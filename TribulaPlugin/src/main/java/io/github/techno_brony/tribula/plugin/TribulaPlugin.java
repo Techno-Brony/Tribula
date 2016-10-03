@@ -1,4 +1,4 @@
-package io.github.techno_brony.tribula.plugin.BukkitTemplate;
+package io.github.techno_brony.tribula.plugin;
 
 import org.bukkit.plugin.java.JavaPlugin;
 

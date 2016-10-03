@@ -1,6 +1,6 @@
 package io.github.techno_brony.tribula.sql;
 
-import io.github.techno_brony.tribula.plugin.BukkitTemplate.TribulaPlugin;
+import io.github.techno_brony.tribula.plugin.TribulaPlugin;
 import io.github.techno_brony.tribula.sql.commands.CommandSQL;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -8,7 +8,13 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class Main extends TribulaPlugin {
+enum SQLColumnType {
+    varchar,
+    smallint,
+    bigint
+}
+
+public class Main extends TribulaPlugin implements TribulaSQLAPI {
 
     private Connection connection;
     private String host, database, username, password;
@@ -33,7 +39,6 @@ public class Main extends TribulaPlugin {
         username = getConfig().getString("username");
         password = getConfig().getString("password");
     }
-
     private void openSQLConnection() throws SQLException, ClassNotFoundException {
         if (connection != null && !connection.isClosed()) {
             return;
@@ -64,7 +69,7 @@ public class Main extends TribulaPlugin {
                     openSQLConnection();
                     Statement statement = connection.createStatement();
                     ResultSet result = statement.executeQuery(
-                            "SELECT * FROM " + client.getUniqueTableID() + " WHERE UUID = '" + player + "';");
+                            "SELECT * FROM " + client.getUniqueTableID() + " WHERE UUID = '" + player.toString() + "';");
                     if (result.next()) {
                         ResultSetMetaData metaData = result.getMetaData();
                         HashMap<String, Object> data = new HashMap<>();
@@ -74,7 +79,7 @@ public class Main extends TribulaPlugin {
                         callback.done(data);
                     }
                 } catch (ClassNotFoundException | SQLException e) {
-                    e.printStackTrace();
+                    getLogger().severe("Client: " + client.getUniqueTableID() + " attempted to access invalid data.");
                 }
             }
         }.runTaskAsynchronously(this);
@@ -95,27 +100,58 @@ public class Main extends TribulaPlugin {
                 getData(client, player, new TribulaSQLCallback() {
                     @Override
                     public void done(HashMap<String, Object> o) {
-                        HashMap<String, Object> field = new HashMap<>();
-                        field.put(column, o.get(column));
-                        callback.done(field);
+                        HashMap<String, Object> value = new HashMap<>();
+                        value.put(column, value.get(column));
+                        callback.done(value);
                     }
                 });
             }
         }.runTaskAsynchronously(this);
     }
 
+    /**
+     * Sets a field in the database table
+     *
+     * @param client The plugin
+     * @param player The player
+     * @param column The column of which is field lies in
+     * @param value  The value of which to replace the field
+     */
     public void setData(final TribulaSQLClient client, final UUID player, final String column, final Object value) {
         new BukkitRunnable() {
             @Override
             public void run() {
                 try {
                     openSQLConnection();
-                    Statement statement = connection.createStatement(); //TODO FINISH
-                    statement.executeUpdate("INSERT INTO " + client.getUniqueTableID() + " (PLAYERNAME, BALANCE) VALUES ('Playername', 100);");
+                    Statement statement = connection.createStatement();
+                    statement.executeUpdate("UPDATE " + client.getUniqueTableID() +
+                            " SET " + column + "='" + value.toString() + "' WHERE UUID='" + player + "';");
                 } catch (SQLException | ClassNotFoundException e) {
-                    e.printStackTrace();
+                    getLogger().severe("Client: " + client.getUniqueTableID() + " attempted to set invalid data.");
                 }
             }
         }.runTaskAsynchronously(this);
+    }
+
+    /**
+     * Creates a table if one does not exist
+     *
+     * @param client  The plugin
+     * @param columns The columns that will be added to the table
+     */
+    public void createTable(final TribulaSQLClient client, HashMap<String, SQLColumnType> columns) {
+        try {
+            openSQLConnection();
+            Statement statement = connection.createStatement();
+            String sqlupdate = "CREATE TABLE IF NOT EXISTS " + client.getUniqueTableID() + " (";
+            for (String s : columns.keySet()) {
+                sqlupdate += s + " " + columns.get(s).toString() + ",";
+            }
+            sqlupdate = sqlupdate.substring(0, sqlupdate.length() - 1);
+            sqlupdate += ");";
+            statement.executeUpdate(sqlupdate);
+        } catch (ClassNotFoundException | SQLException e) {
+            getLogger().severe("An error occurred while trying to create table");
+        }
     }
 }
