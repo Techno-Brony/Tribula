@@ -1,9 +1,0 @@
-main: io.github.techno_brony.tribula.plugin.BukkitTemplate.TribulaPluginulaPlugin
-name: BukkitTemplate #TODO
-version: 1.0
-author: TechnoBrony
-description: Bukkit Template #TODO
-commands:
-   templatecmd: #TODO
-      description: This is a demo command. #TODO
-      usage: /<command>
