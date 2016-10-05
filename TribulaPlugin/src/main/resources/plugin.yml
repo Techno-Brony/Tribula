@@ -1,5 +1,0 @@
-main: io.github.techno_brony.tribula.plugin.TribulaPlugin
-name: TribulaPlugin
-version: 1.0
-author: TechnoBrony
-description: This is a dependency for all other Tribula plugins
