@@ -1,32 +1,58 @@
 package io.github.techno_brony.tribula.plugin.wrappers;
 
+import io.github.techno_brony.tribula.plugin.wrappers.enchantments.TribulaEnchantmentNull;
 import io.github.techno_brony.tribula.plugin.wrappers.enums.TribulaItemRarity;
 import io.github.techno_brony.tribula.plugin.wrappers.interfaces.ITribulaEnchantment;
 import io.github.techno_brony.tribula.plugin.wrappers.interfaces.ITribulaItem;
 import io.github.techno_brony.tribula.plugin.wrappers.itemtypes.TribulaItemType;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
-public class TribulaItem implements ITribulaItem {
+import java.util.ArrayList;
+
+public class TribulaItem extends ItemStack implements ITribulaItem {
 
     private final String itemDisplayName;
     private final TribulaItemType itemType;
     private final TribulaItemRarity itemRarity;
-    private final Material displayItem;
     private final ITribulaEnchantment itemEnchantment;
     private final int levelRequirement;
 
-    public TribulaItem(String itemDisplayName, TribulaItemType itemType, TribulaItemRarity itemRarity, Material displayItem, ITribulaEnchantment itemEnchantment, int levelRequirement) {
+    private final String lore;
+
+    public TribulaItem(String itemDisplayName, TribulaItemType itemType, TribulaItemRarity itemRarity, Material displayItem, ITribulaEnchantment itemEnchantment, int levelRequirement, String lore) {
+        super(displayItem);
+
         this.itemDisplayName = itemDisplayName;
         this.itemType = itemType;
         this.itemRarity = itemRarity;
-        this.displayItem = displayItem;
         this.itemEnchantment = itemEnchantment;
         this.levelRequirement = levelRequirement;
+        this.lore = lore;
+
+        ItemMeta displayItemMeta = super.getItemMeta();
+        displayItemMeta.setDisplayName(itemDisplayName);
+        ArrayList<String> displayItemMetaLore = new ArrayList<>();
+
+        displayItemMetaLore.add(ChatColor.GOLD + lore);
+        displayItemMetaLore.add("");
+        displayItemMetaLore.add(ChatColor.GREEN + itemType.getTypeName() + " Item");
+        displayItemMetaLore.add(ChatColor.LIGHT_PURPLE + "Rarity: " + itemRarity.toString());
+        if (itemEnchantment != TribulaEnchantmentNull.getInstance()) {
+            displayItemMeta.addEnchant(itemEnchantment.getDisplayEnchantment(), itemEnchantment.getDisplayEnchantmentLevel(), true);
+            displayItemMetaLore.add(ChatColor.AQUA + "Enchantment: " + itemEnchantment.getEnchantmentName());
+        }
+        displayItemMetaLore.add(ChatColor.RED + "Level Required: " + levelRequirement);
+
+        displayItemMeta.setLore(displayItemMetaLore);
+        super.setItemMeta(displayItemMeta);
     }
 
     @Override
-    public Material getDisplayItem() {
-        return displayItem;
+    public ItemStack getDisplayItem() {
+        return super.clone();
     }
 
     @Override
@@ -57,5 +83,10 @@ public class TribulaItem implements ITribulaItem {
     @Override
     public String getItemDisplayName() {
         return itemDisplayName;
+    }
+
+    @Override
+    public String getLore() {
+        return lore;
     }
 }

@@ -2,10 +2,10 @@ package io.github.techno_brony.tribula.plugin.wrappers.interfaces;
 
 import io.github.techno_brony.tribula.plugin.wrappers.enums.TribulaItemRarity;
 import io.github.techno_brony.tribula.plugin.wrappers.itemtypes.TribulaItemType;
-import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 
 public interface ITribulaItem {
-    Material getDisplayItem();
+    ItemStack getDisplayItem();
 
     Class<?> getItemType();
 
@@ -18,4 +18,6 @@ public interface ITribulaItem {
     int getLevelRequirement();
 
     String getItemDisplayName();
+
+    String getLore();
 }

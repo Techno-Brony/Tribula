@@ -1,14 +1,19 @@
 package io.github.techno_brony.tribula.plugin.wrappers;
 
 import io.github.techno_brony.tribula.plugin.wrappers.interfaces.ITribulaPlayer;
-import net.minecraft.server.v1_10_R1.EntityPlayer;
-import org.bukkit.craftbukkit.v1_10_R1.CraftServer;
-import org.bukkit.craftbukkit.v1_10_R1.entity.CraftPlayer;
+import org.bukkit.entity.Player;
 
-public class TribulaPlayer extends CraftPlayer implements ITribulaPlayer {
+public class TribulaPlayer implements ITribulaPlayer {
 
-    public TribulaPlayer(CraftServer server, EntityPlayer entity) {
-        super(server, entity);
+    private Player player;
+
+    public TribulaPlayer(Player player) {
+        this.player = player;
+        //TODO set all this shit
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
     @Override
