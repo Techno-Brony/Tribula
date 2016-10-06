@@ -1,0 +1,9 @@
+main: io.github.techno_brony.tribula.plugin.TribulaCorePlugin
+name: TribulaCorePlugin
+version: 1.0
+author: TechnoBrony
+description: This is a dependency for all other Tribula Plugins
+commands:
+   tribulaplugin:
+      description: Tribula Core Plugin Main Command.
+      usage: /<command>
