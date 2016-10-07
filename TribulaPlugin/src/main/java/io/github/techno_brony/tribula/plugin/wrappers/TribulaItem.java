@@ -1,5 +1,6 @@
 package io.github.techno_brony.tribula.plugin.wrappers;
 
+import com.google.common.base.CaseFormat;
 import io.github.techno_brony.tribula.plugin.wrappers.enchantments.TribulaEnchantmentNull;
 import io.github.techno_brony.tribula.plugin.wrappers.enums.TribulaItemRarity;
 import io.github.techno_brony.tribula.plugin.wrappers.interfaces.ITribulaEnchantment;
@@ -39,7 +40,7 @@ public class TribulaItem extends ItemStack implements ITribulaItem {
         displayItemMetaLore.add(ChatColor.GOLD + lore);
         displayItemMetaLore.add("");
         displayItemMetaLore.add(ChatColor.GREEN + itemType.getTypeName() + " Item");
-        displayItemMetaLore.add(ChatColor.LIGHT_PURPLE + "Rarity: " + itemRarity.toString());
+        displayItemMetaLore.add(ChatColor.LIGHT_PURPLE + "Rarity: " + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, itemRarity.toString()));
         if (itemEnchantment != TribulaEnchantmentNull.getInstance()) {
             displayItemMeta.addEnchant(itemEnchantment.getDisplayEnchantment(), itemEnchantment.getDisplayEnchantmentLevel(), true);
             displayItemMetaLore.add(ChatColor.AQUA + "Enchantment: " + itemEnchantment.getEnchantmentName());

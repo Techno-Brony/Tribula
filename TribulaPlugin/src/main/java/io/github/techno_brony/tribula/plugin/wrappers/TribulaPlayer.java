@@ -9,29 +9,28 @@ import java.util.UUID;
 public class TribulaPlayer implements ITribulaPlayer {
 
     private static HashMap<UUID, TribulaPlayer> playerHashMap = new HashMap<>();
-
-    private Player player;
+    int level = 0;
+    private UUID playerUUID;
     //TODO private fields for caching
 
-    public TribulaPlayer(Player player) {
-        this.player = player;
+    private TribulaPlayer(UUID playerID) {
+        this.playerUUID = playerID;
         //TODO set all this shit
     }
 
-    public static TribulaPlayer getTribulaPlayer(Player player) {
-        UUID uniqueID = player.getUniqueId();
-        if (!playerHashMap.containsKey(uniqueID)) {
-            playerHashMap.put(uniqueID, new TribulaPlayer(player));
+    public static TribulaPlayer getTribulaPlayer(UUID playerUUID) {
+        if (!playerHashMap.containsKey(playerUUID)) {
+            playerHashMap.put(playerUUID, new TribulaPlayer(playerUUID));
         }
-        return playerHashMap.get(player.getUniqueId());
+        return playerHashMap.get(playerUUID);
+    }
+
+    public static TribulaPlayer getTribulaPlayer(Player player) {
+        return getTribulaPlayer(player.getUniqueId());
     }
 
     public UUID getPlayerUUID() {
-        return player.getUniqueId();
-    }
-
-    public Player getPlayer() {
-        return player;
+        return playerUUID;
     }
 
     @Override
@@ -62,5 +61,10 @@ public class TribulaPlayer implements ITribulaPlayer {
     @Override
     public void getCurrentDifficulty() {
         //TODO
+    }
+
+    @Override
+    public int getCurrentLevel() {
+        return 0; //TODO
     }
 }

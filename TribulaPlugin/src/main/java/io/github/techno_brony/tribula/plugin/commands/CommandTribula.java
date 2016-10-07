@@ -6,11 +6,11 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-public class CommandTribulaPlugin implements CommandExecutor {
+public class CommandTribula implements CommandExecutor {
 
     private final TribulaCorePlugin plugin;
 
-    public CommandTribulaPlugin(TribulaCorePlugin plugin) {
+    public CommandTribula(TribulaCorePlugin plugin) {
         this.plugin = plugin;
     }
 

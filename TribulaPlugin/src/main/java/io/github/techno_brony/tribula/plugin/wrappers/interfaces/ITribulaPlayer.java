@@ -12,4 +12,6 @@ public interface ITribulaPlayer { //TODO
     void getCurrentParty();
 
     void getCurrentDifficulty();
+
+    int getCurrentLevel();
 }
