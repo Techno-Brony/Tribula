@@ -2,7 +2,7 @@ package io.github.techno_brony.tribula.plugin.wrappers.itemtypes.attack;
 
 import io.github.techno_brony.tribula.plugin.wrappers.itemtypes.TribulaItemType;
 
-public class TribulaItemTypeAttack extends TribulaItemType {
+public abstract class TribulaItemTypeAttack extends TribulaItemType {
 
     private TribulaItemTypeAttack() {
     }
@@ -12,6 +12,7 @@ public class TribulaItemTypeAttack extends TribulaItemType {
         return "Attack";
     }
 
+    public abstract double getDamage();
 
     //TODO
 }

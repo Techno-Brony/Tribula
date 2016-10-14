@@ -33,6 +33,10 @@ public class TribulaItem extends ItemStack implements ITribulaItem {
         this.levelRequirement = levelRequirement;
         this.lore = lore;
 
+        configureItem();
+    }
+
+    private void configureItem() {
         ItemMeta displayItemMeta = super.getItemMeta();
         displayItemMeta.setDisplayName(itemDisplayName);
         ArrayList<String> displayItemMetaLore = new ArrayList<>();
