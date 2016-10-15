@@ -1,10 +1,10 @@
 package io.github.techno_brony.tribula.plugin.wrappers.interfaces;
 
 import io.github.techno_brony.tribula.plugin.wrappers.enums.TribulaSpecialType;
-import org.bukkit.entity.LivingEntity;
+import net.minecraft.server.v1_10_R1.EntityLiving;
 
 public interface ITribulaSpecial {
-    void applySpecial(LivingEntity entity);
+    void applySpecial(EntityLiving entity);
 
     TribulaSpecialType getSpecialType();
 }

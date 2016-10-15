@@ -1,5 +1,6 @@
 package io.github.techno_brony.tribula.plugin.wrappers.enums;
 
+import io.github.techno_brony.tribula.plugin.wrappers.mobs.TribulaMobFireballZombie;
 import net.minecraft.server.v1_10_R1.Entity;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_10_R1.CraftWorld;
@@ -7,11 +8,11 @@ import org.bukkit.craftbukkit.v1_10_R1.CraftWorld;
 import java.lang.reflect.Field;
 import java.util.Map;
 
-public enum TribulaEntityTypes {
+public enum TribulaCustomEntityTypes {
 
-    TRIBULA_MOB_ZOMBIE("Zombie", 54, TribulaMobZombie.class); //TODO
+    TRIBULA_MOB_FIREBALL_ZOMBIE("Zombie", 54, TribulaMobFireballZombie.class); //TODO
 
-    TribulaEntityTypes(String name, int id, Class<? extends Entity> custom) {
+    TribulaCustomEntityTypes(String name, int id, Class<? extends Entity> custom) {
         addToMaps(custom, name, id);
     }
 

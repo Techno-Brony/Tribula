@@ -1,8 +1,7 @@
 package io.github.techno_brony.tribula.plugin.wrappers.specials.damage;
 
 import io.github.techno_brony.tribula.plugin.wrappers.specials.TribulaSpecialDamage;
-import org.bukkit.craftbukkit.v1_10_R1.entity.CraftFireball;
-import org.bukkit.entity.LivingEntity;
+import net.minecraft.server.v1_10_R1.EntityLiving;
 
 public class TribulaSpecialFireball extends TribulaSpecialDamage {
 
@@ -13,7 +12,7 @@ public class TribulaSpecialFireball extends TribulaSpecialDamage {
     }
 
     @Override
-    public void applySpecial(LivingEntity entity) {
-        entity.launchProjectile(CraftFireball.class);
+    public void applySpecial(EntityLiving entity) {
+        //TODO
     }
 }

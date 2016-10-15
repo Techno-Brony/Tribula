@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Tribula.iml" filepath="$PROJECT_DIR$/.idea/Tribula.iml" />
       <module fileurl="file://$PROJECT_DIR$/TribulaPlugin/TribulaPlugin.iml" filepath="$PROJECT_DIR$/TribulaPlugin/TribulaPlugin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TribulaPluginKotlin/TribulaPluginKotlin.iml" filepath="$PROJECT_DIR$/TribulaPluginKotlin/TribulaPluginKotlin.iml" />
     </modules>
   </component>
 </project>
