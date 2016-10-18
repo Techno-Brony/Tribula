@@ -4,8 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Tribula.iml" filepath="$PROJECT_DIR$/.idea/Tribula.iml" />
       <module fileurl="file://$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/spigot.iml" filepath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/spigot.iml" />
-      <module fileurl="file://$PROJECT_DIR$/TribulaCustomServerParent/Spigot-API/spigot-api.iml" filepath="$PROJECT_DIR$/TribulaCustomServerParent/Spigot-API/spigot-api.iml" />
-      <module fileurl="file://$PROJECT_DIR$/TribulaCustomServerParent/spigot-parent.iml" filepath="$PROJECT_DIR$/TribulaCustomServerParent/spigot-parent.iml" />
     </modules>
   </component>
 </project>
