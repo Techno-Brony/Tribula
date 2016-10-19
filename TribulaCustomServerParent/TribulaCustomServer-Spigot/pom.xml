@@ -1,12 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.spigotmc</groupId>
     <artifactId>spigot</artifactId>
     <packaging>jar</packaging>
     <version>1.10.2-R0.1-SNAPSHOT</version>
-    <name>Spigot</name>
-    <url>http://www.spigotmc.org</url>
+    <name>Spigot-Tribula</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -94,37 +93,6 @@
     <!-- This builds a completely 'ready to start' jar with all dependencies inside -->
     <build>
         <plugins>
-            <plugin>
-                <groupId>net.md-5</groupId>
-                <artifactId>scriptus</artifactId>
-                <version>0.2</version>
-                <executions>
-                    <execution>
-                        <id>ex-spigot</id>
-                        <configuration>
-                            <format>git-Spigot-%s</format>
-                            <scmDirectory>../</scmDirectory>
-                            <descriptionProperty>spigot.desc</descriptionProperty>
-                        </configuration>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>describe</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>ex-craftbukkit</id>
-                        <configuration>
-                            <format>-%s</format>
-                            <scmDirectory>../../CraftBukkit</scmDirectory>
-                            <descriptionProperty>craftbukkit.desc</descriptionProperty>
-                        </configuration>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>describe</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>  
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
