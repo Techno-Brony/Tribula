@@ -1,14 +1,15 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Lists;
+import org.bukkit.craftbukkit.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.inventory.CraftShapelessRecipe;
+
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import javax.annotation.Nullable;
 
 // CraftBukkit start
-import org.bukkit.craftbukkit.inventory.CraftItemStack;
-import org.bukkit.craftbukkit.inventory.CraftShapelessRecipe;
 // CraftBukkit end
 
 public class ShapelessRecipes implements IRecipe {
@@ -28,6 +29,7 @@ public class ShapelessRecipes implements IRecipe {
         CraftShapelessRecipe recipe = new CraftShapelessRecipe(result, this);
         for (ItemStack stack : this.ingredients) {
             if (stack != null) {
+                //noinspection deprecation
                 recipe.addIngredient(org.bukkit.craftbukkit.util.CraftMagicNumbers.getMaterial(stack.getItem()), stack.getData());
             }
         }
@@ -65,6 +67,7 @@ public class ShapelessRecipes implements IRecipe {
                     boolean flag = false;
                     Iterator iterator = arraylist.iterator();
 
+                    //noinspection WhileLoopReplaceableByForEach
                     while (iterator.hasNext()) {
                         ItemStack itemstack1 = (ItemStack) iterator.next();
 

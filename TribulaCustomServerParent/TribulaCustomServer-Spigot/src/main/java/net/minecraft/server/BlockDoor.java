@@ -85,6 +85,7 @@ public class BlockDoor extends Block {
     }
 
     public String getName() {
+        //noinspection deprecation,deprecation
         return LocaleI18n.get((this.a() + ".name").replaceAll("tile", "item"));
     }
 
@@ -109,6 +110,7 @@ public class BlockDoor extends Block {
     }
 
     public MaterialMapColor r(IBlockData iblockdata) {
+        //noinspection deprecation
         return iblockdata.getBlock() == Blocks.IRON_DOOR ? MaterialMapColor.h : (iblockdata.getBlock() == Blocks.WOODEN_DOOR ? BlockWood.EnumLogVariant.OAK.c() : (iblockdata.getBlock() == Blocks.SPRUCE_DOOR ? BlockWood.EnumLogVariant.SPRUCE.c() : (iblockdata.getBlock() == Blocks.BIRCH_DOOR ? BlockWood.EnumLogVariant.BIRCH.c() : (iblockdata.getBlock() == Blocks.JUNGLE_DOOR ? BlockWood.EnumLogVariant.JUNGLE.c() : (iblockdata.getBlock() == Blocks.ACACIA_DOOR ? BlockWood.EnumLogVariant.ACACIA.c() : (iblockdata.getBlock() == Blocks.DARK_OAK_DOOR ? BlockWood.EnumLogVariant.DARK_OAK.c() : super.r(iblockdata)))))));
     }
 

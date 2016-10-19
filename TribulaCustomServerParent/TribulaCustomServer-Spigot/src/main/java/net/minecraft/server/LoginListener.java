@@ -121,8 +121,9 @@ public class LoginListener implements PacketLoginInListener, ITickable {
         } else {
             this.g = LoginListener.EnumProtocolState.ACCEPTED;
             if (this.server.aF() >= 0 && !this.networkManager.isLocal()) {
+                //noinspection unchecked
                 this.networkManager.sendPacket(new PacketLoginOutSetCompression(this.server.aF()), new ChannelFutureListener() {
-                    public void a(ChannelFuture channelfuture) throws Exception {
+                    public void a(ChannelFuture channelfuture) {
                         LoginListener.this.networkManager.setCompressionLevel(LoginListener.this.server.aF());
                     }
 
@@ -259,11 +260,14 @@ public class LoginListener implements PacketLoginInListener, ITickable {
                             AsyncPlayerPreLoginEvent asyncEvent = new AsyncPlayerPreLoginEvent(playerName, address, uniqueId);
                             server.getPluginManager().callEvent(asyncEvent);
 
-                            if (PlayerPreLoginEvent.getHandlerList().getRegisteredListeners().length != 0) {
+            //noinspection deprecation
+            if (PlayerPreLoginEvent.getHandlerList().getRegisteredListeners().length != 0) {
                                 //noinspection deprecation,deprecation
                                 final PlayerPreLoginEvent event = new PlayerPreLoginEvent(playerName, address, uniqueId);
-                                if (asyncEvent.getResult() != PlayerPreLoginEvent.Result.ALLOWED) {
-                                    event.disallow(asyncEvent.getResult(), asyncEvent.getKickMessage());
+                //noinspection deprecation,deprecation
+                if (asyncEvent.getResult() != PlayerPreLoginEvent.Result.ALLOWED) {
+                    //noinspection deprecation
+                    event.disallow(asyncEvent.getResult(), asyncEvent.getKickMessage());
                                 }
                                 //noinspection deprecation,deprecation,deprecation
                                 Waitable<PlayerPreLoginEvent.Result> waitable = new Waitable<PlayerPreLoginEvent.Result>() {
@@ -274,6 +278,7 @@ public class LoginListener implements PacketLoginInListener, ITickable {
                                     }};
 
                                 LoginListener.this.server.processQueue.add(waitable);
+                                //noinspection deprecation
                                 if (waitable.get() != PlayerPreLoginEvent.Result.ALLOWED) {
                                     disconnect(event.getKickMessage());
                                     return;

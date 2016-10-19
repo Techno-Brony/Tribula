@@ -141,7 +141,7 @@ public class ContainerBrewingStand extends Container {
 
     static class a extends Slot {
 
-        public a(IInventory iinventory, int i, int j, int k) {
+        public a(IInventory iinventory, @SuppressWarnings("SameParameterValue") int i, @SuppressWarnings("SameParameterValue") int j, @SuppressWarnings("SameParameterValue") int k) {
             super(iinventory, i, j, k);
         }
 
@@ -160,7 +160,7 @@ public class ContainerBrewingStand extends Container {
 
     static class SlotBrewing extends Slot {
 
-        public SlotBrewing(IInventory iinventory, int i, int j, int k) {
+        public SlotBrewing(IInventory iinventory, @SuppressWarnings("SameParameterValue") int i, @SuppressWarnings("SameParameterValue") int j, @SuppressWarnings("SameParameterValue") int k) {
             super(iinventory, i, j, k);
         }
 

@@ -1,15 +1,15 @@
 package net.minecraft.server;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.UUID;
-import javax.annotation.Nullable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.annotation.Nullable;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.UUID;
+
 public class GenericAttributes {
 
-    private static final Logger j = LogManager.getLogger();
     // Spigot start
     public static final IAttribute maxHealth = (new AttributeRanged(null, "generic.maxHealth", 20.0D, 0.0D, org.spigotmc.SpigotConfig.maxHealth)).a("Max Health").a(true);
     public static final IAttribute FOLLOW_RANGE = (new AttributeRanged(null, "generic.followRange", 32.0D, 0.0D, 2048.0D)).a("Follow Range");
@@ -20,12 +20,14 @@ public class GenericAttributes {
     public static final IAttribute g = (new AttributeRanged(null, "generic.armor", 0.0D, 0.0D, 30.0D)).a(true);
     public static final IAttribute h = (new AttributeRanged(null, "generic.armorToughness", 0.0D, 0.0D, 20.0D)).a(true);
     public static final IAttribute i = (new AttributeRanged(null, "generic.luck", 0.0D, -1024.0D, 1024.0D)).a(true);
+    private static final Logger j = LogManager.getLogger();
     // Spigot end
 
     public static NBTTagList a(AttributeMapBase attributemapbase) {
         NBTTagList nbttaglist = new NBTTagList();
         Iterator iterator = attributemapbase.a().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             AttributeInstance attributeinstance = (AttributeInstance) iterator.next();
 
@@ -47,6 +49,7 @@ public class GenericAttributes {
             NBTTagList nbttaglist = new NBTTagList();
             Iterator iterator = collection.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 AttributeModifier attributemodifier = (AttributeModifier) iterator.next();
 

@@ -79,6 +79,7 @@ public class Explosion {
                             }
 
                             if (f > 0.0F && (this.source == null || this.source.a(this, this.world, blockposition, iblockdata, f)) && blockposition.getY() < 256 && blockposition.getY() >= 0) { // CraftBukkit - don't wrap explosions
+                                //noinspection unchecked
                                 hashset.add(blockposition);
                             }
 
@@ -91,6 +92,7 @@ public class Explosion {
             }
         }
 
+        //noinspection unchecked
         this.blocks.addAll(hashset);
         float f3 = this.size * 2.0F;
 
@@ -155,7 +157,7 @@ public class Explosion {
 
     }
 
-    public void a(boolean flag) {
+    public void a(@SuppressWarnings("SameParameterValue") boolean flag) {
         this.world.a(null, this.posX, this.posY, this.posZ, SoundEffects.bF, SoundCategory.BLOCKS, 4.0F, (1.0F + (this.world.random.nextFloat() - this.world.random.nextFloat()) * 0.2F) * 0.7F);
         if (this.size >= 2.0F && this.b) {
             this.world.addParticle(EnumParticle.EXPLOSION_HUGE, this.posX, this.posY, this.posZ, 1.0D, 0.0D, 0.0D);

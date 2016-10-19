@@ -7,7 +7,7 @@ public class PathfinderGoalVillagerFarm extends PathfinderGoalGotoTarget {
     private boolean e;
     private int f;
 
-    public PathfinderGoalVillagerFarm(EntityVillager entityvillager, double d0) {
+    public PathfinderGoalVillagerFarm(EntityVillager entityvillager, @SuppressWarnings("SameParameterValue") double d0) {
         super(entityvillager, d0, 16);
         this.c = entityvillager;
     }

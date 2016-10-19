@@ -1,7 +1,7 @@
 package net.minecraft.server;
 
-import java.util.Collection;
 import javax.annotation.Nullable;
+import java.util.Collection;
 
 class RecipeTippedArrow extends ShapedRecipes implements IRecipe { // CraftBukkit
 
@@ -53,6 +53,7 @@ class RecipeTippedArrow extends ShapedRecipes implements IRecipe { // CraftBukki
             ItemStack itemstack1 = new ItemStack(Items.TIPPED_ARROW, 8);
 
             PotionUtil.a(itemstack1, PotionUtil.c(itemstack));
+            //noinspection unchecked
             PotionUtil.a(itemstack1, (Collection) PotionUtil.b(itemstack));
             return itemstack1;
         } else {

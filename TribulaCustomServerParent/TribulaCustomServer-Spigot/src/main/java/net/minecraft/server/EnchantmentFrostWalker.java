@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 public class EnchantmentFrostWalker extends Enchantment {
 
-    public EnchantmentFrostWalker(Enchantment.Rarity enchantment_rarity, EnumItemSlot... aenumitemslot) {
+    public EnchantmentFrostWalker(@SuppressWarnings("SameParameterValue") Enchantment.Rarity enchantment_rarity, @SuppressWarnings("SameParameterValue") EnumItemSlot... aenumitemslot) {
         super(enchantment_rarity, EnchantmentSlotType.ARMOR_FEET, aenumitemslot);
         this.c("frostWalker");
     }
@@ -18,6 +18,7 @@ public class EnchantmentFrostWalker extends Enchantment {
             BlockPosition.MutableBlockPosition blockposition_mutableblockposition = new BlockPosition.MutableBlockPosition(0, 0, 0);
             Iterator iterator = BlockPosition.b(blockposition.a((double) (-f), -1.0D, (double) (-f)), blockposition.a((double) f, -1.0D, (double) f)).iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 BlockPosition.MutableBlockPosition blockposition_mutableblockposition1 = (BlockPosition.MutableBlockPosition) iterator.next();
 

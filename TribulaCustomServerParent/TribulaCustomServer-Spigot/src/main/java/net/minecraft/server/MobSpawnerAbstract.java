@@ -1,13 +1,14 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Lists;
+
 import java.util.Iterator;
 import java.util.List;
 
 public abstract class MobSpawnerAbstract {
 
-    public int spawnDelay = 20;
     private final List<MobSpawnerData> mobs = Lists.newArrayList();
+    public int spawnDelay = 20;
     private MobSpawnerData spawnData = new MobSpawnerData();
     private double d;
     private double e;
@@ -197,6 +198,7 @@ public abstract class MobSpawnerAbstract {
             } else {
                 Iterator iterator = this.mobs.iterator();
 
+                //noinspection WhileLoopReplaceableByForEach
                 while (iterator.hasNext()) {
                     MobSpawnerData mobspawnerdata = (MobSpawnerData) iterator.next();
 
@@ -222,7 +224,7 @@ public abstract class MobSpawnerAbstract {
         this.spawnData = mobspawnerdata;
     }
 
-    public abstract void a(int i);
+    public abstract void a(@SuppressWarnings("SameParameterValue") int i);
 
     public abstract World a();
 

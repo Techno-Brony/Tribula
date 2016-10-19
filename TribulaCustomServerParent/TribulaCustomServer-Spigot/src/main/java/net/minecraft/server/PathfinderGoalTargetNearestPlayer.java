@@ -1,11 +1,12 @@
 package net.minecraft.server;
 
 import com.google.common.base.Predicate;
-import java.util.Collections;
-import java.util.List;
-import javax.annotation.Nullable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import javax.annotation.Nullable;
+import java.util.Collections;
+import java.util.List;
 
 public class PathfinderGoalTargetNearestPlayer extends PathfinderGoal {
 
@@ -21,6 +22,7 @@ public class PathfinderGoalTargetNearestPlayer extends PathfinderGoal {
             PathfinderGoalTargetNearestPlayer.a.warn("Use NearestAttackableTargetGoal.class for PathfinerMob mobs!");
         }
 
+        //noinspection unchecked
         this.c = new Predicate() {
             public boolean a(@Nullable Entity entity) {
                 if (!(entity instanceof EntityHuman)) {

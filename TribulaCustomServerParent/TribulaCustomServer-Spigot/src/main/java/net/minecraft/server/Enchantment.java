@@ -80,10 +80,12 @@ public abstract class Enchantment {
             ItemStack itemstack = entityliving.getEquipment(enumitemslot);
 
             if (itemstack != null) {
+                //noinspection unchecked
                 arraylist.add(itemstack);
             }
         }
 
+        //noinspection unchecked
         return arraylist.size() > 0 ? arraylist : null;
     }
 
@@ -132,6 +134,7 @@ public abstract class Enchantment {
         //noinspection deprecation,deprecation
         String s = LocaleI18n.get(this.a());
 
+        //noinspection deprecation,deprecation
         return i == 1 && this.getMaxLevel() == 1 ? s : s + " " + LocaleI18n.get("enchantment.level." + i);
     }
 

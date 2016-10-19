@@ -35,6 +35,7 @@ public class RecipeArmorDye extends ShapelessRecipes implements IRecipe { // Cra
                         return false;
                     }
 
+                    //noinspection unchecked
                     arraylist.add(itemstack1);
                 }
             }

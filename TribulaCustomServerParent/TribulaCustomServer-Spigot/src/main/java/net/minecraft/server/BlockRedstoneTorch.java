@@ -27,6 +27,7 @@ public class BlockRedstoneTorch extends BlockTorch {
         List list = (List) BlockRedstoneTorch.g.get(world);
 
         if (flag) {
+            //noinspection unchecked
             list.add(new BlockRedstoneTorch.RedstoneUpdateInfo(blockposition, world.getTime()));
         }
 

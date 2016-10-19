@@ -1,7 +1,8 @@
 package net.minecraft.server;
 
+import org.bukkit.event.entity.EntityCombustEvent;
+
 import javax.annotation.Nullable;
-import org.bukkit.event.entity.EntityCombustEvent; // CraftBukkit
 
 public class ItemBow extends Item {
 
@@ -13,6 +14,17 @@ public class ItemBow extends Item {
         });
         this.a(new MinecraftKey("pulling"), new IDynamicTexture() {
         });
+    }
+
+    public static float b(int i) {
+        float f = (float) i / 20.0F;
+
+        f = (f * f + f * 2.0F) / 3.0F;
+        if (f > 1.0F) {
+            f = 1.0F;
+        }
+
+        return f;
     }
 
     private ItemStack a(EntityHuman entityhuman) {
@@ -100,6 +112,7 @@ public class ItemBow extends Item {
                         if (event.getProjectile() == entityarrow.getBukkitEntity()) {
                             if (!world.addEntity(entityarrow)) {
                                 if (entityhuman instanceof EntityPlayer) {
+                                    //noinspection deprecation
                                     ((EntityPlayer) entityhuman).getBukkitEntity().updateInventory();
                                 }
                                 return;
@@ -122,17 +135,6 @@ public class ItemBow extends Item {
         }
     }
 
-    public static float b(int i) {
-        float f = (float) i / 20.0F;
-
-        f = (f * f + f * 2.0F) / 3.0F;
-        if (f > 1.0F) {
-            f = 1.0F;
-        }
-
-        return f;
-    }
-
     public int e(ItemStack itemstack) {
         return 72000;
     }
@@ -145,9 +147,11 @@ public class ItemBow extends Item {
         boolean flag = this.a(entityhuman) != null;
 
         if (!entityhuman.abilities.canInstantlyBuild && !flag) {
+            //noinspection unchecked,unchecked,unchecked
             return !flag ? new InteractionResultWrapper(EnumInteractionResult.FAIL, itemstack) : new InteractionResultWrapper(EnumInteractionResult.PASS, itemstack);
         } else {
             entityhuman.c(enumhand);
+            //noinspection unchecked
             return new InteractionResultWrapper(EnumInteractionResult.SUCCESS, itemstack);
         }
     }

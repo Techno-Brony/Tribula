@@ -48,6 +48,7 @@ public class CommandSpreadPlayers extends CommandAbstract {
                         throw new ExceptionEntityNotFound();
                     }
 
+                    //noinspection unchecked
                     arraylist.addAll(list);
                 } else {
                     EntityPlayer entityplayer = minecraftserver.getPlayerList().getPlayer(s);
@@ -56,6 +57,7 @@ public class CommandSpreadPlayers extends CommandAbstract {
                         throw new ExceptionPlayerNotFound();
                     }
 
+                    //noinspection unchecked
                     arraylist.add(entityplayer);
                 }
             }
@@ -65,6 +67,7 @@ public class CommandSpreadPlayers extends CommandAbstract {
                 throw new ExceptionEntityNotFound();
             } else {
                 icommandlistener.sendMessage(new ChatMessage("commands.spreadplayers.spreading." + (flag ? "teams" : "players"), arraylist.size(), d4, d1, d2, d3));
+                //noinspection unchecked
                 this.a(icommandlistener, arraylist, new CommandSpreadPlayers.Location2D(d1, d2), d3, d4, ((Entity) arraylist.get(0)).world, flag);
             }
         }
@@ -91,12 +94,15 @@ public class CommandSpreadPlayers extends CommandAbstract {
         HashSet hashset = Sets.newHashSet();
         Iterator iterator = list.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             Entity entity = (Entity) iterator.next();
 
             if (entity instanceof EntityHuman) {
+                //noinspection unchecked
                 hashset.add(entity.aQ());
             } else {
+                //noinspection unchecked
                 hashset.add(null);
             }
         }
@@ -189,6 +195,7 @@ public class CommandSpreadPlayers extends CommandAbstract {
                 ScoreboardTeamBase scoreboardteambase = entity instanceof EntityHuman ? entity.aQ() : null;
 
                 if (!hashmap.containsKey(scoreboardteambase)) {
+                    //noinspection unchecked
                     hashmap.put(scoreboardteambase, acommandspreadplayers_location2d[i++]);
                 }
 

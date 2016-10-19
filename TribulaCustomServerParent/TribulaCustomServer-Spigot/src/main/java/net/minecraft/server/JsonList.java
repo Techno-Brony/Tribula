@@ -4,38 +4,22 @@ import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.io.Files;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import com.google.gson.*;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.*;
+
 public class JsonList<K, V extends JsonListEntry<K>> {
 
     protected static final Logger a = LogManager.getLogger();
-    protected final Gson b;
-    private final File c;
-    private final Map<String, V> d = Maps.newHashMap();
-    private boolean e = true;
     private static final ParameterizedType f = new ParameterizedType() {
         public Type[] getActualTypeArguments() {
             return new Type[] { JsonListEntry.class};
@@ -49,6 +33,10 @@ public class JsonList<K, V extends JsonListEntry<K>> {
             return null;
         }
     };
+    protected final Gson b;
+    private final File c;
+    private final Map<String, V> d = Maps.newHashMap();
+    private boolean e = true;
 
     public JsonList(File file) {
         this.c = file;
@@ -62,7 +50,7 @@ public class JsonList<K, V extends JsonListEntry<K>> {
         return this.e;
     }
 
-    public void a(boolean flag) {
+    public void a(@SuppressWarnings("SameParameterValue") boolean flag) {
         this.e = flag;
     }
 
@@ -127,6 +115,7 @@ public class JsonList<K, V extends JsonListEntry<K>> {
             JsonListEntry jsonlistentry = (JsonListEntry) iterator.next();
 
             if (jsonlistentry.hasExpired()) {
+                //noinspection unchecked
                 arraylist.add(jsonlistentry.getKey());
             }
         }
@@ -142,6 +131,7 @@ public class JsonList<K, V extends JsonListEntry<K>> {
     }
 
     protected JsonListEntry<K> a(JsonObject jsonobject) {
+        //noinspection unchecked
         return new JsonListEntry(null, jsonobject);
     }
 
@@ -163,7 +153,7 @@ public class JsonList<K, V extends JsonListEntry<K>> {
 
     }
 
-    public void load() throws FileNotFoundException {
+    public void load() {
         Collection collection = null;
         BufferedReader bufferedreader = null;
 
@@ -189,10 +179,12 @@ public class JsonList<K, V extends JsonListEntry<K>> {
             this.d.clear();
             Iterator iterator = collection.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 JsonListEntry jsonlistentry = (JsonListEntry) iterator.next();
 
                 if (jsonlistentry.getKey() != null) {
+                    //noinspection unchecked,unchecked
                     this.d.put(this.a((K) jsonlistentry.getKey()), (V) jsonlistentry); // CraftBukkit - fix decompile error
                 }
             }
@@ -203,6 +195,10 @@ public class JsonList<K, V extends JsonListEntry<K>> {
     class JsonListEntrySerializer implements JsonDeserializer<JsonListEntry<K>>, JsonSerializer<JsonListEntry<K>> {
 
         private JsonListEntrySerializer() {}
+
+        JsonListEntrySerializer(@SuppressWarnings("SameParameterValue") Object object) {
+            this();
+        }
 
         public JsonElement a(JsonListEntry<K> jsonlistentry, Type type, JsonSerializationContext jsonserializationcontext) {
             JsonObject jsonobject = new JsonObject();
@@ -222,15 +218,12 @@ public class JsonList<K, V extends JsonListEntry<K>> {
         }
 
         public JsonElement serialize(JsonListEntry<K> object, Type type, JsonSerializationContext jsonserializationcontext) { // CraftBukkit - fix decompile error
+            //noinspection unchecked
             return this.a((JsonListEntry) object, type, jsonserializationcontext);
         }
 
         public JsonListEntry<K> deserialize(JsonElement jsonelement, Type type, JsonDeserializationContext jsondeserializationcontext) throws JsonParseException { // CraftBukkit - fix decompile error
             return this.a(jsonelement, type, jsondeserializationcontext);
-        }
-
-        JsonListEntrySerializer(Object object) {
-            this();
         }
     }
 }

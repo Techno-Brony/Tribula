@@ -57,7 +57,7 @@ public class BlockPiston extends BlockDirectional {
         return entityliving.getDirection().opposite();
     }
 
-    public static boolean a(IBlockData iblockdata, World world, BlockPosition blockposition, EnumDirection enumdirection, boolean flag) {
+    public static boolean a(IBlockData iblockdata, World world, BlockPosition blockposition, EnumDirection enumdirection, @SuppressWarnings("SameParameterValue") boolean flag) {
         Block block = iblockdata.getBlock();
 
         if (block == Blocks.OBSIDIAN) {
@@ -300,6 +300,7 @@ public class BlockPiston extends BlockDirectional {
             for (Object aList : list) {
                 BlockPosition blockposition1 = (BlockPosition) aList;
 
+                //noinspection unchecked
                 arraylist.add(world.getType(blockposition1).b((IBlockAccess) world, blockposition1));
             }
 

@@ -47,6 +47,7 @@ public class EntityWolf extends EntityTameableAnimal {
         this.targetSelector.a(1, new PathfinderGoalOwnerHurtByTarget(this));
         this.targetSelector.a(2, new PathfinderGoalOwnerHurtTarget(this));
         this.targetSelector.a(3, new PathfinderGoalHurtByTarget(this, true, new Class[0]));
+        //noinspection unchecked
         this.targetSelector.a(4, new PathfinderGoalRandomTargetNonTamed(this, EntityAnimal.class, false, new Predicate() {
             public boolean a(@Nullable Entity entity) {
                 return entity instanceof EntitySheep || entity instanceof EntityRabbit;
@@ -56,6 +57,7 @@ public class EntityWolf extends EntityTameableAnimal {
                 return this.a((Entity) object);
             }
         }));
+        //noinspection unchecked
         this.targetSelector.a(5, new PathfinderGoalNearestAttackableTarget(this, EntitySkeleton.class, false));
     }
 

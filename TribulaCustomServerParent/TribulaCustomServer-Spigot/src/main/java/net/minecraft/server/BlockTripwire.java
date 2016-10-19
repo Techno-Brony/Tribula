@@ -145,6 +145,7 @@ public class BlockTripwire extends Block {
         if (!list.isEmpty()) {
             Iterator iterator = list.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 Entity entity = (Entity) iterator.next();
 
@@ -248,6 +249,7 @@ public class BlockTripwire extends Block {
             return iblockdata.set(BlockTripwire.EAST, iblockdata.get(BlockTripwire.WEST)).set(BlockTripwire.WEST, iblockdata.get(BlockTripwire.EAST));
 
         default:
+            //noinspection deprecation
             return super.a(iblockdata, enumblockmirror);
         }
     }

@@ -7,7 +7,7 @@ public class BlockPressurePlateWeighted extends BlockPressurePlateAbstract {
     public static final BlockStateInteger POWER = BlockStateInteger.of("power", 0, 15);
     private final int weight;
 
-    protected BlockPressurePlateWeighted(Material material, int i) {
+    protected BlockPressurePlateWeighted(@SuppressWarnings("SameParameterValue") Material material, @SuppressWarnings("SameParameterValue") int i) {
         this(material, i, material.r());
     }
 
@@ -23,6 +23,7 @@ public class BlockPressurePlateWeighted extends BlockPressurePlateAbstract {
         int i = 0;
         java.util.Iterator iterator = world.a(Entity.class, BlockPressurePlateWeighted.c.a(blockposition)).iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             Entity entity = (Entity) iterator.next();
 

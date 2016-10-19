@@ -180,6 +180,7 @@ public class ContainerAnvil extends Container {
                     Map map1 = EnchantmentManager.a(itemstack2);
                     Iterator iterator = map1.keySet().iterator();
 
+                    //noinspection WhileLoopReplaceableByForEach
                     while (iterator.hasNext()) {
                         Enchantment enchantment = (Enchantment) iterator.next();
 
@@ -195,6 +196,7 @@ public class ContainerAnvil extends Container {
 
                             Iterator iterator1 = map.keySet().iterator();
 
+                            //noinspection WhileLoopReplaceableByForEach
                             while (iterator1.hasNext()) {
                                 Enchantment enchantment1 = (Enchantment) iterator1.next();
 
@@ -209,6 +211,7 @@ public class ContainerAnvil extends Container {
                                     k1 = enchantment.getMaxLevel();
                                 }
 
+                                //noinspection unchecked
                                 map.put(enchantment, k1);
                                 int l1 = 0;
 
@@ -277,6 +280,7 @@ public class ContainerAnvil extends Container {
                 }
 
                 itemstack1.setRepairCost(i2);
+                //noinspection unchecked
                 EnchantmentManager.a(map, itemstack1);
             }
 

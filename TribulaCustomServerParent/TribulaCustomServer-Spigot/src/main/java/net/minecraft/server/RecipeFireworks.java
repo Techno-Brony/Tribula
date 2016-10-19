@@ -96,6 +96,7 @@ public class RecipeFireworks extends ShapelessRecipes implements IRecipe { // Cr
 
                     if (itemstack2 != null) {
                         if (itemstack2.getItem() == Items.DYE) {
+                            //noinspection unchecked
                             arraylist.add(ItemDye.a[itemstack2.getData() & 15]);
                         } else if (itemstack2.getItem() == Items.GLOWSTONE_DUST) {
                             nbttagcompound1.setBoolean("Flicker", true);
@@ -132,6 +133,7 @@ public class RecipeFireworks extends ShapelessRecipes implements IRecipe { // Cr
 
                     if (itemstack3 != null) {
                         if (itemstack3.getItem() == Items.DYE) {
+                            //noinspection unchecked
                             arraylist1.add(ItemDye.a[itemstack3.getData() & 15]);
                         } else if (itemstack3.getItem() == Items.FIREWORK_CHARGE) {
                             this.a = itemstack3.cloneItemStack();

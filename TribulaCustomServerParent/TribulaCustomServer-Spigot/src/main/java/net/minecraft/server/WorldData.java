@@ -199,6 +199,7 @@ public class WorldData {
             nbttagcompound1 = nbttagcompound.getCompound("DimensionData");
             Iterator iterator = nbttagcompound1.c().iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 String s1 = (String) iterator.next();
 
@@ -353,6 +354,7 @@ public class WorldData {
         NBTTagCompound nbttagcompound3 = new NBTTagCompound();
         Iterator iterator = this.N.entrySet().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             Entry entry = (Entry) iterator.next();
 
@@ -500,7 +502,7 @@ public class WorldData {
         return this.y;
     }
 
-    public void f(boolean flag) {
+    public void f(@SuppressWarnings("SameParameterValue") boolean flag) {
         this.y = flag;
     }
 
@@ -508,7 +510,7 @@ public class WorldData {
         return this.z;
     }
 
-    public void g(boolean flag) {
+    public void g(@SuppressWarnings("SameParameterValue") boolean flag) {
         this.z = flag;
     }
 
@@ -528,7 +530,7 @@ public class WorldData {
         return this.A;
     }
 
-    public void c(boolean flag) {
+    public void c(@SuppressWarnings("SameParameterValue") boolean flag) {
         this.A = flag;
     }
 
@@ -536,7 +538,7 @@ public class WorldData {
         return this.B;
     }
 
-    public void d(boolean flag) {
+    public void d(@SuppressWarnings("SameParameterValue") boolean flag) {
         this.B = flag;
     }
 
@@ -624,6 +626,7 @@ public class WorldData {
         this.C = enumdifficulty;
         // CraftBukkit start
         PacketPlayOutServerDifficulty packet = new PacketPlayOutServerDifficulty(this.getDifficulty(), this.isDifficultyLocked());
+        //noinspection unchecked
         for (EntityPlayer player : (java.util.List<EntityPlayer>) (java.util.List) world.players) {
             player.playerConnection.sendPacket(packet);
         }
@@ -634,13 +637,14 @@ public class WorldData {
         return this.D;
     }
 
-    public void e(boolean flag) {
+    public void e(@SuppressWarnings("SameParameterValue") boolean flag) {
         this.D = flag;
     }
 
     public void a(CrashReportSystemDetails crashreportsystemdetails) {
+        //noinspection unchecked
         crashreportsystemdetails.a("Level seed", new CrashReportCallable() {
-            public String a() throws Exception {
+            public String a() {
                 return String.valueOf(WorldData.this.getSeed());
             }
 
@@ -648,8 +652,9 @@ public class WorldData {
                 return this.a();
             }
         });
+        //noinspection unchecked
         crashreportsystemdetails.a("Level generator", new CrashReportCallable() {
-            public String a() throws Exception {
+            public String a() {
                 return String.format("ID %02d - %s, ver %d. Features enabled: %b", WorldData.this.f.g(), WorldData.this.f.name(), WorldData.this.f.getVersion(), WorldData.this.y);
             }
 
@@ -657,8 +662,9 @@ public class WorldData {
                 return this.a();
             }
         });
+        //noinspection unchecked
         crashreportsystemdetails.a("Level generator options", new CrashReportCallable() {
-            public String a() throws Exception {
+            public String a() {
                 return WorldData.this.g;
             }
 
@@ -666,8 +672,9 @@ public class WorldData {
                 return this.a();
             }
         });
+        //noinspection unchecked
         crashreportsystemdetails.a("Level spawn location", new CrashReportCallable() {
-            public String a() throws Exception {
+            public String a() {
                 return CrashReportSystemDetails.a(WorldData.this.h, WorldData.this.i, WorldData.this.j);
             }
 
@@ -675,8 +682,9 @@ public class WorldData {
                 return this.a();
             }
         });
+        //noinspection unchecked
         crashreportsystemdetails.a("Level time", new CrashReportCallable() {
-            public String a() throws Exception {
+            public String a() {
                 return String.format("%d game time, %d day time", WorldData.this.k, WorldData.this.l);
             }
 
@@ -684,8 +692,9 @@ public class WorldData {
                 return this.a();
             }
         });
+        //noinspection unchecked
         crashreportsystemdetails.a("Level dimension", new CrashReportCallable() {
-            public String a() throws Exception {
+            public String a() {
                 return String.valueOf(WorldData.this.p);
             }
 
@@ -693,8 +702,9 @@ public class WorldData {
                 return this.a();
             }
         });
+        //noinspection unchecked
         crashreportsystemdetails.a("Level storage version", new CrashReportCallable() {
-            public String a() throws Exception {
+            public String a() {
                 String s = "Unknown?";
 
                 try {
@@ -716,8 +726,9 @@ public class WorldData {
                 return this.a();
             }
         });
+        //noinspection unchecked
         crashreportsystemdetails.a("Level weather", new CrashReportCallable() {
-            public String a() throws Exception {
+            public String a() {
                 return String.format("Rain time: %d (now: %b), thunder time: %d (now: %b)", WorldData.this.u, WorldData.this.t, WorldData.this.w, WorldData.this.v);
             }
 
@@ -725,8 +736,9 @@ public class WorldData {
                 return this.a();
             }
         });
+        //noinspection unchecked
         crashreportsystemdetails.a("Level game mode", new CrashReportCallable() {
-            public String a() throws Exception {
+            public String a() {
                 return String.format("Game mode: %s (ID %d). Hardcore: %b. Cheats: %b", WorldData.this.x.b(), WorldData.this.x.getId(), WorldData.this.z, WorldData.this.A);
             }
 

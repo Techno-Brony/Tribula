@@ -188,7 +188,9 @@ public class BlockFire extends Block {
                                             org.bukkit.Server server = world.getServer();
                                             org.bukkit.World bworld = world.getWorld();
                                             org.bukkit.block.BlockState blockState = bworld.getBlockAt(blockposition1.getX(), blockposition1.getY(), blockposition1.getZ()).getState();
+                                            //noinspection deprecation
                                             blockState.setTypeId(Block.getId(this));
+                                            //noinspection deprecation
                                             blockState.setData(new org.bukkit.material.MaterialData(Block.getId(this), (byte) l1));
 
                                             BlockSpreadEvent spreadEvent = new BlockSpreadEvent(blockState.getBlock(), bworld.getBlockAt(blockposition.getX(), blockposition.getY(), blockposition.getZ()), blockState);

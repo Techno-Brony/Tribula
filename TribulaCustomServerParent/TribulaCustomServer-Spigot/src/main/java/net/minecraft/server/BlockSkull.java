@@ -38,6 +38,7 @@ public class BlockSkull extends BlockTileEntity {
     }
 
     public String getName() {
+        //noinspection deprecation,deprecation
         return LocaleI18n.get("tile.skull.skeleton.name");
     }
 

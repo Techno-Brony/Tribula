@@ -42,6 +42,7 @@ public class ServerStatisticManager extends StatisticManager {
         JsonObject jsonobject = new JsonObject();
         Iterator iterator = map.entrySet().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             Entry entry = (Entry) iterator.next();
 
@@ -116,6 +117,7 @@ public class ServerStatisticManager extends StatisticManager {
 
         this.e.clear();
         this.g = false;
+        //noinspection unchecked
         return hashset;
     }
 
@@ -129,6 +131,7 @@ public class ServerStatisticManager extends StatisticManager {
             HashMap hashmap = Maps.newHashMap();
             Iterator iterator = jsonobject.entrySet().iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 Entry entry = (Entry) iterator.next();
                 Statistic statistic = StatisticList.getStatistic((String) entry.getKey());
@@ -158,12 +161,14 @@ public class ServerStatisticManager extends StatisticManager {
                         }
                     }
 
+                    //noinspection unchecked
                     hashmap.put(statistic, statisticwrapper);
                 } else {
                     ServerStatisticManager.b.warn("Invalid statistic in {}: Don\'t know what {} is", this.d, entry.getKey());
                 }
             }
 
+            //noinspection unchecked
             return hashmap;
         }
     }
@@ -171,6 +176,7 @@ public class ServerStatisticManager extends StatisticManager {
     public void d() {
         Iterator iterator = this.a.keySet().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             Statistic statistic = (Statistic) iterator.next();
 
@@ -187,13 +193,16 @@ public class ServerStatisticManager extends StatisticManager {
             this.f = i;
             Iterator iterator = this.c().iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 Statistic statistic = (Statistic) iterator.next();
 
+                //noinspection unchecked
                 hashmap.put(statistic, this.getStatisticValue(statistic));
             }
         }
 
+        //noinspection unchecked
         entityplayer.playerConnection.sendPacket(new PacketPlayOutStatistic(hashmap));
     }
 
@@ -201,15 +210,18 @@ public class ServerStatisticManager extends StatisticManager {
         HashMap hashmap = Maps.newHashMap();
         Iterator iterator = AchievementList.e.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             Achievement achievement = (Achievement) iterator.next();
 
             if (this.hasAchievement(achievement)) {
+                //noinspection unchecked
                 hashmap.put(achievement, this.getStatisticValue(achievement));
                 this.e.remove(achievement);
             }
         }
 
+        //noinspection unchecked
         entityplayer.playerConnection.sendPacket(new PacketPlayOutStatistic(hashmap));
     }
 

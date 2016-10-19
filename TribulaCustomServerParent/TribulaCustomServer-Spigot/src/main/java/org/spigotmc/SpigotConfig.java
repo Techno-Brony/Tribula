@@ -105,6 +105,7 @@ public class SpigotConfig
     {
         for ( Map.Entry<String, Command> entry : commands.entrySet() )
         {
+            //noinspection deprecation
             MinecraftServer.getServer().server.getCommandMap().register( entry.getKey(), "Spigot", entry.getValue() );
         }
 
@@ -304,6 +305,7 @@ public class SpigotConfig
 
     private static void spamExclusions()
     {
+        //noinspection unchecked
         spamExclusions = getList( "commands.spam-exclusions", Collections.singletonList("/skill"));
     }
 
@@ -324,6 +326,7 @@ public class SpigotConfig
             set( "commands.replace-commands", config.getStringList( "replace-commands" ) );
             config.set( "replace-commands", null );
         }
+        //noinspection unchecked
         replaceCommands = new HashSet<String>( (List<String>) getList( "commands.replace-commands",
                 Arrays.asList( "setblock", "summon", "testforblock", "tellraw" ) ) );
     }

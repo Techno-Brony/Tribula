@@ -26,6 +26,7 @@ public class Village {
     public Village() {
         this.c = BlockPosition.ZERO;
         this.d = BlockPosition.ZERO;
+        //noinspection unchecked
         this.j = new TreeMap();
         this.k = Lists.newArrayList();
     }
@@ -33,6 +34,7 @@ public class Village {
     public Village(World world) {
         this.c = BlockPosition.ZERO;
         this.d = BlockPosition.ZERO;
+        //noinspection unchecked
         this.j = new TreeMap();
         this.k = Lists.newArrayList();
         this.a = world;
@@ -70,7 +72,7 @@ public class Village {
 
     }
 
-    private Vec3D a(BlockPosition blockposition, int i, int j, int k) {
+    private Vec3D a(BlockPosition blockposition, @SuppressWarnings("SameParameterValue") int i, @SuppressWarnings("SameParameterValue") int j, @SuppressWarnings("SameParameterValue") int k) {
         for (int l = 0; l < 10; ++l) {
             BlockPosition blockposition1 = blockposition.a(this.a.random.nextInt(16) - 8, this.a.random.nextInt(6) - 3, this.a.random.nextInt(16) - 8);
 
@@ -152,6 +154,7 @@ public class Village {
         int i = Integer.MAX_VALUE;
         Iterator iterator = this.b.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             VillageDoor villagedoor1 = (VillageDoor) iterator.next();
             int j = villagedoor1.a(blockposition);
@@ -170,6 +173,7 @@ public class Village {
         int i = Integer.MAX_VALUE;
         Iterator iterator = this.b.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             VillageDoor villagedoor1 = (VillageDoor) iterator.next();
             int j = villagedoor1.a(blockposition);
@@ -263,6 +267,7 @@ public class Village {
         EntityHuman entityhuman = null;
         Iterator iterator = this.j.keySet().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             String s = (String) iterator.next();
 
@@ -420,6 +425,7 @@ public class Village {
         NBTTagList nbttaglist = new NBTTagList();
         Iterator iterator = this.b.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             VillageDoor villagedoor = (VillageDoor) iterator.next();
             NBTTagCompound nbttagcompound1 = new NBTTagCompound();
@@ -437,6 +443,7 @@ public class Village {
         NBTTagList nbttaglist1 = new NBTTagList();
         Iterator iterator1 = this.j.keySet().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator1.hasNext()) {
             String s = (String) iterator1.next();
             NBTTagCompound nbttagcompound2 = new NBTTagCompound();
@@ -461,9 +468,10 @@ public class Village {
         return this.i == 0 || this.g - this.i >= 3600;
     }
 
-    public void b(int i) {
+    public void b(@SuppressWarnings("SameParameterValue") int i) {
         Iterator iterator = this.j.keySet().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             String s = (String) iterator.next();
 

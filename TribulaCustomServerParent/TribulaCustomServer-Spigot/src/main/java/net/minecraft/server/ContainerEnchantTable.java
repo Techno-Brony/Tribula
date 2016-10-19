@@ -225,6 +225,7 @@ public class ContainerEnchantTable extends Container {
                     Map<org.bukkit.enchantments.Enchantment, Integer> enchants = new java.util.HashMap<org.bukkit.enchantments.Enchantment, Integer>();
                     for (Object obj : list) {
                         WeightedRandomEnchant instance = (WeightedRandomEnchant) obj;
+                        //noinspection deprecation
                         enchants.put(org.bukkit.enchantments.Enchantment.getById(Enchantment.getId(instance.enchantment)), instance.level);
                     }
                     CraftItemStack item = CraftItemStack.asCraftMirror(itemstack);
@@ -237,6 +238,7 @@ public class ContainerEnchantTable extends Container {
                         return false;
                     }
                     if (flag) {
+                        //noinspection deprecation
                         itemstack.setItem(Items.ENCHANTED_BOOK);
                     }
 
@@ -292,6 +294,7 @@ public class ContainerEnchantTable extends Container {
             list.remove(this.l.nextInt(list.size()));
         }
 
+        //noinspection unchecked
         return list;
     }
 

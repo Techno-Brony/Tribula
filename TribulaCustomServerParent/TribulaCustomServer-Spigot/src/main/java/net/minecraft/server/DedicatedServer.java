@@ -183,13 +183,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
             DedicatedServer.LOGGER.info("Starting Tribula server on {}:{}", this.getServerIp().isEmpty() ? "*" : this.getServerIp(), this.P());
 
         if (!org.spigotmc.SpigotConfig.lateBind) {
-            try {
-                this.am().a(inetaddress, this.P());
-            } catch (IOException ioexception) {
-                DedicatedServer.LOGGER.warn("Failed to bind to port.");
-                DedicatedServer.LOGGER.warn("The exception was: {}", ioexception.toString());
-                return false;
-            }
+            this.am().a(inetaddress, this.P());
         }
 
             // Spigot Start - Move DedicatedPlayerList up and bring plugin loading from CraftServer to here
@@ -289,16 +283,9 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
                 }
                 // CraftBukkit end
 
-        if (org.spigotmc.SpigotConfig.lateBind) {
-            try {
-                this.am().a(inetaddress, this.P());
-            } catch (IOException ioexception) {
-                DedicatedServer.LOGGER.warn("Failed to bind to port.");
-                DedicatedServer.LOGGER.warn("The exception was: {}", ioexception.toString());
-                return false;
-            }
-        }
-
+                if (org.spigotmc.SpigotConfig.lateBind) {
+                    this.am().a(inetaddress, this.P());
+                }
                 return true;
             }
         }
@@ -353,8 +340,9 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
 
     public CrashReport b(CrashReport crashreport) {
         crashreport = super.b(crashreport);
+        //noinspection unchecked
         crashreport.g().a("Is Modded", new CrashReportCallable() {
-            public String a() throws Exception {
+            public String a() {
                 String s = DedicatedServer.this.getServerModName();
 
                 return !"vanilla".equals(s) ? "Definitely; Server brand changed to \'" + s + "\'" : "Unknown (can\'t tell)";
@@ -364,8 +352,9 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
                 return this.a();
             }
         });
+        //noinspection unchecked
         crashreport.g().a("Type", new CrashReportCallable() {
-            public String a() throws Exception {
+            public String a() {
                 return "Dedicated Server (map_server.txt)";
             }
 

@@ -111,7 +111,7 @@ public abstract class PathfinderGoalTarget extends PathfinderGoal {
         this.g = null;
     }
 
-    protected boolean a(EntityLiving entityliving, boolean flag) {
+    protected boolean a(EntityLiving entityliving, @SuppressWarnings("SameParameterValue") boolean flag) {
         if (!a(this.e, entityliving, flag, this.f)) {
             return false;
         } else if (!this.e.f(new BlockPosition(entityliving))) {

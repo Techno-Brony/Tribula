@@ -64,6 +64,7 @@ public class EntityWither extends EntityMonster implements IRangedEntity {
         this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
         this.goalSelector.a(7, new PathfinderGoalRandomLookaround(this));
         this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, false, new Class[0]));
+        //noinspection unchecked
         this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this, EntityInsentient.class, 0, false, false, EntityWither.bH));
     }
 
@@ -208,6 +209,7 @@ public class EntityWither extends EntityMonster implements IRangedEntity {
                 // CraftBukkit start - Use relative location for far away sounds
                 // this.world.a(1023, new BlockPosition(this), 0);
                 int viewDistance = this.world.getServer().getViewDistance() * 16;
+                //noinspection deprecation
                 for (EntityPlayer player : MinecraftServer.getServer().getPlayerList().players) {
                     double deltaX = this.locX - player.locX;
                     double deltaZ = this.locZ - player.locZ;
@@ -474,6 +476,7 @@ public class EntityWither extends EntityMonster implements IRangedEntity {
         if (!this.world.isClientSide) {
             Iterator iterator = this.world.a(EntityHuman.class, this.getBoundingBox().grow(50.0D, 100.0D, 50.0D)).iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 EntityHuman entityhuman = (EntityHuman) iterator.next();
 
@@ -537,6 +540,7 @@ public class EntityWither extends EntityMonster implements IRangedEntity {
             this.a(7);
         }
 
+        @SuppressWarnings("MethodNameSameAsClassName")
         public boolean a() {
             return EntityWither.this.de() > 0;
         }

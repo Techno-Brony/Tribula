@@ -57,6 +57,7 @@ public class CrashReport {
     }
 
     private void h() {
+        //noinspection unchecked
         this.d.a("Minecraft Version", new CrashReportCallable() {
             public String a() {
                 return "1.10.2";
@@ -66,6 +67,7 @@ public class CrashReport {
                 return this.a();
             }
         });
+        //noinspection unchecked
         this.d.a("Operating System", new CrashReportCallable() {
             public String a() {
                 return System.getProperty("os.name") + " (" + System.getProperty("os.arch") + ") version " + System.getProperty("os.version");
@@ -75,6 +77,7 @@ public class CrashReport {
                 return this.a();
             }
         });
+        //noinspection unchecked
         this.d.a("Java Version", new CrashReportCallable() {
             public String a() {
                 return System.getProperty("java.version") + ", " + System.getProperty("java.vendor");
@@ -84,6 +87,7 @@ public class CrashReport {
                 return this.a();
             }
         });
+        //noinspection unchecked
         this.d.a("Java VM Version", new CrashReportCallable() {
             public String a() {
                 return System.getProperty("java.vm.name") + " (" + System.getProperty("java.vm.info") + "), " + System.getProperty("java.vm.vendor");
@@ -93,6 +97,7 @@ public class CrashReport {
                 return this.a();
             }
         });
+        //noinspection unchecked
         this.d.a("Memory", new CrashReportCallable() {
             public String a() {
                 Runtime runtime = Runtime.getRuntime();
@@ -110,6 +115,7 @@ public class CrashReport {
                 return this.a();
             }
         });
+        //noinspection unchecked
         this.d.a("JVM Flags", new CrashReportCallable() {
             public String a() {
                 RuntimeMXBean runtimemxbean = ManagementFactory.getRuntimeMXBean();
@@ -118,6 +124,7 @@ public class CrashReport {
                 StringBuilder stringbuilder = new StringBuilder();
                 Iterator iterator = list.iterator();
 
+                //noinspection WhileLoopReplaceableByForEach
                 while (iterator.hasNext()) {
                     String s = (String) iterator.next();
 
@@ -137,8 +144,9 @@ public class CrashReport {
                 return this.a();
             }
         });
+        //noinspection unchecked
         this.d.a("IntCache", new CrashReportCallable() {
-            public String a() throws Exception {
+            public String a() {
                 return IntCache.b();
             }
 
@@ -146,6 +154,7 @@ public class CrashReport {
                 return this.a();
             }
         });
+        //noinspection unchecked
         this.d.a("CraftBukkit Information", (CrashReportCallable) new org.bukkit.craftbukkit.CraftCrashReport()); // CraftBukkit
     }
 
@@ -179,6 +188,7 @@ public class CrashReport {
 
         Iterator iterator = this.e.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             CrashReportSystemDetails crashreportsystemdetails = (CrashReportSystemDetails) iterator.next();
 
@@ -283,7 +293,7 @@ public class CrashReport {
         return this.a(s, 1);
     }
 
-    public CrashReportSystemDetails a(String s, int i) {
+    public CrashReportSystemDetails a(String s, @SuppressWarnings("SameParameterValue") int i) {
         CrashReportSystemDetails crashreportsystemdetails = new CrashReportSystemDetails(this, s);
 
         if (this.g) {

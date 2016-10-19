@@ -26,12 +26,14 @@ public class ItemSnowball extends Item {
 
                 world.a(null, entityhuman.locX, entityhuman.locY, entityhuman.locZ, SoundEffects.fS, SoundCategory.NEUTRAL, 0.5F, 0.4F / (ItemSnowball.j.nextFloat() * 0.4F + 0.8F));
             } else if (entityhuman instanceof EntityPlayer) {
+                //noinspection deprecation
                 ((EntityPlayer) entityhuman).getBukkitEntity().updateInventory();
             }
         }
         // CraftBukkit end
 
         entityhuman.b(StatisticList.b(this));
+        //noinspection unchecked
         return new InteractionResultWrapper(EnumInteractionResult.SUCCESS, itemstack);
     }
 }

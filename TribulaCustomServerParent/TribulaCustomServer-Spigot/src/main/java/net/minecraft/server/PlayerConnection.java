@@ -170,6 +170,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
 
         this.minecraftServer.methodProfiler.b();
         // CraftBukkit start
+        //noinspection unchecked
         for (int spam; (spam = this.chatThrottle) > 0 && !chatSpamField.compareAndSet(this, spam, spam - 1); ) ;
         /* Use thread-safe field access instead
         if (this.chatThrottle > 0) {
@@ -224,6 +225,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
         // CraftBukkit end
         final ChatComponentText chatcomponenttext = new ChatComponentText(s);
 
+        //noinspection unchecked,unchecked
         this.networkManager.sendPacket(new PacketPlayOutKickDisconnect(chatcomponenttext), new GenericFutureListener() {
             public void operationComplete(Future future) throws Exception { // CraftBukkit - decompile error
                 PlayerConnection.this.networkManager.close(chatcomponenttext);
@@ -725,6 +727,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
 
         this.A = this.e;
         this.player.setLocation(this.teleportPos.x, this.teleportPos.y, this.teleportPos.z, f2, f3);
+        //noinspection unchecked
         this.player.playerConnection.sendPacket(new PacketPlayOutPosition(d0, d1, d2, f, f1, set, this.teleportAwait));
     }
 
@@ -1079,8 +1082,9 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
             CrashReport crashreport = CrashReport.a(throwable, "Sending packet");
             CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Packet being sent");
 
+            //noinspection unchecked
             crashreportsystemdetails.a("Packet class", new CrashReportCallable() {
-                public String a() throws Exception {
+                public String a() {
                     return packet.getClass().getCanonicalName();
                 }
 
@@ -1205,6 +1209,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
             // Spigot end
             // CraftBukkit start - replaced with thread safe throttle
             // this.chatThrottle += 20;
+            //noinspection unchecked
             if (counted && chatSpamField.addAndGet(this, 20) > 200 && !this.minecraftServer.getPlayerList().isOp(this.player.getProfile())) { // Spigot
                 if (!isSync) {
                     Waitable waitable = new Waitable() {
@@ -1248,6 +1253,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
             AsyncPlayerChatEvent event = new AsyncPlayerChatEvent(async, player, s, new LazyPlayerSet(minecraftServer));
             this.server.getPluginManager().callEvent(event);
 
+            //noinspection deprecation
             if (PlayerChatEvent.getHandlerList().getRegisteredListeners().length != 0) {
                 // Evil plugins still listening to deprecated event
                 //noinspection deprecation,deprecation
@@ -1789,6 +1795,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
                         ItemStack cursor = this.player.inventory.getCarried();
                         action = InventoryAction.NOTHING;
                         // Quick check for if we have any of the item
+                        //noinspection deprecation,deprecation
                         if (inventory.getTopInventory().contains(org.bukkit.Material.getMaterial(Item.getId(cursor.getItem()))) || inventory.getBottomInventory().contains(org.bukkit.Material.getMaterial(Item.getId(cursor.getItem())))) {
                             action = InventoryAction.COLLECT_TO_CURSOR;
                         }
@@ -1903,9 +1910,11 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
                     ItemStack itemstack1 = this.player.activeContainer.c.get(j).getItem();
                     ItemStack itemstack2 = itemstack1 != null && itemstack1.count > 0 ? itemstack1 : null;
 
+                    //noinspection unchecked
                     arraylist1.add(itemstack2);
                 }
 
+                //noinspection unchecked
                 this.player.a(this.player.activeContainer, arraylist1);
             }
         }
@@ -2103,6 +2112,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
     public void a(PacketPlayInTabComplete packetplayintabcomplete) {
         PlayerConnectionUtils.ensureMainThread(packetplayintabcomplete, this, this.player.x());
         // CraftBukkit start
+        //noinspection unchecked
         if (chatSpamField.addAndGet(this, 10) > 500 && !this.minecraftServer.getPlayerList().isOp(this.player.getProfile())) {
             this.disconnect("disconnect.spam");
             return;
@@ -2111,9 +2121,11 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
         ArrayList arraylist = Lists.newArrayList();
         Iterator iterator = this.minecraftServer.tabCompleteCommand(this.player, packetplayintabcomplete.a(), packetplayintabcomplete.b(), packetplayintabcomplete.c()).iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             String s = (String) iterator.next();
 
+            //noinspection unchecked
             arraylist.add(s);
         }
 
@@ -2195,6 +2207,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
                         }
 
                         itemstack1.a("pages", nbttaglist);
+                        //noinspection deprecation
                         itemstack1.setItem(Items.WRITTEN_BOOK);
                         CraftEventFactory.handleEditBookEvent(player, itemstack1); // CraftBukkit
                     }

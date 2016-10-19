@@ -85,6 +85,7 @@ public class TileEntityHopper extends TileEntityLootable implements IHopper, ITi
         } else {
             Iterator iterator = a(ihopper.getWorld(), ihopper.E(), ihopper.F(), ihopper.G()).iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 EntityItem entityitem = (EntityItem) iterator.next();
 

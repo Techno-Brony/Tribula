@@ -31,6 +31,7 @@ public class NameReferencingFileConverter {
         List list = Files.readLines(file, Charsets.UTF_8);
         Iterator iterator = list.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             String s = (String) iterator.next();
 
@@ -42,10 +43,12 @@ public class NameReferencingFileConverter {
             }
         }
 
+        //noinspection unchecked
         return list;
     }
 
     private static void a(MinecraftServer minecraftserver, Collection<String> collection, ProfileLookupCallback profilelookupcallback) {
+        //noinspection unchecked,unchecked
         String[] astring = Iterators.toArray(Iterators.filter(collection.iterator(), new Predicate() {
             public boolean a(@Nullable String s) {
                 return !UtilColor.b(s);
@@ -76,17 +79,14 @@ public class NameReferencingFileConverter {
 
         if (NameReferencingFileConverter.b.exists() && NameReferencingFileConverter.b.isFile()) {
             if (gameprofilebanlist.c().exists()) {
-                try {
-                    gameprofilebanlist.load();
+                gameprofilebanlist.load();
                 // CraftBukkit start - FileNotFoundException -> IOException, don't print stacetrace
-                } catch (IOException filenotfoundexception) {
-                    NameReferencingFileConverter.e.warn("Could not load existing file {}", gameprofilebanlist.c().getName());
-                }
             }
 
             try {
                 final HashMap hashmap = Maps.newHashMap();
 
+                //noinspection unchecked
                 a(NameReferencingFileConverter.b, hashmap);
                 ProfileLookupCallback profilelookupcallback = new ProfileLookupCallback() {
                     public void onProfileLookupSucceeded(GameProfile gameprofile) {
@@ -114,6 +114,7 @@ public class NameReferencingFileConverter {
                     }
                 };
 
+                //noinspection unchecked
                 a(minecraftserver, hashmap.keySet(), profilelookupcallback);
                 gameprofilebanlist.save();
                 c(NameReferencingFileConverter.b);
@@ -135,20 +136,18 @@ public class NameReferencingFileConverter {
 
         if (NameReferencingFileConverter.a.exists() && NameReferencingFileConverter.a.isFile()) {
             if (ipbanlist.c().exists()) {
-                try {
-                    ipbanlist.load();
+                ipbanlist.load();
                 // CraftBukkit start - FileNotFoundException -> IOException, don't print stacetrace
-                } catch (IOException filenotfoundexception) {
-                    NameReferencingFileConverter.e.warn("Could not load existing file {}", ipbanlist.c().getName());
-                }
             }
 
             try {
                 HashMap hashmap = Maps.newHashMap();
 
+                //noinspection unchecked
                 a(NameReferencingFileConverter.a, hashmap);
                 Iterator iterator = hashmap.keySet().iterator();
 
+                //noinspection WhileLoopReplaceableByForEach
                 while (iterator.hasNext()) {
                     String s = (String) iterator.next();
                     String[] astring = (String[]) hashmap.get(s);
@@ -177,12 +176,8 @@ public class NameReferencingFileConverter {
 
         if (NameReferencingFileConverter.c.exists() && NameReferencingFileConverter.c.isFile()) {
             if (oplist.c().exists()) {
-                try {
-                    oplist.load();
+                oplist.load();
                 // CraftBukkit start - FileNotFoundException -> IOException, don't print stacetrace
-                } catch (IOException filenotfoundexception) {
-                    NameReferencingFileConverter.e.warn("Could not load existing file {}", oplist.c().getName());
-                }
             }
 
             try {
@@ -201,6 +196,7 @@ public class NameReferencingFileConverter {
                     }
                 };
 
+                //noinspection unchecked
                 a(minecraftserver, list, profilelookupcallback);
                 oplist.save();
                 c(NameReferencingFileConverter.c);
@@ -222,12 +218,8 @@ public class NameReferencingFileConverter {
 
         if (NameReferencingFileConverter.d.exists() && NameReferencingFileConverter.d.isFile()) {
             if (whitelist.c().exists()) {
-                try {
-                    whitelist.load();
+                whitelist.load();
                 // CraftBukkit start - FileNotFoundException -> IOException, don't print stacetrace
-                } catch (IOException filenotfoundexception) {
-                    NameReferencingFileConverter.e.warn("Could not load existing file {}", whitelist.c().getName());
-                }
             }
 
             try {
@@ -246,6 +238,7 @@ public class NameReferencingFileConverter {
                     }
                 };
 
+                //noinspection unchecked
                 a(minecraftserver, list, profilelookupcallback);
                 whitelist.save();
                 c(NameReferencingFileConverter.d);
@@ -273,6 +266,7 @@ public class NameReferencingFileConverter {
                 ProfileLookupCallback profilelookupcallback = new ProfileLookupCallback() {
                     public void onProfileLookupSucceeded(GameProfile gameprofile) {
                         minecraftserver.getUserCache().a(gameprofile);
+                        //noinspection unchecked
                         arraylist.add(gameprofile);
                     }
 
@@ -308,6 +302,7 @@ public class NameReferencingFileConverter {
                     String s1 = s.substring(0, s.length() - ".dat".length());
 
                     if (!s1.isEmpty()) {
+                        //noinspection unchecked
                         arraylist.add(s1);
                     }
                 }
@@ -497,7 +492,7 @@ public class NameReferencingFileConverter {
         file.renameTo(file1);
     }
 
-    private static Date b(String s, Date date) {
+    private static Date b(String s, @SuppressWarnings("SameParameterValue") Date date) {
         Date date1;
 
         try {
@@ -523,7 +518,7 @@ public class NameReferencingFileConverter {
             this(s);
         }
 
-        FileConversionException(String s, Throwable throwable, Object object) {
+        FileConversionException(String s, Throwable throwable, @SuppressWarnings("SameParameterValue") Object object) {
             this(s, throwable);
         }
     }

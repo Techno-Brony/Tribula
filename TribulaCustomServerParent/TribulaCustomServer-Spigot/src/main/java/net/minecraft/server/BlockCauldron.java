@@ -176,7 +176,7 @@ public class BlockCauldron extends Block {
     }
 
     // CraftBukkit start
-    public void a(World world, BlockPosition blockposition, IBlockData iblockdata, int i) {
+    public void a(World world, BlockPosition blockposition, IBlockData iblockdata, @SuppressWarnings("SameParameterValue") int i) {
         this.changeLevel(world, blockposition, iblockdata, i, null, CauldronLevelChangeEvent.ChangeReason.UNKNOWN);
     }
 

@@ -133,6 +133,7 @@ public class PlayerChunk {
             PacketPlayOutMapChunk packetplayoutmapchunk = new PacketPlayOutMapChunk(this.chunk, '\uffff');
             Iterator iterator = this.c.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 EntityPlayer entityplayer = (EntityPlayer) iterator.next();
 
@@ -247,11 +248,11 @@ public class PlayerChunk {
         return this.c.contains(entityplayer);
     }
 
-    public boolean a(Predicate<EntityPlayer> predicate) {
+    public boolean a(@SuppressWarnings("SameParameterValue") Predicate<EntityPlayer> predicate) {
         return Iterables.tryFind(this.c, predicate).isPresent();
     }
 
-    public boolean a(double d0, Predicate<EntityPlayer> predicate) {
+    public boolean a(@SuppressWarnings("SameParameterValue") double d0, @SuppressWarnings("SameParameterValue") Predicate<EntityPlayer> predicate) {
         int i = 0;
 
         for (int j = this.c.size(); i < j; ++i) {
@@ -278,6 +279,7 @@ public class PlayerChunk {
         double d0 = Double.MAX_VALUE;
         Iterator iterator = this.c.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             EntityPlayer entityplayer = (EntityPlayer) iterator.next();
             double d1 = this.location.a(entityplayer);

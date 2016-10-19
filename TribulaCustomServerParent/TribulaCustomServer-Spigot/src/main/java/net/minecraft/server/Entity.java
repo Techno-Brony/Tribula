@@ -229,7 +229,7 @@ public abstract class Entity implements ICommandListener {
         this.dead = true;
     }
 
-    public void b(boolean flag) {}
+    public void b(@SuppressWarnings("SameParameterValue") boolean flag) {}
 
     public void setSize(float f, float f1) {
         if (f != this.width || f1 != this.length) {
@@ -905,7 +905,7 @@ public abstract class Entity implements ICommandListener {
         return null;
     }
 
-    protected void burn(float i) { // CraftBukkit - int -> float
+    protected void burn(@SuppressWarnings("SameParameterValue") float i) { // CraftBukkit - int -> float
         if (!this.fireProof) {
             this.damageEntity(DamageSource.FIRE, i);
         }
@@ -920,6 +920,7 @@ public abstract class Entity implements ICommandListener {
         if (this.isVehicle()) {
             Iterator iterator = this.bx().iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 Entity entity = (Entity) iterator.next();
 
@@ -1015,7 +1016,7 @@ public abstract class Entity implements ICommandListener {
 
     }
 
-    public boolean a(Material material) {
+    public boolean a(@SuppressWarnings("SameParameterValue") Material material) {
         if (this.bB() instanceof EntityBoat) {
             return false;
         } else {
@@ -1107,7 +1108,7 @@ public abstract class Entity implements ICommandListener {
         this.setYawPitch(f, f1);
     }
 
-    public void setPositionRotation(BlockPosition blockposition, float f, float f1) {
+    public void setPositionRotation(BlockPosition blockposition, @SuppressWarnings("SameParameterValue") float f, @SuppressWarnings("SameParameterValue") float f1) {
         this.setPositionRotation((double) blockposition.getX() + 0.5D, (double) blockposition.getY(), (double) blockposition.getZ() + 0.5D, f, f1);
     }
 
@@ -1553,11 +1554,11 @@ public abstract class Entity implements ICommandListener {
         return nbttaglist;
     }
 
-    public EntityItem a(Item item, int i) {
+    public EntityItem a(Item item, @SuppressWarnings("SameParameterValue") int i) {
         return this.a(item, i, 0.0F);
     }
 
-    public EntityItem a(Item item, int i, float f) {
+    public EntityItem a(Item item, int i, @SuppressWarnings("SameParameterValue") float f) {
         return this.a(new ItemStack(item, i, 0), f);
     }
 
@@ -2000,6 +2001,7 @@ public abstract class Entity implements ICommandListener {
                 s = "generic";
             }
 
+            //noinspection deprecation,deprecation
             return LocaleI18n.get("entity." + s + ".name");
         }
     }
@@ -2221,8 +2223,9 @@ public abstract class Entity implements ICommandListener {
     }
 
     public void appendEntityCrashDetails(CrashReportSystemDetails crashreportsystemdetails) {
+        //noinspection unchecked
         crashreportsystemdetails.a("Entity Type", new CrashReportCallable() {
-            public String a() throws Exception {
+            public String a() {
                 return EntityTypes.b(Entity.this) + " (" + Entity.this.getClass().getCanonicalName() + ")";
             }
 
@@ -2231,8 +2234,9 @@ public abstract class Entity implements ICommandListener {
             }
         });
         crashreportsystemdetails.a("Entity ID", this.id);
+        //noinspection unchecked
         crashreportsystemdetails.a("Entity Name", new CrashReportCallable() {
-            public String a() throws Exception {
+            public String a() {
                 return Entity.this.getName();
             }
 
@@ -2243,8 +2247,9 @@ public abstract class Entity implements ICommandListener {
         crashreportsystemdetails.a("Entity\'s Exact location", String.format("%.2f, %.2f, %.2f", this.locX, this.locY, this.locZ));
         crashreportsystemdetails.a("Entity\'s Block location", CrashReportSystemDetails.a(MathHelper.floor(this.locX), MathHelper.floor(this.locY), MathHelper.floor(this.locZ)));
         crashreportsystemdetails.a("Entity\'s Momentum", String.format("%.2f, %.2f, %.2f", this.motX, this.motY, this.motZ));
+        //noinspection unchecked
         crashreportsystemdetails.a("Entity\'s Passengers", new CrashReportCallable() {
-            public String a() throws Exception {
+            public String a() {
                 return Entity.this.bx().toString();
             }
 
@@ -2252,8 +2257,9 @@ public abstract class Entity implements ICommandListener {
                 return this.a();
             }
         });
+        //noinspection unchecked
         crashreportsystemdetails.a("Entity\'s Vehicle", new CrashReportCallable() {
-            public String a() throws Exception {
+            public String a() {
                 return Entity.this.bB().toString();
             }
 
@@ -2505,6 +2511,7 @@ public abstract class Entity implements ICommandListener {
     }
 
     public List<Entity> bx() {
+        //noinspection unchecked
         return (List) (this.passengers.isEmpty() ? Collections.emptyList() : Lists.newArrayList(this.passengers));
     }
 
@@ -2527,14 +2534,18 @@ public abstract class Entity implements ICommandListener {
     public Collection<Entity> by() {
         HashSet hashset = Sets.newHashSet();
 
+        //noinspection unchecked
         this.a(Entity.class, hashset);
+        //noinspection unchecked
         return hashset;
     }
 
     public <T extends Entity> Collection<T> b(Class<T> oclass) {
         HashSet hashset = Sets.newHashSet();
 
+        //noinspection unchecked
         this.a(oclass, hashset);
+        //noinspection unchecked
         return hashset;
     }
 
@@ -2544,6 +2555,7 @@ public abstract class Entity implements ICommandListener {
         for (Iterator iterator = this.bx().iterator(); iterator.hasNext(); entity.a(oclass, set)) {
             entity = (Entity) iterator.next();
             if (oclass.isAssignableFrom(entity.getClass())) {
+                //noinspection unchecked
                 set.add((T) entity); // CraftBukkit - decompile error
             }
         }

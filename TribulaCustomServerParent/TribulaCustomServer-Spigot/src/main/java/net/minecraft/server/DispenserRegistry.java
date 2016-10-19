@@ -301,6 +301,7 @@ public class DispenserRegistry {
                     // CraftBukkit start - Handle stacked buckets
                     Item item = Items.BUCKET;
                     if (--itemstack.count == 0) {
+                        //noinspection deprecation
                         itemstack.setItem(Items.BUCKET);
                         itemstack.count = 1;
                     } else if (((TileEntityDispenser) isourceblock.getTileEntity()).addItem(new ItemStack(item)) < 0) {
@@ -363,6 +364,7 @@ public class DispenserRegistry {
 
                 world.setAir(blockposition);
                 if (--itemstack.count == 0) {
+                    //noinspection deprecation
                     itemstack.setItem(item);
                     itemstack.count = 1;
                 } else if (((TileEntityDispenser) isourceblock.getTileEntity()).addItem(new ItemStack(item)) < 0) {
@@ -762,6 +764,7 @@ public class DispenserRegistry {
             return itemstack;
         }
 
+        @SuppressWarnings("MethodNameSameAsClassName")
         protected void a(ISourceBlock isourceblock) {
             isourceblock.getWorld().triggerEffect(1000, isourceblock.getBlockPosition(), 0);
         }

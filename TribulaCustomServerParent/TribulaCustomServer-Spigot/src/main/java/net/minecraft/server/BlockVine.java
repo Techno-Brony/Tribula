@@ -141,6 +141,7 @@ public class BlockVine extends Block {
         IBlockData iblockdata1 = iblockdata;
         Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             EnumDirection enumdirection = (EnumDirection) iterator.next();
             BlockStateBoolean blockstateboolean = getDirection(enumdirection);
@@ -203,6 +204,7 @@ public class BlockVine extends Block {
                         IBlockData iblockdata1 = iblockdata;
                         Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
+                        //noinspection WhileLoopReplaceableByForEach
                         while (iterator.hasNext()) {
                             EnumDirection enumdirection1 = (EnumDirection) iterator.next();
 
@@ -400,6 +402,7 @@ public class BlockVine extends Block {
             return iblockdata.set(BlockVine.EAST, iblockdata.get(BlockVine.WEST)).set(BlockVine.WEST, iblockdata.get(BlockVine.EAST));
 
         default:
+            //noinspection deprecation
             return super.a(iblockdata, enumblockmirror);
         }
     }

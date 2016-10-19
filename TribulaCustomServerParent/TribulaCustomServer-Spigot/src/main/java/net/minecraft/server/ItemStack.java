@@ -63,9 +63,11 @@ public final class ItemStack {
         //if (this.damage < 0) {
         //    this.damage = 0;
         //}
+        //noinspection deprecation
         if (MinecraftServer.getServer() != null) {
             NBTTagCompound savedStack = new NBTTagCompound();
             this.save(savedStack);
+            //noinspection deprecation
             MinecraftServer.getServer().getDataConverterManager().a(DataConverterTypes.ITEM_INSTANCE, savedStack); // PAIL: convert
             this.c(savedStack); // PAIL: load
         }
@@ -160,6 +162,7 @@ public final class ItemStack {
             Location location = new Location(world.getWorld(), blockposition.getX(), blockposition.getY(), blockposition.getZ());
             TreeType treeType = BlockSapling.treeType;
             BlockSapling.treeType = null;
+            //noinspection unchecked
             List<BlockState> blocks = (List<BlockState>) world.capturedBlockStates.clone();
             world.capturedBlockStates.clear();
             StructureGrowEvent event = null;
@@ -185,6 +188,7 @@ public final class ItemStack {
 
         if (enuminteractionresult == EnumInteractionResult.SUCCESS) {
             org.bukkit.event.block.BlockPlaceEvent placeEvent = null;
+            //noinspection unchecked
             List<BlockState> blocks = (List<BlockState>) world.capturedBlockStates.clone();
             world.capturedBlockStates.clear();
             if (blocks.size() > 1) {
@@ -357,6 +361,7 @@ public final class ItemStack {
         }
 
         // Is this a block?
+        //noinspection deprecation,deprecation
         if (CraftMagicNumbers.getBlock(CraftMagicNumbers.getId(this.getItem())) != Blocks.AIR) {
             // If vanilla doesn't use data on it don't allow any
             if (!(this.usesData() || this.getItem().usesDurability())) {
@@ -365,6 +370,7 @@ public final class ItemStack {
         }
 
         // Filter invalid plant data
+        //noinspection deprecation,deprecation
         if (CraftMagicNumbers.getBlock(CraftMagicNumbers.getId(this.getItem())) == Blocks.DOUBLE_PLANT && (i > 5 || i < 0)) {
             i = 0;
         }
@@ -379,7 +385,7 @@ public final class ItemStack {
         return this.item == null ? 0 : this.item.getMaxDurability();
     }
 
-    public boolean isDamaged(int i, Random random) {
+    public boolean isDamaged(@SuppressWarnings("SameParameterValue") int i, Random random) {
         return isDamaged(i, random, null);
     }
 
@@ -548,7 +554,7 @@ public final class ItemStack {
         this.tag = nbttagcompound;
     }
 
-    public NBTTagCompound a(String s, boolean flag) {
+    public NBTTagCompound a(@SuppressWarnings("SameParameterValue") String s, boolean flag) {
         if (this.tag != null && this.tag.hasKeyOfType(s, 10)) {
             return this.tag.getCompound(s);
         } else if (flag) {
@@ -691,6 +697,7 @@ public final class ItemStack {
                 AttributeModifier attributemodifier = GenericAttributes.a(nbttagcompound);
 
                 if (attributemodifier != null && (!nbttagcompound.hasKeyOfType("Slot", 8) || nbttagcompound.getString("Slot").equals(enumitemslot.d())) && attributemodifier.a().getLeastSignificantBits() != 0L && attributemodifier.a().getMostSignificantBits() != 0L) {
+                    //noinspection unchecked
                     ((Multimap) object).put(nbttagcompound.getString("AttributeName"), attributemodifier);
                 }
             }
@@ -698,6 +705,7 @@ public final class ItemStack {
             object = this.getItem().a(enumitemslot);
         }
 
+        //noinspection unchecked
         return (Multimap) object;
     }
 

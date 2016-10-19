@@ -334,6 +334,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         Collection collection = this.world.getServer().getScoreboardManager().getScoreboardScores(iscoreboardcriteria, this.getName(), new java.util.ArrayList<ScoreboardScore>()); // CraftBukkit - Use our scores instead
         Iterator iterator = collection.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             ScoreboardScore scoreboardscore = (ScoreboardScore) iterator.next(); // CraftBukkit - Use our scores instead
 
@@ -356,6 +357,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
             HashSet hashset = Sets.newHashSet(BiomeBase.i);
             Iterator iterator = achievementset.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 String s1 = (String) iterator.next();
                 Iterator iterator1 = hashset.iterator();
@@ -455,6 +457,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         Collection collection = this.world.getServer().getScoreboardManager().getScoreboardScores(IScoreboardCriteria.d, this.getName(), new java.util.ArrayList<ScoreboardScore>());
         Iterator iterator = collection.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             ScoreboardScore scoreboardscore = (ScoreboardScore) iterator.next(); // CraftBukkit - Use our scores instead
 
@@ -884,6 +887,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
             this.bV.b(this, statistic, i);
             Iterator iterator = this.getScoreboard().getObjectivesForCriteria(statistic.k()).iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 ScoreboardObjective scoreboardobjective = (ScoreboardObjective) iterator.next();
 
@@ -902,6 +906,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
             this.bV.setStatistic(this, statistic, 0);
             Iterator iterator = this.getScoreboard().getObjectivesForCriteria(statistic.k()).iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 ScoreboardObjective scoreboardobjective = (ScoreboardObjective) iterator.next();
 
@@ -994,6 +999,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
     }
 
     public void a(EnumGamemode enumgamemode) {
+        //noinspection deprecation
         getBukkitEntity().setGameMode(org.bukkit.GameMode.getByValue(enumgamemode.getId()));
         /* CraftBukkit start - defer to our setGameMode
         this.playerInteractManager.setGameMode(enumgamemode);

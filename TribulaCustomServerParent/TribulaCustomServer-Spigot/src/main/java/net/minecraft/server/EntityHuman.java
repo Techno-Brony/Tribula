@@ -501,6 +501,7 @@ public abstract class EntityHuman extends EntityLiving {
             collection.addAll(this.d(entity));
             Iterator<ScoreboardScore> iterator = collection.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 // CraftBukkit start
                 // ScoreboardObjective scoreboardobjective = (ScoreboardObjective) iterator.next();
@@ -522,6 +523,7 @@ public abstract class EntityHuman extends EntityLiving {
             if (i >= 0 && i < IScoreboardCriteria.n.length) {
                 Iterator iterator = this.getScoreboard().getObjectivesForCriteria(IScoreboardCriteria.n[i]).iterator();
 
+                //noinspection WhileLoopReplaceableByForEach
                 while (iterator.hasNext()) {
                     ScoreboardObjective scoreboardobjective = (ScoreboardObjective) iterator.next();
                     ScoreboardScore scoreboardscore = this.getScoreboard().getPlayerScoreForObjective(s, scoreboardobjective);
@@ -606,10 +608,12 @@ public abstract class EntityHuman extends EntityLiving {
                 org.bukkit.inventory.ItemStack cur = player.getInventory().getItemInHand();
                 if (flag1 && (cur == null || cur.getAmount() == 0)) {
                     // The complete stack was dropped
+                    //noinspection deprecation
                     player.getInventory().setItemInHand(drop.getItemStack());
                 } else if (flag1 && cur.isSimilar(drop.getItemStack()) && drop.getItemStack().getAmount() == 1) {
                     // Only one item is dropped
                     cur.setAmount(cur.getAmount() + 1);
+                    //noinspection deprecation
                     player.getInventory().setItemInHand(cur);
                 } else {
                     // Fallback
@@ -823,8 +827,10 @@ public abstract class EntityHuman extends EntityLiving {
         }
 
         if (this instanceof EntityPlayer) {
+            //noinspection deprecation
             return team.hasPlayer(((EntityPlayer) this).getBukkitEntity());
         }
+        //noinspection deprecation,deprecation
         return team.hasPlayer(this.world.getServer().getOfflinePlayer(this.getName()));
         // CraftBukkit end
     }
@@ -1049,6 +1055,7 @@ public abstract class EntityHuman extends EntityLiving {
                             List list = this.world.a(EntityLiving.class, entity.getBoundingBox().grow(1.0D, 0.25D, 1.0D));
                             Iterator iterator = list.iterator();
 
+                            //noinspection WhileLoopReplaceableByForEach
                             while (iterator.hasNext()) {
                                 EntityLiving entityliving = (EntityLiving) iterator.next();
 
@@ -1413,7 +1420,7 @@ public abstract class EntityHuman extends EntityLiving {
 
     }
 
-    public boolean a(Achievement achievement) {
+    public boolean a(@SuppressWarnings("SameParameterValue") Achievement achievement) {
         return false;
     }
 
@@ -1423,7 +1430,7 @@ public abstract class EntityHuman extends EntityLiving {
 
     public void a(Statistic statistic, int i) {}
 
-    public void a(Statistic statistic) {}
+    public void a(@SuppressWarnings("SameParameterValue") Statistic statistic) {}
 
     public void cl() {
         super.cl();
@@ -1640,7 +1647,7 @@ public abstract class EntityHuman extends EntityLiving {
         return this.foodData;
     }
 
-    public boolean m(boolean flag) {
+    public boolean m(@SuppressWarnings("SameParameterValue") boolean flag) {
         return (flag || this.foodData.c()) && !this.abilities.isInvulnerable;
     }
 
@@ -1877,7 +1884,7 @@ public abstract class EntityHuman extends EntityLiving {
         return (float) (1.0D / this.getAttributeInstance(GenericAttributes.f).getValue() * 20.0D);
     }
 
-    public float o(float f) {
+    public float o(@SuppressWarnings("SameParameterValue") float f) {
         return MathHelper.a(((float) this.aF + f) / this.dd(), 0.0F, 1.0F);
     }
 

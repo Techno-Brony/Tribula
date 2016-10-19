@@ -43,6 +43,7 @@ public class EntityTippedArrow extends EntityArrow {
             if (!list.isEmpty()) {
                 Iterator iterator = list.iterator();
 
+                //noinspection WhileLoopReplaceableByForEach
                 while (iterator.hasNext()) {
                     MobEffect mobeffect = (MobEffect) iterator.next();
 
@@ -50,6 +51,7 @@ public class EntityTippedArrow extends EntityArrow {
                 }
             }
 
+            //noinspection unchecked,unchecked
             this.datawatcher.set(EntityTippedArrow.f, PotionUtil.a(PotionUtil.a(this.potionRegistry, list)));
         } else if (itemstack.getItem() == Items.ARROW) {
             this.potionRegistry = Potions.a;
@@ -61,6 +63,7 @@ public class EntityTippedArrow extends EntityArrow {
 
     public void a(MobEffect mobeffect) {
         this.effects.add(mobeffect);
+        //noinspection unchecked,unchecked
         this.getDataWatcher().set(EntityTippedArrow.f, PotionUtil.a(PotionUtil.a(this.potionRegistry, (Collection) this.effects)));
     }
 
@@ -105,6 +108,7 @@ public class EntityTippedArrow extends EntityArrow {
 
     // CraftBukkit start accessor methods
     public void refreshEffects() {
+        //noinspection unchecked,unchecked
         this.getDataWatcher().set(EntityTippedArrow.f, PotionUtil.a(PotionUtil.a(this.potionRegistry, (Collection) this.effects)));
     }
 
@@ -114,6 +118,7 @@ public class EntityTippedArrow extends EntityArrow {
 
     public void setType(String string) {
         this.potionRegistry = PotionRegistry.a.get(new MinecraftKey(string));
+        //noinspection unchecked,unchecked
         this.datawatcher.set(EntityTippedArrow.f, PotionUtil.a(PotionUtil.a(this.potionRegistry, (Collection) this.effects)));
     }
     // CraftBukkit end
@@ -136,6 +141,7 @@ public class EntityTippedArrow extends EntityArrow {
             NBTTagList nbttaglist = new NBTTagList();
             Iterator iterator = this.effects.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 MobEffect mobeffect = (MobEffect) iterator.next();
 
@@ -155,6 +161,7 @@ public class EntityTippedArrow extends EntityArrow {
 
         Iterator iterator = PotionUtil.b(nbttagcompound).iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             MobEffect mobeffect = (MobEffect) iterator.next();
 
@@ -162,6 +169,7 @@ public class EntityTippedArrow extends EntityArrow {
         }
 
         if (this.potionRegistry != Potions.a || !this.effects.isEmpty()) {
+            //noinspection unchecked,unchecked
             this.datawatcher.set(EntityTippedArrow.f, PotionUtil.a(PotionUtil.a(this.potionRegistry, (Collection) this.effects)));
         }
 
@@ -196,6 +204,7 @@ public class EntityTippedArrow extends EntityArrow {
             ItemStack itemstack = new ItemStack(Items.TIPPED_ARROW);
 
             PotionUtil.a(itemstack, this.potionRegistry);
+            //noinspection unchecked
             PotionUtil.a(itemstack, (Collection) this.effects);
             return itemstack;
         }

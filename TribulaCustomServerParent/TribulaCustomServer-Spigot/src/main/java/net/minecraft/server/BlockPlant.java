@@ -16,7 +16,7 @@ public class BlockPlant extends Block {
         this(Material.PLANT);
     }
 
-    protected BlockPlant(Material material) {
+    protected BlockPlant(@SuppressWarnings("SameParameterValue") Material material) {
         this(material, material.r());
     }
 
@@ -35,6 +35,7 @@ public class BlockPlant extends Block {
     }
 
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
+        //noinspection deprecation
         super.a(iblockdata, world, blockposition, block);
         this.e(world, blockposition, iblockdata);
     }

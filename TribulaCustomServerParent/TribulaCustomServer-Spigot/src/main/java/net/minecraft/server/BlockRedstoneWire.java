@@ -132,6 +132,7 @@ public class BlockRedstoneWire extends Block {
         this.B.clear();
         Iterator iterator = arraylist.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             BlockPosition blockposition1 = (BlockPosition) iterator.next();
 
@@ -158,6 +159,7 @@ public class BlockRedstoneWire extends Block {
         int l = 0;
         Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             EnumDirection enumdirection = (EnumDirection) iterator.next();
             BlockPosition blockposition2 = blockposition.shift(enumdirection);
@@ -344,10 +346,12 @@ public class BlockRedstoneWire extends Block {
                 EnumSet enumset = EnumSet.noneOf(EnumDirection.class);
                 Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
+                //noinspection WhileLoopReplaceableByForEach
                 while (iterator.hasNext()) {
                     EnumDirection enumdirection1 = (EnumDirection) iterator.next();
 
                     if (this.c(iblockaccess, blockposition, enumdirection1)) {
+                        //noinspection unchecked
                         enumset.add(enumdirection1);
                     }
                 }
@@ -413,6 +417,7 @@ public class BlockRedstoneWire extends Block {
             return iblockdata.set(BlockRedstoneWire.EAST, iblockdata.get(BlockRedstoneWire.WEST)).set(BlockRedstoneWire.WEST, iblockdata.get(BlockRedstoneWire.EAST));
 
         default:
+            //noinspection deprecation
             return super.a(iblockdata, enumblockmirror);
         }
     }

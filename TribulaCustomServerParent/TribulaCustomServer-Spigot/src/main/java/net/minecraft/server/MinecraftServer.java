@@ -119,7 +119,8 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
     private boolean hasStopped = false;
     // CraftBukkit end
 
-    public MinecraftServer(OptionSet options, Proxy proxy, DataConverterManager dataconvertermanager, YggdrasilAuthenticationService yggdrasilauthenticationservice, MinecraftSessionService minecraftsessionservice, GameProfileRepository gameprofilerepository, UserCache usercache) {
+    public MinecraftServer(OptionSet options, @SuppressWarnings("SameParameterValue") Proxy proxy, DataConverterManager dataconvertermanager, YggdrasilAuthenticationService yggdrasilauthenticationservice, MinecraftSessionService minecraftsessionservice, GameProfileRepository gameprofilerepository, UserCache usercache) {
+        //noinspection deprecation
         io.netty.util.ResourceLeakDetector.setEnabled( false ); // Spigot - disable
         this.e = proxy;
         this.U = yggdrasilauthenticationservice;
@@ -393,6 +394,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
                 if (this.V()) {
                     world = (WorldServer) (new DemoWorldServer(this, idatamanager, worlddata, dimension, this.methodProfiler)).b();
                 } else {
+                    //noinspection deprecation
                     world = (WorldServer) (new WorldServer(this, idatamanager, worlddata, dimension, this.methodProfiler, org.bukkit.World.Environment.getEnvironment(dimension), gen)).b();
                 }
 
@@ -441,6 +443,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
                     worlddata = new WorldData(worldsettings, name);
                 }
                 worlddata.checkName(name); // CraftBukkit - Migration did not rewrite the level.dat; This forces 1.8 to take the last loaded world as respawn (in this case the end)
+                //noinspection deprecation
                 world = (WorldServer) new SecondaryWorldServer(this, idatamanager, dimension, this.worlds.get(0), this.methodProfiler, worlddata, org.bukkit.World.Environment.getEnvironment(dimension), gen).b();
             }
 
@@ -550,7 +553,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         this.server.enablePlugins(org.bukkit.plugin.PluginLoadOrder.POSTWORLD); // CraftBukkit
     }
 
-    protected void saveChunks(boolean flag) {
+    protected void saveChunks(@SuppressWarnings("SameParameterValue") boolean flag) {
         WorldServer[] aworldserver = this.worldServer;
         int i = aworldserver.length;
 
@@ -574,7 +577,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
 
     }
 
-    public void stop() throws ExceptionWorldConflict { // CraftBukkit - added throws
+    public void stop() { // CraftBukkit - added throws
         // CraftBukkit start - prevent double stopping on multiple threads
         synchronized(stopLock) {
             if (hasStopped) return;
@@ -779,7 +782,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
 
     public void B() {}
 
-    protected void C() throws ExceptionWorldConflict { // CraftBukkit - added throws
+    protected void C() { // CraftBukkit - added throws
         SpigotTimings.serverTickTimer.startTiming(); // Spigot
         long i = System.nanoTime();
 
@@ -982,7 +985,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         // CraftBukkit end */
     }
 
-    public File d(String s) {
+    public File d(@SuppressWarnings("SameParameterValue") String s) {
         return new File(this.A(), s);
     }
 
@@ -1045,8 +1048,9 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
     }
 
     public CrashReport b(CrashReport crashreport) {
+        //noinspection unchecked
         crashreport.g().a("Profiler Position", new CrashReportCallable() {
-            public String a() throws Exception {
+            public String a() {
                 return MinecraftServer.this.methodProfiler.a ? MinecraftServer.this.methodProfiler.c() : "N/A (disabled)";
             }
 
@@ -1055,6 +1059,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
             }
         });
         if (this.v != null) {
+            //noinspection unchecked
             crashreport.g().a("Player Count", new CrashReportCallable() {
                 public String a() {
                     return MinecraftServer.this.v.getPlayerCount() + " / " + MinecraftServer.this.v.getMaxPlayers() + "; " + MinecraftServer.this.v.v();
@@ -1494,6 +1499,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
 
             // Spigot start
             this.j.add(listenablefuturetask);
+            //noinspection unchecked
             return listenablefuturetask;
             // Spigot end
         } else {

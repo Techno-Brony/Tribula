@@ -91,6 +91,7 @@ public class CommandDispatcher extends CommandHandler implements ICommandDispatc
         if (flag) {
             Iterator iterator = minecraftserver.getPlayerList().v().iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 EntityHuman entityhuman = (EntityHuman) iterator.next();
 

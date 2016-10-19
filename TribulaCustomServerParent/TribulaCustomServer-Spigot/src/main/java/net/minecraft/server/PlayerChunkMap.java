@@ -67,6 +67,7 @@ public class PlayerChunkMap {
     public Iterator<Chunk> b() {
         final Iterator iterator = this.i.iterator();
 
+        //noinspection unchecked
         return new AbstractIterator() {
             protected Chunk a() {
                 while (true) {
@@ -121,6 +122,7 @@ public class PlayerChunkMap {
         if (!this.f.isEmpty()) {
             Iterator iterator = this.f.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 playerchunk = (PlayerChunk) iterator.next();
                 playerchunk.d();
@@ -131,6 +133,7 @@ public class PlayerChunkMap {
 
         if (this.l && i % 4L == 0L) {
             this.l = false;
+            //noinspection unchecked
             Collections.sort(this.h, new Comparator() {
                 public int a(PlayerChunk playerchunk, PlayerChunk playerchunk1) {
                     return ComparisonChain.start().compare(playerchunk.g(), playerchunk1.g()).result();
@@ -144,6 +147,7 @@ public class PlayerChunkMap {
 
         if (this.m && i % 4L == 2L) {
             this.m = false;
+            //noinspection unchecked
             Collections.sort(this.g, new Comparator() {
                 public int a(PlayerChunk playerchunk, PlayerChunk playerchunk1) {
                     return ComparisonChain.start().compare(playerchunk.g(), playerchunk1.g()).result();
@@ -370,6 +374,7 @@ public class PlayerChunkMap {
             ArrayList arraylist = Lists.newArrayList(this.managedPlayers);
             Iterator iterator = arraylist.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 EntityPlayer entityplayer = (EntityPlayer) iterator.next();
                 int k = (int) entityplayer.locX >> 4;

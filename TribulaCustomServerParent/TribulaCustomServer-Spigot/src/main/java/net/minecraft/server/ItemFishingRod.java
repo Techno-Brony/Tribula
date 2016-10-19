@@ -27,6 +27,7 @@ public class ItemFishingRod extends Item {
 
             if (playerFishEvent.isCancelled()) {
                 entityhuman.hookedFish = null;
+                //noinspection unchecked
                 return new InteractionResultWrapper(EnumInteractionResult.PASS, itemstack);
             }
             // CraftBukkit end
@@ -39,6 +40,7 @@ public class ItemFishingRod extends Item {
             entityhuman.b(StatisticList.b(this));
         }
 
+        //noinspection unchecked
         return new InteractionResultWrapper(EnumInteractionResult.SUCCESS, itemstack);
     }
 

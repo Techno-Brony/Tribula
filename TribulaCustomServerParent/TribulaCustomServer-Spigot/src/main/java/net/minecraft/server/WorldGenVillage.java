@@ -1,18 +1,14 @@
 package net.minecraft.server;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.Map.Entry;
 
 public class WorldGenVillage extends StructureGenerator {
 
     public static final List<BiomeBase> a = Arrays.asList(Biomes.c, Biomes.d, Biomes.K, Biomes.g);
+    private final int h;
     private int b;
     private int d;
-    private final int h;
 
     public WorldGenVillage() {
         this.d = 32;
@@ -23,6 +19,7 @@ public class WorldGenVillage extends StructureGenerator {
         this();
         Iterator iterator = map.entrySet().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             Entry entry = (Entry) iterator.next();
 
@@ -83,6 +80,7 @@ public class WorldGenVillage extends StructureGenerator {
         public WorldGenVillageStart(World world, Random random, int i, int j, int k) {
             super(i, j);
             List list = WorldGenVillagePieces.a(random, k);
+            //noinspection unchecked
             WorldGenVillagePieces.WorldGenVillageStartPiece worldgenvillagepieces_worldgenvillagestartpiece = new WorldGenVillagePieces.WorldGenVillageStartPiece(world.getWorldChunkManager(), 0, random, (i << 4) + 2, (j << 4) + 2, list, k);
 
             this.a.add(worldgenvillagepieces_worldgenvillagestartpiece);
@@ -110,6 +108,7 @@ public class WorldGenVillage extends StructureGenerator {
             l = 0;
             Iterator iterator = this.a.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 StructurePiece structurepiece1 = (StructurePiece) iterator.next();
 

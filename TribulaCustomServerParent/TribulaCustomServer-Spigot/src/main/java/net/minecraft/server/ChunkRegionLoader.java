@@ -84,7 +84,7 @@ public class ChunkRegionLoader implements IChunkLoader, IAsyncChunkSaver {
         return spawnEntity(nbttagcompound, world, d0, d1, d2, flag, org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason.DEFAULT);
     }
 
-    public static Entity spawnEntity(NBTTagCompound nbttagcompound, World world, double d0, double d1, double d2, boolean flag, org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason spawnReason) {
+    public static Entity spawnEntity(NBTTagCompound nbttagcompound, World world, double d0, double d1, double d2, boolean flag, @SuppressWarnings("SameParameterValue") org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason spawnReason) {
         // CraftBukkit end
         Entity entity = a(nbttagcompound, world);
 
@@ -131,6 +131,7 @@ public class ChunkRegionLoader implements IChunkLoader, IAsyncChunkSaver {
             // CraftBukkit end
             Iterator iterator = entity.bx().iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 Entity entity1 = (Entity) iterator.next();
 
@@ -436,6 +437,7 @@ public class ChunkRegionLoader implements IChunkLoader, IAsyncChunkSaver {
             NBTTagList nbttaglist3 = new NBTTagList();
             Iterator iterator1 = list.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator1.hasNext()) {
                 NextTickListEntry nextticklistentry = (NextTickListEntry) iterator1.next();
                 NBTTagCompound nbttagcompound2 = new NBTTagCompound();

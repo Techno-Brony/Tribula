@@ -16,7 +16,6 @@ import io.netty.util.concurrent.GenericFutureListener;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
 import java.net.InetAddress;
 import java.util.Collections;
 import java.util.Iterator;
@@ -62,7 +61,7 @@ public class ServerConnection {
         this.d = true;
     }
 
-    public void a(InetAddress inetaddress, int i) throws IOException {
+    public void a(InetAddress inetaddress, int i) {
         List list = this.g;
 
         synchronized (this.g) {
@@ -80,6 +79,7 @@ public class ServerConnection {
                 // ServerConnection.e.info("Using default channel type");
             }
 
+            //noinspection unchecked
             this.g.add((new ServerBootstrap()).channel(oclass).childHandler(new ChannelInitializer() {
                 protected void initChannel(Channel channel) throws Exception {
                     try {
@@ -102,6 +102,7 @@ public class ServerConnection {
         this.d = false;
         Iterator iterator = this.g.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             ChannelFuture channelfuture = (ChannelFuture) iterator.next();
 
@@ -139,8 +140,9 @@ public class ServerConnection {
                                 CrashReport crashreport = CrashReport.a(exception, "Ticking memory connection");
                                 CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Ticking connection");
 
+                                //noinspection unchecked
                                 crashreportsystemdetails.a("Connection", new CrashReportCallable() {
-                                    public String a() throws Exception {
+                                    public String a() {
                                         return networkmanager.toString();
                                     }
 
@@ -154,6 +156,7 @@ public class ServerConnection {
                             ServerConnection.e.warn("Failed to handle packet for {}", networkmanager.getSocketAddress(), exception);
                             final ChatComponentText chatcomponenttext = new ChatComponentText("Internal server error");
 
+                            //noinspection unchecked,unchecked
                             networkmanager.sendPacket(new PacketPlayOutKickDisconnect(chatcomponenttext), new GenericFutureListener() {
                                 public void operationComplete(Future future) throws Exception {
                                     networkmanager.close(chatcomponenttext);

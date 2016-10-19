@@ -16,22 +16,27 @@ public class CommandTp extends CommandAbstract {
             EnumSet enumset = EnumSet.noneOf(PacketPlayOutPosition.EnumPlayerTeleportFlags.class);
 
             if (commandabstract_commandnumber.c()) {
+                //noinspection unchecked
                 enumset.add(PacketPlayOutPosition.EnumPlayerTeleportFlags.X);
             }
 
             if (commandabstract_commandnumber1.c()) {
+                //noinspection unchecked
                 enumset.add(PacketPlayOutPosition.EnumPlayerTeleportFlags.Y);
             }
 
             if (commandabstract_commandnumber2.c()) {
+                //noinspection unchecked
                 enumset.add(PacketPlayOutPosition.EnumPlayerTeleportFlags.Z);
             }
 
             if (commandabstract_commandnumber4.c()) {
+                //noinspection unchecked
                 enumset.add(PacketPlayOutPosition.EnumPlayerTeleportFlags.X_ROT);
             }
 
             if (commandabstract_commandnumber3.c()) {
+                //noinspection unchecked
                 enumset.add(PacketPlayOutPosition.EnumPlayerTeleportFlags.Y_ROT);
             }
 
@@ -47,6 +52,7 @@ public class CommandTp extends CommandAbstract {
             }
 
             entity.stopRiding();
+            //noinspection unchecked
             ((EntityPlayer) entity).playerConnection.a(commandabstract_commandnumber.b(), commandabstract_commandnumber1.b(), commandabstract_commandnumber2.b(), f, f1, enumset);
             entity.h(f);
         } else {

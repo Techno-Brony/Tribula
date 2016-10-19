@@ -20,7 +20,7 @@ public class PathfinderGoalNearestAttackableTarget<T extends EntityLiving> exten
         this(entitycreature, oclass, flag, false);
     }
 
-    public PathfinderGoalNearestAttackableTarget(EntityCreature entitycreature, Class<T> oclass, boolean flag, boolean flag1) {
+    public PathfinderGoalNearestAttackableTarget(EntityCreature entitycreature, Class<T> oclass, boolean flag, @SuppressWarnings("SameParameterValue") boolean flag1) {
         this(entitycreature, oclass, 10, flag, flag1, null);
     }
 
@@ -30,12 +30,14 @@ public class PathfinderGoalNearestAttackableTarget<T extends EntityLiving> exten
         this.i = i;
         this.b = new PathfinderGoalNearestAttackableTarget.DistanceComparator(entitycreature);
         this.a(1);
+        //noinspection unchecked
         this.c = new Predicate() {
             public boolean a(@Nullable T t0) {
                 return t0 != null && (!(predicate != null && !predicate.apply(t0)) && (IEntitySelector.e.apply(t0) && PathfinderGoalNearestAttackableTarget.this.a(t0, false)));
             }
 
             public boolean apply(Object object) {
+                //noinspection unchecked
                 return this.a((T) object); // CraftBukkit - fix decompile error
             }
         };
@@ -51,10 +53,12 @@ public class PathfinderGoalNearestAttackableTarget<T extends EntityLiving> exten
                 return false;
             } else {
                 Collections.sort(list, this.b);
+                //noinspection unchecked
                 this.d = (T) list.get(0); // CraftBukkit - fix decompile error
                 return true;
             }
         } else {
+            //noinspection unchecked,unchecked
             this.d = (T) this.e.world.a(this.e.locX, this.e.locY + (double) this.e.getHeadHeight(), this.e.locZ, this.i(), this.i(), new Function<EntityHuman, Double>() { // CraftBukkit - fix decompile error
                 @Nullable
                 public Double a(@Nullable EntityHuman entityhuman) {

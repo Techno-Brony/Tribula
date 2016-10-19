@@ -72,7 +72,7 @@ public class EntityFishingHook extends Entity {
         super.a(datawatcherobject);
     }
 
-    public void c(double d0, double d1, double d2, float f, float f1) {
+    public void c(double d0, double d1, double d2, @SuppressWarnings("SameParameterValue") float f, @SuppressWarnings("SameParameterValue") float f1) {
         float f2 = MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
 
         d0 /= (double) f2;
@@ -428,6 +428,7 @@ public class EntityFishingHook extends Entity {
                 loottableinfo_a.a((float) EnchantmentManager.f(this.owner) + this.owner.dg());
                 Iterator iterator = this.world.ak().a(LootTables.ao).a(this.random, loottableinfo_a.a()).iterator();
 
+                //noinspection WhileLoopReplaceableByForEach
                 while (iterator.hasNext()) {
                     ItemStack itemstack = (ItemStack) iterator.next();
                     EntityItem entityitem = new EntityItem(this.world, this.locX, this.locY, this.locZ, itemstack);

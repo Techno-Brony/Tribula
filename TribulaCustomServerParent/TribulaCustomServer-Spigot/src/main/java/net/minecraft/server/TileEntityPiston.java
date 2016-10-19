@@ -158,6 +158,7 @@ public class TileEntityPiston extends TileEntity implements ITickable {
 
     public void a(NBTTagCompound nbttagcompound) {
         super.a(nbttagcompound);
+        //noinspection deprecation
         this.a = Block.getById(nbttagcompound.getInt("blockId")).fromLegacyData(nbttagcompound.getInt("blockData"));
         this.f = EnumDirection.fromType1(nbttagcompound.getInt("facing"));
         this.i = nbttagcompound.getFloat("progress");

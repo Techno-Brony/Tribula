@@ -40,6 +40,7 @@ public class PathfinderGoalHurtByTarget extends PathfinderGoalTarget {
         List list = this.e.world.a(this.e.getClass(), (new AxisAlignedBB(this.e.locX, this.e.locY, this.e.locZ, this.e.locX + 1.0D, this.e.locY + 1.0D, this.e.locZ + 1.0D)).grow(d0, 10.0D, d0));
         Iterator iterator = list.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             EntityCreature entitycreature = (EntityCreature) iterator.next();
 

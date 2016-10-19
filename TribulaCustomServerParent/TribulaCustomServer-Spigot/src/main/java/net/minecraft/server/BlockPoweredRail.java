@@ -279,6 +279,7 @@ public class BlockPoweredRail extends BlockMinecartTrackAbstract {
                 return iblockdata.set(BlockPoweredRail.SHAPE, BlockMinecartTrackAbstract.EnumTrackPosition.SOUTH_EAST);
 
             default:
+                //noinspection deprecation
                 return super.a(iblockdata, enumblockmirror);
             }
 
@@ -309,6 +310,7 @@ public class BlockPoweredRail extends BlockMinecartTrackAbstract {
             }
         }
 
+        //noinspection deprecation
         return super.a(iblockdata, enumblockmirror);
     }
 

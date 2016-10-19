@@ -24,6 +24,7 @@ public class EntityPainting extends EntityHanging {
             this.art = entitypainting_enumart;
             this.setDirection(enumdirection);
             if (this.survives()) {
+                //noinspection unchecked
                 arraylist.add(entitypainting_enumart);
             }
         }

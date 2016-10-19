@@ -63,7 +63,7 @@ public class NBTCompressedStreamTools {
         }
     }
 
-    private static NBTBase a(DataInput datainput, int i, NBTReadLimiter nbtreadlimiter) throws IOException {
+    private static NBTBase a(DataInput datainput, @SuppressWarnings("SameParameterValue") int i, NBTReadLimiter nbtreadlimiter) throws IOException {
         byte b0 = datainput.readByte();
 
         if (b0 == 0) {

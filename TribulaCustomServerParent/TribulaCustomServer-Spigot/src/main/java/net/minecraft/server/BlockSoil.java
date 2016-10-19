@@ -106,6 +106,7 @@ public class BlockSoil extends Block {
     }
 
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
+        //noinspection deprecation
         super.a(iblockdata, world, blockposition, block);
         if (world.getType(blockposition.up()).getMaterial().isBuildable()) {
             world.setTypeUpdate(blockposition, Blocks.DIRT.getBlockData());

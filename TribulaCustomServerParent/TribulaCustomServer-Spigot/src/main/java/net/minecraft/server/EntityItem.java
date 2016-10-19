@@ -159,6 +159,7 @@ public class EntityItem extends Entity {
         Iterator iterator = this.world.a(EntityItem.class, this.getBoundingBox().grow(radius, radius, radius)).iterator();
         // Spigot end
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             EntityItem entityitem = (EntityItem) iterator.next();
 
@@ -378,6 +379,7 @@ public class EntityItem extends Entity {
     }
 
     public String getName() {
+        //noinspection deprecation,deprecation
         return this.hasCustomName() ? this.getCustomName() : LocaleI18n.get("item." + this.getItemStack().a());
     }
 
@@ -443,7 +445,7 @@ public class EntityItem extends Entity {
         this.pickupDelay = 32767;
     }
 
-    public void a(int i) {
+    public void a(@SuppressWarnings("SameParameterValue") int i) {
         this.pickupDelay = i;
     }
 

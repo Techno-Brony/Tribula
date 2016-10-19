@@ -75,6 +75,7 @@ public class NBTTagIntArray extends NBTBase {
         return this.data;
     }
 
+    @SuppressWarnings("CloneDoesntCallSuperClone")
     public NBTBase clone() {
         return this.c();
     }

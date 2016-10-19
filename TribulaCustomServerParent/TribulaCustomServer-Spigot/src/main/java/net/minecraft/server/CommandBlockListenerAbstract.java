@@ -102,6 +102,7 @@ public abstract class CommandBlockListenerAbstract implements ICommandListener {
                 }
             }
         } finally {
+            //noinspection deprecation
             MinecraftServer.getServer().worldServer = prev;
         }
 
@@ -115,11 +116,14 @@ public abstract class CommandBlockListenerAbstract implements ICommandListener {
                 }
             } catch (Throwable exception) {
                 if (sender.f() instanceof EntityMinecartCommandBlock) {
+                    //noinspection deprecation
                     MinecraftServer.getServer().server.getLogger().log(Level.WARNING, String.format("MinecartCommandBlock at (%d,%d,%d) failed to handle command", sender.getChunkCoordinates().getX(), sender.getChunkCoordinates().getY(), sender.getChunkCoordinates().getZ()), exception);
                 } else if (sender instanceof CommandBlockListenerAbstract) {
                     CommandBlockListenerAbstract listener = (CommandBlockListenerAbstract) sender;
+                    //noinspection deprecation
                     MinecraftServer.getServer().server.getLogger().log(Level.WARNING, String.format("CommandBlock at (%d,%d,%d) failed to handle command", listener.getChunkCoordinates().getX(), listener.getChunkCoordinates().getY(), listener.getChunkCoordinates().getZ()), exception);
                 } else {
+                    //noinspection deprecation
                     MinecraftServer.getServer().server.getLogger().log(Level.WARNING, "Unknown CommandBlock failed to handle command", exception);
                 }
             }
@@ -150,7 +154,7 @@ public abstract class CommandBlockListenerAbstract implements ICommandListener {
         return this.b;
     }
 
-    public void a(int i) {
+    public void a(@SuppressWarnings("SameParameterValue") int i) {
         this.b = i;
     }
 
@@ -229,8 +233,9 @@ public abstract class CommandBlockListenerAbstract implements ICommandListener {
                     CrashReport crashreport = CrashReport.a(throwable, "Executing command block");
                     CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Command to be executed");
 
+                    //noinspection unchecked
                     crashreportsystemdetails.a("Command", new CrashReportCallable() {
-                        public String a() throws Exception {
+                        public String a() {
                             return CommandBlockListenerAbstract.this.getCommand();
                         }
 
@@ -238,8 +243,9 @@ public abstract class CommandBlockListenerAbstract implements ICommandListener {
                             return this.a();
                         }
                     });
+                    //noinspection unchecked
                     crashreportsystemdetails.a("Name", new CrashReportCallable() {
-                        public String a() throws Exception {
+                        public String a() {
                             return CommandBlockListenerAbstract.this.getName();
                         }
 

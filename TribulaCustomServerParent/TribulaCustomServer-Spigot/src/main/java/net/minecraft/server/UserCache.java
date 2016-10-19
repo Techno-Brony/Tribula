@@ -185,6 +185,7 @@ public class UserCache {
             if (list != null) {
                 Iterator iterator = Lists.reverse(list).iterator();
 
+                //noinspection WhileLoopReplaceableByForEach
                 while (iterator.hasNext()) {
                     UserCache.UserCacheEntry usercache_usercacheentry = (UserCache.UserCacheEntry) iterator.next();
 
@@ -226,15 +227,18 @@ public class UserCache {
         ArrayList arraylist1 = Lists.newArrayList(Iterators.limit(this.f.iterator(), i));
         Iterator iterator = arraylist1.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             GameProfile gameprofile = (GameProfile) iterator.next();
             UserCache.UserCacheEntry usercache_usercacheentry = this.b(gameprofile.getId());
 
             if (usercache_usercacheentry != null) {
+                //noinspection unchecked
                 arraylist.add(usercache_usercacheentry);
             }
         }
 
+        //noinspection unchecked
         return arraylist;
     }
 
@@ -248,7 +252,7 @@ public class UserCache {
             this.c = date;
         }
 
-        UserCacheEntry(GameProfile gameprofile, Date date, Object object) {
+        UserCacheEntry(GameProfile gameprofile, Date date, @SuppressWarnings("SameParameterValue") Object object) {
             this(gameprofile, date);
         }
 
@@ -265,7 +269,7 @@ public class UserCache {
 
         private BanEntrySerializer() {}
 
-        BanEntrySerializer(Object object) {
+        BanEntrySerializer(@SuppressWarnings("SameParameterValue") Object object) {
             this();
         }
 

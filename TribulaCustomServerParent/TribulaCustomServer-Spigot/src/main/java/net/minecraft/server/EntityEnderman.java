@@ -60,6 +60,7 @@ public class EntityEnderman extends EntityMonster {
         this.goalSelector.a(11, new EntityEnderman.PathfinderGoalEndermanPickupBlock(this));
         this.targetSelector.a(1, new EntityEnderman.PathfinderGoalPlayerWhoLookedAtTarget(this));
         this.targetSelector.a(2, new PathfinderGoalHurtByTarget(this, false, new Class[0]));
+        //noinspection unchecked
         this.targetSelector.a(3, new PathfinderGoalNearestAttackableTarget(this, EntityEndermite.class, 10, true, false, new Predicate() {
             public boolean a(@Nullable EntityEndermite entityendermite) {
                 return entityendermite.o();
@@ -148,8 +149,10 @@ public class EntityEnderman extends EntityMonster {
         IBlockData iblockdata;
 
         if (nbttagcompound.hasKeyOfType("carried", 8)) {
+            //noinspection deprecation
             iblockdata = Block.getByName(nbttagcompound.getString("carried")).fromLegacyData(nbttagcompound.getShort("carriedData"));
         } else {
+            //noinspection deprecation
             iblockdata = Block.getById(nbttagcompound.getShort("carried")).fromLegacyData(nbttagcompound.getShort("carriedData"));
         }
 
@@ -398,6 +401,7 @@ public class EntityEnderman extends EntityMonster {
         public boolean a() {
             double d0 = this.i();
 
+            //noinspection unchecked
             this.j = this.i.world.a(this.i.locX, this.i.locY, this.i.locZ, d0, d0, null, new Predicate() {
                 public boolean a(@Nullable EntityHuman entityhuman) {
                     return entityhuman != null && PathfinderGoalPlayerWhoLookedAtTarget.this.i.c(entityhuman);

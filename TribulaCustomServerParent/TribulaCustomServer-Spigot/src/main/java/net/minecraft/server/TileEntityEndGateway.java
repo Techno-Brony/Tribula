@@ -1,27 +1,82 @@
 package net.minecraft.server;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-import javax.annotation.Nullable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-// CraftBukkit start
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.event.player.PlayerTeleportEvent;
+
+import javax.annotation.Nullable;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class TileEntityEndGateway extends TileEntity implements ITickable {
 
     private static final Logger a = LogManager.getLogger();
-    private long f;
-    private int g;
     public BlockPosition exitPortal;
     public boolean exactTeleport;
+    private long f;
+    private int g;
 
     public TileEntityEndGateway() {}
+
+    private static BlockPosition a(World world, BlockPosition blockposition, int i, boolean flag) {
+        BlockPosition blockposition1 = null;
+
+        for (int j = -i; j <= i; ++j) {
+            for (int k = -i; k <= i; ++k) {
+                if (j != 0 || k != 0 || flag) {
+                    for (int l = 255; l > (blockposition1 == null ? 0 : blockposition1.getY()); --l) {
+                        BlockPosition blockposition2 = new BlockPosition(blockposition.getX() + j, l, blockposition.getZ() + k);
+                        IBlockData iblockdata = world.getType(blockposition2);
+
+                        if (iblockdata.k() && (flag || iblockdata.getBlock() != Blocks.BEDROCK)) {
+                            blockposition1 = blockposition2;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        return blockposition1 == null ? blockposition : blockposition1;
+    }
+
+    private static Chunk a(World world, Vec3D vec3d) {
+        return world.getChunkAt(MathHelper.floor(vec3d.x / 16.0D), MathHelper.floor(vec3d.z / 16.0D));
+    }
+
+    @Nullable
+    private static BlockPosition a(Chunk chunk) {
+        BlockPosition blockposition = new BlockPosition(chunk.locX * 16, 30, chunk.locZ * 16);
+        int i = chunk.g() + 16 - 1;
+        BlockPosition blockposition1 = new BlockPosition(chunk.locX * 16 + 16 - 1, i, chunk.locZ * 16 + 16 - 1);
+        BlockPosition blockposition2 = null;
+        double d0 = 0.0D;
+        Iterator iterator = BlockPosition.a(blockposition, blockposition1).iterator();
+
+        //noinspection WhileLoopReplaceableByForEach
+        while (iterator.hasNext()) {
+            BlockPosition blockposition3 = (BlockPosition) iterator.next();
+            IBlockData iblockdata = chunk.getBlockData(blockposition3);
+
+            if (iblockdata.getBlock() == Blocks.END_STONE && !chunk.getBlockData(blockposition3.up(1)).k() && !chunk.getBlockData(blockposition3.up(2)).k()) {
+                double d1 = blockposition3.g(0.0D, 0.0D, 0.0D);
+
+                if (blockposition2 == null || d1 < d0) {
+                    blockposition2 = blockposition3;
+                    d0 = d1;
+                }
+            }
+        }
+
+        return blockposition2;
+    }
 
     public NBTTagCompound save(NBTTagCompound nbttagcompound) {
         super.save(nbttagcompound);
@@ -178,58 +233,6 @@ public class TileEntityEndGateway extends TileEntity implements ITickable {
         this.exitPortal = this.exitPortal.up(10);
         this.b(this.exitPortal);
         this.update();
-    }
-
-    private static BlockPosition a(World world, BlockPosition blockposition, int i, boolean flag) {
-        BlockPosition blockposition1 = null;
-
-        for (int j = -i; j <= i; ++j) {
-            for (int k = -i; k <= i; ++k) {
-                if (j != 0 || k != 0 || flag) {
-                    for (int l = 255; l > (blockposition1 == null ? 0 : blockposition1.getY()); --l) {
-                        BlockPosition blockposition2 = new BlockPosition(blockposition.getX() + j, l, blockposition.getZ() + k);
-                        IBlockData iblockdata = world.getType(blockposition2);
-
-                        if (iblockdata.k() && (flag || iblockdata.getBlock() != Blocks.BEDROCK)) {
-                            blockposition1 = blockposition2;
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-
-        return blockposition1 == null ? blockposition : blockposition1;
-    }
-
-    private static Chunk a(World world, Vec3D vec3d) {
-        return world.getChunkAt(MathHelper.floor(vec3d.x / 16.0D), MathHelper.floor(vec3d.z / 16.0D));
-    }
-
-    @Nullable
-    private static BlockPosition a(Chunk chunk) {
-        BlockPosition blockposition = new BlockPosition(chunk.locX * 16, 30, chunk.locZ * 16);
-        int i = chunk.g() + 16 - 1;
-        BlockPosition blockposition1 = new BlockPosition(chunk.locX * 16 + 16 - 1, i, chunk.locZ * 16 + 16 - 1);
-        BlockPosition blockposition2 = null;
-        double d0 = 0.0D;
-        Iterator iterator = BlockPosition.a(blockposition, blockposition1).iterator();
-
-        while (iterator.hasNext()) {
-            BlockPosition blockposition3 = (BlockPosition) iterator.next();
-            IBlockData iblockdata = chunk.getBlockData(blockposition3);
-
-            if (iblockdata.getBlock() == Blocks.END_STONE && !chunk.getBlockData(blockposition3.up(1)).k() && !chunk.getBlockData(blockposition3.up(2)).k()) {
-                double d1 = blockposition3.g(0.0D, 0.0D, 0.0D);
-
-                if (blockposition2 == null || d1 < d0) {
-                    blockposition2 = blockposition3;
-                    d0 = d1;
-                }
-            }
-        }
-
-        return blockposition2;
     }
 
     private void b(BlockPosition blockposition) {

@@ -38,6 +38,7 @@ public class NBTTagByteArray extends NBTBase {
         return "[" + this.data.length + " bytes]";
     }
 
+    @SuppressWarnings("CloneDoesntCallSuperClone")
     public NBTBase clone() {
         byte[] abyte = new byte[this.data.length];
 

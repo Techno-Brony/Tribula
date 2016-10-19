@@ -3,9 +3,9 @@ package net.minecraft.server;
 public class ChunkSection {
 
     private final int yPos;
+    private final DataPaletteBlock blockIds;
     private int nonEmptyBlockCount;
     private int tickingBlockCount;
-    private final DataPaletteBlock blockIds;
     private NibbleArray emittedLight;
     private NibbleArray skyLight;
 
@@ -20,7 +20,7 @@ public class ChunkSection {
     }
 
     // CraftBukkit start
-    public ChunkSection(int y, boolean flag, char[] blockIds) {
+    public ChunkSection(int y, @SuppressWarnings("SameParameterValue") boolean flag, char[] blockIds) {
         this.yPos = y;
         this.blockIds = new DataPaletteBlock();
         for (int i = 0; i < blockIds.length; i++) {

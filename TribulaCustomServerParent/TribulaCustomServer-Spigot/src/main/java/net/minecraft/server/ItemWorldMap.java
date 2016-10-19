@@ -125,8 +125,10 @@ public class ItemWorldMap extends ItemWorldMapBase {
 
                                     l3 = l3 * l3 * 31287121 + l3 * 11;
                                     if ((l3 >> 20 & 1) == 0) {
+                                        //noinspection unchecked
                                         hashmultiset.add(Blocks.DIRT.getBlockData().set(BlockDirt.VARIANT, BlockDirt.EnumDirtVariant.DIRT).g(), 10);
                                     } else {
+                                        //noinspection unchecked
                                         hashmultiset.add(Blocks.STONE.getBlockData().set(BlockStone.VARIANT, BlockStone.EnumStoneVariant.STONE).g(), 100);
                                     }
 
@@ -158,6 +160,7 @@ public class ItemWorldMap extends ItemWorldMapBase {
                                             }
 
                                             d1 += (double) k4 / (double) (i * i);
+                                            //noinspection unchecked
                                             hashmultiset.add(iblockdata.g());
                                         }
                                     }

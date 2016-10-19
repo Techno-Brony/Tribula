@@ -1,8 +1,8 @@
 package net.minecraft.server;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
-import javax.annotation.Nullable;
 
 public class ChunkProviderGenerate implements ChunkGenerator {
 
@@ -12,17 +12,11 @@ public class ChunkProviderGenerate implements ChunkGenerator {
     private final NoiseGeneratorOctaves k;
     private final NoiseGeneratorOctaves l;
     private final NoiseGenerator3 m;
-    public NoiseGeneratorOctaves b;
-    public NoiseGeneratorOctaves c;
-    public NoiseGeneratorOctaves d;
     private final World n;
     private final boolean o;
     private final WorldType p;
     private final double[] q;
     private final float[] r;
-    private CustomWorldSettingsFinal s;
-    private IBlockData t;
-    private double[] u;
     private final WorldGenBase v;
     private final WorldGenStronghold w;
     private final WorldGenVillage x;
@@ -30,11 +24,17 @@ public class ChunkProviderGenerate implements ChunkGenerator {
     private final WorldGenLargeFeature z;
     private final WorldGenBase A;
     private final WorldGenMonument B;
-    private BiomeBase[] C;
+    public NoiseGeneratorOctaves b;
+    public NoiseGeneratorOctaves c;
+    public NoiseGeneratorOctaves d;
     double[] e;
     double[] f;
     double[] g;
     double[] h;
+    private CustomWorldSettingsFinal s;
+    private IBlockData t;
+    private double[] u;
+    private BiomeBase[] C;
 
     public ChunkProviderGenerate(World world, long i, boolean flag, String s) {
         this.t = Blocks.WATER.getBlockData();
@@ -199,7 +199,7 @@ public class ChunkProviderGenerate implements ChunkGenerator {
         return chunk;
     }
 
-    private void a(int i, int j, int k) {
+    private void a(int i, @SuppressWarnings("SameParameterValue") int j, int k) {
         this.h = this.c.a(this.h, i, k, 5, 5, (double) this.s.e, (double) this.s.f, (double) this.s.g);
         float f = this.s.a;
         float f1 = this.s.b;

@@ -368,6 +368,7 @@ public abstract class EntityMinecartAbstract extends Entity implements INamableT
             } else {
                 Iterator iterator = this.world.getEntities(this, this.getBoundingBox().grow(0.20000000298023224D, 0.0D, 0.20000000298023224D)).iterator();
 
+                //noinspection WhileLoopReplaceableByForEach
                 while (iterator.hasNext()) {
                     Entity entity1 = (Entity) iterator.next();
 
@@ -689,6 +690,7 @@ public abstract class EntityMinecartAbstract extends Entity implements INamableT
 
             int i = nbttagcompound.getInt("DisplayData");
 
+            //noinspection deprecation
             this.setDisplayBlock(block == null ? Blocks.AIR.getBlockData() : block.fromLegacyData(i));
             this.setDisplayBlockOffset(nbttagcompound.getInt("DisplayOffset"));
         }

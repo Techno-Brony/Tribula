@@ -25,16 +25,20 @@ public class ItemBucket extends Item {
         MovingObjectPosition movingobjectposition = this.a(world, entityhuman, flag);
 
         if (movingobjectposition == null) {
+            //noinspection unchecked
             return new InteractionResultWrapper(EnumInteractionResult.PASS, itemstack);
         } else if (movingobjectposition.type != MovingObjectPosition.EnumMovingObjectType.BLOCK) {
+            //noinspection unchecked
             return new InteractionResultWrapper(EnumInteractionResult.PASS, itemstack);
         } else {
             BlockPosition blockposition = movingobjectposition.a();
 
             if (!world.a(entityhuman, blockposition)) {
+                //noinspection unchecked
                 return new InteractionResultWrapper(EnumInteractionResult.FAIL, itemstack);
             } else if (flag) {
                 if (!entityhuman.a(blockposition.shift(movingobjectposition.direction), movingobjectposition.direction, itemstack)) {
+                    //noinspection unchecked
                     return new InteractionResultWrapper(EnumInteractionResult.FAIL, itemstack);
                 } else {
                     IBlockData iblockdata = world.getType(blockposition);
@@ -45,26 +49,31 @@ public class ItemBucket extends Item {
                         PlayerBucketFillEvent event = CraftEventFactory.callPlayerBucketFillEvent(entityhuman, blockposition.getX(), blockposition.getY(), blockposition.getZ(), null, itemstack, Items.WATER_BUCKET);
  
                         if (event.isCancelled()) {
+                            //noinspection unchecked
                             return new InteractionResultWrapper(EnumInteractionResult.FAIL, itemstack);
                         }
                         // CraftBukkit end
                         world.setTypeAndData(blockposition, Blocks.AIR.getBlockData(), 11);
                         entityhuman.b(StatisticList.b(this));
                         entityhuman.a(SoundEffects.N, 1.0F, 1.0F);
+                        //noinspection unchecked
                         return new InteractionResultWrapper(EnumInteractionResult.SUCCESS, this.a(itemstack, entityhuman, Items.WATER_BUCKET, event.getItemStack())); // CraftBUkkit
                     } else if (material == Material.LAVA && iblockdata.get(BlockFluids.LEVEL) == 0) {
                         // CraftBukkit start
                         PlayerBucketFillEvent event = CraftEventFactory.callPlayerBucketFillEvent(entityhuman, blockposition.getX(), blockposition.getY(), blockposition.getZ(), null, itemstack, Items.LAVA_BUCKET);
 
                         if (event.isCancelled()) {
+                            //noinspection unchecked
                             return new InteractionResultWrapper(EnumInteractionResult.FAIL, itemstack);
                         }
                         // CraftBukkit end
                         entityhuman.a(SoundEffects.O, 1.0F, 1.0F);
                         world.setTypeAndData(blockposition, Blocks.AIR.getBlockData(), 11);
                         entityhuman.b(StatisticList.b(this));
+                        //noinspection unchecked
                         return new InteractionResultWrapper(EnumInteractionResult.SUCCESS, this.a(itemstack, entityhuman, Items.LAVA_BUCKET, event.getItemStack())); // CraftBukkit
                     } else {
+                        //noinspection unchecked
                         return new InteractionResultWrapper(EnumInteractionResult.FAIL, itemstack);
                     }
                 }
@@ -73,11 +82,14 @@ public class ItemBucket extends Item {
                 BlockPosition blockposition1 = flag1 && movingobjectposition.direction == EnumDirection.UP ? blockposition : blockposition.shift(movingobjectposition.direction);
 
                 if (!entityhuman.a(blockposition1, movingobjectposition.direction, itemstack)) {
+                    //noinspection unchecked
                     return new InteractionResultWrapper(EnumInteractionResult.FAIL, itemstack);
                 } else if (this.a(entityhuman, world, blockposition1, movingobjectposition.direction, blockposition, itemstack)) { // CraftBukkit
                     entityhuman.b(StatisticList.b(this));
+                    //noinspection unchecked,unchecked,unchecked
                     return !entityhuman.abilities.canInstantlyBuild ? new InteractionResultWrapper(EnumInteractionResult.SUCCESS, new ItemStack(Items.BUCKET)) : new InteractionResultWrapper(EnumInteractionResult.SUCCESS, itemstack);
                 } else {
+                    //noinspection unchecked
                     return new InteractionResultWrapper(EnumInteractionResult.FAIL, itemstack);
                 }
             }
@@ -100,7 +112,7 @@ public class ItemBucket extends Item {
     }
 
     // CraftBukkit start
-    public boolean a(@Nullable EntityHuman entityhuman, World world, BlockPosition blockposition) {
+    public boolean a(@SuppressWarnings("SameParameterValue") @Nullable EntityHuman entityhuman, World world, BlockPosition blockposition) {
         return a(entityhuman, world, blockposition, null, blockposition, null);
     }
 

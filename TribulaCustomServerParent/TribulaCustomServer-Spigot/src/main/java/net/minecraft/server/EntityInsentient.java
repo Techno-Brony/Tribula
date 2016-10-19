@@ -150,14 +150,14 @@ public abstract class EntityInsentient extends EntityLiving {
         return new Navigation(this, world);
     }
 
-    public float a(PathType pathtype) {
+    public float a(@SuppressWarnings("SameParameterValue") PathType pathtype) {
         // CraftBukkit - decompile error
         Float ofloat = this.bB.get(pathtype);
 
         return ofloat == null ? pathtype.a() : ofloat;
     }
 
-    public void a(PathType pathtype, float f) {
+    public void a(@SuppressWarnings("SameParameterValue") PathType pathtype, float f) {
         this.bB.put(pathtype, f);
     }
 
@@ -547,6 +547,7 @@ public abstract class EntityInsentient extends EntityLiving {
             List list = loottable.a(this.bD == 0L ? this.random : new Random(this.bD), loottableinfo_a.a());
             Iterator iterator = list.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 ItemStack itemstack = (ItemStack) iterator.next();
 
@@ -580,6 +581,7 @@ public abstract class EntityInsentient extends EntityLiving {
             List list = this.world.a(EntityItem.class, this.getBoundingBox().grow(1.0D, 0.0D, 1.0D));
             Iterator iterator = list.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 EntityItem entityitem = (EntityItem) iterator.next();
 
@@ -762,7 +764,7 @@ public abstract class EntityInsentient extends EntityLiving {
         return 10;
     }
 
-    public void a(Entity entity, float f, float f1) {
+    public void a(Entity entity, @SuppressWarnings("SameParameterValue") float f, @SuppressWarnings("SameParameterValue") float f1) {
         double d0 = entity.locX - this.locX;
         double d1 = entity.locZ - this.locZ;
         double d2;
@@ -992,7 +994,7 @@ public abstract class EntityInsentient extends EntityLiving {
         this.persistent = true;
     }
 
-    public void a(EnumItemSlot enumitemslot, float f) {
+    public void a(EnumItemSlot enumitemslot, @SuppressWarnings("SameParameterValue") float f) {
         switch (EntityInsentient.SyntheticClass_1.a[enumitemslot.a().ordinal()]) {
         case 1:
             this.dropChanceHand[enumitemslot.b()] = f;
@@ -1092,7 +1094,7 @@ public abstract class EntityInsentient extends EntityLiving {
         return this.leashHolder;
     }
 
-    public void setLeashHolder(Entity entity, boolean flag) {
+    public void setLeashHolder(Entity entity, @SuppressWarnings("SameParameterValue") boolean flag) {
         this.bE = true;
         this.leashHolder = entity;
         if (!this.world.isClientSide && flag && this.world instanceof WorldServer) {
@@ -1122,6 +1124,7 @@ public abstract class EntityInsentient extends EntityLiving {
                 List list = this.world.a(EntityLiving.class, this.getBoundingBox().g(10.0D));
                 Iterator iterator = list.iterator();
 
+                //noinspection WhileLoopReplaceableByForEach
                 while (iterator.hasNext()) {
                     EntityLiving entityliving = (EntityLiving) iterator.next();
 

@@ -80,6 +80,7 @@ public class EntityAreaEffectCloud extends Entity {
             if (potionregistry == Potions.a && this.effects.isEmpty()) {
                 this.getDataWatcher().set(EntityAreaEffectCloud.b, 0);
             } else {
+                //noinspection unchecked,unchecked
                 this.getDataWatcher().set(EntityAreaEffectCloud.b, PotionUtil.a(PotionUtil.a(potionregistry, (Collection) this.effects)));
             }
         }
@@ -89,6 +90,7 @@ public class EntityAreaEffectCloud extends Entity {
     public void a(MobEffect mobeffect) {
         this.effects.add(mobeffect);
         if (!this.hasColor) {
+            //noinspection unchecked,unchecked
             this.getDataWatcher().set(EntityAreaEffectCloud.b, PotionUtil.a(PotionUtil.a(this.potionRegistry, (Collection) this.effects)));
         }
 
@@ -97,6 +99,7 @@ public class EntityAreaEffectCloud extends Entity {
     // CraftBukkit start accessor methods
     public void refreshEffects() {
         if (!this.hasColor) {
+            //noinspection unchecked,unchecked
             this.getDataWatcher().set(EntityAreaEffectCloud.b, PotionUtil.a(PotionUtil.a(this.potionRegistry, (Collection) this.effects))); // PAIL: rename
         }
     }
@@ -264,12 +267,15 @@ public class EntityAreaEffectCloud extends Entity {
                 ArrayList arraylist = Lists.newArrayList();
                 Iterator iterator1 = this.potionRegistry.a().iterator();
 
+                //noinspection WhileLoopReplaceableByForEach
                 while (iterator1.hasNext()) {
                     MobEffect mobeffect = (MobEffect) iterator1.next();
 
+                    //noinspection unchecked
                     arraylist.add(new MobEffect(mobeffect.getMobEffect(), mobeffect.getDuration() / 4, mobeffect.getAmplifier(), mobeffect.isAmbient(), mobeffect.isShowParticles()));
                 }
 
+                //noinspection unchecked
                 arraylist.addAll(this.effects);
                 if (arraylist.isEmpty()) {
                     this.au.clear();
@@ -303,6 +309,7 @@ public class EntityAreaEffectCloud extends Entity {
                                 this.au.put(entityliving, this.ticksLived + this.reapplicationDelay);
                                 Iterator iterator3 = arraylist.iterator();
 
+                                //noinspection WhileLoopReplaceableByForEach
                                 while (iterator3.hasNext()) {
                                     MobEffect mobeffect1 = (MobEffect) iterator3.next();
 
@@ -441,6 +448,7 @@ public class EntityAreaEffectCloud extends Entity {
             NBTTagList nbttaglist = new NBTTagList();
             Iterator iterator = this.effects.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 MobEffect mobeffect = (MobEffect) iterator.next();
 

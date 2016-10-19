@@ -48,6 +48,7 @@ public class ChunkProviderServer implements IChunkProvider {
     public void b() {
         Iterator iterator = this.chunks.values().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             Chunk chunk = (Chunk) iterator.next();
 
@@ -114,7 +115,7 @@ public class ChunkProviderServer implements IChunkProvider {
         return getChunkAt(i, j, null);
     }
 
-    public Chunk getChunkAt(int i, int j, Runnable runnable) {
+    public Chunk getChunkAt(int i, int j, @SuppressWarnings("SameParameterValue") Runnable runnable) {
         return getChunkAt(i, j, runnable, true);
     }
 
@@ -218,6 +219,7 @@ public class ChunkProviderServer implements IChunkProvider {
 
         // CraftBukkit start
         Iterator iterator = this.chunks.values().iterator();
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             Chunk chunk = (Chunk) iterator.next();
             // CraftBukkit end

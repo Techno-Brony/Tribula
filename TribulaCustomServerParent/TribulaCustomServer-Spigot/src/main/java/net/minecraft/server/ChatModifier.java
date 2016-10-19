@@ -88,6 +88,7 @@ public class ChatModifier {
             return "Style.ROOT";
         }
 
+        @SuppressWarnings("CloneDoesntCallSuperClone")
         public ChatModifier clone() {
             return this;
         }
@@ -272,6 +273,7 @@ public class ChatModifier {
         return i;
     }
 
+    @SuppressWarnings("CloneDoesntCallSuperClone")
     public ChatModifier clone() {
         ChatModifier chatmodifier = new ChatModifier();
 

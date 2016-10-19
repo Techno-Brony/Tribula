@@ -9,29 +9,8 @@ public class DispenseBehaviorItem implements IDispenseBehavior {
 
     public DispenseBehaviorItem() {}
 
-    public final ItemStack a(ISourceBlock isourceblock, ItemStack itemstack) {
-        ItemStack itemstack1 = this.b(isourceblock, itemstack);
-
-        this.a(isourceblock);
-        this.a(isourceblock, isourceblock.e().get(BlockDispenser.FACING));
-        return itemstack1;
-    }
-
-    protected ItemStack b(ISourceBlock isourceblock, ItemStack itemstack) {
-        EnumDirection enumdirection = isourceblock.e().get(BlockDispenser.FACING);
-        IPosition iposition = BlockDispenser.a(isourceblock);
-        ItemStack itemstack1 = itemstack.cloneAndSubtract(1);
-
-        // CraftBukkit start
-        if (!a(isourceblock.getWorld(), itemstack1, 6, enumdirection, isourceblock)) {
-            itemstack.count++;
-        }
-        // CraftBukkit end
-        return itemstack;
-    }
-
     // CraftBukkit start - void -> boolean return, IPosition -> ISourceBlock last argument
-    public static boolean a(World world, ItemStack itemstack, int i, EnumDirection enumdirection, ISourceBlock isourceblock) {
+    public static boolean a(World world, ItemStack itemstack, @SuppressWarnings("SameParameterValue") int i, EnumDirection enumdirection, ISourceBlock isourceblock) {
         IPosition iposition = BlockDispenser.a(isourceblock);
         // CraftBukkit end
         double d0 = iposition.getX();
@@ -88,6 +67,27 @@ public class DispenseBehaviorItem implements IDispenseBehavior {
 
         return true;
         // CraftBukkit end
+    }
+
+    public final ItemStack a(ISourceBlock isourceblock, ItemStack itemstack) {
+        ItemStack itemstack1 = this.b(isourceblock, itemstack);
+
+        this.a(isourceblock);
+        this.a(isourceblock, isourceblock.e().get(BlockDispenser.FACING));
+        return itemstack1;
+    }
+
+    protected ItemStack b(ISourceBlock isourceblock, ItemStack itemstack) {
+        EnumDirection enumdirection = isourceblock.e().get(BlockDispenser.FACING);
+        IPosition iposition = BlockDispenser.a(isourceblock);
+        ItemStack itemstack1 = itemstack.cloneAndSubtract(1);
+
+        // CraftBukkit start
+        if (!a(isourceblock.getWorld(), itemstack1, 6, enumdirection, isourceblock)) {
+            itemstack.count++;
+        }
+        // CraftBukkit end
+        return itemstack;
     }
 
     protected void a(ISourceBlock isourceblock) {

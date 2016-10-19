@@ -23,6 +23,7 @@ public class ItemMapEmpty extends ItemWorldMapBase {
 
         --itemstack.count;
         if (itemstack.count <= 0) {
+            //noinspection unchecked
             return new InteractionResultWrapper(EnumInteractionResult.SUCCESS, itemstack1);
         } else {
             if (!entityhuman.inventory.pickup(itemstack1.cloneItemStack())) {
@@ -30,6 +31,7 @@ public class ItemMapEmpty extends ItemWorldMapBase {
             }
 
             entityhuman.b(StatisticList.b(this));
+            //noinspection unchecked
             return new InteractionResultWrapper(EnumInteractionResult.SUCCESS, itemstack);
         }
     }

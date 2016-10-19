@@ -36,8 +36,11 @@ public class EntityRabbit extends EntityAnimal {
         this.goalSelector.a(3, new PathfinderGoalTempt(this, 1.0D, Items.CARROT, false));
         this.goalSelector.a(3, new PathfinderGoalTempt(this, 1.0D, Items.GOLDEN_CARROT, false));
         this.goalSelector.a(3, new PathfinderGoalTempt(this, 1.0D, Item.getItemOf(Blocks.YELLOW_FLOWER), false));
+        //noinspection unchecked
         this.goalSelector.a(4, new EntityRabbit.PathfinderGoalRabbitAvoidTarget(this, EntityHuman.class, 8.0F, 2.2D, 2.2D));
+        //noinspection unchecked
         this.goalSelector.a(4, new EntityRabbit.PathfinderGoalRabbitAvoidTarget(this, EntityWolf.class, 10.0F, 2.2D, 2.2D));
+        //noinspection unchecked
         this.goalSelector.a(4, new EntityRabbit.PathfinderGoalRabbitAvoidTarget(this, EntityMonster.class, 4.0F, 2.2D, 2.2D));
         this.goalSelector.a(5, new EntityRabbit.PathfinderGoalEatCarrots(this));
         this.goalSelector.a(6, new PathfinderGoalRandomStroll(this, 0.6D));
@@ -284,9 +287,12 @@ public class EntityRabbit extends EntityAnimal {
             this.getAttributeInstance(GenericAttributes.g).setValue(8.0D);
             this.goalSelector.a(4, new EntityRabbit.PathfinderGoalKillerRabbitMeleeAttack(this));
             this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, false, new Class[0]));
+            //noinspection unchecked
             this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this, EntityHuman.class, true));
+            //noinspection unchecked
             this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this, EntityWolf.class, true));
             if (!this.hasCustomName()) {
+                //noinspection deprecation,deprecation
                 this.setCustomName(LocaleI18n.get("entity.KillerBunny.name"));
             }
         }
@@ -357,7 +363,7 @@ public class EntityRabbit extends EntityAnimal {
 
         private final EntityRabbit b;
 
-        public PathfinderGoalRabbitPanic(EntityRabbit entityrabbit, double d0) {
+        public PathfinderGoalRabbitPanic(EntityRabbit entityrabbit, @SuppressWarnings("SameParameterValue") double d0) {
             super(entityrabbit, d0);
             this.b = entityrabbit;
         }
@@ -470,7 +476,7 @@ public class EntityRabbit extends EntityAnimal {
 
         private final EntityRabbit c;
 
-        public PathfinderGoalRabbitAvoidTarget(EntityRabbit entityrabbit, Class<T> oclass, float f, double d0, double d1) {
+        public PathfinderGoalRabbitAvoidTarget(EntityRabbit entityrabbit, Class<T> oclass, float f, @SuppressWarnings("SameParameterValue") double d0, @SuppressWarnings("SameParameterValue") double d1) {
             super(entityrabbit, oclass, f, d0, d1);
             this.c = entityrabbit;
         }

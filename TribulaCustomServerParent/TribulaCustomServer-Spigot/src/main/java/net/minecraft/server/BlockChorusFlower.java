@@ -33,7 +33,7 @@ public class BlockChorusFlower extends Block {
         return false;
     }
 
-    public static void a(World world, BlockPosition blockposition, Random random, int i) {
+    public static void a(World world, BlockPosition blockposition, @SuppressWarnings("SameParameterValue") Random random, @SuppressWarnings("SameParameterValue") int i) {
         world.setTypeAndData(blockposition, Blocks.CHORUS_PLANT.getBlockData(), 2);
         a(world, blockposition, random, blockposition, i, 0);
     }
@@ -253,6 +253,7 @@ public class BlockChorusFlower extends Block {
                 int i = 0;
                 Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
+                //noinspection WhileLoopReplaceableByForEach
                 while (iterator.hasNext()) {
                     EnumDirection enumdirection = (EnumDirection) iterator.next();
                     IBlockData iblockdata1 = world.getType(blockposition.shift(enumdirection));

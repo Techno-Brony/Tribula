@@ -62,6 +62,7 @@ public class BlockPressurePlateBinary extends BlockPressurePlateAbstract {
         if (!list.isEmpty()) {
             Iterator iterator = list.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 Entity entity = (Entity) iterator.next();
 

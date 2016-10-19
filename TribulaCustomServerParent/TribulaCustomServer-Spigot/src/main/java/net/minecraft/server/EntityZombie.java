@@ -51,8 +51,11 @@ public class EntityZombie extends EntityMonster {
     protected void o() {
         this.goalSelector.a(6, new PathfinderGoalMoveThroughVillage(this, 1.0D, false));
         this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, true, new Class[] { EntityPigZombie.class}));
+        //noinspection unchecked
         this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this, EntityHuman.class, true));
-        if ( world.spigotConfig.zombieAggressiveTowardsVillager ) this.targetSelector.a(3, new PathfinderGoalNearestAttackableTarget(this, EntityVillager.class, false)); // Spigot
+        if ( world.spigotConfig.zombieAggressiveTowardsVillager ) //noinspection unchecked
+            this.targetSelector.a(3, new PathfinderGoalNearestAttackableTarget(this, EntityVillager.class, false)); // Spigot
+        //noinspection unchecked
         this.targetSelector.a(3, new PathfinderGoalNearestAttackableTarget(this, EntityIronGolem.class, true));
     }
 
@@ -589,7 +592,7 @@ public class EntityZombie extends EntityMonster {
             this.b = flag1;
         }
 
-        GroupDataZombie(boolean flag, boolean flag1, EntityZombie.SyntheticClass_1 entityzombie_syntheticclass_1) {
+        GroupDataZombie(boolean flag, boolean flag1, @SuppressWarnings("SameParameterValue") EntityZombie.SyntheticClass_1 entityzombie_syntheticclass_1) {
             this(flag, flag1);
         }
     }

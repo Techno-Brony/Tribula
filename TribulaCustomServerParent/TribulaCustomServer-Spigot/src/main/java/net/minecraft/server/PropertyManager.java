@@ -53,6 +53,7 @@ public class PropertyManager {
 
     private <T> T getOverride(String name, T value) {
         if ((this.options != null) && (this.options.has(name)) && !name.equals( "online-mode")) { // Spigot
+            //noinspection unchecked
             return (T) this.options.valueOf(name);
         }
 
@@ -116,7 +117,7 @@ public class PropertyManager {
         }
     }
 
-    public long getLong(String s, long i) {
+    public long getLong(@SuppressWarnings("SameParameterValue") String s, long i) {
         try {
             return getOverride(s, Long.parseLong(this.getString(s, "" + i))); // CraftBukkit
         } catch (Exception exception) {
@@ -144,7 +145,7 @@ public class PropertyManager {
         return this.properties.containsKey(s);
     }
 
-    public void b(String s) {
+    public void b(@SuppressWarnings("SameParameterValue") String s) {
         this.properties.remove(s);
     }
 }

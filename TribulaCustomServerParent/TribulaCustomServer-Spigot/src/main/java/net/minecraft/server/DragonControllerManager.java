@@ -60,6 +60,7 @@ public class DragonControllerManager {
             this.dragonControllers[i] = dragoncontrollerphase.a(this.enderDragon);
         }
 
+        //noinspection unchecked
         return (T) this.dragonControllers[i]; // CraftBukkit - decompile error
     }
 }

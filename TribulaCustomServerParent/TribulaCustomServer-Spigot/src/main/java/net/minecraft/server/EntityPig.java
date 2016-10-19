@@ -164,6 +164,7 @@ public class EntityPig extends EntityAnimal {
         if (f > 5.0F) {
             Iterator iterator = this.b(EntityHuman.class).iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 EntityHuman entityhuman = (EntityHuman) iterator.next();
 

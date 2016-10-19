@@ -122,7 +122,7 @@ public class ContainerBeacon extends Container {
 
     class SlotBeacon extends Slot {
 
-        public SlotBeacon(IInventory iinventory, int i, int j, int k) {
+        public SlotBeacon(IInventory iinventory, @SuppressWarnings("SameParameterValue") int i, @SuppressWarnings("SameParameterValue") int j, @SuppressWarnings("SameParameterValue") int k) {
             super(iinventory, i, j, k);
         }
 

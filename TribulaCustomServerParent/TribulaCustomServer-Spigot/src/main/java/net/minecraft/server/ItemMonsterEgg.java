@@ -86,6 +86,7 @@ public class ItemMonsterEgg extends Item {
         String s1 = h(itemstack);
 
         if (s1 != null) {
+            //noinspection deprecation,deprecation
             s = s + " " + LocaleI18n.get("entity." + s1 + ".name");
         }
 
@@ -143,6 +144,7 @@ public class ItemMonsterEgg extends Item {
 
     public InteractionResultWrapper<ItemStack> a(ItemStack itemstack, World world, EntityHuman entityhuman, EnumHand enumhand) {
         if (world.isClientSide) {
+            //noinspection unchecked
             return new InteractionResultWrapper(EnumInteractionResult.PASS, itemstack);
         } else {
             MovingObjectPosition movingobjectposition = this.a(world, entityhuman, true);
@@ -151,11 +153,13 @@ public class ItemMonsterEgg extends Item {
                 BlockPosition blockposition = movingobjectposition.a();
 
                 if (!(world.getType(blockposition).getBlock() instanceof BlockFluids)) {
+                    //noinspection unchecked
                     return new InteractionResultWrapper(EnumInteractionResult.PASS, itemstack);
                 } else if (world.a(entityhuman, blockposition) && entityhuman.a(blockposition, movingobjectposition.direction, itemstack)) {
                     Entity entity = a(world, h(itemstack), (double) blockposition.getX() + 0.5D, (double) blockposition.getY() + 0.5D, (double) blockposition.getZ() + 0.5D);
 
                     if (entity == null) {
+                        //noinspection unchecked
                         return new InteractionResultWrapper(EnumInteractionResult.PASS, itemstack);
                     } else {
                         if (entity instanceof EntityLiving && itemstack.hasName()) {
@@ -168,12 +172,15 @@ public class ItemMonsterEgg extends Item {
                         }
 
                         entityhuman.b(StatisticList.b(this));
+                        //noinspection unchecked
                         return new InteractionResultWrapper(EnumInteractionResult.SUCCESS, itemstack);
                     }
                 } else {
+                    //noinspection unchecked
                     return new InteractionResultWrapper(EnumInteractionResult.FAIL, itemstack);
                 }
             } else {
+                //noinspection unchecked
                 return new InteractionResultWrapper(EnumInteractionResult.PASS, itemstack);
             }
         }

@@ -32,6 +32,7 @@ public class ItemBoat extends Item {
         MovingObjectPosition movingobjectposition = world.rayTrace(vec3d, vec3d1, true);
 
         if (movingobjectposition == null) {
+            //noinspection unchecked
             return new InteractionResultWrapper(EnumInteractionResult.PASS, itemstack);
         } else {
             Vec3D vec3d2 = entityhuman.f(1.0F);
@@ -51,14 +52,17 @@ public class ItemBoat extends Item {
             }
 
             if (flag) {
+                //noinspection unchecked
                 return new InteractionResultWrapper(EnumInteractionResult.PASS, itemstack);
             } else if (movingobjectposition.type != MovingObjectPosition.EnumMovingObjectType.BLOCK) {
+                //noinspection unchecked
                 return new InteractionResultWrapper(EnumInteractionResult.PASS, itemstack);
             } else {
                 // CraftBukkit start - Boat placement
                 org.bukkit.event.player.PlayerInteractEvent event = org.bukkit.craftbukkit.event.CraftEventFactory.callPlayerInteractEvent(entityhuman, org.bukkit.event.block.Action.RIGHT_CLICK_BLOCK, movingobjectposition.a(), movingobjectposition.direction, itemstack, enumhand);
 
                 if (event.isCancelled()) {
+                    //noinspection unchecked
                     return new InteractionResultWrapper(EnumInteractionResult.PASS, itemstack);
                 }
                 // CraftBukkit end
@@ -69,6 +73,7 @@ public class ItemBoat extends Item {
                 entityboat.setType(this.a);
                 entityboat.yaw = entityhuman.yaw;
                 if (!world.getCubes(entityboat, entityboat.getBoundingBox().g(-0.1D)).isEmpty()) {
+                    //noinspection unchecked
                     return new InteractionResultWrapper(EnumInteractionResult.FAIL, itemstack);
                 } else {
                     if (!world.isClientSide) {
@@ -80,6 +85,7 @@ public class ItemBoat extends Item {
                     }
 
                     entityhuman.b(StatisticList.b(this));
+                    //noinspection unchecked
                     return new InteractionResultWrapper(EnumInteractionResult.SUCCESS, itemstack);
                 }
             }

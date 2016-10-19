@@ -98,6 +98,7 @@ public class ItemSkull extends Item {
     public String a(ItemStack itemstack) {
         if (itemstack.getData() == 3 && itemstack.hasTag()) {
             if (itemstack.getTag().hasKeyOfType("SkullOwner", 8)) {
+                //noinspection deprecation,deprecation
                 return LocaleI18n.a("item.skull.player.name", itemstack.getTag().getString("SkullOwner"));
             }
 
@@ -105,6 +106,7 @@ public class ItemSkull extends Item {
                 NBTTagCompound nbttagcompound = itemstack.getTag().getCompound("SkullOwner");
 
                 if (nbttagcompound.hasKeyOfType("Name", 8)) {
+                    //noinspection deprecation,deprecation
                     return LocaleI18n.a("item.skull.player.name", nbttagcompound.getString("Name"));
                 }
             }

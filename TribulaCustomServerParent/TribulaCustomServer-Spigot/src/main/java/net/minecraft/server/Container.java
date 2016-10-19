@@ -47,7 +47,7 @@ public abstract class Container {
         return i == 0 || (i == 1 || i == 2 && entityhuman.abilities.canInstantlyBuild);
     }
 
-    public static boolean a(Slot slot, ItemStack itemstack, boolean flag) {
+    public static boolean a(Slot slot, ItemStack itemstack, @SuppressWarnings("SameParameterValue") boolean flag) {
         boolean flag1 = slot == null || !slot.hasItem();
 
         if (slot != null && slot.hasItem() && itemstack != null && itemstack.doMaterialsMatch(slot.getItem()) && ItemStack.equals(slot.getItem(), itemstack)) {
@@ -130,9 +130,11 @@ public abstract class Container {
         ArrayList arraylist = Lists.newArrayList();
 
         for (Slot aC : this.c) {
+            //noinspection unchecked
             arraylist.add(aC.getItem());
         }
 
+        //noinspection unchecked
         return arraylist;
     }
 
@@ -529,7 +531,7 @@ public abstract class Container {
         return true;
     }
 
-    protected void a(int i, int j, boolean flag, EntityHuman entityhuman) {
+    protected void a(int i, int j, @SuppressWarnings("SameParameterValue") boolean flag, EntityHuman entityhuman) {
         this.a(i, j, InventoryClickType.QUICK_MOVE, entityhuman);
     }
 

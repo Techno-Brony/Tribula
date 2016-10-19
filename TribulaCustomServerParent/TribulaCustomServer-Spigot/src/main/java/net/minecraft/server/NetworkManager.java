@@ -73,7 +73,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
     private boolean o;
     private boolean p;
 
-    public NetworkManager(EnumProtocolDirection enumprotocoldirection) {
+    public NetworkManager(@SuppressWarnings("SameParameterValue") EnumProtocolDirection enumprotocoldirection) {
         this.h = enumprotocoldirection;
     }
 
@@ -114,12 +114,14 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
 
         NetworkManager.g.debug(throwable);
         this.close(chatmessage);
+        //noinspection deprecation
         if (MinecraftServer.getServer().isDebugging()) throwable.printStackTrace(); // Spigot
     }
 
-    protected void a(ChannelHandlerContext channelhandlercontext, Packet<?> packet) throws Exception {
+    protected void a(ChannelHandlerContext channelhandlercontext, Packet<?> packet) {
         if (this.channel.isOpen()) {
             try {
+                //noinspection unchecked
                 ((Packet) packet).a(this.m); // CraftBukkit - decompile error
             } catch (CancelledPacketHandleException ignored) {
             }
@@ -141,6 +143,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
             this.j.writeLock().lock();
 
             try {
+                //noinspection unchecked
                 this.i.add(new NetworkManager.QueuedPacket(packet, (GenericFutureListener[]) null));
             } finally {
                 this.j.writeLock().unlock();
@@ -157,6 +160,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
             this.j.writeLock().lock();
 
             try {
+                //noinspection unchecked
                 this.i.add(new NetworkManager.QueuedPacket(packet, (GenericFutureListener[]) ArrayUtils.add(agenericfuturelistener, 0, genericfuturelistener)));
             } finally {
                 this.j.writeLock().unlock();

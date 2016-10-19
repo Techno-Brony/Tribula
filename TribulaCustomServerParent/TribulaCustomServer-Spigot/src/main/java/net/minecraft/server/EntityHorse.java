@@ -301,6 +301,7 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
             if (this.isVehicle()) {
                 Iterator iterator = this.by().iterator();
 
+                //noinspection WhileLoopReplaceableByForEach
                 while (iterator.hasNext()) {
                     Entity entity = (Entity) iterator.next();
 
@@ -382,12 +383,13 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
         return super.cK();
     }
 
-    protected EntityHorse a(Entity entity, double d0) {
+    protected EntityHorse a(Entity entity, @SuppressWarnings("SameParameterValue") double d0) {
         double d1 = Double.MAX_VALUE;
         Entity entity1 = null;
         List list = this.world.getEntities(entity, entity.getBoundingBox().a(d0, d0, d0), EntityHorse.bD);
         Iterator iterator = list.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             Entity entity2 = (Entity) iterator.next();
             double d2 = entity2.e(entity.locX, entity.locY, entity.locZ);

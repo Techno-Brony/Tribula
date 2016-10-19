@@ -306,8 +306,9 @@ public class PlayerInventory implements IInventory {
 
                 crashreportsystemdetails.a("Item ID", Item.getId(itemstack.getItem()));
                 crashreportsystemdetails.a("Item data", itemstack.getData());
+                //noinspection unchecked
                 crashreportsystemdetails.a("Item name", new CrashReportCallable() {
-                    public String a() throws Exception {
+                    public String a() {
                         return itemstack.getName();
                     }
 

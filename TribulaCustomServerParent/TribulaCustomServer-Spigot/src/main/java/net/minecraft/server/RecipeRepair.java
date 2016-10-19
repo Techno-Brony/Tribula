@@ -21,6 +21,7 @@ public class RecipeRepair extends ShapelessRecipes implements IRecipe { // Craft
             ItemStack itemstack = inventorycrafting.getItem(i);
 
             if (itemstack != null) {
+                //noinspection unchecked
                 arraylist.add(itemstack);
                 if (arraylist.size() > 1) {
                     ItemStack itemstack1 = (ItemStack) arraylist.get(0);
@@ -44,6 +45,7 @@ public class RecipeRepair extends ShapelessRecipes implements IRecipe { // Craft
         for (int i = 0; i < inventorycrafting.getSize(); ++i) {
             itemstack = inventorycrafting.getItem(i);
             if (itemstack != null) {
+                //noinspection unchecked
                 arraylist.add(itemstack);
                 if (arraylist.size() > 1) {
                     ItemStack itemstack1 = (ItemStack) arraylist.get(0);

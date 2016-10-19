@@ -28,6 +28,7 @@ public class BlockSapling extends BlockPlant implements IBlockFragilePlantElemen
     }
 
     public String getName() {
+        //noinspection deprecation,deprecation
         return LocaleI18n.get(this.a() + "." + BlockWood.EnumLogVariant.OAK.d() + ".name");
     }
 
@@ -45,6 +46,7 @@ public class BlockSapling extends BlockPlant implements IBlockFragilePlantElemen
                     TreeType treeType = BlockSapling.treeType;
                     BlockSapling.treeType = null;
                     Location location = new Location(world.getWorld(), blockposition.getX(), blockposition.getY(), blockposition.getZ());
+                    //noinspection unchecked
                     List<BlockState> blocks = (List<BlockState>) world.capturedBlockStates.clone();
                     world.capturedBlockStates.clear();
                     StructureGrowEvent event = null;

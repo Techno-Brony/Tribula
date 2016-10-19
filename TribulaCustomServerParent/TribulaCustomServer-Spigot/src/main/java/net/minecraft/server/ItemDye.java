@@ -99,6 +99,7 @@ public class ItemDye extends Item {
                     return false;
                 }
 
+                //noinspection deprecation
                 enumcolor = EnumColor.fromColorIndex(event.getColor().getWoolData());
                 // CraftBukkit end
                 entitysheep.setColor(enumcolor);

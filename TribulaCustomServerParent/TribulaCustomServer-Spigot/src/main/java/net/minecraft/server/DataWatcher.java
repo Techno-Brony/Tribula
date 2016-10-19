@@ -84,7 +84,7 @@ public class DataWatcher {
         packetdataserializer.writeByte(255);
     }
 
-    private static <T> void a(PacketDataSerializer packetdataserializer, DataWatcher.Item<T> datawatcher_item) throws IOException {
+    private static <T> void a(PacketDataSerializer packetdataserializer, DataWatcher.Item<T> datawatcher_item) {
         DataWatcherObject datawatcherobject = datawatcher_item.a();
         int i = DataWatcherRegistry.b(datawatcherobject.b());
 
@@ -93,12 +93,13 @@ public class DataWatcher {
         } else {
             packetdataserializer.writeByte(datawatcherobject.a());
             packetdataserializer.d(i);
+            //noinspection unchecked
             datawatcherobject.b().a(packetdataserializer, datawatcher_item.b());
         }
     }
 
     @Nullable
-    public static List<DataWatcher.Item<?>> b(PacketDataSerializer packetdataserializer) throws IOException {
+    public static List<DataWatcher.Item<?>> b(PacketDataSerializer packetdataserializer) {
         ArrayList arraylist = null;
 
         short short0;
@@ -115,9 +116,11 @@ public class DataWatcher {
                 throw new DecoderException("Unknown serializer type " + i);
             }
 
+            //noinspection unchecked,unchecked
             arraylist.add(new DataWatcher.Item(datawatcherserializer.a(short0), datawatcherserializer.a(packetdataserializer)));
         }
 
+        //noinspection unchecked
         return arraylist;
     }
 
@@ -136,6 +139,7 @@ public class DataWatcher {
     }
 
     private <T> void registerObject(DataWatcherObject<T> datawatcherobject, Object t0) { // CraftBukkit Object
+        //noinspection unchecked
         DataWatcher.Item datawatcher_item = new DataWatcher.Item(datawatcherobject, t0);
 
         this.e.writeLock().lock();
@@ -160,6 +164,7 @@ public class DataWatcher {
         }
 
         this.e.readLock().unlock();
+        //noinspection unchecked
         return datawatcher_item;
     }
 
@@ -171,6 +176,7 @@ public class DataWatcher {
         DataWatcher.Item datawatcher_item = this.c(datawatcherobject);
 
         if (ObjectUtils.notEqual(t0, datawatcher_item.b())) {
+            //noinspection unchecked
             datawatcher_item.a(t0);
             this.c.a(datawatcherobject);
             datawatcher_item.a(true);
@@ -196,6 +202,7 @@ public class DataWatcher {
             this.e.readLock().lock();
             Iterator iterator = this.d.values().iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 DataWatcher.Item datawatcher_item = (DataWatcher.Item) iterator.next();
 
@@ -205,6 +212,7 @@ public class DataWatcher {
                         arraylist = Lists.newArrayList();
                     }
 
+                    //noinspection unchecked
                     arraylist.add(datawatcher_item);
                 }
             }
@@ -213,6 +221,7 @@ public class DataWatcher {
         }
 
         this.g = false;
+        //noinspection unchecked
         return arraylist;
     }
 
@@ -220,6 +229,7 @@ public class DataWatcher {
         this.e.readLock().lock();
         Iterator iterator = this.d.values().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             DataWatcher.Item datawatcher_item = (DataWatcher.Item) iterator.next();
 
@@ -238,7 +248,8 @@ public class DataWatcher {
 
         DataWatcher.Item datawatcher_item;
 
-        for (Iterator iterator = this.d.values().iterator(); iterator.hasNext(); arraylist.add(datawatcher_item)) {
+        for (Iterator iterator = this.d.values().iterator(); iterator.hasNext(); //noinspection unchecked
+             arraylist.add(datawatcher_item)) {
             datawatcher_item = (DataWatcher.Item) iterator.next();
             if (arraylist == null) {
                 arraylist = Lists.newArrayList();
@@ -246,6 +257,7 @@ public class DataWatcher {
         }
 
         this.e.readLock().unlock();
+        //noinspection unchecked
         return arraylist;
     }
 

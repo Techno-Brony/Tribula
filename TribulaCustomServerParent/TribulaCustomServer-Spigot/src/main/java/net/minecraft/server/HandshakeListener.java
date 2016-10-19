@@ -51,6 +51,7 @@ public class HandshakeListener implements PacketHandshakingInListener {
                         // Cleanup stale entries
                         java.util.Iterator iter = throttleTracker.entrySet().iterator();
                         while (iter.hasNext()) {
+                            //noinspection unchecked
                             java.util.Map.Entry<InetAddress, Long> entry = (java.util.Map.Entry) iter.next();
                             if (entry.getValue() > connectionThrottle) {
                                 iter.remove();

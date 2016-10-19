@@ -8,7 +8,7 @@ public class PathfinderGoalTame extends PathfinderGoal {
     private double d;
     private double e;
 
-    public PathfinderGoalTame(EntityHorse entityhorse, double d0) {
+    public PathfinderGoalTame(EntityHorse entityhorse, @SuppressWarnings("SameParameterValue") double d0) {
         this.entity = entityhorse;
         this.b = d0;
         this.a(1);

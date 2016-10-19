@@ -62,6 +62,7 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
     private void e(World world, BlockPosition blockposition, IBlockData iblockdata) {
         boolean flag = iblockdata.get(BlockMinecartDetector.POWERED);
         boolean flag1 = false;
+        //noinspection unchecked
         List list = this.a(world, blockposition, EntityMinecartAbstract.class);
 
         if (!list.isEmpty()) {
@@ -107,6 +108,7 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
         List list = blockminecarttrackabstract_minecarttracklogic.a();
         Iterator iterator = list.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             BlockPosition blockposition1 = (BlockPosition) iterator.next();
             IBlockData iblockdata1 = world.getType(blockposition1);
@@ -133,12 +135,14 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
 
     public int d(IBlockData iblockdata, World world, BlockPosition blockposition) {
         if (iblockdata.get(BlockMinecartDetector.POWERED)) {
+            //noinspection unchecked
             List list = this.a(world, blockposition, EntityMinecartCommandBlock.class);
 
             if (!list.isEmpty()) {
                 return ((EntityMinecartCommandBlock) list.get(0)).getCommandBlock().k();
             }
 
+            //noinspection unchecked
             List list1 = this.a(world, blockposition, EntityMinecartAbstract.class, IEntitySelector.c);
 
             if (!list1.isEmpty()) {
@@ -149,7 +153,7 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
         return 0;
     }
 
-    protected <T extends EntityMinecartAbstract> List<T> a(World world, BlockPosition blockposition, Class<T> oclass, Predicate<Entity>... apredicate) {
+    protected <T extends EntityMinecartAbstract> List<T> a(World world, BlockPosition blockposition, Class<T> oclass, @SuppressWarnings("SameParameterValue") Predicate<Entity>... apredicate) {
         AxisAlignedBB axisalignedbb = this.a(blockposition);
 
         return apredicate.length != 1 ? world.a(oclass, axisalignedbb) : world.a(oclass, axisalignedbb, apredicate[0]);
@@ -301,6 +305,7 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
                 return iblockdata.set(BlockMinecartDetector.SHAPE, BlockMinecartTrackAbstract.EnumTrackPosition.SOUTH_EAST);
 
             default:
+                //noinspection deprecation
                 return super.a(iblockdata, enumblockmirror);
             }
 
@@ -331,6 +336,7 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
             }
         }
 
+        //noinspection deprecation
         return super.a(iblockdata, enumblockmirror);
     }
 

@@ -245,6 +245,7 @@ public class TileEntityBeacon extends TileEntityContainer implements ITickable, 
         if (!this.world.isClientSide && this.k == 4 && i < this.k) {
             Iterator iterator = this.world.a(EntityHuman.class, (new AxisAlignedBB((double) j, (double) k, (double) l, (double) j, (double) (k - 4), (double) l)).grow(10.0D, 5.0D, 10.0D)).iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 EntityHuman entityhuman = (EntityHuman) iterator.next();
 

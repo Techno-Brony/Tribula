@@ -22,7 +22,7 @@ public class RecipiesShield {
         }
         // CraftBukkit end
 
-        Decoration(RecipiesShield.SyntheticClass_1 recipiesshield_syntheticclass_1) {
+        Decoration(@SuppressWarnings("SameParameterValue") RecipiesShield.SyntheticClass_1 recipiesshield_syntheticclass_1) {
             this();
         }
 

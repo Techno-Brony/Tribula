@@ -184,7 +184,8 @@ public class CraftingManager {
 
     // CraftBukkit start
     public void sort() {
-       Collections.sort(this.recipes, new Comparator() {
+        //noinspection unchecked
+        Collections.sort(this.recipes, new Comparator() {
             public int a(IRecipe irecipe, IRecipe irecipe1) {
                 return irecipe instanceof ShapelessRecipes && irecipe1 instanceof ShapedRecipes ? 1 : (irecipe1 instanceof ShapelessRecipes && irecipe instanceof ShapedRecipes ? -1 : (irecipe1.a() < irecipe.a() ? -1 : (irecipe1.a() > irecipe.a() ? 1 : 0)));
             }
@@ -238,6 +239,7 @@ public class CraftingManager {
                 itemstack1 = (ItemStack) aobject[i + 1];
             }
 
+            //noinspection unchecked
             hashmap.put(character, itemstack1);
         }
 
@@ -265,18 +267,22 @@ public class CraftingManager {
 
         for (Object object : aobject) {
             if (object instanceof ItemStack) {
+                //noinspection unchecked
                 arraylist.add(((ItemStack) object).cloneItemStack());
             } else if (object instanceof Item) {
+                //noinspection unchecked
                 arraylist.add(new ItemStack((Item) object));
             } else {
                 if (!(object instanceof Block)) {
                     throw new IllegalArgumentException("Invalid shapeless recipe: unknown type " + object.getClass().getName() + "!");
                 }
 
+                //noinspection unchecked
                 arraylist.add(new ItemStack((Block) object));
             }
         }
 
+        //noinspection unchecked
         this.recipes.add(new ShapelessRecipes(itemstack, arraylist));
     }
 
@@ -309,6 +315,7 @@ public class CraftingManager {
     public ItemStack[] b(InventoryCrafting inventorycrafting, World world) {
         Iterator iterator = this.recipes.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             IRecipe irecipe = (IRecipe) iterator.next();
 

@@ -346,6 +346,7 @@ public class Metrics {
         // File pluginsFolder = plugin.getDataFolder().getParentFile();
 
         // return => base/plugins/PluginMetrics/config.yml
+        //noinspection deprecation
         return new File(new File((File) MinecraftServer.getServer().options.valueOf("plugins"), "PluginMetrics"), "config.yml");
     }
 
@@ -401,6 +402,7 @@ public class Metrics {
         synchronized (graphs) {
             final Iterator<Graph> iter = graphs.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iter.hasNext()) {
                 final Graph graph = iter.next();
 
@@ -457,6 +459,7 @@ public class Metrics {
                 synchronized (graphs) {
                     final Iterator<Graph> iter = graphs.iterator();
 
+                    //noinspection WhileLoopReplaceableByForEach
                     while (iter.hasNext()) {
                         final Graph graph = iter.next();
 
@@ -582,7 +585,7 @@ public class Metrics {
          *
          * @param name the name of the plotter to use, which will show up on the website
          */
-        public Plotter(final String name) {
+        public Plotter(@SuppressWarnings("SameParameterValue") final String name) {
             this.name = name;
         }
 

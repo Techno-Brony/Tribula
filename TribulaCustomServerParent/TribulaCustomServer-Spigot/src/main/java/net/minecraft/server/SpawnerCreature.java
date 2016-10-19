@@ -56,7 +56,7 @@ public final class SpawnerCreature {
         }
     }
 
-    public static void a(World world, BiomeBase biomebase, int i, int j, int k, int l, Random random) {
+    public static void a(World world, BiomeBase biomebase, int i, int j, @SuppressWarnings("SameParameterValue") int k, @SuppressWarnings("SameParameterValue") int l, Random random) {
         List list = biomebase.getMobs(EnumCreatureType.CREATURE);
 
         if (!list.isEmpty()) {
@@ -109,6 +109,7 @@ public final class SpawnerCreature {
     private int getEntityCount(WorldServer server, Class oClass)
     {
         int i = 0;
+        //noinspection unchecked
         Iterator<Long> it = this.b.iterator();
         while ( it.hasNext() )
         {

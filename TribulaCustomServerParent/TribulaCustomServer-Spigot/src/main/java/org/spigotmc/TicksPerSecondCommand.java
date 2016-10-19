@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 public class TicksPerSecondCommand extends Command
 {
 
-    public TicksPerSecondCommand(String name)
+    public TicksPerSecondCommand(@SuppressWarnings("SameParameterValue") String name)
     {
         super( name );
         this.description = "Gets the current ticks per second for the server";
@@ -25,6 +25,7 @@ public class TicksPerSecondCommand extends Command
         }
 
         StringBuilder sb = new StringBuilder( ChatColor.GOLD + "TPS from last 1m, 5m, 15m: " );
+        //noinspection deprecation
         for ( double tps : MinecraftServer.getServer().recentTps )
         {
             sb.append( format( tps ) );

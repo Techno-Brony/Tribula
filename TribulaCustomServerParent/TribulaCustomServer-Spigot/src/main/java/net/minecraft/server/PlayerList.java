@@ -136,9 +136,11 @@ public abstract class PlayerList {
         String joinMessage;
         if (entityplayer.getName().equalsIgnoreCase(s)) {
             // chatmessage = new ChatMessage("multiplayer.player.joined", new Object[] { entityplayer.getScoreboardDisplayName()});
+            //noinspection deprecation,deprecation
             joinMessage = "\u00A7e" + LocaleI18n.a("multiplayer.player.joined", entityplayer.getName());
         } else {
             // chatmessage = new ChatMessage("multiplayer.player.joined.renamed", new Object[] { entityplayer.getScoreboardDisplayName(), s});
+            //noinspection deprecation,deprecation
             joinMessage = "\u00A7e" + LocaleI18n.a("multiplayer.player.joined.renamed", entityplayer.getName(), s);
         }
 
@@ -155,6 +157,7 @@ public abstract class PlayerList {
 
         Iterator iterator = entityplayer.getEffects().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             MobEffect mobeffect = (MobEffect) iterator.next();
 
@@ -214,6 +217,7 @@ public abstract class PlayerList {
         HashSet hashset = Sets.newHashSet();
         Iterator iterator = scoreboardserver.getTeams().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             ScoreboardTeam scoreboardteam = (ScoreboardTeam) iterator.next();
 
@@ -227,12 +231,14 @@ public abstract class PlayerList {
                 List list = scoreboardserver.getScoreboardScorePacketsForObjective(scoreboardobjective);
                 Iterator iterator1 = list.iterator();
 
+                //noinspection WhileLoopReplaceableByForEach
                 while (iterator1.hasNext()) {
                     Packet packet = (Packet) iterator1.next();
 
                     entityplayer.playerConnection.sendPacket(packet);
                 }
 
+                //noinspection unchecked
                 hashset.add(scoreboardobjective);
             }
         }
@@ -384,6 +390,7 @@ public abstract class PlayerList {
                 worldserver.removeEntity(entity);
                 Iterator iterator = entity.by().iterator();
 
+                //noinspection WhileLoopReplaceableByForEach
                 while (iterator.hasNext()) {
                     Entity entity1 = (Entity) iterator.next();
 
@@ -436,12 +443,14 @@ public abstract class PlayerList {
         for (EntityPlayer player1 : this.players) {
             entityplayer = player1;
             if (entityplayer.getUniqueID().equals(uuid)) {
+                //noinspection unchecked
                 arraylist.add(entityplayer);
             }
         }
 
         Iterator iterator = arraylist.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             entityplayer = (EntityPlayer) iterator.next();
             savePlayerFile(entityplayer); // CraftBukkit - Force the player's inventory to be saved
@@ -538,7 +547,7 @@ public abstract class PlayerList {
     }
 
     // CraftBukkit start
-    public EntityPlayer moveToWorld(EntityPlayer entityplayer, int i, boolean flag) {
+    public EntityPlayer moveToWorld(EntityPlayer entityplayer, @SuppressWarnings("SameParameterValue") int i, @SuppressWarnings("SameParameterValue") boolean flag) {
         return this.moveToWorld(entityplayer, i, flag, null, true);
     }
 
@@ -568,13 +577,13 @@ public abstract class PlayerList {
         entityplayer.viewingCredits = false;
         // CraftBukkit end
 
-        entityplayer.playerConnection = entityplayer.playerConnection;
         entityplayer.copyTo(entityplayer, flag);
         entityplayer.h(entityplayer.getId());
         entityplayer.v(entityplayer);
         entityplayer.a(entityplayer.getMainHand());
         Iterator iterator = entityplayer.P().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             String s = (String) iterator.next();
 
@@ -768,6 +777,7 @@ public abstract class PlayerList {
         this.updateClient(entityplayer);
         Iterator iterator = entityplayer.getEffects().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             MobEffect mobeffect = (MobEffect) iterator.next();
 
@@ -995,6 +1005,7 @@ public abstract class PlayerList {
             Collection collection = scoreboardteambase.getPlayerNameSet();
             Iterator iterator = collection.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 String s = (String) iterator.next();
                 EntityPlayer entityplayer = this.getPlayer(s);
@@ -1224,14 +1235,17 @@ public abstract class PlayerList {
         ArrayList arraylist = Lists.newArrayList();
         Iterator iterator = this.players.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             EntityPlayer entityplayer = (EntityPlayer) iterator.next();
 
             if (entityplayer.A().equals(s)) {
+                //noinspection unchecked
                 arraylist.add(entityplayer);
             }
         }
 
+        //noinspection unchecked
         return arraylist;
     }
 
@@ -1247,7 +1261,7 @@ public abstract class PlayerList {
         return null;
     }
 
-    private void a(EntityPlayer entityplayer, EntityPlayer entityplayer1, World world) {
+    private void a(EntityPlayer entityplayer, @SuppressWarnings("SameParameterValue") EntityPlayer entityplayer1, World world) {
         if (entityplayer1 != null) {
             entityplayer.playerInteractManager.setGameMode(entityplayer1.playerInteractManager.getGameMode());
         } else if (this.s != null) {
@@ -1274,7 +1288,7 @@ public abstract class PlayerList {
     }
     // CraftBukkit end
 
-    public void sendMessage(IChatBaseComponent ichatbasecomponent, boolean flag) {
+    public void sendMessage(IChatBaseComponent ichatbasecomponent, @SuppressWarnings("SameParameterValue") boolean flag) {
         this.server.sendMessage(ichatbasecomponent);
         int i = flag ? 1 : 0;
 

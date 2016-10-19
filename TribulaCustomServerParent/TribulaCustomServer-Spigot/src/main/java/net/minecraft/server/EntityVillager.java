@@ -39,7 +39,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, NPC {
         this(world, 0);
     }
 
-    public EntityVillager(World world, int i) {
+    public EntityVillager(World world, @SuppressWarnings("SameParameterValue") int i) {
         super(world);
         this.inventory = new InventorySubcontainer("Items", false, 8, (CraftVillager) this.getBukkitEntity()); // CraftBukkit add argument
         this.setProfession(i);
@@ -77,6 +77,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, NPC {
 
     protected void r() {
         this.goalSelector.a(0, new PathfinderGoalFloat(this));
+        //noinspection unchecked
         this.goalSelector.a(1, new PathfinderGoalAvoidTarget(this, EntityZombie.class, 8.0F, 0.6D, 0.6D));
         this.goalSelector.a(1, new PathfinderGoalTradeWithPlayer(this));
         this.goalSelector.a(1, new PathfinderGoalLookAtTradingPlayer(this));
@@ -143,6 +144,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, NPC {
                 if (this.bF) {
                     Iterator iterator = this.trades.iterator();
 
+                    //noinspection WhileLoopReplaceableByForEach
                     while (iterator.hasNext()) {
                         MerchantRecipe merchantrecipe = (MerchantRecipe) iterator.next();
 
@@ -367,7 +369,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, NPC {
         return this.bG;
     }
 
-    public void s(boolean flag) {
+    public void s(@SuppressWarnings("SameParameterValue") boolean flag) {
         this.bG = flag;
     }
 

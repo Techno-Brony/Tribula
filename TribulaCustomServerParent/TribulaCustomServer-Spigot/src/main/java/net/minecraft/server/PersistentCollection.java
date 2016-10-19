@@ -115,6 +115,7 @@ public class PersistentCollection {
                 datainputstream.close();
                 Iterator iterator = nbttagcompound.c().iterator();
 
+                //noinspection WhileLoopReplaceableByForEach
                 while (iterator.hasNext()) {
                     String s = (String) iterator.next();
                     NBTBase nbtbase = nbttagcompound.get(s);
@@ -153,6 +154,7 @@ public class PersistentCollection {
                     NBTTagCompound nbttagcompound = new NBTTagCompound();
                     Iterator iterator = this.d.keySet().iterator();
 
+                    //noinspection WhileLoopReplaceableByForEach
                     while (iterator.hasNext()) {
                         String s1 = (String) iterator.next();
 

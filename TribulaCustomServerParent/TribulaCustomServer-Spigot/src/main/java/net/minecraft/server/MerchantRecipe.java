@@ -15,7 +15,7 @@ public class MerchantRecipe {
     // CraftBukkit start
     private CraftMerchantRecipe bukkitHandle;
 
-    public MerchantRecipe(ItemStack itemstack, ItemStack itemstack1, ItemStack itemstack2, int i, int j, CraftMerchantRecipe bukkit) {
+    public MerchantRecipe(@SuppressWarnings("SameParameterValue") ItemStack itemstack, @SuppressWarnings("SameParameterValue") ItemStack itemstack1, ItemStack itemstack2, int i, int j, CraftMerchantRecipe bukkit) {
         this(itemstack, itemstack1, itemstack2, i, j);
         this.bukkitHandle = bukkit;
     }
@@ -42,7 +42,7 @@ public class MerchantRecipe {
         this(itemstack, null, itemstack1);
     }
 
-    public MerchantRecipe(ItemStack itemstack, Item item) {
+    public MerchantRecipe(ItemStack itemstack, @SuppressWarnings("SameParameterValue") Item item) {
         this(itemstack, new ItemStack(item));
     }
 

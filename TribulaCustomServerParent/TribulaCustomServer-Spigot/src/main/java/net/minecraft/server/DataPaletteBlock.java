@@ -4,8 +4,8 @@ import javax.annotation.Nullable;
 
 public class DataPaletteBlock implements DataPaletteExpandable {
 
-    private static final DataPalette d = new DataPaletteGlobal();
     protected static final IBlockData a = Blocks.AIR.getBlockData();
+    private static final DataPalette d = new DataPaletteGlobal();
     protected DataBits b;
     protected DataPalette c;
     private int e;
@@ -118,6 +118,7 @@ public class DataPaletteBlock implements DataPaletteExpandable {
                 Block block = Block.getById(j1 >> 4);
                 if (block != null) {
                     try {
+                        //noinspection deprecation
                         data = block.fromLegacyData(j1 & 0xF);
                     } catch (Exception ignored) {
                         data = block.getBlockData();

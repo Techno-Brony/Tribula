@@ -1,8 +1,9 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Sets;
-import java.util.Set;
+
 import javax.annotation.Nullable;
+import java.util.Set;
 
 public class EntityChicken extends EntityAnimal {
 
@@ -20,6 +21,10 @@ public class EntityChicken extends EntityAnimal {
         this.setSize(0.4F, 0.7F);
         this.bD = this.random.nextInt(6000) + 6000;
         this.a(PathType.WATER, 0.0F);
+    }
+
+    public static void b(DataConverterManager dataconvertermanager) {
+        EntityInsentient.a(dataconvertermanager, "Chicken");
     }
 
     protected void r() {
@@ -109,10 +114,6 @@ public class EntityChicken extends EntityAnimal {
         return this.isChickenJockey() ? 10 : super.getExpValue(entityhuman);
     }
 
-    public static void b(DataConverterManager dataconvertermanager) {
-        EntityInsentient.a(dataconvertermanager, "Chicken");
-    }
-
     public void a(NBTTagCompound nbttagcompound) {
         super.a(nbttagcompound);
         this.bE = nbttagcompound.getBoolean("IsChickenJockey");
@@ -150,7 +151,7 @@ public class EntityChicken extends EntityAnimal {
         return this.bE;
     }
 
-    public void p(boolean flag) {
+    public void p(@SuppressWarnings("SameParameterValue") boolean flag) {
         this.bE = flag;
     }
 

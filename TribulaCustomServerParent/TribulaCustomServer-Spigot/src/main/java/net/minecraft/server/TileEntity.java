@@ -202,8 +202,9 @@ public abstract class TileEntity {
     }
 
     public void a(CrashReportSystemDetails crashreportsystemdetails) {
+        //noinspection unchecked
         crashreportsystemdetails.a("Name", new CrashReportCallable() {
-            public String a() throws Exception {
+            public String a() {
                 return TileEntity.g.get(TileEntity.this.getClass()) + " // " + TileEntity.this.getClass().getCanonicalName();
             }
 
@@ -213,8 +214,9 @@ public abstract class TileEntity {
         });
         if (this.world != null) {
             CrashReportSystemDetails.a(crashreportsystemdetails, this.position, this.getBlock(), this.u());
+            //noinspection unchecked
             crashreportsystemdetails.a("Actual block type", new CrashReportCallable() {
-                public String a() throws Exception {
+                public String a() {
                     int i = Block.getId(TileEntity.this.world.getType(TileEntity.this.position).getBlock());
 
                     try {
@@ -228,8 +230,9 @@ public abstract class TileEntity {
                     return this.a();
                 }
             });
+            //noinspection unchecked
             crashreportsystemdetails.a("Actual block data value", new CrashReportCallable() {
-                public String a() throws Exception {
+                public String a() {
                     IBlockData iblockdata = TileEntity.this.world.getType(TileEntity.this.position);
                     int i = iblockdata.getBlock().toLegacyData(iblockdata);
 

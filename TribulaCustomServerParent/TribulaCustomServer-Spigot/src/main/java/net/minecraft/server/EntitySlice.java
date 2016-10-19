@@ -21,6 +21,7 @@ public class EntitySlice<T> extends AbstractSet<T> {
         this.b.put(oclass, this.e);
         Iterator iterator = EntitySlice.a.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             Class oclass1 = (Class) iterator.next();
 
@@ -33,10 +34,12 @@ public class EntitySlice<T> extends AbstractSet<T> {
         EntitySlice.a.add(oclass);
         Iterator iterator = this.e.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             Object object = iterator.next();
 
             if (oclass.isAssignableFrom(object.getClass())) {
+                //noinspection unchecked
                 this.a((T) object, oclass);
             }
         }
@@ -59,9 +62,11 @@ public class EntitySlice<T> extends AbstractSet<T> {
     public boolean add(T t0) {
         Iterator iterator = this.c.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             Class oclass = (Class) iterator.next();
 
+            //noinspection unchecked
             if (oclass.isAssignableFrom(t0.getClass())) {
                 this.a(t0, oclass);
             }
@@ -74,8 +79,10 @@ public class EntitySlice<T> extends AbstractSet<T> {
         List list = (List) this.b.get(oclass);
 
         if (list == null) {
+            //noinspection unchecked
             this.b.put(oclass, Lists.newArrayList(t0));
         } else {
+            //noinspection unchecked
             list.add(t0);
         }
 
@@ -85,9 +92,11 @@ public class EntitySlice<T> extends AbstractSet<T> {
         boolean flag = false;
         Iterator iterator = this.c.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             Class oclass = (Class) iterator.next();
 
+            //noinspection unchecked
             if (oclass.isAssignableFrom(object.getClass())) {
                 List list = (List) this.b.get(oclass);
 
@@ -105,6 +114,7 @@ public class EntitySlice<T> extends AbstractSet<T> {
     }
 
     public <S> Iterable<S> c(final Class<S> oclass) {
+        //noinspection unchecked
         return new Iterable() {
             public Iterator<S> iterator() {
                 List list = (List) EntitySlice.this.b.get(EntitySlice.this.b(oclass));

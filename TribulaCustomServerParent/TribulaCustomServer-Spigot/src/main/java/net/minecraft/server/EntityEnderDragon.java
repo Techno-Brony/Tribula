@@ -74,7 +74,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
         this.getDataWatcher().register(EntityEnderDragon.PHASE, DragonControllerPhase.k.b());
     }
 
-    public double[] a(int i, float f) {
+    public double[] a(int i, @SuppressWarnings("SameParameterValue") float f) {
         if (this.getHealth() <= 0.0F) {
             f = 0.0F;
         }
@@ -306,7 +306,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
         }
     }
 
-    private float q(float f) {
+    private float q(@SuppressWarnings("SameParameterValue") float f) {
         double d0;
 
         if (this.bL.a().a()) {
@@ -343,6 +343,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
             double d0 = Double.MAX_VALUE;
             Iterator iterator = list.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 EntityEnderCrystal entityendercrystal1 = (EntityEnderCrystal) iterator.next();
                 double d1 = entityendercrystal1.h(this);
@@ -363,6 +364,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
         double d1 = (this.by.getBoundingBox().c + this.by.getBoundingBox().f) / 2.0D;
         Iterator iterator = list.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             Entity entity = (Entity) iterator.next();
 
@@ -463,6 +465,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
 
                 Block nmsBlock = org.bukkit.craftbukkit.util.CraftMagicNumbers.getBlock(blockId);
                 if (nmsBlock.a(explosionSource)) {
+                    //noinspection deprecation,deprecation
                     nmsBlock.dropNaturally(this.world, new BlockPosition(blockX, blockY, blockZ), nmsBlock.fromLegacyData(block.getData()), event.getYield(), 0);
                 }
                 nmsBlock.wasExploded(world, new BlockPosition(blockX, blockY, blockZ), explosionSource);
@@ -565,6 +568,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
                 // CraftBukkit start - Use relative location for far away sounds
                 // this.world.a(1028, new BlockPosition(this), 0);
                 int viewDistance = this.world.getServer().getViewDistance() * 16;
+                //noinspection deprecation
                 for (EntityPlayer player : MinecraftServer.getServer().getPlayerList().players) {
                     double deltaX = this.locX - player.locX;
                     double deltaZ = this.locZ - player.locZ;

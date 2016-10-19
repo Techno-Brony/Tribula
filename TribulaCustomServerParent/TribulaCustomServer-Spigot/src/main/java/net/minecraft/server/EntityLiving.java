@@ -469,6 +469,7 @@ public abstract class EntityLiving extends Entity {
             NBTTagList nbttaglist = new NBTTagList();
             Iterator iterator = this.effects.values().iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 MobEffect mobeffect = (MobEffect) iterator.next();
 
@@ -601,7 +602,9 @@ public abstract class EntityLiving extends Entity {
         } else {
             Collection collection = this.effects.values();
 
+            //noinspection unchecked
             this.datawatcher.set(EntityLiving.g, a(collection));
+            //noinspection unchecked
             this.datawatcher.set(EntityLiving.f, PotionUtil.a(collection));
             this.setInvisible(this.hasEffect(MobEffects.INVISIBILITY));
         }
@@ -2224,6 +2227,7 @@ public abstract class EntityLiving extends Entity {
             if (event.isCancelled()) {
                 // Update client
                 if (this instanceof EntityPlayer) {
+                    //noinspection deprecation
                     ((EntityPlayer) this).getBukkitEntity().updateInventory();
                     ((EntityPlayer) this).getBukkitEntity().updateScaledHealth();
                 }

@@ -132,6 +132,7 @@ public class BlockFlowing extends BlockFluids {
 
             Iterator iterator1 = set.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator1.hasNext()) {
                 EnumDirection enumdirection1 = (EnumDirection) iterator1.next();
 
@@ -169,6 +170,7 @@ public class BlockFlowing extends BlockFluids {
         int j = 1000;
         Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             EnumDirection enumdirection1 = (EnumDirection) iterator.next();
 
@@ -204,6 +206,7 @@ public class BlockFlowing extends BlockFluids {
         EnumSet enumset = EnumSet.noneOf(EnumDirection.class);
         Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             EnumDirection enumdirection = (EnumDirection) iterator.next();
             BlockPosition blockposition1 = blockposition.shift(enumdirection);
@@ -223,12 +226,14 @@ public class BlockFlowing extends BlockFluids {
                 }
 
                 if (j <= i) {
+                    //noinspection unchecked
                     enumset.add(enumdirection);
                     i = j;
                 }
             }
         }
 
+        //noinspection unchecked
         return enumset;
     }
 

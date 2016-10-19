@@ -30,6 +30,7 @@ public class BlockStem extends BlockPlant implements IBlockFragilePlantElement {
         iblockdata = iblockdata.set(BlockStem.FACING, EnumDirection.UP);
         Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             EnumDirection enumdirection = (EnumDirection) iterator.next();
 
@@ -61,6 +62,7 @@ public class BlockStem extends BlockPlant implements IBlockFragilePlantElement {
                 } else {
                     Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
+                    //noinspection WhileLoopReplaceableByForEach
                     while (iterator.hasNext()) {
                         EnumDirection enumdirection = (EnumDirection) iterator.next();
 

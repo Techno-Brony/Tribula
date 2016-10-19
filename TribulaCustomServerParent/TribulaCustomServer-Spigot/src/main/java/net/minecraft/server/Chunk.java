@@ -56,6 +56,7 @@ public class Chunk {
         this.tileEntities = Maps.newHashMap();
         this.x = 4096;
         this.y = Queues.newConcurrentLinkedQueue();
+        //noinspection unchecked
         this.entitySlices = (List[]) (new List[16]); // Spigot
         this.world = world;
         this.locX = i;
@@ -63,6 +64,7 @@ public class Chunk {
         this.heightMap = new int[256];
 
         for (int k = 0; k < this.entitySlices.length; ++k) {
+            //noinspection unchecked
             this.entitySlices[k] = new org.bukkit.craftbukkit.util.UnsafeList(); // Spigot
         }
 
@@ -99,7 +101,7 @@ public class Chunk {
 
     }
 
-    public boolean areNeighborsLoaded(final int radius) {
+    public boolean areNeighborsLoaded(@SuppressWarnings("SameParameterValue") final int radius) {
         switch (radius) {
             case 2:
                 return this.neighbors != Integer.MAX_VALUE >> 6;
@@ -107,7 +109,7 @@ public class Chunk {
                 final int mask =
                         //       x        z   offset          x        z   offset          x         z   offset
                         (0x1 << (5 +  1 + 12)) | (0x1 << (1 + 12)) | (0x1 << (-1 * 5 +  1 + 12)) |
-                        (0x1 << (5 + 12)) | (0x1 << (0 + 12)) | (0x1 << (-1 * 5 + 12)) |
+                        (0x1 << (5 + 12)) | (0x1 << (12)) | (0x1 << (-1 * 5 + 12)) |
                         (0x1 << (5 + -1 + 12)) | (0x1 << (-1 + 12)) | (0x1 << (-1 * 5 + -1 + 12));
                 return (this.neighbors & mask) != mask;
             default:
@@ -236,7 +238,8 @@ public class Chunk {
                         Iterator iterator;
                         EnumDirection enumdirection;
 
-                        for (iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator(); iterator.hasNext(); j1 = Math.min(j1, this.world.c(l + enumdirection.getAdjacentX(), i1 + enumdirection.getAdjacentZ()))) {
+                        for (iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator(); iterator.hasNext(); //noinspection deprecation
+                             j1 = Math.min(j1, this.world.c(l + enumdirection.getAdjacentX(), i1 + enumdirection.getAdjacentZ()))) {
                             enumdirection = (EnumDirection) iterator.next();
                         }
 
@@ -363,6 +366,7 @@ public class Chunk {
             if (!this.world.worldProvider.m()) {
                 Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
+                //noinspection WhileLoopReplaceableByForEach
                 while (iterator.hasNext()) {
                     EnumDirection enumdirection = (EnumDirection) iterator.next();
 
@@ -416,8 +420,9 @@ public class Chunk {
                 CrashReport crashreport = CrashReport.a(throwable, "Getting block state");
                 CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Block being got");
 
+                //noinspection unchecked
                 crashreportsystemdetails.a("Location", new CrashReportCallable() {
-                    public String a() throws Exception {
+                    public String a() {
                         return CrashReportSystemDetails.a(i, j, k);
                     }
 
@@ -743,6 +748,7 @@ public class Chunk {
         int i = aentityslice.length;
 
         for (List entityslice : aentityslice) {
+            //noinspection unchecked
             this.world.a(entityslice);
         }
 
@@ -752,6 +758,7 @@ public class Chunk {
         this.j = false;
         Iterator iterator = this.tileEntities.values().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             TileEntity tileentity = (TileEntity) iterator.next();
             // Spigot Start
@@ -775,6 +782,7 @@ public class Chunk {
 
         for (List anAentityslice : aentityslice) {
             // CraftBukkit start
+            //noinspection unchecked
             List<Entity> newList = Lists.newArrayList(anAentityslice);
             Iterator<Entity> iter = newList.iterator();
             while (iter.hasNext()) {
@@ -817,6 +825,7 @@ public class Chunk {
             if (!this.entitySlices[k].isEmpty()) {
                 Iterator iterator = this.entitySlices[k].iterator();
 
+                //noinspection WhileLoopReplaceableByForEach
                 while (iterator.hasNext()) {
                     Entity entity1 = (Entity) iterator.next();
 
@@ -853,10 +862,13 @@ public class Chunk {
         for (int k = i; k <= j; ++k) {
             Iterator iterator = this.entitySlices[k].iterator(); // Spigot
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 Entity entity = (Entity) iterator.next();
 
+                //noinspection unchecked
                 if (oclass.isInstance(entity) && entity.getBoundingBox().b(axisalignedbb) && (predicate == null || predicate.apply((T) entity))) { // CraftBukkit - fix decompile error // Spigot
+                    //noinspection unchecked
                     list.add((T) entity); // Fix decompile error
                 }
             }
@@ -869,14 +881,15 @@ public class Chunk {
             if (this.t && this.world.getTime() != this.lastSaved || this.s) {
                 return true;
             }
-        } else if (this.t && this.world.getTime() >= this.lastSaved + MinecraftServer.getServer().autosavePeriod * 4) { // Spigot - Only save if we've passed 2 auto save intervals without modification
+        } else //noinspection deprecation
+            if (this.t && this.world.getTime() >= this.lastSaved + MinecraftServer.getServer().autosavePeriod * 4) { // Spigot - Only save if we've passed 2 auto save intervals without modification
             return true;
         }
 
         return this.s;
     }
 
-    public Random a(long i) {
+    public Random a(@SuppressWarnings("SameParameterValue") long i) {
         return new Random(this.world.getSeed() + (long) (this.locX * this.locX * 4987142) + (long) (this.locX * 5947611) + (long) (this.locZ * this.locZ) * 4392871L + (long) (this.locZ * 389711) ^ i);
     }
 
@@ -1006,7 +1019,7 @@ public class Chunk {
         return new BlockPosition(blockposition.getX(), this.h[k], blockposition.getZ());
     }
 
-    public void b(boolean flag) {
+    public void b(@SuppressWarnings("SameParameterValue") boolean flag) {
         if (this.m && !this.world.worldProvider.m() && !flag) {
             this.h(this.world.isClientSide);
         }
@@ -1168,6 +1181,7 @@ public class Chunk {
                 if (this.lit) {
                     Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
+                    //noinspection WhileLoopReplaceableByForEach
                     while (iterator.hasNext()) {
                         EnumDirection enumdirection = (EnumDirection) iterator.next();
                         int k = enumdirection.c() == EnumDirection.EnumAxisDirection.POSITIVE ? 16 : 1;
@@ -1294,7 +1308,7 @@ public class Chunk {
         this.lit = flag;
     }
 
-    public void f(boolean flag) {
+    public void f(@SuppressWarnings("SameParameterValue") boolean flag) {
         this.s = flag;
     }
 

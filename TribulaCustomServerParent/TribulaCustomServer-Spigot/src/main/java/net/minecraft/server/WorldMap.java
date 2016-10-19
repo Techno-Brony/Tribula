@@ -246,6 +246,7 @@ public class WorldMap extends PersistentBase {
         super.c();
         Iterator iterator = this.h.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             WorldMap.WorldMapHumanTracker worldmap_worldmaphumantracker = (WorldMap.WorldMapHumanTracker) iterator.next();
 
@@ -290,6 +291,7 @@ public class WorldMap extends PersistentBase {
             for ( org.bukkit.map.MapCursor cursor : render.cursors) {
 
                 if (cursor.isVisible()) {
+                    //noinspection deprecation
                     icons.add(new MapIcon(cursor.getRawType(), cursor.getX(), cursor.getY(), cursor.getDirection()));
                 }
             }

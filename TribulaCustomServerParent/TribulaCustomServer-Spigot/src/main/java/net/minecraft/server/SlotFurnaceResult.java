@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
-import javax.annotation.Nullable;
-// CraftBukkit start
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.FurnaceExtractEvent;
+
+import javax.annotation.Nullable;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class SlotFurnaceResult extends Slot {
@@ -11,7 +13,7 @@ public class SlotFurnaceResult extends Slot {
     private final EntityHuman a;
     private int b;
 
-    public SlotFurnaceResult(EntityHuman entityhuman, IInventory iinventory, int i, int j, int k) {
+    public SlotFurnaceResult(EntityHuman entityhuman, IInventory iinventory, @SuppressWarnings("SameParameterValue") int i, @SuppressWarnings("SameParameterValue") int j, @SuppressWarnings("SameParameterValue") int k) {
         super(iinventory, i, j, k);
         this.a = entityhuman;
     }

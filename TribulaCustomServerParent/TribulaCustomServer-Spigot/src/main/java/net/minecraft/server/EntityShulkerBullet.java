@@ -1,11 +1,12 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Lists;
+
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
-import javax.annotation.Nullable;
 
 public class EntityShulkerBullet extends Entity {
 
@@ -30,10 +31,6 @@ public class EntityShulkerBullet extends Entity {
         this.noclip = true;
     }
 
-    public SoundCategory bC() {
-        return SoundCategory.HOSTILE;
-    }
-
     public EntityShulkerBullet(World world, EntityLiving entityliving, Entity entity, EnumDirection.EnumAxis enumdirection_enumaxis) {
         this(world);
         this.shooter = entityliving;
@@ -47,6 +44,10 @@ public class EntityShulkerBullet extends Entity {
         this.c = EnumDirection.UP;
         this.a(enumdirection_enumaxis);
         projectileSource = (org.bukkit.entity.LivingEntity) entityliving.getBukkitEntity(); // CraftBukkit
+    }
+
+    public SoundCategory bC() {
+        return SoundCategory.HOSTILE;
     }
 
     // CraftBukkit start
@@ -154,24 +155,30 @@ public class EntityShulkerBullet extends Entity {
 
             if (enumdirection_enumaxis != EnumDirection.EnumAxis.X) {
                 if (blockposition1.getX() < blockposition.getX() && this.world.isEmpty(blockposition1.east())) {
+                    //noinspection unchecked
                     arraylist.add(EnumDirection.EAST);
                 } else if (blockposition1.getX() > blockposition.getX() && this.world.isEmpty(blockposition1.west())) {
+                    //noinspection unchecked
                     arraylist.add(EnumDirection.WEST);
                 }
             }
 
             if (enumdirection_enumaxis != EnumDirection.EnumAxis.Y) {
                 if (blockposition1.getY() < blockposition.getY() && this.world.isEmpty(blockposition1.up())) {
+                    //noinspection unchecked
                     arraylist.add(EnumDirection.UP);
                 } else if (blockposition1.getY() > blockposition.getY() && this.world.isEmpty(blockposition1.down())) {
+                    //noinspection unchecked
                     arraylist.add(EnumDirection.DOWN);
                 }
             }
 
             if (enumdirection_enumaxis != EnumDirection.EnumAxis.Z) {
                 if (blockposition1.getZ() < blockposition.getZ() && this.world.isEmpty(blockposition1.south())) {
+                    //noinspection unchecked
                     arraylist.add(EnumDirection.SOUTH);
                 } else if (blockposition1.getZ() > blockposition.getZ() && this.world.isEmpty(blockposition1.north())) {
+                    //noinspection unchecked
                     arraylist.add(EnumDirection.NORTH);
                 }
             }

@@ -27,6 +27,7 @@ public class EntityDamageSourceIndirect extends EntityDamageSource {
         String s = "death.attack." + this.translationIndex;
         String s1 = s + ".item";
 
+        //noinspection deprecation,deprecation
         return itemstack != null && itemstack.hasName() && LocaleI18n.c(s1) ? new ChatMessage(s1, entityliving.getScoreboardDisplayName(), ichatbasecomponent, itemstack.B()) : new ChatMessage(s, entityliving.getScoreboardDisplayName(), ichatbasecomponent);
     }
 

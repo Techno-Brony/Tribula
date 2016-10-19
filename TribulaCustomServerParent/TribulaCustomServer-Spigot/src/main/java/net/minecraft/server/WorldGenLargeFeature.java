@@ -1,19 +1,16 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Lists;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+
+import java.util.*;
 import java.util.Map.Entry;
 
 public class WorldGenLargeFeature extends StructureGenerator {
 
     private static final List<BiomeBase> a = Arrays.asList(Biomes.d, Biomes.s, Biomes.w, Biomes.x, Biomes.h, Biomes.n, Biomes.F);
     private final List<BiomeBase.BiomeMeta> b;
-    private int d;
     private final int h;
+    private int d;
 
     public WorldGenLargeFeature() {
         this.b = Lists.newArrayList();
@@ -26,6 +23,7 @@ public class WorldGenLargeFeature extends StructureGenerator {
         this();
         Iterator iterator = map.entrySet().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             Entry entry = (Entry) iterator.next();
 
@@ -69,6 +67,7 @@ public class WorldGenLargeFeature extends StructureGenerator {
 
             Iterator iterator = WorldGenLargeFeature.a.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 BiomeBase biomebase1 = (BiomeBase) iterator.next();
 

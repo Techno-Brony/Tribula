@@ -119,6 +119,7 @@ public class EntityFallingBlock extends Entity {
                                         NBTTagCompound nbttagcompound = tileentity.save(new NBTTagCompound());
                                         Iterator iterator = this.tileEntityData.c().iterator();
 
+                                        //noinspection WhileLoopReplaceableByForEach
                                         while (iterator.hasNext()) {
                                             String s = (String) iterator.next();
                                             NBTBase nbtbase = this.tileEntityData.get(s);
@@ -161,6 +162,7 @@ public class EntityFallingBlock extends Entity {
                 DamageSource damagesource = flag ? DamageSource.ANVIL : DamageSource.FALLING_BLOCK;
                 Iterator iterator = arraylist.iterator();
 
+                //noinspection WhileLoopReplaceableByForEach
                 while (iterator.hasNext()) {
                     Entity entity = (Entity) iterator.next();
 
@@ -205,10 +207,13 @@ public class EntityFallingBlock extends Entity {
         int i = nbttagcompound.getByte("Data") & 255;
 
         if (nbttagcompound.hasKeyOfType("Block", 8)) {
+            //noinspection deprecation
             this.block = Block.getByName(nbttagcompound.getString("Block")).fromLegacyData(i);
         } else if (nbttagcompound.hasKeyOfType("TileID", 99)) {
+            //noinspection deprecation
             this.block = Block.getById(nbttagcompound.getInt("TileID")).fromLegacyData(i);
         } else {
+            //noinspection deprecation
             this.block = Block.getById(nbttagcompound.getByte("Tile") & 255).fromLegacyData(i);
         }
 

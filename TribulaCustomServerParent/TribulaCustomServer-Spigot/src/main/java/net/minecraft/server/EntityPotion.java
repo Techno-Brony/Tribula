@@ -127,6 +127,7 @@ public class EntityPotion extends EntityProjectile {
                     if (!list1.isEmpty()) {
                         Iterator iterator1 = list1.iterator();
 
+                        //noinspection WhileLoopReplaceableByForEach
                         while (iterator1.hasNext()) {
                             EntityLiving entityliving = (EntityLiving) iterator1.next();
 
@@ -160,6 +161,7 @@ public class EntityPotion extends EntityProjectile {
 
                             Iterator iterator2 = list.iterator();
 
+                            //noinspection WhileLoopReplaceableByForEach
                             while (iterator2.hasNext()) {
                                 MobEffect mobeffect1 = (MobEffect) iterator2.next();
                                 MobEffectList mobeffectlist = mobeffect1.getMobEffect();

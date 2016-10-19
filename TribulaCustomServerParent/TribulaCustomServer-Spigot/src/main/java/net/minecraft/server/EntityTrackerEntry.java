@@ -77,6 +77,7 @@ public class EntityTrackerEntry {
         List list1 = this.tracker.bx();
 
         if (!list1.equals(this.w)) {
+            //noinspection unchecked
             this.w = list1;
             this.broadcast(new PacketPlayOutMount(this.tracker));
         }
@@ -90,6 +91,7 @@ public class EntityTrackerEntry {
                 WorldMap worldmap = Items.FILLED_MAP.getSavedMap(itemstack, this.tracker.world);
                 Iterator iterator = this.trackedPlayers.iterator(); // CraftBukkit
 
+                //noinspection WhileLoopReplaceableByForEach
                 while (iterator.hasNext()) {
                     EntityHuman entityhuman = (EntityHuman) iterator.next();
                     EntityPlayer entityplayer = (EntityPlayer) entityhuman;
@@ -168,6 +170,7 @@ public class EntityTrackerEntry {
                         this.v = 0;
                         // CraftBukkit start - Refresh list of who can see a player before sending teleport packet
                         if (this.tracker instanceof EntityPlayer) {
+                            //noinspection unchecked
                             this.scanPlayers(new java.util.ArrayList(this.trackedPlayers));
                         }
                         // CraftBukkit end
@@ -272,6 +275,7 @@ public class EntityTrackerEntry {
                     ((EntityPlayer) this.tracker).getBukkitEntity().injectScaledMaxHealth(set, false);
                 }
                 // CraftBukkit end
+                //noinspection unchecked
                 this.broadcastIncludingSelf(new PacketPlayOutUpdateAttributes(this.tracker.getId(), set));
             }
 
@@ -283,6 +287,7 @@ public class EntityTrackerEntry {
     public void broadcast(Packet<?> packet) {
         Iterator iterator = this.trackedPlayers.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             EntityPlayer entityplayer = (EntityPlayer) iterator.next();
 
@@ -302,6 +307,7 @@ public class EntityTrackerEntry {
     public void a() {
         Iterator iterator = this.trackedPlayers.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             EntityPlayer entityplayer = (EntityPlayer) iterator.next();
 
@@ -356,6 +362,7 @@ public class EntityTrackerEntry {
                         // CraftBukkit end
 
                         if (!collection.isEmpty()) {
+                            //noinspection unchecked
                             entityplayer.playerConnection.sendPacket(new PacketPlayOutUpdateAttributes(this.tracker.getId(), collection));
                         }
 
@@ -401,6 +408,7 @@ public class EntityTrackerEntry {
                         EntityLiving entityliving = (EntityLiving) this.tracker;
                         Iterator iterator = entityliving.getEffects().iterator();
 
+                        //noinspection WhileLoopReplaceableByForEach
                         while (iterator.hasNext()) {
                             MobEffect mobeffect = (MobEffect) iterator.next();
 

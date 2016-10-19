@@ -1,16 +1,16 @@
 package net.minecraft.server;
 
+import org.bukkit.event.entity.EntityPortalEnterEvent;
+
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
-import javax.annotation.Nullable;
-
-import org.bukkit.event.entity.EntityPortalEnterEvent; // CraftBukkit
 
 public class BlockEnderPortal extends BlockTileEntity {
 
     protected static final AxisAlignedBB a = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.75D, 1.0D);
 
-    protected BlockEnderPortal(Material material) {
+    protected BlockEnderPortal(@SuppressWarnings("SameParameterValue") Material material) {
         super(material);
         this.a(1.0F);
     }

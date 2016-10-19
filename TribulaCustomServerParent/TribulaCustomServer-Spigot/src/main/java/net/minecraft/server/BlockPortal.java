@@ -166,6 +166,7 @@ public class BlockPortal extends BlockHalfTransparent {
         }
 
         if (!blockportal_shape.d()) {
+            //noinspection unchecked
             return new ShapeDetector.ShapeDetectorCollection(blockposition, EnumDirection.NORTH, EnumDirection.UP, loadingcache, 1, 1, 1);
         } else {
             int[] aint = new int[EnumDirection.EnumAxisDirection.values().length];
@@ -178,6 +179,7 @@ public class BlockPortal extends BlockHalfTransparent {
 
             for (j = 0; j < i; ++j) {
                 EnumDirection.EnumAxisDirection enumdirection_enumaxisdirection = aenumdirection_enumaxisdirection[j];
+                //noinspection unchecked
                 ShapeDetector.ShapeDetectorCollection shapedetector_shapedetectorcollection = new ShapeDetector.ShapeDetectorCollection(enumdirection.c() == enumdirection_enumaxisdirection ? blockposition1 : blockposition1.shift(blockportal_shape.c, blockportal_shape.b() - 1), EnumDirection.a(enumdirection_enumaxisdirection, enumdirection_enumaxis), EnumDirection.UP, loadingcache, blockportal_shape.b(), blockportal_shape.a(), 1);
 
                 for (int k = 0; k < blockportal_shape.b(); ++k) {
@@ -204,6 +206,7 @@ public class BlockPortal extends BlockHalfTransparent {
                 }
             }
 
+            //noinspection unchecked
             return new ShapeDetector.ShapeDetectorCollection(enumdirection.c() == enumdirection_enumaxisdirection1 ? blockposition1 : blockposition1.shift(blockportal_shape.c, blockportal_shape.b() - 1), EnumDirection.a(enumdirection_enumaxisdirection1, enumdirection_enumaxis), EnumDirection.UP, loadingcache, blockportal_shape.b(), blockportal_shape.a(), 1);
         }
     }

@@ -10,7 +10,7 @@ import java.io.File;
 public class RestartCommand extends Command
 {
 
-    public RestartCommand(String name)
+    public RestartCommand(@SuppressWarnings("SameParameterValue") String name)
     {
         super( name );
         this.description = "Restarts the server";
@@ -36,6 +36,7 @@ public class RestartCommand extends Command
                 WatchdogThread.doStop();
 
                 // Kick all players
+                //noinspection deprecation
                 for ( EntityPlayer p : MinecraftServer.getServer().getPlayerList().players)
                 {
                     p.playerConnection.disconnect(SpigotConfig.restartMessage);
@@ -48,6 +49,7 @@ public class RestartCommand extends Command
                 {
                 }
                 // Close the socket so we can rebind with the new process
+                //noinspection deprecation
                 MinecraftServer.getServer().getServerConnection().b();
 
                 // Give time for it to kick in
@@ -61,6 +63,7 @@ public class RestartCommand extends Command
                 // Actually shutdown
                 try
                 {
+                    //noinspection deprecation
                     MinecraftServer.getServer().stop();
                 } catch ( Throwable ignored)
                 {
@@ -101,6 +104,7 @@ public class RestartCommand extends Command
                 // Actually shutdown
                 try
                 {
+                    //noinspection deprecation
                     MinecraftServer.getServer().stop();
                 } catch ( Throwable ignored)
                 {
@@ -118,6 +122,7 @@ public class RestartCommand extends Command
     {
         if ( testPermission( sender ) )
         {
+            //noinspection deprecation
             MinecraftServer.getServer().processQueue.add( new Runnable()
             {
                 @Override

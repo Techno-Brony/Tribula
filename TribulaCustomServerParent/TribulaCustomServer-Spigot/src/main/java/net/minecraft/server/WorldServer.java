@@ -44,6 +44,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
 
     // Add env and gen to constructor
     public WorldServer(MinecraftServer minecraftserver, IDataManager idatamanager, WorldData worlddata, int i, MethodProfiler methodprofiler, org.bukkit.World.Environment env, org.bukkit.generator.ChunkGenerator gen) {
+        //noinspection deprecation
         super(idatamanager, worlddata, DimensionManager.a(env.getId()).d(), methodprofiler, false, gen, env);
         this.dimension = i;
         this.pvpMode = minecraftserver.getPVP();
@@ -170,6 +171,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
     }
 
     private TileEntity fixTileEntity(BlockPosition pos, Block type, TileEntity found) {
+        //noinspection deprecation
         this.getServer().getLogger().log(Level.SEVERE, "Block at {0},{1},{2} is {3} but has {4}" + ". "
                 + "Bukkit will attempt to fix this, but there may be additional damage that we cannot recover.", new Object[]{pos.getX(), pos.getY(), pos.getZ(), org.bukkit.Material.getMaterial(Block.getId(type)).toString(), found});
 
@@ -285,6 +287,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
             int j = 0;
             Iterator iterator = this.players.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 EntityHuman entityhuman = (EntityHuman) iterator.next();
 
@@ -304,6 +307,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         this.O = false;
         Iterator iterator = this.players.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             EntityHuman entityhuman = (EntityHuman) iterator.next();
 
@@ -445,6 +449,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                     if (this.v(blockposition1)) {
                         // CraftBukkit start
                         BlockState blockState = this.getWorld().getBlockAt(blockposition1.getX(), blockposition1.getY(), blockposition1.getZ()).getState();
+                        //noinspection deprecation
                         blockState.setTypeId(Block.getId(Blocks.ICE));
 
                         BlockFormEvent iceBlockForm = new BlockFormEvent(blockState.getBlock(), blockState);
@@ -458,6 +463,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                     if (flag && this.f(blockposition, true)) {
                         // CraftBukkit start
                         BlockState blockState = this.getWorld().getBlockAt(blockposition.getX(), blockposition.getY(), blockposition.getZ()).getState();
+                        //noinspection deprecation
                         blockState.setTypeId(Block.getId(Blocks.SNOW_LAYER));
 
                         BlockFormEvent snow = new BlockFormEvent(blockState.getBlock(), blockState);
@@ -773,11 +779,13 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                         arraylist = Lists.newArrayList();
                     }
 
+                    //noinspection unchecked
                     arraylist.add(nextticklistentry);
                 }
             }
         }
 
+        //noinspection unchecked
         return arraylist;
     }
 
@@ -836,6 +844,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                 for (Object te : chunk.tileEntities.values()) {
                     TileEntity tileentity = (TileEntity) te;
                     if ((tileentity.position.getX() >= i) && (tileentity.position.getY() >= j) && (tileentity.position.getZ() >= k) && (tileentity.position.getX() < l) && (tileentity.position.getY() < i1) && (tileentity.position.getZ() < j1)) {
+                        //noinspection unchecked
                         arraylist.add(tileentity);
                     }
                 }
@@ -853,6 +862,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         */
         // CraftBukkit end
 
+        //noinspection unchecked
         return arraylist;
     }
 
@@ -909,6 +919,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
             WorldChunkManager worldchunkmanager = this.worldProvider.k();
             List list = worldchunkmanager.a();
             Random random = new Random(this.getSeed());
+            //noinspection unchecked
             BlockPosition blockposition = worldchunkmanager.a(0, 0, 256, list, random);
             int i = 8;
             int j = this.worldProvider.getSeaLevel();
@@ -977,7 +988,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         return this.worldProvider.h();
     }
 
-    public void save(boolean flag, @Nullable IProgressUpdate iprogressupdate) throws ExceptionWorldConflict {
+    public void save(boolean flag, @SuppressWarnings("SameParameterValue") @Nullable IProgressUpdate iprogressupdate) throws ExceptionWorldConflict {
         ChunkProviderServer chunkproviderserver = this.getChunkProviderServer();
 
         if (chunkproviderserver.e()) {
@@ -996,6 +1007,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
             Collection arraylist = chunkproviderserver.a();
             Iterator iterator = arraylist.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 Chunk chunk = (Chunk) iterator.next();
 
@@ -1057,6 +1069,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         ArrayList arraylist = Lists.newArrayList(collection);
         Iterator iterator = arraylist.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             Entity entity = (Entity) iterator.next();
 
@@ -1174,6 +1187,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
 
         Iterator iterator = this.players.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             EntityHuman entityhuman = (EntityHuman) iterator.next();
 
@@ -1209,6 +1223,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
             this.T ^= 1;
             Iterator iterator = this.S[i].iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 BlockActionData blockactiondata = (BlockActionData) iterator.next();
 
@@ -1295,11 +1310,11 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         return this.dataManager.h();
     }
 
-    public void a(EnumParticle enumparticle, double d0, double d1, double d2, int i, double d3, double d4, double d5, double d6, int... aint) {
+    public void a(@SuppressWarnings("SameParameterValue") EnumParticle enumparticle, double d0, double d1, double d2, int i, double d3, double d4, double d5, double d6, int... aint) {
         this.a(enumparticle, false, d0, d1, d2, i, d3, d4, d5, d6, aint);
     }
 
-    public void a(EnumParticle enumparticle, boolean flag, double d0, double d1, double d2, int i, double d3, double d4, double d5, double d6, int... aint) {
+    public void a(EnumParticle enumparticle, @SuppressWarnings("SameParameterValue") boolean flag, double d0, double d1, double d2, int i, double d3, double d4, double d5, double d6, int... aint) {
         // CraftBukkit - visibility api support
         sendParticles(null, enumparticle, flag, d0, d1, d2, i, d3, d4, d5, d6, aint);
     }
@@ -1358,7 +1373,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
 
         private BlockActionDataList() {}
 
-        BlockActionDataList(Object object) {
+        BlockActionDataList(@SuppressWarnings("SameParameterValue") Object object) {
             this();
         }
     }

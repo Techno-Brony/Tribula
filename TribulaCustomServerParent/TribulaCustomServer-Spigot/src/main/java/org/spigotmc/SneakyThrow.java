@@ -10,6 +10,7 @@ public class SneakyThrow
 
     private static <T extends Throwable> T superSneaky(Throwable t) throws T
     {
+        //noinspection unchecked
         throw (T) t;
     }
 }
