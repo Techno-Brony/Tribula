@@ -6,8 +6,8 @@ import java.util.List;
 public class PathfinderGoalHurtByTarget extends PathfinderGoalTarget {
 
     private final boolean a;
-    private int b;
     private final Class<?>[] c;
+    private int b;
 
     public PathfinderGoalHurtByTarget(EntityCreature entitycreature, boolean flag, Class<?>... aclass) {
         super(entitycreature, true);
@@ -48,9 +48,7 @@ public class PathfinderGoalHurtByTarget extends PathfinderGoalTarget {
                 Class[] aclass = this.c;
                 int i = aclass.length;
 
-                for (int j = 0; j < i; ++j) {
-                    Class oclass = aclass[j];
-
+                for (Class oclass : aclass) {
                     if (entitycreature.getClass() == oclass) {
                         flag = true;
                         break;

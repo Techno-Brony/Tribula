@@ -1,15 +1,14 @@
 package net.minecraft.server;
 
-import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Sets;
 import org.bukkit.event.entity.EntityTargetEvent;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
-import javax.annotation.Nullable;
 
 public class EntityEnderman extends EntityMonster {
 
@@ -18,6 +17,25 @@ public class EntityEnderman extends EntityMonster {
     private static final Set<Block> c = Sets.newIdentityHashSet();
     private static final DataWatcherObject<Optional<IBlockData>> bx = DataWatcher.a(EntityEnderman.class, DataWatcherRegistry.g);
     private static final DataWatcherObject<Boolean> by = DataWatcher.a(EntityEnderman.class, DataWatcherRegistry.h);
+
+    static {
+        EntityEnderman.c.add(Blocks.GRASS);
+        EntityEnderman.c.add(Blocks.DIRT);
+        EntityEnderman.c.add(Blocks.SAND);
+        EntityEnderman.c.add(Blocks.GRAVEL);
+        EntityEnderman.c.add(Blocks.YELLOW_FLOWER);
+        EntityEnderman.c.add(Blocks.RED_FLOWER);
+        EntityEnderman.c.add(Blocks.BROWN_MUSHROOM);
+        EntityEnderman.c.add(Blocks.RED_MUSHROOM);
+        EntityEnderman.c.add(Blocks.TNT);
+        EntityEnderman.c.add(Blocks.CACTUS);
+        EntityEnderman.c.add(Blocks.CLAY);
+        EntityEnderman.c.add(Blocks.PUMPKIN);
+        EntityEnderman.c.add(Blocks.MELON_BLOCK);
+        EntityEnderman.c.add(Blocks.MYCELIUM);
+        EntityEnderman.c.add(Blocks.NETHERRACK);
+    }
+
     private int bz;
     private int bA;
 
@@ -26,6 +44,10 @@ public class EntityEnderman extends EntityMonster {
         this.setSize(0.6F, 2.9F);
         this.P = 1.0F;
         this.a(PathType.WATER, -1.0F);
+    }
+
+    public static void b(DataConverterManager dataconvertermanager) {
+        EntityInsentient.a(dataconvertermanager, "Enderman");
     }
 
     protected void r() {
@@ -73,11 +95,11 @@ public class EntityEnderman extends EntityMonster {
 
         if (entityliving == null) {
             this.bA = 0;
-            this.datawatcher.set(EntityEnderman.by, Boolean.valueOf(false));
+            this.datawatcher.set(EntityEnderman.by, Boolean.FALSE);
             attributeinstance.c(EntityEnderman.b);
         } else {
             this.bA = this.ticksLived;
-            this.datawatcher.set(EntityEnderman.by, Boolean.valueOf(true));
+            this.datawatcher.set(EntityEnderman.by, Boolean.TRUE);
             if (!attributeinstance.a(EntityEnderman.b)) {
                 attributeinstance.b(EntityEnderman.b);
             }
@@ -89,7 +111,7 @@ public class EntityEnderman extends EntityMonster {
     protected void i() {
         super.i();
         this.datawatcher.register(EntityEnderman.bx, Optional.absent());
-        this.datawatcher.register(EntityEnderman.by, Boolean.valueOf(false));
+        this.datawatcher.register(EntityEnderman.by, Boolean.FALSE);
     }
 
     public void o() {
@@ -110,10 +132,6 @@ public class EntityEnderman extends EntityMonster {
         super.a(datawatcherobject);
     }
 
-    public static void b(DataConverterManager dataconvertermanager) {
-        EntityInsentient.a(dataconvertermanager, "Enderman");
-    }
-
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
         IBlockData iblockdata = this.getCarried();
@@ -130,9 +148,9 @@ public class EntityEnderman extends EntityMonster {
         IBlockData iblockdata;
 
         if (nbttagcompound.hasKeyOfType("carried", 8)) {
-            iblockdata = Block.getByName(nbttagcompound.getString("carried")).fromLegacyData(nbttagcompound.getShort("carriedData") & '\uffff');
+            iblockdata = Block.getByName(nbttagcompound.getString("carried")).fromLegacyData(nbttagcompound.getShort("carriedData"));
         } else {
-            iblockdata = Block.getById(nbttagcompound.getShort("carried")).fromLegacyData(nbttagcompound.getShort("carriedData") & '\uffff');
+            iblockdata = Block.getById(nbttagcompound.getShort("carried")).fromLegacyData(nbttagcompound.getShort("carriedData"));
         }
 
         if (iblockdata == null || iblockdata.getBlock() == null || iblockdata.getMaterial() == Material.AIR) {
@@ -255,13 +273,13 @@ public class EntityEnderman extends EntityMonster {
         return LootTables.v;
     }
 
-    public void setCarried(@Nullable IBlockData iblockdata) {
-        this.datawatcher.set(EntityEnderman.bx, Optional.fromNullable(iblockdata));
-    }
-
     @Nullable
     public IBlockData getCarried() {
         return (IBlockData) ((Optional) this.datawatcher.get(EntityEnderman.bx)).orNull();
+    }
+
+    public void setCarried(@Nullable IBlockData iblockdata) {
+        this.datawatcher.set(EntityEnderman.bx, Optional.fromNullable(iblockdata));
     }
 
     public boolean damageEntity(DamageSource damagesource, float f) {
@@ -287,25 +305,7 @@ public class EntityEnderman extends EntityMonster {
     }
 
     public boolean dh() {
-        return this.datawatcher.get(EntityEnderman.by).booleanValue();
-    }
-
-    static {
-        EntityEnderman.c.add(Blocks.GRASS);
-        EntityEnderman.c.add(Blocks.DIRT);
-        EntityEnderman.c.add(Blocks.SAND);
-        EntityEnderman.c.add(Blocks.GRAVEL);
-        EntityEnderman.c.add(Blocks.YELLOW_FLOWER);
-        EntityEnderman.c.add(Blocks.RED_FLOWER);
-        EntityEnderman.c.add(Blocks.BROWN_MUSHROOM);
-        EntityEnderman.c.add(Blocks.RED_MUSHROOM);
-        EntityEnderman.c.add(Blocks.TNT);
-        EntityEnderman.c.add(Blocks.CACTUS);
-        EntityEnderman.c.add(Blocks.CLAY);
-        EntityEnderman.c.add(Blocks.PUMPKIN);
-        EntityEnderman.c.add(Blocks.MELON_BLOCK);
-        EntityEnderman.c.add(Blocks.MYCELIUM);
-        EntityEnderman.c.add(Blocks.NETHERRACK);
+        return this.datawatcher.get(EntityEnderman.by);
     }
 
     static class PathfinderGoalEndermanPickupBlock extends PathfinderGoal {

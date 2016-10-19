@@ -3,70 +3,60 @@ package net.minecraft.server;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
-import javax.annotation.Nullable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-// CraftBukkit start
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Server;
 import org.bukkit.TravelAgent;
 import org.bukkit.block.BlockFace;
-import org.bukkit.entity.Hanging;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Vehicle;
-import org.spigotmc.CustomTimingsHandler; // Spigot
-import org.bukkit.event.entity.EntityCombustByEntityEvent;
-import org.bukkit.event.hanging.HangingBreakByEntityEvent;
-import org.bukkit.event.vehicle.VehicleBlockCollisionEvent;
-import org.bukkit.event.vehicle.VehicleEnterEvent;
-import org.bukkit.event.vehicle.VehicleExitEvent;
 import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.craftbukkit.entity.CraftEntity;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.craftbukkit.event.CraftEventFactory;
+import org.bukkit.entity.Hanging;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Vehicle;
 import org.bukkit.event.entity.EntityAirChangeEvent;
+import org.bukkit.event.entity.EntityCombustByEntityEvent;
 import org.bukkit.event.entity.EntityCombustEvent;
 import org.bukkit.event.entity.EntityPortalEvent;
+import org.bukkit.event.hanging.HangingBreakByEntityEvent;
+import org.bukkit.event.vehicle.VehicleBlockCollisionEvent;
+import org.bukkit.event.vehicle.VehicleEnterEvent;
+import org.bukkit.event.vehicle.VehicleExitEvent;
 import org.bukkit.plugin.PluginManager;
+import org.spigotmc.CustomTimingsHandler;
+
+import javax.annotation.Nullable;
+import java.util.*;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public abstract class Entity implements ICommandListener {
 
+    protected static final DataWatcherObject<Byte> aa = DataWatcher.a(Entity.class, DataWatcherRegistry.a);
     // CraftBukkit start
     private static final int CURRENT_LEVEL = 2;
-    static boolean isLevelAtLeast(NBTTagCompound tag, int level) {
-        return tag.hasKey("Bukkit.updateLevel") && tag.getInt("Bukkit.updateLevel") >= level;
-    }
-
-    protected CraftEntity bukkitEntity;
-
-    public CraftEntity getBukkitEntity() {
-        if (bukkitEntity == null) {
-            bukkitEntity = CraftEntity.getEntity(world.getServer(), this);
-        }
-        return bukkitEntity;
-    }
-    // CraftBukikt end
-
     private static final Logger a = LogManager.getLogger();
     private static final AxisAlignedBB b = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
+    // CraftBukikt end
+    private static final DataWatcherObject<Integer> az = DataWatcher.a(Entity.class, DataWatcherRegistry.b);
+    private static final DataWatcherObject<String> aA = DataWatcher.a(Entity.class, DataWatcherRegistry.d);
+    private static final DataWatcherObject<Boolean> aB = DataWatcher.a(Entity.class, DataWatcherRegistry.h);
+    private static final DataWatcherObject<Boolean> aC = DataWatcher.a(Entity.class, DataWatcherRegistry.h);
+    private static final DataWatcherObject<Boolean> aD = DataWatcher.a(Entity.class, DataWatcherRegistry.h);
     private static double c = 1.0D;
     private static int entityCount;
-    private int id;
-    public boolean i;
     public final List<Entity> passengers;
-    protected int j;
-    private Entity au;
+    // Spigot start
+    public final byte activationType = org.spigotmc.ActivationRange.initializeEntityActivationType(this);
+    public final boolean defaultActivationState;
+    private final CommandObjectiveExecutor aF;
+    private final List<ItemStack> aG;
+    private final Set<String> aH;
+    public boolean i;
     public boolean attachedToPlayer;
     public World world;
     public double lastX;
@@ -82,14 +72,11 @@ public abstract class Entity implements ICommandListener {
     public float pitch;
     public float lastYaw;
     public float lastPitch;
-    private AxisAlignedBB boundingBox;
     public boolean onGround;
     public boolean positionChanged;
     public boolean B;
     public boolean C;
     public boolean velocityChanged;
-    protected boolean E;
-    private boolean aw;
     public boolean dead;
     public float width;
     public float length;
@@ -97,28 +84,17 @@ public abstract class Entity implements ICommandListener {
     public float J;
     public float K;
     public float fallDistance;
-    private int ax;
     public double M;
     public double N;
     public double O;
     public float P;
     public boolean noclip;
     public float R;
-    protected Random random;
     public int ticksLived;
     public int maxFireTicks;
     public int fireTicks;
     public boolean inWater; // Spigot - protected -> public // PAIL
     public int noDamageTicks;
-    protected boolean justCreated;
-    protected boolean fireProof;
-    protected DataWatcher datawatcher;
-    protected static final DataWatcherObject<Byte> aa = DataWatcher.a(Entity.class, DataWatcherRegistry.a);
-    private static final DataWatcherObject<Integer> az = DataWatcher.a(Entity.class, DataWatcherRegistry.b);
-    private static final DataWatcherObject<String> aA = DataWatcher.a(Entity.class, DataWatcherRegistry.d);
-    private static final DataWatcherObject<Boolean> aB = DataWatcher.a(Entity.class, DataWatcherRegistry.h);
-    private static final DataWatcherObject<Boolean> aC = DataWatcher.a(Entity.class, DataWatcherRegistry.h);
-    private static final DataWatcherObject<Boolean> aD = DataWatcher.a(Entity.class, DataWatcherRegistry.h);
     public boolean ab;
     public int ac;
     public int ad;
@@ -126,33 +102,36 @@ public abstract class Entity implements ICommandListener {
     public boolean ai;
     public boolean impulse;
     public int portalCooldown;
-    protected boolean al;
-    protected int am;
     public int dimension;
-    protected BlockPosition ao;
-    protected Vec3D ap;
-    protected EnumDirection aq;
-    private boolean invulnerable;
-    protected UUID uniqueID;
-    protected String as;
-    private final CommandObjectiveExecutor aF;
-    private final List<ItemStack> aG;
     public boolean glowing;
-    private final Set<String> aH;
-    private boolean aI;
     public boolean valid; // CraftBukkit
     public org.bukkit.projectiles.ProjectileSource projectileSource; // CraftBukkit - For projectiles only
     public boolean forceExplosionKnockback; // CraftBukkit - SPIGOT-949
     public CustomTimingsHandler tickTimer = org.bukkit.craftbukkit.SpigotTimings.getEntityTimings(this); // Spigot
-    // Spigot start
-    public final byte activationType = org.spigotmc.ActivationRange.initializeEntityActivationType(this);
-    public final boolean defaultActivationState;
     public long activatedTick = Integer.MIN_VALUE;
     public boolean fromMobSpawner;
-    public void inactiveTick() { }
+    protected CraftEntity bukkitEntity;
+    protected int j;
+    protected boolean E;
+    protected Random random;
+    protected boolean justCreated;
+    protected boolean fireProof;
+    protected DataWatcher datawatcher;
+    protected boolean al;
+    protected int am;
+    protected BlockPosition ao;
+    protected Vec3D ap;
+    protected EnumDirection aq;
+    protected UUID uniqueID;
+    protected String as;
     protected int numCollisions = 0;
-    // Spigot end
-
+    private int id;
+    private Entity au;
+    private AxisAlignedBB boundingBox;
+    private boolean aw;
+    private int ax;
+    private boolean invulnerable;
+    private boolean aI;
     public Entity(World world) {
         this.id = Entity.entityCount++;
         this.passengers = Lists.newArrayList();
@@ -180,14 +159,28 @@ public abstract class Entity implements ICommandListener {
         // Spigot end
 
         this.datawatcher = new DataWatcher(this);
-        this.datawatcher.register(Entity.aa, Byte.valueOf((byte) 0));
-        this.datawatcher.register(Entity.az, Integer.valueOf(300));
-        this.datawatcher.register(Entity.aB, Boolean.valueOf(false));
+        this.datawatcher.register(Entity.aa, (byte) 0);
+        this.datawatcher.register(Entity.az, 300);
+        this.datawatcher.register(Entity.aB, Boolean.FALSE);
         this.datawatcher.register(Entity.aA, "");
-        this.datawatcher.register(Entity.aC, Boolean.valueOf(false));
-        this.datawatcher.register(Entity.aD, Boolean.valueOf(false));
+        this.datawatcher.register(Entity.aC, Boolean.FALSE);
+        this.datawatcher.register(Entity.aD, Boolean.FALSE);
         this.i();
     }
+
+    static boolean isLevelAtLeast(NBTTagCompound tag, int level) {
+        return tag.hasKey("Bukkit.updateLevel") && tag.getInt("Bukkit.updateLevel") >= level;
+    }
+
+    public CraftEntity getBukkitEntity() {
+        if (bukkitEntity == null) {
+            bukkitEntity = CraftEntity.getEntity(world.getServer(), this);
+        }
+        return bukkitEntity;
+    }
+    // Spigot end
+
+    public void inactiveTick() { }
 
     public int getId() {
         return this.id;
@@ -325,27 +318,26 @@ public abstract class Entity implements ICommandListener {
             if (this.al) {
                 MinecraftServer minecraftserver = this.world.getMinecraftServer();
 
-                if (true || minecraftserver.getAllowNether()) { // CraftBukkit
-                    if (!this.isPassenger()) {
-                        int i = this.V();
+                // CraftBukkit
+                if (!this.isPassenger()) {
+                    int i = this.V();
 
-                        if (this.am++ >= i) {
-                            this.am = i;
-                            this.portalCooldown = this.aE();
-                            byte b0;
+                    if (this.am++ >= i) {
+                        this.am = i;
+                        this.portalCooldown = this.aE();
+                        byte b0;
 
-                            if (this.world.worldProvider.getDimensionManager().getDimensionID() == -1) {
-                                b0 = 0;
-                            } else {
-                                b0 = -1;
-                            }
-
-                            this.c(b0);
+                        if (this.world.worldProvider.getDimensionManager().getDimensionID() == -1) {
+                            b0 = 0;
+                        } else {
+                            b0 = -1;
                         }
-                    }
 
-                    this.al = false;
+                        this.c(b0);
+                    }
                 }
+
+                this.al = false;
             } else {
                 if (this.am > 0) {
                     this.am -= 4;
@@ -463,7 +455,7 @@ public abstract class Entity implements ICommandListener {
     }
 
     private boolean b(AxisAlignedBB axisalignedbb) {
-        return this.world.getCubes(this, axisalignedbb).isEmpty() && !this.world.containsLiquid(axisalignedbb);
+        return this.world.getCubes(this, axisalignedbb).isEmpty() && this.world.containsLiquid(axisalignedbb);
     }
 
     public void move(double d0, double d1, double d2) {
@@ -876,19 +868,19 @@ public abstract class Entity implements ICommandListener {
     }
 
     public boolean isSilent() {
-        return this.datawatcher.get(Entity.aC).booleanValue();
+        return this.datawatcher.get(Entity.aC);
     }
 
     public void setSilent(boolean flag) {
-        this.datawatcher.set(Entity.aC, Boolean.valueOf(flag));
+        this.datawatcher.set(Entity.aC, flag);
     }
 
     public boolean isNoGravity() {
-        return this.datawatcher.get(Entity.aD).booleanValue();
+        return this.datawatcher.get(Entity.aD);
     }
 
     public void setNoGravity(boolean flag) {
-        this.datawatcher.set(Entity.aD, Boolean.valueOf(flag));
+        this.datawatcher.set(Entity.aD, flag);
     }
 
     protected boolean playStepSound() {
@@ -1541,12 +1533,9 @@ public abstract class Entity implements ICommandListener {
 
     protected NBTTagList a(double... adouble) {
         NBTTagList nbttaglist = new NBTTagList();
-        double[] adouble1 = adouble;
         int i = adouble.length;
 
-        for (int j = 0; j < i; ++j) {
-            double d0 = adouble1[j];
-
+        for (double d0 : adouble) {
             nbttaglist.add(new NBTTagDouble(d0));
         }
 
@@ -1555,12 +1544,9 @@ public abstract class Entity implements ICommandListener {
 
     protected NBTTagList a(float... afloat) {
         NBTTagList nbttaglist = new NBTTagList();
-        float[] afloat1 = afloat;
         int i = afloat.length;
 
-        for (int j = 0; j < i; ++j) {
-            float f = afloat1[j];
-
+        for (float f : afloat) {
             nbttaglist.add(new NBTTagFloat(f));
         }
 
@@ -1604,7 +1590,7 @@ public abstract class Entity implements ICommandListener {
             BlockPosition.PooledBlockPosition blockposition_pooledblockposition = BlockPosition.PooledBlockPosition.s();
 
             for (int i = 0; i < 8; ++i) {
-                int j = MathHelper.floor(this.locY + (double) (((float) ((i >> 0) % 2) - 0.5F) * 0.1F) + (double) this.getHeadHeight());
+                int j = MathHelper.floor(this.locY + (double) (((float) ((i) % 2) - 0.5F) * 0.1F) + (double) this.getHeadHeight());
                 int k = MathHelper.floor(this.locX + (double) (((float) ((i >> 1) % 2) - 0.5F) * this.width * 0.8F));
                 int l = MathHelper.floor(this.locZ + (double) (((float) ((i >> 2) % 2) - 0.5F) * this.width * 0.8F));
 
@@ -1623,7 +1609,7 @@ public abstract class Entity implements ICommandListener {
     }
 
     public boolean a(EntityHuman entityhuman, @Nullable ItemStack itemstack, EnumHand enumhand) {
-        return false;
+        return true;
     }
 
     @Nullable
@@ -1861,6 +1847,10 @@ public abstract class Entity implements ICommandListener {
         return this.getFlag(5);
     }
 
+    public void setInvisible(boolean flag) {
+        this.setFlag(5, flag);
+    }
+
     @Nullable
     public ScoreboardTeamBase aQ() {
         return this.world.getScoreboard().getPlayerTeam(this.bf());
@@ -1874,27 +1864,23 @@ public abstract class Entity implements ICommandListener {
         return this.aQ() != null && this.aQ().isAlly(scoreboardteambase);
     }
 
-    public void setInvisible(boolean flag) {
-        this.setFlag(5, flag);
-    }
-
     public boolean getFlag(int i) {
-        return (this.datawatcher.get(Entity.aa).byteValue() & 1 << i) != 0;
+        return (this.datawatcher.get(Entity.aa) & 1 << i) != 0;
     }
 
     public void setFlag(int i, boolean flag) {
-        byte b0 = this.datawatcher.get(Entity.aa).byteValue();
+        byte b0 = this.datawatcher.get(Entity.aa);
 
         if (flag) {
-            this.datawatcher.set(Entity.aa, Byte.valueOf((byte) (b0 | 1 << i)));
+            this.datawatcher.set(Entity.aa, (byte) (b0 | 1 << i));
         } else {
-            this.datawatcher.set(Entity.aa, Byte.valueOf((byte) (b0 & ~(1 << i))));
+            this.datawatcher.set(Entity.aa, (byte) (b0 & ~(1 << i)));
         }
 
     }
 
     public int getAirTicks() {
-        return this.datawatcher.get(Entity.az).intValue();
+        return this.datawatcher.get(Entity.az);
     }
 
     public void setAirTicks(int i) {
@@ -1903,7 +1889,7 @@ public abstract class Entity implements ICommandListener {
         if (event.isCancelled()) {
             return;
         }
-        this.datawatcher.set(Entity.az, Integer.valueOf(event.getAmount()));
+        this.datawatcher.set(Entity.az, event.getAmount());
         // CraftBukkit end
     }
 
@@ -1959,27 +1945,27 @@ public abstract class Entity implements ICommandListener {
             EnumDirection enumdirection = EnumDirection.UP;
             double d6 = Double.MAX_VALUE;
 
-            if (!this.world.t(blockposition.west()) && d3 < d6) {
+            if (this.world.t(blockposition.west()) && d3 < d6) {
                 d6 = d3;
                 enumdirection = EnumDirection.WEST;
             }
 
-            if (!this.world.t(blockposition.east()) && 1.0D - d3 < d6) {
+            if (this.world.t(blockposition.east()) && 1.0D - d3 < d6) {
                 d6 = 1.0D - d3;
                 enumdirection = EnumDirection.EAST;
             }
 
-            if (!this.world.t(blockposition.north()) && d5 < d6) {
+            if (this.world.t(blockposition.north()) && d5 < d6) {
                 d6 = d5;
                 enumdirection = EnumDirection.NORTH;
             }
 
-            if (!this.world.t(blockposition.south()) && 1.0D - d5 < d6) {
+            if (this.world.t(blockposition.south()) && 1.0D - d5 < d6) {
                 d6 = 1.0D - d5;
                 enumdirection = EnumDirection.SOUTH;
             }
 
-            if (!this.world.t(blockposition.up()) && 1.0D - d4 < d6) {
+            if (this.world.t(blockposition.up()) && 1.0D - d4 < d6) {
                 d6 = 1.0D - d4;
                 enumdirection = EnumDirection.UP;
             }
@@ -2043,7 +2029,7 @@ public abstract class Entity implements ICommandListener {
     }
 
     public String toString() {
-        return String.format("%s[\'%s\'/%d, l=\'%s\', x=%.2f, y=%.2f, z=%.2f]", this.getClass().getSimpleName(), this.getName(), Integer.valueOf(this.id), this.world == null ? "~NULL~" : this.world.getWorldData().getName(), Double.valueOf(this.locX), Double.valueOf(this.locY), Double.valueOf(this.locZ));
+        return String.format("%s[\'%s\'/%d, l=\'%s\', x=%.2f, y=%.2f, z=%.2f]", this.getClass().getSimpleName(), this.getName(), this.id, this.world == null ? "~NULL~" : this.world.getWorldData().getName(), this.locX, this.locY, this.locZ);
     }
 
     public boolean isInvulnerable(DamageSource damagesource) {
@@ -2117,13 +2103,11 @@ public abstract class Entity implements ICommandListener {
     }
 
     public Entity teleportTo(Location exit, boolean portal) {
-        if (true) {
-            WorldServer worldserver = ((CraftWorld) getBukkitEntity().getLocation().getWorld()).getHandle();
-            WorldServer worldserver1 = ((CraftWorld) exit.getWorld()).getHandle();
-            int i = worldserver1.dimension;
-            // CraftBukkit end
+        WorldServer worldserver = ((CraftWorld) getBukkitEntity().getLocation().getWorld()).getHandle();
+        WorldServer worldserver1 = ((CraftWorld) exit.getWorld()).getHandle();
+        // CraftBukkit end
 
-            this.dimension = i;
+        this.dimension = worldserver1.dimension;
             /* CraftBukkit start - TODO: Check if we need this
             if (j == 1 && i == 1) {
                 worldserver1 = minecraftserver.getWorldServer(0);
@@ -2131,9 +2115,9 @@ public abstract class Entity implements ICommandListener {
             }
             // CraftBukkit end */
 
-            this.world.kill(this);
-            this.dead = false;
-            this.world.methodProfiler.a("reposition");
+        this.world.kill(this);
+        this.dead = false;
+        this.world.methodProfiler.a("reposition");
             /* CraftBukkit start - Handled in calculateTarget
             BlockPosition blockposition;
 
@@ -2164,51 +2148,48 @@ public abstract class Entity implements ICommandListener {
             }
 
             // CraftBukkit end */
-            // CraftBukkit start - Ensure chunks are loaded in case TravelAgent is not used which would initially cause chunks to load during find/create
-            // minecraftserver.getPlayerList().changeWorld(this, j, worldserver, worldserver1);
-            worldserver1.getMinecraftServer().getPlayerList().repositionEntity(this, exit, portal);
-            // worldserver.entityJoinedWorld(this, false); // Handled in repositionEntity
-            // CraftBukkit end
-            this.world.methodProfiler.c("reloading");
-            Entity entity = EntityTypes.createEntityByName(EntityTypes.b(this), worldserver1);
+        // CraftBukkit start - Ensure chunks are loaded in case TravelAgent is not used which would initially cause chunks to load during find/create
+        // minecraftserver.getPlayerList().changeWorld(this, j, worldserver, worldserver1);
+        worldserver1.getMinecraftServer().getPlayerList().repositionEntity(this, exit, portal);
+        // worldserver.entityJoinedWorld(this, false); // Handled in repositionEntity
+        // CraftBukkit end
+        this.world.methodProfiler.c("reloading");
+        Entity entity = EntityTypes.createEntityByName(EntityTypes.b(this), worldserver1);
 
-            if (entity != null) {
-                entity.a(this);
-                /* CraftBukkit start - We need to do this...
-                if (j == 1 && i == 1) {
-                    BlockPosition blockposition1 = worldserver1.q(worldserver1.getSpawn());
+        if (entity != null) {
+            entity.a(this);
+            /* CraftBukkit start - We need to do this...
+            if (j == 1 && i == 1) {
+                BlockPosition blockposition1 = worldserver1.q(worldserver1.getSpawn());
 
-                    entity.setPositionRotation(blockposition1, entity.yaw, entity.pitch);
-                } else {
-                    entity.setPositionRotation(blockposition, entity.yaw, entity.pitch);
-                }
-                // CraftBukkit end */
-
-                boolean flag = entity.attachedToPlayer;
-
-                entity.attachedToPlayer = true;
-                worldserver1.addEntity(entity);
-                entity.attachedToPlayer = flag;
-                worldserver1.entityJoinedWorld(entity, false);
-                // CraftBukkit start - Forward the CraftEntity to the new entity
-                this.getBukkitEntity().setHandle(entity);
-                entity.bukkitEntity = this.getBukkitEntity();
-
-                if (this instanceof EntityInsentient) {
-                    ((EntityInsentient)this).unleash(true, false); // Unleash to prevent duping of leads.
-                }
-                // CraftBukkit end
+                entity.setPositionRotation(blockposition1, entity.yaw, entity.pitch);
+            } else {
+                entity.setPositionRotation(blockposition, entity.yaw, entity.pitch);
             }
+            // CraftBukkit end */
 
-            this.dead = true;
-            this.world.methodProfiler.b();
-            worldserver.m();
-            worldserver1.m();
-            this.world.methodProfiler.b();
-            return entity;
-        } else {
-            return null;
+            boolean flag = entity.attachedToPlayer;
+
+            entity.attachedToPlayer = true;
+            worldserver1.addEntity(entity);
+            entity.attachedToPlayer = flag;
+            worldserver1.entityJoinedWorld(entity, false);
+            // CraftBukkit start - Forward the CraftEntity to the new entity
+            this.getBukkitEntity().setHandle(entity);
+            entity.bukkitEntity = this.getBukkitEntity();
+
+            if (this instanceof EntityInsentient) {
+                ((EntityInsentient)this).unleash(true, false); // Unleash to prevent duping of leads.
+            }
+            // CraftBukkit end
         }
+
+        this.dead = true;
+        this.world.methodProfiler.b();
+        worldserver.m();
+        worldserver1.m();
+        this.world.methodProfiler.b();
+        return entity;
     }
 
     public boolean aX() {
@@ -2236,7 +2217,7 @@ public abstract class Entity implements ICommandListener {
     }
 
     public boolean isIgnoreBlockTrigger() {
-        return false;
+        return true;
     }
 
     public void appendEntityCrashDetails(CrashReportSystemDetails crashreportsystemdetails) {
@@ -2249,7 +2230,7 @@ public abstract class Entity implements ICommandListener {
                 return this.a();
             }
         });
-        crashreportsystemdetails.a("Entity ID", Integer.valueOf(this.id));
+        crashreportsystemdetails.a("Entity ID", this.id);
         crashreportsystemdetails.a("Entity Name", new CrashReportCallable() {
             public String a() throws Exception {
                 return Entity.this.getName();
@@ -2259,9 +2240,9 @@ public abstract class Entity implements ICommandListener {
                 return this.a();
             }
         });
-        crashreportsystemdetails.a("Entity\'s Exact location", String.format("%.2f, %.2f, %.2f", Double.valueOf(this.locX), Double.valueOf(this.locY), Double.valueOf(this.locZ)));
+        crashreportsystemdetails.a("Entity\'s Exact location", String.format("%.2f, %.2f, %.2f", this.locX, this.locY, this.locZ));
         crashreportsystemdetails.a("Entity\'s Block location", CrashReportSystemDetails.a(MathHelper.floor(this.locX), MathHelper.floor(this.locY), MathHelper.floor(this.locZ)));
-        crashreportsystemdetails.a("Entity\'s Momentum", String.format("%.2f, %.2f, %.2f", Double.valueOf(this.motX), Double.valueOf(this.motY), Double.valueOf(this.motZ)));
+        crashreportsystemdetails.a("Entity\'s Momentum", String.format("%.2f, %.2f, %.2f", this.motX, this.motY, this.motZ));
         crashreportsystemdetails.a("Entity\'s Passengers", new CrashReportCallable() {
             public String a() throws Exception {
                 return Entity.this.bx().toString();
@@ -2307,6 +2288,10 @@ public abstract class Entity implements ICommandListener {
         return chatcomponenttext;
     }
 
+    public String getCustomName() {
+        return this.datawatcher.get(Entity.aA);
+    }
+
     public void setCustomName(String s) {
         // CraftBukkit start - Add a sane limit for name length
         if (s.length() > 256) {
@@ -2316,20 +2301,16 @@ public abstract class Entity implements ICommandListener {
         this.datawatcher.set(Entity.aA, s);
     }
 
-    public String getCustomName() {
-        return this.datawatcher.get(Entity.aA);
-    }
-
     public boolean hasCustomName() {
         return !this.datawatcher.get(Entity.aA).isEmpty();
     }
 
-    public void setCustomNameVisible(boolean flag) {
-        this.datawatcher.set(Entity.aB, Boolean.valueOf(flag));
+    public boolean getCustomNameVisible() {
+        return this.datawatcher.get(Entity.aB);
     }
 
-    public boolean getCustomNameVisible() {
-        return this.datawatcher.get(Entity.aB).booleanValue();
+    public void setCustomNameVisible(boolean flag) {
+        this.datawatcher.set(Entity.aB, flag);
     }
 
     public void enderTeleportTo(double d0, double d1, double d2) {
@@ -2589,16 +2570,16 @@ public abstract class Entity implements ICommandListener {
 
         do {
             if (!iterator.hasNext()) {
-                return false;
+                return true;
             }
 
             entity1 = (Entity) iterator.next();
             if (entity1.equals(entity)) {
-                return true;
+                return false;
             }
-        } while (!entity1.y(entity));
+        } while (entity1.y(entity));
 
-        return true;
+        return false;
     }
 
     public boolean bA() {
@@ -2628,29 +2609,29 @@ public abstract class Entity implements ICommandListener {
         static {
             try {
                 Entity.SyntheticClass_1.b[EnumBlockMirror.LEFT_RIGHT.ordinal()] = 1;
-            } catch (NoSuchFieldError nosuchfielderror) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 Entity.SyntheticClass_1.b[EnumBlockMirror.FRONT_BACK.ordinal()] = 2;
-            } catch (NoSuchFieldError nosuchfielderror1) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             a = new int[EnumBlockRotation.values().length];
 
             try {
                 Entity.SyntheticClass_1.a[EnumBlockRotation.CLOCKWISE_180.ordinal()] = 1;
-            } catch (NoSuchFieldError nosuchfielderror2) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 Entity.SyntheticClass_1.a[EnumBlockRotation.COUNTERCLOCKWISE_90.ordinal()] = 2;
-            } catch (NoSuchFieldError nosuchfielderror3) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 Entity.SyntheticClass_1.a[EnumBlockRotation.CLOCKWISE_90.ordinal()] = 3;
-            } catch (NoSuchFieldError nosuchfielderror4) {
+            } catch (NoSuchFieldError ignored) {
             }
 
         }

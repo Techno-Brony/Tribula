@@ -20,6 +20,8 @@ public class TileEntityPiston extends TileEntity implements ITickable {
         this.h = flag1;
     }
 
+    public static void a(DataConverterManager dataconvertermanager) {}
+
     public IBlockData d() {
         return this.a;
     }
@@ -56,22 +58,22 @@ public class TileEntityPiston extends TileEntity implements ITickable {
         if (!list.isEmpty()) {
             EnumDirection enumdirection = this.g ? this.f : this.f.opposite();
 
-            for (int i = 0; i < list.size(); ++i) {
-                Entity entity = (Entity) list.get(i);
+            for (Object aList : list) {
+                Entity entity = (Entity) aList;
 
                 if (entity.o_() != EnumPistonReaction.IGNORE) {
                     if (this.a.getBlock() == Blocks.SLIME) {
-                        switch (TileEntityPiston.SyntheticClass_1.a[enumdirection.k().ordinal()]) {
-                        case 1:
-                            entity.motX = (double) enumdirection.getAdjacentX();
-                            break;
+                        switch (SyntheticClass_1.a[enumdirection.k().ordinal()]) {
+                            case 1:
+                                entity.motX = (double) enumdirection.getAdjacentX();
+                                break;
 
-                        case 2:
-                            entity.motY = (double) enumdirection.getAdjacentY();
-                            break;
+                            case 2:
+                                entity.motY = (double) enumdirection.getAdjacentY();
+                                break;
 
-                        case 3:
-                            entity.motZ = (double) enumdirection.getAdjacentZ();
+                            case 3:
+                                entity.motZ = (double) enumdirection.getAdjacentZ();
                         }
                     }
 
@@ -80,35 +82,35 @@ public class TileEntityPiston extends TileEntity implements ITickable {
                     double d2 = 0.0D;
                     AxisAlignedBB axisalignedbb1 = entity.getBoundingBox();
 
-                    switch (TileEntityPiston.SyntheticClass_1.a[enumdirection.k().ordinal()]) {
-                    case 1:
-                        if (enumdirection.c() == EnumDirection.EnumAxisDirection.POSITIVE) {
-                            d0 = axisalignedbb.d - axisalignedbb1.a;
-                        } else {
-                            d0 = axisalignedbb1.d - axisalignedbb.a;
-                        }
+                    switch (SyntheticClass_1.a[enumdirection.k().ordinal()]) {
+                        case 1:
+                            if (enumdirection.c() == EnumDirection.EnumAxisDirection.POSITIVE) {
+                                d0 = axisalignedbb.d - axisalignedbb1.a;
+                            } else {
+                                d0 = axisalignedbb1.d - axisalignedbb.a;
+                            }
 
-                        d0 += 0.01D;
-                        break;
+                            d0 += 0.01D;
+                            break;
 
-                    case 2:
-                        if (enumdirection.c() == EnumDirection.EnumAxisDirection.POSITIVE) {
-                            d1 = axisalignedbb.e - axisalignedbb1.b;
-                        } else {
-                            d1 = axisalignedbb1.e - axisalignedbb.b;
-                        }
+                        case 2:
+                            if (enumdirection.c() == EnumDirection.EnumAxisDirection.POSITIVE) {
+                                d1 = axisalignedbb.e - axisalignedbb1.b;
+                            } else {
+                                d1 = axisalignedbb1.e - axisalignedbb.b;
+                            }
 
-                        d1 += 0.01D;
-                        break;
+                            d1 += 0.01D;
+                            break;
 
-                    case 3:
-                        if (enumdirection.c() == EnumDirection.EnumAxisDirection.POSITIVE) {
-                            d2 = axisalignedbb.f - axisalignedbb1.c;
-                        } else {
-                            d2 = axisalignedbb1.f - axisalignedbb.c;
-                        }
+                        case 3:
+                            if (enumdirection.c() == EnumDirection.EnumAxisDirection.POSITIVE) {
+                                d2 = axisalignedbb.f - axisalignedbb1.c;
+                            } else {
+                                d2 = axisalignedbb1.f - axisalignedbb.c;
+                            }
 
-                        d2 += 0.01D;
+                            d2 += 0.01D;
                     }
 
                     entity.move(d0 * (double) enumdirection.getAdjacentX(), d1 * (double) enumdirection.getAdjacentY(), d2 * (double) enumdirection.getAdjacentZ());
@@ -154,8 +156,6 @@ public class TileEntityPiston extends TileEntity implements ITickable {
         }
     }
 
-    public static void a(DataConverterManager dataconvertermanager) {}
-
     public void a(NBTTagCompound nbttagcompound) {
         super.a(nbttagcompound);
         this.a = Block.getById(nbttagcompound.getInt("blockId")).fromLegacyData(nbttagcompound.getInt("blockData"));
@@ -182,17 +182,17 @@ public class TileEntityPiston extends TileEntity implements ITickable {
         static {
             try {
                 TileEntityPiston.SyntheticClass_1.a[EnumDirection.EnumAxis.X.ordinal()] = 1;
-            } catch (NoSuchFieldError nosuchfielderror) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 TileEntityPiston.SyntheticClass_1.a[EnumDirection.EnumAxis.Y.ordinal()] = 2;
-            } catch (NoSuchFieldError nosuchfielderror1) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 TileEntityPiston.SyntheticClass_1.a[EnumDirection.EnumAxis.Z.ordinal()] = 3;
-            } catch (NoSuchFieldError nosuchfielderror2) {
+            } catch (NoSuchFieldError ignored) {
             }
 
         }

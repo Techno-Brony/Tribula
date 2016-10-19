@@ -1,14 +1,16 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Lists;
-import java.util.ArrayList;
+
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class RecipeArmorDye extends ShapelessRecipes implements IRecipe { // CraftBukkit - added extends
 
     // CraftBukkit start - Delegate to new parent class with bogus info
     public RecipeArmorDye() {
-        super(new ItemStack(Items.LEATHER_HELMET, 0, 0), java.util.Arrays.asList(new ItemStack(Items.DYE, 0, 5)));
+        super(new ItemStack(Items.LEATHER_HELMET, 0, 0), Collections.singletonList(new ItemStack(Items.DYE, 0, 5)));
     }
     // CraftBukkit end
 

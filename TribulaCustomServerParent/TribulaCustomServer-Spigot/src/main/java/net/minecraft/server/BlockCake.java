@@ -1,7 +1,7 @@
 package net.minecraft.server;
 
-import java.util.Random;
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockCake extends Block {
 
@@ -10,12 +10,12 @@ public class BlockCake extends Block {
 
     protected BlockCake() {
         super(Material.CAKE);
-        this.w(this.blockStateList.getBlockData().set(BlockCake.BITES, Integer.valueOf(0)));
+        this.w(this.blockStateList.getBlockData().set(BlockCake.BITES, 0));
         this.a(true);
     }
 
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
-        return BlockCake.b[iblockdata.get(BlockCake.BITES).intValue()];
+        return BlockCake.b[iblockdata.get(BlockCake.BITES)];
     }
 
     public boolean c(IBlockData iblockdata) {
@@ -46,10 +46,10 @@ public class BlockCake extends Block {
 
             ((EntityPlayer) entityhuman).getBukkitEntity().sendHealthUpdate();
             // CraftBukkit end
-            int i = iblockdata.get(BlockCake.BITES).intValue();
+            int i = iblockdata.get(BlockCake.BITES);
 
             if (i < 6) {
-                world.setTypeAndData(blockposition, iblockdata.set(BlockCake.BITES, Integer.valueOf(i + 1)), 3);
+                world.setTypeAndData(blockposition, iblockdata.set(BlockCake.BITES, i + 1), 3);
             } else {
                 world.setAir(blockposition);
             }
@@ -86,11 +86,11 @@ public class BlockCake extends Block {
     }
 
     public IBlockData fromLegacyData(int i) {
-        return this.getBlockData().set(BlockCake.BITES, Integer.valueOf(i));
+        return this.getBlockData().set(BlockCake.BITES, i);
     }
 
     public int toLegacyData(IBlockData iblockdata) {
-        return iblockdata.get(BlockCake.BITES).intValue();
+        return iblockdata.get(BlockCake.BITES);
     }
 
     protected BlockStateList getStateList() {
@@ -98,7 +98,7 @@ public class BlockCake extends Block {
     }
 
     public int d(IBlockData iblockdata, World world, BlockPosition blockposition) {
-        return (7 - iblockdata.get(BlockCake.BITES).intValue()) * 2;
+        return (7 - iblockdata.get(BlockCake.BITES)) * 2;
     }
 
     public boolean isComplexRedstone(IBlockData iblockdata) {

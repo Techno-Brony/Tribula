@@ -1,27 +1,290 @@
 package net.minecraft.server;
 
-import java.util.Iterator;
-import java.util.List;
-import javax.annotation.Nullable;
-
-// CraftBukkit start
 import org.bukkit.craftbukkit.entity.CraftHumanEntity;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.inventory.InventoryPickupItemEvent;
 import org.bukkit.inventory.Inventory;
+
+import javax.annotation.Nullable;
+import java.util.Iterator;
+import java.util.List;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class TileEntityHopper extends TileEntityLootable implements IHopper, ITickable {
 
+    // CraftBukkit start - add fields and methods
+    public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
     private ItemStack[] items = new ItemStack[5];
     private String f;
     private int g = -1;
-
-    // CraftBukkit start - add fields and methods
-    public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
     private int maxStack = MAX_STACK;
+
+    public TileEntityHopper() {}
+
+    public static void a(DataConverterManager dataconvertermanager) {
+        dataconvertermanager.a(DataConverterTypes.BLOCK_ENTITY, new DataInspectorItemList("Hopper", "Items"));
+    }
+
+    private static boolean b(IInventory iinventory, EnumDirection enumdirection) {
+        if (iinventory instanceof IWorldInventory) {
+            IWorldInventory iworldinventory = (IWorldInventory) iinventory;
+            int[] aint = iworldinventory.getSlotsForFace(enumdirection);
+            int i = aint.length;
+
+            for (int k : aint) {
+                if (iworldinventory.getItem(k) != null) {
+                    return false;
+                }
+            }
+        } else {
+            int l = iinventory.getSize();
+
+            for (int i1 = 0; i1 < l; ++i1) {
+                if (iinventory.getItem(i1) != null) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public static boolean a(IHopper ihopper) {
+        IInventory iinventory = b(ihopper);
+
+        if (iinventory != null) {
+            EnumDirection enumdirection = EnumDirection.DOWN;
+
+            if (b(iinventory, enumdirection)) {
+                return false;
+            }
+
+            if (iinventory instanceof IWorldInventory) {
+                IWorldInventory iworldinventory = (IWorldInventory) iinventory;
+                int[] aint = iworldinventory.getSlotsForFace(enumdirection);
+                int i = aint.length;
+
+                for (int k : aint) {
+                    if (a(ihopper, iinventory, k, enumdirection)) {
+                        return true;
+                    }
+                }
+            } else {
+                int l = iinventory.getSize();
+
+                for (int i1 = 0; i1 < l; ++i1) {
+                    if (a(ihopper, iinventory, i1, enumdirection)) {
+                        return true;
+                    }
+                }
+            }
+        } else {
+            Iterator iterator = a(ihopper.getWorld(), ihopper.E(), ihopper.F(), ihopper.G()).iterator();
+
+            while (iterator.hasNext()) {
+                EntityItem entityitem = (EntityItem) iterator.next();
+
+                if (a(ihopper, entityitem)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private static boolean a(IHopper ihopper, IInventory iinventory, int i, EnumDirection enumdirection) {
+        ItemStack itemstack = iinventory.getItem(i);
+
+        if (itemstack != null && b(iinventory, itemstack, i, enumdirection)) {
+            ItemStack itemstack1 = itemstack.cloneItemStack();
+            // ItemStack itemstack2 = addItem(ihopper, iinventory.splitStack(i, 1), (EnumDirection) null);
+            // CraftBukkit start - Call event on collection of items from inventories into the hopper
+            CraftItemStack oitemstack = CraftItemStack.asCraftMirror(iinventory.splitStack(i, ihopper.getWorld().spigotConfig.hopperAmount)); // Spigot
+
+            Inventory sourceInventory;
+            // Have to special case large chests as they work oddly
+            if (iinventory instanceof InventoryLargeChest) {
+                sourceInventory = new org.bukkit.craftbukkit.inventory.CraftInventoryDoubleChest((InventoryLargeChest) iinventory);
+            } else {
+                sourceInventory = iinventory.getOwner().getInventory();
+            }
+
+            InventoryMoveItemEvent event = new InventoryMoveItemEvent(sourceInventory, oitemstack.clone(), ihopper.getOwner().getInventory(), false);
+
+            ihopper.getWorld().getServer().getPluginManager().callEvent(event);
+            if (event.isCancelled()) {
+                iinventory.setItem(i, itemstack1);
+
+                if (ihopper instanceof TileEntityHopper) {
+                    ((TileEntityHopper) ihopper).setCooldown(ihopper.getWorld().spigotConfig.hopperTransfer); // Spigot
+                } else if (ihopper instanceof EntityMinecartHopper) {
+                    ((EntityMinecartHopper) ihopper).setCooldown(ihopper.getWorld().spigotConfig.hopperTransfer / 2); // Spigot
+                }
+                return false;
+            }
+            int origCount = event.getItem().getAmount(); // Spigot
+            ItemStack itemstack2 = addItem(ihopper, CraftItemStack.asNMSCopy(event.getItem()), null);
+
+            if (itemstack2 == null || itemstack2.count == 0) {
+                if (event.getItem().equals(oitemstack)) {
+                    iinventory.update();
+                } else {
+                    iinventory.setItem(i, itemstack1);
+                }
+                // CraftBukkit end
+                return true;
+            }
+            itemstack1.count -= origCount - itemstack2.count; // Spigot
+
+            iinventory.setItem(i, itemstack1);
+        }
+
+        return false;
+    }
+    // CraftBukkit end
+
+    public static boolean a(IInventory iinventory, EntityItem entityitem) {
+        boolean flag = false;
+
+        if (entityitem == null) {
+            return false;
+        } else {
+            // CraftBukkit start
+            InventoryPickupItemEvent event = new InventoryPickupItemEvent(iinventory.getOwner().getInventory(), (org.bukkit.entity.Item) entityitem.getBukkitEntity());
+            entityitem.world.getServer().getPluginManager().callEvent(event);
+            if (event.isCancelled()) {
+                return false;
+            }
+            // CraftBukkit end
+            ItemStack itemstack = entityitem.getItemStack().cloneItemStack();
+            ItemStack itemstack1 = addItem(iinventory, itemstack, null);
+
+            if (itemstack1 != null && itemstack1.count != 0) {
+                entityitem.setItemStack(itemstack1);
+            } else {
+                flag = true;
+                entityitem.die();
+            }
+
+            return flag;
+        }
+    }
+
+    public static ItemStack addItem(IInventory iinventory, ItemStack itemstack, @Nullable EnumDirection enumdirection) {
+        if (iinventory instanceof IWorldInventory && enumdirection != null) {
+            IWorldInventory iworldinventory = (IWorldInventory) iinventory;
+            int[] aint = iworldinventory.getSlotsForFace(enumdirection);
+
+            for (int i = 0; i < aint.length && itemstack != null && itemstack.count > 0; ++i) {
+                itemstack = c(iinventory, itemstack, aint[i], enumdirection);
+            }
+        } else {
+            int j = iinventory.getSize();
+
+            for (int k = 0; k < j && itemstack != null && itemstack.count > 0; ++k) {
+                itemstack = c(iinventory, itemstack, k, enumdirection);
+            }
+        }
+
+        if (itemstack != null && itemstack.count == 0) {
+            itemstack = null;
+        }
+
+        return itemstack;
+    }
+
+    private static boolean a(IInventory iinventory, ItemStack itemstack, int i, EnumDirection enumdirection) {
+        return iinventory.b(i, itemstack) && (!(iinventory instanceof IWorldInventory) || ((IWorldInventory) iinventory).canPlaceItemThroughFace(i, itemstack, enumdirection));
+    }
+
+    private static boolean b(IInventory iinventory, ItemStack itemstack, int i, EnumDirection enumdirection) {
+        return !(iinventory instanceof IWorldInventory) || ((IWorldInventory) iinventory).canTakeItemThroughFace(i, itemstack, enumdirection);
+    }
+
+    private static ItemStack c(IInventory iinventory, ItemStack itemstack, int i, EnumDirection enumdirection) {
+        ItemStack itemstack1 = iinventory.getItem(i);
+
+        if (a(iinventory, itemstack, i, enumdirection)) {
+            boolean flag = false;
+
+            if (itemstack1 == null) {
+                iinventory.setItem(i, itemstack);
+                itemstack = null;
+                flag = true;
+            } else if (a(itemstack1, itemstack)) {
+                int j = itemstack.getMaxStackSize() - itemstack1.count;
+                int k = Math.min(itemstack.count, j);
+
+                itemstack.count -= k;
+                itemstack1.count += k;
+                flag = k > 0;
+            }
+
+            if (flag) {
+                if (iinventory instanceof TileEntityHopper) {
+                    TileEntityHopper tileentityhopper = (TileEntityHopper) iinventory;
+
+                    if (tileentityhopper.p()) {
+                        tileentityhopper.setCooldown(tileentityhopper.world.spigotConfig.hopperTransfer); // Spigot
+                    }
+
+                    iinventory.update();
+                }
+
+                iinventory.update();
+            }
+        }
+
+        return itemstack;
+    }
+
+    public static IInventory b(IHopper ihopper) {
+        return b(ihopper.getWorld(), ihopper.E(), ihopper.F() + 1.0D, ihopper.G());
+    }
+
+    public static List<EntityItem> a(World world, double d0, double d1, double d2) {
+        return world.a(EntityItem.class, new AxisAlignedBB(d0 - 0.5D, d1, d2 - 0.5D, d0 + 0.5D, d1 + 1.5D, d2 + 0.5D), IEntitySelector.a);
+    }
+
+    public static IInventory b(World world, double d0, double d1, double d2) {
+        Object object = null;
+        int i = MathHelper.floor(d0);
+        int j = MathHelper.floor(d1);
+        int k = MathHelper.floor(d2);
+        BlockPosition blockposition = new BlockPosition(i, j, k);
+        if ( !world.isLoaded( blockposition ) ) return null; // Spigot
+        Block block = world.getType(blockposition).getBlock();
+
+        if (block.isTileEntity()) {
+            TileEntity tileentity = world.getTileEntity(blockposition);
+
+            if (tileentity instanceof IInventory) {
+                object = tileentity;
+                if (object instanceof TileEntityChest && block instanceof BlockChest) {
+                    object = ((BlockChest) block).a(world, blockposition, true);
+                }
+            }
+        }
+
+        if (object == null) {
+            List list = world.getEntities(null, new AxisAlignedBB(d0 - 0.5D, d1 - 0.5D, d2 - 0.5D, d0 + 0.5D, d1 + 0.5D, d2 + 0.5D), IEntitySelector.c);
+
+            if (!list.isEmpty()) {
+                object = list.get(world.random.nextInt(list.size()));
+            }
+        }
+
+        return (IInventory) object;
+    }
+
+    private static boolean a(ItemStack itemstack, ItemStack itemstack1) {
+        return itemstack.getItem() == itemstack1.getItem() && (itemstack.getData() == itemstack1.getData() && (itemstack.count <= itemstack.getMaxStackSize() && ItemStack.equals(itemstack, itemstack1)));
+    }
 
     public ItemStack[] getContents() {
         return this.items;
@@ -37,17 +300,6 @@ public class TileEntityHopper extends TileEntityLootable implements IHopper, ITi
 
     public List<HumanEntity> getViewers() {
         return transaction;
-    }
-
-    public void setMaxStackSize(int size) {
-        maxStack = size;
-    }
-    // CraftBukkit end
-
-    public TileEntityHopper() {}
-
-    public static void a(DataConverterManager dataconvertermanager) {
-        dataconvertermanager.a(DataConverterTypes.BLOCK_ENTITY, new DataInspectorItemList("Hopper", "Items"));
     }
 
     public void a(NBTTagCompound nbttagcompound) {
@@ -146,6 +398,10 @@ public class TileEntityHopper extends TileEntityLootable implements IHopper, ITi
         return maxStack; // CraftBukkit
     }
 
+    public void setMaxStackSize(int size) {
+        maxStack = size;
+    }
+
     public boolean a(EntityHuman entityhuman) {
         return this.world.getTileEntity(this.position) == this && entityhuman.e((double) this.position.getX() + 0.5D, (double) this.position.getY() + 0.5D, (double) this.position.getZ() + 0.5D) <= 64.0D;
     }
@@ -161,7 +417,7 @@ public class TileEntityHopper extends TileEntityLootable implements IHopper, ITi
     public void E_() {
         if (this.world != null && !this.world.isClientSide) {
             --this.g;
-            if (!this.o()) {
+            if (this.o()) {
                 this.setCooldown(0);
                 this.m();
             }
@@ -171,7 +427,7 @@ public class TileEntityHopper extends TileEntityLootable implements IHopper, ITi
 
     public boolean m() {
         if (this.world != null && !this.world.isClientSide) {
-            if (!this.o() && BlockHopper.f(this.u())) {
+            if (this.o() && BlockHopper.f(this.u())) {
                 boolean flag = false;
 
                 if (!this.q()) {
@@ -198,9 +454,7 @@ public class TileEntityHopper extends TileEntityLootable implements IHopper, ITi
         ItemStack[] aitemstack = this.items;
         int i = aitemstack.length;
 
-        for (int j = 0; j < i; ++j) {
-            ItemStack itemstack = aitemstack[j];
-
+        for (ItemStack itemstack : aitemstack) {
             if (itemstack != null) {
                 return false;
             }
@@ -213,9 +467,7 @@ public class TileEntityHopper extends TileEntityLootable implements IHopper, ITi
         ItemStack[] aitemstack = this.items;
         int i = aitemstack.length;
 
-        for (int j = 0; j < i; ++j) {
-            ItemStack itemstack = aitemstack[j];
-
+        for (ItemStack itemstack : aitemstack) {
             if (itemstack == null || itemstack.count != itemstack.getMaxStackSize()) {
                 return false;
             }
@@ -284,11 +536,9 @@ public class TileEntityHopper extends TileEntityLootable implements IHopper, ITi
         if (iinventory instanceof IWorldInventory) {
             IWorldInventory iworldinventory = (IWorldInventory) iinventory;
             int[] aint = iworldinventory.getSlotsForFace(enumdirection);
-            int[] aint1 = aint;
             int i = aint.length;
 
-            for (int j = 0; j < i; ++j) {
-                int k = aint1[j];
+            for (int k : aint) {
                 ItemStack itemstack = iworldinventory.getItem(k);
 
                 if (itemstack == null || itemstack.count != itemstack.getMaxStackSize()) {
@@ -310,272 +560,10 @@ public class TileEntityHopper extends TileEntityLootable implements IHopper, ITi
         return true;
     }
 
-    private static boolean b(IInventory iinventory, EnumDirection enumdirection) {
-        if (iinventory instanceof IWorldInventory) {
-            IWorldInventory iworldinventory = (IWorldInventory) iinventory;
-            int[] aint = iworldinventory.getSlotsForFace(enumdirection);
-            int[] aint1 = aint;
-            int i = aint.length;
-
-            for (int j = 0; j < i; ++j) {
-                int k = aint1[j];
-
-                if (iworldinventory.getItem(k) != null) {
-                    return false;
-                }
-            }
-        } else {
-            int l = iinventory.getSize();
-
-            for (int i1 = 0; i1 < l; ++i1) {
-                if (iinventory.getItem(i1) != null) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
-    }
-
-    public static boolean a(IHopper ihopper) {
-        IInventory iinventory = b(ihopper);
-
-        if (iinventory != null) {
-            EnumDirection enumdirection = EnumDirection.DOWN;
-
-            if (b(iinventory, enumdirection)) {
-                return false;
-            }
-
-            if (iinventory instanceof IWorldInventory) {
-                IWorldInventory iworldinventory = (IWorldInventory) iinventory;
-                int[] aint = iworldinventory.getSlotsForFace(enumdirection);
-                int[] aint1 = aint;
-                int i = aint.length;
-
-                for (int j = 0; j < i; ++j) {
-                    int k = aint1[j];
-
-                    if (a(ihopper, iinventory, k, enumdirection)) {
-                        return true;
-                    }
-                }
-            } else {
-                int l = iinventory.getSize();
-
-                for (int i1 = 0; i1 < l; ++i1) {
-                    if (a(ihopper, iinventory, i1, enumdirection)) {
-                        return true;
-                    }
-                }
-            }
-        } else {
-            Iterator iterator = a(ihopper.getWorld(), ihopper.E(), ihopper.F(), ihopper.G()).iterator();
-
-            while (iterator.hasNext()) {
-                EntityItem entityitem = (EntityItem) iterator.next();
-
-                if (a(ihopper, entityitem)) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    private static boolean a(IHopper ihopper, IInventory iinventory, int i, EnumDirection enumdirection) {
-        ItemStack itemstack = iinventory.getItem(i);
-
-        if (itemstack != null && b(iinventory, itemstack, i, enumdirection)) {
-            ItemStack itemstack1 = itemstack.cloneItemStack();
-            // ItemStack itemstack2 = addItem(ihopper, iinventory.splitStack(i, 1), (EnumDirection) null);
-            // CraftBukkit start - Call event on collection of items from inventories into the hopper
-            CraftItemStack oitemstack = CraftItemStack.asCraftMirror(iinventory.splitStack(i, ihopper.getWorld().spigotConfig.hopperAmount)); // Spigot
-
-            Inventory sourceInventory;
-            // Have to special case large chests as they work oddly
-            if (iinventory instanceof InventoryLargeChest) {
-                sourceInventory = new org.bukkit.craftbukkit.inventory.CraftInventoryDoubleChest((InventoryLargeChest) iinventory);
-            } else {
-                sourceInventory = iinventory.getOwner().getInventory();
-            }
-
-            InventoryMoveItemEvent event = new InventoryMoveItemEvent(sourceInventory, oitemstack.clone(), ihopper.getOwner().getInventory(), false);
-
-            ihopper.getWorld().getServer().getPluginManager().callEvent(event);
-            if (event.isCancelled()) {
-                iinventory.setItem(i, itemstack1);
-
-                if (ihopper instanceof TileEntityHopper) {
-                    ((TileEntityHopper) ihopper).setCooldown(ihopper.getWorld().spigotConfig.hopperTransfer); // Spigot
-                } else if (ihopper instanceof EntityMinecartHopper) {
-                    ((EntityMinecartHopper) ihopper).setCooldown(ihopper.getWorld().spigotConfig.hopperTransfer / 2); // Spigot
-                }
-                return false;
-            }
-            int origCount = event.getItem().getAmount(); // Spigot
-            ItemStack itemstack2 = addItem(ihopper, CraftItemStack.asNMSCopy(event.getItem()), null);
-
-            if (itemstack2 == null || itemstack2.count == 0) {
-                if (event.getItem().equals(oitemstack)) {
-                    iinventory.update();
-                } else {
-                    iinventory.setItem(i, itemstack1);
-                }
-                // CraftBukkit end
-                return true;
-            }
-            itemstack1.count -= origCount - itemstack2.count; // Spigot
-
-            iinventory.setItem(i, itemstack1);
-        }
-
-        return false;
-    }
-
-    public static boolean a(IInventory iinventory, EntityItem entityitem) {
-        boolean flag = false;
-
-        if (entityitem == null) {
-            return false;
-        } else {
-            // CraftBukkit start
-            InventoryPickupItemEvent event = new InventoryPickupItemEvent(iinventory.getOwner().getInventory(), (org.bukkit.entity.Item) entityitem.getBukkitEntity());
-            entityitem.world.getServer().getPluginManager().callEvent(event);
-            if (event.isCancelled()) {
-                return false;
-            }
-            // CraftBukkit end
-            ItemStack itemstack = entityitem.getItemStack().cloneItemStack();
-            ItemStack itemstack1 = addItem(iinventory, itemstack, null);
-
-            if (itemstack1 != null && itemstack1.count != 0) {
-                entityitem.setItemStack(itemstack1);
-            } else {
-                flag = true;
-                entityitem.die();
-            }
-
-            return flag;
-        }
-    }
-
-    public static ItemStack addItem(IInventory iinventory, ItemStack itemstack, @Nullable EnumDirection enumdirection) {
-        if (iinventory instanceof IWorldInventory && enumdirection != null) {
-            IWorldInventory iworldinventory = (IWorldInventory) iinventory;
-            int[] aint = iworldinventory.getSlotsForFace(enumdirection);
-
-            for (int i = 0; i < aint.length && itemstack != null && itemstack.count > 0; ++i) {
-                itemstack = c(iinventory, itemstack, aint[i], enumdirection);
-            }
-        } else {
-            int j = iinventory.getSize();
-
-            for (int k = 0; k < j && itemstack != null && itemstack.count > 0; ++k) {
-                itemstack = c(iinventory, itemstack, k, enumdirection);
-            }
-        }
-
-        if (itemstack != null && itemstack.count == 0) {
-            itemstack = null;
-        }
-
-        return itemstack;
-    }
-
-    private static boolean a(IInventory iinventory, ItemStack itemstack, int i, EnumDirection enumdirection) {
-        return iinventory.b(i, itemstack) && (!(iinventory instanceof IWorldInventory) || ((IWorldInventory) iinventory).canPlaceItemThroughFace(i, itemstack, enumdirection));
-    }
-
-    private static boolean b(IInventory iinventory, ItemStack itemstack, int i, EnumDirection enumdirection) {
-        return !(iinventory instanceof IWorldInventory) || ((IWorldInventory) iinventory).canTakeItemThroughFace(i, itemstack, enumdirection);
-    }
-
-    private static ItemStack c(IInventory iinventory, ItemStack itemstack, int i, EnumDirection enumdirection) {
-        ItemStack itemstack1 = iinventory.getItem(i);
-
-        if (a(iinventory, itemstack, i, enumdirection)) {
-            boolean flag = false;
-
-            if (itemstack1 == null) {
-                iinventory.setItem(i, itemstack);
-                itemstack = null;
-                flag = true;
-            } else if (a(itemstack1, itemstack)) {
-                int j = itemstack.getMaxStackSize() - itemstack1.count;
-                int k = Math.min(itemstack.count, j);
-
-                itemstack.count -= k;
-                itemstack1.count += k;
-                flag = k > 0;
-            }
-
-            if (flag) {
-                if (iinventory instanceof TileEntityHopper) {
-                    TileEntityHopper tileentityhopper = (TileEntityHopper) iinventory;
-
-                    if (tileentityhopper.p()) {
-                        tileentityhopper.setCooldown(tileentityhopper.world.spigotConfig.hopperTransfer); // Spigot
-                    }
-
-                    iinventory.update();
-                }
-
-                iinventory.update();
-            }
-        }
-
-        return itemstack;
-    }
-
     private IInventory I() {
         EnumDirection enumdirection = BlockHopper.e(this.u());
 
         return b(this.getWorld(), this.E() + (double) enumdirection.getAdjacentX(), this.F() + (double) enumdirection.getAdjacentY(), this.G() + (double) enumdirection.getAdjacentZ());
-    }
-
-    public static IInventory b(IHopper ihopper) {
-        return b(ihopper.getWorld(), ihopper.E(), ihopper.F() + 1.0D, ihopper.G());
-    }
-
-    public static List<EntityItem> a(World world, double d0, double d1, double d2) {
-        return world.a(EntityItem.class, new AxisAlignedBB(d0 - 0.5D, d1, d2 - 0.5D, d0 + 0.5D, d1 + 1.5D, d2 + 0.5D), IEntitySelector.a);
-    }
-
-    public static IInventory b(World world, double d0, double d1, double d2) {
-        Object object = null;
-        int i = MathHelper.floor(d0);
-        int j = MathHelper.floor(d1);
-        int k = MathHelper.floor(d2);
-        BlockPosition blockposition = new BlockPosition(i, j, k);
-        if ( !world.isLoaded( blockposition ) ) return null; // Spigot
-        Block block = world.getType(blockposition).getBlock();
-
-        if (block.isTileEntity()) {
-            TileEntity tileentity = world.getTileEntity(blockposition);
-
-            if (tileentity instanceof IInventory) {
-                object = tileentity;
-                if (object instanceof TileEntityChest && block instanceof BlockChest) {
-                    object = ((BlockChest) block).a(world, blockposition, true);
-                }
-            }
-        }
-
-        if (object == null) {
-            List list = world.getEntities(null, new AxisAlignedBB(d0 - 0.5D, d1 - 0.5D, d2 - 0.5D, d0 + 0.5D, d1 + 0.5D, d2 + 0.5D), IEntitySelector.c);
-
-            if (!list.isEmpty()) {
-                object = list.get(world.random.nextInt(list.size()));
-            }
-        }
-
-        return (IInventory) object;
-    }
-
-    private static boolean a(ItemStack itemstack, ItemStack itemstack1) {
-        return itemstack.getItem() == itemstack1.getItem() && (itemstack.getData() == itemstack1.getData() && (itemstack.count <= itemstack.getMaxStackSize() && ItemStack.equals(itemstack, itemstack1)));
     }
 
     public double E() {
@@ -595,7 +583,7 @@ public class TileEntityHopper extends TileEntityLootable implements IHopper, ITi
     }
 
     public boolean o() {
-        return this.g > 0;
+        return this.g <= 0;
     }
 
     public boolean p() {

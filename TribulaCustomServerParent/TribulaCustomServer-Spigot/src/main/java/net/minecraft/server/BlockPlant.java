@@ -1,10 +1,11 @@
 package net.minecraft.server;
 
-import java.util.Random;
-import javax.annotation.Nullable;
-// CraftBukkit start
-import org.bukkit.craftbukkit.util.CraftMagicNumbers;
 import org.bukkit.event.block.BlockPhysicsEvent;
+
+import javax.annotation.Nullable;
+import java.util.Random;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class BlockPlant extends Block {
@@ -46,6 +47,7 @@ public class BlockPlant extends Block {
         if (!this.f(world, blockposition, iblockdata)) {
             // CraftBukkit Start
             org.bukkit.block.Block block = world.getWorld().getBlockAt(blockposition.getX(), blockposition.getY(), blockposition.getZ());
+            //noinspection deprecation,deprecation
             BlockPhysicsEvent event = new BlockPhysicsEvent(block, block.getTypeId());
             world.getServer().getPluginManager().callEvent(event);
 

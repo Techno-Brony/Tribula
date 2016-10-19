@@ -1,17 +1,17 @@
 package net.minecraft.server;
 
-import java.util.Iterator;
-import java.util.List;
-import javax.annotation.Nullable;
-
-// CraftBukkit start
 import org.bukkit.craftbukkit.entity.CraftHumanEntity;
 import org.bukkit.entity.HumanEntity;
+
+import javax.annotation.Nullable;
+import java.util.Iterator;
+import java.util.List;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class TileEntityChest extends TileEntityLootable implements ITickable, IInventory {
 
-    private ItemStack[] items = new ItemStack[27];
     public boolean a;
     public TileEntityChest f;
     public TileEntityChest g;
@@ -20,15 +20,22 @@ public class TileEntityChest extends TileEntityLootable implements ITickable, II
     public float j;
     public float k;
     public int l;
+    // CraftBukkit start - add fields and methods
+    public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
+    private ItemStack[] items = new ItemStack[27];
     private int p;
     private BlockChest.Type q;
     private String r;
-
+    private int maxStack = MAX_STACK;
     public TileEntityChest() {}
 
-    // CraftBukkit start - add fields and methods
-    public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
-    private int maxStack = MAX_STACK;
+    public TileEntityChest(BlockChest.Type blockchest_type) {
+        this.q = blockchest_type;
+    }
+
+    public static void a(DataConverterManager dataconvertermanager) {
+        dataconvertermanager.a(DataConverterTypes.BLOCK_ENTITY, new DataInspectorItemList("Chest", "Items"));
+    }
 
     public ItemStack[] getContents() {
         return this.items;
@@ -41,18 +48,10 @@ public class TileEntityChest extends TileEntityLootable implements ITickable, II
     public void onClose(CraftHumanEntity who) {
         transaction.remove(who);
     }
+    // CraftBukkit end
 
     public List<HumanEntity> getViewers() {
         return transaction;
-    }
-
-    public void setMaxStackSize(int size) {
-        maxStack = size;
-    }
-    // CraftBukkit end
-
-    public TileEntityChest(BlockChest.Type blockchest_type) {
-        this.q = blockchest_type;
     }
 
     public int getSize() {
@@ -103,10 +102,6 @@ public class TileEntityChest extends TileEntityLootable implements ITickable, II
 
     public void a(String s) {
         this.r = s;
-    }
-
-    public static void a(DataConverterManager dataconvertermanager) {
-        dataconvertermanager.a(DataConverterTypes.BLOCK_ENTITY, new DataInspectorItemList("Chest", "Items"));
     }
 
     public void a(NBTTagCompound nbttagcompound) {
@@ -160,9 +155,13 @@ public class TileEntityChest extends TileEntityLootable implements ITickable, II
         return maxStack; // CraftBukkit
     }
 
+    public void setMaxStackSize(int size) {
+        maxStack = size;
+    }
+
     public boolean a(EntityHuman entityhuman) {
-        if (this.world == null) return true; // CraftBukkit
-        return this.world.getTileEntity(this.position) == this && entityhuman.e((double) this.position.getX() + 0.5D, (double) this.position.getY() + 0.5D, (double) this.position.getZ() + 0.5D) <= 64.0D;
+        // CraftBukkit
+        return this.world == null || this.world.getTileEntity(this.position) == this && entityhuman.e((double) this.position.getX() + 0.5D, (double) this.position.getY() + 0.5D, (double) this.position.getZ() + 0.5D) <= 64.0D;
     }
 
     public void invalidateBlockCache() {
@@ -445,22 +444,22 @@ public class TileEntityChest extends TileEntityLootable implements ITickable, II
         static {
             try {
                 TileEntityChest.SyntheticClass_1.a[EnumDirection.NORTH.ordinal()] = 1;
-            } catch (NoSuchFieldError nosuchfielderror) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 TileEntityChest.SyntheticClass_1.a[EnumDirection.SOUTH.ordinal()] = 2;
-            } catch (NoSuchFieldError nosuchfielderror1) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 TileEntityChest.SyntheticClass_1.a[EnumDirection.EAST.ordinal()] = 3;
-            } catch (NoSuchFieldError nosuchfielderror2) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 TileEntityChest.SyntheticClass_1.a[EnumDirection.WEST.ordinal()] = 4;
-            } catch (NoSuchFieldError nosuchfielderror3) {
+            } catch (NoSuchFieldError ignored) {
             }
 
         }

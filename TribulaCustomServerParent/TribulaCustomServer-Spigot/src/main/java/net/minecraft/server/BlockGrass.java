@@ -1,14 +1,15 @@
 package net.minecraft.server;
 
-import java.util.Random;
-import javax.annotation.Nullable;
-
-// CraftBukkit start
 import org.bukkit.block.BlockState;
 import org.bukkit.craftbukkit.event.CraftEventFactory;
 import org.bukkit.craftbukkit.util.CraftMagicNumbers;
-import org.bukkit.event.block.BlockSpreadEvent;
 import org.bukkit.event.block.BlockFadeEvent;
+import org.bukkit.event.block.BlockSpreadEvent;
+
+import javax.annotation.Nullable;
+import java.util.Random;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class BlockGrass extends Block implements IBlockFragilePlantElement {
@@ -17,7 +18,7 @@ public class BlockGrass extends Block implements IBlockFragilePlantElement {
 
     protected BlockGrass() {
         super(Material.GRASS);
-        this.w(this.blockStateList.getBlockData().set(BlockGrass.SNOWY, Boolean.valueOf(false)));
+        this.w(this.blockStateList.getBlockData().set(BlockGrass.SNOWY, Boolean.FALSE));
         this.a(true);
         this.a(CreativeModeTab.b);
     }
@@ -25,7 +26,7 @@ public class BlockGrass extends Block implements IBlockFragilePlantElement {
     public IBlockData updateState(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         Block block = iblockaccess.getType(blockposition.up()).getBlock();
 
-        return iblockdata.set(BlockGrass.SNOWY, Boolean.valueOf(block == Blocks.SNOW || block == Blocks.SNOW_LAYER));
+        return iblockdata.set(BlockGrass.SNOWY, block == Blocks.SNOW || block == Blocks.SNOW_LAYER);
     }
 
     public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {

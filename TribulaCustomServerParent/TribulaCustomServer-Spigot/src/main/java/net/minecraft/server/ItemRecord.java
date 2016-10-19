@@ -1,6 +1,7 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Maps;
+
 import java.util.Map;
 
 public class ItemRecord extends Item {
@@ -20,13 +21,13 @@ public class ItemRecord extends Item {
     public EnumInteractionResult a(ItemStack itemstack, EntityHuman entityhuman, World world, BlockPosition blockposition, EnumHand enumhand, EnumDirection enumdirection, float f, float f1, float f2) {
         IBlockData iblockdata = world.getType(blockposition);
 
-        if (iblockdata.getBlock() == Blocks.JUKEBOX && !iblockdata.get(BlockJukeBox.HAS_RECORD).booleanValue()) {
+        if (iblockdata.getBlock() == Blocks.JUKEBOX && !iblockdata.get(BlockJukeBox.HAS_RECORD)) {
             if (!world.isClientSide) {
-                if (true) return EnumInteractionResult.SUCCESS; // CraftBukkit - handled in ItemStack
-                ((BlockJukeBox) Blocks.JUKEBOX).a(world, blockposition, iblockdata, itemstack);
-                world.a(null, 1010, blockposition, Item.getId(this));
-                --itemstack.count;
-                entityhuman.b(StatisticList.Z);
+                return EnumInteractionResult.SUCCESS; // CraftBukkit - handled in ItemStack
+//                ((BlockJukeBox) Blocks.JUKEBOX).a(world, blockposition, iblockdata, itemstack);
+//                world.a(null, 1010, blockposition, Item.getId(this));
+//                --itemstack.count;
+//                entityhuman.b(StatisticList.Z);
             }
 
             return EnumInteractionResult.SUCCESS;

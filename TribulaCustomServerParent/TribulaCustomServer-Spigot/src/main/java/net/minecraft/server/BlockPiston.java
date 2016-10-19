@@ -1,20 +1,17 @@
 package net.minecraft.server;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import org.bukkit.craftbukkit.block.CraftBlock;
+import org.bukkit.event.block.BlockPistonExtendEvent;
+import org.bukkit.event.block.BlockPistonRetractEvent;
+
+import javax.annotation.Nullable;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Nullable;
 
 // CraftBukkit start
-import java.util.AbstractList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.ListIterator;
-
-import com.google.common.collect.ImmutableList;
-import org.bukkit.craftbukkit.block.CraftBlock;
-import org.bukkit.event.block.BlockPistonRetractEvent;
-import org.bukkit.event.block.BlockPistonExtendEvent;
 // CraftBukkit end
 
 public class BlockPiston extends BlockDirectional {
@@ -30,15 +27,72 @@ public class BlockPiston extends BlockDirectional {
 
     public BlockPiston(boolean flag) {
         super(Material.PISTON);
-        this.w(this.blockStateList.getBlockData().set(BlockPiston.FACING, EnumDirection.NORTH).set(BlockPiston.EXTENDED, Boolean.valueOf(false)));
+        this.w(this.blockStateList.getBlockData().set(BlockPiston.FACING, EnumDirection.NORTH).set(BlockPiston.EXTENDED, Boolean.FALSE));
         this.sticky = flag;
         this.a(SoundEffectType.d);
         this.c(0.5F);
         this.a(CreativeModeTab.d);
     }
 
+    @Nullable
+    public static EnumDirection e(int i) {
+        int j = i & 7;
+
+        return j > 5 ? null : EnumDirection.fromType1(j);
+    }
+
+    public static EnumDirection a(BlockPosition blockposition, EntityLiving entityliving) {
+        if (MathHelper.e((float) entityliving.locX - (float) blockposition.getX()) < 2.0F && MathHelper.e((float) entityliving.locZ - (float) blockposition.getZ()) < 2.0F) {
+            double d0 = entityliving.locY + (double) entityliving.getHeadHeight();
+
+            if (d0 - (double) blockposition.getY() > 2.0D) {
+                return EnumDirection.UP;
+            }
+
+            if ((double) blockposition.getY() - d0 > 0.0D) {
+                return EnumDirection.DOWN;
+            }
+        }
+
+        return entityliving.getDirection().opposite();
+    }
+
+    public static boolean a(IBlockData iblockdata, World world, BlockPosition blockposition, EnumDirection enumdirection, boolean flag) {
+        Block block = iblockdata.getBlock();
+
+        if (block == Blocks.OBSIDIAN) {
+            return false;
+        } else if (!world.getWorldBorder().a(blockposition)) {
+            return false;
+        } else if (blockposition.getY() >= 0 && (enumdirection != EnumDirection.DOWN || blockposition.getY() != 0)) {
+            if (blockposition.getY() <= world.getHeight() - 1 && (enumdirection != EnumDirection.UP || blockposition.getY() != world.getHeight() - 1)) {
+                if (block != Blocks.PISTON && block != Blocks.STICKY_PISTON) {
+                    if (iblockdata.b(world, blockposition) == -1.0F) {
+                        return false;
+                    }
+
+                    if (iblockdata.o() == EnumPistonReaction.BLOCK) {
+                        return false;
+                    }
+
+                    if (iblockdata.o() == EnumPistonReaction.DESTROY) {
+                        return flag;
+                    }
+                } else if (iblockdata.get(BlockPiston.EXTENDED)) {
+                    return false;
+                }
+
+                return !block.isTileEntity();
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
-        if (iblockdata.get(BlockPiston.EXTENDED).booleanValue()) {
+        if (iblockdata.get(BlockPiston.EXTENDED)) {
             switch (BlockPiston.SyntheticClass_1.a[iblockdata.get(BlockPiston.FACING).ordinal()]) {
             case 1:
                 return BlockPiston.g;
@@ -65,7 +119,7 @@ public class BlockPiston extends BlockDirectional {
     }
 
     public boolean k(IBlockData iblockdata) {
-        return !iblockdata.get(BlockPiston.EXTENDED).booleanValue() || iblockdata.get(BlockPiston.FACING) == EnumDirection.DOWN;
+        return !iblockdata.get(BlockPiston.EXTENDED) || iblockdata.get(BlockPiston.FACING) == EnumDirection.DOWN;
     }
 
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, AxisAlignedBB axisalignedbb, List<AxisAlignedBB> list, @Nullable Entity entity) {
@@ -99,18 +153,18 @@ public class BlockPiston extends BlockDirectional {
     }
 
     public IBlockData getPlacedState(World world, BlockPosition blockposition, EnumDirection enumdirection, float f, float f1, float f2, int i, EntityLiving entityliving) {
-        return this.getBlockData().set(BlockPiston.FACING, a(blockposition, entityliving)).set(BlockPiston.EXTENDED, Boolean.valueOf(false));
+        return this.getBlockData().set(BlockPiston.FACING, a(blockposition, entityliving)).set(BlockPiston.EXTENDED, Boolean.FALSE);
     }
 
     private void e(World world, BlockPosition blockposition, IBlockData iblockdata) {
         EnumDirection enumdirection = iblockdata.get(BlockPiston.FACING);
         boolean flag = this.a(world, blockposition, enumdirection);
 
-        if (flag && !iblockdata.get(BlockPiston.EXTENDED).booleanValue()) {
+        if (flag && !iblockdata.get(BlockPiston.EXTENDED)) {
             if ((new PistonExtendsChecker(world, blockposition, enumdirection, true)).a()) {
                 world.playBlockAction(blockposition, this, 0, enumdirection.a());
             }
-        } else if (!flag && iblockdata.get(BlockPiston.EXTENDED).booleanValue()) {
+        } else if (!flag && iblockdata.get(BlockPiston.EXTENDED)) {
             // CraftBukkit start
             if (!this.sticky) {
                 org.bukkit.block.Block block = world.getWorld().getBlockAt(blockposition.getX(), blockposition.getY(), blockposition.getZ());
@@ -169,7 +223,7 @@ public class BlockPiston extends BlockDirectional {
             boolean flag = this.a(world, blockposition, enumdirection);
 
             if (flag && i == 1) {
-                world.setTypeAndData(blockposition, iblockdata.set(BlockPiston.EXTENDED, Boolean.valueOf(true)), 2);
+                world.setTypeAndData(blockposition, iblockdata.set(BlockPiston.EXTENDED, Boolean.TRUE), 2);
                 return false;
             }
 
@@ -183,7 +237,7 @@ public class BlockPiston extends BlockDirectional {
                 return false;
             }
 
-            world.setTypeAndData(blockposition, iblockdata.set(BlockPiston.EXTENDED, Boolean.valueOf(true)), 2);
+            world.setTypeAndData(blockposition, iblockdata.set(BlockPiston.EXTENDED, Boolean.TRUE), 2);
             world.a(null, blockposition, SoundEffects.eb, SoundCategory.BLOCKS, 0.5F, world.random.nextFloat() * 0.25F + 0.6F);
         } else if (i == 1) {
             TileEntity tileentity = world.getTileEntity(blockposition.shift(enumdirection));
@@ -230,63 +284,6 @@ public class BlockPiston extends BlockDirectional {
         return false;
     }
 
-    @Nullable
-    public static EnumDirection e(int i) {
-        int j = i & 7;
-
-        return j > 5 ? null : EnumDirection.fromType1(j);
-    }
-
-    public static EnumDirection a(BlockPosition blockposition, EntityLiving entityliving) {
-        if (MathHelper.e((float) entityliving.locX - (float) blockposition.getX()) < 2.0F && MathHelper.e((float) entityliving.locZ - (float) blockposition.getZ()) < 2.0F) {
-            double d0 = entityliving.locY + (double) entityliving.getHeadHeight();
-
-            if (d0 - (double) blockposition.getY() > 2.0D) {
-                return EnumDirection.UP;
-            }
-
-            if ((double) blockposition.getY() - d0 > 0.0D) {
-                return EnumDirection.DOWN;
-            }
-        }
-
-        return entityliving.getDirection().opposite();
-    }
-
-    public static boolean a(IBlockData iblockdata, World world, BlockPosition blockposition, EnumDirection enumdirection, boolean flag) {
-        Block block = iblockdata.getBlock();
-
-        if (block == Blocks.OBSIDIAN) {
-            return false;
-        } else if (!world.getWorldBorder().a(blockposition)) {
-            return false;
-        } else if (blockposition.getY() >= 0 && (enumdirection != EnumDirection.DOWN || blockposition.getY() != 0)) {
-            if (blockposition.getY() <= world.getHeight() - 1 && (enumdirection != EnumDirection.UP || blockposition.getY() != world.getHeight() - 1)) {
-                if (block != Blocks.PISTON && block != Blocks.STICKY_PISTON) {
-                    if (iblockdata.b(world, blockposition) == -1.0F) {
-                        return false;
-                    }
-
-                    if (iblockdata.o() == EnumPistonReaction.BLOCK) {
-                        return false;
-                    }
-
-                    if (iblockdata.o() == EnumPistonReaction.DESTROY) {
-                        return flag;
-                    }
-                } else if (iblockdata.get(BlockPiston.EXTENDED).booleanValue()) {
-                    return false;
-                }
-
-                return !block.isTileEntity();
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-
     private boolean a(World world, BlockPosition blockposition, EnumDirection enumdirection, boolean flag) {
         if (!flag) {
             world.setAir(blockposition.shift(enumdirection));
@@ -300,8 +297,8 @@ public class BlockPiston extends BlockDirectional {
             List list = pistonextendschecker.getMovedBlocks();
             ArrayList arraylist = Lists.newArrayList();
 
-            for (int i = 0; i < list.size(); ++i) {
-                BlockPosition blockposition1 = (BlockPosition) list.get(i);
+            for (Object aList : list) {
+                BlockPosition blockposition1 = (BlockPosition) aList;
 
                 arraylist.add(world.getType(blockposition1).b((IBlockAccess) world, blockposition1));
             }
@@ -409,14 +406,14 @@ public class BlockPiston extends BlockDirectional {
     }
 
     public IBlockData fromLegacyData(int i) {
-        return this.getBlockData().set(BlockPiston.FACING, e(i)).set(BlockPiston.EXTENDED, Boolean.valueOf((i & 8) > 0));
+        return this.getBlockData().set(BlockPiston.FACING, e(i)).set(BlockPiston.EXTENDED, (i & 8) > 0);
     }
 
     public int toLegacyData(IBlockData iblockdata) {
         byte b0 = 0;
         int i = b0 | iblockdata.get(BlockPiston.FACING).a();
 
-        if (iblockdata.get(BlockPiston.EXTENDED).booleanValue()) {
+        if (iblockdata.get(BlockPiston.EXTENDED)) {
             i |= 8;
         }
 
@@ -442,32 +439,32 @@ public class BlockPiston extends BlockDirectional {
         static {
             try {
                 BlockPiston.SyntheticClass_1.a[EnumDirection.DOWN.ordinal()] = 1;
-            } catch (NoSuchFieldError nosuchfielderror) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockPiston.SyntheticClass_1.a[EnumDirection.UP.ordinal()] = 2;
-            } catch (NoSuchFieldError nosuchfielderror1) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockPiston.SyntheticClass_1.a[EnumDirection.NORTH.ordinal()] = 3;
-            } catch (NoSuchFieldError nosuchfielderror2) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockPiston.SyntheticClass_1.a[EnumDirection.SOUTH.ordinal()] = 4;
-            } catch (NoSuchFieldError nosuchfielderror3) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockPiston.SyntheticClass_1.a[EnumDirection.WEST.ordinal()] = 5;
-            } catch (NoSuchFieldError nosuchfielderror4) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockPiston.SyntheticClass_1.a[EnumDirection.EAST.ordinal()] = 6;
-            } catch (NoSuchFieldError nosuchfielderror5) {
+            } catch (NoSuchFieldError ignored) {
             }
 
         }

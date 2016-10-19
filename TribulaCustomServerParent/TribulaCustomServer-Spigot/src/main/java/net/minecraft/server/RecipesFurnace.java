@@ -1,22 +1,19 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Maps;
+
+import javax.annotation.Nullable;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
-import javax.annotation.Nullable;
 
 public class RecipesFurnace {
 
     private static final RecipesFurnace a = new RecipesFurnace();
-    public Map<ItemStack, ItemStack> recipes = Maps.newHashMap();
     private final Map<ItemStack, Float> experience = Maps.newHashMap();
+    public Map<ItemStack, ItemStack> recipes = Maps.newHashMap();
     public Map<ItemStack,ItemStack> customRecipes = Maps.newHashMap(); // CraftBukkit - add field
     public Map<ItemStack,Float> customExperience = Maps.newHashMap(); // CraftBukkit - add field
-
-    public static RecipesFurnace getInstance() {
-        return RecipesFurnace.a;
-    }
 
     public RecipesFurnace() {
         this.registerRecipe(Blocks.IRON_ORE, new ItemStack(Items.IRON_INGOT), 0.7F);
@@ -43,9 +40,7 @@ public class RecipesFurnace {
         ItemFish.EnumFish[] aitemfish_enumfish = ItemFish.EnumFish.values();
         int i = aitemfish_enumfish.length;
 
-        for (int j = 0; j < i; ++j) {
-            ItemFish.EnumFish itemfish_enumfish = aitemfish_enumfish[j];
-
+        for (ItemFish.EnumFish itemfish_enumfish : aitemfish_enumfish) {
             if (itemfish_enumfish.g()) {
                 this.a(new ItemStack(Items.FISH, 1, itemfish_enumfish.a()), new ItemStack(Items.COOKED_FISH, 1, itemfish_enumfish.a()), 0.35F);
             }
@@ -55,6 +50,10 @@ public class RecipesFurnace {
         this.registerRecipe(Blocks.REDSTONE_ORE, new ItemStack(Items.REDSTONE), 0.7F);
         this.registerRecipe(Blocks.LAPIS_ORE, new ItemStack(Items.DYE, 1, EnumColor.BLUE.getInvColorIndex()), 0.2F);
         this.registerRecipe(Blocks.QUARTZ_ORE, new ItemStack(Items.QUARTZ), 0.2F);
+    }
+
+    public static RecipesFurnace getInstance() {
+        return RecipesFurnace.a;
     }
 
     // CraftBukkit start - add method
@@ -73,7 +72,7 @@ public class RecipesFurnace {
 
     public void a(ItemStack itemstack, ItemStack itemstack1, float f) {
         this.recipes.put(itemstack, itemstack1);
-        this.experience.put(itemstack1, Float.valueOf(f));
+        this.experience.put(itemstack1, f);
     }
 
     @Nullable
@@ -98,13 +97,13 @@ public class RecipesFurnace {
             }
 
             entry = (Entry) iterator.next();
-        } while (!this.a(itemstack, (ItemStack) entry.getKey()));
+        } while (this.a(itemstack, (ItemStack) entry.getKey()));
 
         return (ItemStack) entry.getValue();
     }
 
     private boolean a(ItemStack itemstack, ItemStack itemstack1) {
-        return itemstack1.getItem() == itemstack.getItem() && (itemstack1.getData() == 32767 || itemstack1.getData() == itemstack.getData());
+        return itemstack1.getItem() != itemstack.getItem() || (itemstack1.getData() != 32767 && itemstack1.getData() != itemstack.getData());
     }
 
     public Map<ItemStack, ItemStack> getRecipes() {
@@ -132,8 +131,8 @@ public class RecipesFurnace {
             }
 
             entry = (Entry) iterator.next();
-        } while (!this.a(itemstack, (ItemStack) entry.getKey()));
+        } while (this.a(itemstack, (ItemStack) entry.getKey()));
 
-        return ((Float) entry.getValue()).floatValue();
+        return (Float) entry.getValue();
     }
 }

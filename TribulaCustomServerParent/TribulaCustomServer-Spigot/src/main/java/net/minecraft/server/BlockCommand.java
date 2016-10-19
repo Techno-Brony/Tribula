@@ -1,9 +1,9 @@
 package net.minecraft.server;
 
-import java.util.Random;
-import javax.annotation.Nullable;
+import org.bukkit.event.block.BlockRedstoneEvent;
 
-import org.bukkit.event.block.BlockRedstoneEvent; // CraftBukkit
+import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockCommand extends BlockTileEntity {
 
@@ -12,7 +12,7 @@ public class BlockCommand extends BlockTileEntity {
 
     public BlockCommand(MaterialMapColor materialmapcolor) {
         super(Material.ORE, materialmapcolor);
-        this.w(this.blockStateList.getBlockData().set(BlockCommand.a, EnumDirection.NORTH).set(BlockCommand.b, Boolean.valueOf(false)));
+        this.w(this.blockStateList.getBlockData().set(BlockCommand.a, EnumDirection.NORTH).set(BlockCommand.b, Boolean.FALSE));
     }
 
     public TileEntity a(World world, int i) {
@@ -44,7 +44,7 @@ public class BlockCommand extends BlockTileEntity {
             if (eventRedstone.getNewCurrent() > 0 && !(eventRedstone.getOldCurrent() > 0)) { // CraftBukkit
                     tileentitycommand.a(true);
                     if (tileentitycommand.k() != TileEntityCommand.Type.SEQUENCE && !flag2) {
-                        boolean flag3 = !tileentitycommand.l() || this.e(world, blockposition, iblockdata);
+                        boolean flag3 = tileentitycommand.l() || this.e(world, blockposition, iblockdata);
 
                         tileentitycommand.c(flag3);
                         world.a(blockposition, this, this.a(world));
@@ -69,7 +69,7 @@ public class BlockCommand extends BlockTileEntity {
                 CommandBlockListenerAbstract commandblocklistenerabstract = tileentitycommand.getCommandBlock();
                 boolean flag = !UtilColor.b(commandblocklistenerabstract.getCommand());
                 TileEntityCommand.Type tileentitycommand_type = tileentitycommand.k();
-                boolean flag1 = !tileentitycommand.l() || this.e(world, blockposition, iblockdata);
+                boolean flag1 = tileentitycommand.l() || this.e(world, blockposition, iblockdata);
                 boolean flag2 = tileentitycommand.i();
                 boolean flag3 = false;
 
@@ -173,11 +173,11 @@ public class BlockCommand extends BlockTileEntity {
     }
 
     public IBlockData fromLegacyData(int i) {
-        return this.getBlockData().set(BlockCommand.a, EnumDirection.fromType1(i & 7)).set(BlockCommand.b, Boolean.valueOf((i & 8) != 0));
+        return this.getBlockData().set(BlockCommand.a, EnumDirection.fromType1(i & 7)).set(BlockCommand.b, (i & 8) != 0);
     }
 
     public int toLegacyData(IBlockData iblockdata) {
-        return iblockdata.get(BlockCommand.a).a() | (iblockdata.get(BlockCommand.b).booleanValue() ? 8 : 0);
+        return iblockdata.get(BlockCommand.a).a() | (iblockdata.get(BlockCommand.b) ? 8 : 0);
     }
 
     public IBlockData a(IBlockData iblockdata, EnumBlockRotation enumblockrotation) {
@@ -193,7 +193,7 @@ public class BlockCommand extends BlockTileEntity {
     }
 
     public IBlockData getPlacedState(World world, BlockPosition blockposition, EnumDirection enumdirection, float f, float f1, float f2, int i, EntityLiving entityliving) {
-        return this.getBlockData().set(BlockCommand.a, BlockPiston.a(blockposition, entityliving)).set(BlockCommand.b, Boolean.valueOf(false));
+        return this.getBlockData().set(BlockCommand.a, BlockPiston.a(blockposition, entityliving)).set(BlockCommand.b, Boolean.FALSE);
     }
 
     public void c(World world, BlockPosition blockposition) {

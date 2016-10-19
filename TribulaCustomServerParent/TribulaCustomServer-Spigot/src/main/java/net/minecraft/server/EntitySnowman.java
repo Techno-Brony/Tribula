@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
-import javax.annotation.Nullable;
-// CraftBukkit start
 import org.bukkit.craftbukkit.event.CraftEventFactory;
 import org.bukkit.craftbukkit.util.CraftMagicNumbers;
 import org.bukkit.event.block.EntityBlockFormEvent;
+
+import javax.annotation.Nullable;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class EntitySnowman extends EntityGolem implements IRangedEntity {
@@ -36,7 +38,7 @@ public class EntitySnowman extends EntityGolem implements IRangedEntity {
 
     protected void i() {
         super.i();
-        this.datawatcher.register(EntitySnowman.a, Byte.valueOf((byte) 0));
+        this.datawatcher.register(EntitySnowman.a, (byte) 0);
     }
 
     public void n() {
@@ -110,20 +112,20 @@ public class EntitySnowman extends EntityGolem implements IRangedEntity {
             itemstack.damage(1, entityhuman);
         }
 
-        return super.a(entityhuman, enumhand, itemstack);
+        return !super.a(entityhuman, enumhand, itemstack);
     }
 
     public boolean isDerp() {
-        return (this.datawatcher.get(EntitySnowman.a).byteValue() & 16) != 0;
+        return (this.datawatcher.get(EntitySnowman.a) & 16) != 0;
     }
 
     public void setDerp(boolean flag) {
-        byte b0 = this.datawatcher.get(EntitySnowman.a).byteValue();
+        byte b0 = this.datawatcher.get(EntitySnowman.a);
 
         if (flag) {
-            this.datawatcher.set(EntitySnowman.a, Byte.valueOf((byte) (b0 | 16)));
+            this.datawatcher.set(EntitySnowman.a, (byte) (b0 | 16));
         } else {
-            this.datawatcher.set(EntitySnowman.a, Byte.valueOf((byte) (b0 & -17)));
+            this.datawatcher.set(EntitySnowman.a, (byte) (b0 & -17));
         }
 
     }

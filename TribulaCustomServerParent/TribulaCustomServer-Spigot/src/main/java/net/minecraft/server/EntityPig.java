@@ -1,11 +1,11 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Sets;
+import org.bukkit.craftbukkit.event.CraftEventFactory;
+
+import javax.annotation.Nullable;
 import java.util.Iterator;
 import java.util.Set;
-import javax.annotation.Nullable;
-
-import org.bukkit.craftbukkit.event.CraftEventFactory; // CraftBukkit
 
 public class EntityPig extends EntityAnimal {
 
@@ -18,6 +18,10 @@ public class EntityPig extends EntityAnimal {
     public EntityPig(World world) {
         super(world);
         this.setSize(0.9F, 0.9F);
+    }
+
+    public static void b(DataConverterManager dataconvertermanager) {
+        EntityInsentient.a(dataconvertermanager, "Pig");
     }
 
     protected void r() {
@@ -63,11 +67,7 @@ public class EntityPig extends EntityAnimal {
 
     protected void i() {
         super.i();
-        this.datawatcher.register(EntityPig.bx, Boolean.valueOf(false));
-    }
-
-    public static void b(DataConverterManager dataconvertermanager) {
-        EntityInsentient.a(dataconvertermanager, "Pig");
+        this.datawatcher.register(EntityPig.bx, Boolean.FALSE);
     }
 
     public void b(NBTTagCompound nbttagcompound) {
@@ -97,15 +97,15 @@ public class EntityPig extends EntityAnimal {
     }
 
     public boolean a(EntityHuman entityhuman, EnumHand enumhand, @Nullable ItemStack itemstack) {
-        if (!super.a(entityhuman, enumhand, itemstack)) {
+        if (super.a(entityhuman, enumhand, itemstack)) {
             if (this.hasSaddle() && !this.world.isClientSide && !this.isVehicle()) {
                 entityhuman.startRiding(this);
-                return true;
-            } else {
                 return false;
+            } else {
+                return true;
             }
         } else {
-            return true;
+            return false;
         }
     }
 
@@ -123,14 +123,14 @@ public class EntityPig extends EntityAnimal {
     }
 
     public boolean hasSaddle() {
-        return this.datawatcher.get(EntityPig.bx).booleanValue();
+        return this.datawatcher.get(EntityPig.bx);
     }
 
     public void setSaddle(boolean flag) {
         if (flag) {
-            this.datawatcher.set(EntityPig.bx, Boolean.valueOf(true));
+            this.datawatcher.set(EntityPig.bx, Boolean.TRUE);
         } else {
-            this.datawatcher.set(EntityPig.bx, Boolean.valueOf(false));
+            this.datawatcher.set(EntityPig.bx, Boolean.FALSE);
         }
 
     }

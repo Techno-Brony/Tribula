@@ -1,20 +1,16 @@
 package net.minecraft.server;
 
 import com.google.common.base.Predicate;
+import org.bukkit.craftbukkit.util.BlockStateListPopulator;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+
 import javax.annotation.Nullable;
 
 // CraftBukkit start
-import org.bukkit.craftbukkit.util.BlockStateListPopulator;
-import org.bukkit.event.block.BlockRedstoneEvent;
-import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 // CraftBukkit end
 
 public class BlockPumpkin extends BlockFacingHorizontal {
 
-    private ShapeDetector snowGolemPart;
-    private ShapeDetector snowGolem;
-    private ShapeDetector ironGolemPart;
-    private ShapeDetector ironGolem;
     private static final Predicate<IBlockData> e = new Predicate() {
         public boolean a(@Nullable IBlockData iblockdata) {
             return iblockdata != null && (iblockdata.getBlock() == Blocks.PUMPKIN || iblockdata.getBlock() == Blocks.LIT_PUMPKIN);
@@ -24,6 +20,10 @@ public class BlockPumpkin extends BlockFacingHorizontal {
             return this.a((IBlockData) object);
         }
     };
+    private ShapeDetector snowGolemPart;
+    private ShapeDetector snowGolem;
+    private ShapeDetector ironGolemPart;
+    private ShapeDetector ironGolem;
 
     protected BlockPumpkin() {
         super(Material.PUMPKIN, MaterialMapColor.q);

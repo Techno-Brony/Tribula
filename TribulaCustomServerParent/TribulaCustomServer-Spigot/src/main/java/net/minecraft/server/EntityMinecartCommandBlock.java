@@ -100,7 +100,7 @@ public class EntityMinecartCommandBlock extends EntityMinecartAbstract {
 
     public boolean a(EntityHuman entityhuman, @Nullable ItemStack itemstack, EnumHand enumhand) {
         this.c.a(entityhuman);
-        return false;
+        return true;
     }
 
     public void a(DataWatcherObject<?> datawatcherobject) {
@@ -108,7 +108,7 @@ public class EntityMinecartCommandBlock extends EntityMinecartAbstract {
         if (EntityMinecartCommandBlock.b.equals(datawatcherobject)) {
             try {
                 this.c.b(this.getDataWatcher().get(EntityMinecartCommandBlock.b));
-            } catch (Throwable throwable) {
+            } catch (Throwable ignored) {
             }
         } else if (EntityMinecartCommandBlock.a.equals(datawatcherobject)) {
             this.c.setCommand(this.getDataWatcher().get(EntityMinecartCommandBlock.a));

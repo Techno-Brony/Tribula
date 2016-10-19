@@ -1,7 +1,7 @@
 package net.minecraft.server;
 
-import java.util.Random;
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockMobSpawner extends BlockTileEntity {
 
@@ -33,9 +33,8 @@ public class BlockMobSpawner extends BlockTileEntity {
 
     @Override
     public int getExpDrop(World world, IBlockData iblockdata, int enchantmentLevel) {
-        int j = 15 + world.random.nextInt(15) + world.random.nextInt(15);
 
-        return j;
+        return 15 + world.random.nextInt(15) + world.random.nextInt(15);
         // CraftBukkit end
     }
 

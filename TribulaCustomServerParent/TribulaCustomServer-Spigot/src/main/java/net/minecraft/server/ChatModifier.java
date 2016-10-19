@@ -1,28 +1,12 @@
 package net.minecraft.server;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
-import java.lang.reflect.Type;
+import com.google.gson.*;
+
 import javax.annotation.Nullable;
+import java.lang.reflect.Type;
 
 public class ChatModifier {
 
-    private ChatModifier a;
-    private EnumChatFormat b;
-    private Boolean c;
-    private Boolean d;
-    private Boolean e;
-    private Boolean f;
-    private Boolean g;
-    private ChatClickable h;
-    private ChatHoverable i;
-    private String j;
     private static final ChatModifier k = new ChatModifier() {
         @Nullable
         public EnumChatFormat getColor() {
@@ -112,6 +96,16 @@ public class ChatModifier {
             return this;
         }
     };
+    private ChatModifier a;
+    private EnumChatFormat b;
+    private Boolean c;
+    private Boolean d;
+    private Boolean e;
+    private Boolean f;
+    private Boolean g;
+    private ChatClickable h;
+    private ChatHoverable i;
+    private String j;
 
     public ChatModifier() {}
 
@@ -120,24 +114,49 @@ public class ChatModifier {
         return this.b == null ? this.o().getColor() : this.b;
     }
 
+    public ChatModifier setColor(EnumChatFormat enumchatformat) {
+        this.b = enumchatformat;
+        return this;
+    }
+
     public boolean isBold() {
-        return this.c == null ? this.o().isBold() : this.c.booleanValue();
+        return this.c == null ? this.o().isBold() : this.c;
+    }
+
+    public ChatModifier setBold(Boolean obool) {
+        this.c = obool;
+        return this;
     }
 
     public boolean isItalic() {
-        return this.d == null ? this.o().isItalic() : this.d.booleanValue();
+        return this.d == null ? this.o().isItalic() : this.d;
+    }
+
+    public ChatModifier setItalic(Boolean obool) {
+        this.d = obool;
+        return this;
     }
 
     public boolean isStrikethrough() {
-        return this.f == null ? this.o().isStrikethrough() : this.f.booleanValue();
+        return this.f == null ? this.o().isStrikethrough() : this.f;
+    }
+
+    public ChatModifier setStrikethrough(Boolean obool) {
+        this.f = obool;
+        return this;
     }
 
     public boolean isUnderlined() {
-        return this.e == null ? this.o().isUnderlined() : this.e.booleanValue();
+        return this.e == null ? this.o().isUnderlined() : this.e;
     }
 
     public boolean isRandom() {
-        return this.g == null ? this.o().isRandom() : this.g.booleanValue();
+        return this.g == null ? this.o().isRandom() : this.g;
+    }
+
+    public ChatModifier setRandom(Boolean obool) {
+        this.g = obool;
+        return this;
     }
 
     public boolean g() {
@@ -159,33 +178,8 @@ public class ChatModifier {
         return this.j == null ? this.o().j() : this.j;
     }
 
-    public ChatModifier setColor(EnumChatFormat enumchatformat) {
-        this.b = enumchatformat;
-        return this;
-    }
-
-    public ChatModifier setBold(Boolean obool) {
-        this.c = obool;
-        return this;
-    }
-
-    public ChatModifier setItalic(Boolean obool) {
-        this.d = obool;
-        return this;
-    }
-
-    public ChatModifier setStrikethrough(Boolean obool) {
-        this.f = obool;
-        return this;
-    }
-
     public ChatModifier setUnderline(Boolean obool) {
         this.e = obool;
-        return this;
-    }
-
-    public ChatModifier setRandom(Boolean obool) {
-        this.g = obool;
         return this;
     }
 
@@ -297,11 +291,11 @@ public class ChatModifier {
     public ChatModifier n() {
         ChatModifier chatmodifier = new ChatModifier();
 
-        chatmodifier.setBold(Boolean.valueOf(this.isBold()));
-        chatmodifier.setItalic(Boolean.valueOf(this.isItalic()));
-        chatmodifier.setStrikethrough(Boolean.valueOf(this.isStrikethrough()));
-        chatmodifier.setUnderline(Boolean.valueOf(this.isUnderlined()));
-        chatmodifier.setRandom(Boolean.valueOf(this.isRandom()));
+        chatmodifier.setBold(this.isBold());
+        chatmodifier.setItalic(this.isItalic());
+        chatmodifier.setStrikethrough(this.isStrikethrough());
+        chatmodifier.setUnderline(this.isUnderlined());
+        chatmodifier.setRandom(this.isRandom());
         chatmodifier.setColor(this.getColor());
         chatmodifier.setChatClickable(this.h());
         chatmodifier.setChatHoverable(this.i());
@@ -323,23 +317,23 @@ public class ChatModifier {
                     return null;
                 } else {
                     if (jsonobject.has("bold")) {
-                        chatmodifier.c = Boolean.valueOf(jsonobject.get("bold").getAsBoolean());
+                        chatmodifier.c = jsonobject.get("bold").getAsBoolean();
                     }
 
                     if (jsonobject.has("italic")) {
-                        chatmodifier.d = Boolean.valueOf(jsonobject.get("italic").getAsBoolean());
+                        chatmodifier.d = jsonobject.get("italic").getAsBoolean();
                     }
 
                     if (jsonobject.has("underlined")) {
-                        chatmodifier.e = Boolean.valueOf(jsonobject.get("underlined").getAsBoolean());
+                        chatmodifier.e = jsonobject.get("underlined").getAsBoolean();
                     }
 
                     if (jsonobject.has("strikethrough")) {
-                        chatmodifier.f = Boolean.valueOf(jsonobject.get("strikethrough").getAsBoolean());
+                        chatmodifier.f = jsonobject.get("strikethrough").getAsBoolean();
                     }
 
                     if (jsonobject.has("obfuscated")) {
-                        chatmodifier.g = Boolean.valueOf(jsonobject.get("obfuscated").getAsBoolean());
+                        chatmodifier.g = jsonobject.get("obfuscated").getAsBoolean();
                     }
 
                     if (jsonobject.has("color")) {

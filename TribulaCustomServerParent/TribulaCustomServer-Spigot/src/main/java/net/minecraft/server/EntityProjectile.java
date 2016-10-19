@@ -1,22 +1,22 @@
 package net.minecraft.server;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
-import javax.annotation.Nullable;
 
 public abstract class EntityProjectile extends Entity implements IProjectile {
 
+    public int shake;
+    public EntityLiving shooter;
+    public String shooterName;
+    public Entity c;
+    protected boolean inGround;
     private int blockX;
     private int blockY;
     private int blockZ;
     private Block inBlockId;
-    protected boolean inGround;
-    public int shake;
-    public EntityLiving shooter;
-    public String shooterName;
     private int av;
     private int aw;
-    public Entity c;
     private int ax;
 
     public EntityProjectile(World world) {
@@ -37,6 +37,8 @@ public abstract class EntityProjectile extends Entity implements IProjectile {
         this.shooter = entityliving;
         this.projectileSource = (org.bukkit.entity.LivingEntity) entityliving.getBukkitEntity(); // CraftBukkit
     }
+
+    public static void a(DataConverterManager dataconvertermanager, String s) {}
 
     protected void i() {}
 
@@ -122,8 +124,8 @@ public abstract class EntityProjectile extends Entity implements IProjectile {
         double d0 = 0.0D;
         boolean flag = false;
 
-        for (int i = 0; i < list.size(); ++i) {
-            Entity entity1 = (Entity) list.get(i);
+        for (Object aList : list) {
+            Entity entity1 = (Entity) aList;
 
             if (entity1.isInteractable()) {
                 if (entity1 == this.c) {
@@ -225,8 +227,6 @@ public abstract class EntityProjectile extends Entity implements IProjectile {
     }
 
     protected abstract void a(MovingObjectPosition movingobjectposition);
-
-    public static void a(DataConverterManager dataconvertermanager, String s) {}
 
     public void b(NBTTagCompound nbttagcompound) {
         nbttagcompound.setInt("xTile", this.blockX);

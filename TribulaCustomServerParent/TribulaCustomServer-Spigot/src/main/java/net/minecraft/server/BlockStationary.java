@@ -1,8 +1,8 @@
 package net.minecraft.server;
 
-import java.util.Random;
+import org.bukkit.craftbukkit.event.CraftEventFactory;
 
-import org.bukkit.craftbukkit.event.CraftEventFactory;  // CraftBukkit
+import java.util.Random;
 
 public class BlockStationary extends BlockFluids {
 
@@ -91,9 +91,7 @@ public class BlockStationary extends BlockFluids {
         EnumDirection[] aenumdirection = EnumDirection.values();
         int i = aenumdirection.length;
 
-        for (int j = 0; j < i; ++j) {
-            EnumDirection enumdirection = aenumdirection[j];
-
+        for (EnumDirection enumdirection : aenumdirection) {
             if (this.d(world, blockposition.shift(enumdirection))) {
                 return true;
             }

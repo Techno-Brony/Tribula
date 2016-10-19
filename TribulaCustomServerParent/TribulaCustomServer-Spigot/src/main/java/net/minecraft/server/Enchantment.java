@@ -1,8 +1,9 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Lists;
-import java.util.ArrayList;
+
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 
 public abstract class Enchantment {
 
@@ -11,6 +12,12 @@ public abstract class Enchantment {
     private final Enchantment.Rarity e;
     public EnchantmentSlotType itemTarget;
     protected String d;
+
+    protected Enchantment(Enchantment.Rarity enchantment_rarity, EnchantmentSlotType enchantmentslottype, EnumItemSlot[] aenumitemslot) {
+        this.e = enchantment_rarity;
+        this.itemTarget = enchantmentslottype;
+        this.a = aenumitemslot;
+    }
 
     @Nullable
     public static Enchantment c(int i) {
@@ -26,10 +33,41 @@ public abstract class Enchantment {
         return Enchantment.enchantments.get(new MinecraftKey(s));
     }
 
-    protected Enchantment(Enchantment.Rarity enchantment_rarity, EnchantmentSlotType enchantmentslottype, EnumItemSlot[] aenumitemslot) {
-        this.e = enchantment_rarity;
-        this.itemTarget = enchantmentslottype;
-        this.a = aenumitemslot;
+    public static void f() {
+        EnumItemSlot[] aenumitemslot = new EnumItemSlot[] { EnumItemSlot.HEAD, EnumItemSlot.CHEST, EnumItemSlot.LEGS, EnumItemSlot.FEET};
+
+        Enchantment.enchantments.a(0, new MinecraftKey("protection"), new EnchantmentProtection(Enchantment.Rarity.COMMON, EnchantmentProtection.DamageType.ALL, aenumitemslot));
+        Enchantment.enchantments.a(1, new MinecraftKey("fire_protection"), new EnchantmentProtection(Enchantment.Rarity.UNCOMMON, EnchantmentProtection.DamageType.FIRE, aenumitemslot));
+        Enchantment.enchantments.a(2, new MinecraftKey("feather_falling"), new EnchantmentProtection(Enchantment.Rarity.UNCOMMON, EnchantmentProtection.DamageType.FALL, aenumitemslot));
+        Enchantment.enchantments.a(3, new MinecraftKey("blast_protection"), new EnchantmentProtection(Enchantment.Rarity.RARE, EnchantmentProtection.DamageType.EXPLOSION, aenumitemslot));
+        Enchantment.enchantments.a(4, new MinecraftKey("projectile_protection"), new EnchantmentProtection(Enchantment.Rarity.UNCOMMON, EnchantmentProtection.DamageType.PROJECTILE, aenumitemslot));
+        Enchantment.enchantments.a(5, new MinecraftKey("respiration"), new EnchantmentOxygen(Enchantment.Rarity.RARE, aenumitemslot));
+        Enchantment.enchantments.a(6, new MinecraftKey("aqua_affinity"), new EnchantmentWaterWorker(Enchantment.Rarity.RARE, aenumitemslot));
+        Enchantment.enchantments.a(7, new MinecraftKey("thorns"), new EnchantmentThorns(Enchantment.Rarity.VERY_RARE, aenumitemslot));
+        Enchantment.enchantments.a(8, new MinecraftKey("depth_strider"), new EnchantmentDepthStrider(Enchantment.Rarity.RARE, aenumitemslot));
+        Enchantment.enchantments.a(9, new MinecraftKey("frost_walker"), new EnchantmentFrostWalker(Enchantment.Rarity.RARE, EnumItemSlot.FEET));
+        Enchantment.enchantments.a(16, new MinecraftKey("sharpness"), new EnchantmentWeaponDamage(Enchantment.Rarity.COMMON, 0, EnumItemSlot.MAINHAND));
+        Enchantment.enchantments.a(17, new MinecraftKey("smite"), new EnchantmentWeaponDamage(Enchantment.Rarity.UNCOMMON, 1, EnumItemSlot.MAINHAND));
+        Enchantment.enchantments.a(18, new MinecraftKey("bane_of_arthropods"), new EnchantmentWeaponDamage(Enchantment.Rarity.UNCOMMON, 2, EnumItemSlot.MAINHAND));
+        Enchantment.enchantments.a(19, new MinecraftKey("knockback"), new EnchantmentKnockback(Enchantment.Rarity.UNCOMMON, EnumItemSlot.MAINHAND));
+        Enchantment.enchantments.a(20, new MinecraftKey("fire_aspect"), new EnchantmentFire(Enchantment.Rarity.RARE, EnumItemSlot.MAINHAND));
+        Enchantment.enchantments.a(21, new MinecraftKey("looting"), new EnchantmentLootBonus(Enchantment.Rarity.RARE, EnchantmentSlotType.WEAPON, EnumItemSlot.MAINHAND));
+        Enchantment.enchantments.a(32, new MinecraftKey("efficiency"), new EnchantmentDigging(Enchantment.Rarity.COMMON, EnumItemSlot.MAINHAND));
+        Enchantment.enchantments.a(33, new MinecraftKey("silk_touch"), new EnchantmentSilkTouch(Enchantment.Rarity.VERY_RARE, EnumItemSlot.MAINHAND));
+        Enchantment.enchantments.a(34, new MinecraftKey("unbreaking"), new EnchantmentDurability(Enchantment.Rarity.UNCOMMON, EnumItemSlot.MAINHAND));
+        Enchantment.enchantments.a(35, new MinecraftKey("fortune"), new EnchantmentLootBonus(Enchantment.Rarity.RARE, EnchantmentSlotType.DIGGER, EnumItemSlot.MAINHAND));
+        Enchantment.enchantments.a(48, new MinecraftKey("power"), new EnchantmentArrowDamage(Enchantment.Rarity.COMMON, EnumItemSlot.MAINHAND));
+        Enchantment.enchantments.a(49, new MinecraftKey("punch"), new EnchantmentArrowKnockback(Enchantment.Rarity.RARE, EnumItemSlot.MAINHAND));
+        Enchantment.enchantments.a(50, new MinecraftKey("flame"), new EnchantmentFlameArrows(Enchantment.Rarity.RARE, EnumItemSlot.MAINHAND));
+        Enchantment.enchantments.a(51, new MinecraftKey("infinity"), new EnchantmentInfiniteArrows(Enchantment.Rarity.VERY_RARE, EnumItemSlot.MAINHAND));
+        Enchantment.enchantments.a(61, new MinecraftKey("luck_of_the_sea"), new EnchantmentLootBonus(Enchantment.Rarity.RARE, EnchantmentSlotType.FISHING_ROD, EnumItemSlot.MAINHAND));
+        Enchantment.enchantments.a(62, new MinecraftKey("lure"), new EnchantmentLure(Enchantment.Rarity.RARE, EnchantmentSlotType.FISHING_ROD, EnumItemSlot.MAINHAND));
+        Enchantment.enchantments.a(70, new MinecraftKey("mending"), new EnchantmentMending(Enchantment.Rarity.RARE, EnumItemSlot.values()));
+        // CraftBukkit start
+        for (Object enchantment : Enchantment.enchantments) {
+            org.bukkit.enchantments.Enchantment.registerEnchantment(new org.bukkit.craftbukkit.enchantments.CraftEnchantment((Enchantment) enchantment));
+        }
+        // CraftBukkit end
     }
 
     @Nullable
@@ -38,8 +76,7 @@ public abstract class Enchantment {
         EnumItemSlot[] aenumitemslot = this.a;
         int i = aenumitemslot.length;
 
-        for (int j = 0; j < i; ++j) {
-            EnumItemSlot enumitemslot = aenumitemslot[j];
+        for (EnumItemSlot enumitemslot : aenumitemslot) {
             ItemStack itemstack = entityliving.getEquipment(enumitemslot);
 
             if (itemstack != null) {
@@ -92,6 +129,7 @@ public abstract class Enchantment {
     }
 
     public String d(int i) {
+        //noinspection deprecation,deprecation
         String s = LocaleI18n.get(this.a());
 
         return i == 1 && this.getMaxLevel() == 1 ? s : s + " " + LocaleI18n.get("enchantment.level." + i);
@@ -107,43 +145,6 @@ public abstract class Enchantment {
 
     public boolean e() {
         return false;
-    }
-
-    public static void f() {
-        EnumItemSlot[] aenumitemslot = new EnumItemSlot[] { EnumItemSlot.HEAD, EnumItemSlot.CHEST, EnumItemSlot.LEGS, EnumItemSlot.FEET};
-
-        Enchantment.enchantments.a(0, new MinecraftKey("protection"), new EnchantmentProtection(Enchantment.Rarity.COMMON, EnchantmentProtection.DamageType.ALL, aenumitemslot));
-        Enchantment.enchantments.a(1, new MinecraftKey("fire_protection"), new EnchantmentProtection(Enchantment.Rarity.UNCOMMON, EnchantmentProtection.DamageType.FIRE, aenumitemslot));
-        Enchantment.enchantments.a(2, new MinecraftKey("feather_falling"), new EnchantmentProtection(Enchantment.Rarity.UNCOMMON, EnchantmentProtection.DamageType.FALL, aenumitemslot));
-        Enchantment.enchantments.a(3, new MinecraftKey("blast_protection"), new EnchantmentProtection(Enchantment.Rarity.RARE, EnchantmentProtection.DamageType.EXPLOSION, aenumitemslot));
-        Enchantment.enchantments.a(4, new MinecraftKey("projectile_protection"), new EnchantmentProtection(Enchantment.Rarity.UNCOMMON, EnchantmentProtection.DamageType.PROJECTILE, aenumitemslot));
-        Enchantment.enchantments.a(5, new MinecraftKey("respiration"), new EnchantmentOxygen(Enchantment.Rarity.RARE, aenumitemslot));
-        Enchantment.enchantments.a(6, new MinecraftKey("aqua_affinity"), new EnchantmentWaterWorker(Enchantment.Rarity.RARE, aenumitemslot));
-        Enchantment.enchantments.a(7, new MinecraftKey("thorns"), new EnchantmentThorns(Enchantment.Rarity.VERY_RARE, aenumitemslot));
-        Enchantment.enchantments.a(8, new MinecraftKey("depth_strider"), new EnchantmentDepthStrider(Enchantment.Rarity.RARE, aenumitemslot));
-        Enchantment.enchantments.a(9, new MinecraftKey("frost_walker"), new EnchantmentFrostWalker(Enchantment.Rarity.RARE, EnumItemSlot.FEET));
-        Enchantment.enchantments.a(16, new MinecraftKey("sharpness"), new EnchantmentWeaponDamage(Enchantment.Rarity.COMMON, 0, EnumItemSlot.MAINHAND));
-        Enchantment.enchantments.a(17, new MinecraftKey("smite"), new EnchantmentWeaponDamage(Enchantment.Rarity.UNCOMMON, 1, EnumItemSlot.MAINHAND));
-        Enchantment.enchantments.a(18, new MinecraftKey("bane_of_arthropods"), new EnchantmentWeaponDamage(Enchantment.Rarity.UNCOMMON, 2, EnumItemSlot.MAINHAND));
-        Enchantment.enchantments.a(19, new MinecraftKey("knockback"), new EnchantmentKnockback(Enchantment.Rarity.UNCOMMON, EnumItemSlot.MAINHAND));
-        Enchantment.enchantments.a(20, new MinecraftKey("fire_aspect"), new EnchantmentFire(Enchantment.Rarity.RARE, EnumItemSlot.MAINHAND));
-        Enchantment.enchantments.a(21, new MinecraftKey("looting"), new EnchantmentLootBonus(Enchantment.Rarity.RARE, EnchantmentSlotType.WEAPON, EnumItemSlot.MAINHAND));
-        Enchantment.enchantments.a(32, new MinecraftKey("efficiency"), new EnchantmentDigging(Enchantment.Rarity.COMMON, EnumItemSlot.MAINHAND));
-        Enchantment.enchantments.a(33, new MinecraftKey("silk_touch"), new EnchantmentSilkTouch(Enchantment.Rarity.VERY_RARE, EnumItemSlot.MAINHAND));
-        Enchantment.enchantments.a(34, new MinecraftKey("unbreaking"), new EnchantmentDurability(Enchantment.Rarity.UNCOMMON, EnumItemSlot.MAINHAND));
-        Enchantment.enchantments.a(35, new MinecraftKey("fortune"), new EnchantmentLootBonus(Enchantment.Rarity.RARE, EnchantmentSlotType.DIGGER, EnumItemSlot.MAINHAND));
-        Enchantment.enchantments.a(48, new MinecraftKey("power"), new EnchantmentArrowDamage(Enchantment.Rarity.COMMON, EnumItemSlot.MAINHAND));
-        Enchantment.enchantments.a(49, new MinecraftKey("punch"), new EnchantmentArrowKnockback(Enchantment.Rarity.RARE, EnumItemSlot.MAINHAND));
-        Enchantment.enchantments.a(50, new MinecraftKey("flame"), new EnchantmentFlameArrows(Enchantment.Rarity.RARE, EnumItemSlot.MAINHAND));
-        Enchantment.enchantments.a(51, new MinecraftKey("infinity"), new EnchantmentInfiniteArrows(Enchantment.Rarity.VERY_RARE, EnumItemSlot.MAINHAND));
-        Enchantment.enchantments.a(61, new MinecraftKey("luck_of_the_sea"), new EnchantmentLootBonus(Enchantment.Rarity.RARE, EnchantmentSlotType.FISHING_ROD, EnumItemSlot.MAINHAND));
-        Enchantment.enchantments.a(62, new MinecraftKey("lure"), new EnchantmentLure(Enchantment.Rarity.RARE, EnchantmentSlotType.FISHING_ROD, EnumItemSlot.MAINHAND));
-        Enchantment.enchantments.a(70, new MinecraftKey("mending"), new EnchantmentMending(Enchantment.Rarity.RARE, EnumItemSlot.values()));
-        // CraftBukkit start
-        for (Object enchantment : Enchantment.enchantments) {
-            org.bukkit.enchantments.Enchantment.registerEnchantment(new org.bukkit.craftbukkit.enchantments.CraftEnchantment((Enchantment) enchantment));
-        }
-        // CraftBukkit end
     }
 
     public enum Rarity {

@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
-import javax.annotation.Nullable;
-// CraftBukkit start
 import org.bukkit.event.entity.SlimeSplitEvent;
+
+import javax.annotation.Nullable;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class EntitySlime extends EntityInsentient implements IMonster {
@@ -18,6 +20,10 @@ public class EntitySlime extends EntityInsentient implements IMonster {
         this.moveController = new EntitySlime.ControllerMoveSlime(this);
     }
 
+    public static void c(DataConverterManager dataconvertermanager) {
+        EntityInsentient.a(dataconvertermanager, "Slime");
+    }
+
     protected void r() {
         this.goalSelector.a(1, new EntitySlime.PathfinderGoalSlimeRandomJump(this));
         this.goalSelector.a(2, new EntitySlime.PathfinderGoalSlimeNearestPlayer(this));
@@ -29,25 +35,21 @@ public class EntitySlime extends EntityInsentient implements IMonster {
 
     protected void i() {
         super.i();
-        this.datawatcher.register(EntitySlime.bv, Integer.valueOf(1));
+        this.datawatcher.register(EntitySlime.bv, 1);
+    }
+
+    public int getSize() {
+        return this.datawatcher.get(EntitySlime.bv);
     }
 
     public void setSize(int i) {
-        this.datawatcher.set(EntitySlime.bv, Integer.valueOf(i));
+        this.datawatcher.set(EntitySlime.bv, i);
         this.setSize(0.51000005F * (float) i, 0.51000005F * (float) i);
         this.setPosition(this.locX, this.locY, this.locZ);
         this.getAttributeInstance(GenericAttributes.maxHealth).setValue((double) (i * i));
         this.getAttributeInstance(GenericAttributes.MOVEMENT_SPEED).setValue((double) (0.2F + 0.1F * (float) i));
         this.setHealth(this.getMaxHealth());
         this.b_ = i;
-    }
-
-    public int getSize() {
-        return this.datawatcher.get(EntitySlime.bv).intValue();
-    }
-
-    public static void c(DataConverterManager dataconvertermanager) {
-        EntityInsentient.a(dataconvertermanager, "Slime");
     }
 
     public void b(NBTTagCompound nbttagcompound) {
@@ -394,9 +396,9 @@ public class EntitySlime extends EntityInsentient implements IMonster {
 
     static class ControllerMoveSlime extends ControllerMove {
 
+        private final EntitySlime k;
         private float i;
         private int j;
-        private final EntitySlime k;
         private boolean l;
 
         public ControllerMoveSlime(EntitySlime entityslime) {

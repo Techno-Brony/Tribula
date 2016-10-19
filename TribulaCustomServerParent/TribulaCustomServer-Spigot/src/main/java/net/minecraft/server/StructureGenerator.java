@@ -2,14 +2,15 @@ package net.minecraft.server;
 
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
 public abstract class StructureGenerator extends WorldGenBase {
 
-    private PersistentStructure a;
     protected Long2ObjectMap<StructureStart> c = new Long2ObjectOpenHashMap(1024);
+    private PersistentStructure a;
 
     public StructureGenerator() {}
 
@@ -43,7 +44,7 @@ public abstract class StructureGenerator extends WorldGenBase {
                         return this.a();
                     }
                 });
-                crashreportsystemdetails.a("Chunk location", String.format("%d,%d", Integer.valueOf(i), Integer.valueOf(j)));
+                crashreportsystemdetails.a("Chunk location", String.format("%d,%d", i, j));
                 crashreportsystemdetails.a("Chunk pos hash", new CrashReportCallable() {
                     public String a() throws Exception {
                         return String.valueOf(ChunkCoordIntPair.a(i, j));

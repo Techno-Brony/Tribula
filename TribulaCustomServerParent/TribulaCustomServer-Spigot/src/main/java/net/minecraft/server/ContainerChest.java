@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
-import javax.annotation.Nullable;
-// CraftBukkit start
 import org.bukkit.craftbukkit.inventory.CraftInventory;
 import org.bukkit.craftbukkit.inventory.CraftInventoryView;
+
+import javax.annotation.Nullable;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class ContainerChest extends Container {
@@ -13,26 +15,6 @@ public class ContainerChest extends Container {
     // CraftBukkit start
     private CraftInventoryView bukkitEntity = null;
     private PlayerInventory player;
-
-    @Override
-    public CraftInventoryView getBukkitView() {
-        if (bukkitEntity != null) {
-            return bukkitEntity;
-        }
-
-        CraftInventory inventory;
-        if (this.container instanceof PlayerInventory) {
-            inventory = new org.bukkit.craftbukkit.inventory.CraftInventoryPlayer((PlayerInventory) this.container);
-        } else if (this.container instanceof InventoryLargeChest) {
-            inventory = new org.bukkit.craftbukkit.inventory.CraftInventoryDoubleChest((InventoryLargeChest) this.container);
-        } else {
-            inventory = new CraftInventory(this.container);
-        }
-
-        bukkitEntity = new CraftInventoryView(this.player.player.getBukkitEntity(), inventory, this);
-        return bukkitEntity;
-    }
-    // CraftBukkit end
 
     public ContainerChest(IInventory iinventory, IInventory iinventory1, EntityHuman entityhuman) {
         this.container = iinventory1;
@@ -65,10 +47,30 @@ public class ContainerChest extends Container {
         }
 
     }
+    // CraftBukkit end
+
+    @Override
+    public CraftInventoryView getBukkitView() {
+        if (bukkitEntity != null) {
+            return bukkitEntity;
+        }
+
+        CraftInventory inventory;
+        if (this.container instanceof PlayerInventory) {
+            inventory = new org.bukkit.craftbukkit.inventory.CraftInventoryPlayer((PlayerInventory) this.container);
+        } else if (this.container instanceof InventoryLargeChest) {
+            inventory = new org.bukkit.craftbukkit.inventory.CraftInventoryDoubleChest((InventoryLargeChest) this.container);
+        } else {
+            inventory = new CraftInventory(this.container);
+        }
+
+        bukkitEntity = new CraftInventoryView(this.player.player.getBukkitEntity(), inventory, this);
+        return bukkitEntity;
+    }
 
     public boolean a(EntityHuman entityhuman) {
-        if (!this.checkReachable) return true; // CraftBukkit
-        return this.container.a(entityhuman);
+        // CraftBukkit
+        return this.checkReachable && !this.container.a(entityhuman);
     }
 
     @Nullable
@@ -81,10 +83,10 @@ public class ContainerChest extends Container {
 
             itemstack = itemstack1.cloneItemStack();
             if (i < this.f * 9) {
-                if (!this.a(itemstack1, this.f * 9, this.c.size(), true)) {
+                if (this.a(itemstack1, this.f * 9, this.c.size(), true)) {
                     return null;
                 }
-            } else if (!this.a(itemstack1, 0, this.f * 9, false)) {
+            } else if (this.a(itemstack1, 0, this.f * 9, false)) {
                 return null;
             }
 

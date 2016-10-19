@@ -3,11 +3,13 @@ package net.minecraft.server;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
-import java.util.Random;
-// CraftBukkit start
 import org.bukkit.Location;
 import org.bukkit.event.entity.EntityPortalExitEvent;
 import org.bukkit.util.Vector;
+
+import java.util.Random;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class PortalTravelAgent {
@@ -50,9 +52,9 @@ public class PortalTravelAgent {
             for (int l = -2; l <= 2; ++l) {
                 for (int i1 = -2; i1 <= 2; ++i1) {
                     for (int j1 = -1; j1 < 3; ++j1) {
-                        int k1 = i + i1 * 1 + l * 0;
+                        int k1 = i + i1;
                         int l1 = j + j1;
-                        int i2 = k + i1 * 0 - l * 1;
+                        int i2 = k - l;
                         boolean flag2 = j1 < 0;
 
                         this.world.setTypeUpdate(new BlockPosition(k1, l1, i2), flag2 ? Blocks.OBSIDIAN.getBlockData() : Blocks.AIR.getBlockData());

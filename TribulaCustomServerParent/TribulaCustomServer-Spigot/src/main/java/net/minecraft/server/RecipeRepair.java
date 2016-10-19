@@ -1,14 +1,16 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Lists;
-import java.util.ArrayList;
+
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class RecipeRepair extends ShapelessRecipes implements IRecipe { // CraftBukkit - added extends
 
     // CraftBukkit start - Delegate to new parent class
     public RecipeRepair() {
-        super(new ItemStack(Items.LEATHER_HELMET), java.util.Arrays.asList(new ItemStack(Items.LEATHER_HELMET)));
+        super(new ItemStack(Items.LEATHER_HELMET), Collections.singletonList(new ItemStack(Items.LEATHER_HELMET)));
     }
     // CraftBukkit end
 
@@ -73,8 +75,7 @@ public class RecipeRepair extends ShapelessRecipes implements IRecipe { // Craft
                 java.util.List<ItemStack> ingredients = new ArrayList<ItemStack>();
                 ingredients.add(itemstack2.cloneItemStack());
                 ingredients.add(itemstack.cloneItemStack());
-                ShapelessRecipes recipe = new ShapelessRecipes(result.cloneItemStack(), ingredients);
-                inventorycrafting.currentRecipe = recipe;
+                inventorycrafting.currentRecipe = new ShapelessRecipes(result.cloneItemStack(), ingredients);
                 result = org.bukkit.craftbukkit.event.CraftEventFactory.callPreCraftEvent(inventorycrafting, result, CraftingManager.getInstance().lastCraftView, true);
                 return result;
                 // return new ItemStack(itemstack2.getItem(), 1, i1);

@@ -1,15 +1,14 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Sets;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-
-// CraftBukkit start
 import org.bukkit.craftbukkit.util.LongHash;
 import org.bukkit.craftbukkit.util.LongHashSet;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public final class SpawnerCreature {
@@ -18,6 +17,93 @@ public final class SpawnerCreature {
     private final LongHashSet b = new LongHashSet(); // CraftBukkit
 
     public SpawnerCreature() {}
+
+    private static BlockPosition getRandomPosition(World world, int i, int j) {
+        Chunk chunk = world.getChunkAt(i, j);
+        int k = i * 16 + world.random.nextInt(16);
+        int l = j * 16 + world.random.nextInt(16);
+        int i1 = MathHelper.c(chunk.e(new BlockPosition(k, 0, l)) + 1, 16);
+        int j1 = world.random.nextInt(i1 > 0 ? i1 : chunk.g() + 16 - 1);
+
+        return new BlockPosition(k, j1, l);
+    }
+    // Spigot end
+
+    public static boolean a(IBlockData iblockdata) {
+        return !iblockdata.k() && (!iblockdata.m() && (!iblockdata.getMaterial().isLiquid() && !BlockMinecartTrackAbstract.i(iblockdata)));
+    }
+
+    public static boolean a(EntityInsentient.EnumEntityPositionType entityinsentient_enumentitypositiontype, World world, BlockPosition blockposition) {
+        if (!world.getWorldBorder().a(blockposition)) {
+            return false;
+        } else {
+            IBlockData iblockdata = world.getType(blockposition);
+
+            if (entityinsentient_enumentitypositiontype == EntityInsentient.EnumEntityPositionType.IN_WATER) {
+                return iblockdata.getMaterial().isLiquid() && world.getType(blockposition.down()).getMaterial().isLiquid() && !world.getType(blockposition.up()).l();
+            } else {
+                BlockPosition blockposition1 = blockposition.down();
+
+                if (!world.getType(blockposition1).q()) {
+                    return false;
+                } else {
+                    Block block = world.getType(blockposition1).getBlock();
+                    boolean flag = block != Blocks.BEDROCK && block != Blocks.BARRIER;
+
+                    return flag && a(iblockdata) && a(world.getType(blockposition.up()));
+                }
+            }
+        }
+    }
+
+    public static void a(World world, BiomeBase biomebase, int i, int j, int k, int l, Random random) {
+        List list = biomebase.getMobs(EnumCreatureType.CREATURE);
+
+        if (!list.isEmpty()) {
+            while (random.nextFloat() < biomebase.f()) {
+                BiomeBase.BiomeMeta biomebase_biomemeta = (BiomeBase.BiomeMeta) WeightedRandom.a(world.random, list);
+                int i1 = biomebase_biomemeta.c + random.nextInt(1 + biomebase_biomemeta.d - biomebase_biomemeta.c);
+                GroupDataEntity groupdataentity = null;
+                int j1 = i + random.nextInt(k);
+                int k1 = j + random.nextInt(l);
+                int l1 = j1;
+                int i2 = k1;
+
+                for (int j2 = 0; j2 < i1; ++j2) {
+                    boolean flag = false;
+
+                    for (int k2 = 0; !flag && k2 < 4; ++k2) {
+                        BlockPosition blockposition = world.q(new BlockPosition(j1, 0, k1));
+
+                        if (a(EntityInsentient.EnumEntityPositionType.ON_GROUND, world, blockposition)) {
+                            EntityInsentient entityinsentient;
+
+                            try {
+                                entityinsentient = biomebase_biomemeta.b.getConstructor(new Class[] { World.class}).newInstance(world);
+                            } catch (Exception exception) {
+                                exception.printStackTrace();
+                                continue;
+                            }
+
+                            entityinsentient.setPositionRotation((double) ((float) j1 + 0.5F), (double) blockposition.getY(), (double) ((float) k1 + 0.5F), random.nextFloat() * 360.0F, 0.0F);
+                            // CraftBukkit start - Added a reason for spawning this creature, moved entityinsentient.prepare(groupdataentity) up
+                            groupdataentity = entityinsentient.prepare(world.D(new BlockPosition(entityinsentient)), groupdataentity);
+                            world.addEntity(entityinsentient, SpawnReason.CHUNK_GEN);
+                            // CraftBukkit end
+                            flag = true;
+                        }
+
+                        j1 += random.nextInt(5) - random.nextInt(5);
+
+                        for (k1 += random.nextInt(5) - random.nextInt(5); j1 < i || j1 >= i + k || k1 < j || k1 >= j + k; k1 = i2 + random.nextInt(5) - random.nextInt(5)) {
+                            j1 = l1 + random.nextInt(5) - random.nextInt(5);
+                        }
+                    }
+                }
+            }
+
+        }
+    }
 
     // Spigot start - get entity count only from chunks being processed in b
     private int getEntityCount(WorldServer server, Class oClass)
@@ -36,7 +122,6 @@ public final class SpawnerCreature {
         }
         return i;
     }
-    // Spigot end
 
     public int a(WorldServer worldserver, boolean flag, boolean flag1, boolean flag2) {
         if (!flag && !flag1) {
@@ -130,7 +215,7 @@ public final class SpawnerCreature {
                         label120:
                         while (iterator1.hasNext() && (moblimit > 0)) { // Spigot - while more allowed
                             // CraftBukkit start = use LongHash and LongObjectHashMap
-                            long key = ((Long) iterator1.next()).longValue();
+                            long key = (Long) iterator1.next();
                             BlockPosition blockposition1 = getRandomPosition(worldserver, LongHash.msw(key), LongHash.lsw(key));
                             // CraftBukkit
                             int i2 = blockposition1.getX();
@@ -218,92 +303,6 @@ public final class SpawnerCreature {
             }
 
             return j1;
-        }
-    }
-
-    private static BlockPosition getRandomPosition(World world, int i, int j) {
-        Chunk chunk = world.getChunkAt(i, j);
-        int k = i * 16 + world.random.nextInt(16);
-        int l = j * 16 + world.random.nextInt(16);
-        int i1 = MathHelper.c(chunk.e(new BlockPosition(k, 0, l)) + 1, 16);
-        int j1 = world.random.nextInt(i1 > 0 ? i1 : chunk.g() + 16 - 1);
-
-        return new BlockPosition(k, j1, l);
-    }
-
-    public static boolean a(IBlockData iblockdata) {
-        return !iblockdata.k() && (!iblockdata.m() && (!iblockdata.getMaterial().isLiquid() && !BlockMinecartTrackAbstract.i(iblockdata)));
-    }
-
-    public static boolean a(EntityInsentient.EnumEntityPositionType entityinsentient_enumentitypositiontype, World world, BlockPosition blockposition) {
-        if (!world.getWorldBorder().a(blockposition)) {
-            return false;
-        } else {
-            IBlockData iblockdata = world.getType(blockposition);
-
-            if (entityinsentient_enumentitypositiontype == EntityInsentient.EnumEntityPositionType.IN_WATER) {
-                return iblockdata.getMaterial().isLiquid() && world.getType(blockposition.down()).getMaterial().isLiquid() && !world.getType(blockposition.up()).l();
-            } else {
-                BlockPosition blockposition1 = blockposition.down();
-
-                if (!world.getType(blockposition1).q()) {
-                    return false;
-                } else {
-                    Block block = world.getType(blockposition1).getBlock();
-                    boolean flag = block != Blocks.BEDROCK && block != Blocks.BARRIER;
-
-                    return flag && a(iblockdata) && a(world.getType(blockposition.up()));
-                }
-            }
-        }
-    }
-
-    public static void a(World world, BiomeBase biomebase, int i, int j, int k, int l, Random random) {
-        List list = biomebase.getMobs(EnumCreatureType.CREATURE);
-
-        if (!list.isEmpty()) {
-            while (random.nextFloat() < biomebase.f()) {
-                BiomeBase.BiomeMeta biomebase_biomemeta = (BiomeBase.BiomeMeta) WeightedRandom.a(world.random, list);
-                int i1 = biomebase_biomemeta.c + random.nextInt(1 + biomebase_biomemeta.d - biomebase_biomemeta.c);
-                GroupDataEntity groupdataentity = null;
-                int j1 = i + random.nextInt(k);
-                int k1 = j + random.nextInt(l);
-                int l1 = j1;
-                int i2 = k1;
-
-                for (int j2 = 0; j2 < i1; ++j2) {
-                    boolean flag = false;
-
-                    for (int k2 = 0; !flag && k2 < 4; ++k2) {
-                        BlockPosition blockposition = world.q(new BlockPosition(j1, 0, k1));
-
-                        if (a(EntityInsentient.EnumEntityPositionType.ON_GROUND, world, blockposition)) {
-                            EntityInsentient entityinsentient;
-
-                            try {
-                                entityinsentient = biomebase_biomemeta.b.getConstructor(new Class[] { World.class}).newInstance(world);
-                            } catch (Exception exception) {
-                                exception.printStackTrace();
-                                continue;
-                            }
-
-                            entityinsentient.setPositionRotation((double) ((float) j1 + 0.5F), (double) blockposition.getY(), (double) ((float) k1 + 0.5F), random.nextFloat() * 360.0F, 0.0F);
-                            // CraftBukkit start - Added a reason for spawning this creature, moved entityinsentient.prepare(groupdataentity) up
-                            groupdataentity = entityinsentient.prepare(world.D(new BlockPosition(entityinsentient)), groupdataentity);
-                            world.addEntity(entityinsentient, SpawnReason.CHUNK_GEN);
-                            // CraftBukkit end
-                            flag = true;
-                        }
-
-                        j1 += random.nextInt(5) - random.nextInt(5);
-
-                        for (k1 += random.nextInt(5) - random.nextInt(5); j1 < i || j1 >= i + k || k1 < j || k1 >= j + k; k1 = i2 + random.nextInt(5) - random.nextInt(5)) {
-                            j1 = l1 + random.nextInt(5) - random.nextInt(5);
-                        }
-                    }
-                }
-            }
-
         }
     }
 }

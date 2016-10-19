@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
-import javax.annotation.Nullable;
-// CraftBukkit start
 import org.bukkit.craftbukkit.event.CraftEventFactory;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerBucketFillEvent;
+
+import javax.annotation.Nullable;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class ItemBucket extends Item {
@@ -38,7 +40,7 @@ public class ItemBucket extends Item {
                     IBlockData iblockdata = world.getType(blockposition);
                     Material material = iblockdata.getMaterial();
 
-                    if (material == Material.WATER && iblockdata.get(BlockFluids.LEVEL).intValue() == 0) {
+                    if (material == Material.WATER && iblockdata.get(BlockFluids.LEVEL) == 0) {
                         // CraftBukkit start
                         PlayerBucketFillEvent event = CraftEventFactory.callPlayerBucketFillEvent(entityhuman, blockposition.getX(), blockposition.getY(), blockposition.getZ(), null, itemstack, Items.WATER_BUCKET);
  
@@ -50,7 +52,7 @@ public class ItemBucket extends Item {
                         entityhuman.b(StatisticList.b(this));
                         entityhuman.a(SoundEffects.N, 1.0F, 1.0F);
                         return new InteractionResultWrapper(EnumInteractionResult.SUCCESS, this.a(itemstack, entityhuman, Items.WATER_BUCKET, event.getItemStack())); // CraftBUkkit
-                    } else if (material == Material.LAVA && iblockdata.get(BlockFluids.LEVEL).intValue() == 0) {
+                    } else if (material == Material.LAVA && iblockdata.get(BlockFluids.LEVEL) == 0) {
                         // CraftBukkit start
                         PlayerBucketFillEvent event = CraftEventFactory.callPlayerBucketFillEvent(entityhuman, blockposition.getX(), blockposition.getY(), blockposition.getZ(), null, itemstack, Items.LAVA_BUCKET);
 

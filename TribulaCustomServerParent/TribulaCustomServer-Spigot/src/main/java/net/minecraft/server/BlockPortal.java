@@ -1,11 +1,11 @@
 package net.minecraft.server;
 
 import com.google.common.cache.LoadingCache;
-import java.util.Random;
-import javax.annotation.Nullable;
+import org.bukkit.event.entity.EntityPortalEnterEvent;
+import org.bukkit.event.world.PortalCreateEvent;
 
-import org.bukkit.event.entity.EntityPortalEnterEvent; // CraftBukkit
-import org.bukkit.event.world.PortalCreateEvent; // CraftBukkit
+import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockPortal extends BlockHalfTransparent {
 
@@ -18,6 +18,10 @@ public class BlockPortal extends BlockHalfTransparent {
         super(Material.PORTAL, false);
         this.w(this.blockStateList.getBlockData().set(BlockPortal.AXIS, EnumDirection.EnumAxis.X));
         this.a(true);
+    }
+
+    public static int a(EnumDirection.EnumAxis enumdirection_enumaxis) {
+        return enumdirection_enumaxis == EnumDirection.EnumAxis.X ? 1 : (enumdirection_enumaxis == EnumDirection.EnumAxis.Z ? 2 : 0);
     }
 
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
@@ -61,10 +65,6 @@ public class BlockPortal extends BlockHalfTransparent {
         return BlockPortal.k;
     }
 
-    public static int a(EnumDirection.EnumAxis enumdirection_enumaxis) {
-        return enumdirection_enumaxis == EnumDirection.EnumAxis.X ? 1 : (enumdirection_enumaxis == EnumDirection.EnumAxis.Z ? 2 : 0);
-    }
-
     public boolean c(IBlockData iblockdata) {
         return false;
     }
@@ -79,13 +79,9 @@ public class BlockPortal extends BlockHalfTransparent {
         } else {
             BlockPortal.Shape blockportal_shape1 = new BlockPortal.Shape(world, blockposition, EnumDirection.EnumAxis.Z);
 
-            if (blockportal_shape1.d() && blockportal_shape1.e == 0) {
-                return blockportal_shape1.createPortal();
-                // return true;
-                // CraftBukkit end
-            } else {
-                return false;
-            }
+            // return true;
+// CraftBukkit end
+            return blockportal_shape1.d() && blockportal_shape1.e == 0 && blockportal_shape1.createPortal();
         }
     }
 
@@ -220,29 +216,29 @@ public class BlockPortal extends BlockHalfTransparent {
         static {
             try {
                 BlockPortal.SyntheticClass_1.b[EnumBlockRotation.COUNTERCLOCKWISE_90.ordinal()] = 1;
-            } catch (NoSuchFieldError nosuchfielderror) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockPortal.SyntheticClass_1.b[EnumBlockRotation.CLOCKWISE_90.ordinal()] = 2;
-            } catch (NoSuchFieldError nosuchfielderror1) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             a = new int[EnumDirection.EnumAxis.values().length];
 
             try {
                 BlockPortal.SyntheticClass_1.a[EnumDirection.EnumAxis.X.ordinal()] = 1;
-            } catch (NoSuchFieldError nosuchfielderror2) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockPortal.SyntheticClass_1.a[EnumDirection.EnumAxis.Y.ordinal()] = 2;
-            } catch (NoSuchFieldError nosuchfielderror3) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockPortal.SyntheticClass_1.a[EnumDirection.EnumAxis.Z.ordinal()] = 3;
-            } catch (NoSuchFieldError nosuchfielderror4) {
+            } catch (NoSuchFieldError ignored) {
             }
 
         }
@@ -254,11 +250,11 @@ public class BlockPortal extends BlockHalfTransparent {
         private final EnumDirection.EnumAxis b;
         private final EnumDirection c;
         private final EnumDirection d;
+        java.util.Collection<org.bukkit.block.Block> blocks = new java.util.HashSet<org.bukkit.block.Block>(); // CraftBukkit - add field
         private int e;
         private BlockPosition position;
         private int height;
         private int width;
-        java.util.Collection<org.bukkit.block.Block> blocks = new java.util.HashSet<org.bukkit.block.Block>(); // CraftBukkit - add field
 
         public Shape(World world, BlockPosition blockposition, EnumDirection.EnumAxis enumdirection_enumaxis) {
             this.a = world;

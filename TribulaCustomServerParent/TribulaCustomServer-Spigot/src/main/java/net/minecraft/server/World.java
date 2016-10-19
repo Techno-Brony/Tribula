@@ -1,38 +1,101 @@
 	package net.minecraft.server;
 
-import com.google.common.base.Function;
-import com.google.common.base.Objects;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Lists;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
-import javax.annotation.Nullable;
+    import com.google.common.base.Function;
+    import com.google.common.base.Objects;
+    import com.google.common.base.Predicate;
+    import com.google.common.collect.Lists;
+    import com.google.common.collect.Maps;
+    import org.bukkit.Bukkit;
+    import org.bukkit.block.BlockState;
+    import org.bukkit.craftbukkit.CraftServer;
+    import org.bukkit.craftbukkit.CraftWorld;
+    import org.bukkit.craftbukkit.SpigotTimings;
+    import org.bukkit.craftbukkit.event.CraftEventFactory;
+    import org.bukkit.craftbukkit.util.CraftMagicNumbers;
+    import org.bukkit.event.block.BlockCanBuildEvent;
+    import org.bukkit.event.block.BlockPhysicsEvent;
+    import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+    import org.bukkit.generator.ChunkGenerator;
+
+    import javax.annotation.Nullable;
+    import java.util.*;
 
 // CraftBukkit start
-import com.google.common.collect.Maps;
-import java.util.Map;
-import org.bukkit.Bukkit;
-import org.bukkit.block.BlockState;
-import org.bukkit.craftbukkit.SpigotTimings; // Spigot
-import org.bukkit.craftbukkit.CraftServer;
-import org.bukkit.craftbukkit.CraftWorld;
-import org.bukkit.craftbukkit.event.CraftEventFactory;
-import org.bukkit.craftbukkit.util.CraftMagicNumbers;
-import org.bukkit.event.block.BlockCanBuildEvent;
-import org.bukkit.event.block.BlockPhysicsEvent;
-import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
-import org.bukkit.generator.ChunkGenerator;
 // CraftBukkit end
 
 public abstract class World implements IBlockAccess {
 
-    private int a = 63;
+    public static boolean haveWeSilencedAPhysicsCrash;
+    public static String blockLocation;
+    public final List<TileEntity> tileEntityList = Lists.newArrayList();
+    public final List<TileEntity> tileEntityListTick = Lists.newArrayList();
+    public final List<EntityHuman> players = Lists.newArrayList();
+    public final List<Entity> j = Lists.newArrayList();
+    public final Random random = new Random();
+    public final MethodProfiler methodProfiler;
+    public final boolean isClientSide;
+    public final org.spigotmc.SpigotWorldConfig spigotConfig; // Spigot
+    public final SpigotTimings.WorldTimingsHandler timings; // Spigot
+    // Spigot end
+    protected final List<Entity> f = Lists.newArrayList();
+    protected final IntHashMap<Entity> entitiesById = new IntHashMap();
+    protected final int m = 1013904223;
+    protected final IDataManager dataManager;
+    private final List<TileEntity> b = Lists.newArrayList();
+    private final List<TileEntity> tileEntityListUnload = Lists.newArrayList();
+    private final long I = 16777215L;
+    private final Calendar L;
+    private final WorldBorder N;
+    // CraftBukkit start Added the following
+    private final CraftWorld world;
+    public WorldProvider worldProvider;
+    public WorldData worldData;
+    public PersistentCollection worldMaps;
+    public Scoreboard scoreboard;
+    public boolean allowMonsters;
+    public boolean allowAnimals;
+    public boolean pvpMode;
+    public boolean keepSpawnInMemory = true;
+    public ChunkGenerator generator;
+    public boolean captureBlockStates = false;
+    public boolean captureTreeGeneration = false;
+    public ArrayList<BlockState> capturedBlockStates= new ArrayList<BlockState>(){
+        @Override
+        public boolean add( BlockState blockState ) {
+            Iterator<BlockState> blockStateIterator = this.iterator();
+            while( blockStateIterator.hasNext() ) {
+                BlockState blockState1 = blockStateIterator.next();
+                if ( blockState1.getLocation().equals( blockState.getLocation() ) ) {
+                    return false;
+                }
+            }
+
+            return super.add( blockState );
+        }
+    };
+    public long ticksPerAnimalSpawns;
+    public long ticksPerMonsterSpawns;
+    public boolean populating;
+    public Map<BlockPosition, TileEntity> capturedTileEntities = Maps.newHashMap();
     protected boolean d;
+    protected int l = (new Random()).nextInt();
+    protected float n;
+    protected float o;
+    protected float p;
+    protected float q;
+    protected NavigationListener t = new NavigationListener();
+    protected List<IWorldAccess> u;
+    protected IChunkProvider chunkProvider;
+    protected boolean isLoading;
+    protected PersistentVillage villages;
+    protected LootTableRegistry B;
+    int[] H;
+    private int a = 63;
+    private int J;
+    private int K;
+    private boolean M;
+    private int tickPosition;
+    private boolean guardEntityList; // Spigot
     // Spigot start - guard entity list from removals
     public final List<Entity> entityList = new java.util.ArrayList<Entity>()
     {
@@ -58,92 +121,9 @@ public abstract class World implements IBlockAccess {
             }
         }
     };
-    // Spigot end
-    protected final List<Entity> f = Lists.newArrayList();
-    public final List<TileEntity> tileEntityList = Lists.newArrayList();
-    public final List<TileEntity> tileEntityListTick = Lists.newArrayList();
-    private final List<TileEntity> b = Lists.newArrayList();
-    private final List<TileEntity> tileEntityListUnload = Lists.newArrayList();
-    public final List<EntityHuman> players = Lists.newArrayList();
-    public final List<Entity> j = Lists.newArrayList();
-    protected final IntHashMap<Entity> entitiesById = new IntHashMap();
-    private final long I = 16777215L;
-    private int J;
-    protected int l = (new Random()).nextInt();
-    protected final int m = 1013904223;
-    protected float n;
-    protected float o;
-    protected float p;
-    protected float q;
-    private int K;
-    public final Random random = new Random();
-    public WorldProvider worldProvider;
-    protected NavigationListener t = new NavigationListener();
-    protected List<IWorldAccess> u;
-    protected IChunkProvider chunkProvider;
-    protected final IDataManager dataManager;
-    public WorldData worldData;
-    protected boolean isLoading;
-    public PersistentCollection worldMaps;
-    protected PersistentVillage villages;
-    protected LootTableRegistry B;
-    public final MethodProfiler methodProfiler;
-    private final Calendar L;
-    public Scoreboard scoreboard;
-    public final boolean isClientSide;
-    public boolean allowMonsters;
-    public boolean allowAnimals;
-    private boolean M;
-    private final WorldBorder N;
-    int[] H;
-
-    // CraftBukkit start Added the following
-    private final CraftWorld world;
-    public boolean pvpMode;
-    public boolean keepSpawnInMemory = true;
-    public ChunkGenerator generator;
-
-    public boolean captureBlockStates = false;
-    public boolean captureTreeGeneration = false;
-    public ArrayList<BlockState> capturedBlockStates= new ArrayList<BlockState>(){
-        @Override
-        public boolean add( BlockState blockState ) {
-            Iterator<BlockState> blockStateIterator = this.iterator();
-            while( blockStateIterator.hasNext() ) {
-                BlockState blockState1 = blockStateIterator.next();
-                if ( blockState1.getLocation().equals( blockState.getLocation() ) ) {
-                    return false;
-                }
-            }
-
-            return super.add( blockState );
-        }
-    };
-    public long ticksPerAnimalSpawns;
-    public long ticksPerMonsterSpawns;
-    public boolean populating;
-    private int tickPosition;
-    public final org.spigotmc.SpigotWorldConfig spigotConfig; // Spigot
-
-    public final SpigotTimings.WorldTimingsHandler timings; // Spigot
-    private boolean guardEntityList; // Spigot
-    public static boolean haveWeSilencedAPhysicsCrash;
-    public static String blockLocation;
     private org.spigotmc.TickLimiter entityLimiter;
     private org.spigotmc.TickLimiter tileLimiter;
     private int tileTickPosition;
-
-    public CraftWorld getWorld() {
-        return this.world;
-    }
-
-    public CraftServer getServer() {
-        return (CraftServer) Bukkit.getServer();
-    }
-
-    public Chunk getChunkIfLoaded(int x, int z) {
-        return ((ChunkProviderServer) this.chunkProvider).getChunkIfLoaded(x, z);
-    }
 
     protected World(IDataManager idatamanager, WorldData worlddata, WorldProvider worldprovider, MethodProfiler methodprofiler, boolean flag, ChunkGenerator gen, org.bukkit.World.Environment env) {
         this.spigotConfig = new org.spigotmc.SpigotWorldConfig( worlddata.getName() ); // Spigot
@@ -197,6 +177,18 @@ public abstract class World implements IBlockAccess {
         timings = new SpigotTimings.WorldTimingsHandler(this); // Spigot - code below can generate new world and access timings
                 this.entityLimiter = new org.spigotmc.TickLimiter(spigotConfig.entityMaxTickTime);
         this.tileLimiter = new org.spigotmc.TickLimiter(spigotConfig.tileMaxTickTime);
+    }
+
+    public CraftWorld getWorld() {
+        return this.world;
+    }
+
+    public CraftServer getServer() {
+        return (CraftServer) Bukkit.getServer();
+    }
+
+    public Chunk getChunkIfLoaded(int x, int z) {
+        return ((ChunkProviderServer) this.chunkProvider).getChunkIfLoaded(x, z);
     }
 
     public World b() {
@@ -406,6 +398,7 @@ public abstract class World implements IBlockAccess {
             }
         }
     }
+    // CraftBukkit end
 
     // CraftBukkit start - Split off from original setTypeAndData(int i, int j, int k, Block block, int l, int i1) method in order to directly send client and physic updates
     public void notifyAndUpdatePhysics(BlockPosition blockposition, Chunk chunk, IBlockData oldBlock, IBlockData newBlock, int flag) {
@@ -420,7 +413,6 @@ public abstract class World implements IBlockAccess {
             }
         }
     }
-    // CraftBukkit end
 
     public boolean setAir(BlockPosition blockposition) {
         return this.setTypeAndData(blockposition, Blocks.AIR.getBlockData(), 3);
@@ -447,8 +439,8 @@ public abstract class World implements IBlockAccess {
     }
 
     public void notify(BlockPosition blockposition, IBlockData iblockdata, IBlockData iblockdata1, int i) {
-        for (int j = 0; j < this.u.size(); ++j) {
-            this.u.get(j).a(this, blockposition, iblockdata, iblockdata1, i);
+        for (IWorldAccess anU : this.u) {
+            anU.a(this, blockposition, iblockdata, iblockdata1, i);
         }
 
     }
@@ -488,8 +480,8 @@ public abstract class World implements IBlockAccess {
     }
 
     public void b(int i, int j, int k, int l, int i1, int j1) {
-        for (int k1 = 0; k1 < this.u.size(); ++k1) {
-            this.u.get(k1).a(i, j, k, l, i1, j1);
+        for (IWorldAccess anU : this.u) {
+            anU.a(i, j, k, l, i1, j1);
         }
 
     }
@@ -538,6 +530,7 @@ public abstract class World implements IBlockAccess {
                 // CraftBukkit start
                 CraftWorld world = this.getWorld();
                 if (world != null) {
+                    //noinspection deprecation,deprecation
                     BlockPhysicsEvent event = new BlockPhysicsEvent(world.getBlockAt(blockposition.getX(), blockposition.getY(), blockposition.getZ()), CraftMagicNumbers.getId(block));
                     this.getServer().getPluginManager().callEvent(event);
 
@@ -557,7 +550,7 @@ public abstract class World implements IBlockAccess {
                 crashreportsystemdetails.a("Source block type", new CrashReportCallable() {
                     public String a() throws Exception {
                         try {
-                            return String.format("ID #%d (%s // %s)", Integer.valueOf(Block.getId(block)), block.a(), block.getClass().getCanonicalName());
+                            return String.format("ID #%d (%s // %s)", Block.getId(block), block.a(), block.getClass().getCanonicalName());
                         } catch (Throwable throwable) {
                             return "ID #" + Block.getId(block);
                         }
@@ -724,8 +717,8 @@ public abstract class World implements IBlockAccess {
     }
 
     public void m(BlockPosition blockposition) {
-        for (int i = 0; i < this.u.size(); ++i) {
-            this.u.get(i).a(blockposition);
+        for (IWorldAccess anU : this.u) {
+            anU.a(blockposition);
         }
 
     }
@@ -912,8 +905,8 @@ public abstract class World implements IBlockAccess {
     }
 
     public void a(@Nullable EntityHuman entityhuman, double d0, double d1, double d2, SoundEffect soundeffect, SoundCategory soundcategory, float f, float f1) {
-        for (int i = 0; i < this.u.size(); ++i) {
-            this.u.get(i).a(entityhuman, soundeffect, soundcategory, d0, d1, d2, f, f1);
+        for (IWorldAccess anU : this.u) {
+            anU.a(entityhuman, soundeffect, soundcategory, d0, d1, d2, f, f1);
         }
 
     }
@@ -921,8 +914,8 @@ public abstract class World implements IBlockAccess {
     public void a(double d0, double d1, double d2, SoundEffect soundeffect, SoundCategory soundcategory, float f, float f1, boolean flag) {}
 
     public void a(BlockPosition blockposition, @Nullable SoundEffect soundeffect) {
-        for (int i = 0; i < this.u.size(); ++i) {
-            this.u.get(i).a(soundeffect, blockposition);
+        for (IWorldAccess anU : this.u) {
+            anU.a(soundeffect, blockposition);
         }
 
     }
@@ -932,8 +925,8 @@ public abstract class World implements IBlockAccess {
     }
 
     private void a(int i, boolean flag, double d0, double d1, double d2, double d3, double d4, double d5, int... aint) {
-        for (int j = 0; j < this.u.size(); ++j) {
-            this.u.get(j).a(i, flag, d0, d1, d2, d3, d4, d5, aint);
+        for (IWorldAccess anU : this.u) {
+            anU.a(i, flag, d0, d1, d2, d3, d4, d5, aint);
         }
 
     }
@@ -1023,16 +1016,16 @@ public abstract class World implements IBlockAccess {
     }
 
     protected void b(Entity entity) {
-        for (int i = 0; i < this.u.size(); ++i) {
-            this.u.get(i).a(entity);
+        for (IWorldAccess anU : this.u) {
+            anU.a(entity);
         }
 
         entity.valid = true; // CraftBukkit
     }
 
     protected void c(Entity entity) {
-        for (int i = 0; i < this.u.size(); ++i) {
-            this.u.get(i).b(entity);
+        for (IWorldAccess anU : this.u) {
+            anU.b(entity);
         }
 
         entity.valid = false; // CraftBukkit
@@ -1255,18 +1248,16 @@ public abstract class World implements IBlockAccess {
                             if (i2 <= 0 || j2 != k && j2 != l - 1) {
                                 blockposition_pooledblockposition.f(k1, j2, l1);
                                 if (k1 < -30000000 || k1 >= 30000000 || l1 < -30000000 || l1 >= 30000000) {
-                                    boolean flag = true;
 
-                                    return flag;
+                                    return true;
                                 }
 
                                 IBlockData iblockdata = this.getType(blockposition_pooledblockposition);
 
                                 iblockdata.a(this, blockposition_pooledblockposition, axisalignedbb, arraylist, null);
                                 if (!arraylist.isEmpty()) {
-                                    boolean flag1 = true;
 
-                                    return flag1;
+                                    return true;
                                 }
                             }
                         }
@@ -1531,9 +1522,7 @@ public abstract class World implements IBlockAccess {
 
         this.methodProfiler.c("pendingBlockEntities");
         if (!this.b.isEmpty()) {
-            for (int i1 = 0; i1 < this.b.size(); ++i1) {
-                TileEntity tileentity1 = this.b.get(i1);
-
+            for (TileEntity tileentity1 : this.b) {
                 if (!tileentity1.x()) {
                     /* CraftBukkit start - Order matters, moved down
                     if (!this.tileEntityList.contains(tileentity1)) {
@@ -1692,8 +1681,8 @@ public abstract class World implements IBlockAccess {
     public boolean a(AxisAlignedBB axisalignedbb, @Nullable Entity entity) {
         List list = this.getEntities(null, axisalignedbb);
 
-        for (int i = 0; i < list.size(); ++i) {
-            Entity entity1 = (Entity) list.get(i);
+        for (Object aList : list) {
+            Entity entity1 = (Entity) aList;
 
             if (!entity1.dead && entity1.i && entity1 != entity && (entity == null || entity1.x(entity))) {
                 return false;
@@ -1719,14 +1708,14 @@ public abstract class World implements IBlockAccess {
 
                     if (iblockdata.getMaterial() != Material.AIR) {
                         blockposition_pooledblockposition.t();
-                        return true;
+                        return false;
                     }
                 }
             }
         }
 
         blockposition_pooledblockposition.t();
-        return false;
+        return true;
     }
 
     public boolean containsLiquid(AxisAlignedBB axisalignedbb) {
@@ -1745,14 +1734,14 @@ public abstract class World implements IBlockAccess {
 
                     if (iblockdata.getMaterial().isLiquid()) {
                         blockposition_pooledblockposition.t();
-                        return true;
+                        return false;
                     }
                 }
             }
         }
 
         blockposition_pooledblockposition.t();
-        return false;
+        return true;
     }
 
     public boolean f(AxisAlignedBB axisalignedbb) {
@@ -1814,7 +1803,7 @@ public abstract class World implements IBlockAccess {
                         Block block = iblockdata.getBlock();
 
                         if (iblockdata.getMaterial() == material) {
-                            double d0 = (double) ((float) (l1 + 1) - BlockFluids.e(iblockdata.get(BlockFluids.LEVEL).intValue()));
+                            double d0 = (double) ((float) (l1 + 1) - BlockFluids.e(iblockdata.get(BlockFluids.LEVEL)));
 
                             if ((double) l >= d0) {
                                 flag = true;
@@ -1878,7 +1867,7 @@ public abstract class World implements IBlockAccess {
                     IBlockData iblockdata = this.getType(blockposition_pooledblockposition.f(k1, l1, i2));
 
                     if (iblockdata.getMaterial() == material) {
-                        int j2 = iblockdata.get(BlockFluids.LEVEL).intValue();
+                        int j2 = iblockdata.get(BlockFluids.LEVEL);
                         double d0 = (double) (l1 + 1);
 
                         if (j2 < 8) {
@@ -1954,7 +1943,6 @@ public abstract class World implements IBlockAccess {
         }
     }
 
-    public Map<BlockPosition, TileEntity> capturedTileEntities = Maps.newHashMap();
     @Nullable
     public TileEntity getTileEntity(BlockPosition blockposition) {
         if (this.E(blockposition)) {
@@ -1986,9 +1974,7 @@ public abstract class World implements IBlockAccess {
 
     @Nullable
     private TileEntity F(BlockPosition blockposition) {
-        for (int i = 0; i < this.b.size(); ++i) {
-            TileEntity tileentity = this.b.get(i);
-
+        for (TileEntity tileentity : this.b) {
             if (!tileentity.x() && tileentity.getPosition().equals(blockposition)) {
                 return tileentity;
             }
@@ -2057,7 +2043,7 @@ public abstract class World implements IBlockAccess {
     public boolean t(BlockPosition blockposition) {
         AxisAlignedBB axisalignedbb = this.getType(blockposition).d(this, blockposition);
 
-        return axisalignedbb != Block.k && axisalignedbb.a() >= 1.0D;
+        return axisalignedbb == Block.k || axisalignedbb.a() < 1.0D;
     }
 
     public boolean d(BlockPosition blockposition, boolean flag) {
@@ -2066,7 +2052,7 @@ public abstract class World implements IBlockAccess {
         } else {
             Chunk chunk = this.chunkProvider.getLoadedChunkAt(blockposition.getX() >> 4, blockposition.getZ() >> 4);
 
-            if (chunk != null && !chunk.isEmpty()) {
+            if (chunk != null && chunk.isEmpty()) {
                 IBlockData iblockdata = this.getType(blockposition);
 
                 return iblockdata.getMaterial().k() && iblockdata.h();
@@ -2166,9 +2152,9 @@ public abstract class World implements IBlockAccess {
                 this.o = MathHelper.a(this.o, 0.0F, 1.0F);
 
                 // CraftBukkit start
-                for (int idx = 0; idx < this.players.size(); ++idx) {
-                    if (((EntityPlayer) this.players.get(idx)).world == this) {
-                        ((EntityPlayer) this.players.get(idx)).tickWeather();
+                for (EntityHuman player : this.players) {
+                    if (((EntityPlayer) player).world == this) {
+                        ((EntityPlayer) player).tickWeather();
                     }
                 }
                 // CraftBukkit end
@@ -2203,7 +2189,7 @@ public abstract class World implements IBlockAccess {
                 IBlockData iblockdata = this.getType(blockposition);
                 Block block = iblockdata.getBlock();
 
-                if ((block == Blocks.WATER || block == Blocks.FLOWING_WATER) && iblockdata.get(BlockFluids.LEVEL).intValue() == 0) {
+                if ((block == Blocks.WATER || block == Blocks.FLOWING_WATER) && iblockdata.get(BlockFluids.LEVEL) == 0) {
                     if (!flag) {
                         return true;
                     }
@@ -2281,9 +2267,7 @@ public abstract class World implements IBlockAccess {
                 EnumDirection[] aenumdirection = EnumDirection.values();
                 int k = aenumdirection.length;
 
-                for (int l = 0; l < k; ++l) {
-                    EnumDirection enumdirection = aenumdirection[l];
-
+                for (EnumDirection enumdirection : aenumdirection) {
                     blockposition_pooledblockposition.j(blockposition).d(enumdirection);
                     int i1 = this.b(enumskyblock, blockposition_pooledblockposition) - j;
 
@@ -2305,7 +2289,7 @@ public abstract class World implements IBlockAccess {
     public boolean c(EnumSkyBlock enumskyblock, BlockPosition blockposition) {
         // CraftBukkit start - Use neighbor cache instead of looking up
         Chunk chunk = this.getChunkIfLoaded(blockposition.getX() >> 4, blockposition.getZ() >> 4);
-        if (chunk == null || !chunk.areNeighborsLoaded(1) /*!this.areChunksLoaded(blockposition, 17, false)*/) {
+        if (chunk == null || chunk.areNeighborsLoaded(1) /*!this.areChunksLoaded(blockposition, 17, false)*/) {
             // CraftBukkit end
             return false;
         } else {
@@ -2352,8 +2336,7 @@ public abstract class World implements IBlockAccess {
                                 EnumDirection[] aenumdirection = EnumDirection.values();
                                 int i4 = aenumdirection.length;
 
-                                for (int j4 = 0; j4 < i4; ++j4) {
-                                    EnumDirection enumdirection = aenumdirection[j4];
+                                for (EnumDirection enumdirection : aenumdirection) {
                                     int k4 = i2 + enumdirection.getAdjacentX();
                                     int l4 = j2 + enumdirection.getAdjacentY();
                                     int i5 = k2 + enumdirection.getAdjacentZ();
@@ -2524,8 +2507,8 @@ public abstract class World implements IBlockAccess {
         Entity entity = null;
         double d0 = Double.MAX_VALUE;
 
-        for (int i = 0; i < list.size(); ++i) {
-            Entity entity1 = (Entity) list.get(i);
+        for (Object aList : list) {
+            Entity entity1 = (Entity) aList;
 
             if (entity1 != t0 && IEntitySelector.e.apply(entity1)) {
                 double d1 = t0.h(entity1);
@@ -2605,6 +2588,7 @@ public abstract class World implements IBlockAccess {
 
         // CraftBukkit start - store default return
         boolean defaultReturn = !(axisalignedbb != Block.k && !this.a(axisalignedbb.a(blockposition), entity)) && (iblockdata.getMaterial() == Material.ORIENTABLE && block == Blocks.ANVIL || iblockdata.getMaterial().isReplaceable() && block.canPlace(this, blockposition, enumdirection, itemstack));
+        //noinspection deprecation,deprecation
         BlockCanBuildEvent event = new BlockCanBuildEvent(this.getWorld().getBlockAt(blockposition.getX(), blockposition.getY(), blockposition.getZ()), CraftMagicNumbers.getId(block), defaultReturn);
         this.getServer().getPluginManager().callEvent(event);
 
@@ -2679,8 +2663,7 @@ public abstract class World implements IBlockAccess {
         EnumDirection[] aenumdirection = EnumDirection.values();
         int j = aenumdirection.length;
 
-        for (int k = 0; k < j; ++k) {
-            EnumDirection enumdirection = aenumdirection[k];
+        for (EnumDirection enumdirection : aenumdirection) {
             int l = this.getBlockFacePower(blockposition.shift(enumdirection), enumdirection);
 
             if (l >= 15) {
@@ -2710,8 +2693,7 @@ public abstract class World implements IBlockAccess {
         double d4 = -1.0D;
         EntityHuman entityhuman = null;
 
-        for (int i = 0; i < this.players.size(); ++i) {
-            EntityHuman entityhuman1 = this.players.get(i);
+        for (EntityHuman entityhuman1 : this.players) {
             // CraftBukkit start - Fixed an NPE
             if (entityhuman1 == null || entityhuman1.dead) {
                 continue;
@@ -2732,9 +2714,7 @@ public abstract class World implements IBlockAccess {
     }
 
     public boolean isPlayerNearby(double d0, double d1, double d2, double d3) {
-        for (int i = 0; i < this.players.size(); ++i) {
-            EntityHuman entityhuman = this.players.get(i);
-
+        for (EntityHuman entityhuman : this.players) {
             if (IEntitySelector.e.apply(entityhuman)) {
                 double d4 = entityhuman.e(d0, d1, d2);
 
@@ -2762,9 +2742,7 @@ public abstract class World implements IBlockAccess {
         double d5 = -1.0D;
         EntityHuman entityhuman = null;
 
-        for (int i = 0; i < this.players.size(); ++i) {
-            EntityHuman entityhuman1 = this.players.get(i);
-
+        for (EntityHuman entityhuman1 : this.players) {
             if (!entityhuman1.abilities.isInvulnerable && entityhuman1.isAlive() && !entityhuman1.isSpectator() && (predicate == null || predicate.apply(entityhuman1))) {
                 double d6 = entityhuman1.e(d0, entityhuman1.locY, d2);
                 double d7 = d3;
@@ -2784,7 +2762,7 @@ public abstract class World implements IBlockAccess {
                 }
 
                 if (function != null) {
-                    d7 *= Objects.firstNonNull(function.apply(entityhuman1), Double.valueOf(1.0D)).doubleValue();
+                    d7 *= Objects.firstNonNull(function.apply(entityhuman1), 1.0D);
                 }
 
                 if ((d4 < 0.0D || Math.abs(entityhuman1.locY - d1) < d4 * d4) && (d3 < 0.0D || d6 < d7 * d7) && (d5 == -1.0D || d6 < d5)) {
@@ -2799,9 +2777,7 @@ public abstract class World implements IBlockAccess {
 
     @Nullable
     public EntityHuman a(String s) {
-        for (int i = 0; i < this.players.size(); ++i) {
-            EntityHuman entityhuman = this.players.get(i);
-
+        for (EntityHuman entityhuman : this.players) {
             if (s.equals(entityhuman.getName())) {
                 return entityhuman;
             }
@@ -2812,9 +2788,7 @@ public abstract class World implements IBlockAccess {
 
     @Nullable
     public EntityHuman b(UUID uuid) {
-        for (int i = 0; i < this.players.size(); ++i) {
-            EntityHuman entityhuman = this.players.get(i);
-
+        for (EntityHuman entityhuman : this.players) {
             if (uuid.equals(entityhuman.getUniqueID())) {
                 return entityhuman;
             }
@@ -2950,8 +2924,8 @@ public abstract class World implements IBlockAccess {
     }
 
     public void a(int i, BlockPosition blockposition, int j) {
-        for (int k = 0; k < this.u.size(); ++k) {
-            this.u.get(k).a(i, blockposition, j);
+        for (IWorldAccess anU : this.u) {
+            anU.a(i, blockposition, j);
         }
 
     }
@@ -2962,8 +2936,8 @@ public abstract class World implements IBlockAccess {
 
     public void a(@Nullable EntityHuman entityhuman, int i, BlockPosition blockposition, int j) {
         try {
-            for (int k = 0; k < this.u.size(); ++k) {
-                this.u.get(k).a(entityhuman, i, blockposition, j);
+            for (IWorldAccess anU : this.u) {
+                anU.a(entityhuman, i, blockposition, j);
             }
 
         } catch (Throwable throwable) {
@@ -2972,8 +2946,8 @@ public abstract class World implements IBlockAccess {
 
             crashreportsystemdetails.a("Block coordinates", CrashReportSystemDetails.a(blockposition));
             crashreportsystemdetails.a("Event source", entityhuman);
-            crashreportsystemdetails.a("Event type", Integer.valueOf(i));
-            crashreportsystemdetails.a("Event data", Integer.valueOf(j));
+            crashreportsystemdetails.a("Event type", i);
+            crashreportsystemdetails.a("Event data", j);
             throw new ReportedException(crashreport);
         }
     }
@@ -3026,9 +3000,7 @@ public abstract class World implements IBlockAccess {
     }
 
     public void c(int i, BlockPosition blockposition, int j) {
-        for (int k = 0; k < this.u.size(); ++k) {
-            IWorldAccess iworldaccess = this.u.get(k);
-
+        for (IWorldAccess iworldaccess : this.u) {
             iworldaccess.b(i, blockposition, j);
         }
 

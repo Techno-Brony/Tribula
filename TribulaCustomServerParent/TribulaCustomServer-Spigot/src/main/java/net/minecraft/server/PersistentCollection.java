@@ -2,25 +2,19 @@ package net.minecraft.server;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import java.io.DataInputStream;
-import java.io.DataOutput;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+
+import javax.annotation.Nullable;
+import java.io.*;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import javax.annotation.Nullable;
 
 public class PersistentCollection {
 
-    private final IDataManager b;
-    protected Map<String, PersistentBase> a = Maps.newHashMap();
     public final List<PersistentBase> c = Lists.newArrayList(); // Spigot
+    private final IDataManager b;
     private final Map<String, Short> d = Maps.newHashMap();
+    protected Map<String, PersistentBase> a = Maps.newHashMap();
 
     public PersistentCollection(IDataManager idatamanager) {
         this.b = idatamanager;
@@ -75,9 +69,7 @@ public class PersistentCollection {
     }
 
     public void a() {
-        for (int i = 0; i < this.c.size(); ++i) {
-            PersistentBase persistentbase = this.c.get(i);
-
+        for (PersistentBase persistentbase : this.c) {
             if (persistentbase.d()) {
                 this.a(persistentbase);
                 persistentbase.a(false);
@@ -131,7 +123,7 @@ public class PersistentCollection {
                         NBTTagShort nbttagshort = (NBTTagShort) nbtbase;
                         short short0 = nbttagshort.f();
 
-                        this.d.put(s, Short.valueOf(short0));
+                        this.d.put(s, short0);
                     }
                 }
             }
@@ -145,14 +137,14 @@ public class PersistentCollection {
         Short oshort = this.d.get(s);
 
         if (oshort == null) {
-            oshort = Short.valueOf((short) 0);
+            oshort = (short) 0;
         } else {
-            oshort = Short.valueOf((short) (oshort.shortValue() + 1));
+            oshort = (short) (oshort + 1);
         }
 
         this.d.put(s, oshort);
         if (this.b == null) {
-            return oshort.shortValue();
+            return oshort;
         } else {
             try {
                 File file = this.b.getDataFile("idcounts");
@@ -164,7 +156,7 @@ public class PersistentCollection {
                     while (iterator.hasNext()) {
                         String s1 = (String) iterator.next();
 
-                        nbttagcompound.setShort(s1, this.d.get(s1).shortValue());
+                        nbttagcompound.setShort(s1, this.d.get(s1));
                     }
 
                     DataOutputStream dataoutputstream = new DataOutputStream(new FileOutputStream(file));
@@ -176,7 +168,7 @@ public class PersistentCollection {
                 exception.printStackTrace();
             }
 
-            return oshort.shortValue();
+            return oshort;
         }
     }
 }

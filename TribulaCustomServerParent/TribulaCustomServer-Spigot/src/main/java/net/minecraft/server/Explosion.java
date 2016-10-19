@@ -3,21 +3,19 @@ package net.minecraft.server;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import org.bukkit.Location;
+import org.bukkit.craftbukkit.event.CraftEventFactory;
+import org.bukkit.event.block.BlockExplodeEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
+
+import java.util.*;
 
 // CraftBukkit start
-import org.bukkit.craftbukkit.event.CraftEventFactory;
-import org.bukkit.event.entity.EntityExplodeEvent;
-import org.bukkit.Location;
-import org.bukkit.event.block.BlockExplodeEvent;
 // CraftBukkit end
 
 public class Explosion {
 
+    public final Entity source;
     private final boolean a;
     private final boolean b;
     private final Random c = new Random();
@@ -25,7 +23,6 @@ public class Explosion {
     private final double posX;
     private final double posY;
     private final double posZ;
-    public final Entity source;
     private final float size;
     private final List<BlockPosition> blocks = Lists.newArrayList();
     private final Map<EntityHuman, Vec3D> k = Maps.newHashMap();
@@ -106,8 +103,8 @@ public class Explosion {
         List list = this.world.getEntities(this.source, new AxisAlignedBB((double) i, (double) l, (double) j1, (double) j, (double) i1, (double) k1));
         Vec3D vec3d = new Vec3D(this.posX, this.posY, this.posZ);
 
-        for (int l1 = 0; l1 < list.size(); ++l1) {
-            Entity entity = (Entity) list.get(l1);
+        for (Object aList : list) {
+            Entity entity = (Entity) aList;
 
             if (!entity.bt()) {
                 double d7 = entity.f(this.posX, this.posY, this.posZ) / (double) f3;

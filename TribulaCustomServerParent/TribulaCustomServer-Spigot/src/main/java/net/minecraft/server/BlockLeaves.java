@@ -1,9 +1,9 @@
 package net.minecraft.server;
 
-import java.util.Random;
-import javax.annotation.Nullable;
+import org.bukkit.event.block.LeavesDecayEvent;
 
-import org.bukkit.event.block.LeavesDecayEvent; // CraftBukkit
+import javax.annotation.Nullable;
+import java.util.Random;
 
 public abstract class BlockLeaves extends Block {
 
@@ -35,8 +35,8 @@ public abstract class BlockLeaves extends Block {
                         BlockPosition blockposition1 = blockposition.a(l, i1, j1);
                         IBlockData iblockdata1 = world.getType(blockposition1);
 
-                        if (iblockdata1.getMaterial() == Material.LEAVES && !iblockdata1.get(BlockLeaves.CHECK_DECAY).booleanValue()) {
-                            world.setTypeAndData(blockposition1, iblockdata1.set(BlockLeaves.CHECK_DECAY, Boolean.valueOf(true)), 4);
+                        if (iblockdata1.getMaterial() == Material.LEAVES && !iblockdata1.get(BlockLeaves.CHECK_DECAY)) {
+                            world.setTypeAndData(blockposition1, iblockdata1.set(BlockLeaves.CHECK_DECAY, Boolean.TRUE), 4);
                         }
                     }
                 }
@@ -47,7 +47,7 @@ public abstract class BlockLeaves extends Block {
 
     public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
         if (!world.isClientSide) {
-            if (iblockdata.get(BlockLeaves.CHECK_DECAY).booleanValue() && iblockdata.get(BlockLeaves.DECAYABLE).booleanValue()) {
+            if (iblockdata.get(BlockLeaves.CHECK_DECAY) && iblockdata.get(BlockLeaves.DECAYABLE)) {
                 boolean flag = true;
                 boolean flag1 = true;
                 int i = blockposition.getX();
@@ -125,7 +125,7 @@ public abstract class BlockLeaves extends Block {
                 int l1 = this.d[16912];
 
                 if (l1 >= 0) {
-                    world.setTypeAndData(blockposition, iblockdata.set(BlockLeaves.CHECK_DECAY, Boolean.valueOf(false)), 4);
+                    world.setTypeAndData(blockposition, iblockdata.set(BlockLeaves.CHECK_DECAY, Boolean.FALSE), 4);
                 } else {
                     this.b(world, blockposition);
                 }

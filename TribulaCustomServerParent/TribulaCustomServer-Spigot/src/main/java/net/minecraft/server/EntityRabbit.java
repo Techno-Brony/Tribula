@@ -19,11 +19,15 @@ public class EntityRabbit extends EntityAnimal {
         this.initializePathFinderGoals(); // CraftBukkit - moved code
     }
 
+    public static void b(DataConverterManager dataconvertermanager) {
+        EntityInsentient.a(dataconvertermanager, "Rabbit");
+    }
+    // CraftBukkit end
+
     // CraftBukkit start - code from constructor
     public void initializePathFinderGoals(){
         this.c(0.0D);
     }
-    // CraftBukkit end
 
     protected void r() {
         this.goalSelector.a(1, new PathfinderGoalFloat(this));
@@ -97,7 +101,7 @@ public class EntityRabbit extends EntityAnimal {
 
     protected void i() {
         super.i();
-        this.datawatcher.register(EntityRabbit.bx, Integer.valueOf(0));
+        this.datawatcher.register(EntityRabbit.bx, 0);
     }
 
     public void M() {
@@ -131,7 +135,7 @@ public class EntityRabbit extends EntityAnimal {
 
             EntityRabbit.ControllerJumpRabbit entityrabbit_controllerjumprabbit = (EntityRabbit.ControllerJumpRabbit) this.g;
 
-            if (!entityrabbit_controllerjumprabbit.c()) {
+            if (entityrabbit_controllerjumprabbit.c()) {
                 if (this.moveController.a() && this.bC == 0) {
                     PathEntity pathentity = this.navigation.k();
                     Vec3D vec3d = new Vec3D(this.moveController.d(), this.moveController.e(), this.moveController.f());
@@ -195,10 +199,6 @@ public class EntityRabbit extends EntityAnimal {
         super.initAttributes();
         this.getAttributeInstance(GenericAttributes.maxHealth).setValue(3.0D);
         this.getAttributeInstance(GenericAttributes.MOVEMENT_SPEED).setValue(0.30000001192092896D);
-    }
-
-    public static void b(DataConverterManager dataconvertermanager) {
-        EntityInsentient.a(dataconvertermanager, "Rabbit");
     }
 
     public void b(NBTTagCompound nbttagcompound) {
@@ -276,7 +276,7 @@ public class EntityRabbit extends EntityAnimal {
     }
 
     public int getRabbitType() {
-        return this.datawatcher.get(EntityRabbit.bx).intValue();
+        return this.datawatcher.get(EntityRabbit.bx);
     }
 
     public void setRabbitType(int i) {
@@ -291,7 +291,7 @@ public class EntityRabbit extends EntityAnimal {
             }
         }
 
-        this.datawatcher.set(EntityRabbit.bx, Integer.valueOf(i));
+        this.datawatcher.set(EntityRabbit.bx, i);
     }
 
     @Nullable
@@ -417,7 +417,7 @@ public class EntityRabbit extends EntityAnimal {
                 if (this.e && block instanceof BlockCarrots) {
                     Integer integer = iblockdata.get(BlockCarrots.AGE);
 
-                    if (integer.intValue() == 0) {
+                    if (integer == 0) {
                         // CraftBukkit start
                         if (org.bukkit.craftbukkit.event.CraftEventFactory.callEntityChangeBlockEvent(this.c, blockposition, Blocks.AIR, 0).isCancelled()) {
                             return;
@@ -430,12 +430,12 @@ public class EntityRabbit extends EntityAnimal {
                         if (org.bukkit.craftbukkit.event.CraftEventFactory.callEntityChangeBlockEvent(
                                 this.c,
                                 blockposition,
-                                block, block.toLegacyData(iblockdata.set(BlockCarrots.AGE, Integer.valueOf(integer.intValue() - 1)))
+                                block, block.toLegacyData(iblockdata.set(BlockCarrots.AGE, integer - 1))
                         ).isCancelled()) {
                             return;
                         }
                         // CraftBukkit end
-                        world.setTypeAndData(blockposition, iblockdata.set(BlockCarrots.AGE, Integer.valueOf(integer.intValue() - 1)), 2);
+                        world.setTypeAndData(blockposition, iblockdata.set(BlockCarrots.AGE, integer - 1), 2);
                         world.triggerEffect(2001, blockposition, Block.getCombinedId(iblockdata));
                     }
 
@@ -491,7 +491,7 @@ public class EntityRabbit extends EntityAnimal {
         }
 
         public void c() {
-            if (this.i.onGround && !this.i.be && !((EntityRabbit.ControllerJumpRabbit) this.i.g).c()) {
+            if (this.i.onGround && !this.i.be && ((ControllerJumpRabbit) this.i.g).c()) {
                 this.i.c(0.0D);
             } else if (this.a()) {
                 this.i.c(this.j);
@@ -513,6 +513,15 @@ public class EntityRabbit extends EntityAnimal {
         }
     }
 
+    public static class GroupDataRabbit implements GroupDataEntity {
+
+        public int a;
+
+        public GroupDataRabbit(int i) {
+            this.a = i;
+        }
+    }
+
     public class ControllerJumpRabbit extends ControllerJump {
 
         private final EntityRabbit c;
@@ -524,7 +533,7 @@ public class EntityRabbit extends EntityAnimal {
         }
 
         public boolean c() {
-            return this.a;
+            return !this.a;
         }
 
         public boolean d() {
@@ -541,15 +550,6 @@ public class EntityRabbit extends EntityAnimal {
                 this.a = false;
             }
 
-        }
-    }
-
-    public static class GroupDataRabbit implements GroupDataEntity {
-
-        public int a;
-
-        public GroupDataRabbit(int i) {
-            this.a = i;
         }
     }
 }

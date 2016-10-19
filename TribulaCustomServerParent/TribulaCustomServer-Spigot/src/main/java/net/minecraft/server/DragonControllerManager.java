@@ -2,9 +2,10 @@ package net.minecraft.server;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-// CraftBukkit start
 import org.bukkit.craftbukkit.entity.CraftEnderDragon;
 import org.bukkit.event.entity.EnderDragonChangePhaseEvent;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class DragonControllerManager {
@@ -40,7 +41,7 @@ public class DragonControllerManager {
 
             this.currentDragonController = this.b(dragoncontrollerphase);
             if (!this.enderDragon.world.isClientSide) {
-                this.enderDragon.getDataWatcher().set(EntityEnderDragon.PHASE, Integer.valueOf(dragoncontrollerphase.b()));
+                this.enderDragon.getDataWatcher().set(EntityEnderDragon.PHASE, dragoncontrollerphase.b());
             }
 
             DragonControllerManager.a.debug("Dragon is now in phase {} on the {}", dragoncontrollerphase, this.enderDragon.world.isClientSide ? "client" : "server");

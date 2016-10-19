@@ -1,20 +1,22 @@
 package net.minecraft.server;
 
+import joptsimple.OptionSet;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import joptsimple.OptionSet; // CraftBukkit
 
 public class PropertyManager {
 
     private static final Logger a = LogManager.getLogger();
     public final Properties properties = new Properties();
     private final File file;
+    // CraftBukkit start
+    private OptionSet options = null;
 
     public PropertyManager(File file) {
         this.file = file;
@@ -31,7 +33,7 @@ public class PropertyManager {
                 if (fileinputstream != null) {
                     try {
                         fileinputstream.close();
-                    } catch (IOException ioexception) {
+                    } catch (IOException ignored) {
                     }
                 }
 
@@ -42,9 +44,6 @@ public class PropertyManager {
         }
 
     }
-
-    // CraftBukkit start
-    private OptionSet options = null;
 
     public PropertyManager(final OptionSet options) {
         this((File) options.valueOf("config"));
@@ -85,7 +84,7 @@ public class PropertyManager {
             if (fileoutputstream != null) {
                 try {
                     fileoutputstream.close();
-                } catch (IOException ioexception) {
+                } catch (IOException ignored) {
                 }
             }
 

@@ -1,7 +1,7 @@
 package net.minecraft.server;
 
-import java.util.Random;
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockDaylightDetector extends BlockTileEntity {
 
@@ -12,7 +12,7 @@ public class BlockDaylightDetector extends BlockTileEntity {
     public BlockDaylightDetector(boolean flag) {
         super(Material.WOOD);
         this.c = flag;
-        this.w(this.blockStateList.getBlockData().set(BlockDaylightDetector.POWER, Integer.valueOf(0)));
+        this.w(this.blockStateList.getBlockData().set(BlockDaylightDetector.POWER, 0));
         this.a(CreativeModeTab.d);
         this.c(0.2F);
         this.a(SoundEffectType.a);
@@ -24,7 +24,7 @@ public class BlockDaylightDetector extends BlockTileEntity {
     }
 
     public int b(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
-        return iblockdata.get(BlockDaylightDetector.POWER).intValue();
+        return iblockdata.get(BlockDaylightDetector.POWER);
     }
 
     public void c(World world, BlockPosition blockposition) {
@@ -45,9 +45,9 @@ public class BlockDaylightDetector extends BlockTileEntity {
             }
 
             i = MathHelper.clamp(i, 0, 15);
-            if (iblockdata.get(BlockDaylightDetector.POWER).intValue() != i) {
+            if (iblockdata.get(BlockDaylightDetector.POWER) != i) {
                 i = org.bukkit.craftbukkit.event.CraftEventFactory.callRedstoneChange(world, blockposition.getX(), blockposition.getY(), blockposition.getZ(), iblockdata.get(POWER), i).getNewCurrent(); // CraftBukkit - Call BlockRedstoneEvent
-                world.setTypeAndData(blockposition, iblockdata.set(BlockDaylightDetector.POWER, Integer.valueOf(i)), 3);
+                world.setTypeAndData(blockposition, iblockdata.set(BlockDaylightDetector.POWER, i), 3);
             }
 
         }
@@ -103,11 +103,11 @@ public class BlockDaylightDetector extends BlockTileEntity {
     }
 
     public IBlockData fromLegacyData(int i) {
-        return this.getBlockData().set(BlockDaylightDetector.POWER, Integer.valueOf(i));
+        return this.getBlockData().set(BlockDaylightDetector.POWER, i);
     }
 
     public int toLegacyData(IBlockData iblockdata) {
-        return iblockdata.get(BlockDaylightDetector.POWER).intValue();
+        return iblockdata.get(BlockDaylightDetector.POWER);
     }
 
     protected BlockStateList getStateList() {

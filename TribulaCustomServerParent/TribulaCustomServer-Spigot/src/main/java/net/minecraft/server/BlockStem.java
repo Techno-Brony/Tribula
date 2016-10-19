@@ -1,31 +1,31 @@
 package net.minecraft.server;
 
+import org.bukkit.craftbukkit.event.CraftEventFactory;
+
+import javax.annotation.Nullable;
 import java.util.Iterator;
 import java.util.Random;
-import javax.annotation.Nullable;
-
-import org.bukkit.craftbukkit.event.CraftEventFactory; // CraftBukkit
 
 public class BlockStem extends BlockPlant implements IBlockFragilePlantElement {
 
     public static final BlockStateInteger AGE = BlockStateInteger.of("age", 0, 7);
     public static final BlockStateDirection FACING = BlockTorch.FACING;
-    private final Block blockFruit;
     protected static final AxisAlignedBB[] d = new AxisAlignedBB[] { new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 0.125D, 0.625D), new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 0.25D, 0.625D), new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 0.375D, 0.625D), new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 0.5D, 0.625D), new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 0.625D, 0.625D), new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 0.75D, 0.625D), new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 0.875D, 0.625D), new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 1.0D, 0.625D)};
+    private final Block blockFruit;
 
     protected BlockStem(Block block) {
-        this.w(this.blockStateList.getBlockData().set(BlockStem.AGE, Integer.valueOf(0)).set(BlockStem.FACING, EnumDirection.UP));
+        this.w(this.blockStateList.getBlockData().set(BlockStem.AGE, 0).set(BlockStem.FACING, EnumDirection.UP));
         this.blockFruit = block;
         this.a(true);
         this.a((CreativeModeTab) null);
     }
 
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
-        return BlockStem.d[iblockdata.get(BlockStem.AGE).intValue()];
+        return BlockStem.d[iblockdata.get(BlockStem.AGE)];
     }
 
     public IBlockData updateState(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
-        int i = iblockdata.get(BlockStem.AGE).intValue();
+        int i = iblockdata.get(BlockStem.AGE);
 
         iblockdata = iblockdata.set(BlockStem.FACING, EnumDirection.UP);
         Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
@@ -52,10 +52,10 @@ public class BlockStem extends BlockPlant implements IBlockFragilePlantElement {
             float f = BlockCrops.a(this, world, blockposition);
 
             if (random.nextInt((int) ((100.0F / (this == Blocks.PUMPKIN_STEM ? world.spigotConfig.pumpkinModifier : world.spigotConfig.melonModifier)) * (25.0F / f)) + 1) == 0) { // Spigot
-                int i = iblockdata.get(BlockStem.AGE).intValue();
+                int i = iblockdata.get(BlockStem.AGE);
 
                 if (i < 7) {
-                    iblockdata = iblockdata.set(BlockStem.AGE, Integer.valueOf(i + 1));
+                    iblockdata = iblockdata.set(BlockStem.AGE, i + 1);
                     // world.setTypeAndData(blockposition, iblockdata, 2); // CraftBukkit
                     CraftEventFactory.handleBlockGrowEvent(world, blockposition.getX(), blockposition.getY(), blockposition.getZ(), this, toLegacyData(iblockdata)); // CraftBukkit
                 } else {
@@ -83,7 +83,7 @@ public class BlockStem extends BlockPlant implements IBlockFragilePlantElement {
     }
 
     public void g(World world, BlockPosition blockposition, IBlockData iblockdata) {
-        int i = iblockdata.get(BlockStem.AGE).intValue() + MathHelper.nextInt(world.random, 2, 5);
+        int i = iblockdata.get(BlockStem.AGE) + MathHelper.nextInt(world.random, 2, 5);
 
         // world.setTypeAndData(blockposition, iblockdata.set(BlockStem.AGE, Integer.valueOf(Math.min(7, i))), 2);
         CraftEventFactory.handleBlockGrowEvent(world, blockposition.getX(), blockposition.getY(), blockposition.getZ(), this, Math.min(7, i)); // CraftBukkit
@@ -95,7 +95,7 @@ public class BlockStem extends BlockPlant implements IBlockFragilePlantElement {
             Item item = this.e();
 
             if (item != null) {
-                int j = iblockdata.get(BlockStem.AGE).intValue();
+                int j = iblockdata.get(BlockStem.AGE);
 
                 for (int k = 0; k < 3; ++k) {
                     if (world.random.nextInt(15) <= j) {
@@ -125,7 +125,7 @@ public class BlockStem extends BlockPlant implements IBlockFragilePlantElement {
     }
 
     public boolean a(World world, BlockPosition blockposition, IBlockData iblockdata, boolean flag) {
-        return iblockdata.get(BlockStem.AGE).intValue() != 7;
+        return iblockdata.get(BlockStem.AGE) != 7;
     }
 
     public boolean a(World world, Random random, BlockPosition blockposition, IBlockData iblockdata) {
@@ -137,11 +137,11 @@ public class BlockStem extends BlockPlant implements IBlockFragilePlantElement {
     }
 
     public IBlockData fromLegacyData(int i) {
-        return this.getBlockData().set(BlockStem.AGE, Integer.valueOf(i));
+        return this.getBlockData().set(BlockStem.AGE, i);
     }
 
     public int toLegacyData(IBlockData iblockdata) {
-        return iblockdata.get(BlockStem.AGE).intValue();
+        return iblockdata.get(BlockStem.AGE);
     }
 
     protected BlockStateList getStateList() {

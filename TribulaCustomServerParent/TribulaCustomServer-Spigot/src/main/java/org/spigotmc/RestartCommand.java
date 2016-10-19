@@ -1,11 +1,11 @@
 package org.spigotmc;
 
-import java.io.File;
-import java.util.List;
 import net.minecraft.server.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+
+import java.io.File;
 
 public class RestartCommand extends Command
 {
@@ -16,23 +16,6 @@ public class RestartCommand extends Command
         this.description = "Restarts the server";
         this.usageMessage = "/restart";
         this.setPermission( "bukkit.command.restart" );
-    }
-
-    @Override
-    public boolean execute(CommandSender sender, String currentAlias, String[] args)
-    {
-        if ( testPermission( sender ) )
-        {
-            MinecraftServer.getServer().processQueue.add( new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    restart();
-                }
-            } );
-        }
-        return true;
     }
 
     public static void restart()
@@ -61,7 +44,7 @@ public class RestartCommand extends Command
                 try
                 {
                     Thread.sleep( 100 );
-                } catch ( InterruptedException ex )
+                } catch ( InterruptedException ignored)
                 {
                 }
                 // Close the socket so we can rebind with the new process
@@ -71,7 +54,7 @@ public class RestartCommand extends Command
                 try
                 {
                     Thread.sleep( 100 );
-                } catch ( InterruptedException ex )
+                } catch ( InterruptedException ignored)
                 {
                 }
 
@@ -79,7 +62,7 @@ public class RestartCommand extends Command
                 try
                 {
                     MinecraftServer.getServer().stop();
-                } catch ( Throwable t )
+                } catch ( Throwable ignored)
                 {
                 }
 
@@ -119,7 +102,7 @@ public class RestartCommand extends Command
                 try
                 {
                     MinecraftServer.getServer().stop();
-                } catch ( Throwable t )
+                } catch ( Throwable ignored)
                 {
                 }
             }
@@ -128,5 +111,22 @@ public class RestartCommand extends Command
         {
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean execute(CommandSender sender, String currentAlias, String[] args)
+    {
+        if ( testPermission( sender ) )
+        {
+            MinecraftServer.getServer().processQueue.add( new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    restart();
+                }
+            } );
+        }
+        return true;
     }
 }

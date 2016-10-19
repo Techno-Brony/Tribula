@@ -1,14 +1,17 @@
 package net.minecraft.server;
 
+import org.bukkit.craftbukkit.command.CraftBlockCommandSender;
+import org.bukkit.craftbukkit.command.ProxiedNativeCommandSender;
+
 import javax.annotation.Nullable;
 
 public class TileEntitySign extends TileEntity {
 
     public final IChatBaseComponent[] lines = new IChatBaseComponent[] { new ChatComponentText(""), new ChatComponentText(""), new ChatComponentText(""), new ChatComponentText("")};
+    private final CommandObjectiveExecutor i = new CommandObjectiveExecutor();
     public int f = -1;
     public boolean isEditable = true;
     private EntityHuman h;
-    private final CommandObjectiveExecutor i = new CommandObjectiveExecutor();
 
     public TileEntitySign() {}
 
@@ -189,8 +192,7 @@ public class TileEntitySign extends TileEntity {
         IChatBaseComponent[] aichatbasecomponent = this.lines;
         int i = aichatbasecomponent.length;
 
-        for (int j = 0; j < i; ++j) {
-            IChatBaseComponent ichatbasecomponent = aichatbasecomponent[j];
+        for (IChatBaseComponent ichatbasecomponent : aichatbasecomponent) {
             ChatModifier chatmodifier = ichatbasecomponent == null ? null : ichatbasecomponent.getChatModifier();
 
             if (chatmodifier != null && chatmodifier.h() != null) {
@@ -199,9 +201,9 @@ public class TileEntitySign extends TileEntity {
                 if (chatclickable.a() == ChatClickable.EnumClickAction.RUN_COMMAND) {
                     // CraftBukkit start
                     // entityhuman.h().getCommandHandler().a(icommandlistener, chatclickable.b());
-                    CommandBlockListenerAbstract.executeCommand(icommandlistener, new org.bukkit.craftbukkit.command.ProxiedNativeCommandSender(
+                    CommandBlockListenerAbstract.executeCommand(icommandlistener, new ProxiedNativeCommandSender(
                             icommandlistener,
-                            new org.bukkit.craftbukkit.command.CraftBlockCommandSender(icommandlistener),
+                            new CraftBlockCommandSender(icommandlistener),
                             entityhuman.getBukkitEntity()
                     ), chatclickable.b());
                     // CraftBukkit end

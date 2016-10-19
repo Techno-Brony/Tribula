@@ -7,16 +7,11 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+
 import javax.annotation.Nullable;
+import java.util.*;
 
 // CraftBukkit start
-import java.util.LinkedList;
 // CraftBukkit end
 
 public class PlayerChunkMap {
@@ -57,6 +52,14 @@ public class PlayerChunkMap {
         this.a(viewDistance); // Spigot
     }
 
+    public static int getFurthestViewableBlock(int i) {
+        return i * 16 - 16;
+    }
+
+    private static long d(int i, int j) {
+        return (long) i + 2147483647L | (long) j + 2147483647L << 32;
+    }
+
     public WorldServer getWorld() {
         return this.world;
     }
@@ -79,11 +82,11 @@ public class PlayerChunkMap {
                             return chunk;
                         }
 
-                        if (!chunk.j()) {
+                        if (chunk.j()) {
                             return chunk;
                         }
 
-                        if (!playerchunk.a(128.0D, PlayerChunkMap.a)) {
+                        if (playerchunk.a(128.0D, PlayerChunkMap.a)) {
                             continue;
                         }
 
@@ -215,6 +218,7 @@ public class PlayerChunkMap {
     public PlayerChunk getChunk(int i, int j) {
         return this.e.get(d(i, j));
     }
+    // CraftBukkit end
 
     private PlayerChunk c(int i, int j) {
         long k = d(i, j);
@@ -239,12 +243,8 @@ public class PlayerChunkMap {
     // CraftBukkit start - add method
     public final boolean isChunkInUse(int x, int z) {
         PlayerChunk pi = getChunk(x, z);
-        if (pi != null) {
-            return (pi.c.size() > 0);
-        }
-        return false;
+        return pi != null && (pi.c.size() > 0);
     }
-    // CraftBukkit end
 
     public void flagDirty(BlockPosition blockposition) {
         int i = blockposition.getX() >> 4;
@@ -306,7 +306,7 @@ public class PlayerChunkMap {
         int j1 = i - k;
         int k1 = j - l;
 
-        return (j1 >= -i1 && j1 <= i1) && (k1 >= -i1 && k1 <= i1);
+        return (j1 < -i1 || j1 > i1) || (k1 < -i1 || k1 > i1);
     }
 
     public void movePlayer(EntityPlayer entityplayer) {
@@ -328,12 +328,12 @@ public class PlayerChunkMap {
             if (j1 != 0 || k1 != 0) {
                 for (int l1 = i - i1; l1 <= i + i1; ++l1) {
                     for (int i2 = j - i1; i2 <= j + i1; ++i2) {
-                        if (!this.a(l1, i2, k, l, i1)) {
+                        if (this.a(l1, i2, k, l, i1)) {
                             // this.c(l1, i2).a(entityplayer);
                             chunksToLoad.add(new ChunkCoordIntPair(l1, i2)); // CraftBukkit
                         }
 
-                        if (!this.a(l1 - j1, i2 - k1, i, j, i1)) {
+                        if (this.a(l1 - j1, i2 - k1, i, j, i1)) {
                             PlayerChunk playerchunk = this.getChunk(l1 - j1, i2 - k1);
 
                             if (playerchunk != null) {
@@ -390,7 +390,7 @@ public class PlayerChunkMap {
                 } else {
                     for (i1 = k - this.j; i1 <= k + this.j; ++i1) {
                         for (j1 = l - this.j; j1 <= l + this.j; ++j1) {
-                            if (!this.a(i1, j1, k, l, i)) {
+                            if (this.a(i1, j1, k, l, i)) {
                                 this.c(i1, j1).b(entityplayer);
                             }
                         }
@@ -406,14 +406,6 @@ public class PlayerChunkMap {
     private void e() {
         this.l = true;
         this.m = true;
-    }
-
-    public static int getFurthestViewableBlock(int i) {
-        return i * 16 - 16;
-    }
-
-    private static long d(int i, int j) {
-        return (long) i + 2147483647L | (long) j + 2147483647L << 32;
     }
 
     public void a(PlayerChunk playerchunk) {

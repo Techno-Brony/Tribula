@@ -1,18 +1,23 @@
 package net.minecraft.server;
 
-import javax.annotation.Nullable;
-// CraftBukkit start
-import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.craftbukkit.event.CraftEventFactory;
 import org.bukkit.event.Event;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+
+import javax.annotation.Nullable;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class PlayerInteractManager {
 
     public World world;
     public EntityPlayer player;
+    // CraftBukkit start
+    public boolean interactResult = false;
+    public boolean firedInteract = false;
     private EnumGamemode gamemode;
     private boolean d;
     private int lastDigTick;
@@ -31,16 +36,16 @@ public class PlayerInteractManager {
         this.world = world;
     }
 
+    public EnumGamemode getGameMode() {
+        return this.gamemode;
+    }
+
     public void setGameMode(EnumGamemode enumgamemode) {
         this.gamemode = enumgamemode;
         enumgamemode.a(this.player.abilities);
         this.player.updateAbilities();
         this.player.server.getPlayerList().sendAll(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.UPDATE_GAME_MODE, this.player), this.player); // CraftBukkit
         this.world.everyoneSleeping();
-    }
-
-    public EnumGamemode getGameMode() {
-        return this.gamemode;
     }
 
     public boolean c() {
@@ -141,7 +146,7 @@ public class PlayerInteractManager {
                         return;
                     }
 
-                    if (!itemstack.a(block)) {
+                    if (itemstack.a(block)) {
                         return;
                     }
                 }
@@ -310,73 +315,69 @@ public class PlayerInteractManager {
                 return false;
             }
         }
-        if (false && this.gamemode.isCreative() && this.player.getItemInMainHand() != null && this.player.getItemInMainHand().getItem() instanceof ItemSword) { // CraftBukkit - false
+        IBlockData iblockdata = this.world.getType(blockposition);
+        if (iblockdata.getBlock() == Blocks.AIR) return false; // CraftBukkit - A plugin set block to air without cancelling
+        TileEntity tileentity = this.world.getTileEntity(blockposition);
+        Block block = iblockdata.getBlock();
+
+        // CraftBukkit start - Special case skulls, their item data comes from a tile entity
+        if (iblockdata.getBlock() == Blocks.SKULL && !this.isCreative()) {
+            iblockdata.getBlock().dropNaturally(world, blockposition, iblockdata, 1.0F, 0);
+            return this.c(blockposition);
+        }
+        // CraftBukkit end
+
+        if ((block instanceof BlockCommand || block instanceof BlockStructure) && !this.player.dh()) {
+            this.world.notify(blockposition, iblockdata, iblockdata, 3);
             return false;
         } else {
-            IBlockData iblockdata = this.world.getType(blockposition);
-            if (iblockdata.getBlock() == Blocks.AIR) return false; // CraftBukkit - A plugin set block to air without cancelling
-            TileEntity tileentity = this.world.getTileEntity(blockposition);
-            Block block = iblockdata.getBlock();
+            if (this.gamemode.c()) {
+                if (this.gamemode == EnumGamemode.SPECTATOR) {
+                    return false;
+                }
 
-            // CraftBukkit start - Special case skulls, their item data comes from a tile entity
-            if (iblockdata.getBlock() == Blocks.SKULL && !this.isCreative()) {
-                iblockdata.getBlock().dropNaturally(world, blockposition, iblockdata, 1.0F, 0);
-                return this.c(blockposition);
-            }
-            // CraftBukkit end
+                if (!this.player.cZ()) {
+                    ItemStack itemstack = this.player.getItemInMainHand();
 
-            if ((block instanceof BlockCommand || block instanceof BlockStructure) && !this.player.dh()) {
-                this.world.notify(blockposition, iblockdata, iblockdata, 3);
-                return false;
-            } else {
-                if (this.gamemode.c()) {
-                    if (this.gamemode == EnumGamemode.SPECTATOR) {
+                    if (itemstack == null) {
                         return false;
                     }
 
-                    if (!this.player.cZ()) {
-                        ItemStack itemstack = this.player.getItemInMainHand();
-
-                        if (itemstack == null) {
-                            return false;
-                        }
-
-                        if (!itemstack.a(block)) {
-                            return false;
-                        }
+                    if (itemstack.a(block)) {
+                        return false;
                     }
                 }
-
-                this.world.a(this.player, 2001, blockposition, Block.getCombinedId(iblockdata));
-                boolean flag = this.c(blockposition);
-
-                if (this.isCreative()) {
-                    this.player.playerConnection.sendPacket(new PacketPlayOutBlockChange(this.world, blockposition));
-                } else {
-                    ItemStack itemstack1 = this.player.getItemInMainHand();
-                    ItemStack itemstack2 = itemstack1 == null ? null : itemstack1.cloneItemStack();
-                    boolean flag1 = this.player.hasBlock(iblockdata);
-
-                    if (itemstack1 != null) {
-                        itemstack1.a(this.world, iblockdata, blockposition, this.player);
-                        if (itemstack1.count == 0) {
-                            this.player.a(EnumHand.MAIN_HAND, null);
-                        }
-                    }
-
-                    if (flag && flag1) {
-                        iblockdata.getBlock().a(this.world, this.player, blockposition, iblockdata, tileentity, itemstack2);
-                    }
-                }
-
-                // CraftBukkit start - Drop event experience
-                if (flag && event != null) {
-                    iblockdata.getBlock().dropExperience(this.world, blockposition, event.getExpToDrop());
-                }
-                // CraftBukkit end
-
-                return flag;
             }
+
+            this.world.a(this.player, 2001, blockposition, Block.getCombinedId(iblockdata));
+            boolean flag = this.c(blockposition);
+
+            if (this.isCreative()) {
+                this.player.playerConnection.sendPacket(new PacketPlayOutBlockChange(this.world, blockposition));
+            } else {
+                ItemStack itemstack1 = this.player.getItemInMainHand();
+                ItemStack itemstack2 = itemstack1 == null ? null : itemstack1.cloneItemStack();
+                boolean flag1 = this.player.hasBlock(iblockdata);
+
+                if (itemstack1 != null) {
+                    itemstack1.a(this.world, iblockdata, blockposition, this.player);
+                    if (itemstack1.count == 0) {
+                        this.player.a(EnumHand.MAIN_HAND, null);
+                    }
+                }
+
+                if (flag && flag1) {
+                    iblockdata.getBlock().a(this.world, this.player, blockposition, iblockdata, tileentity, itemstack2);
+                }
+            }
+
+            // CraftBukkit start - Drop event experience
+            if (flag && event != null) {
+                iblockdata.getBlock().dropExperience(this.world, blockposition, event.getExpToDrop());
+            }
+            // CraftBukkit end
+
+            return flag;
         }
     }
 
@@ -414,10 +415,6 @@ public class PlayerInteractManager {
             }
         }
     }
-
-    // CraftBukkit start
-    public boolean interactResult = false;
-    public boolean firedInteract = false;
     // CraftBukkit end
 
     public EnumInteractionResult a(EntityHuman entityhuman, World world, @Nullable ItemStack itemstack, EnumHand enumhand, BlockPosition blockposition, EnumDirection enumdirection, float f, float f1, float f2) {

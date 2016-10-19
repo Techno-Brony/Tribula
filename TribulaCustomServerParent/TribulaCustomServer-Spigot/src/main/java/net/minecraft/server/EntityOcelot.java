@@ -1,18 +1,21 @@
 package net.minecraft.server;
 
-import com.google.common.base.Predicate;
 import javax.annotation.Nullable;
 
 public class EntityOcelot extends EntityTameableAnimal {
 
     private static final DataWatcherObject<Integer> bB = DataWatcher.a(EntityOcelot.class, DataWatcherRegistry.b);
+    public boolean spawnBonus = true; // Spigot
     private PathfinderGoalAvoidTarget<EntityHuman> bC;
     private PathfinderGoalTempt bD;
-    public boolean spawnBonus = true; // Spigot
 
     public EntityOcelot(World world) {
         super(world);
         this.setSize(0.6F, 0.7F);
+    }
+
+    public static void b(DataConverterManager dataconvertermanager) {
+        EntityInsentient.a(dataconvertermanager, "Ozelot");
     }
 
     protected void r() {
@@ -33,7 +36,7 @@ public class EntityOcelot extends EntityTameableAnimal {
 
     protected void i() {
         super.i();
-        this.datawatcher.register(EntityOcelot.bB, Integer.valueOf(0));
+        this.datawatcher.register(EntityOcelot.bB, 0);
     }
 
     public void M() {
@@ -68,10 +71,6 @@ public class EntityOcelot extends EntityTameableAnimal {
     }
 
     public void e(float f, float f1) {}
-
-    public static void b(DataConverterManager dataconvertermanager) {
-        EntityInsentient.a(dataconvertermanager, "Ozelot");
-    }
 
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
@@ -153,7 +152,7 @@ public class EntityOcelot extends EntityTameableAnimal {
             return true;
         }
 
-        return super.a(entityhuman, enumhand, itemstack);
+        return !super.a(entityhuman, enumhand, itemstack);
     }
 
     public EntityOcelot b(EntityAgeable entityageable) {
@@ -187,11 +186,11 @@ public class EntityOcelot extends EntityTameableAnimal {
     }
 
     public int getCatType() {
-        return this.datawatcher.get(EntityOcelot.bB).intValue();
+        return this.datawatcher.get(EntityOcelot.bB);
     }
 
     public void setCatType(int i) {
-        this.datawatcher.set(EntityOcelot.bB, Integer.valueOf(i));
+        this.datawatcher.set(EntityOcelot.bB, i);
     }
 
     public boolean cK() {
@@ -199,7 +198,7 @@ public class EntityOcelot extends EntityTameableAnimal {
     }
 
     public boolean canSpawn() {
-        if (this.world.a(this.getBoundingBox(), this) && this.world.getCubes(this, this.getBoundingBox()).isEmpty() && !this.world.containsLiquid(this.getBoundingBox())) {
+        if (this.world.a(this.getBoundingBox(), this) && this.world.getCubes(this, this.getBoundingBox()).isEmpty() && this.world.containsLiquid(this.getBoundingBox())) {
             BlockPosition blockposition = new BlockPosition(this.locX, this.getBoundingBox().b, this.locZ);
 
             if (blockposition.getY() < this.world.K()) {

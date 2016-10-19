@@ -1,8 +1,9 @@
 package net.minecraft.server;
 
-import java.util.Calendar;
+import org.bukkit.event.entity.EntityCombustEvent;
+
 import javax.annotation.Nullable;
-import org.bukkit.event.entity.EntityCombustEvent; // CraftBukkit
+import java.util.Calendar;
 
 public class EntitySkeleton extends EntityMonster implements IRangedEntity {
 
@@ -26,6 +27,10 @@ public class EntitySkeleton extends EntityMonster implements IRangedEntity {
         this.o();
     }
 
+    public static void b(DataConverterManager dataconvertermanager) {
+        EntityInsentient.a(dataconvertermanager, "Skeleton");
+    }
+
     protected void r() {
         this.goalSelector.a(1, new PathfinderGoalFloat(this));
         this.goalSelector.a(2, new PathfinderGoalRestrictSun(this));
@@ -46,8 +51,8 @@ public class EntitySkeleton extends EntityMonster implements IRangedEntity {
 
     protected void i() {
         super.i();
-        this.datawatcher.register(EntitySkeleton.a, Integer.valueOf(EnumSkeletonType.NORMAL.a()));
-        this.datawatcher.register(EntitySkeleton.b, Boolean.valueOf(false));
+        this.datawatcher.register(EntitySkeleton.a, EnumSkeletonType.NORMAL.a());
+        this.datawatcher.register(EntitySkeleton.b, Boolean.FALSE);
     }
 
     protected SoundEffect G() {
@@ -278,11 +283,11 @@ public class EntitySkeleton extends EntityMonster implements IRangedEntity {
     }
 
     public EnumSkeletonType getSkeletonType() {
-        return EnumSkeletonType.a(this.datawatcher.get(EntitySkeleton.a).intValue());
+        return EnumSkeletonType.a(this.datawatcher.get(EntitySkeleton.a));
     }
 
     public void setSkeletonType(EnumSkeletonType enumskeletontype) {
-        this.datawatcher.set(EntitySkeleton.a, Integer.valueOf(enumskeletontype.a()));
+        this.datawatcher.set(EntitySkeleton.a, enumskeletontype.a());
         this.fireProof = enumskeletontype == EnumSkeletonType.WITHER;
         this.b(enumskeletontype);
     }
@@ -294,10 +299,6 @@ public class EntitySkeleton extends EntityMonster implements IRangedEntity {
             this.setSize(0.6F, 1.99F);
         }
 
-    }
-
-    public static void b(DataConverterManager dataconvertermanager) {
-        EntityInsentient.a(dataconvertermanager, "Skeleton");
     }
 
     public void a(NBTTagCompound nbttagcompound) {
@@ -333,6 +334,6 @@ public class EntitySkeleton extends EntityMonster implements IRangedEntity {
     }
 
     public void a(boolean flag) {
-        this.datawatcher.set(EntitySkeleton.b, Boolean.valueOf(flag));
+        this.datawatcher.set(EntitySkeleton.b, flag);
     }
 }

@@ -1,7 +1,7 @@
 package net.minecraft.server;
 
-import java.util.Random;
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class EntityGhast extends EntityFlying implements IMonster {
 
@@ -16,6 +16,10 @@ public class EntityGhast extends EntityFlying implements IMonster {
         this.moveController = new EntityGhast.ControllerGhast(this);
     }
 
+    public static void b(DataConverterManager dataconvertermanager) {
+        EntityInsentient.a(dataconvertermanager, "Ghast");
+    }
+
     protected void r() {
         this.goalSelector.a(5, new EntityGhast.PathfinderGoalGhastIdleMove(this));
         this.goalSelector.a(7, new EntityGhast.PathfinderGoalGhastMoveTowardsTarget(this));
@@ -24,7 +28,7 @@ public class EntityGhast extends EntityFlying implements IMonster {
     }
 
     public void a(boolean flag) {
-        this.datawatcher.set(EntityGhast.a, Boolean.valueOf(flag));
+        this.datawatcher.set(EntityGhast.a, flag);
     }
 
     public int getPower() {
@@ -53,7 +57,7 @@ public class EntityGhast extends EntityFlying implements IMonster {
 
     protected void i() {
         super.i();
-        this.datawatcher.register(EntityGhast.a, Boolean.valueOf(false));
+        this.datawatcher.register(EntityGhast.a, Boolean.FALSE);
     }
 
     protected void initAttributes() {
@@ -93,10 +97,6 @@ public class EntityGhast extends EntityFlying implements IMonster {
 
     public int cO() {
         return 1;
-    }
-
-    public static void b(DataConverterManager dataconvertermanager) {
-        EntityInsentient.a(dataconvertermanager, "Ghast");
     }
 
     public void b(NBTTagCompound nbttagcompound) {

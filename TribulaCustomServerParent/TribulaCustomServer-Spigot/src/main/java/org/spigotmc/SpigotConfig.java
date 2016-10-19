@@ -1,18 +1,6 @@
 package org.spigotmc;
 
 import com.google.common.base.Throwables;
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.logging.Level;
 import gnu.trove.map.hash.TObjectIntHashMap;
 import net.minecraft.server.AttributeRanged;
 import net.minecraft.server.GenericAttributes;
@@ -27,10 +15,17 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.*;
+import java.util.logging.Level;
+
 public class SpigotConfig
 {
 
-    private static File CONFIG_FILE;
     private static final String HEADER = "This is the main configuration file for Spigot.\n"
             + "As you can see, there's tons to configure. Some options may impact gameplay, so use\n"
             + "with caution, and make sure you know what each option does before configuring.\n"
@@ -44,8 +39,40 @@ public class SpigotConfig
             + "Forums: http://www.spigotmc.org/\n";
     /*========================================================================*/
     public static YamlConfiguration config;
+    public static boolean logCommands;
+    public static int tabComplete;
+    public static String whitelistMessage;
+    public static String unknownCommandMessage;
+    public static String serverFullMessage;
+    public static String outdatedClientMessage = "Outdated client! Please use {0}";
+    public static String outdatedServerMessage = "Outdated server! I\'m still on {0}";
+    public static int timeoutTime = 60;
+    public static boolean restartOnCrash = true;
+    public static String restartScript = "./start.sh";
+    public static String restartMessage;
+    public static boolean bungee;
+    public static boolean lateBind;
+    public static boolean disableStatSaving;
+    public static TObjectIntHashMap<String> forcedStats = new TObjectIntHashMap<String>();
+    public static int playerSample;
+    public static int playerShuffle;
+    public static List<String> spamExclusions;
+    public static boolean silentCommandBlocks;
+    public static boolean filterCreativeItems;
+    public static Set<String> replaceCommands;
+    public static int userCacheCap;
+    public static boolean saveUserCacheOnStopOnly;
+    public static int intCacheLimit;
+    public static double movedWronglyThreshold;
+    public static double movedTooQuicklyMultiplier;
+    public static double maxHealth = 2048;
+    public static double movementSpeed = 2048;
+    public static double attackDamage = 2048;
+    public static boolean debug;
+    public static int itemDirtyTicks;
     static int version;
     static Map<String, Command> commands;
+    private static File CONFIG_FILE;
     /*========================================================================*/
     private static Metrics metrics;
 
@@ -56,7 +83,7 @@ public class SpigotConfig
         try
         {
             config.load( CONFIG_FILE );
-        } catch ( IOException ex )
+        } catch ( IOException ignored)
         {
         } catch ( InvalidConfigurationException ex )
         {
@@ -161,13 +188,11 @@ public class SpigotConfig
         return config.getDouble( path, config.getDouble( path ) );
     }
 
-    public static boolean logCommands;
     private static void logCommands()
     {
         logCommands = getBoolean( "commands.log", true );
     }
 
-    public static int tabComplete;
     private static void tabComplete()
     {
         if ( version < 6 )
@@ -184,15 +209,11 @@ public class SpigotConfig
         tabComplete = getInt( "commands.tab-complete", 0 );
     }
 
-    public static String whitelistMessage;
-    public static String unknownCommandMessage;
-    public static String serverFullMessage;
-    public static String outdatedClientMessage = "Outdated client! Please use {0}";
-    public static String outdatedServerMessage = "Outdated server! I\'m still on {0}";
     private static String transform(String s)
     {
         return ChatColor.translateAlternateColorCodes( '&', s ).replaceAll( "\\n", "\n" );
     }
+
     private static void messages()
     {
         if (version < 8)
@@ -208,10 +229,6 @@ public class SpigotConfig
         outdatedServerMessage = transform( getString( "messages.outdated-server", outdatedServerMessage ) );
     }
 
-    public static int timeoutTime = 60;
-    public static boolean restartOnCrash = true;
-    public static String restartScript = "./start.sh";
-    public static String restartMessage;
     private static void watchdog()
     {
         timeoutTime = getInt( "settings.timeout-time", timeoutTime );
@@ -222,7 +239,6 @@ public class SpigotConfig
         WatchdogThread.doStart( timeoutTime, restartOnCrash );
     }
 
-    public static boolean bungee;
     private static void bungee() {
         if ( version < 4 )
         {
@@ -231,7 +247,7 @@ public class SpigotConfig
         }
         bungee = getBoolean( "settings.bungeecord", false );
     }
-
+    
     private static void nettyThreads()
     {
         int count = getInt( "settings.netty-threads", 4 );
@@ -240,13 +256,10 @@ public class SpigotConfig
         // Bukkit.getLogger().log( Level.INFO, "Using {0} threads for Netty based IO", count );
     }
 
-    public static boolean lateBind;
     private static void lateBind() {
         lateBind = getBoolean( "settings.late-bind", false );
     }
-
-    public static boolean disableStatSaving;
-    public static TObjectIntHashMap<String> forcedStats = new TObjectIntHashMap<String>();
+    
     private static void stats()
     {
         disableStatSaving = getBoolean( "stats.disable-saving", false );
@@ -277,7 +290,6 @@ public class SpigotConfig
         commands.put( "tps", new TicksPerSecondCommand( "tps" ) );
     }
 
-    public static int playerSample;
     private static void playerSample()
     {
         playerSample = getInt( "settings.sample-count", 12 );
@@ -285,31 +297,26 @@ public class SpigotConfig
         // System.out.println( "Server Ping Player Sample Count: " + playerSample );
     }
 
-    public static int playerShuffle;
     private static void playerShuffle()
     {
         playerShuffle = getInt( "settings.player-shuffle", 0 );
     }
 
-    public static List<String> spamExclusions;
     private static void spamExclusions()
     {
-        spamExclusions = getList( "commands.spam-exclusions", Arrays.asList("/skill") );
+        spamExclusions = getList( "commands.spam-exclusions", Collections.singletonList("/skill"));
     }
 
-    public static boolean silentCommandBlocks;
     private static void silentCommandBlocks()
     {
         silentCommandBlocks = getBoolean( "commands.silent-commandblock-console", false );
     }
 
-    public static boolean filterCreativeItems;
     private static void filterCreativeItems()
     {
         filterCreativeItems = getBoolean( "settings.filter-creative-items", true );
     }
 
-    public static Set<String> replaceCommands;
     private static void replaceCommands()
     {
         if ( config.contains( "replace-commands" ) )
@@ -320,40 +327,32 @@ public class SpigotConfig
         replaceCommands = new HashSet<String>( (List<String>) getList( "commands.replace-commands",
                 Arrays.asList( "setblock", "summon", "testforblock", "tellraw" ) ) );
     }
-    
-    public static int userCacheCap;
+
     private static void userCacheCap()
     {
         userCacheCap = getInt( "settings.user-cache-size", 1000 );
     }
-    
-    public static boolean saveUserCacheOnStopOnly;
+
     private static void saveUserCacheOnStopOnly()
     {
         saveUserCacheOnStopOnly = getBoolean( "settings.save-user-cache-on-stop-only", false );
     }
 
-    public static int intCacheLimit;
     private static void intCacheLimit()
     {
         intCacheLimit = getInt( "settings.int-cache-limit", 1024 );
     }
 
-    public static double movedWronglyThreshold;
     private static void movedWronglyThreshold()
     {
         movedWronglyThreshold = getDouble( "settings.moved-wrongly-threshold", 0.0625D );
     }
 
-    public static double movedTooQuicklyMultiplier;
     private static void movedTooQuicklyMultiplier()
     {
         movedTooQuicklyMultiplier = getDouble( "settings.moved-too-quickly-multiplier", 10.0D );
     }
 
-    public static double maxHealth = 2048;
-    public static double movementSpeed = 2048;
-    public static double attackDamage = 2048;
     private static void attributeMaxes()
     {
         maxHealth = getDouble( "settings.attribute.maxHealth.max", maxHealth );
@@ -364,7 +363,6 @@ public class SpigotConfig
         ( (AttributeRanged) GenericAttributes.ATTACK_DAMAGE ).b = attackDamage;
     }
 
-    public static boolean debug;
     private static void debug()
     {
         debug = getBoolean( "settings.debug", false );
@@ -388,7 +386,6 @@ public class SpigotConfig
 //        }
     }
 
-    public static int itemDirtyTicks;
     private static void itemDirtyTicks() {
         itemDirtyTicks = getInt("settings.item-dirty-ticks", 20);
     }

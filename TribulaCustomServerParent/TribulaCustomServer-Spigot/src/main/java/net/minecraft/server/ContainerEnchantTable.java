@@ -1,23 +1,33 @@
 package net.minecraft.server;
 
-import java.util.List;
-import java.util.Random;
-import javax.annotation.Nullable;
-
-// CraftBukkit start
-import java.util.Map;
 import org.bukkit.Location;
-
 import org.bukkit.craftbukkit.inventory.CraftInventoryEnchanting;
 import org.bukkit.craftbukkit.inventory.CraftInventoryView;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
+import org.bukkit.entity.Player;
 import org.bukkit.event.enchantment.EnchantItemEvent;
 import org.bukkit.event.enchantment.PrepareItemEnchantEvent;
-import org.bukkit.entity.Player;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class ContainerEnchantTable extends Container {
 
+    private final BlockPosition position;
+    private final Random l = new Random();
+    public World world;
+    public int f;
+    public int[] costs = new int[3];
+    public int[] h = new int[] { -1, -1, -1};
+    public int[] i = new int[] { -1, -1, -1};
+    // CraftBukkit start
+    private CraftInventoryView bukkitEntity = null;
+    private Player player;
     // CraftBukkit - make type specific (changed from IInventory)
     public InventorySubcontainer enchantSlots = new InventorySubcontainer("Enchant", true, 2) {
         public int getMaxStackSize() {
@@ -34,16 +44,6 @@ public class ContainerEnchantTable extends Container {
             return new org.bukkit.Location(world.getWorld(), position.getX(), position.getY(), position.getZ());
         }
     };
-    public World world;
-    private final BlockPosition position;
-    private final Random l = new Random();
-    public int f;
-    public int[] costs = new int[3];
-    public int[] h = new int[] { -1, -1, -1};
-    public int[] i = new int[] { -1, -1, -1};
-    // CraftBukkit start
-    private CraftInventoryView bukkitEntity = null;
-    private Player player;
     // CraftBukkit end
 
     public ContainerEnchantTable(PlayerInventory playerinventory, World world, BlockPosition blockposition) {
@@ -103,9 +103,7 @@ public class ContainerEnchantTable extends Container {
     public void b() {
         super.b();
 
-        for (int i = 0; i < this.listeners.size(); ++i) {
-            ICrafting icrafting = this.listeners.get(i);
-
+        for (ICrafting icrafting : this.listeners) {
             this.c(icrafting);
         }
 
@@ -245,6 +243,7 @@ public class ContainerEnchantTable extends Container {
                     for (Map.Entry<org.bukkit.enchantments.Enchantment, Integer> entry : event.getEnchantsToAdd().entrySet()) {
                         try {
                             if (flag) {
+                                //noinspection deprecation
                                 int enchantId = entry.getKey().getId();
                                 if (Enchantment.c(enchantId) == null) {
                                     continue;
@@ -316,8 +315,8 @@ public class ContainerEnchantTable extends Container {
     }
 
     public boolean a(EntityHuman entityhuman) {
-        if (!this.checkReachable) return true; // CraftBukkit
-        return this.world.getType(this.position).getBlock() == Blocks.ENCHANTING_TABLE && entityhuman.e((double) this.position.getX() + 0.5D, (double) this.position.getY() + 0.5D, (double) this.position.getZ() + 0.5D) <= 64.0D;
+        // CraftBukkit
+        return this.checkReachable && (this.world.getType(this.position).getBlock() != Blocks.ENCHANTING_TABLE || entityhuman.e((double) this.position.getX() + 0.5D, (double) this.position.getY() + 0.5D, (double) this.position.getZ() + 0.5D) > 64.0D);
     }
 
     @Nullable
@@ -330,15 +329,15 @@ public class ContainerEnchantTable extends Container {
 
             itemstack = itemstack1.cloneItemStack();
             if (i == 0) {
-                if (!this.a(itemstack1, 2, 38, true)) {
+                if (this.a(itemstack1, 2, 38, true)) {
                     return null;
                 }
             } else if (i == 1) {
-                if (!this.a(itemstack1, 2, 38, true)) {
+                if (this.a(itemstack1, 2, 38, true)) {
                     return null;
                 }
             } else if (itemstack1.getItem() == Items.DYE && EnumColor.fromInvColorIndex(itemstack1.getData()) == EnumColor.BLUE) {
-                if (!this.a(itemstack1, 1, 2, true)) {
+                if (this.a(itemstack1, 1, 2, true)) {
                     return null;
                 }
             } else {

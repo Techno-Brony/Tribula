@@ -4,11 +4,8 @@ import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import java.util.AbstractSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+
+import java.util.*;
 
 public class EntitySlice<T> extends AbstractSet<T> {
 
@@ -85,17 +82,16 @@ public class EntitySlice<T> extends AbstractSet<T> {
     }
 
     public boolean remove(Object object) {
-        Object object1 = object;
         boolean flag = false;
         Iterator iterator = this.c.iterator();
 
         while (iterator.hasNext()) {
             Class oclass = (Class) iterator.next();
 
-            if (oclass.isAssignableFrom(object1.getClass())) {
+            if (oclass.isAssignableFrom(object.getClass())) {
                 List list = (List) this.b.get(oclass);
 
-                if (list != null && list.remove(object1)) {
+                if (list != null && list.remove(object)) {
                     flag = true;
                 }
             }

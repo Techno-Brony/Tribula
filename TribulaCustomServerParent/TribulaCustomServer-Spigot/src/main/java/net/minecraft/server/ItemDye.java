@@ -1,6 +1,6 @@
 package net.minecraft.server;
 
-import org.bukkit.event.entity.SheepDyeWoolEvent; // CraftBukkit
+import org.bukkit.event.entity.SheepDyeWoolEvent;
 
 public class ItemDye extends Item {
 
@@ -10,6 +10,28 @@ public class ItemDye extends Item {
         this.a(true);
         this.setMaxDurability(0);
         this.a(CreativeModeTab.l);
+    }
+
+    public static boolean a(ItemStack itemstack, World world, BlockPosition blockposition) {
+        IBlockData iblockdata = world.getType(blockposition);
+
+        if (iblockdata.getBlock() instanceof IBlockFragilePlantElement) {
+            IBlockFragilePlantElement iblockfragileplantelement = (IBlockFragilePlantElement) iblockdata.getBlock();
+
+            if (iblockfragileplantelement.a(world, blockposition, iblockdata, world.isClientSide)) {
+                if (!world.isClientSide) {
+                    if (iblockfragileplantelement.a(world, world.random, blockposition, iblockdata)) {
+                        iblockfragileplantelement.b(world, world.random, blockposition, iblockdata);
+                    }
+
+                    --itemstack.count;
+                }
+
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public String f_(ItemStack itemstack) {
@@ -61,28 +83,6 @@ public class ItemDye extends Item {
         }
     }
 
-    public static boolean a(ItemStack itemstack, World world, BlockPosition blockposition) {
-        IBlockData iblockdata = world.getType(blockposition);
-
-        if (iblockdata.getBlock() instanceof IBlockFragilePlantElement) {
-            IBlockFragilePlantElement iblockfragileplantelement = (IBlockFragilePlantElement) iblockdata.getBlock();
-
-            if (iblockfragileplantelement.a(world, blockposition, iblockdata, world.isClientSide)) {
-                if (!world.isClientSide) {
-                    if (iblockfragileplantelement.a(world, world.random, blockposition, iblockdata)) {
-                        iblockfragileplantelement.b(world, world.random, blockposition, iblockdata);
-                    }
-
-                    --itemstack.count;
-                }
-
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     public boolean a(ItemStack itemstack, EntityHuman entityhuman, EntityLiving entityliving, EnumHand enumhand) {
         if (entityliving instanceof EntitySheep) {
             EntitySheep entitysheep = (EntitySheep) entityliving;
@@ -91,6 +91,7 @@ public class ItemDye extends Item {
             if (!entitysheep.isSheared() && entitysheep.getColor() != enumcolor) {
                 // CraftBukkit start
                 byte bColor = (byte) enumcolor.getColorIndex();
+                //noinspection deprecation
                 SheepDyeWoolEvent event = new SheepDyeWoolEvent((org.bukkit.entity.Sheep) entitysheep.getBukkitEntity(), org.bukkit.DyeColor.getByData(bColor));
                 entitysheep.world.getServer().getPluginManager().callEvent(event);
 

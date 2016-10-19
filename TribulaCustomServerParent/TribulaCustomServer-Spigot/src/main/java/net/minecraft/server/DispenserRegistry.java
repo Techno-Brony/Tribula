@@ -1,22 +1,22 @@
 package net.minecraft.server;
 
 import com.mojang.authlib.GameProfile;
-import java.io.PrintStream;
-import java.util.Random;
-import java.util.UUID;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-// CraftBukkit start
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.event.block.BlockDispenseEvent;
+
+import java.io.PrintStream;
+import java.util.Random;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class DispenserRegistry {
 
     public static final PrintStream a = System.out;
-    private static boolean b;
     private static final Logger c = LogManager.getLogger();
+    private static boolean b;
 
     public static boolean a() {
         return DispenserRegistry.b;
@@ -327,10 +327,10 @@ public class DispenserRegistry {
                 Material material = iblockdata.getMaterial();
                 Item item;
 
-                if (Material.WATER.equals(material) && block instanceof BlockFluids && iblockdata.get(BlockFluids.LEVEL).intValue() == 0) {
+                if (Material.WATER.equals(material) && block instanceof BlockFluids && iblockdata.get(BlockFluids.LEVEL) == 0) {
                     item = Items.WATER_BUCKET;
                 } else {
-                    if (!Material.LAVA.equals(material) || !(block instanceof BlockFluids) || iblockdata.get(BlockFluids.LEVEL).intValue() != 0) {
+                    if (!Material.LAVA.equals(material) || !(block instanceof BlockFluids) || iblockdata.get(BlockFluids.LEVEL) != 0) {
                         return super.b(isourceblock, itemstack);
                     }
 
@@ -413,7 +413,7 @@ public class DispenserRegistry {
                     }
                     // CraftBukkit end
                 } else if (world.getType(blockposition).getBlock() == Blocks.TNT) {
-                    Blocks.TNT.postBreak(world, blockposition, Blocks.TNT.getBlockData().set(BlockTNT.EXPLODE, Boolean.valueOf(true)));
+                    Blocks.TNT.postBreak(world, blockposition, Blocks.TNT.getBlockData().set(BlockTNT.EXPLODE, Boolean.TRUE));
                     world.setAir(blockposition);
                 } else {
                     this.b = false;

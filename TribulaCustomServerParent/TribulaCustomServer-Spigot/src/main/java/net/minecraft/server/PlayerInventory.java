@@ -1,14 +1,14 @@
 package net.minecraft.server;
 
-import java.util.Arrays;
-import javax.annotation.Nullable;
-
-// CraftBukkit start
-import java.util.List;
 import org.bukkit.Location;
-
 import org.bukkit.craftbukkit.entity.CraftHumanEntity;
 import org.bukkit.entity.HumanEntity;
+
+import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.List;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class PlayerInventory implements IInventory {
@@ -19,12 +19,24 @@ public class PlayerInventory implements IInventory {
     private final ItemStack[][] g;
     public int itemInHandIndex;
     public EntityHuman player;
-    private ItemStack carried;
     public boolean f;
-
     // CraftBukkit start - add fields and methods
     public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
+    private ItemStack carried;
     private int maxStack = MAX_STACK;
+
+    public PlayerInventory(EntityHuman entityhuman) {
+        this.g = new ItemStack[][] { this.items, this.armor, this.extraSlots};
+        this.player = entityhuman;
+    }
+
+    public static int getHotbarSize() {
+        return 9;
+    }
+
+    public static boolean e(int i) {
+        return i >= 0 && i < 9;
+    }
 
     public ItemStack[] getContents() {
         ItemStack[] combined = new ItemStack[items.length + armor.length + extraSlots.length];
@@ -49,33 +61,20 @@ public class PlayerInventory implements IInventory {
     public List<HumanEntity> getViewers() {
         return transaction;
     }
+    // CraftBukkit end
 
     public org.bukkit.inventory.InventoryHolder getOwner() {
         return this.player.getBukkitEntity();
-    }
-
-    public void setMaxStackSize(int size) {
-        maxStack = size;
     }
 
     @Override
     public Location getLocation() {
         return player.getBukkitEntity().getLocation();
     }
-    // CraftBukkit end
-
-    public PlayerInventory(EntityHuman entityhuman) {
-        this.g = new ItemStack[][] { this.items, this.armor, this.extraSlots};
-        this.player = entityhuman;
-    }
 
     @Nullable
     public ItemStack getItemInHand() {
         return e(this.itemInHandIndex) ? this.items[this.itemInHandIndex] : null;
-    }
-
-    public static int getHotbarSize() {
-        return 9;
     }
 
     private boolean a(@Nullable ItemStack itemstack, ItemStack itemstack1) {
@@ -89,12 +88,12 @@ public class PlayerInventory implements IInventory {
     // CraftBukkit start - Watch method above! :D
     public int canHold(ItemStack itemstack) {
         int remains = itemstack.count;
-        for (int i = 0; i < this.items.length; ++i) {
-            if (this.items[i] == null) return itemstack.count;
+        for (ItemStack item : this.items) {
+            if (item == null) return itemstack.count;
 
             // Taken from firstPartial(ItemStack)
-            if (this.items[i] != null && this.items[i].getItem() == itemstack.getItem() && this.items[i].isStackable() && this.items[i].count < this.items[i].getMaxStackSize() && this.items[i].count < this.getMaxStackSize() && (!this.items[i].usesData() || this.items[i].getData() == itemstack.getData()) && ItemStack.equals(this.items[i], itemstack)) {
-                remains -= (this.items[i].getMaxStackSize() < this.getMaxStackSize() ? this.items[i].getMaxStackSize() : this.getMaxStackSize()) - this.items[i].count;
+            if (item != null && item.getItem() == itemstack.getItem() && item.isStackable() && item.count < item.getMaxStackSize() && item.count < this.getMaxStackSize() && (!item.usesData() || item.getData() == itemstack.getData()) && ItemStack.equals(item, itemstack)) {
+                remains -= (item.getMaxStackSize() < this.getMaxStackSize() ? item.getMaxStackSize() : this.getMaxStackSize()) - item.count;
             }
             if (remains <= 0) return itemstack.count;
         }
@@ -118,10 +117,6 @@ public class PlayerInventory implements IInventory {
 
         this.items[this.itemInHandIndex] = this.items[i];
         this.items[i] = itemstack;
-    }
-
-    public static boolean e(int i) {
-        return i >= 0 && i < 9;
     }
 
     public int k() {
@@ -264,9 +259,7 @@ public class PlayerInventory implements IInventory {
         ItemStack[][] aitemstack = this.g;
         int i = aitemstack.length;
 
-        for (int j = 0; j < i; ++j) {
-            ItemStack[] aitemstack1 = aitemstack[j];
-
+        for (ItemStack[] aitemstack1 : aitemstack) {
             for (int k = 0; k < aitemstack1.length; ++k) {
                 if (aitemstack1[k] != null) {
                     aitemstack1[k].a(this.player.world, this.player, k, this.itemInHandIndex == k);
@@ -311,8 +304,8 @@ public class PlayerInventory implements IInventory {
                 CrashReport crashreport = CrashReport.a(throwable, "Adding item to inventory");
                 CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Item being added");
 
-                crashreportsystemdetails.a("Item ID", Integer.valueOf(Item.getId(itemstack.getItem())));
-                crashreportsystemdetails.a("Item data", Integer.valueOf(itemstack.getData()));
+                crashreportsystemdetails.a("Item ID", Item.getId(itemstack.getItem()));
+                crashreportsystemdetails.a("Item data", itemstack.getData());
                 crashreportsystemdetails.a("Item name", new CrashReportCallable() {
                     public String a() throws Exception {
                         return itemstack.getName();
@@ -335,9 +328,7 @@ public class PlayerInventory implements IInventory {
         ItemStack[][] aitemstack1 = this.g;
         int k = aitemstack1.length;
 
-        for (int l = 0; l < k; ++l) {
-            ItemStack[] aitemstack2 = aitemstack1[l];
-
+        for (ItemStack[] aitemstack2 : aitemstack1) {
             if (i < aitemstack2.length) {
                 aitemstack = aitemstack2;
                 break;
@@ -381,9 +372,7 @@ public class PlayerInventory implements IInventory {
         ItemStack[][] aitemstack1 = this.g;
         int j = aitemstack1.length;
 
-        for (int k = 0; k < j; ++k) {
-            ItemStack[] aitemstack2 = aitemstack1[k];
-
+        for (ItemStack[] aitemstack2 : aitemstack1) {
             if (i < aitemstack2.length) {
                 aitemstack = aitemstack2;
                 break;
@@ -407,9 +396,7 @@ public class PlayerInventory implements IInventory {
         ItemStack[][] aitemstack1 = this.g;
         int j = aitemstack1.length;
 
-        for (int k = 0; k < j; ++k) {
-            ItemStack[] aitemstack2 = aitemstack1[k];
-
+        for (ItemStack[] aitemstack2 : aitemstack1) {
             if (i < aitemstack2.length) {
                 aitemstack = aitemstack2;
                 break;
@@ -501,9 +488,7 @@ public class PlayerInventory implements IInventory {
         ItemStack[][] aitemstack1 = this.g;
         int j = aitemstack1.length;
 
-        for (int k = 0; k < j; ++k) {
-            ItemStack[] aitemstack2 = aitemstack1[k];
-
+        for (ItemStack[] aitemstack2 : aitemstack1) {
             if (i < aitemstack2.length) {
                 aitemstack = aitemstack2;
                 break;
@@ -529,6 +514,10 @@ public class PlayerInventory implements IInventory {
 
     public int getMaxStackSize() {
         return maxStack; // CraftBukkit
+    }
+
+    public void setMaxStackSize(int size) {
+        maxStack = size;
     }
 
     public boolean b(IBlockData iblockdata) {
@@ -562,9 +551,7 @@ public class PlayerInventory implements IInventory {
         ItemStack[][] aitemstack = this.g;
         int i = aitemstack.length;
 
-        for (int j = 0; j < i; ++j) {
-            ItemStack[] aitemstack1 = aitemstack[j];
-
+        for (ItemStack[] aitemstack1 : aitemstack) {
             for (int k = 0; k < aitemstack1.length; ++k) {
                 if (aitemstack1[k] != null) {
                     this.player.a(aitemstack1[k], true, false);
@@ -579,10 +566,6 @@ public class PlayerInventory implements IInventory {
         this.f = true;
     }
 
-    public void setCarried(@Nullable ItemStack itemstack) {
-        this.carried = itemstack;
-    }
-
     @Nullable
     public ItemStack getCarried() {
         // CraftBukkit start
@@ -593,6 +576,10 @@ public class PlayerInventory implements IInventory {
         return this.carried;
     }
 
+    public void setCarried(@Nullable ItemStack itemstack) {
+        this.carried = itemstack;
+    }
+
     public boolean a(EntityHuman entityhuman) {
         return !this.player.dead && entityhuman.h(this.player) <= 64.0D;
     }
@@ -601,14 +588,10 @@ public class PlayerInventory implements IInventory {
         ItemStack[][] aitemstack = this.g;
         int i = aitemstack.length;
 
-        for (int j = 0; j < i; ++j) {
-            ItemStack[] aitemstack1 = aitemstack[j];
-            ItemStack[] aitemstack2 = aitemstack1;
+        for (ItemStack[] aitemstack1 : aitemstack) {
             int k = aitemstack1.length;
 
-            for (int l = 0; l < k; ++l) {
-                ItemStack itemstack1 = aitemstack2[l];
-
+            for (ItemStack itemstack1 : aitemstack1) {
                 if (itemstack1 != null && itemstack1.doMaterialsMatch(itemstack)) {
                     return true;
                 }
@@ -648,9 +631,7 @@ public class PlayerInventory implements IInventory {
         ItemStack[][] aitemstack = this.g;
         int i = aitemstack.length;
 
-        for (int j = 0; j < i; ++j) {
-            ItemStack[] aitemstack1 = aitemstack[j];
-
+        for (ItemStack[] aitemstack1 : aitemstack) {
             for (int k = 0; k < aitemstack1.length; ++k) {
                 aitemstack1[k] = null;
             }

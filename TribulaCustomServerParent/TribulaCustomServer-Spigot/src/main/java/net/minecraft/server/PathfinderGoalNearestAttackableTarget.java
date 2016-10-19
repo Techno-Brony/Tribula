@@ -2,17 +2,18 @@ package net.minecraft.server;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+
+import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import javax.annotation.Nullable;
 
 public class PathfinderGoalNearestAttackableTarget<T extends EntityLiving> extends PathfinderGoalTarget {
 
     protected final Class<T> a;
-    private final int i;
     protected final PathfinderGoalNearestAttackableTarget.DistanceComparator b;
     protected final Predicate<? super T> c;
+    private final int i;
     protected T d;
 
     public PathfinderGoalNearestAttackableTarget(EntityCreature entitycreature, Class<T> oclass, boolean flag) {
@@ -66,11 +67,11 @@ public class PathfinderGoalNearestAttackableTarget<T extends EntityLiving> exten
                         boolean flag2 = PathfinderGoalNearestAttackableTarget.this.e instanceof EntityCreeper && i == 4;
 
                         if (flag || flag1 || flag2) {
-                            return Double.valueOf(0.5D);
+                            return 0.5D;
                         }
                     }
 
-                    return Double.valueOf(1.0D);
+                    return 1.0D;
                 }
 
                 public Double apply(EntityHuman object) { // CraftBukkit - fix decompile error

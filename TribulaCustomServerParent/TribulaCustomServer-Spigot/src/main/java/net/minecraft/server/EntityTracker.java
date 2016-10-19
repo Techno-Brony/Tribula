@@ -2,18 +2,19 @@ package net.minecraft.server;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class EntityTracker {
 
     private static final Logger a = LogManager.getLogger();
+    public final IntHashMap<EntityTrackerEntry> trackedEntities = new IntHashMap();
     private final WorldServer world;
     private final Set<EntityTrackerEntry> c = Sets.newHashSet();
-    public final IntHashMap<EntityTrackerEntry> trackedEntities = new IntHashMap();
     private int e;
 
     public EntityTracker(WorldServer worldserver) {
@@ -185,8 +186,8 @@ public class EntityTracker {
             }
         }
 
-        for (int i = 0; i < arraylist.size(); ++i) {
-            EntityPlayer entityplayer = (EntityPlayer) arraylist.get(i);
+        for (Object anArraylist : arraylist) {
+            EntityPlayer entityplayer = (EntityPlayer) anArraylist;
             Iterator iterator1 = this.c.iterator();
 
             while (iterator1.hasNext()) {

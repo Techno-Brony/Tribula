@@ -2,14 +2,10 @@ package net.minecraft.server;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.Iterator;
-import java.util.Random;
-import java.util.Set;
-import javax.annotation.Nullable;
+import org.bukkit.event.block.BlockRedstoneEvent;
 
-import org.bukkit.event.block.BlockRedstoneEvent; // CraftBukkit
+import javax.annotation.Nullable;
+import java.util.*;
 
 public class BlockRedstoneWire extends Block {
 
@@ -19,16 +15,12 @@ public class BlockRedstoneWire extends Block {
     public static final BlockStateEnum<BlockRedstoneWire.EnumRedstoneWireConnection> WEST = BlockStateEnum.of("west", BlockRedstoneWire.EnumRedstoneWireConnection.class);
     public static final BlockStateInteger POWER = BlockStateInteger.of("power", 0, 15);
     protected static final AxisAlignedBB[] f = new AxisAlignedBB[] { new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, 0.8125D, 0.0625D, 0.8125D), new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, 0.8125D, 0.0625D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.1875D, 0.8125D, 0.0625D, 0.8125D), new AxisAlignedBB(0.0D, 0.0D, 0.1875D, 0.8125D, 0.0625D, 1.0D), new AxisAlignedBB(0.1875D, 0.0D, 0.0D, 0.8125D, 0.0625D, 0.8125D), new AxisAlignedBB(0.1875D, 0.0D, 0.0D, 0.8125D, 0.0625D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.8125D, 0.0625D, 0.8125D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.8125D, 0.0625D, 1.0D), new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, 1.0D, 0.0625D, 0.8125D), new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, 1.0D, 0.0625D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.1875D, 1.0D, 0.0625D, 0.8125D), new AxisAlignedBB(0.0D, 0.0D, 0.1875D, 1.0D, 0.0625D, 1.0D), new AxisAlignedBB(0.1875D, 0.0D, 0.0D, 1.0D, 0.0625D, 0.8125D), new AxisAlignedBB(0.1875D, 0.0D, 0.0D, 1.0D, 0.0625D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0625D, 0.8125D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0625D, 1.0D)};
-    private boolean g = true;
     private final Set<BlockPosition> B = Sets.newHashSet();
+    private boolean g = true;
 
     public BlockRedstoneWire() {
         super(Material.ORIENTABLE);
-        this.w(this.blockStateList.getBlockData().set(BlockRedstoneWire.NORTH, BlockRedstoneWire.EnumRedstoneWireConnection.NONE).set(BlockRedstoneWire.EAST, BlockRedstoneWire.EnumRedstoneWireConnection.NONE).set(BlockRedstoneWire.SOUTH, BlockRedstoneWire.EnumRedstoneWireConnection.NONE).set(BlockRedstoneWire.WEST, BlockRedstoneWire.EnumRedstoneWireConnection.NONE).set(BlockRedstoneWire.POWER, Integer.valueOf(0)));
-    }
-
-    public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
-        return BlockRedstoneWire.f[x(iblockdata.b(iblockaccess, blockposition))];
+        this.w(this.blockStateList.getBlockData().set(BlockRedstoneWire.NORTH, BlockRedstoneWire.EnumRedstoneWireConnection.NONE).set(BlockRedstoneWire.EAST, BlockRedstoneWire.EnumRedstoneWireConnection.NONE).set(BlockRedstoneWire.SOUTH, BlockRedstoneWire.EnumRedstoneWireConnection.NONE).set(BlockRedstoneWire.WEST, BlockRedstoneWire.EnumRedstoneWireConnection.NONE).set(BlockRedstoneWire.POWER, 0));
     }
 
     private static int x(IBlockData iblockdata) {
@@ -55,6 +47,32 @@ public class BlockRedstoneWire extends Block {
         }
 
         return i;
+    }
+
+    protected static boolean c(IBlockAccess iblockaccess, BlockPosition blockposition) {
+        return i(iblockaccess.getType(blockposition));
+    }
+
+    protected static boolean i(IBlockData iblockdata) {
+        return a(iblockdata, (EnumDirection) null);
+    }
+
+    protected static boolean a(IBlockData iblockdata, @Nullable EnumDirection enumdirection) {
+        Block block = iblockdata.getBlock();
+
+        if (block == Blocks.REDSTONE_WIRE) {
+            return true;
+        } else if (Blocks.UNPOWERED_REPEATER.C(iblockdata)) {
+            EnumDirection enumdirection1 = iblockdata.get(BlockRepeater.FACING);
+
+            return enumdirection1 == enumdirection || enumdirection1.opposite() == enumdirection;
+        } else {
+            return iblockdata.m() && enumdirection != null;
+        }
+    }
+
+    public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
+        return BlockRedstoneWire.f[x(iblockdata.b(iblockaccess, blockposition))];
     }
 
     public IBlockData updateState(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
@@ -125,7 +143,7 @@ public class BlockRedstoneWire extends Block {
 
     private IBlockData a(World world, BlockPosition blockposition, BlockPosition blockposition1, IBlockData iblockdata) {
         IBlockData iblockdata1 = iblockdata;
-        int i = iblockdata.get(BlockRedstoneWire.POWER).intValue();
+        int i = iblockdata.get(BlockRedstoneWire.POWER);
         byte b0 = 0;
         int j = this.getPower(world, blockposition1, b0);
 
@@ -180,7 +198,7 @@ public class BlockRedstoneWire extends Block {
         // CraftBukkit end
 
         if (i != j) {
-            iblockdata = iblockdata.set(BlockRedstoneWire.POWER, Integer.valueOf(j));
+            iblockdata = iblockdata.set(BlockRedstoneWire.POWER, j);
             if (world.getType(blockposition) == iblockdata1) {
                 world.setTypeAndData(blockposition, iblockdata, 2);
             }
@@ -189,9 +207,7 @@ public class BlockRedstoneWire extends Block {
             EnumDirection[] aenumdirection = EnumDirection.values();
             int i1 = aenumdirection.length;
 
-            for (int j1 = 0; j1 < i1; ++j1) {
-                EnumDirection enumdirection1 = aenumdirection[j1];
-
+            for (EnumDirection enumdirection1 : aenumdirection) {
                 this.B.add(blockposition.shift(enumdirection1));
             }
         }
@@ -205,9 +221,7 @@ public class BlockRedstoneWire extends Block {
             EnumDirection[] aenumdirection = EnumDirection.values();
             int i = aenumdirection.length;
 
-            for (int j = 0; j < i; ++j) {
-                EnumDirection enumdirection = aenumdirection[j];
-
+            for (EnumDirection enumdirection : aenumdirection) {
                 world.applyPhysics(blockposition.shift(enumdirection), this);
             }
 
@@ -255,9 +269,7 @@ public class BlockRedstoneWire extends Block {
             EnumDirection[] aenumdirection = EnumDirection.values();
             int i = aenumdirection.length;
 
-            for (int j = 0; j < i; ++j) {
-                EnumDirection enumdirection = aenumdirection[j];
-
+            for (EnumDirection enumdirection : aenumdirection) {
                 world.applyPhysics(blockposition.shift(enumdirection), this);
             }
 
@@ -291,7 +303,7 @@ public class BlockRedstoneWire extends Block {
         if (world.getType(blockposition).getBlock() != this) {
             return i;
         } else {
-            int j = world.getType(blockposition).get(BlockRedstoneWire.POWER).intValue();
+            int j = world.getType(blockposition).get(BlockRedstoneWire.POWER);
 
             return j > i ? j : i;
         }
@@ -322,7 +334,7 @@ public class BlockRedstoneWire extends Block {
         if (!this.g) {
             return 0;
         } else {
-            int i = iblockdata.get(BlockRedstoneWire.POWER).intValue();
+            int i = iblockdata.get(BlockRedstoneWire.POWER);
 
             if (i == 0) {
                 return 0;
@@ -360,28 +372,6 @@ public class BlockRedstoneWire extends Block {
         return !flag1 && flag && c(iblockaccess, blockposition1.up()) || (a(iblockdata, enumdirection) || (iblockdata.getBlock() == Blocks.POWERED_REPEATER && iblockdata.get(BlockDiodeAbstract.FACING) == enumdirection || !flag && c(iblockaccess, blockposition1.down())));
     }
 
-    protected static boolean c(IBlockAccess iblockaccess, BlockPosition blockposition) {
-        return i(iblockaccess.getType(blockposition));
-    }
-
-    protected static boolean i(IBlockData iblockdata) {
-        return a(iblockdata, (EnumDirection) null);
-    }
-
-    protected static boolean a(IBlockData iblockdata, @Nullable EnumDirection enumdirection) {
-        Block block = iblockdata.getBlock();
-
-        if (block == Blocks.REDSTONE_WIRE) {
-            return true;
-        } else if (Blocks.UNPOWERED_REPEATER.C(iblockdata)) {
-            EnumDirection enumdirection1 = iblockdata.get(BlockRepeater.FACING);
-
-            return enumdirection1 == enumdirection || enumdirection1.opposite() == enumdirection;
-        } else {
-            return iblockdata.m() && enumdirection != null;
-        }
-    }
-
     public boolean isPowerSource(IBlockData iblockdata) {
         return this.g;
     }
@@ -391,11 +381,11 @@ public class BlockRedstoneWire extends Block {
     }
 
     public IBlockData fromLegacyData(int i) {
-        return this.getBlockData().set(BlockRedstoneWire.POWER, Integer.valueOf(i));
+        return this.getBlockData().set(BlockRedstoneWire.POWER, i);
     }
 
     public int toLegacyData(IBlockData iblockdata) {
-        return iblockdata.get(BlockRedstoneWire.POWER).intValue();
+        return iblockdata.get(BlockRedstoneWire.POWER);
     }
 
     public IBlockData a(IBlockData iblockdata, EnumBlockRotation enumblockrotation) {
@@ -431,42 +421,6 @@ public class BlockRedstoneWire extends Block {
         return new BlockStateList(this, BlockRedstoneWire.NORTH, BlockRedstoneWire.EAST, BlockRedstoneWire.SOUTH, BlockRedstoneWire.WEST, BlockRedstoneWire.POWER);
     }
 
-    static class SyntheticClass_1 {
-
-        static final int[] a;
-        static final int[] b = new int[EnumBlockMirror.values().length];
-
-        static {
-            try {
-                BlockRedstoneWire.SyntheticClass_1.b[EnumBlockMirror.LEFT_RIGHT.ordinal()] = 1;
-            } catch (NoSuchFieldError nosuchfielderror) {
-            }
-
-            try {
-                BlockRedstoneWire.SyntheticClass_1.b[EnumBlockMirror.FRONT_BACK.ordinal()] = 2;
-            } catch (NoSuchFieldError nosuchfielderror1) {
-            }
-
-            a = new int[EnumBlockRotation.values().length];
-
-            try {
-                BlockRedstoneWire.SyntheticClass_1.a[EnumBlockRotation.CLOCKWISE_180.ordinal()] = 1;
-            } catch (NoSuchFieldError nosuchfielderror2) {
-            }
-
-            try {
-                BlockRedstoneWire.SyntheticClass_1.a[EnumBlockRotation.COUNTERCLOCKWISE_90.ordinal()] = 2;
-            } catch (NoSuchFieldError nosuchfielderror3) {
-            }
-
-            try {
-                BlockRedstoneWire.SyntheticClass_1.a[EnumBlockRotation.CLOCKWISE_90.ordinal()] = 3;
-            } catch (NoSuchFieldError nosuchfielderror4) {
-            }
-
-        }
-    }
-
     enum EnumRedstoneWireConnection implements INamable {
 
         UP("up"), SIDE("side"), NONE("none");
@@ -483,6 +437,42 @@ public class BlockRedstoneWire extends Block {
 
         public String getName() {
             return this.d;
+        }
+    }
+
+    static class SyntheticClass_1 {
+
+        static final int[] a;
+        static final int[] b = new int[EnumBlockMirror.values().length];
+
+        static {
+            try {
+                BlockRedstoneWire.SyntheticClass_1.b[EnumBlockMirror.LEFT_RIGHT.ordinal()] = 1;
+            } catch (NoSuchFieldError ignored) {
+            }
+
+            try {
+                BlockRedstoneWire.SyntheticClass_1.b[EnumBlockMirror.FRONT_BACK.ordinal()] = 2;
+            } catch (NoSuchFieldError ignored) {
+            }
+
+            a = new int[EnumBlockRotation.values().length];
+
+            try {
+                BlockRedstoneWire.SyntheticClass_1.a[EnumBlockRotation.CLOCKWISE_180.ordinal()] = 1;
+            } catch (NoSuchFieldError ignored) {
+            }
+
+            try {
+                BlockRedstoneWire.SyntheticClass_1.a[EnumBlockRotation.COUNTERCLOCKWISE_90.ordinal()] = 2;
+            } catch (NoSuchFieldError ignored) {
+            }
+
+            try {
+                BlockRedstoneWire.SyntheticClass_1.a[EnumBlockRotation.CLOCKWISE_90.ordinal()] = 3;
+            } catch (NoSuchFieldError ignored) {
+            }
+
         }
     }
 }

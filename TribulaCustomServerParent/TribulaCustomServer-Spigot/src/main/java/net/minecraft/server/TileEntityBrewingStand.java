@@ -1,13 +1,14 @@
 package net.minecraft.server;
 
-import java.util.Arrays;
-import javax.annotation.Nullable;
-
-// CraftBukkit start
-import java.util.List;
 import org.bukkit.craftbukkit.entity.CraftHumanEntity;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.BrewEvent;
+
+import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.List;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class TileEntityBrewingStand extends TileEntityContainer implements ITickable, IWorldInventory {
@@ -15,6 +16,8 @@ public class TileEntityBrewingStand extends TileEntityContainer implements ITick
     private static final int[] a = new int[] { 3};
     private static final int[] f = new int[] { 0, 1, 2, 3};
     private static final int[] g = new int[] { 0, 1, 2, 4};
+    // CraftBukkit start - add fields and methods
+    public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
     private ItemStack[] items = new ItemStack[5];
     private int brewTime;
     private boolean[] j;
@@ -22,12 +25,12 @@ public class TileEntityBrewingStand extends TileEntityContainer implements ITick
     private String l;
     private int m;
     private int lastTick = MinecraftServer.currentTick; // CraftBukkit - add field
-
+    private int maxStack = 64;
     public TileEntityBrewingStand() {}
 
-    // CraftBukkit start - add fields and methods
-    public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
-    private int maxStack = 64;
+    public static void a(DataConverterManager dataconvertermanager) {
+        dataconvertermanager.a(DataConverterTypes.BLOCK_ENTITY, new DataInspectorItemList("Cauldron", "Items"));
+    }
 
     public void onOpen(CraftHumanEntity who) {
         transaction.add(who);
@@ -43,10 +46,6 @@ public class TileEntityBrewingStand extends TileEntityContainer implements ITick
 
     public ItemStack[] getContents() {
         return this.items;
-    }
-
-    public void setMaxStackSize(int size) {
-        maxStack = size;
     }
     // CraftBukkit end
 
@@ -118,7 +117,7 @@ public class TileEntityBrewingStand extends TileEntityContainer implements ITick
                 }
 
                 for (int i = 0; i < BlockBrewingStand.HAS_BOTTLE.length; ++i) {
-                    iblockdata = iblockdata.set(BlockBrewingStand.HAS_BOTTLE[i], Boolean.valueOf(aboolean[i]));
+                    iblockdata = iblockdata.set(BlockBrewingStand.HAS_BOTTLE[i], aboolean[i]);
                 }
 
                 this.world.setTypeAndData(this.position, iblockdata, 2);
@@ -198,10 +197,6 @@ public class TileEntityBrewingStand extends TileEntityContainer implements ITick
         this.world.triggerEffect(1035, blockposition, 0);
     }
 
-    public static void a(DataConverterManager dataconvertermanager) {
-        dataconvertermanager.a(DataConverterTypes.BLOCK_ENTITY, new DataInspectorItemList("Cauldron", "Items"));
-    }
-
     public void a(NBTTagCompound nbttagcompound) {
         super.a(nbttagcompound);
         NBTTagList nbttaglist = nbttagcompound.getList("Items", 10);
@@ -273,6 +268,10 @@ public class TileEntityBrewingStand extends TileEntityContainer implements ITick
 
     public int getMaxStackSize() {
         return this.maxStack; // CraftBukkit
+    }
+
+    public void setMaxStackSize(int size) {
+        maxStack = size;
     }
 
     public boolean a(EntityHuman entityhuman) {

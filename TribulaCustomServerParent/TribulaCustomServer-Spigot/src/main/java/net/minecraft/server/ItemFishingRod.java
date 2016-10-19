@@ -1,6 +1,6 @@
 package net.minecraft.server;
 
-import org.bukkit.event.player.PlayerFishEvent; // CraftBukkit
+import org.bukkit.event.player.PlayerFishEvent;
 
 public class ItemFishingRod extends Item {
 
@@ -21,6 +21,7 @@ public class ItemFishingRod extends Item {
         } else {
             // CraftBukkit start
             EntityFishingHook hook = new EntityFishingHook(world, entityhuman);
+            //noinspection deprecation
             PlayerFishEvent playerFishEvent = new PlayerFishEvent((org.bukkit.entity.Player) entityhuman.getBukkitEntity(), null, (org.bukkit.entity.Fish) hook.getBukkitEntity(), PlayerFishEvent.State.FISHING);
             world.getServer().getPluginManager().callEvent(playerFishEvent);
 

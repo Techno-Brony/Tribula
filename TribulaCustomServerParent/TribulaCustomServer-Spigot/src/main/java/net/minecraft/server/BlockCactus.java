@@ -1,9 +1,9 @@
 package net.minecraft.server;
 
+import org.bukkit.craftbukkit.event.CraftEventFactory;
+
 import java.util.Iterator;
 import java.util.Random;
-
-import org.bukkit.craftbukkit.event.CraftEventFactory; // CraftBukkit
 
 public class BlockCactus extends Block {
 
@@ -13,7 +13,7 @@ public class BlockCactus extends Block {
 
     protected BlockCactus() {
         super(Material.CACTUS);
-        this.w(this.blockStateList.getBlockData().set(BlockCactus.AGE, Integer.valueOf(0)));
+        this.w(this.blockStateList.getBlockData().set(BlockCactus.AGE, 0));
         this.a(true);
         this.a(CreativeModeTab.c);
     }
@@ -28,17 +28,17 @@ public class BlockCactus extends Block {
             }
 
             if (i < 3) {
-                int j = iblockdata.get(BlockCactus.AGE).intValue();
+                int j = iblockdata.get(BlockCactus.AGE);
 
                 if (j >= (byte) range(3, ((100.0F / world.spigotConfig.cactusModifier) * 15) + 0.5F, 15)) { // Spigot
                     // world.setTypeUpdate(blockposition1, this.getBlockData()); // CraftBukkit
-                    IBlockData iblockdata1 = iblockdata.set(BlockCactus.AGE, Integer.valueOf(0));
+                    IBlockData iblockdata1 = iblockdata.set(BlockCactus.AGE, 0);
 
                     CraftEventFactory.handleBlockGrowEvent(world, blockposition1.getX(), blockposition1.getY(), blockposition1.getZ(), this, 0); // CraftBukkit
                     world.setTypeAndData(blockposition, iblockdata1, 4);
                     iblockdata1.doPhysics(world, blockposition1, this);
                 } else {
-                    world.setTypeAndData(blockposition, iblockdata.set(BlockCactus.AGE, Integer.valueOf(j + 1)), 4);
+                    world.setTypeAndData(blockposition, iblockdata.set(BlockCactus.AGE, j + 1), 4);
                 }
 
             }
@@ -95,11 +95,11 @@ public class BlockCactus extends Block {
     }
 
     public IBlockData fromLegacyData(int i) {
-        return this.getBlockData().set(BlockCactus.AGE, Integer.valueOf(i));
+        return this.getBlockData().set(BlockCactus.AGE, i);
     }
 
     public int toLegacyData(IBlockData iblockdata) {
-        return iblockdata.get(BlockCactus.AGE).intValue();
+        return iblockdata.get(BlockCactus.AGE);
     }
 
     protected BlockStateList getStateList() {

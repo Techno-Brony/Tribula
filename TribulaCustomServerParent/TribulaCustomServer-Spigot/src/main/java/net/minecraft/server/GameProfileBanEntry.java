@@ -2,6 +2,7 @@ package net.minecraft.server;
 
 import com.google.gson.JsonObject;
 import com.mojang.authlib.GameProfile;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -19,14 +20,6 @@ public class GameProfileBanEntry extends ExpirableListEntry<GameProfile> {
         super(b(jsonobject), jsonobject);
     }
 
-    protected void a(JsonObject jsonobject) {
-        if (this.getKey() != null) {
-            jsonobject.addProperty("uuid", this.getKey().getId() == null ? "" : this.getKey().getId().toString());
-            jsonobject.addProperty("name", this.getKey().getName());
-            super.a(jsonobject);
-        }
-    }
-
     private static GameProfile b(JsonObject jsonobject) {
         // Spigot start
         // this whole method has to be reworked to account for the fact Bukkit only accepts UUID bans and gives no way for usernames to be stored!
@@ -37,7 +30,7 @@ public class GameProfileBanEntry extends ExpirableListEntry<GameProfile> {
 
             try {
                 uuid = UUID.fromString(s);
-            } catch (Throwable throwable) {
+            } catch (Throwable ignored) {
             }
 
         }
@@ -52,5 +45,13 @@ public class GameProfileBanEntry extends ExpirableListEntry<GameProfile> {
             return null;
         }
         // Spigot End
+    }
+
+    protected void a(JsonObject jsonobject) {
+        if (this.getKey() != null) {
+            jsonobject.addProperty("uuid", this.getKey().getId() == null ? "" : this.getKey().getId().toString());
+            jsonobject.addProperty("name", this.getKey().getName());
+            super.a(jsonobject);
+        }
     }
 }

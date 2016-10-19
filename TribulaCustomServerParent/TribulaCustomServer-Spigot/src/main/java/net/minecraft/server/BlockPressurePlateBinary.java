@@ -1,9 +1,9 @@
 package net.minecraft.server;
 
+import org.bukkit.event.entity.EntityInteractEvent;
+
 import java.util.Iterator;
 import java.util.List;
-
-import org.bukkit.event.entity.EntityInteractEvent; // CraftBukkit
 
 public class BlockPressurePlateBinary extends BlockPressurePlateAbstract {
 
@@ -12,16 +12,16 @@ public class BlockPressurePlateBinary extends BlockPressurePlateAbstract {
 
     protected BlockPressurePlateBinary(Material material, BlockPressurePlateBinary.EnumMobType blockpressureplatebinary_enummobtype) {
         super(material);
-        this.w(this.blockStateList.getBlockData().set(BlockPressurePlateBinary.POWERED, Boolean.valueOf(false)));
+        this.w(this.blockStateList.getBlockData().set(BlockPressurePlateBinary.POWERED, Boolean.FALSE));
         this.e = blockpressureplatebinary_enummobtype;
     }
 
     protected int getPower(IBlockData iblockdata) {
-        return iblockdata.get(BlockPressurePlateBinary.POWERED).booleanValue() ? 15 : 0;
+        return iblockdata.get(BlockPressurePlateBinary.POWERED) ? 15 : 0;
     }
 
     protected IBlockData a(IBlockData iblockdata, int i) {
-        return iblockdata.set(BlockPressurePlateBinary.POWERED, Boolean.valueOf(i > 0));
+        return iblockdata.set(BlockPressurePlateBinary.POWERED, i > 0);
     }
 
     protected void b(World world, BlockPosition blockposition) {
@@ -85,7 +85,7 @@ public class BlockPressurePlateBinary extends BlockPressurePlateAbstract {
                 }
                 // CraftBukkit end
 
-                if (!entity.isIgnoreBlockTrigger()) {
+                if (entity.isIgnoreBlockTrigger()) {
                     return 15;
                 }
             }
@@ -95,15 +95,22 @@ public class BlockPressurePlateBinary extends BlockPressurePlateAbstract {
     }
 
     public IBlockData fromLegacyData(int i) {
-        return this.getBlockData().set(BlockPressurePlateBinary.POWERED, Boolean.valueOf(i == 1));
+        return this.getBlockData().set(BlockPressurePlateBinary.POWERED, i == 1);
     }
 
     public int toLegacyData(IBlockData iblockdata) {
-        return iblockdata.get(BlockPressurePlateBinary.POWERED).booleanValue() ? 1 : 0;
+        return iblockdata.get(BlockPressurePlateBinary.POWERED) ? 1 : 0;
     }
 
     protected BlockStateList getStateList() {
         return new BlockStateList(this, BlockPressurePlateBinary.POWERED);
+    }
+
+    public enum EnumMobType {
+
+        EVERYTHING, MOBS;
+
+        EnumMobType() {}
     }
 
     static class SyntheticClass_1 {
@@ -113,21 +120,14 @@ public class BlockPressurePlateBinary extends BlockPressurePlateAbstract {
         static {
             try {
                 BlockPressurePlateBinary.SyntheticClass_1.a[BlockPressurePlateBinary.EnumMobType.EVERYTHING.ordinal()] = 1;
-            } catch (NoSuchFieldError nosuchfielderror) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockPressurePlateBinary.SyntheticClass_1.a[BlockPressurePlateBinary.EnumMobType.MOBS.ordinal()] = 2;
-            } catch (NoSuchFieldError nosuchfielderror1) {
+            } catch (NoSuchFieldError ignored) {
             }
 
         }
-    }
-
-    public enum EnumMobType {
-
-        EVERYTHING, MOBS;
-
-        EnumMobType() {}
     }
 }

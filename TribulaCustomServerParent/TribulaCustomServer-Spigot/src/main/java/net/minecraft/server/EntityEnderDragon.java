@@ -1,20 +1,27 @@
 package net.minecraft.server;
 
-import java.util.Iterator;
-import java.util.List;
-import javax.annotation.Nullable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-// CraftBukkit start
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
+
+import javax.annotation.Nullable;
+import java.util.Iterator;
+import java.util.List;
+
+// CraftBukkit start
 // CraftBukkit end
 
 // PAIL: Fixme
 public class EntityEnderDragon extends EntityInsentient implements IComplex, IMonster {
 
-    private static final Logger bJ = LogManager.getLogger();
     public static final DataWatcherObject<Integer> PHASE = DataWatcher.a(EntityEnderDragon.class, DataWatcherRegistry.b);
+    private static final Logger bJ = LogManager.getLogger();
+    private final EnderDragonBattle bK;
+    private final DragonControllerManager bL;
+    private final PathPoint[] bO = new PathPoint[24];
+    private final int[] bP = new int[24];
+    private final Path bQ = new Path();
     public double[][] b = new double[64][3];
     public int c = -1;
     public EntityComplexPart[] children;
@@ -31,13 +38,8 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
     public boolean bG;
     public int bH;
     public EntityEnderCrystal currentEnderCrystal;
-    private final EnderDragonBattle bK;
-    private final DragonControllerManager bL;
     private int bM = 200;
     private int bN;
-    private final PathPoint[] bO = new PathPoint[24];
-    private final int[] bP = new int[24];
-    private final Path bQ = new Path();
     private Explosion explosionSource = new Explosion(null, this, Double.NaN, Double.NaN, Double.NaN, Float.NaN, true, true); // CraftBukkit - reusable source for CraftTNTPrimed.getSource()
 
     public EntityEnderDragon(World world) {
@@ -58,6 +60,10 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
         this.bL = new DragonControllerManager(this);
     }
 
+    public static void b(DataConverterManager dataconvertermanager) {
+        EntityInsentient.a(dataconvertermanager, "EnderDragon");
+    }
+
     protected void initAttributes() {
         super.initAttributes();
         this.getAttributeInstance(GenericAttributes.maxHealth).setValue(200.0D);
@@ -65,7 +71,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
 
     protected void i() {
         super.i();
-        this.getDataWatcher().register(EntityEnderDragon.PHASE, Integer.valueOf(DragonControllerPhase.k.b()));
+        this.getDataWatcher().register(EntityEnderDragon.PHASE, DragonControllerPhase.k.b());
     }
 
     public double[] a(int i, float f) {
@@ -376,9 +382,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
     }
 
     private void b(List<Entity> list) {
-        for (int i = 0; i < list.size(); ++i) {
-            Entity entity = list.get(i);
-
+        for (Entity entity : list) {
             if (entity instanceof EntityLiving) {
                 entity.damageEntity(DamageSource.mobAttack(this), 10.0F);
                 this.a(this, entity);
@@ -784,7 +788,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
         if (pathpoint3 == pathpoint2) {
             return null;
         } else {
-            EntityEnderDragon.bJ.debug("Failed to find path from {} to {}", Integer.valueOf(i), Integer.valueOf(j));
+            EntityEnderDragon.bJ.debug("Failed to find path from {} to {}", i, j);
             if (pathpoint != null) {
                 pathpoint.h = pathpoint3;
                 pathpoint3 = pathpoint;
@@ -814,10 +818,6 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
         }
 
         return new PathEntity(apathpoint);
-    }
-
-    public static void b(DataConverterManager dataconvertermanager) {
-        EntityInsentient.a(dataconvertermanager, "EnderDragon");
     }
 
     public void b(NBTTagCompound nbttagcompound) {
@@ -914,7 +914,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
 
     public void a(DataWatcherObject<?> datawatcherobject) {
         if (EntityEnderDragon.PHASE.equals(datawatcherobject) && this.world.isClientSide) {
-            this.bL.setControllerPhase(DragonControllerPhase.getById(this.getDataWatcher().get(EntityEnderDragon.PHASE).intValue()));
+            this.bL.setControllerPhase(DragonControllerPhase.getById(this.getDataWatcher().get(EntityEnderDragon.PHASE)));
         }
 
         super.a(datawatcherobject);

@@ -1,19 +1,24 @@
 package net.minecraft.server;
 
 import com.google.common.base.Predicate;
+
 import javax.annotation.Nullable;
 
 public class EntityIronGolem extends EntityGolem {
 
     protected static final DataWatcherObject<Byte> a = DataWatcher.a(EntityIronGolem.class, DataWatcherRegistry.a);
-    private int c;
     Village b;
+    private int c;
     private int bx;
     private int by;
 
     public EntityIronGolem(World world) {
         super(world);
         this.setSize(1.4F, 2.7F);
+    }
+
+    public static void b(DataConverterManager dataconvertermanager) {
+        EntityInsentient.a(dataconvertermanager, "VillagerGolem");
     }
 
     protected void r() {
@@ -40,7 +45,7 @@ public class EntityIronGolem extends EntityGolem {
 
     protected void i() {
         super.i();
-        this.datawatcher.register(EntityIronGolem.a, Byte.valueOf((byte) 0));
+        this.datawatcher.register(EntityIronGolem.a, (byte) 0);
     }
 
     protected void M() {
@@ -102,11 +107,7 @@ public class EntityIronGolem extends EntityGolem {
     }
 
     public boolean d(Class<? extends EntityLiving> oclass) {
-        return !(this.isPlayerCreated() && EntityHuman.class.isAssignableFrom(oclass)) && (oclass != EntityCreeper.class && super.d(oclass));
-    }
-
-    public static void b(DataConverterManager dataconvertermanager) {
-        EntityInsentient.a(dataconvertermanager, "VillagerGolem");
+        return !(this.isPlayerCreated() && EntityHuman.class.isAssignableFrom(oclass)) && (oclass != EntityCreeper.class && !super.d(oclass));
     }
 
     public void b(NBTTagCompound nbttagcompound) {
@@ -164,16 +165,16 @@ public class EntityIronGolem extends EntityGolem {
     }
 
     public boolean isPlayerCreated() {
-        return (this.datawatcher.get(EntityIronGolem.a).byteValue() & 1) != 0;
+        return (this.datawatcher.get(EntityIronGolem.a) & 1) != 0;
     }
 
     public void setPlayerCreated(boolean flag) {
-        byte b0 = this.datawatcher.get(EntityIronGolem.a).byteValue();
+        byte b0 = this.datawatcher.get(EntityIronGolem.a);
 
         if (flag) {
-            this.datawatcher.set(EntityIronGolem.a, Byte.valueOf((byte) (b0 | 1)));
+            this.datawatcher.set(EntityIronGolem.a, (byte) (b0 | 1));
         } else {
-            this.datawatcher.set(EntityIronGolem.a, Byte.valueOf((byte) (b0 & -2)));
+            this.datawatcher.set(EntityIronGolem.a, (byte) (b0 & -2));
         }
 
     }

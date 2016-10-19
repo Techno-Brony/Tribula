@@ -4,10 +4,18 @@ import com.google.common.collect.Lists;
 import com.mojang.authlib.GameProfileRepository;
 import com.mojang.authlib.minecraft.MinecraftSessionService;
 import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
-import java.io.BufferedReader;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.bukkit.craftbukkit.LoggerOutputStream;
+import org.bukkit.craftbukkit.SpigotTimings;
+import org.bukkit.craftbukkit.util.Waitable;
+import org.bukkit.event.server.RemoteServerCommandEvent;
+import org.bukkit.event.server.ServerCommandEvent;
+
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.net.InetAddress;
 import java.net.Proxy;
 import java.util.Collections;
@@ -15,29 +23,19 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 // CraftBukkit start
-import java.io.PrintStream;
-import org.apache.logging.log4j.Level;
-
-import org.bukkit.craftbukkit.LoggerOutputStream;
-import org.bukkit.craftbukkit.SpigotTimings; // Spigot
-import org.bukkit.event.server.ServerCommandEvent;
-import org.bukkit.craftbukkit.util.Waitable;
-import org.bukkit.event.server.RemoteServerCommandEvent;
 // CraftBukkit end
 
 public class DedicatedServer extends MinecraftServer implements IMinecraftServer {
 
     private static final Logger LOGGER = LogManager.getLogger();
     private static final Pattern l = Pattern.compile("^[a-fA-F0-9]{40}$");
-    private final List<ServerCommand> serverCommandQueue = Collections.synchronizedList(Lists.<ServerCommand>newArrayList()); // CraftBukkit - fix decompile error
-    private RemoteStatusListener n;
     public final RemoteControlCommandListener remoteControlCommandListener = new RemoteControlCommandListener(this);
-    private RemoteControlListener p;
+    private final List<ServerCommand> serverCommandQueue = Collections.synchronizedList(Lists.<ServerCommand>newArrayList()); // CraftBukkit - fix decompile error
     public PropertyManager propertyManager;
+    private RemoteStatusListener n;
+    private RemoteControlListener p;
     private EULA r;
     private boolean generateStructures;
     private EnumGamemode t;
@@ -54,10 +52,11 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
             }
 
             public void run() {
+                //noinspection InfiniteLoopStatement
                 while (true) {
                     try {
                         Thread.sleep(2147483647L);
-                    } catch (InterruptedException interruptedexception) {
+                    } catch (InterruptedException ignored) {
                     }
                 }
             }
@@ -78,7 +77,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
 
                 try {
                     // CraftBukkit start - JLine disabling compatibility
-                    while (!isStopped() && isRunning()) {
+                    while (isStopped() && isRunning()) {
                         if (org.bukkit.craftbukkit.Main.useJline) {
                             s = bufferedreader.readLine(">", null);
                         } else {
@@ -156,9 +155,9 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
             this.setForceGamemode(this.propertyManager.getBoolean("force-gamemode", false));
             this.setIdleTimeout(this.propertyManager.getInt("player-idle-timeout", 0));
             if (this.propertyManager.getInt("difficulty", 1) < 0) {
-                this.propertyManager.setProperty("difficulty", Integer.valueOf(0));
+                this.propertyManager.setProperty("difficulty", 0);
             } else if (this.propertyManager.getInt("difficulty", 1) > 3) {
-                this.propertyManager.setProperty("difficulty", Integer.valueOf(3));
+                this.propertyManager.setProperty("difficulty", 3);
             }
 
             this.generateStructures = this.propertyManager.getBoolean("generate-structures", true);
@@ -181,7 +180,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
             // Spigot end
 
             this.a(MinecraftEncryption.b());
-            DedicatedServer.LOGGER.info("Starting Tribula server on {}:{}", this.getServerIp().isEmpty() ? "*" : this.getServerIp(), Integer.valueOf(this.P()));
+            DedicatedServer.LOGGER.info("Starting Tribula server on {}:{}", this.getServerIp().isEmpty() ? "*" : this.getServerIp(), this.P());
 
         if (!org.spigotmc.SpigotConfig.lateBind) {
             try {
@@ -258,13 +257,13 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
                 this.c(this.propertyManager.getInt("max-build-height", 256));
                 this.c((this.getMaxBuildHeight() + 8) / 16 * 16);
                 this.c(MathHelper.clamp(this.getMaxBuildHeight(), 64, 256));
-                this.propertyManager.setProperty("max-build-height", Integer.valueOf(this.getMaxBuildHeight()));
+                this.propertyManager.setProperty("max-build-height", this.getMaxBuildHeight());
                 TileEntitySkull.a(this.getUserCache());
                 TileEntitySkull.a(this.ay());
                 UserCache.a(this.getOnlineMode());
                 this.a(this.S(), this.S(), k, worldtype, s2);
                 long i1 = System.nanoTime() - j;
-                String s3 = String.format("%.3fs", Double.valueOf((double) i1 / 1.0E9D));
+                String s3 = String.format("%.3fs", (double) i1 / 1.0E9D);
 
                 DedicatedServer.LOGGER.info("Server startup completed in {}", s3);
                 if (this.propertyManager.getBoolean("enable-query", false)) {
@@ -300,14 +299,6 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
             }
         }
 
-                if (false && this.aP() > 0L) {  // Spigot - disable
-                    Thread thread1 = new Thread(new ThreadWatchdog(this));
-
-                    thread1.setName("Server Watchdog");
-                    thread1.setDaemon(true);
-                    thread1.start();
-                }
-
                 return true;
             }
         }
@@ -337,17 +328,17 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
         return s;
     }
 
-    public void setGamemode(EnumGamemode enumgamemode) {
-        super.setGamemode(enumgamemode);
-        this.t = enumgamemode;
-    }
-
     public boolean getGenerateStructures() {
         return this.generateStructures;
     }
 
     public EnumGamemode getGamemode() {
         return this.t;
+    }
+
+    public void setGamemode(EnumGamemode enumgamemode) {
+        super.setGamemode(enumgamemode);
+        this.t = enumgamemode;
     }
 
     public EnumDifficulty getDifficulty() {
@@ -403,8 +394,8 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
     }
 
     public void a(MojangStatisticsGenerator mojangstatisticsgenerator) {
-        mojangstatisticsgenerator.a("whitelist_enabled", Boolean.valueOf(this.aM().getHasWhitelist()));
-        mojangstatisticsgenerator.a("whitelist_count", Integer.valueOf(this.aM().getWhitelisted().length));
+        mojangstatisticsgenerator.a("whitelist_enabled", this.aM().getHasWhitelist());
+        mojangstatisticsgenerator.a("whitelist_count", this.aM().getWhitelisted().length);
         super.a(mojangstatisticsgenerator);
     }
 
@@ -508,20 +499,20 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
 
     public boolean a(World world, BlockPosition blockposition, EntityHuman entityhuman) {
         if (world.worldProvider.getDimensionManager().getDimensionID() != 0) {
-            return false;
+            return true;
         } else if (this.aM().getOPs().isEmpty()) {
-            return false;
+            return true;
         } else if (this.aM().isOp(entityhuman.getProfile())) {
-            return false;
+            return true;
         } else if (this.getSpawnProtection() <= 0) {
-            return false;
+            return true;
         } else {
             BlockPosition blockposition1 = world.getSpawn();
             int i = MathHelper.a(blockposition.getX() - blockposition1.getX());
             int j = MathHelper.a(blockposition.getZ() - blockposition1.getZ());
             int k = Math.max(i, j);
 
-            return k <= this.getSpawnProtection();
+            return k > this.getSpawnProtection();
         }
     }
 
@@ -531,7 +522,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
 
     public void setIdleTimeout(int i) {
         super.setIdleTimeout(i);
-        this.propertyManager.setProperty("player-idle-timeout", Integer.valueOf(i));
+        this.propertyManager.setProperty("player-idle-timeout", i);
         this.a();
     }
 
@@ -629,7 +620,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
     private void aR() {
         try {
             Thread.sleep(5000L);
-        } catch (InterruptedException interruptedexception) {
+        } catch (InterruptedException ignored) {
         }
     }
 

@@ -1,7 +1,8 @@
 package net.minecraft.server;
 
+import org.bukkit.craftbukkit.inventory.CraftMerchantRecipe;
+
 import javax.annotation.Nullable;
-import org.bukkit.craftbukkit.inventory.CraftMerchantRecipe; // CraftBukkit
 
 public class MerchantRecipe {
 
@@ -14,19 +15,15 @@ public class MerchantRecipe {
     // CraftBukkit start
     private CraftMerchantRecipe bukkitHandle;
 
-    public CraftMerchantRecipe asBukkit() {
-        return (bukkitHandle == null) ? bukkitHandle = new CraftMerchantRecipe(this) : bukkitHandle;
-    }
-
     public MerchantRecipe(ItemStack itemstack, ItemStack itemstack1, ItemStack itemstack2, int i, int j, CraftMerchantRecipe bukkit) {
         this(itemstack, itemstack1, itemstack2, i, j);
         this.bukkitHandle = bukkit;
     }
-    // CraftBukkit end
 
     public MerchantRecipe(NBTTagCompound nbttagcompound) {
         this.a(nbttagcompound);
     }
+    // CraftBukkit end
 
     public MerchantRecipe(ItemStack itemstack, @Nullable ItemStack itemstack1, ItemStack itemstack2) {
         this(itemstack, itemstack1, itemstack2, 0, 7);
@@ -47,6 +44,10 @@ public class MerchantRecipe {
 
     public MerchantRecipe(ItemStack itemstack, Item item) {
         this(itemstack, new ItemStack(item));
+    }
+
+    public CraftMerchantRecipe asBukkit() {
+        return (bukkitHandle == null) ? bukkitHandle = new CraftMerchantRecipe(this) : bukkitHandle;
     }
 
     public ItemStack getBuyItem1() {
@@ -110,11 +111,7 @@ public class MerchantRecipe {
             this.maxUses = 7;
         }
 
-        if (nbttagcompound.hasKeyOfType("rewardExp", 1)) {
-            this.rewardExp = nbttagcompound.getBoolean("rewardExp");
-        } else {
-            this.rewardExp = true;
-        }
+        this.rewardExp = !nbttagcompound.hasKeyOfType("rewardExp", 1) || nbttagcompound.getBoolean("rewardExp");
 
     }
 

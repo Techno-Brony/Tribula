@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
-import javax.annotation.Nullable;
-// CraftBukkit start
 import org.bukkit.craftbukkit.inventory.CraftInventory;
 import org.bukkit.craftbukkit.inventory.CraftInventoryView;
+
+import javax.annotation.Nullable;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class ContainerHopper extends Container {
@@ -13,18 +15,6 @@ public class ContainerHopper extends Container {
     // CraftBukkit start
     private CraftInventoryView bukkitEntity = null;
     private PlayerInventory player;
-
-    @Override
-    public CraftInventoryView getBukkitView() {
-        if (bukkitEntity != null) {
-            return bukkitEntity;
-        }
-
-        CraftInventory inventory = new CraftInventory(this.hopper);
-        bukkitEntity = new CraftInventoryView(this.player.player.getBukkitEntity(), inventory, this);
-        return bukkitEntity;
-    }
-    // CraftBukkit end
 
     public ContainerHopper(PlayerInventory playerinventory, IInventory iinventory, EntityHuman entityhuman) {
         this.hopper = iinventory;
@@ -49,10 +39,22 @@ public class ContainerHopper extends Container {
         }
 
     }
+    // CraftBukkit end
+
+    @Override
+    public CraftInventoryView getBukkitView() {
+        if (bukkitEntity != null) {
+            return bukkitEntity;
+        }
+
+        CraftInventory inventory = new CraftInventory(this.hopper);
+        bukkitEntity = new CraftInventoryView(this.player.player.getBukkitEntity(), inventory, this);
+        return bukkitEntity;
+    }
 
     public boolean a(EntityHuman entityhuman) {
-        if (!this.checkReachable) return true; // CraftBukkit
-        return this.hopper.a(entityhuman);
+        // CraftBukkit
+        return this.checkReachable && !this.hopper.a(entityhuman);
     }
 
     @Nullable
@@ -65,10 +67,10 @@ public class ContainerHopper extends Container {
 
             itemstack = itemstack1.cloneItemStack();
             if (i < this.hopper.getSize()) {
-                if (!this.a(itemstack1, this.hopper.getSize(), this.c.size(), true)) {
+                if (this.a(itemstack1, this.hopper.getSize(), this.c.size(), true)) {
                     return null;
                 }
-            } else if (!this.a(itemstack1, 0, this.hopper.getSize(), false)) {
+            } else if (this.a(itemstack1, 0, this.hopper.getSize(), false)) {
                 return null;
             }
 

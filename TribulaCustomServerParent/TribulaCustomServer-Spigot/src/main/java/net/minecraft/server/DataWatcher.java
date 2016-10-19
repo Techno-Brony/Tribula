@@ -4,6 +4,11 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import io.netty.handler.codec.DecoderException;
 import io.netty.handler.codec.EncoderException;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import javax.annotation.Nullable;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -11,10 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-import javax.annotation.Nullable;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class DataWatcher {
 
@@ -38,14 +39,14 @@ public class DataWatcher {
                 if (!oclass1.equals(oclass)) {
                     DataWatcher.a.debug("defineId called for: {} from {}", oclass, oclass1, new RuntimeException());
                 }
-            } catch (ClassNotFoundException classnotfoundexception) {
+            } catch (ClassNotFoundException ignored) {
             }
         }
 
         int i;
 
         if (DataWatcher.b.containsKey(oclass)) {
-            i = DataWatcher.b.get(oclass).intValue() + 1;
+            i = DataWatcher.b.get(oclass) + 1;
         } else {
             int j = 0;
             Class oclass2 = oclass;
@@ -53,7 +54,7 @@ public class DataWatcher {
             while (oclass2 != Entity.class) {
                 oclass2 = oclass2.getSuperclass();
                 if (DataWatcher.b.containsKey(oclass2)) {
-                    j = DataWatcher.b.get(oclass2).intValue() + 1;
+                    j = DataWatcher.b.get(oclass2) + 1;
                     break;
                 }
             }
@@ -64,9 +65,60 @@ public class DataWatcher {
         if (i > 254) {
             throw new IllegalArgumentException("Data value id is too big with " + i + "! (Max is " + 254 + ")");
         } else {
-            DataWatcher.b.put(oclass, Integer.valueOf(i));
+            DataWatcher.b.put(oclass, i);
             return datawatcherserializer.a(i);
         }
+    }
+
+    public static void a(List<DataWatcher.Item<?>> list, PacketDataSerializer packetdataserializer) throws IOException {
+        if (list != null) {
+            int i = 0;
+
+            for (int j = list.size(); i < j; ++i) {
+                DataWatcher.Item datawatcher_item = (DataWatcher.Item) list.get(i);
+
+                a(packetdataserializer, datawatcher_item);
+            }
+        }
+
+        packetdataserializer.writeByte(255);
+    }
+
+    private static <T> void a(PacketDataSerializer packetdataserializer, DataWatcher.Item<T> datawatcher_item) throws IOException {
+        DataWatcherObject datawatcherobject = datawatcher_item.a();
+        int i = DataWatcherRegistry.b(datawatcherobject.b());
+
+        if (i < 0) {
+            throw new EncoderException("Unknown serializer type " + datawatcherobject.b());
+        } else {
+            packetdataserializer.writeByte(datawatcherobject.a());
+            packetdataserializer.d(i);
+            datawatcherobject.b().a(packetdataserializer, datawatcher_item.b());
+        }
+    }
+
+    @Nullable
+    public static List<DataWatcher.Item<?>> b(PacketDataSerializer packetdataserializer) throws IOException {
+        ArrayList arraylist = null;
+
+        short short0;
+
+        while ((short0 = packetdataserializer.readUnsignedByte()) != 255) {
+            if (arraylist == null) {
+                arraylist = Lists.newArrayList();
+            }
+
+            int i = packetdataserializer.g();
+            DataWatcherSerializer datawatcherserializer = DataWatcherRegistry.a(i);
+
+            if (datawatcherserializer == null) {
+                throw new DecoderException("Unknown serializer type " + i);
+            }
+
+            arraylist.add(new DataWatcher.Item(datawatcherserializer.a(short0), datawatcherserializer.a(packetdataserializer)));
+        }
+
+        return arraylist;
     }
 
     public <T> void register(DataWatcherObject<T> datawatcherobject, Object t0) { // CraftBukkit T -> Object
@@ -74,7 +126,7 @@ public class DataWatcher {
 
         if (i > 254) {
             throw new IllegalArgumentException("Data value id is too big with " + i + "! (Max is " + 254 + ")");
-        } else if (this.d.containsKey(Integer.valueOf(i))) {
+        } else if (this.d.containsKey(i)) {
             throw new IllegalArgumentException("Duplicate id value for " + i + "!");
         } else if (DataWatcherRegistry.b(datawatcherobject.b()) < 0) {
             throw new IllegalArgumentException("Unregistered serializer " + datawatcherobject.b() + " for " + i + "!");
@@ -87,7 +139,7 @@ public class DataWatcher {
         DataWatcher.Item datawatcher_item = new DataWatcher.Item(datawatcherobject, t0);
 
         this.e.writeLock().lock();
-        this.d.put(Integer.valueOf(datawatcherobject.a()), datawatcher_item);
+        this.d.put(datawatcherobject.a(), datawatcher_item);
         this.f = false;
         this.e.writeLock().unlock();
     }
@@ -98,7 +150,7 @@ public class DataWatcher {
         DataWatcher.Item datawatcher_item;
 
         try {
-            datawatcher_item = (DataWatcher.Item) this.d.get(Integer.valueOf(datawatcherobject.a()));
+            datawatcher_item = (DataWatcher.Item) this.d.get(datawatcherobject.a());
         } catch (Throwable throwable) {
             CrashReport crashreport = CrashReport.a(throwable, "Getting synched entity data");
             CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Synched entity data");
@@ -134,20 +186,6 @@ public class DataWatcher {
 
     public boolean a() {
         return this.g;
-    }
-
-    public static void a(List<DataWatcher.Item<?>> list, PacketDataSerializer packetdataserializer) throws IOException {
-        if (list != null) {
-            int i = 0;
-
-            for (int j = list.size(); i < j; ++i) {
-                DataWatcher.Item datawatcher_item = (DataWatcher.Item) list.get(i);
-
-                a(packetdataserializer, datawatcher_item);
-            }
-        }
-
-        packetdataserializer.writeByte(255);
     }
 
     @Nullable
@@ -208,43 +246,6 @@ public class DataWatcher {
         }
 
         this.e.readLock().unlock();
-        return arraylist;
-    }
-
-    private static <T> void a(PacketDataSerializer packetdataserializer, DataWatcher.Item<T> datawatcher_item) throws IOException {
-        DataWatcherObject datawatcherobject = datawatcher_item.a();
-        int i = DataWatcherRegistry.b(datawatcherobject.b());
-
-        if (i < 0) {
-            throw new EncoderException("Unknown serializer type " + datawatcherobject.b());
-        } else {
-            packetdataserializer.writeByte(datawatcherobject.a());
-            packetdataserializer.d(i);
-            datawatcherobject.b().a(packetdataserializer, datawatcher_item.b());
-        }
-    }
-
-    @Nullable
-    public static List<DataWatcher.Item<?>> b(PacketDataSerializer packetdataserializer) throws IOException {
-        ArrayList arraylist = null;
-
-        short short0;
-
-        while ((short0 = packetdataserializer.readUnsignedByte()) != 255) {
-            if (arraylist == null) {
-                arraylist = Lists.newArrayList();
-            }
-
-            int i = packetdataserializer.g();
-            DataWatcherSerializer datawatcherserializer = DataWatcherRegistry.a(i);
-
-            if (datawatcherserializer == null) {
-                throw new DecoderException("Unknown serializer type " + i);
-            }
-
-            arraylist.add(new DataWatcher.Item(datawatcherserializer.a(short0), datawatcherserializer.a(packetdataserializer)));
-        }
-
         return arraylist;
     }
 

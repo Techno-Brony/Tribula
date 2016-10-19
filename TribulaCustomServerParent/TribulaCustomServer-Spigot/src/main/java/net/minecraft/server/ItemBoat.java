@@ -38,8 +38,8 @@ public class ItemBoat extends Item {
             boolean flag = false;
             List list = world.getEntities(entityhuman, entityhuman.getBoundingBox().a(vec3d2.x * 5.0D, vec3d2.y * 5.0D, vec3d2.z * 5.0D).g(1.0D));
 
-            for (int i = 0; i < list.size(); ++i) {
-                Entity entity = (Entity) list.get(i);
+            for (Object aList : list) {
+                Entity entity = (Entity) aList;
 
                 if (entity.isInteractable()) {
                     AxisAlignedBB axisalignedbb = entity.getBoundingBox().g((double) entity.aA());

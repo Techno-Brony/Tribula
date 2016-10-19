@@ -1,7 +1,7 @@
 package net.minecraft.server;
 
-import java.util.List;
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class BlockWaterLily extends BlockPlant {
 
@@ -39,7 +39,7 @@ public class BlockWaterLily extends BlockPlant {
             IBlockData iblockdata1 = world.getType(blockposition.down());
             Material material = iblockdata1.getMaterial();
 
-            return material == Material.WATER && iblockdata1.get(BlockFluids.LEVEL).intValue() == 0 || material == Material.ICE;
+            return material == Material.WATER && iblockdata1.get(BlockFluids.LEVEL) == 0 || material == Material.ICE;
         } else {
             return false;
         }

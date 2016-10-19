@@ -2,11 +2,8 @@ package net.minecraft.server;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+
+import java.util.*;
 
 public class ScoreboardServer extends Scoreboard {
 
@@ -66,7 +63,7 @@ public class ScoreboardServer extends Scoreboard {
         if (super.addPlayerToTeam(s, s1)) {
             ScoreboardTeam scoreboardteam = this.getTeam(s1);
 
-            this.sendAll(new PacketPlayOutScoreboardTeam(scoreboardteam, Arrays.asList(s), 3));
+            this.sendAll(new PacketPlayOutScoreboardTeam(scoreboardteam, Collections.singletonList(s), 3));
             this.b();
             return true;
         } else {
@@ -76,7 +73,7 @@ public class ScoreboardServer extends Scoreboard {
 
     public void removePlayerFromTeam(String s, ScoreboardTeam scoreboardteam) {
         super.removePlayerFromTeam(s, scoreboardteam);
-        this.sendAll(new PacketPlayOutScoreboardTeam(scoreboardteam, Arrays.asList(s), 4));
+        this.sendAll(new PacketPlayOutScoreboardTeam(scoreboardteam, Collections.singletonList(s), 4));
         this.b();
     }
 
@@ -130,9 +127,7 @@ public class ScoreboardServer extends Scoreboard {
         Runnable[] arunnable = this.c;
         int i = arunnable.length;
 
-        for (int j = 0; j < i; ++j) {
-            Runnable runnable = arunnable[j];
-
+        for (Runnable runnable : arunnable) {
             runnable.run();
         }
 

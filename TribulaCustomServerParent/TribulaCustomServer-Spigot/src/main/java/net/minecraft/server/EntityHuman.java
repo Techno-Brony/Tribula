@@ -3,17 +3,8 @@ package net.minecraft.server;
 import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import com.mojang.authlib.GameProfile;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
-import javax.annotation.Nullable;
-
-// CraftBukkit start
 import org.bukkit.craftbukkit.entity.CraftHumanEntity;
 import org.bukkit.craftbukkit.entity.CraftItem;
-import org.bukkit.craftbukkit.event.CraftEventFactory;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityCombustByEntityEvent;
 import org.bukkit.event.player.PlayerBedEnterEvent;
@@ -21,20 +12,24 @@ import org.bukkit.event.player.PlayerBedLeaveEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerVelocityEvent;
 import org.bukkit.util.Vector;
+
+import javax.annotation.Nullable;
+import java.util.*;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public abstract class EntityHuman extends EntityLiving {
 
-    private static final DataWatcherObject<Float> a = DataWatcher.a(EntityHuman.class, DataWatcherRegistry.c);
-    private static final DataWatcherObject<Integer> b = DataWatcher.a(EntityHuman.class, DataWatcherRegistry.b);
     protected static final DataWatcherObject<Byte> br = DataWatcher.a(EntityHuman.class, DataWatcherRegistry.a);
     protected static final DataWatcherObject<Byte> bs = DataWatcher.a(EntityHuman.class, DataWatcherRegistry.a);
+    private static final DataWatcherObject<Float> a = DataWatcher.a(EntityHuman.class, DataWatcherRegistry.c);
+    private static final DataWatcherObject<Integer> b = DataWatcher.a(EntityHuman.class, DataWatcherRegistry.b);
+    private final GameProfile bT;
+    private final ItemCooldown bW = this.l();
     public PlayerInventory inventory = new PlayerInventory(this);
-    private InventoryEnderChest enderChest = new InventoryEnderChest();
     public Container defaultContainer;
     public Container activeContainer;
-    protected FoodMetaData foodData = new FoodMetaData(this); // CraftBukkit - add "this" to constructor
-    protected int bx;
     public float by;
     public float bz;
     public int bA;
@@ -49,36 +44,26 @@ public abstract class EntityHuman extends EntityLiving {
     public int sleepTicks;
     public float bJ;
     public float bK;
-    private BlockPosition e;
-    private boolean f;
-    private BlockPosition g;
     public PlayerAbilities abilities = new PlayerAbilities();
     public int expLevel;
     public int expTotal;
     public float exp;
-    private int h;
-    protected float bP = 0.1F;
-    protected float bQ = 0.02F;
-    private int bS;
-    private final GameProfile bT;
-    private ItemStack bV;
-    private final ItemCooldown bW = this.l();
     public EntityFishingHook hookedFish;
-
     // CraftBukkit start
     public boolean fauxSleeping;
     public String spawnWorld = "";
     public int oldLevel = -1;
-
-    @Override
-    public CraftHumanEntity getBukkitEntity() {
-        return (CraftHumanEntity) super.getBukkitEntity();
-    }
-    // CraftBukkit end
-
-    protected ItemCooldown l() {
-        return new ItemCooldown();
-    }
+    protected FoodMetaData foodData = new FoodMetaData(this); // CraftBukkit - add "this" to constructor
+    protected int bx;
+    protected float bP = 0.1F;
+    protected float bQ = 0.02F;
+    private InventoryEnderChest enderChest = new InventoryEnderChest();
+    private BlockPosition e;
+    private boolean f;
+    private BlockPosition g;
+    private int h;
+    private int bS;
+    private ItemStack bV;
 
     public EntityHuman(World world, GameProfile gameprofile) {
         super(world);
@@ -92,6 +77,58 @@ public abstract class EntityHuman extends EntityLiving {
         this.bb = 180.0F;
         this.maxFireTicks = 20;
     }
+    // CraftBukkit end
+
+    public static void a(DataConverterManager dataconvertermanager) {
+        dataconvertermanager.a(DataConverterTypes.PLAYER, new DataInspector() {
+            public NBTTagCompound a(DataConverter dataconverter, NBTTagCompound nbttagcompound, int i) {
+                DataConverterRegistry.b(dataconverter, nbttagcompound, i, "Inventory");
+                DataConverterRegistry.b(dataconverter, nbttagcompound, i, "EnderItems");
+                return nbttagcompound;
+            }
+        });
+    }
+
+    @Nullable
+    public static BlockPosition getBed(World world, BlockPosition blockposition, boolean flag) {
+        Block block = world.getType(blockposition).getBlock();
+
+        if (block != Blocks.BED) {
+            if (!flag) {
+                return null;
+            } else {
+                boolean flag1 = block.d();
+                boolean flag2 = world.getType(blockposition.up()).getBlock().d();
+
+                return flag1 && flag2 ? blockposition : null;
+            }
+        } else {
+            return BlockBed.a(world, blockposition, 0);
+        }
+    }
+
+    public static UUID a(GameProfile gameprofile) {
+        UUID uuid = gameprofile.getId();
+
+        if (uuid == null) {
+            uuid = d(gameprofile.getName());
+        }
+
+        return uuid;
+    }
+
+    public static UUID d(String s) {
+        return UUID.nameUUIDFromBytes(("OfflinePlayer:" + s).getBytes(Charsets.UTF_8));
+    }
+
+    @Override
+    public CraftHumanEntity getBukkitEntity() {
+        return (CraftHumanEntity) super.getBukkitEntity();
+    }
+
+    protected ItemCooldown l() {
+        return new ItemCooldown();
+    }
 
     protected void initAttributes() {
         super.initAttributes();
@@ -103,10 +140,10 @@ public abstract class EntityHuman extends EntityLiving {
 
     protected void i() {
         super.i();
-        this.datawatcher.register(EntityHuman.a, Float.valueOf(0.0F));
-        this.datawatcher.register(EntityHuman.b, Integer.valueOf(0));
-        this.datawatcher.register(EntityHuman.br, Byte.valueOf((byte) 0));
-        this.datawatcher.register(EntityHuman.bs, Byte.valueOf((byte) 1));
+        this.datawatcher.register(EntityHuman.a, 0.0F);
+        this.datawatcher.register(EntityHuman.b, 0);
+        this.datawatcher.register(EntityHuman.br, (byte) 0);
+        this.datawatcher.register(EntityHuman.bs, (byte) 1);
     }
 
     public void m() {
@@ -140,7 +177,7 @@ public abstract class EntityHuman extends EntityLiving {
         }
 
         super.m();
-        if (!this.world.isClientSide && this.activeContainer != null && !this.activeContainer.a(this)) {
+        if (!this.world.isClientSide && this.activeContainer != null && this.activeContainer.a(this)) {
             this.closeInventory();
             this.activeContainer = this.defaultContainer;
         }
@@ -383,8 +420,8 @@ public abstract class EntityHuman extends EntityLiving {
 
             List list = this.world.getEntities(this, axisalignedbb);
 
-            for (int i = 0; i < list.size(); ++i) {
-                Entity entity = (Entity) list.get(i);
+            for (Object aList : list) {
+                Entity entity = (Entity) aList;
 
                 if (!entity.dead) {
                     this.c(entity);
@@ -399,17 +436,17 @@ public abstract class EntityHuman extends EntityLiving {
     }
 
     public int getScore() {
-        return this.datawatcher.get(EntityHuman.b).intValue();
+        return this.datawatcher.get(EntityHuman.b);
     }
 
     public void setScore(int i) {
-        this.datawatcher.set(EntityHuman.b, Integer.valueOf(i));
+        this.datawatcher.set(EntityHuman.b, i);
     }
 
     public void addScore(int i) {
         int j = this.getScore();
 
-        this.datawatcher.set(EntityHuman.b, Integer.valueOf(j + i));
+        this.datawatcher.set(EntityHuman.b, j + i);
     }
 
     public void die(DamageSource damagesource) {
@@ -565,6 +602,7 @@ public abstract class EntityHuman extends EntityLiving {
             this.world.getServer().getPluginManager().callEvent(event);
 
             if (event.isCancelled()) {
+                //noinspection deprecation
                 org.bukkit.inventory.ItemStack cur = player.getInventory().getItemInHand();
                 if (flag1 && (cur == null || cur.getAmount() == 0)) {
                     // The complete stack was dropped
@@ -654,16 +692,6 @@ public abstract class EntityHuman extends EntityLiving {
 
     public boolean hasBlock(IBlockData iblockdata) {
         return this.inventory.b(iblockdata);
-    }
-
-    public static void a(DataConverterManager dataconvertermanager) {
-        dataconvertermanager.a(DataConverterTypes.PLAYER, new DataInspector() {
-            public NBTTagCompound a(DataConverter dataconverter, NBTTagCompound nbttagcompound, int i) {
-                DataConverterRegistry.b(dataconverter, nbttagcompound, i, "Inventory");
-                DataConverterRegistry.b(dataconverter, nbttagcompound, i, "EnderItems");
-                return nbttagcompound;
-            }
-        });
     }
 
     public void a(NBTTagCompound nbttagcompound) {
@@ -782,21 +810,22 @@ public abstract class EntityHuman extends EntityLiving {
             EntityPlayer thatPlayer = (EntityPlayer) entityhuman;
             team = thatPlayer.getBukkitEntity().getScoreboard().getPlayerTeam(thatPlayer.getBukkitEntity());
             if (team == null || team.allowFriendlyFire()) {
-                return true;
+                return false;
             }
         } else {
             // This should never be called, but is implemented anyway
+            //noinspection deprecation
             org.bukkit.OfflinePlayer thisPlayer = entityhuman.world.getServer().getOfflinePlayer(entityhuman.getName());
             team = entityhuman.world.getServer().getScoreboardManager().getMainScoreboard().getPlayerTeam(thisPlayer);
             if (team == null || team.allowFriendlyFire()) {
-                return true;
+                return false;
             }
         }
 
         if (this instanceof EntityPlayer) {
-            return !team.hasPlayer(((EntityPlayer) this).getBukkitEntity());
+            return team.hasPlayer(((EntityPlayer) this).getBukkitEntity());
         }
-        return !team.hasPlayer(this.world.getServer().getOfflinePlayer(this.getName()));
+        return team.hasPlayer(this.world.getServer().getOfflinePlayer(this.getName()));
         // CraftBukkit end
     }
 
@@ -830,9 +859,7 @@ public abstract class EntityHuman extends EntityLiving {
         ItemStack[] aitemstack = this.inventory.armor;
         int j = aitemstack.length;
 
-        for (int k = 0; k < j; ++k) {
-            ItemStack itemstack = aitemstack[k];
-
+        for (ItemStack itemstack : aitemstack) {
             if (itemstack != null) {
                 ++i;
             }
@@ -843,30 +870,27 @@ public abstract class EntityHuman extends EntityLiving {
 
     // CraftBukkit start
     protected boolean damageEntity0(DamageSource damagesource, float f) { // void -> boolean
-        if (true) {
-            return super.damageEntity0(damagesource, f);
-        }
+        return super.damageEntity0(damagesource, f);
         // CraftBukkit end
-        if (!this.isInvulnerable(damagesource)) {
-            f = this.applyArmorModifier(damagesource, f);
-            f = this.applyMagicModifier(damagesource, f);
-            float f1 = f;
-
-            f = Math.max(f - this.getAbsorptionHearts(), 0.0F);
-            this.setAbsorptionHearts(this.getAbsorptionHearts() - (f1 - f));
-            if (f != 0.0F) {
-                this.applyExhaustion(damagesource.getExhaustionCost());
-                float f2 = this.getHealth();
-
-                this.setHealth(this.getHealth() - f);
-                this.getCombatTracker().trackDamage(damagesource, f2, f);
-                if (f < 3.4028235E37F) {
-                    this.a(StatisticList.z, Math.round(f * 10.0F));
-                }
-
-            }
-        }
-        return false; // CraftBukkit
+//        if (!this.isInvulnerable(damagesource)) {
+//            f = this.applyMagicModifier(damagesource, f);
+//            float f1 = f;
+//
+//            f = Math.max(f - this.getAbsorptionHearts(), 0.0F);
+//            this.setAbsorptionHearts(this.getAbsorptionHearts() - (f1 - f));
+//            if (f != 0.0F) {
+//                this.applyExhaustion(damagesource.getExhaustionCost());
+//                float f2 = this.getHealth();
+//
+//                this.setHealth(this.getHealth() - f);
+//                this.getCombatTracker().trackDamage(damagesource, f2, f);
+//                if (f < 3.4028235E37F) {
+//                    this.a(StatisticList.z, Math.round(f * 10.0F));
+//                }
+//
+//            }
+//        }
+//        return true; // CraftBukkit
     }
 
     public void openSign(TileEntitySign tileentitysign) {}
@@ -897,7 +921,7 @@ public abstract class EntityHuman extends EntityLiving {
         } else {
             ItemStack itemstack1 = itemstack != null ? itemstack.cloneItemStack() : null;
 
-            if (!entity.a(this, itemstack, enumhand)) {
+            if (entity.a(this, itemstack, enumhand)) {
                 if (itemstack != null && entity instanceof EntityLiving) {
                     if (this.abilities.canInstantlyBuild) {
                         itemstack = itemstack1;
@@ -1315,7 +1339,7 @@ public abstract class EntityHuman extends EntityLiving {
         IBlockData iblockdata = this.world.getType(this.bedPosition);
 
         if (this.bedPosition != null && iblockdata.getBlock() == Blocks.BED) {
-            this.world.setTypeAndData(this.bedPosition, iblockdata.set(BlockBed.OCCUPIED, Boolean.valueOf(false)), 4);
+            this.world.setTypeAndData(this.bedPosition, iblockdata.set(BlockBed.OCCUPIED, Boolean.FALSE), 4);
             BlockPosition blockposition = BlockBed.a(this.world, this.bedPosition, 0);
 
             if (blockposition == null) {
@@ -1356,24 +1380,6 @@ public abstract class EntityHuman extends EntityLiving {
 
     private boolean r() {
         return this.world.getType(this.bedPosition).getBlock() == Blocks.BED;
-    }
-
-    @Nullable
-    public static BlockPosition getBed(World world, BlockPosition blockposition, boolean flag) {
-        Block block = world.getType(blockposition).getBlock();
-
-        if (block != Blocks.BED) {
-            if (!flag) {
-                return null;
-            } else {
-                boolean flag1 = block.d();
-                boolean flag2 = world.getType(blockposition.up()).getBlock().d();
-
-                return flag1 && flag2 ? blockposition : null;
-            }
-        } else {
-            return BlockBed.a(world, blockposition, 0);
-        }
     }
 
     public boolean isSleeping() {
@@ -1782,39 +1788,25 @@ public abstract class EntityHuman extends EntityLiving {
         return f;
     }
 
+    public float getAbsorptionHearts() {
+        return this.getDataWatcher().get(EntityHuman.a);
+    }
+
     public void setAbsorptionHearts(float f) {
         if (f < 0.0F) {
             f = 0.0F;
         }
 
-        this.getDataWatcher().set(EntityHuman.a, Float.valueOf(f));
-    }
-
-    public float getAbsorptionHearts() {
-        return this.getDataWatcher().get(EntityHuman.a).floatValue();
-    }
-
-    public static UUID a(GameProfile gameprofile) {
-        UUID uuid = gameprofile.getId();
-
-        if (uuid == null) {
-            uuid = d(gameprofile.getName());
-        }
-
-        return uuid;
-    }
-
-    public static UUID d(String s) {
-        return UUID.nameUUIDFromBytes(("OfflinePlayer:" + s).getBytes(Charsets.UTF_8));
+        this.getDataWatcher().set(EntityHuman.a, f);
     }
 
     public boolean a(ChestLock chestlock) {
         if (chestlock.a()) {
-            return true;
+            return false;
         } else {
             ItemStack itemstack = this.getItemInMainHand();
 
-            return (itemstack != null && itemstack.hasName()) && itemstack.getName().equals(chestlock.b());
+            return (itemstack == null || !itemstack.hasName()) || !itemstack.getName().equals(chestlock.b());
         }
     }
 
@@ -1874,11 +1866,11 @@ public abstract class EntityHuman extends EntityLiving {
     }
 
     public EnumMainHand getMainHand() {
-        return this.datawatcher.get(EntityHuman.bs).byteValue() == 0 ? EnumMainHand.LEFT : EnumMainHand.RIGHT;
+        return this.datawatcher.get(EntityHuman.bs) == 0 ? EnumMainHand.LEFT : EnumMainHand.RIGHT;
     }
 
     public void a(EnumMainHand enummainhand) {
-        this.datawatcher.set(EntityHuman.bs, Byte.valueOf((byte) (enummainhand == EnumMainHand.LEFT ? 0 : 1)));
+        this.datawatcher.set(EntityHuman.bs, (byte) (enummainhand == EnumMainHand.LEFT ? 0 : 1));
     }
 
     public float dd() {
@@ -1912,34 +1904,6 @@ public abstract class EntityHuman extends EntityLiving {
         return this.abilities.canInstantlyBuild && this.a(2, "");
     }
 
-    static class SyntheticClass_1 {
-
-        static final int[] a = new int[EnumDirection.values().length];
-
-        static {
-            try {
-                EntityHuman.SyntheticClass_1.a[EnumDirection.SOUTH.ordinal()] = 1;
-            } catch (NoSuchFieldError nosuchfielderror) {
-            }
-
-            try {
-                EntityHuman.SyntheticClass_1.a[EnumDirection.NORTH.ordinal()] = 2;
-            } catch (NoSuchFieldError nosuchfielderror1) {
-            }
-
-            try {
-                EntityHuman.SyntheticClass_1.a[EnumDirection.WEST.ordinal()] = 3;
-            } catch (NoSuchFieldError nosuchfielderror2) {
-            }
-
-            try {
-                EntityHuman.SyntheticClass_1.a[EnumDirection.EAST.ordinal()] = 4;
-            } catch (NoSuchFieldError nosuchfielderror3) {
-            }
-
-        }
-    }
-
     public enum EnumBedResult {
 
         OK, NOT_POSSIBLE_HERE, NOT_POSSIBLE_NOW, TOO_FAR_AWAY, OTHER_PROBLEM, NOT_SAFE;
@@ -1952,6 +1916,17 @@ public abstract class EntityHuman extends EntityLiving {
         FULL(0, "options.chat.visibility.full"), SYSTEM(1, "options.chat.visibility.system"), HIDDEN(2, "options.chat.visibility.hidden");
 
         private static final EntityHuman.EnumChatVisibility[] d = new EntityHuman.EnumChatVisibility[values().length];
+
+        static {
+            EntityHuman.EnumChatVisibility[] aentityhuman_enumchatvisibility = values();
+            int i = aentityhuman_enumchatvisibility.length;
+
+            for (EnumChatVisibility entityhuman_enumchatvisibility : aentityhuman_enumchatvisibility) {
+                EnumChatVisibility.d[entityhuman_enumchatvisibility.e] = entityhuman_enumchatvisibility;
+            }
+
+        }
+
         private final int e;
         private final String f;
 
@@ -1959,15 +1934,31 @@ public abstract class EntityHuman extends EntityLiving {
             this.e = i;
             this.f = s;
         }
+    }
+
+    static class SyntheticClass_1 {
+
+        static final int[] a = new int[EnumDirection.values().length];
 
         static {
-            EntityHuman.EnumChatVisibility[] aentityhuman_enumchatvisibility = values();
-            int i = aentityhuman_enumchatvisibility.length;
+            try {
+                EntityHuman.SyntheticClass_1.a[EnumDirection.SOUTH.ordinal()] = 1;
+            } catch (NoSuchFieldError ignored) {
+            }
 
-            for (int j = 0; j < i; ++j) {
-                EntityHuman.EnumChatVisibility entityhuman_enumchatvisibility = aentityhuman_enumchatvisibility[j];
+            try {
+                EntityHuman.SyntheticClass_1.a[EnumDirection.NORTH.ordinal()] = 2;
+            } catch (NoSuchFieldError ignored) {
+            }
 
-                EntityHuman.EnumChatVisibility.d[entityhuman_enumchatvisibility.e] = entityhuman_enumchatvisibility;
+            try {
+                EntityHuman.SyntheticClass_1.a[EnumDirection.WEST.ordinal()] = 3;
+            } catch (NoSuchFieldError ignored) {
+            }
+
+            try {
+                EntityHuman.SyntheticClass_1.a[EnumDirection.EAST.ordinal()] = 4;
+            } catch (NoSuchFieldError ignored) {
             }
 
         }

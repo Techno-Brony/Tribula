@@ -1,6 +1,6 @@
 package net.minecraft.server;
 
-import org.bukkit.event.entity.ExplosionPrimeEvent; // CraftBukkit
+import org.bukkit.event.entity.ExplosionPrimeEvent;
 
 public class EntityWitherSkull extends EntityFireball {
 
@@ -96,15 +96,15 @@ public class EntityWitherSkull extends EntityFireball {
     }
 
     protected void i() {
-        this.datawatcher.register(EntityWitherSkull.e, Boolean.valueOf(false));
+        this.datawatcher.register(EntityWitherSkull.e, Boolean.FALSE);
     }
 
     public boolean isCharged() {
-        return this.datawatcher.get(EntityWitherSkull.e).booleanValue();
+        return this.datawatcher.get(EntityWitherSkull.e);
     }
 
     public void setCharged(boolean flag) {
-        this.datawatcher.set(EntityWitherSkull.e, Boolean.valueOf(flag));
+        this.datawatcher.set(EntityWitherSkull.e, flag);
     }
 
     protected boolean k() {

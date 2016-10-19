@@ -1,26 +1,27 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Sets;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-// CraftBukkit start
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerVelocityEvent;
+
+import java.util.*;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class EntityTrackerEntry {
 
     private static final Logger c = LogManager.getLogger();
+    public final Set<EntityPlayer> trackedPlayers = Sets.newHashSet();
     private final Entity tracker;
     private final int e;
-    private int f;
     private final int g;
+    private final boolean u;
+    public int a;
+    public boolean b;
+    private int f;
     private long xLoc;
     private long yLoc;
     private long zLoc;
@@ -30,18 +31,14 @@ public class EntityTrackerEntry {
     private double n;
     private double o;
     private double p;
-    public int a;
     private double q;
     private double r;
     private double s;
     private boolean isMoving;
-    private final boolean u;
     private int v;
     private List<Entity> w = Collections.emptyList();
     private boolean x;
     private boolean y;
-    public boolean b;
-    public final Set<EntityPlayer> trackedPlayers = Sets.newHashSet();
 
     public EntityTrackerEntry(Entity entity, int i, int j, int k, boolean flag) {
         this.tracker = entity;
@@ -378,8 +375,7 @@ public class EntityTrackerEntry {
                         EnumItemSlot[] aenumitemslot = EnumItemSlot.values();
                         int i = aenumitemslot.length;
 
-                        for (int j = 0; j < i; ++j) {
-                            EnumItemSlot enumitemslot = aenumitemslot[j];
+                        for (EnumItemSlot enumitemslot : aenumitemslot) {
                             ItemStack itemstack = ((EntityLiving) this.tracker).getEquipment(enumitemslot);
 
                             if (itemstack != null) {
@@ -437,8 +433,8 @@ public class EntityTrackerEntry {
     }
 
     public void scanPlayers(List<EntityHuman> list) {
-        for (int i = 0; i < list.size(); ++i) {
-            this.updatePlayer((EntityPlayer) list.get(i));
+        for (EntityHuman aList : list) {
+            this.updatePlayer((EntityPlayer) aList);
         }
 
     }

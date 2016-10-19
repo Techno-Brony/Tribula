@@ -1,7 +1,8 @@
 package net.minecraft.server;
 
+import org.bukkit.craftbukkit.inventory.CraftInventoryView;
+
 import javax.annotation.Nullable;
-import org.bukkit.craftbukkit.inventory.CraftInventoryView; // CraftBukkit
 
 public class ContainerMerchant extends Container {
 
@@ -12,15 +13,6 @@ public class ContainerMerchant extends Container {
     // CraftBukkit start
     private CraftInventoryView bukkitEntity = null;
     private PlayerInventory player;
-
-    @Override
-    public CraftInventoryView getBukkitView() {
-        if (bukkitEntity == null) {
-            bukkitEntity = new CraftInventoryView(this.player.player.getBukkitEntity(), new org.bukkit.craftbukkit.inventory.CraftInventoryMerchant(f), this);
-        }
-        return bukkitEntity;
-    }
-    // CraftBukkit end
 
     public ContainerMerchant(PlayerInventory playerinventory, IMerchant imerchant, World world) {
         this.merchant = imerchant;
@@ -43,6 +35,15 @@ public class ContainerMerchant extends Container {
             this.a(new Slot(playerinventory, i, 8 + i * 18, 142));
         }
 
+    }
+    // CraftBukkit end
+
+    @Override
+    public CraftInventoryView getBukkitView() {
+        if (bukkitEntity == null) {
+            bukkitEntity = new CraftInventoryView(this.player.player.getBukkitEntity(), new org.bukkit.craftbukkit.inventory.CraftInventoryMerchant(f), this);
+        }
+        return bukkitEntity;
     }
 
     public InventoryMerchant e() {
@@ -67,7 +68,7 @@ public class ContainerMerchant extends Container {
     }
 
     public boolean a(EntityHuman entityhuman) {
-        return this.merchant.getTrader() == entityhuman;
+        return this.merchant.getTrader() != entityhuman;
     }
 
     @Nullable
@@ -80,20 +81,20 @@ public class ContainerMerchant extends Container {
 
             itemstack = itemstack1.cloneItemStack();
             if (i == 2) {
-                if (!this.a(itemstack1, 3, 39, true)) {
+                if (this.a(itemstack1, 3, 39, true)) {
                     return null;
                 }
 
                 slot.a(itemstack1, itemstack);
             } else if (i != 0 && i != 1) {
                 if (i >= 3 && i < 30) {
-                    if (!this.a(itemstack1, 30, 39, false)) {
+                    if (this.a(itemstack1, 30, 39, false)) {
                         return null;
                     }
-                } else if (i >= 30 && i < 39 && !this.a(itemstack1, 3, 30, false)) {
+                } else if (i >= 30 && i < 39 && this.a(itemstack1, 3, 30, false)) {
                     return null;
                 }
-            } else if (!this.a(itemstack1, 3, 39, false)) {
+            } else if (this.a(itemstack1, 3, 39, false)) {
                 return null;
             }
 

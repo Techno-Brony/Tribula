@@ -1,9 +1,10 @@
 package net.minecraft.server;
 
+import org.bukkit.event.block.CauldronLevelChangeEvent;
+
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
-import javax.annotation.Nullable;
-import org.bukkit.event.block.CauldronLevelChangeEvent; // CraftBukkit
 
 public class BlockCauldron extends Block {
 
@@ -16,7 +17,7 @@ public class BlockCauldron extends Block {
 
     public BlockCauldron() {
         super(Material.ORE, MaterialMapColor.m);
-        this.w(this.blockStateList.getBlockData().set(BlockCauldron.LEVEL, Integer.valueOf(0)));
+        this.w(this.blockStateList.getBlockData().set(BlockCauldron.LEVEL, 0));
     }
 
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, AxisAlignedBB axisalignedbb, List<AxisAlignedBB> list, @Nullable Entity entity) {
@@ -40,7 +41,7 @@ public class BlockCauldron extends Block {
     }
 
     public void a(World world, BlockPosition blockposition, IBlockData iblockdata, Entity entity) {
-        int i = iblockdata.get(BlockCauldron.LEVEL).intValue();
+        int i = iblockdata.get(BlockCauldron.LEVEL);
         float f = (float) blockposition.getY() + (6.0F + (float) (3 * i)) / 16.0F;
 
         if (!world.isClientSide && entity.isBurning() && i > 0 && entity.getBoundingBox().b <= (double) f) {
@@ -59,7 +60,7 @@ public class BlockCauldron extends Block {
         if (itemstack == null) {
             return true;
         } else {
-            int i = iblockdata.get(BlockCauldron.LEVEL).intValue();
+            int i = iblockdata.get(BlockCauldron.LEVEL);
             Item item = itemstack.getItem();
 
             if (item == Items.WATER_BUCKET) {
@@ -180,7 +181,7 @@ public class BlockCauldron extends Block {
     }
 
     private boolean changeLevel(World world, BlockPosition blockposition, IBlockData iblockdata, int i, Entity entity, CauldronLevelChangeEvent.ChangeReason reason) {
-        int newLevel = Integer.valueOf(MathHelper.clamp(i, 0, 3));
+        int newLevel = MathHelper.clamp(i, 0, 3);
         CauldronLevelChangeEvent event = new CauldronLevelChangeEvent(
                 world.getWorld().getBlockAt(blockposition.getX(), blockposition.getY(), blockposition.getZ()),
                 (entity == null) ? null : entity.getBukkitEntity(), reason, iblockdata.get(BlockCauldron.LEVEL), newLevel
@@ -202,7 +203,7 @@ public class BlockCauldron extends Block {
             if (world.getWorldChunkManager().a(f, blockposition.getY()) >= 0.15F) {
                 IBlockData iblockdata = world.getType(blockposition);
 
-                if (iblockdata.get(BlockCauldron.LEVEL).intValue() < 3) {
+                if (iblockdata.get(BlockCauldron.LEVEL) < 3) {
                     a(world, blockposition, iblockdata.a(BlockCauldron.LEVEL), 2); // CraftBukkit
                 }
 
@@ -224,15 +225,15 @@ public class BlockCauldron extends Block {
     }
 
     public int d(IBlockData iblockdata, World world, BlockPosition blockposition) {
-        return iblockdata.get(BlockCauldron.LEVEL).intValue();
+        return iblockdata.get(BlockCauldron.LEVEL);
     }
 
     public IBlockData fromLegacyData(int i) {
-        return this.getBlockData().set(BlockCauldron.LEVEL, Integer.valueOf(i));
+        return this.getBlockData().set(BlockCauldron.LEVEL, i);
     }
 
     public int toLegacyData(IBlockData iblockdata) {
-        return iblockdata.get(BlockCauldron.LEVEL).intValue();
+        return iblockdata.get(BlockCauldron.LEVEL);
     }
 
     protected BlockStateList getStateList() {

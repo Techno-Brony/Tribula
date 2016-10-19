@@ -1,7 +1,7 @@
 package net.minecraft.server;
 
-import java.util.Random;
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockNetherWart extends BlockPlant {
 
@@ -10,13 +10,13 @@ public class BlockNetherWart extends BlockPlant {
 
     protected BlockNetherWart() {
         super(Material.PLANT, MaterialMapColor.D);
-        this.w(this.blockStateList.getBlockData().set(BlockNetherWart.AGE, Integer.valueOf(0)));
+        this.w(this.blockStateList.getBlockData().set(BlockNetherWart.AGE, 0));
         this.a(true);
         this.a((CreativeModeTab) null);
     }
 
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
-        return BlockNetherWart.c[iblockdata.get(BlockNetherWart.AGE).intValue()];
+        return BlockNetherWart.c[iblockdata.get(BlockNetherWart.AGE)];
     }
 
     protected boolean i(IBlockData iblockdata) {
@@ -28,10 +28,10 @@ public class BlockNetherWart extends BlockPlant {
     }
 
     public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
-        int i = iblockdata.get(BlockNetherWart.AGE).intValue();
+        int i = iblockdata.get(BlockNetherWart.AGE);
 
         if (i < 3 && random.nextInt(Math.max(1, (int) (100.0F / world.spigotConfig.wartModifier) * 10)) == 0) { // Spigot
-            iblockdata = iblockdata.set(BlockNetherWart.AGE, Integer.valueOf(i + 1));
+            iblockdata = iblockdata.set(BlockNetherWart.AGE, i + 1);
             // world.setTypeAndData(blockposition, iblockdata, 2); // CraftBukkit
             org.bukkit.craftbukkit.event.CraftEventFactory.handleBlockGrowEvent(world, blockposition.getX(), blockposition.getY(), blockposition.getZ(), this, toLegacyData(iblockdata)); // CraftBukkit
         }
@@ -43,7 +43,7 @@ public class BlockNetherWart extends BlockPlant {
         if (!world.isClientSide) {
             int j = 1;
 
-            if (iblockdata.get(BlockNetherWart.AGE).intValue() >= 3) {
+            if (iblockdata.get(BlockNetherWart.AGE) >= 3) {
                 j = 2 + world.random.nextInt(3);
                 if (i > 0) {
                     j += world.random.nextInt(i + 1);
@@ -71,11 +71,11 @@ public class BlockNetherWart extends BlockPlant {
     }
 
     public IBlockData fromLegacyData(int i) {
-        return this.getBlockData().set(BlockNetherWart.AGE, Integer.valueOf(i));
+        return this.getBlockData().set(BlockNetherWart.AGE, i);
     }
 
     public int toLegacyData(IBlockData iblockdata) {
-        return iblockdata.get(BlockNetherWart.AGE).intValue();
+        return iblockdata.get(BlockNetherWart.AGE);
     }
 
     protected BlockStateList getStateList() {

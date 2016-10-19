@@ -1,12 +1,6 @@
 package org.spigotmc;
 
-import net.minecraft.server.Entity;
-import net.minecraft.server.EntityExperienceOrb;
-import net.minecraft.server.EntityGhast;
-import net.minecraft.server.EntityItem;
-import net.minecraft.server.EntityItemFrame;
-import net.minecraft.server.EntityPainting;
-import net.minecraft.server.EntityPlayer;
+import net.minecraft.server.*;
 
 public class TrackingRange
 {
@@ -15,9 +9,7 @@ public class TrackingRange
      * Gets the range an entity should be 'tracked' by players and visible in
      * the client.
      *
-     * @param entity
      * @param defaultRange Default range defined by Mojang
-     * @return
      */
     public static int getEntityTrackingRange(Entity entity, int defaultRange)
     {

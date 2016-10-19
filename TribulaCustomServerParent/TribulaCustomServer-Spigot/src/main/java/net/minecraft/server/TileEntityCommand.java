@@ -4,10 +4,6 @@ import javax.annotation.Nullable;
 
 public class TileEntityCommand extends TileEntity {
 
-    private boolean a;
-    private boolean f;
-    private boolean g;
-    private boolean h;
     private final CommandBlockListenerAbstract i = new CommandBlockListenerAbstract() {
         {
             sender = new org.bukkit.craftbukkit.command.CraftBlockCommandSender(this); // CraftBukkit - add sender
@@ -43,6 +39,10 @@ public class TileEntityCommand extends TileEntity {
             return TileEntityCommand.this.world.getMinecraftServer();
         }
     };
+    private boolean a;
+    private boolean f;
+    private boolean g;
+    private boolean h;
 
     public TileEntityCommand() {}
 
@@ -110,7 +110,7 @@ public class TileEntityCommand extends TileEntity {
                 BlockPosition blockposition = this.getPosition();
                 BlockCommand blockcommand = (BlockCommand) block;
 
-                this.g = !this.l() || blockcommand.e(this.world, blockposition, this.world.getType(blockposition));
+                this.g = this.l() || blockcommand.e(this.world, blockposition, this.world.getType(blockposition));
                 this.world.a(blockposition, block, block.a(this.world));
                 if (this.g) {
                     blockcommand.c(this.world, blockposition);
@@ -145,7 +145,7 @@ public class TileEntityCommand extends TileEntity {
     public boolean l() {
         IBlockData iblockdata = this.world.getType(this.getPosition());
 
-        return iblockdata.getBlock() instanceof BlockCommand && iblockdata.get(BlockCommand.b).booleanValue();
+        return !(iblockdata.getBlock() instanceof BlockCommand) || !iblockdata.get(BlockCommand.b);
     }
 
     public void z() {

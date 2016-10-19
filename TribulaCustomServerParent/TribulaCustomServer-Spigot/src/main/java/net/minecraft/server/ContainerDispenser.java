@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
-import javax.annotation.Nullable;
-// CraftBukkit start
 import org.bukkit.craftbukkit.inventory.CraftInventory;
 import org.bukkit.craftbukkit.inventory.CraftInventoryView;
+
+import javax.annotation.Nullable;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class ContainerDispenser extends Container {
@@ -43,8 +45,8 @@ public class ContainerDispenser extends Container {
     }
 
     public boolean a(EntityHuman entityhuman) {
-        if (!this.checkReachable) return true; // CraftBukkit
-        return this.items.a(entityhuman);
+        // CraftBukkit
+        return this.checkReachable && !this.items.a(entityhuman);
     }
 
     @Nullable
@@ -57,10 +59,10 @@ public class ContainerDispenser extends Container {
 
             itemstack = itemstack1.cloneItemStack();
             if (i < 9) {
-                if (!this.a(itemstack1, 9, 45, true)) {
+                if (this.a(itemstack1, 9, 45, true)) {
                     return null;
                 }
-            } else if (!this.a(itemstack1, 0, 9, false)) {
+            } else if (this.a(itemstack1, 0, 9, false)) {
                 return null;
             }
 

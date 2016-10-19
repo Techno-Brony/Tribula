@@ -2,14 +2,6 @@ package net.minecraft.server;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import java.text.DecimalFormat;
-import java.util.Random;
-import javax.annotation.Nullable;
-
-// CraftBukkit start
-import java.util.List;
-import java.util.Map;
-
 import org.bukkit.Location;
 import org.bukkit.TreeType;
 import org.bukkit.block.BlockState;
@@ -17,6 +9,14 @@ import org.bukkit.craftbukkit.block.CraftBlockState;
 import org.bukkit.craftbukkit.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 import org.bukkit.event.world.StructureGrowEvent;
+
+import javax.annotation.Nullable;
+import java.text.DecimalFormat;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public final class ItemStack {
@@ -73,6 +73,8 @@ public final class ItemStack {
 
     }
 
+    private ItemStack() {}
+
     public static ItemStack createStack(NBTTagCompound nbttagcompound) {
         ItemStack itemstack = new ItemStack();
 
@@ -80,11 +82,34 @@ public final class ItemStack {
         return itemstack.getItem() != null ? itemstack : null;
     }
 
-    private ItemStack() {}
-
     public static void a(DataConverterManager dataconvertermanager) {
         dataconvertermanager.a(DataConverterTypes.ITEM_INSTANCE, new DataInspectorBlockEntity());
         dataconvertermanager.a(DataConverterTypes.ITEM_INSTANCE, new DataInspectorEntity());
+    }
+
+    public static boolean equals(@Nullable ItemStack itemstack, @Nullable ItemStack itemstack1) {
+        return itemstack == null && itemstack1 == null || ((itemstack != null && itemstack1 != null) && (!(itemstack.tag == null && itemstack1.tag != null) && (itemstack.tag == null || itemstack.tag.equals(itemstack1.tag))));
+    }
+
+    // Spigot Start
+    public static boolean fastMatches(ItemStack itemstack, ItemStack itemstack1) {
+        return itemstack == null && itemstack1 == null || itemstack != null && itemstack1 != null && itemstack.count == itemstack1.count && itemstack.item == itemstack1.item && itemstack.damage == itemstack1.damage;
+    }
+
+    public static boolean matches(@Nullable ItemStack itemstack, @Nullable ItemStack itemstack1) {
+        return itemstack == null && itemstack1 == null || ((itemstack != null && itemstack1 != null) && itemstack.e(itemstack1));
+    }
+
+    public static boolean c(@Nullable ItemStack itemstack, @Nullable ItemStack itemstack1) {
+        return itemstack == itemstack1 || ((itemstack != null && itemstack1 != null) && itemstack.doMaterialsMatch(itemstack1));
+    }
+
+    public static boolean d(@Nullable ItemStack itemstack, @Nullable ItemStack itemstack1) {
+        return itemstack == itemstack1 || ((itemstack != null && itemstack1 != null) && itemstack.b(itemstack1));
+    }
+
+    public static ItemStack c(ItemStack itemstack) {
+        return itemstack == null ? null : itemstack.cloneItemStack();
     }
 
     public ItemStack cloneAndSubtract(int i) {
@@ -101,6 +126,12 @@ public final class ItemStack {
 
     public Item getItem() {
         return this.item;
+    }
+
+    @Deprecated
+    public void setItem(Item item) {
+        this.item = item;
+        this.setData(this.getData()); // CraftBukkit - Set data again to ensure it is filtered properly
     }
 
     public EnumInteractionResult placeItem(EntityHuman entityhuman, World world, BlockPosition blockposition, EnumHand enumhand, EnumDirection enumdirection, float f, float f1, float f2) {
@@ -297,12 +328,8 @@ public final class ItemStack {
 
     public boolean e() {
         // Spigot Start
-        if ( this.item.getMaxDurability() <= 0 )
-        {
-            return false;
-        }
-        return ( !hasTag() ) || ( !getTag().getBoolean( "Unbreakable" ) );
-        // Spigot End
+        return this.item.getMaxDurability() > 0 && ((!hasTag()) || (!getTag().getBoolean("Unbreakable")));
+// Spigot End
     }
 
     public boolean usesData() {
@@ -422,6 +449,7 @@ public final class ItemStack {
             }
         }
     }
+    // Spigot End
 
     public void a(EntityLiving entityliving, EntityHuman entityhuman) {
         boolean flag = this.item.a(this, entityliving, entityhuman);
@@ -459,36 +487,8 @@ public final class ItemStack {
         return itemstack;
     }
 
-    public static boolean equals(@Nullable ItemStack itemstack, @Nullable ItemStack itemstack1) {
-        return itemstack == null && itemstack1 == null || ((itemstack != null && itemstack1 != null) && (!(itemstack.tag == null && itemstack1.tag != null) && (itemstack.tag == null || itemstack.tag.equals(itemstack1.tag))));
-    }
-
-    // Spigot Start
-    public static boolean fastMatches(ItemStack itemstack, ItemStack itemstack1) {
-        if (itemstack == null && itemstack1 == null) {
-            return true;
-        }
-        if (itemstack != null && itemstack1 != null) {
-            return itemstack.count == itemstack1.count && itemstack.item == itemstack1.item && itemstack.damage == itemstack1.damage;
-        }
-        return false;
-    }
-    // Spigot End
-
-    public static boolean matches(@Nullable ItemStack itemstack, @Nullable ItemStack itemstack1) {
-        return itemstack == null && itemstack1 == null || ((itemstack != null && itemstack1 != null) && itemstack.e(itemstack1));
-    }
-
     private boolean e(ItemStack itemstack) {
         return this.count == itemstack.count && (this.item == itemstack.item && (this.damage == itemstack.damage && (!(this.tag == null && itemstack.tag != null) && (this.tag == null || this.tag.equals(itemstack.tag)))));
-    }
-
-    public static boolean c(@Nullable ItemStack itemstack, @Nullable ItemStack itemstack1) {
-        return itemstack == itemstack1 || ((itemstack != null && itemstack1 != null) && itemstack.doMaterialsMatch(itemstack1));
-    }
-
-    public static boolean d(@Nullable ItemStack itemstack, @Nullable ItemStack itemstack1) {
-        return itemstack == itemstack1 || ((itemstack != null && itemstack1 != null) && itemstack.b(itemstack1));
     }
 
     public boolean doMaterialsMatch(@Nullable ItemStack itemstack) {
@@ -501,10 +501,6 @@ public final class ItemStack {
 
     public String a() {
         return this.item.f_(this);
-    }
-
-    public static ItemStack c(ItemStack itemstack) {
-        return itemstack == null ? null : itemstack.cloneItemStack();
     }
 
     public String toString() {
@@ -548,6 +544,10 @@ public final class ItemStack {
         return this.tag;
     }
 
+    public void setTag(NBTTagCompound nbttagcompound) {
+        this.tag = nbttagcompound;
+    }
+
     public NBTTagCompound a(String s, boolean flag) {
         if (this.tag != null && this.tag.hasKeyOfType(s, 10)) {
             return this.tag.getCompound(s);
@@ -563,10 +563,6 @@ public final class ItemStack {
 
     public NBTTagList getEnchantments() {
         return this.tag == null ? null : this.tag.getList("ench", 10);
-    }
-
-    public void setTag(NBTTagCompound nbttagcompound) {
-        this.tag = nbttagcompound;
     }
 
     public String getName() {
@@ -725,17 +721,11 @@ public final class ItemStack {
         nbttaglist.add(nbttagcompound);
     }
 
-    @Deprecated
-    public void setItem(Item item) {
-        this.item = item;
-        this.setData(this.getData()); // CraftBukkit - Set data again to ensure it is filtered properly
-    }
-
     public IChatBaseComponent B() {
         ChatComponentText chatcomponenttext = new ChatComponentText(this.getName());
 
         if (this.hasName()) {
-            chatcomponenttext.getChatModifier().setItalic(Boolean.valueOf(true));
+            chatcomponenttext.getChatModifier().setItalic(Boolean.TRUE);
         }
 
         IChatBaseComponent ichatbasecomponent = (new ChatComponentText("[")).addSibling(chatcomponenttext).a("]");
@@ -752,7 +742,7 @@ public final class ItemStack {
 
     public boolean a(Block block) {
         if (block == this.h) {
-            return this.i;
+            return !this.i;
         } else {
             this.h = block;
             if (this.hasTag() && this.tag.hasKeyOfType("CanDestroy", 9)) {
@@ -763,13 +753,13 @@ public final class ItemStack {
 
                     if (block1 == block) {
                         this.i = true;
-                        return true;
+                        return false;
                     }
                 }
             }
 
             this.i = false;
-            return false;
+            return true;
         }
     }
 

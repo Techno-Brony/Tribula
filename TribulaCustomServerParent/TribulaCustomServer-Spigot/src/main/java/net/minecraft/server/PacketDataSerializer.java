@@ -1,14 +1,12 @@
 package net.minecraft.server;
 
 import com.google.common.base.Charsets;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufAllocator;
-import io.netty.buffer.ByteBufInputStream;
-import io.netty.buffer.ByteBufOutputStream;
-import io.netty.buffer.ByteBufProcessor;
+import io.netty.buffer.*;
 import io.netty.handler.codec.DecoderException;
 import io.netty.handler.codec.EncoderException;
-import java.io.DataInput;
+import org.bukkit.craftbukkit.inventory.CraftItemStack;
+
+import javax.annotation.Nullable;
 import java.io.DataOutput;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,9 +17,6 @@ import java.nio.channels.GatheringByteChannel;
 import java.nio.channels.ScatteringByteChannel;
 import java.nio.charset.Charset;
 import java.util.UUID;
-import javax.annotation.Nullable;
-
-import org.bukkit.craftbukkit.inventory.CraftItemStack; // CraftBukkit
 
 public class PacketDataSerializer extends ByteBuf {
 
@@ -66,12 +61,9 @@ public class PacketDataSerializer extends ByteBuf {
 
     public PacketDataSerializer a(int[] aint) {
         this.d(aint.length);
-        int[] aint1 = aint;
         int i = aint.length;
 
-        for (int j = 0; j < i; ++j) {
-            int k = aint1[j];
-
+        for (int k : aint) {
             this.d(k);
         }
 
@@ -100,12 +92,9 @@ public class PacketDataSerializer extends ByteBuf {
 
     public PacketDataSerializer a(long[] along) {
         this.d(along.length);
-        long[] along1 = along;
         int i = along.length;
 
-        for (int j = 0; j < i; ++j) {
-            long k = along1[j];
-
+        for (long k : along) {
             this.writeLong(k);
         }
 

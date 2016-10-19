@@ -3,55 +3,44 @@ package net.minecraft.server;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import com.google.common.util.concurrent.ListenableFuture;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.UUID;
-import javax.annotation.Nullable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-// CraftBukkit start
-import java.util.logging.Level;
-
 import org.bukkit.WeatherType;
 import org.bukkit.block.BlockState;
 import org.bukkit.craftbukkit.util.HashTreeSet;
-
 import org.bukkit.event.block.BlockFormEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.weather.LightningStrikeEvent;
+
+import javax.annotation.Nullable;
+import java.io.File;
+import java.util.*;
+import java.util.logging.Level;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class WorldServer extends World implements IAsyncTaskHandler {
 
     private static final Logger a = LogManager.getLogger();
+    // CraftBukkit start
+    public final int dimension;
+    protected final VillageSiege siegeManager = new VillageSiege(this);
     private final MinecraftServer server;
-    public EntityTracker tracker;
     private final PlayerChunkMap manager;
     // private final Set<NextTickListEntry> nextTickListHash = Sets.newHashSet();
     private final HashTreeSet<NextTickListEntry> nextTickList = new HashTreeSet<NextTickListEntry>(); // CraftBukkit - HashTreeSet
     private final Map<UUID, Entity> entitiesByUUID = Maps.newHashMap();
+    private final PortalTravelAgent portalTravelAgent;
+    private final SpawnerCreature spawnerCreature = new SpawnerCreature();
+    private final WorldServer.BlockActionDataList[] S = new WorldServer.BlockActionDataList[] { new WorldServer.BlockActionDataList(null), new WorldServer.BlockActionDataList(null)};
+    private final List<NextTickListEntry> U = Lists.newArrayList();
+    public EntityTracker tracker;
     public boolean savingDisabled;
     private boolean O;
     private int emptyTime;
-    private final PortalTravelAgent portalTravelAgent;
-    private final SpawnerCreature spawnerCreature = new SpawnerCreature();
-    protected final VillageSiege siegeManager = new VillageSiege(this);
-    private final WorldServer.BlockActionDataList[] S = new WorldServer.BlockActionDataList[] { new WorldServer.BlockActionDataList(null), new WorldServer.BlockActionDataList(null)};
     private int T;
-    private final List<NextTickListEntry> U = Lists.newArrayList();
-
-    // CraftBukkit start
-    public final int dimension;
 
     // Add env and gen to constructor
     public WorldServer(MinecraftServer minecraftserver, IDataManager idatamanager, WorldData worlddata, int i, MethodProfiler methodprofiler, org.bukkit.World.Environment env, org.bukkit.generator.ChunkGenerator gen) {
@@ -419,7 +408,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                 chunk.n();
                 this.methodProfiler.c("tickChunk");
                 chunk.b(false);
-                if ( !chunk.areNeighborsLoaded( 1 ) ) continue; // Spigot
+                if (chunk.areNeighborsLoaded( 1 )) continue; // Spigot
                 this.methodProfiler.c("thunder");
                 int l;
                 BlockPosition blockposition;
@@ -489,9 +478,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                     ChunkSection[] achunksection = chunk.getSections();
                     int i1 = achunksection.length;
 
-                    for (int j1 = 0; j1 < i1; ++j1) {
-                        ChunkSection chunksection = achunksection[j1];
-
+                    for (ChunkSection chunksection : achunksection) {
                         if (chunksection != Chunk.a && chunksection.shouldTick()) {
                             for (int k1 = 0; k1 < i; ++k1) {
                                 this.l = this.l * 3 + 1013904223;
@@ -621,13 +608,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
     }
 
     public void tickEntities() {
-        if (false && this.players.isEmpty()) { // CraftBukkit - this prevents entity cleanup, other issues on servers with no players
-            if (this.emptyTime++ >= 300) {
-                return;
-            }
-        } else {
-            this.m();
-        }
+        this.m();
 
         this.worldProvider.r();
         super.tickEntities();
@@ -638,43 +619,42 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         super.l();
         this.methodProfiler.c("players");
 
-        for (int i = 0; i < this.players.size(); ++i) {
-            Entity entity = this.players.get(i);
-            Entity entity1 = entity.bB();
+        for (EntityHuman player : this.players) {
+            Entity entity1 = player.bB();
 
             if (entity1 != null) {
-                if (!entity1.dead && entity1.w(entity)) {
+                if (!entity1.dead && entity1.w(player)) {
                     continue;
                 }
 
-                entity.stopRiding();
+                player.stopRiding();
             }
 
             this.methodProfiler.a("tick");
-            if (!entity.dead) {
+            if (!player.dead) {
                 try {
-                    this.g(entity);
+                    this.g(player);
                 } catch (Throwable throwable) {
                     CrashReport crashreport = CrashReport.a(throwable, "Ticking player");
                     CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Player being ticked");
 
-                    entity.appendEntityCrashDetails(crashreportsystemdetails);
+                    player.appendEntityCrashDetails(crashreportsystemdetails);
                     throw new ReportedException(crashreport);
                 }
             }
 
             this.methodProfiler.b();
             this.methodProfiler.a("remove");
-            if (entity.dead) {
-                int j = entity.ac;
-                int k = entity.ae;
+            if (player.dead) {
+                int j = player.ac;
+                int k = player.ae;
 
-                if (entity.ab && this.isChunkLoaded(j, k, true)) {
-                    this.getChunkAt(j, k).b(entity);
+                if (player.ab && this.isChunkLoaded(j, k, true)) {
+                    this.getChunkAt(j, k).b(player);
                 }
 
-                this.entityList.remove(entity);
-                this.c(entity);
+                this.entityList.remove(player);
+                this.c(player);
             }
 
             this.methodProfiler.b();
@@ -692,67 +672,63 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         } else {
             int i = this.nextTickList.size();
 
-            if (false) { // CraftBukkit
-                throw new IllegalStateException("TickNextTick list out of synch");
-            } else {
-                if (i > 65536) {
-                    // CraftBukkit start - If the server has too much to process over time, try to alleviate that
-                    if (i > 20 * 65536) {
-                        i = i / 20;
-                    } else {
-                        i = 65536;
-                    }
-                    // CraftBukkit end
+            if (i > 65536) {
+                // CraftBukkit start - If the server has too much to process over time, try to alleviate that
+                if (i > 20 * 65536) {
+                    i = i / 20;
+                } else {
+                    i = 65536;
                 }
-
-                this.methodProfiler.a("cleaning");
-
-                NextTickListEntry nextticklistentry;
-
-                for (int j = 0; j < i; ++j) {
-                    nextticklistentry = this.nextTickList.first();
-                    if (!flag && nextticklistentry.b > this.worldData.getTime()) {
-                        break;
-                    }
-
-                    // CraftBukkit - use nextTickList
-                    this.nextTickList.remove(nextticklistentry);
-                    // this.nextTickListHash.remove(nextticklistentry);
-                    this.U.add(nextticklistentry);
-                }
-
-                this.methodProfiler.b();
-                this.methodProfiler.a("ticking");
-                Iterator iterator = this.U.iterator();
-
-                while (iterator.hasNext()) {
-                    nextticklistentry = (NextTickListEntry) iterator.next();
-                    iterator.remove();
-                    boolean flag1 = false;
-
-                    if (this.areChunksLoadedBetween(nextticklistentry.a.a(0, 0, 0), nextticklistentry.a.a(0, 0, 0))) {
-                        IBlockData iblockdata = this.getType(nextticklistentry.a);
-
-                        if (iblockdata.getMaterial() != Material.AIR && Block.a(iblockdata.getBlock(), nextticklistentry.a())) {
-                            try {
-                                iblockdata.getBlock().b(this, nextticklistentry.a, iblockdata, this.random);
-                            } catch (Throwable throwable) {
-                                CrashReport crashreport = CrashReport.a(throwable, "Exception while ticking a block");
-                                CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Block being ticked");
-
-                                CrashReportSystemDetails.a(crashreportsystemdetails, nextticklistentry.a, iblockdata);
-                                throw new ReportedException(crashreport);
-                            }
-                        }
-                    } else {
-                        this.a(nextticklistentry.a, nextticklistentry.a(), 0);
-                    }
-                }
-
-                this.methodProfiler.b();
-                this.U.clear();
-                return !this.nextTickList.isEmpty();
+                // CraftBukkit end
             }
+
+            this.methodProfiler.a("cleaning");
+
+            NextTickListEntry nextticklistentry;
+
+            for (int j = 0; j < i; ++j) {
+                nextticklistentry = this.nextTickList.first();
+                if (!flag && nextticklistentry.b > this.worldData.getTime()) {
+                    break;
+                }
+
+                // CraftBukkit - use nextTickList
+                this.nextTickList.remove(nextticklistentry);
+                // this.nextTickListHash.remove(nextticklistentry);
+                this.U.add(nextticklistentry);
+            }
+
+            this.methodProfiler.b();
+            this.methodProfiler.a("ticking");
+            Iterator iterator = this.U.iterator();
+
+            while (iterator.hasNext()) {
+                nextticklistentry = (NextTickListEntry) iterator.next();
+                iterator.remove();
+                boolean flag1 = false;
+
+                if (this.areChunksLoadedBetween(nextticklistentry.a.a(0, 0, 0), nextticklistentry.a.a(0, 0, 0))) {
+                    IBlockData iblockdata = this.getType(nextticklistentry.a);
+
+                    if (iblockdata.getMaterial() != Material.AIR && Block.a(iblockdata.getBlock(), nextticklistentry.a())) {
+                        try {
+                            iblockdata.getBlock().b(this, nextticklistentry.a, iblockdata, this.random);
+                        } catch (Throwable throwable) {
+                            CrashReport crashreport = CrashReport.a(throwable, "Exception while ticking a block");
+                            CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Block being ticked");
+
+                            CrashReportSystemDetails.a(crashreportsystemdetails, nextticklistentry.a, iblockdata);
+                            throw new ReportedException(crashreport);
+                        }
+                    }
+                } else {
+                    this.a(nextticklistentry.a, nextticklistentry.a(), 0);
+                }
+            }
+
+            this.methodProfiler.b();
+            this.U.clear();
+            return !this.nextTickList.isEmpty();
         }
     }
 
@@ -881,7 +857,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
     }
 
     public boolean a(EntityHuman entityhuman, BlockPosition blockposition) {
-        return !this.server.a(this, blockposition, entityhuman) && this.getWorldBorder().a(blockposition);
+        return this.server.a(this, blockposition, entityhuman) && this.getWorldBorder().a(blockposition);
     }
 
     public void a(WorldSettings worldsettings) {
@@ -898,7 +874,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
 
                 try {
                     this.a(crashreport);
-                } catch (Throwable throwable1) {
+                } catch (Throwable ignored) {
                 }
 
                 throw new ReportedException(crashreport);
@@ -1044,9 +1020,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         WorldServer[] aworldserver = this.server.worldServer;
         int i = aworldserver.length;
 
-        for (int j = 0; j < i; ++j) {
-            WorldServer worldserver = aworldserver[j];
-
+        for (WorldServer worldserver : aworldserver) {
             if (worldserver instanceof SecondaryWorldServer) {
                 worldserver.c();
             }
@@ -1129,12 +1103,9 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         Entity[] aentity = entity.aT();
 
         if (aentity != null) {
-            Entity[] aentity1 = aentity;
             int i = aentity.length;
 
-            for (int j = 0; j < i; ++j) {
-                Entity entity1 = aentity1[j];
-
+            for (Entity entity1 : aentity) {
                 this.entitiesById.a(entity1.getId(), entity1);
             }
         }
@@ -1148,12 +1119,9 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         Entity[] aentity = entity.aT();
 
         if (aentity != null) {
-            Entity[] aentity1 = aentity;
             int i = aentity.length;
 
-            for (int j = 0; j < i; ++j) {
-                Entity entity1 = aentity1[j];
-
+            for (Entity entity1 : aentity) {
                 this.entitiesById.d(entity1.getId());
             }
         }
@@ -1291,15 +1259,15 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         // */
         if (flag != this.W()) {
             // Only send weather packets to those affected
-            for (int i = 0; i < this.players.size(); ++i) {
-                if (((EntityPlayer) this.players.get(i)).world == this) {
-                    ((EntityPlayer) this.players.get(i)).setPlayerWeather((!flag ? WeatherType.DOWNFALL : WeatherType.CLEAR), false);
+            for (EntityHuman player : this.players) {
+                if (((EntityPlayer) player).world == this) {
+                    ((EntityPlayer) player).setPlayerWeather((!flag ? WeatherType.DOWNFALL : WeatherType.CLEAR), false);
                 }
             }
         }
-        for (int i = 0; i < this.players.size(); ++i) {
-            if (((EntityPlayer) this.players.get(i)).world == this) {
-                ((EntityPlayer) this.players.get(i)).updateWeather(this.n, this.o, this.p, this.q);
+        for (EntityHuman player : this.players) {
+            if (((EntityPlayer) player).world == this) {
+                ((EntityPlayer) player).updateWeather(this.n, this.o, this.p, this.q);
             }
         }
         // CraftBukkit end
@@ -1340,9 +1308,10 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         // CraftBukkit end
         PacketPlayOutWorldParticles packetplayoutworldparticles = new PacketPlayOutWorldParticles(enumparticle, flag, (float) d0, (float) d1, (float) d2, (float) d3, (float) d4, (float) d5, (float) d6, i, aint);
 
-        for (int j = 0; j < this.players.size(); ++j) {
-            EntityPlayer entityplayer = (EntityPlayer) this.players.get(j);
-            if (sender != null && !entityplayer.getBukkitEntity().canSee(sender.getBukkitEntity())) continue; // CraftBukkit
+        for (EntityHuman player : this.players) {
+            EntityPlayer entityplayer = (EntityPlayer) player;
+            if (sender != null && !entityplayer.getBukkitEntity().canSee(sender.getBukkitEntity()))
+                continue; // CraftBukkit
             BlockPosition blockposition = entityplayer.getChunkCoordinates();
             double d7 = blockposition.distanceSquared(d0, d1, d2);
 

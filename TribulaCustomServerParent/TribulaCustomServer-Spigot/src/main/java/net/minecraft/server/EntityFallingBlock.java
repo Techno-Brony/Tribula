@@ -1,23 +1,23 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Lists;
+import org.bukkit.craftbukkit.event.CraftEventFactory;
+
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Iterator;
-import javax.annotation.Nullable;
-
-import org.bukkit.craftbukkit.event.CraftEventFactory; // CraftBukkit
 
 public class EntityFallingBlock extends Entity {
 
-    private IBlockData block;
+    protected static final DataWatcherObject<BlockPosition> d = DataWatcher.a(EntityFallingBlock.class, DataWatcherRegistry.j);
     public int ticksLived;
     public boolean dropItem = true;
-    private boolean f;
     public boolean hurtEntities;
+    public NBTTagCompound tileEntityData;
+    private IBlockData block;
+    private boolean f;
     private int fallHurtMax = 40;
     private float fallHurtAmount = 2.0F;
-    public NBTTagCompound tileEntityData;
-    protected static final DataWatcherObject<BlockPosition> d = DataWatcher.a(EntityFallingBlock.class, DataWatcherRegistry.j);
 
     public EntityFallingBlock(World world) {
         super(world);
@@ -37,6 +37,8 @@ public class EntityFallingBlock extends Entity {
         this.lastZ = d2;
         this.a(new BlockPosition(this));
     }
+
+    public static void a(DataConverterManager dataconvertermanager) {}
 
     public void a(BlockPosition blockposition) {
         this.datawatcher.set(EntityFallingBlock.d, blockposition);
@@ -168,21 +170,19 @@ public class EntityFallingBlock extends Entity {
                 }
 
                 if (flag && (double) this.random.nextFloat() < 0.05000000074505806D + (double) i * 0.05D) {
-                    int j = this.block.get(BlockAnvil.DAMAGE).intValue();
+                    int j = this.block.get(BlockAnvil.DAMAGE);
 
                     ++j;
                     if (j > 2) {
                         this.f = true;
                     } else {
-                        this.block = this.block.set(BlockAnvil.DAMAGE, Integer.valueOf(j));
+                        this.block = this.block.set(BlockAnvil.DAMAGE, j);
                     }
                 }
             }
         }
 
     }
-
-    public static void a(DataConverterManager dataconvertermanager) {}
 
     protected void b(NBTTagCompound nbttagcompound) {
         Block block = this.block != null ? this.block.getBlock() : Blocks.AIR;
@@ -246,8 +246,8 @@ public class EntityFallingBlock extends Entity {
         if (this.block != null) {
             Block block = this.block.getBlock();
 
-            crashreportsystemdetails.a("Immitating block ID", Integer.valueOf(Block.getId(block)));
-            crashreportsystemdetails.a("Immitating block data", Integer.valueOf(block.toLegacyData(this.block)));
+            crashreportsystemdetails.a("Immitating block ID", Block.getId(block));
+            crashreportsystemdetails.a("Immitating block data", block.toLegacyData(this.block));
         }
 
     }

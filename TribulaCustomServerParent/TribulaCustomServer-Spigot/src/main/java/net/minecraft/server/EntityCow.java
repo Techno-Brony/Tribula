@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
-import javax.annotation.Nullable;
-// CraftBukkit start
 import org.bukkit.craftbukkit.event.CraftEventFactory;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
+
+import javax.annotation.Nullable;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class EntityCow extends EntityAnimal {
@@ -66,7 +68,7 @@ public class EntityCow extends EntityAnimal {
             org.bukkit.event.player.PlayerBucketFillEvent event = CraftEventFactory.callPlayerBucketFillEvent(entityhuman, loc.getBlockX(), loc.getBlockY(), loc.getBlockZ(), null, itemstack, Items.MILK_BUCKET);
 
             if (event.isCancelled()) {
-                return false;
+                return true;
             }
 
             ItemStack result = CraftItemStack.asNMSCopy(event.getItemStack());
@@ -78,7 +80,7 @@ public class EntityCow extends EntityAnimal {
             }
             // CraftBukkit end
 
-            return true;
+            return false;
         } else {
             return super.a(entityhuman, enumhand, itemstack);
         }

@@ -1,11 +1,12 @@
 package net.minecraft.server;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 
 public class RecipeBookClone extends ShapelessRecipes implements IRecipe { // CraftBukkit - added extends
 
     public RecipeBookClone() {
-        super(new ItemStack(Items.WRITTEN_BOOK, 0, -1), java.util.Arrays.asList(new ItemStack(Items.WRITABLE_BOOK, 0, 0)));
+        super(new ItemStack(Items.WRITTEN_BOOK, 0, -1), Collections.singletonList(new ItemStack(Items.WRITABLE_BOOK, 0, 0)));
     }
     // CraftBukkit end
 

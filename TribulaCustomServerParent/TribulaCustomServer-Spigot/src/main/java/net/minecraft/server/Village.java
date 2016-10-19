@@ -2,6 +2,7 @@ package net.minecraft.server;
 
 import com.google.common.collect.Lists;
 import com.mojang.authlib.GameProfile;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.TreeMap;
@@ -9,8 +10,10 @@ import java.util.UUID;
 
 public class Village {
 
-    private World a;
     private final List<VillageDoor> b = Lists.newArrayList();
+    private final TreeMap<String, Integer> j;
+    private final List<Village.Aggressor> k;
+    private World a;
     private BlockPosition c;
     private BlockPosition d;
     private int e;
@@ -18,8 +21,6 @@ public class Village {
     private int g;
     private int h;
     private int i;
-    private final TreeMap<String, Integer> j;
-    private final List<Village.Aggressor> k;
     private int l;
 
     public Village() {
@@ -245,8 +246,7 @@ public class Village {
         double d0 = Double.MAX_VALUE;
         Village.Aggressor village_aggressor = null;
 
-        for (int i = 0; i < this.k.size(); ++i) {
-            Village.Aggressor village_aggressor1 = this.k.get(i);
+        for (Aggressor village_aggressor1 : this.k) {
             double d1 = village_aggressor1.a.h(entityliving);
 
             if (d1 <= d0) {
@@ -352,14 +352,14 @@ public class Village {
     public int a(String s) {
         Integer integer = this.j.get(s);
 
-        return integer != null ? integer.intValue() : 0;
+        return integer != null ? integer : 0;
     }
 
     public int a(String s, int i) {
         int j = this.a(s);
         int k = MathHelper.clamp(j + i, -30, 10);
 
-        this.j.put(s, Integer.valueOf(k));
+        this.j.put(s, k);
         return k;
     }
 
@@ -395,10 +395,10 @@ public class Village {
                 GameProfile gameprofile = usercache.a(UUID.fromString(nbttagcompound2.getString("UUID")));
 
                 if (gameprofile != null) {
-                    this.j.put(gameprofile.getName(), Integer.valueOf(nbttagcompound2.getInt("S")));
+                    this.j.put(gameprofile.getName(), nbttagcompound2.getInt("S"));
                 }
             } else {
-                this.j.put(nbttagcompound2.getString("Name"), Integer.valueOf(nbttagcompound2.getInt("S")));
+                this.j.put(nbttagcompound2.getString("Name"), nbttagcompound2.getInt("S"));
             }
         }
 
@@ -445,7 +445,7 @@ public class Village {
 
             if (gameprofile != null) {
                 nbttagcompound2.setString("UUID", gameprofile.getId().toString());
-                nbttagcompound2.setInt("S", this.j.get(s).intValue());
+                nbttagcompound2.setInt("S", this.j.get(s));
                 nbttaglist1.add(nbttagcompound2);
             }
         }

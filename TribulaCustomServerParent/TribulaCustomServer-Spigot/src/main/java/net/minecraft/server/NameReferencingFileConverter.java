@@ -10,30 +10,22 @@ import com.mojang.authlib.Agent;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.ProfileLookupCallback;
 import com.mojang.authlib.yggdrasil.ProfileNotFoundException;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.UUID;
-import javax.annotation.Nullable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.annotation.Nullable;
+import java.io.File;
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.*;
+
 public class NameReferencingFileConverter {
 
-    private static final Logger e = LogManager.getLogger();
     public static final File a = new File("banned-ips.txt");
     public static final File b = new File("banned-players.txt");
     public static final File c = new File("ops.txt");
     public static final File d = new File("white-list.txt");
+    private static final Logger e = LogManager.getLogger();
 
     static List<String> a(File file, Map<String, String[]> map) throws IOException {
         List list = Files.readLines(file, Charsets.UTF_8);
@@ -67,11 +59,9 @@ public class NameReferencingFileConverter {
         if (minecraftserver.getOnlineMode() || org.spigotmc.SpigotConfig.bungee) { // Spigot: bungee = online mode, for now.
             minecraftserver.getGameProfileRepository().findProfilesByNames(astring, Agent.MINECRAFT, profilelookupcallback);
         } else {
-            String[] astring1 = astring;
             int i = astring.length;
 
-            for (int j = 0; j < i; ++j) {
-                String s = astring1[j];
+            for (String s : astring) {
                 UUID uuid = EntityHuman.a(new GameProfile(null, s));
                 GameProfile gameprofile = new GameProfile(uuid, s);
 
@@ -309,11 +299,9 @@ public class NameReferencingFileConverter {
         if (file.exists() && file.isDirectory()) {
             File[] afile = file.listFiles();
             ArrayList arraylist = Lists.newArrayList();
-            File[] afile1 = afile;
             int i = afile.length;
 
-            for (int j = 0; j < i; ++j) {
-                File file3 = afile1[j];
+            for (File file3 : afile) {
                 String s = file3.getName();
 
                 if (s.toLowerCase(Locale.ROOT).endsWith(".dat")) {
@@ -389,9 +377,7 @@ public class NameReferencingFileConverter {
                         // String[] astring = astring1; // CraftBukkit - decompile error
                         int i = astring.length;
 
-                        for (int j = 0; j < i; ++j) {
-                            String s1 = astring[j];
-
+                        for (String s1 : astring) {
                             if (s1 != null && s1.equalsIgnoreCase(gameprofile.getName())) {
                                 s = s1;
                                 break;
@@ -499,6 +485,7 @@ public class NameReferencingFileConverter {
 
     private static File d(PropertyManager propertymanager) {
         String s = propertymanager.getString("level-name", "world");
+        //noinspection deprecation
         File file = new File(MinecraftServer.getServer().server.getWorldContainer(), s); // CraftBukkit - Respect container setting
 
         return new File(file, "players");
