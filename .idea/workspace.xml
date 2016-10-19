@@ -4,7 +4,7 @@
     <option name="SCOPE_TYPE" value="4" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91e547d1-3e04-4bea-8a71-a17795495724" name="Default" comment="Removed not essential files and directories">
+    <list default="true" id="91e547d1-3e04-4bea-8a71-a17795495724" name="Default" comment="Removed default bukkit tests as server won't be modifying core mechanics.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Tribula.iws" />
@@ -580,7 +580,7 @@
       <workItem from="1476775824775" duration="5335000" />
       <workItem from="1476817201590" duration="528000" />
       <workItem from="1476817825969" duration="370000" />
-      <workItem from="1476846338562" duration="962000" />
+      <workItem from="1476846338562" duration="1001000" />
     </task>
     <task id="LOCAL-00001" summary="Added Base Plugin">
       <created>1475468678577</created>
@@ -722,11 +722,18 @@
       <option name="project" value="LOCAL" />
       <updated>1476857458186</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Removed default bukkit tests as server won't be modifying core mechanics.">
+      <created>1476857516122</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1476857516123</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62813000" />
+    <option name="totallyTimeSpent" value="62852000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -823,7 +830,8 @@
     <MESSAGE value="Suppressed superfluous logging." />
     <MESSAGE value="Attempting to fix git directories" />
     <MESSAGE value="Removed not essential files and directories" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed not essential files and directories" />
+    <MESSAGE value="Removed default bukkit tests as server won't be modifying core mechanics." />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed default bukkit tests as server won't be modifying core mechanics." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
