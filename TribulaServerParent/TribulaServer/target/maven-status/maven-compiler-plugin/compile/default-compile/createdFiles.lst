@@ -533,6 +533,7 @@ net/minecraft/server/WorldGenVillagePieces$WorldGenVillageButcher.class
 net/minecraft/server/BlockIce.class
 org/bukkit/craftbukkit/enchantments/CraftEnchantment.class
 net/minecraft/server/EntityGhast$PathfinderGoalGhastIdleMove.class
+io/github/techno_brony/tribula/internals/interfaces/ITribulaPlayer.class
 net/minecraft/server/EntityGhast$ControllerGhast.class
 org/apache/logging/log4j/core/appender/ConsoleAppender$FactoryData.class
 net/minecraft/server/NBTTagIntArray.class
@@ -620,6 +621,7 @@ net/minecraft/server/BlockMagma.class
 org/bukkit/craftbukkit/inventory/CraftMetaMap.class
 net/minecraft/server/BlockPortal$Shape.class
 net/minecraft/server/PacketStatusListener$1ServerListPingEvent.class
+io/github/techno_brony/tribula/internals/enums/TribulaPlayerDifficulty.class
 net/minecraft/server/WorldGenVillagePieces$WorldGenVillageStartPiece.class
 org/bukkit/craftbukkit/inventory/CraftShapedRecipe.class
 org/spigotmc/TrackingRange.class
@@ -919,6 +921,7 @@ org/bukkit/craftbukkit/help/SimpleHelpMap.class
 net/minecraft/server/EntitySpider$GroupDataSpider.class
 net/minecraft/server/TileEntityNote.class
 net/minecraft/server/EntityEnderman$PathfinderGoalPlayerWhoLookedAtTarget$1.class
+io/github/techno_brony/tribula/internals/TribulaPlayer.class
 org/bukkit/craftbukkit/scheduler/CraftScheduler.class
 org/bukkit/craftbukkit/chunkio/QueuedChunk.class
 org/bukkit/craftbukkit/inventory/CraftInventoryBeacon.class

@@ -1,0 +1,9 @@
+main: io.github.techno_brony.tribula.utilitiess.Main
+name: TribulaTemplate #TODO
+version: 1.0
+author: TechnoBrony
+description: Tribula Template #TODO
+commands:
+   templatecmd: #TODO
+      description: This is a demo command. #TODO
+      usage: /<command>

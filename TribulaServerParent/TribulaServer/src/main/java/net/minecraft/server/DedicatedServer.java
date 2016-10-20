@@ -145,22 +145,20 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
                 this.c(this.propertyManager.getString("server-ip", ""));
             }
 
-            this.setSpawnAnimals(this.propertyManager.getBoolean("spawn-animals", true));
-            this.setSpawnNPCs(this.propertyManager.getBoolean("spawn-npcs", true));
-            this.setPVP(this.propertyManager.getBoolean("pvp", true));
-            this.setAllowFlight(this.propertyManager.getBoolean("allow-flight", false));
+            //** Major World Mechanics Modification Here **//
+            this.setSpawnAnimals(false); // No need for natural animals
+            this.setSpawnNPCs(false); // No need for natural NPCs
+            this.setPVP(true); // PvP enabled for fighting mechanics
+            this.setAllowFlight(true); // Custom items later allow for flight
             this.setResourcePack(this.propertyManager.getString("resource-pack", ""), this.aK());
             this.setMotd(this.propertyManager.getString("motd", "A Minecraft Server"));
             this.setForceGamemode(this.propertyManager.getBoolean("force-gamemode", false));
             this.setIdleTimeout(this.propertyManager.getInt("player-idle-timeout", 0));
-            if (this.propertyManager.getInt("difficulty", 1) < 0) {
-                this.propertyManager.setProperty("difficulty", 0);
-            } else if (this.propertyManager.getInt("difficulty", 1) > 3) {
-                this.propertyManager.setProperty("difficulty", 3);
-            }
+            this.propertyManager.setProperty("difficulty", 2); // Might change later for dynamic difficulty
 
-            this.generateStructures = this.propertyManager.getBoolean("generate-structures", true);
-            int i = this.propertyManager.getInt("gamemode", EnumGamemode.SURVIVAL.getId());
+            this.generateStructures = false; // No need for random structures; Custom structures will be added or custom generator
+            int i = EnumGamemode.ADVENTURE.getId(); // Players wont need to break blocks naturally
+            //** Major World Mechanics Modification End Here **//
 
             this.t = WorldSettings.a(i);
             // DedicatedServer.LOGGER.info("Default game type: {}", new Object[] { this.t});  <-- Log not required

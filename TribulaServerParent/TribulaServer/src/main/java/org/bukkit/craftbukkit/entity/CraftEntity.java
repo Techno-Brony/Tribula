@@ -1,34 +1,38 @@
 package org.bukkit.craftbukkit.entity;
 
 import com.google.common.base.Preconditions;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-
+import io.github.techno_brony.tribula.internals.TribulaPlayer;
 import net.minecraft.server.*;
-
 import org.bukkit.EntityEffect;
 import org.bukkit.Location;
 import org.bukkit.Server;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.CraftServer;
-import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.metadata.MetadataValue;
-import org.bukkit.permissions.PermissibleBase;
-import org.bukkit.permissions.Permission;
-import org.bukkit.permissions.PermissionAttachment;
-import org.bukkit.permissions.PermissionAttachmentInfo;
-import org.bukkit.permissions.ServerOperator;
+import org.bukkit.permissions.*;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
+
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 public abstract class CraftEntity implements org.bukkit.entity.Entity {
     private static PermissibleBase perm;
 
     protected final CraftServer server;
     protected Entity entity;
+    // Spigot start
+    private final Spigot spigot = new Spigot()
+    {
+        @Override
+        public boolean isInvulnerable()
+        {
+            return getHandle().isInvulnerable(net.minecraft.server.DamageSource.GENERIC);
+        }
+    };
     private EntityDamageEvent lastDamageEvent;
 
     public CraftEntity(final CraftServer server, final Entity entity) {
@@ -43,7 +47,7 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
         if (entity instanceof EntityLiving) {
             // Players
             if (entity instanceof EntityHuman) {
-                if (entity instanceof EntityPlayer) { return new CraftPlayer(server, (EntityPlayer) entity); }
+                if (entity instanceof EntityPlayer) { return new TribulaPlayer(server, (EntityPlayer) entity); }
                 else { return new CraftHumanEntity(server, (EntityHuman) entity); }
             }
             // Water Animals
@@ -183,6 +187,24 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
         throw new AssertionError("Unknown entity " + (entity == null ? null : entity.getClass()));
     }
 
+    private static PermissibleBase getPermissibleBase() {
+        if (perm == null) {
+            perm = new PermissibleBase(new ServerOperator() {
+
+                @Override
+                public boolean isOp() {
+                    return false;
+                }
+
+                @Override
+                public void setOp(boolean value) {
+
+                }
+            });
+        }
+        return perm;
+    }
+
     public Location getLocation() {
         return new Location(getWorld(), entity.locX, entity.locY, entity.locZ, entity.yaw, entity.pitch);
     }
@@ -274,12 +296,12 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
         return entity.fireTicks;
     }
 
-    public int getMaxFireTicks() {
-        return entity.maxFireTicks;
-    }
-
     public void setFireTicks(int ticks) {
         entity.fireTicks = ticks;
+    }
+
+    public int getMaxFireTicks() {
+        return entity.maxFireTicks;
     }
 
     public void remove() {
@@ -342,12 +364,12 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
         getHandle().fallDistance = distance;
     }
 
-    public void setLastDamageCause(EntityDamageEvent event) {
-        lastDamageEvent = event;
-    }
-
     public EntityDamageEvent getLastDamageCause() {
         return lastDamageEvent;
+    }
+
+    public void setLastDamageCause(EntityDamageEvent event) {
+        lastDamageEvent = event;
     }
 
     public UUID getUniqueId() {
@@ -369,12 +391,12 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
         return entity;
     }
 
-    public void playEffect(EntityEffect type) {
-        this.getHandle().world.broadcastEntityEffect(getHandle(), type.getData());
-    }
-
     public void setHandle(final Entity entity) {
         this.entity = entity;
+    }
+
+    public void playEffect(EntityEffect type) {
+        this.getHandle().world.broadcastEntityEffect(getHandle(), type.getData());
     }
 
     @Override
@@ -439,15 +461,6 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
     }
 
     @Override
-    public void setCustomName(String name) {
-        if (name == null) {
-            name = "";
-        }
-
-        getHandle().setCustomName(name);
-    }
-
-    @Override
     public String getCustomName() {
         String name = getHandle().getCustomName();
 
@@ -459,13 +472,22 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
     }
 
     @Override
-    public void setCustomNameVisible(boolean flag) {
-        getHandle().setCustomNameVisible(flag);
+    public void setCustomName(String name) {
+        if (name == null) {
+            name = "";
+        }
+
+        getHandle().setCustomName(name);
     }
 
     @Override
     public boolean isCustomNameVisible() {
         return getHandle().getCustomNameVisible();
+    }
+
+    @Override
+    public void setCustomNameVisible(boolean flag) {
+        getHandle().setCustomNameVisible(flag);
     }
 
     @Override
@@ -549,6 +571,11 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
     }
 
     @Override
+    public boolean isGlowing() {
+        return getHandle().glowing;
+    }
+
+    @Override
     public void setGlowing(boolean flag) {
         getHandle().glowing = flag;
         Entity e = getHandle();
@@ -558,18 +585,13 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
     }
 
     @Override
-    public boolean isGlowing() {
-        return getHandle().glowing;
+    public boolean isInvulnerable() {
+        return getHandle().isInvulnerable(DamageSource.GENERIC);
     }
 
     @Override
     public void setInvulnerable(boolean flag) {
         getHandle().setInvulnerable(flag);
-    }
-
-    @Override
-    public boolean isInvulnerable() {
-        return getHandle().isInvulnerable(DamageSource.GENERIC);
     }
 
     @Override
@@ -601,34 +623,6 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
     public void setPortalCooldown(int cooldown) {
         getHandle().portalCooldown = cooldown;
     }
-
-    private static PermissibleBase getPermissibleBase() {
-        if (perm == null) {
-            perm = new PermissibleBase(new ServerOperator() {
-
-                @Override
-                public boolean isOp() {
-                    return false;
-                }
-
-                @Override
-                public void setOp(boolean value) {
-
-                }
-            });
-        }
-        return perm;
-    }
-
-    // Spigot start
-    private final Spigot spigot = new Spigot()
-    {
-        @Override
-        public boolean isInvulnerable()
-        {
-            return getHandle().isInvulnerable(net.minecraft.server.DamageSource.GENERIC);
-        }
-    };
 
     public Spigot spigot()
     {

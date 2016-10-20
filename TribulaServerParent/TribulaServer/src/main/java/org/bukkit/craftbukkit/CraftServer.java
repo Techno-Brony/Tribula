@@ -225,11 +225,11 @@ public final class CraftServer implements Server {
         saveCommandsConfig();
         overrideAllCommandBlockCommands = commandsConfiguration.getStringList("command-block-overrides").contains("*");
         ((SimplePluginManager) pluginManager).useTimings(configuration.getBoolean("settings.plugin-profiling"));
-        monsterSpawn = configuration.getInt("spawn-limits.monsters");
-        animalSpawn = configuration.getInt("spawn-limits.animals");
-        waterAnimalSpawn = configuration.getInt("spawn-limits.water-animals");
-        ambientSpawn = configuration.getInt("spawn-limits.ambient");
-        console.autosavePeriod = configuration.getInt("ticks-per.autosave");
+        monsterSpawn = 0; //Natural Mob Spawning not required
+        animalSpawn = 0; //Natural Mob Spawning not required
+        waterAnimalSpawn = 0; //Natural Mob Spawning not required
+        ambientSpawn = 0; //Natural Mob Spawning not required
+        console.autosavePeriod = 36000; //Custom unmodifiable world means auto-save is not required
         warningState = WarningState.value(configuration.getString("settings.deprecated-verbose"));
         chunkGCPeriod = configuration.getInt("chunk-gc.period-in-ticks");
         chunkGCLoadThresh = configuration.getInt("chunk-gc.load-threshold");
@@ -581,12 +581,12 @@ public final class CraftServer implements Server {
 
     @Override
     public int getTicksPerAnimalSpawns() {
-        return this.configuration.getInt("ticks-per.animal-spawns");
+        return 65535; // Custom mob spawning means attempting to spawn naturally is not required
     }
 
     @Override
     public int getTicksPerMonsterSpawns() {
-        return this.configuration.getInt("ticks-per.monster-spawns");
+        return 65535; // Custom mob spawning means attempting to spawn naturally is not required
     }
 
     @Override

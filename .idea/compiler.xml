@@ -23,6 +23,9 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="spigot" />
+        <module name="TribulaTemplate" />
+        <module name="TribulaTemplate (1)" />
+        <module name="TribulaUtilities" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -32,6 +35,9 @@
       <module name="TribulaPlugin" target="1.7" />
       <module name="TribulaPluginKotlin" target="1.5" />
       <module name="TribulaSQL" target="1.7" />
+      <module name="TribulaTemplate" target="1.7" />
+      <module name="TribulaTemplate (1)" target="1.7" />
+      <module name="TribulaUtilities" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

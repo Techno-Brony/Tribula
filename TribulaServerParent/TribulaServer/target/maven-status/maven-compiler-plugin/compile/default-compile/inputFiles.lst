@@ -329,6 +329,7 @@
 /Users/zhiyuanqi/Documents/Github/Java/Minecraft/Tribula Everything/Tribula/TribulaServerParent/TribulaServer/src/main/java/net/minecraft/server/InventoryCrafting.java
 /Users/zhiyuanqi/Documents/Github/Java/Minecraft/Tribula Everything/Tribula/TribulaServerParent/TribulaServer/src/main/java/net/minecraft/server/BlockPortal.java
 /Users/zhiyuanqi/Documents/Github/Java/Minecraft/Tribula Everything/Tribula/TribulaServerParent/TribulaServer/src/main/java/net/minecraft/server/EntityEgg.java
+/Users/zhiyuanqi/Documents/Github/Java/Minecraft/Tribula Everything/Tribula/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/enums/TribulaPlayerDifficulty.java
 /Users/zhiyuanqi/Documents/Github/Java/Minecraft/Tribula Everything/Tribula/TribulaServerParent/TribulaServer/src/main/java/net/minecraft/server/PlayerConnection.java
 /Users/zhiyuanqi/Documents/Github/Java/Minecraft/Tribula Everything/Tribula/TribulaServerParent/TribulaServer/src/main/java/net/minecraft/server/EntitySlime.java
 /Users/zhiyuanqi/Documents/Github/Java/Minecraft/Tribula Everything/Tribula/TribulaServerParent/TribulaServer/src/main/java/net/minecraft/server/BlockGrass.java
@@ -536,6 +537,7 @@
 /Users/zhiyuanqi/Documents/Github/Java/Minecraft/Tribula Everything/Tribula/TribulaServerParent/TribulaServer/src/main/java/org/spigotmc/ActivationRange.java
 /Users/zhiyuanqi/Documents/Github/Java/Minecraft/Tribula Everything/Tribula/TribulaServerParent/TribulaServer/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 /Users/zhiyuanqi/Documents/Github/Java/Minecraft/Tribula Everything/Tribula/TribulaServerParent/TribulaServer/src/main/java/org/bukkit/craftbukkit/help/MultipleCommandAliasHelpTopicFactory.java
+/Users/zhiyuanqi/Documents/Github/Java/Minecraft/Tribula Everything/Tribula/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/TribulaPlayer.java
 /Users/zhiyuanqi/Documents/Github/Java/Minecraft/Tribula Everything/Tribula/TribulaServerParent/TribulaServer/src/main/java/org/bukkit/craftbukkit/CraftProfileBanEntry.java
 /Users/zhiyuanqi/Documents/Github/Java/Minecraft/Tribula Everything/Tribula/TribulaServerParent/TribulaServer/src/main/java/org/bukkit/craftbukkit/entity/CraftMushroomCow.java
 /Users/zhiyuanqi/Documents/Github/Java/Minecraft/Tribula Everything/Tribula/TribulaServerParent/TribulaServer/src/main/java/net/minecraft/server/EntityPainting.java
@@ -551,6 +553,7 @@
 /Users/zhiyuanqi/Documents/Github/Java/Minecraft/Tribula Everything/Tribula/TribulaServerParent/TribulaServer/src/main/java/net/minecraft/server/FoodMetaData.java
 /Users/zhiyuanqi/Documents/Github/Java/Minecraft/Tribula Everything/Tribula/TribulaServerParent/TribulaServer/src/main/java/org/bukkit/craftbukkit/entity/CraftHorse.java
 /Users/zhiyuanqi/Documents/Github/Java/Minecraft/Tribula Everything/Tribula/TribulaServerParent/TribulaServer/src/main/java/net/minecraft/server/Slot.java
+/Users/zhiyuanqi/Documents/Github/Java/Minecraft/Tribula Everything/Tribula/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/interfaces/ITribulaPlayer.java
 /Users/zhiyuanqi/Documents/Github/Java/Minecraft/Tribula Everything/Tribula/TribulaServerParent/TribulaServer/src/main/java/org/bukkit/craftbukkit/command/ProxiedNativeCommandSender.java
 /Users/zhiyuanqi/Documents/Github/Java/Minecraft/Tribula Everything/Tribula/TribulaServerParent/TribulaServer/src/main/java/net/minecraft/server/BlockMonsterEggs.java
 /Users/zhiyuanqi/Documents/Github/Java/Minecraft/Tribula Everything/Tribula/TribulaServerParent/TribulaServer/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryFurnace.java

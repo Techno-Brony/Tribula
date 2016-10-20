@@ -1,20 +1,22 @@
 package net.minecraft.server;
 
+import joptsimple.OptionSet;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import joptsimple.OptionSet; // CraftBukkit
 
 public class PropertyManager {
 
     private static final Logger a = LogManager.getLogger();
     public final Properties properties = new Properties();
     private final File file;
+    // CraftBukkit start
+    private OptionSet options = null;
 
     public PropertyManager(File file) {
         this.file = file;
@@ -25,27 +27,23 @@ public class PropertyManager {
                 fileinputstream = new FileInputStream(file);
                 this.properties.load(fileinputstream);
             } catch (Exception exception) {
-                PropertyManager.a.warn("Failed to load {}", new Object[] { file, exception});
+                PropertyManager.a.warn("Failed to load {}", file, exception);
                 this.a();
             } finally {
                 if (fileinputstream != null) {
                     try {
                         fileinputstream.close();
                     } catch (IOException ioexception) {
-                        ;
                     }
                 }
 
             }
         } else {
-            PropertyManager.a.warn("{} does not exist", new Object[] { file});
+            PropertyManager.a.warn("{} does not exist", file);
             this.a();
         }
 
     }
-
-    // CraftBukkit start
-    private OptionSet options = null;
 
     public PropertyManager(final OptionSet options) {
         this((File) options.valueOf("config"));
@@ -80,14 +78,13 @@ public class PropertyManager {
             fileoutputstream = new FileOutputStream(this.file);
             this.properties.store(fileoutputstream, "Minecraft server properties");
         } catch (Exception exception) {
-            PropertyManager.a.warn("Failed to save {}", new Object[] { this.file, exception});
+            PropertyManager.a.warn("Failed to save {}", this.file, exception);
             this.a();
         } finally {
             if (fileoutputstream != null) {
                 try {
                     fileoutputstream.close();
                 } catch (IOException ioexception) {
-                    ;
                 }
             }
 

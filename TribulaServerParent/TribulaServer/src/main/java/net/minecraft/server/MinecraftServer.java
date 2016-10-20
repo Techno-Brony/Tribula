@@ -169,92 +169,12 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         DispenserRegistry.c();
 
         try {
-            /* CraftBukkit start - Replace everything
-            boolean flag = true;
-            String s = null;
-            String s1 = ".";
-            String s2 = null;
-            boolean flag1 = false;
-            boolean flag2 = false;
-            int i = -1;
-
-            for (int j = 0; j < astring.length; ++j) {
-                String s3 = astring[j];
-                String s4 = j == astring.length - 1 ? null : astring[j + 1];
-                boolean flag3 = false;
-
-                if (!"nogui".equals(s3) && !"--nogui".equals(s3)) {
-                    if ("--port".equals(s3) && s4 != null) {
-                        flag3 = true;
-
-                        try {
-                            i = Integer.parseInt(s4);
-                        } catch (NumberFormatException numberformatexception) {
-                            ;
-                        }
-                    } else if ("--singleplayer".equals(s3) && s4 != null) {
-                        flag3 = true;
-                        s = s4;
-                    } else if ("--universe".equals(s3) && s4 != null) {
-                        flag3 = true;
-                        s1 = s4;
-                    } else if ("--world".equals(s3) && s4 != null) {
-                        flag3 = true;
-                        s2 = s4;
-                    } else if ("--demo".equals(s3)) {
-                        flag1 = true;
-                    } else if ("--bonusChest".equals(s3)) {
-                        flag2 = true;
-                    }
-                } else {
-                    flag = false;
-                }
-
-                if (flag3) {
-                    ++j;
-                }
-            }
-            */ // CraftBukkit end
-
             String s1 = "."; // PAIL?
             YggdrasilAuthenticationService yggdrasilauthenticationservice = new YggdrasilAuthenticationService(Proxy.NO_PROXY, UUID.randomUUID().toString());
             MinecraftSessionService minecraftsessionservice = yggdrasilauthenticationservice.createMinecraftSessionService();
             GameProfileRepository gameprofilerepository = yggdrasilauthenticationservice.createProfileRepository();
             UserCache usercache = new UserCache(gameprofilerepository, new File(s1, MinecraftServer.a.getName()));
             final DedicatedServer dedicatedserver = new DedicatedServer(options, DataConverterRegistry.a(), yggdrasilauthenticationservice, minecraftsessionservice, gameprofilerepository, usercache);
-
-            /* CraftBukkit start
-            if (s != null) {
-                dedicatedserver.i(s);
-            }
-
-            if (s2 != null) {
-                dedicatedserver.setWorld(s2);
-            }
-
-            if (i >= 0) {
-                dedicatedserver.setPort(i);
-            }
-
-            if (flag1) {
-                dedicatedserver.b(true);
-            }
-
-            if (flag2) {
-                dedicatedserver.c(true);
-            }
-
-            if (flag && !GraphicsEnvironment.isHeadless()) {
-                dedicatedserver.aN();
-            }
-
-            dedicatedserver.F();
-            Runtime.getRuntime().addShutdownHook(new Thread("Server Shutdown Thread") {
-                public void run() {
-                    dedicatedserver.stop();
-                }
-            });
-            */
 
             if (options.has("port")) {
                 int port = (Integer) options.valueOf("port");
