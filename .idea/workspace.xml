@@ -5,472 +5,335 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="91e547d1-3e04-4bea-8a71-a17795495724" name="Default" comment="Attempting to fix git directories">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/.travis.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0001-POM-Changes.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0002-Spigot-Timings.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0003-Add-PlayerItemDamageEvent.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0004-BungeeCord-Support.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0005-Add-Arrow-API.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0006-Add-Particle-API.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0007-Define-EntitySpawnEvent-and-SpawnerSpawnEvent.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0008-Entity-Mount-and-Dismount-Events.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0009-InventoryClickEvent-getClickedInventory.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0010-Added-getAllSessionData-to-the-Conversation-API.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0011-Catch-Conversation-API-Errors.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0012-Player-Collision-API.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0013-Expand-Boolean-Prompt-Values.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0014-Add-Getter-for-Entity-Invulnerability.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0015-Add-respawn-API.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0016-Fix-Plugin-Message-API-Disconnects.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0017-Fix-Tab-Completion-for-Some-Commands.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0018-Implement-Locale-Getter-for-Players.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0019-Add-support-for-fetching-hidden-players.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0020-Silenceable-Lightning-API.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0021-Remove-deprecation-on-some-player-lookup-methods.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0022-Add-Score.isScoreSet-Z-API.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0023-Add-PlayerSpawnLocationEvent.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0024-Ease-ClassLoader-Deadlocks-Where-Possible.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0025-Fix-slow-tab-complete-for-some-commands.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0026-Undeprecate-Player-updateInventory-V.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0027-Added-isUnbreakable-and-setUnbreakable-to-ItemMeta.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0028-BungeeCord-Chat-API.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit-Patches/0029-Add-restart-API.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0001-POM-Changes.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0002-Skeleton-API-Implementations.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0003-mc-dev-imports.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0004-Obfuscation-Helpers.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0005-Spigot-Configuration.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0006-Crop-Growth-Rates.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0007-Merge-tweaks-and-configuration.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0008-Async-Operation-Catching.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0009-View-Distance.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0010-Spigot-Timings.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0011-Fix-Mob-Spawning-Relative-to-View-Distance.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0012-Handle-Null-Tile-Entities.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0013-Item-Despawn-Rate.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0014-Entity-Activation-Range.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0015-Metrics.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0016-PlayerItemDamageEvent.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0017-Prevent-NPE-in-CraftSign.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0018-Entity-Tracking-Ranges.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0019-Thread-Naming-and-Tweaks.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0020-Close-Unloaded-Save-Files.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0021-Remove-o-Option.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0022-Recipe-Deconstruction.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0023-Implement-Arrow-API.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0024-Hopper-Customisations.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0025-Firework-Meta-Crash-Fix.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0026-Allow-Disabling-of-Command-Logging.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0027-Allow-Disabling-of-Command-TabComplete.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0028-Configurable-Messages.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0029-Allow-Disabling-of-Random-Lighting-Updates.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0030-Properly-Close-Inventories.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0031-Disallow-Interaction-With-Self.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0032-Entity-Mount-and-Dismount-Events.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0033-Prevent-Ghost-Players-Caused-by-Plugins.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0034-Plug-World-Unload-Memory-Leak.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0035-Player-Collision-API.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0036-Fully-Disable-Snooper-When-Not-Required.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0037-Add-Getter-for-Entity-Invulnerability.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0038-Allow-Disabling-of-1.6.3-Structure-Saving.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0039-Don-t-Special-Case-X-Move-Value.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0040-Implement-respawn-API.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0041-Arrow-Despawn-Rate.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0042-Watchdog-Thread.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0043-Fix-some-chunks-not-being-sent-to-the-client.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0044-Fix-Broken-Async-Chat.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0045-Fire-PreLogin-Events-in-Offline-Mode.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0046-BungeeCord-Support.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0047-Allow-Disabling-Zombie-Villager-Aggression.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0048-Configurable-Amount-of-Netty-Threads.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0049-Prevent-Mineshaft-Saving.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0050-Log-Cause-of-Unexpected-Exceptions.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0051-Particle-API.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0052-Save-ticks-lived-to-nbttag.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0053-Add-Option-to-Nerf-Mobs-from-Spawner-s.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0054-Warn-if-PermGen-may-be-insufficient.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0055-Disable-Connected-Check-on-setScoreboard.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0056-Add-Late-Bind-Option.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0057-Allow-statistics-to-be-disabled-forced.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0058-Fix-ItemStack-Unbreakable-Code.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0059-Try-and-Debug-Crash-Reports-Crashing.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0060-Improve-AutoSave-Mechanism.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0061-Catch-stalling-on-corrupted-map-data-NBT-arrays.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0062-Allow-toggling-of-ZombiePigmen-spawning-in-portal-bl.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0063-Highly-Optimized-Tick-Loop.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0064-Configurable-Ping-Sample-Size.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0065-Add-Optional-Tick-Shuffling.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0066-Implement-Locale-Getter-for-Players.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0067-Cap-Entity-Collisions.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0068-Fix-dispensing-bone-meal-not-having-the-correct-data.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0069-Spam-Filter-Exclusions.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0070-Add-Option-to-Silence-CommandBlock-Console.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0071-Add-support-for-fetching-hidden-players.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0072-Allow-Disabling-Creative-Item-Filter.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0073-Cap-Channel-Registrations.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0074-Allow-vanilla-commands-to-be-the-main-version-of-a-c.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0075-Implement-Silenceable-Lightning-API.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0076-Use-one-PermissibleBase-for-all-Command-Blocks.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0077-Prevent-hoppers-from-loading-chunks.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0078-Guard-Entity-List.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0079-Fix-ConcurrentModificationException-while-being-idle.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0080-Cancellable-WitherSkull-potion-effect.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0081-Descriptive-kick-reasons-instead-of-Nope.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0082-Configurable-dragon-death-and-wither-spawn-sounds.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0083-Display-Spigot-in-client-crashes-server-lists-and-Mo.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0084-Treat-Bungee-as-Online-Mode.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0085-Add-Conversion-Message.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0086-Properly-cancel-fishing-event.-Fixes-BUKKIT-5396.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0087-Print-Stack-on-InternalException.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0088-Use-Offline-Player-Data-Once-if-Required.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0089-Use-Provided-Case-for-Non-Existent-Offline-Players.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0090-Check-for-blank-OfflinePlayer-Names.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0091-Fix-Player-Banning.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0092-Fix-ban-expire-dates.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0093-Correct-Ban-Expiration.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0094-Convert-Horses-owner-to-UUID.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0095-Add-Score.isScoreSet-Z-API.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0096-Log-null-TileEntity-Owner.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0097-Don-t-special-case-invalid-usernames-for-UUIDs.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0098-Convert-player-skulls-async.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0099-Prevent-NoClassDefError-crash-and-notify-on-crash.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0100-Check-Skull-canPlace.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0101-Fix-race-condition-that-could-kill-connections-befor.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0102-Configurable-UserCache-cap.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0103-Implement-PlayerSpawnLocationEvent.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0104-Cap-Objective-Score-Length.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0105-Process-conversation-input-on-the-main-thread.-Fixes.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0106-Configurable-save-on-stop-only-for-UserCache.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0107-Prevent-Unbounded-IntCache-Growth.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0108-Cross-World-Entity-Teleportation.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0109-Limit-block-placement-interaction-packets.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0110-Better-item-validation.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0111-Further-Seed-Customisation.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0112-Disable-ResourceLeakDetector.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0113-Add-More-Information-to-session.lock-Errors.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0114-Safer-JSON-Loading.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0115-Add-CommandLine-EULA-Flag.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0116-Fix-for-enchanting-table-wiping-meta-when-placing-st.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0117-Don-t-spawn-bonus-ocelots-when-plugins-spawn-ocelots.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0118-Prevent-a-crash-involving-attributes.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0119-Make-moved-wrongly-limit-configurable.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0120-Fix-Null-Tile-Entity-Worlds.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0121-Make-moved-too-quickly-limit-configurable.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0122-Apply-NBTReadLimiter-to-more-things.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0123-Allow-Attribute-Capping.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0124-Only-fetch-an-online-UUID-in-online-mode.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0125-Filter-attribute-modifiers-which-cause-the-attribute.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0126-Plug-WorldMap-Memory-Leak.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0127-Fix-Corrupted-Trapped-Chest.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0128-Remove-uneeded-validation.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0129-Add-Hunger-Config-Values.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0130-Make-debug-logging-togglable.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0131-Skip-invalid-enchants-in-CraftMetaItem.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0132-Limit-TNT-Detonations-per-tick.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0133-Added-isUnbreakable-and-setUnbreakable-to-ItemMeta.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0134-Configurable-Hanging-Tick.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0135-Refactor-ItemDoor-Place.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0136-BungeeCord-Chat-API.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0137-Use-Standard-List-for-EntitySlices.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0138-Allow-Capping-Tile-Entity-Tick-Time.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0139-Use-FastMatches-for-ItemStack-Dirty-Check.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0140-Use-CLQ-for-main-thread-tasks.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0141-map-decoration-fix.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0142-Use-Map-for-getPlayer-String-lookup.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0143-Clear-Packet-Queue-on-Disconnect.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0144-Implement-SpawnerSpawnEvent.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0145-Don-t-tick-blocks-if-neighbor-chunks-aren-t-loaded.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0146-Branchless-NibbleArray.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/LGPL.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/LICENCE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/applyPatches.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/deprecation-mappings.csrg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/makePatches.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/Block.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockButtonAbstract.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockCactus.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockCake.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockCauldron.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockChorusFlower.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockCocoa.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockCommand.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockCrops.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockDaylightDetector.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockDiodeAbstract.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockDispenser.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockDoor.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockDragonEgg.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockDropper.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockEnderPortal.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockFire.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockFlowing.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockGrass.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockIce.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockJukeBox.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockLeaves.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockLever.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockMagma.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockMinecartDetector.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockMobSpawner.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockMonsterEggs.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockMushroom.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockMycel.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockNetherWart.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockOre.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockPiston.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockPlant.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockPortal.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockPoweredRail.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockPressurePlateAbstract.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockPressurePlateBinary.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockPressurePlateWeighted.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockPumpkin.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockRedstoneLamp.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockRedstoneOre.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockRedstoneTorch.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockRedstoneWire.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockReed.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockSapling.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockSkull.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockSnow.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockSoil.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockStationary.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockStem.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockTNT.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockTrapdoor.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockTripwire.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockTripwireHook.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockVine.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/BlockWaterLily.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ChatBaseComponent.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ChatModifier.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/Chunk.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ChunkProviderGenerate.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ChunkProviderServer.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ChunkRegionLoader.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ChunkSection.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/CommandBlockListenerAbstract.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/CommandExecute.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/CommandGamemode.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/CommandGamerule.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/CommandSpreadPlayers.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/CommandTp.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/Container.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ContainerAnvil.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ContainerBeacon.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ContainerBrewingStand.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ContainerChest.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ContainerDispenser.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ContainerEnchantTable.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ContainerFurnace.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ContainerHopper.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ContainerHorse.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ContainerMerchant.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ContainerPlayer.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ContainerWorkbench.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/CraftingManager.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/CrashReport.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/DataPaletteBlock.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/DataWatcher.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/DedicatedServer.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/DispenseBehaviorItem.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/DispenseBehaviorProjectile.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/DispenserRegistry.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/DragonControllerManager.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/Enchantment.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EnchantmentFrostWalker.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EnchantmentThorns.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/Entity.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityAgeable.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityAnimal.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityAreaEffectCloud.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityArmorStand.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityArrow.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityBoat.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityChicken.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityCow.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityCreature.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityCreeper.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityDamageSourceIndirect.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityEgg.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityEnderCrystal.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityEnderDragon.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityEnderPearl.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityEnderman.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityExperienceOrb.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityFallingBlock.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityFireball.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityFireworks.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityFishingHook.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityGhast.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityHanging.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityHorse.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityHuman.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityInsentient.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityIronGolem.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityItem.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityItemFrame.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityLargeFireball.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityLeash.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityLightning.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityLiving.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityMinecartAbstract.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityMinecartCommandBlock.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityMinecartContainer.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityMonster.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityMushroomCow.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityOcelot.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityPainting.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityPig.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityPlayer.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityPotion.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityProjectile.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityRabbit.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntitySheep.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityShulkerBullet.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntitySilverfish.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntitySkeleton.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntitySlice.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntitySlime.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntitySmallFireball.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntitySnowman.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntitySpider.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityTNTPrimed.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityThrownExpBottle.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityTippedArrow.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityTracker.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityTrackerEntry.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityVillager.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityWither.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityWitherSkull.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityWolf.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/EntityZombie.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ExpirableListEntry.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/Explosion.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/FoodMetaData.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/HandshakeListener.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/IDataManager.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/IInventory.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/IRecipe.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/InventoryCraftResult.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/InventoryCrafting.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/InventoryEnderChest.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/InventoryHorseChest.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/InventoryLargeChest.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/InventoryMerchant.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/InventorySubcontainer.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ItemArmor.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ItemBlock.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ItemBoat.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ItemBow.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ItemBucket.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ItemChorusFruit.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ItemDye.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ItemFireball.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ItemFishingRod.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ItemFlintAndSteel.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ItemHanging.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ItemLeash.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ItemMapEmpty.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ItemMinecart.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ItemMonsterEgg.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ItemRecord.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ItemSkull.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ItemSnowball.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ItemStack.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ItemWaterLily.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ItemWorldMap.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/JsonList.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/LoginListener.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/MerchantRecipe.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/MethodProfiler.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/MinecraftServer.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/MobEffectList.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/MobSpawnerAbstract.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/NameReferencingFileConverter.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/NetworkManager.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PacketDataSerializer.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PacketPlayInCloseWindow.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PacketStatusListener.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PathfinderGoalBreakDoor.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PathfinderGoalBreed.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PathfinderGoalDefendVillage.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PathfinderGoalEatTile.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PathfinderGoalHorseTrap.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PathfinderGoalHurtByTarget.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PathfinderGoalMakeLove.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PathfinderGoalNearestAttackableTarget.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PathfinderGoalNearestAttackableTargetInsentient.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PathfinderGoalOwnerHurtByTarget.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PathfinderGoalOwnerHurtTarget.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PathfinderGoalPanic.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PathfinderGoalSit.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PathfinderGoalTame.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PathfinderGoalTarget.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PathfinderGoalTargetNearestPlayer.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PathfinderGoalTempt.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PathfinderGoalVillagerFarm.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PlayerChunk.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PlayerChunkMap.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PlayerConnection.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PlayerInteractManager.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PlayerInventory.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PlayerList.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PortalTravelAgent.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/PropertyManager.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/RecipeArmorDye.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/RecipeBookClone.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/RecipeFireworks.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/RecipeMapClone.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/RecipeRepair.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/RecipeTippedArrow.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/RecipesBanner.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/RecipesFurnace.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/RecipiesShield.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/RegionFile.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/RegionFileCache.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/RemoteControlCommandListener.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ScoreboardServer.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/SecondaryWorldServer.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ShapedRecipes.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/ShapelessRecipes.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/Slot.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/SlotFurnaceResult.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/SpawnerCreature.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/StatisticManager.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/StructureGenerator.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/TileEntity.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/TileEntityBanner.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/TileEntityBeacon.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/TileEntityBrewingStand.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/TileEntityChest.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/TileEntityCommand.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/TileEntityContainer.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/TileEntityDispenser.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/TileEntityEndGateway.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/TileEntityFurnace.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/TileEntityHopper.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/TileEntityNote.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/TileEntityPiston.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/TileEntitySign.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/UserCache.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/Village.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/VillageSiege.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/World.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/WorldBorder.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/WorldData.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/WorldGenGroundBush.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/WorldGenMegaTreeAbstract.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/WorldGenRegistration.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/WorldGenVillagePieces.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/WorldManager.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/WorldMap.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/WorldNBTStorage.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/nms-patches/WorldServer.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/applyPatches.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/rebuildPatches.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/upstreamMerge.sh" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/pom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/AttributeRanged.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/Block.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockButtonAbstract.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockCactus.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockCake.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockCauldron.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockChorusFlower.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockCocoa.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockCommand.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockCrops.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockDaylightDetector.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockDiodeAbstract.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockDispenser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockDoor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockDragonEgg.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockDropper.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockEnderPortal.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockFire.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockFlowing.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockGrass.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockIce.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockJukeBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockLeaves.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockLever.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockMagma.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockMinecartDetector.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockMobSpawner.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockMonsterEggs.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockMushroom.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockMycel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockNetherWart.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockOre.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockPiston.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockPlant.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockPortal.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockPoweredRail.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockPressurePlateAbstract.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockPressurePlateBinary.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockPressurePlateWeighted.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockPumpkin.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockRedstoneLamp.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockRedstoneOre.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockRedstoneTorch.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockRedstoneWire.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockReed.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockSapling.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockSkull.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockSnow.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockSoil.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockStationary.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockStem.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockTNT.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockTrapdoor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockTripwire.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockTripwireHook.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockVine.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/BlockWaterLily.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ChatBaseComponent.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ChatModifier.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/Chunk.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ChunkProviderGenerate.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ChunkProviderServer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ChunkRegionLoader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ChunkSection.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/CommandBlockListenerAbstract.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/CommandDispatcher.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/CommandExecute.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/CommandGamemode.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/CommandGamerule.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/CommandSpreadPlayers.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/CommandTp.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/Container.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ContainerAnvil.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ContainerBeacon.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ContainerBrewingStand.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ContainerChest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ContainerDispenser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ContainerEnchantTable.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ContainerFurnace.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ContainerHopper.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ContainerHorse.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ContainerMerchant.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ContainerPlayer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ContainerWorkbench.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/CraftingManager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/CrashReport.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/DataPaletteBlock.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/DataWatcher.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/DedicatedServer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/DispenseBehaviorItem.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/DispenseBehaviorProjectile.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/DispenserRegistry.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/DragonControllerManager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/Enchantment.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EnchantmentFrostWalker.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EnchantmentThorns.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/Entity.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityAgeable.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityAnimal.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityAreaEffectCloud.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityArmorStand.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityArrow.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityBoat.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityChicken.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityCow.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityCreature.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityCreeper.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityDamageSourceIndirect.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityEgg.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityEnderCrystal.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityEnderDragon.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityEnderPearl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityEnderman.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityExperienceOrb.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityFallingBlock.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityFireball.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityFireworks.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityFishingHook.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityGhast.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityHanging.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityHorse.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityHuman.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityInsentient.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityIronGolem.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityItem.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityItemFrame.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityLargeFireball.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityLeash.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityLightning.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityLiving.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityMinecartAbstract.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityMinecartCommandBlock.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityMinecartContainer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityMonster.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityMushroomCow.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityOcelot.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityPainting.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityPig.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityPlayer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityPotion.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityProjectile.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityRabbit.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntitySheep.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityShulkerBullet.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntitySilverfish.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntitySkeleton.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntitySlice.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntitySlime.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntitySmallFireball.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntitySnowman.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntitySpider.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityTNTPrimed.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityThrownExpBottle.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityTippedArrow.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityTracker.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityTrackerEntry.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityVillager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityWither.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityWitherSkull.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityWolf.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/EntityZombie.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ExpirableListEntry.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/Explosion.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/FoodMetaData.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/GameProfileBanEntry.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/GenericAttributes.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/HandshakeListener.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/IDataManager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/IInventory.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/IRecipe.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/IntCache.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/InventoryCraftResult.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/InventoryCrafting.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/InventoryEnderChest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/InventoryHorseChest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/InventoryLargeChest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/InventoryMerchant.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/InventorySubcontainer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ItemArmor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ItemBlock.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ItemBoat.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ItemBow.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ItemBucket.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ItemChorusFruit.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ItemDoor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ItemDye.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ItemFireball.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ItemFishingRod.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ItemFlintAndSteel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ItemHanging.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ItemLeash.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ItemMapEmpty.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ItemMinecart.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ItemMonsterEgg.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ItemRecord.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ItemSkull.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ItemSnowball.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ItemStack.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ItemWaterLily.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ItemWorldMap.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/JsonList.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/LoginListener.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/MerchantRecipe.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/MethodProfiler.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/MinecraftServer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/MobEffectList.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/MobSpawnerAbstract.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/NBTCompressedStreamTools.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/NBTTagByteArray.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/NBTTagIntArray.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/NameReferencingFileConverter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/NetworkManager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/NibbleArray.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PacketDataSerializer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PacketHandshakingInSetProtocol.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PacketPlayInArmAnimation.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PacketPlayInBlockPlace.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PacketPlayInChat.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PacketPlayInCloseWindow.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PacketPlayInUseItem.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PacketPlayOutChat.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PacketStatusListener.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PathfinderGoalBreakDoor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PathfinderGoalBreed.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PathfinderGoalDefendVillage.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PathfinderGoalEatTile.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PathfinderGoalHorseTrap.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PathfinderGoalHurtByTarget.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PathfinderGoalMakeLove.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PathfinderGoalNearestAttackableTarget.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PathfinderGoalNearestAttackableTargetInsentient.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PathfinderGoalOwnerHurtByTarget.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PathfinderGoalOwnerHurtTarget.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PathfinderGoalPanic.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PathfinderGoalSit.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PathfinderGoalTame.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PathfinderGoalTarget.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PathfinderGoalTargetNearestPlayer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PathfinderGoalTempt.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PathfinderGoalVillagerFarm.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PersistentCollection.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PlayerChunk.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PlayerChunkMap.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PlayerConnection.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PlayerInteractManager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PlayerInventory.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PlayerList.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PortalTravelAgent.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/PropertyManager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/RecipeArmorDye.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/RecipeBookClone.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/RecipeFireworks.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/RecipeMapClone.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/RecipeRepair.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/RecipeTippedArrow.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/RecipesBanner.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/RecipesFurnace.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/RecipiesShield.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/RegionFile.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/RegionFileCache.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/RemoteControlCommandListener.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ScoreboardServer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/SecondaryWorldServer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ServerConnection.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ServerStatisticManager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ShapedRecipes.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ShapelessRecipes.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/Slot.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/SlotFurnaceResult.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/SpawnerCreature.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/StatisticManager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/StructureGenerator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/TileEntity.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/TileEntityBanner.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/TileEntityBeacon.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/TileEntityBrewingStand.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/TileEntityChest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/TileEntityCommand.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/TileEntityContainer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/TileEntityDispenser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/TileEntityEndGateway.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/TileEntityFurnace.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/TileEntityHopper.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/TileEntityNote.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/TileEntityPiston.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/TileEntitySign.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/TileEntitySkull.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/UserCache.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/Village.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/VillageSiege.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/World.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/WorldBorder.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/WorldData.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/WorldGenGroundBush.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/WorldGenLargeFeature.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/WorldGenMegaTreeAbstract.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/WorldGenRegistration.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/WorldGenVillage.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/WorldGenVillagePieces.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/WorldManager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/WorldMap.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/WorldNBTStorage.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/WorldServer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/org/apache/logging/log4j/core/appender/ConsoleAppender.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/org/spigotmc/ActivationRange.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/org/spigotmc/AsyncCatcher.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/org/spigotmc/CaseInsensitiveHashingStrategy.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/org/spigotmc/CaseInsensitiveMap.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/org/spigotmc/LimitStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/org/spigotmc/Metrics.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/org/spigotmc/RestartCommand.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/org/spigotmc/SneakyThrow.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/org/spigotmc/SpigotConfig.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/org/spigotmc/SpigotWorldConfig.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/org/spigotmc/TickLimiter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/org/spigotmc/TicksPerSecondCommand.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/org/spigotmc/TrackingRange.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/org/spigotmc/ValidateUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/org/spigotmc/WatchdogThread.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/resources/configurations/bukkit.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/resources/configurations/commands.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/resources/configurations/help.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/resources/log4j2.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaCustomServerParent/pom.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Tribula.iws" />
@@ -512,18 +375,7 @@
     <favorites_list name="Tribula" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="101">
-              <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -703,6 +555,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -721,23 +574,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Tribula" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Tribula" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TribulaCustomServerParent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
@@ -985,6 +823,7 @@
       <workItem from="1476817201590" duration="528000" />
       <workItem from="1476817825969" duration="370000" />
       <workItem from="1476846338562" duration="910000" />
+      <workItem from="1476939255289" duration="105000" />
     </task>
     <task id="LOCAL-00001" summary="Added Base Plugin">
       <created>1475468678577</created>
@@ -1123,7 +962,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62761000" />
+    <option name="totallyTimeSpent" value="62866000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1144,7 +983,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5028612" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.49713877" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32891566" sideWeight="0.49713877" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1245,13 +1084,7 @@
     <entry file="file://$PROJECT_DIR$/TribulaPluginKotlin/pom.xml" />
     <entry file="file://$PROJECT_DIR$/TribulaPluginKotlin/src/main/resources/plugin.yml" />
     <entry file="file://$PROJECT_DIR$/TribulaCustomServer/LGPL.txt" />
-    <entry file="file://$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0003-mc-dev-imports.patch">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0003-mc-dev-imports.patch" />
     <entry file="file://$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ItemBow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
@@ -1266,13 +1099,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/test/java/org/bukkit/craftbukkit/inventory/CompositeSerialization.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="40" column="59" selection-start-line="40" selection-start-column="59" selection-end-line="40" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/test/java/org/bukkit/craftbukkit/inventory/CompositeSerialization.java" />
     <entry file="file://$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/org/spigotmc/ActivationRange.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-64">
@@ -1343,20 +1170,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0130-Make-debug-logging-togglable.patch">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="43" column="10" selection-start-line="43" selection-start-column="10" selection-end-line="43" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0085-Add-Conversion-Message.patch">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0130-Make-debug-logging-togglable.patch" />
+    <entry file="file://$PROJECT_DIR$/TribulaCustomServerParent/CraftBukkit-Patches/0085-Add-Conversion-Message.patch" />
     <entry file="file://$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ServerConnection.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
@@ -1378,27 +1193,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaCustomServerParent/Bukkit/src/main/java/org/bukkit/Bukkit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaCustomServerParent/Spigot-API/src/test/java/org/bukkit/TestServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="77" column="19" selection-start-line="77" selection-start-column="19" selection-end-line="77" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaCustomServerParent/Bukkit/src/main/java/org/bukkit/command/defaults/VersionCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="45" column="32" selection-start-line="45" selection-start-column="32" selection-end-line="45" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/TribulaCustomServerParent/Bukkit/src/main/java/org/bukkit/Bukkit.java" />
+    <entry file="file://$PROJECT_DIR$/TribulaCustomServerParent/Spigot-API/src/test/java/org/bukkit/TestServer.java" />
+    <entry file="file://$PROJECT_DIR$/TribulaCustomServerParent/Bukkit/src/main/java/org/bukkit/command/defaults/VersionCommand.java" />
     <entry file="file://$PROJECT_DIR$/TribulaCustomServerParent/Spigot-API/src/main/java/org/bukkit/command/defaults/VersionCommand.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="112">
@@ -1494,7 +1291,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
           <caret line="11" column="41" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1514,18 +1310,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/deprecation-mappings.csrg">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/deprecation-mappings.csrg" />
     <entry file="file://$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
-          <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+        <state relative-caret-position="165">
+          <caret line="25" column="47" selection-start-line="25" selection-start-column="47" selection-end-line="25" selection-end-column="47" />
           <folding />
         </state>
       </provider>
