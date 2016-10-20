@@ -4,11 +4,13 @@ import java.io.IOException;
 
 public class PacketPlayInBlockPlace implements Packet<PacketListenerPlayIn> {
 
-    private EnumHand a;
     public long timestamp; // Spigot
+    private EnumHand a;
 
+    @SuppressWarnings("unused")
     public PacketPlayInBlockPlace() {}
 
+    @SuppressWarnings("unused")
     public PacketPlayInBlockPlace(EnumHand enumhand) {
         this.a = enumhand;
     }

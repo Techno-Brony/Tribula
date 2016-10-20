@@ -20,6 +20,7 @@ public class MerchantRecipe {
         this.bukkitHandle = bukkit;
     }
 
+    @SuppressWarnings("unused")
     public MerchantRecipe(NBTTagCompound nbttagcompound) {
         this.a(nbttagcompound);
     }
@@ -54,10 +55,12 @@ public class MerchantRecipe {
         return this.buyingItem1;
     }
 
+    @SuppressWarnings("unused")
     public ItemStack getBuyItem2() {
         return this.buyingItem2;
     }
 
+    @SuppressWarnings("unused")
     public boolean hasSecondItem() {
         return this.buyingItem2 != null;
     }
@@ -70,6 +73,7 @@ public class MerchantRecipe {
         return this.uses;
     }
 
+    @SuppressWarnings("unused")
     public int f() {
         return this.maxUses;
     }
@@ -115,6 +119,7 @@ public class MerchantRecipe {
 
     }
 
+    @SuppressWarnings("unused")
     public NBTTagCompound k() {
         NBTTagCompound nbttagcompound = new NBTTagCompound();
 

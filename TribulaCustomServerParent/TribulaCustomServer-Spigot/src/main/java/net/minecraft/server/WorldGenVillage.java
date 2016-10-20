@@ -6,15 +6,16 @@ import java.util.Map.Entry;
 public class WorldGenVillage extends StructureGenerator {
 
     public static final List<BiomeBase> a = Arrays.asList(Biomes.c, Biomes.d, Biomes.K, Biomes.g);
-    private final int h;
     private int b;
     private int d;
 
+    @SuppressWarnings("unused")
     public WorldGenVillage() {
         this.d = 32;
-        this.h = 8;
+        int h = 8;
     }
 
+    @SuppressWarnings("unused")
     public WorldGenVillage(Map<String, String> map) {
         this();
         Iterator iterator = map.entrySet().iterator();
@@ -75,6 +76,7 @@ public class WorldGenVillage extends StructureGenerator {
 
         private boolean c;
 
+        @SuppressWarnings("unused")
         public WorldGenVillageStart() {}
 
         public WorldGenVillageStart(World world, Random random, int i, int j, int k) {

@@ -48,10 +48,12 @@ public class EntityVillager extends EntityAgeable implements IMerchant, NPC {
         this.m(true);
     }
 
+    @SuppressWarnings("unused")
     public static void b(DataConverterManager dataconvertermanager) {
         EntityInsentient.a(dataconvertermanager, "Villager");
         dataconvertermanager.a(DataConverterTypes.ENTITY, new DataInspectorItemList("Villager", "Inventory"));
         dataconvertermanager.a(DataConverterTypes.ENTITY, new DataInspector() {
+            @SuppressWarnings("unused")
             public NBTTagCompound a(DataConverter dataconverter, NBTTagCompound nbttagcompound, int i) {
                 if ("Villager".equals(nbttagcompound.getString("id")) && nbttagcompound.hasKeyOfType("Offers", 10)) {
                     NBTTagCompound nbttagcompound1 = nbttagcompound.getCompound("Offers");
@@ -279,10 +281,12 @@ public class EntityVillager extends EntityAgeable implements IMerchant, NPC {
         this.bA = flag;
     }
 
+    @SuppressWarnings("unused")
     public void q(boolean flag) {
         this.bB = flag;
     }
 
+    @SuppressWarnings("unused")
     public boolean dg() {
         return this.bB;
     }
@@ -608,6 +612,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, NPC {
         return this.m(1);
     }
 
+    @SuppressWarnings("unused")
     public boolean dl() {
         return this.m(2);
     }

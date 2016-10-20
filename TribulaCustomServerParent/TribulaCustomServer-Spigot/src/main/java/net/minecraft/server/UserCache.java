@@ -146,6 +146,7 @@ public class UserCache {
         return usercache_usercacheentry == null ? null : usercache_usercacheentry.a();
     }
 
+    @SuppressWarnings("unused")
     public String[] a() {
         ArrayList arraylist = Lists.newArrayList(this.d.keySet());
 

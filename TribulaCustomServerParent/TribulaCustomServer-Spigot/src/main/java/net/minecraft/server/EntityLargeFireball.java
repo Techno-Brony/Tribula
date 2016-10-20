@@ -1,6 +1,6 @@
 package net.minecraft.server;
 
-import org.bukkit.event.entity.ExplosionPrimeEvent; // CraftBukkit
+import org.bukkit.event.entity.ExplosionPrimeEvent;
 
 public class EntityLargeFireball extends EntityFireball {
 
@@ -12,6 +12,11 @@ public class EntityLargeFireball extends EntityFireball {
 
     public EntityLargeFireball(World world, EntityLiving entityliving, double d0, double d1, double d2) {
         super(world, entityliving, d0, d1, d2);
+    }
+
+    @SuppressWarnings("unused")
+    public static void a(DataConverterManager dataconvertermanager) {
+        EntityFireball.a(dataconvertermanager, "Fireball");
     }
 
     protected void a(MovingObjectPosition movingobjectposition) {
@@ -35,10 +40,6 @@ public class EntityLargeFireball extends EntityFireball {
             this.die();
         }
 
-    }
-
-    public static void a(DataConverterManager dataconvertermanager) {
-        EntityFireball.a(dataconvertermanager, "Fireball");
     }
 
     public void b(NBTTagCompound nbttagcompound) {

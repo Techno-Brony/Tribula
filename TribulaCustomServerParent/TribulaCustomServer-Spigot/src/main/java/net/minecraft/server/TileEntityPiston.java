@@ -7,7 +7,6 @@ public class TileEntityPiston extends TileEntity implements ITickable {
     private IBlockData a;
     private EnumDirection f;
     private boolean g;
-    private boolean h;
     private float i;
     private float j;
 
@@ -17,11 +16,13 @@ public class TileEntityPiston extends TileEntity implements ITickable {
         this.a = iblockdata;
         this.f = enumdirection;
         this.g = flag;
-        this.h = flag1;
+        boolean h = flag1;
     }
 
+    @SuppressWarnings("unused")
     public static void a(DataConverterManager dataconvertermanager) {}
 
+    @SuppressWarnings("unused")
     public IBlockData d() {
         return this.a;
     }

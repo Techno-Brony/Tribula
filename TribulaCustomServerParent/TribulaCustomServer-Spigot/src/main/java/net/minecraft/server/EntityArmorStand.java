@@ -72,6 +72,7 @@ public class EntityArmorStand extends EntityLiving {
         this.setPosition(d0, d1, d2);
     }
 
+    @SuppressWarnings("unused")
     public static void a(DataConverterManager dataconvertermanager) {
         dataconvertermanager.a(DataConverterTypes.ENTITY, new DataInspectorItemList("ArmorStand", "ArmorItems", "HandItems"));
     }
@@ -720,10 +721,12 @@ public class EntityArmorStand extends EntityLiving {
         this.datawatcher.set(EntityArmorStand.g, vector3f);
     }
 
+    @SuppressWarnings("unused")
     public Vector3f u() {
         return this.headPose;
     }
 
+    @SuppressWarnings("unused")
     public Vector3f w() {
         return this.bodyPose;
     }

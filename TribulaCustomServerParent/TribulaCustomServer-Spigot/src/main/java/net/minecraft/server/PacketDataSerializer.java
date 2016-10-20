@@ -36,12 +36,14 @@ public class PacketDataSerializer extends ByteBuf {
         return 5;
     }
 
+    @SuppressWarnings("unused")
     public PacketDataSerializer a(byte[] abyte) {
         this.d(abyte.length);
         this.writeBytes(abyte);
         return this;
     }
 
+    @SuppressWarnings("unused")
     public byte[] a() {
         return this.b(this.readableBytes());
     }
@@ -59,6 +61,7 @@ public class PacketDataSerializer extends ByteBuf {
         }
     }
 
+    @SuppressWarnings("unused")
     public PacketDataSerializer a(int[] aint) {
         this.d(aint.length);
         int i = aint.length;
@@ -70,6 +73,7 @@ public class PacketDataSerializer extends ByteBuf {
         return this;
     }
 
+    @SuppressWarnings("unused")
     public int[] b() {
         return this.c(this.readableBytes());
     }
@@ -90,6 +94,7 @@ public class PacketDataSerializer extends ByteBuf {
         }
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public PacketDataSerializer a(long[] along) {
         this.d(along.length);
         int i = along.length;
@@ -105,6 +110,7 @@ public class PacketDataSerializer extends ByteBuf {
         return BlockPosition.fromLong(this.readLong());
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public PacketDataSerializer a(BlockPosition blockposition) {
         this.writeLong(blockposition.asLong());
         return this;
@@ -114,6 +120,7 @@ public class PacketDataSerializer extends ByteBuf {
         return IChatBaseComponent.ChatSerializer.a(this.e(32767));
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public PacketDataSerializer a(IChatBaseComponent ichatbasecomponent) {
         return this.a(IChatBaseComponent.ChatSerializer.a(ichatbasecomponent));
     }
@@ -122,6 +129,7 @@ public class PacketDataSerializer extends ByteBuf {
         return oclass.getEnumConstants()[this.g()]; // CraftBukkit - fix decompile error
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public PacketDataSerializer a(Enum<?> oenum) {
         return this.d(oenum.ordinal());
     }
@@ -160,12 +168,14 @@ public class PacketDataSerializer extends ByteBuf {
         return i;
     }
 
+    @SuppressWarnings("unused")
     public PacketDataSerializer a(UUID uuid) {
         this.writeLong(uuid.getMostSignificantBits());
         this.writeLong(uuid.getLeastSignificantBits());
         return this;
     }
 
+    @SuppressWarnings("unused")
     public UUID i() {
         return new UUID(this.readLong(), this.readLong());
     }
@@ -180,6 +190,7 @@ public class PacketDataSerializer extends ByteBuf {
         return this;
     }
 
+    @SuppressWarnings("unused")
     public PacketDataSerializer b(long i) {
         while ((i & -128L) != 0L) {
             this.writeByte((int) (i & 127L) | 128);
@@ -190,6 +201,7 @@ public class PacketDataSerializer extends ByteBuf {
         return this;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public PacketDataSerializer a(@Nullable NBTTagCompound nbttagcompound) {
         if (nbttagcompound == null) {
             this.writeByte(0);
@@ -222,6 +234,7 @@ public class PacketDataSerializer extends ByteBuf {
         }
     }
 
+    @SuppressWarnings("unused")
     public PacketDataSerializer a(@Nullable ItemStack itemstack) {
         if (itemstack == null || itemstack.getItem() == null) { // CraftBukkit - NPE fix itemstack.getItem()
             this.writeShort(-1);

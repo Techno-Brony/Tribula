@@ -8,6 +8,7 @@ import java.util.UUID;
 
 public class GameProfileBanEntry extends ExpirableListEntry<GameProfile> {
 
+    @SuppressWarnings("unused")
     public GameProfileBanEntry(GameProfile gameprofile) {
         this(gameprofile, null, null, null, null);
     }
@@ -16,6 +17,7 @@ public class GameProfileBanEntry extends ExpirableListEntry<GameProfile> {
         super(gameprofile, date, s, date1, s1); // Spigot
     }
 
+    @SuppressWarnings("unused")
     public GameProfileBanEntry(JsonObject jsonobject) {
         super(b(jsonobject), jsonobject);
     }

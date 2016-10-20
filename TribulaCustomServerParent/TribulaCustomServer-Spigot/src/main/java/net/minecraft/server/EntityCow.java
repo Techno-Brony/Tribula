@@ -15,6 +15,7 @@ public class EntityCow extends EntityAnimal {
         this.setSize(0.9F, 1.4F);
     }
 
+    @SuppressWarnings("unused")
     public static void b(DataConverterManager dataconvertermanager) {
         EntityInsentient.a(dataconvertermanager, "Cow");
     }

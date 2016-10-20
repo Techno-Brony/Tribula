@@ -6,6 +6,7 @@ public class ItemBoat extends Item {
 
     private final EntityBoat.EnumBoatType a;
 
+    @SuppressWarnings("unused")
     public ItemBoat(EntityBoat.EnumBoatType entityboat_enumboattype) {
         this.a = entityboat_enumboattype;
         this.maxStackSize = 1;

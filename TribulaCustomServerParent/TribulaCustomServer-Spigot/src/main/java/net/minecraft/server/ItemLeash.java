@@ -7,10 +7,12 @@ import java.util.List;
 
 public class ItemLeash extends Item {
 
+    @SuppressWarnings("unused")
     public ItemLeash() {
         this.a(CreativeModeTab.i);
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public static boolean a(EntityHuman entityhuman, World world, BlockPosition blockposition) {
         EntityLeash entityleash = EntityLeash.b(world, blockposition);
         boolean flag = false;

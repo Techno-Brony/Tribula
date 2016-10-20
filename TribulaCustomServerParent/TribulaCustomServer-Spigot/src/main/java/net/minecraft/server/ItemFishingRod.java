@@ -4,6 +4,7 @@ import org.bukkit.event.player.PlayerFishEvent;
 
 public class ItemFishingRod extends Item {
 
+    @SuppressWarnings("unused")
     public ItemFishingRod() {
         this.setMaxDurability(64);
         this.d(1);

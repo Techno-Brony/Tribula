@@ -12,6 +12,7 @@ public class EntityMushroomCow extends EntityCow {
         this.bA = Blocks.MYCELIUM;
     }
 
+    @SuppressWarnings("unused")
     public static void c(DataConverterManager dataconvertermanager) {
         EntityInsentient.a(dataconvertermanager, "MushroomCow");
     }

@@ -10,6 +10,7 @@ public class BlockDispenser extends BlockTileEntity {
     @SuppressWarnings("unchecked")
     public static final RegistryDefault<Item, IDispenseBehavior> REGISTRY = new RegistryDefault(new DispenseBehaviorItem());
     public static boolean eventFired = false; // CraftBukkit
+    @SuppressWarnings("unused")
     protected Random d = new Random();
 
     protected BlockDispenser() {

@@ -1,6 +1,6 @@
 package net.minecraft.server;
 
-import org.bukkit.event.entity.EntityCombustByEntityEvent; // CraftBukkit
+import org.bukkit.event.entity.EntityCombustByEntityEvent;
 
 public class EntitySmallFireball extends EntityFireball {
 
@@ -19,6 +19,7 @@ public class EntitySmallFireball extends EntityFireball {
         this.setSize(0.3125F, 0.3125F);
     }
 
+    @SuppressWarnings("unused")
     public static void a(DataConverterManager dataconvertermanager) {
         EntityFireball.a(dataconvertermanager, "SmallFireball");
     }

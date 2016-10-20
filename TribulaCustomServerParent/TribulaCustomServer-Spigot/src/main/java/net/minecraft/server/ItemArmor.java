@@ -13,6 +13,7 @@ import java.util.UUID;
 
 public class ItemArmor extends Item {
 
+    @SuppressWarnings("unused")
     public static final String[] a = new String[] { "minecraft:items/empty_armor_slot_boots", "minecraft:items/empty_armor_slot_leggings", "minecraft:items/empty_armor_slot_chestplate", "minecraft:items/empty_armor_slot_helmet"};
     public static final IDispenseBehavior b = new DispenseBehaviorItem() {
         protected ItemStack b(ISourceBlock isourceblock, ItemStack itemstack) {
@@ -26,9 +27,11 @@ public class ItemArmor extends Item {
     public final EnumItemSlot c;
     public final int d;
     public final float e;
+    @SuppressWarnings("unused")
     public final int f;
     private final ItemArmor.EnumArmorMaterial p;
 
+    @SuppressWarnings("unused")
     public ItemArmor(ItemArmor.EnumArmorMaterial itemarmor_enumarmormaterial, int i, EnumItemSlot enumitemslot) {
         this.p = itemarmor_enumarmormaterial;
         this.c = enumitemslot;
@@ -198,6 +201,7 @@ public class ItemArmor extends Item {
 
         LEATHER("leather", 5, new int[] { 1, 2, 3, 1}, 15, SoundEffects.s, 0.0F), CHAIN("chainmail", 15, new int[] { 1, 4, 5, 2}, 12, SoundEffects.n, 0.0F), IRON("iron", 15, new int[] { 2, 5, 6, 2}, 9, SoundEffects.r, 0.0F), GOLD("gold", 7, new int[] { 1, 3, 5, 2}, 25, SoundEffects.q, 0.0F), DIAMOND("diamond", 33, new int[] { 3, 6, 8, 3}, 10, SoundEffects.o, 2.0F);
 
+        @SuppressWarnings("unused")
         private final String f;
         private final int g;
         private final int[] h;
@@ -205,6 +209,7 @@ public class ItemArmor extends Item {
         private final SoundEffect j;
         private final float k;
 
+        @SuppressWarnings("unused")
         EnumArmorMaterial(String s, int i, int[] aint, int j, SoundEffect soundeffect, float f) {
             this.f = s;
             this.g = i;

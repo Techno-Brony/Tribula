@@ -3,6 +3,7 @@ package org.spigotmc;
 public class SneakyThrow
 {
 
+    @SuppressWarnings("unused")
     public static void sneaky(Throwable t)
     {
         throw SneakyThrow.<RuntimeException>superSneaky( t );

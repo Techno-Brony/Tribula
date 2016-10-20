@@ -66,6 +66,7 @@ public abstract class EntityInsentient extends EntityLiving {
         dataconvertermanager.a(DataConverterTypes.ENTITY, new DataInspectorItemList(s, "ArmorItems", "HandItems"));
     }
 
+    @SuppressWarnings("unused")
     public static void a(DataConverterManager dataconvertermanager) {
         a(dataconvertermanager, "Mob");
     }
@@ -565,6 +566,7 @@ public abstract class EntityInsentient extends EntityLiving {
         this.bg = f;
     }
 
+    @SuppressWarnings("unused")
     public void p(float f) {
         this.bf = f;
     }
@@ -809,6 +811,7 @@ public abstract class EntityInsentient extends EntityLiving {
         return this.world.containsLiquid(this.getBoundingBox()) && this.world.getCubes(this, this.getBoundingBox()).isEmpty() && this.world.a(this.getBoundingBox(), this);
     }
 
+    @SuppressWarnings("unused")
     public int cO() {
         return 4;
     }
@@ -986,6 +989,7 @@ public abstract class EntityInsentient extends EntityLiving {
         return groupdataentity;
     }
 
+    @SuppressWarnings("unused")
     public boolean cP() {
         return false;
     }
@@ -1210,8 +1214,9 @@ public abstract class EntityInsentient extends EntityLiving {
 
     public enum EnumEntityPositionType {
 
-        ON_GROUND, IN_AIR, IN_WATER;
+        ON_GROUND, @SuppressWarnings("unused")IN_AIR, IN_WATER;
 
+        @SuppressWarnings("unused")
         EnumEntityPositionType() {}
     }
 

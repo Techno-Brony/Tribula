@@ -5,6 +5,7 @@ import java.util.UUID;
 
 public class ItemMonsterEgg extends Item {
 
+    @SuppressWarnings("unused")
     public ItemMonsterEgg() {
         this.a(CreativeModeTab.f);
     }

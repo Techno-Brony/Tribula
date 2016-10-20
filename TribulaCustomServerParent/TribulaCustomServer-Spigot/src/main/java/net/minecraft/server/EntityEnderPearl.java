@@ -20,6 +20,7 @@ public class EntityEnderPearl extends EntityProjectile {
         this.d = entityliving;
     }
 
+    @SuppressWarnings("unused")
     public static void a(DataConverterManager dataconvertermanager) {
         EntityProjectile.a(dataconvertermanager, "ThrownEnderpearl");
     }

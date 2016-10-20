@@ -36,6 +36,7 @@ public class EntityPotion extends EntityProjectile {
 
     }
 
+    @SuppressWarnings("unused")
     public static void a(DataConverterManager dataconvertermanager) {
         EntityProjectile.a(dataconvertermanager, "ThrownPotion");
         dataconvertermanager.a(DataConverterTypes.ENTITY, new DataInspectorItem("ThrownPotion", "Potion"));

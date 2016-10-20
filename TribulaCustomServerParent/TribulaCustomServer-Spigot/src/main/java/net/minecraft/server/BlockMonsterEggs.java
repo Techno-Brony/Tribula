@@ -119,20 +119,24 @@ public class BlockMonsterEggs extends Block {
         private final String i;
         private final String j;
 
+        @SuppressWarnings("unused")
         EnumMonsterEggVarient(int i, String s) {
             this(i, s, s);
         }
 
+        @SuppressWarnings("unused")
         EnumMonsterEggVarient(int i, String s, String s1) {
             this.h = i;
             this.i = s;
             this.j = s1;
         }
 
+        @SuppressWarnings("unused")
         EnumMonsterEggVarient(int i, String s, BlockMonsterEggs.SyntheticClass_1 blockmonstereggs_syntheticclass_1) {
             this(i, s);
         }
 
+        @SuppressWarnings("unused")
         EnumMonsterEggVarient(int i, String s, String s1, BlockMonsterEggs.SyntheticClass_1 blockmonstereggs_syntheticclass_1) {
             this(i, s, s1);
         }
@@ -170,6 +174,7 @@ public class BlockMonsterEggs extends Block {
             return this.i;
         }
 
+        @SuppressWarnings("unused")
         public String c() {
             return this.j;
         }

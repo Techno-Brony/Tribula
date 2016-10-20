@@ -12,6 +12,7 @@ public class EntitySlime extends EntityInsentient implements IMonster {
     private static final DataWatcherObject<Integer> bv = DataWatcher.a(EntitySlime.class, DataWatcherRegistry.b);
     public float a;
     public float b;
+    @SuppressWarnings("unused")
     public float c;
     private boolean bw;
 
@@ -20,6 +21,7 @@ public class EntitySlime extends EntityInsentient implements IMonster {
         this.moveController = new EntitySlime.ControllerMoveSlime(this);
     }
 
+    @SuppressWarnings("unused")
     public static void c(DataConverterManager dataconvertermanager) {
         EntityInsentient.a(dataconvertermanager, "Slime");
     }

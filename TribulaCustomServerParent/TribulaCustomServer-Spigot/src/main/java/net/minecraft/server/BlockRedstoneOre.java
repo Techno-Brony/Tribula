@@ -11,15 +11,13 @@ import java.util.Random;
 
 public class BlockRedstoneOre extends Block {
 
-    private final boolean a;
-
     public BlockRedstoneOre(boolean flag) {
         super(Material.STONE);
         if (flag) {
             this.a(true);
         }
 
-        this.a = flag;
+        boolean a = flag;
     }
 
     public int a(World world) {

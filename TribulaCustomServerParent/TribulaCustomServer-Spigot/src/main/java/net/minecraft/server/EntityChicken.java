@@ -10,7 +10,9 @@ public class EntityChicken extends EntityAnimal {
     private static final Set<Item> bF = Sets.newHashSet(Items.WHEAT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS, Items.BEETROOT_SEEDS);
     public float bx;
     public float by;
+    @SuppressWarnings("unused")
     public float bz;
+    @SuppressWarnings("unused")
     public float bB;
     public float bC = 1.0F;
     public int bD;
@@ -23,6 +25,7 @@ public class EntityChicken extends EntityAnimal {
         this.a(PathType.WATER, 0.0F);
     }
 
+    @SuppressWarnings("unused")
     public static void b(DataConverterManager dataconvertermanager) {
         EntityInsentient.a(dataconvertermanager, "Chicken");
     }

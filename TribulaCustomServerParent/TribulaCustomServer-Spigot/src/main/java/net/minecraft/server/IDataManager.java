@@ -12,6 +12,7 @@ public interface IDataManager {
 
     void saveWorldData(WorldData worlddata, NBTTagCompound nbttagcompound);
 
+    @SuppressWarnings("unused")
     void saveWorldData(WorldData worlddata);
 
     IPlayerFileData getPlayerFileData();

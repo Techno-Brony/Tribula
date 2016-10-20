@@ -266,9 +266,12 @@ public class BlockTripwire extends Block {
         return new BlockStateList(this, BlockTripwire.POWERED, BlockTripwire.ATTACHED, BlockTripwire.DISARMED, BlockTripwire.NORTH, BlockTripwire.EAST, BlockTripwire.WEST, BlockTripwire.SOUTH);
     }
 
+    @SuppressWarnings("unused")
     static class SyntheticClass_1 {
 
+        @SuppressWarnings("unused")
         static final int[] a;
+        @SuppressWarnings("unused")
         static final int[] b = new int[EnumBlockMirror.values().length];
 
         static {

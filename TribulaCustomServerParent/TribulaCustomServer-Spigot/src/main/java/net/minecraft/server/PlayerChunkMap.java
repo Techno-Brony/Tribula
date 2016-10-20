@@ -48,6 +48,7 @@ public class PlayerChunkMap {
     private long k;
     private boolean l = true;
     private boolean m = true;
+    @SuppressWarnings("unused")
     private boolean wasNotEmpty; // CraftBukkit - add field
 
     public PlayerChunkMap(WorldServer worldserver, int viewDistance /* Spigot */) {

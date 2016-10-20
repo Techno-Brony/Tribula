@@ -9,6 +9,7 @@ public class BlockCactus extends Block {
 
     public static final BlockStateInteger AGE = BlockStateInteger.of("age", 0, 15);
     protected static final AxisAlignedBB b = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 0.9375D, 0.9375D);
+    @SuppressWarnings("unused")
     protected static final AxisAlignedBB c = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 1.0D, 0.9375D);
 
     protected BlockCactus() {

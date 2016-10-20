@@ -39,6 +39,7 @@ public abstract class Entity implements ICommandListener {
     protected static final DataWatcherObject<Byte> aa = DataWatcher.a(Entity.class, DataWatcherRegistry.a);
     // CraftBukkit start
     private static final int CURRENT_LEVEL = 2;
+    @SuppressWarnings("unused")
     private static final Logger a = LogManager.getLogger();
     private static final AxisAlignedBB b = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
     // CraftBukikt end
@@ -47,6 +48,7 @@ public abstract class Entity implements ICommandListener {
     private static final DataWatcherObject<Boolean> aB = DataWatcher.a(Entity.class, DataWatcherRegistry.h);
     private static final DataWatcherObject<Boolean> aC = DataWatcher.a(Entity.class, DataWatcherRegistry.h);
     private static final DataWatcherObject<Boolean> aD = DataWatcher.a(Entity.class, DataWatcherRegistry.h);
+    @SuppressWarnings("unused")
     private static double c = 1.0D;
     private static int entityCount;
     public final List<Entity> passengers;
@@ -75,6 +77,7 @@ public abstract class Entity implements ICommandListener {
     public boolean onGround;
     public boolean positionChanged;
     public boolean B;
+    @SuppressWarnings("unused")
     public boolean C;
     public boolean velocityChanged;
     public boolean dead;
@@ -89,6 +92,7 @@ public abstract class Entity implements ICommandListener {
     public double O;
     public float P;
     public boolean noclip;
+    @SuppressWarnings("unused")
     public float R;
     public int ticksLived;
     public int maxFireTicks;
@@ -99,6 +103,7 @@ public abstract class Entity implements ICommandListener {
     public int ac;
     public int ad;
     public int ae;
+    @SuppressWarnings("unused")
     public boolean ai;
     public boolean impulse;
     public int portalCooldown;
@@ -194,6 +199,7 @@ public abstract class Entity implements ICommandListener {
         return this.aH;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public boolean a(String s) {
         if (this.aH.size() >= 1024) {
             return false;
@@ -203,10 +209,12 @@ public abstract class Entity implements ICommandListener {
         }
     }
 
+    @SuppressWarnings("unused")
     public boolean b(String s) {
         return this.aH.remove(s);
     }
 
+    @SuppressWarnings("unused")
     public void Q() {
         this.die();
     }
@@ -950,6 +958,7 @@ public abstract class Entity implements ICommandListener {
         return this.inWater;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public boolean ak() {
         if (this.bB() instanceof EntityBoat) {
             this.inWater = false;
@@ -1225,6 +1234,7 @@ public abstract class Entity implements ICommandListener {
         }
     }
 
+    @SuppressWarnings("unused")
     public Vec3D f(float f) {
         if (f == 1.0F) {
             return this.f(this.pitch, this.yaw);
@@ -1648,6 +1658,7 @@ public abstract class Entity implements ICommandListener {
         return (double) this.length * 0.75D;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public boolean startRiding(Entity entity) {
         return this.a(entity, false);
     }
@@ -1796,10 +1807,12 @@ public abstract class Entity implements ICommandListener {
         return this.aG;
     }
 
+    @SuppressWarnings("unused")
     public Iterable<ItemStack> aI() {
         return Iterables.concat(this.aG(), this.getArmorItems());
     }
 
+    @SuppressWarnings("unused")
     public void setEquipment(EnumItemSlot enumitemslot, @Nullable ItemStack itemstack) {}
 
     public boolean isBurning() {
@@ -1986,6 +1999,7 @@ public abstract class Entity implements ICommandListener {
         }
     }
 
+    @SuppressWarnings("unused")
     public void aS() {
         this.E = true;
         this.fallDistance = 0.0F;
@@ -2010,6 +2024,7 @@ public abstract class Entity implements ICommandListener {
         return null;
     }
 
+    @SuppressWarnings("unused")
     public boolean s(Entity entity) {
         return this == entity;
     }
@@ -2206,6 +2221,7 @@ public abstract class Entity implements ICommandListener {
         return true;
     }
 
+    @SuppressWarnings("unused")
     public int aY() {
         return 3;
     }
@@ -2391,6 +2407,7 @@ public abstract class Entity implements ICommandListener {
         this.aw = flag;
     }
 
+    @SuppressWarnings("unused")
     public boolean c(int i, ItemStack itemstack) {
         return false;
     }
@@ -2441,6 +2458,7 @@ public abstract class Entity implements ICommandListener {
         this.aF.a(entity.bs());
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public EnumInteractionResult a(EntityHuman entityhuman, Vec3D vec3d, @Nullable ItemStack itemstack, EnumHand enumhand) {
         return EnumInteractionResult.PASS;
     }
@@ -2461,6 +2479,7 @@ public abstract class Entity implements ICommandListener {
 
     public void c(EntityPlayer entityplayer) {}
 
+    @SuppressWarnings("unused")
     public float a(EnumBlockRotation enumblockrotation) {
         float f = MathHelper.g(this.yaw);
 
@@ -2479,6 +2498,7 @@ public abstract class Entity implements ICommandListener {
         }
     }
 
+    @SuppressWarnings("unused")
     public float a(EnumBlockMirror enumblockmirror) {
         float f = MathHelper.g(this.yaw);
 
@@ -2613,9 +2633,12 @@ public abstract class Entity implements ICommandListener {
         return SoundCategory.NEUTRAL;
     }
 
+    @SuppressWarnings("unused")
     static class SyntheticClass_1 {
 
+        @SuppressWarnings("unused")
         static final int[] a;
+        @SuppressWarnings("unused")
         static final int[] b = new int[EnumBlockMirror.values().length];
 
         static {

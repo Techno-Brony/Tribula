@@ -29,6 +29,7 @@ public abstract class Enchantment {
         return Enchantment.enchantments.a(enchantment); // CraftBukkit - fix decompile error
     }
 
+    @SuppressWarnings("unused")
     @Nullable
     public static Enchantment b(String s) {
         return Enchantment.enchantments.get(new MinecraftKey(s));
@@ -71,6 +72,7 @@ public abstract class Enchantment {
         // CraftBukkit end
     }
 
+    @SuppressWarnings("unused")
     @Nullable
     public Iterable<ItemStack> a(EntityLiving entityliving) {
         ArrayList arraylist = Lists.newArrayList();
@@ -106,14 +108,17 @@ public abstract class Enchantment {
         return 1 + i * 10;
     }
 
+    @SuppressWarnings("unused")
     public int b(int i) {
         return this.a(i) + 5;
     }
 
+    @SuppressWarnings("unused")
     public int a(int i, DamageSource damagesource) {
         return 0;
     }
 
+    @SuppressWarnings("unused")
     public float a(int i, EnumMonsterType enummonstertype) {
         return 0.0F;
     }
@@ -122,6 +127,7 @@ public abstract class Enchantment {
         return this != enchantment;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public Enchantment c(String s) {
         this.d = s;
         return this;
@@ -131,6 +137,7 @@ public abstract class Enchantment {
         return "enchantment." + this.d;
     }
 
+    @SuppressWarnings("unused")
     public String d(int i) {
         //noinspection deprecation,deprecation
         String s = LocaleI18n.get(this.a());
@@ -143,8 +150,10 @@ public abstract class Enchantment {
         return this.itemTarget.canEnchant(itemstack.getItem());
     }
 
+    @SuppressWarnings("unused")
     public void a(EntityLiving entityliving, Entity entity, int i) {}
 
+    @SuppressWarnings("unused")
     public void b(EntityLiving entityliving, Entity entity, int i) {}
 
     public boolean e() {
@@ -157,10 +166,12 @@ public abstract class Enchantment {
 
         private final int e;
 
+        @SuppressWarnings("unused")
         Rarity(int i) {
             this.e = i;
         }
 
+        @SuppressWarnings("unused")
         public int a() {
             return this.e;
         }

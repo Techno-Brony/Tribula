@@ -45,9 +45,11 @@ public class EntityMinecartCommandBlock extends EntityMinecartAbstract {
         super(world, d0, d1, d2);
     }
 
+    @SuppressWarnings("unused")
     public static void a(DataConverterManager dataconvertermanager) {
         EntityMinecartAbstract.a(dataconvertermanager, "MinecartCommandBlock");
         dataconvertermanager.a(DataConverterTypes.ENTITY, new DataInspector() {
+            @SuppressWarnings("unused")
             public NBTTagCompound a(DataConverter dataconverter, NBTTagCompound nbttagcompound, int i) {
                 if ("MinecartCommandBlock".equals(nbttagcompound.getString("id"))) {
                     nbttagcompound.setString("id", "Control");

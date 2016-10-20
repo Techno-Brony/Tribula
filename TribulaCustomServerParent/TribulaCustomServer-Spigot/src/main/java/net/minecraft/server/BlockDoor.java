@@ -46,6 +46,7 @@ public class BlockDoor extends Block {
         return !g(c(iblockaccess, blockposition));
     }
 
+    @SuppressWarnings("unused")
     public static EnumDirection f(IBlockAccess iblockaccess, BlockPosition blockposition) {
         return f(c(iblockaccess, blockposition));
     }
@@ -137,6 +138,7 @@ public class BlockDoor extends Block {
         }
     }
 
+    @SuppressWarnings("unused")
     public void setDoor(World world, BlockPosition blockposition, boolean flag) {
         IBlockData iblockdata = world.getType(blockposition);
 
@@ -321,6 +323,7 @@ public class BlockDoor extends Block {
 
         LEFT, RIGHT;
 
+        @SuppressWarnings("unused")
         EnumDoorHinge() {}
 
         public String toString() {
@@ -336,6 +339,7 @@ public class BlockDoor extends Block {
 
         UPPER, LOWER;
 
+        @SuppressWarnings("unused")
         EnumDoorHalf() {}
 
         public String toString() {
@@ -347,8 +351,10 @@ public class BlockDoor extends Block {
         }
     }
 
+    @SuppressWarnings("unused")
     static class SyntheticClass_1 {
 
+        @SuppressWarnings("unused")
         static final int[] a = new int[EnumDirection.values().length];
 
         static {

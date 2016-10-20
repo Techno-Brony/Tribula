@@ -19,6 +19,7 @@ public class ContainerWorkbench extends Container {
     private PlayerInventory player;
     // CraftBukkit end
 
+    @SuppressWarnings("unused")
     public ContainerWorkbench(PlayerInventory playerinventory, World world, BlockPosition blockposition) {
         // CraftBukkit start - Switched order of IInventory construction and stored player
         this.resultInventory = new InventoryCraftResult();

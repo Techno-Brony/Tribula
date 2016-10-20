@@ -57,7 +57,7 @@ public class CrashReport {
     }
 
     private void h() {
-        //noinspection unchecked
+        //noinspection unchecked,SameReturnValue,SameReturnValue
         this.d.a("Minecraft Version", new CrashReportCallable() {
             public String a() {
                 return "1.10.2";
@@ -158,10 +158,12 @@ public class CrashReport {
         this.d.a("CraftBukkit Information", (CrashReportCallable) new org.bukkit.craftbukkit.CraftCrashReport()); // CraftBukkit
     }
 
+    @SuppressWarnings("unused")
     public String a() {
         return this.b;
     }
 
+    @SuppressWarnings("unused")
     public Throwable b() {
         return this.c;
     }

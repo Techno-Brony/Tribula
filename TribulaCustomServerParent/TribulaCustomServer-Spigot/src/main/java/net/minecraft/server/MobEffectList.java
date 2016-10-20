@@ -18,15 +18,12 @@ public class MobEffectList {
     @SuppressWarnings("unchecked")
     public static final RegistryMaterials<MinecraftKey, MobEffectList> REGISTRY = new RegistryMaterials();
     private final Map<IAttribute, AttributeModifier> a = Maps.newHashMap();
-    private final boolean c;
     private final int d;
     public double durationModifier;
     private String e = "";
-    private int f = -1;
-    private boolean h;
 
     protected MobEffectList(boolean flag, int i) {
-        this.c = flag;
+        boolean c = flag;
         if (flag) {
             this.durationModifier = 0.5D;
         } else {
@@ -45,6 +42,7 @@ public class MobEffectList {
         return MobEffectList.REGISTRY.a(mobeffectlist); // CraftBukkit - decompile error
     }
 
+    @SuppressWarnings("unused")
     @Nullable
     public static MobEffectList getByName(String s) {
         return MobEffectList.REGISTRY.get(new MinecraftKey(s));
@@ -86,10 +84,11 @@ public class MobEffectList {
     }
 
     protected MobEffectList b(int i, int j) {
-        this.f = i + j * 8;
+        int f = i + j * 8;
         return this;
     }
 
+    @SuppressWarnings("unused")
     public void tick(EntityLiving entityliving, int i) {
         if (this == MobEffects.REGENERATION) {
             if (entityliving.getHealth() < entityliving.getMaxHealth()) {
@@ -147,6 +146,7 @@ public class MobEffectList {
 
     }
 
+    @SuppressWarnings("unused")
     public boolean a(int i, int j) {
         int k;
 
@@ -182,6 +182,7 @@ public class MobEffectList {
         return this;
     }
 
+    @SuppressWarnings("unused")
     public int getColor() {
         return this.d;
     }
@@ -231,7 +232,7 @@ public class MobEffectList {
     }
 
     public MobEffectList j() {
-        this.h = true;
+        boolean h = true;
         return this;
     }
 }

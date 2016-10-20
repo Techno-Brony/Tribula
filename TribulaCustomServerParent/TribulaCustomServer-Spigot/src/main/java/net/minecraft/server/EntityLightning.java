@@ -7,6 +7,7 @@ import java.util.List;
 public class EntityLightning extends EntityWeather {
 
     private final boolean d;
+    @SuppressWarnings("unused")
     public long a;
     public boolean isEffect; // CraftBukkit
     public boolean isSilent = false; // Spigot

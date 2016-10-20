@@ -31,7 +31,6 @@ public class LoginListener implements PacketLoginInListener, ITickable {
     public final NetworkManager networkManager;
     private final byte[] e = new byte[4];
     private final MinecraftServer server;
-    private final String j;
     public String hostname = ""; // CraftBukkit - add field
     private LoginListener.EnumProtocolState g;
     private int h;
@@ -41,7 +40,7 @@ public class LoginListener implements PacketLoginInListener, ITickable {
 
     public LoginListener(MinecraftServer minecraftserver, NetworkManager networkmanager) {
         this.g = LoginListener.EnumProtocolState.HELLO;
-        this.j = "";
+        String j = "";
         this.server = minecraftserver;
         this.networkManager = networkmanager;
         LoginListener.random.nextBytes(this.e);
@@ -121,7 +120,7 @@ public class LoginListener implements PacketLoginInListener, ITickable {
         } else {
             this.g = LoginListener.EnumProtocolState.ACCEPTED;
             if (this.server.aF() >= 0 && !this.networkManager.isLocal()) {
-                //noinspection unchecked
+                //noinspection unchecked,UnusedParameters
                 this.networkManager.sendPacket(new PacketLoginOutSetCompression(this.server.aF()), new ChannelFutureListener() {
                     public void a(ChannelFuture channelfuture) {
                         LoginListener.this.networkManager.setCompressionLevel(LoginListener.this.server.aF());
@@ -245,6 +244,7 @@ public class LoginListener implements PacketLoginInListener, ITickable {
 
         HELLO, KEY, AUTHENTICATING, READY_TO_ACCEPT, DELAY_ACCEPT, ACCEPTED;
 
+        @SuppressWarnings("unused")
         EnumProtocolState() {}
     }
 

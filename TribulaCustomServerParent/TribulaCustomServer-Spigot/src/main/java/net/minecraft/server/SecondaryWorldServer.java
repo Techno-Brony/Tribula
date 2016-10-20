@@ -62,6 +62,7 @@ public class SecondaryWorldServer extends WorldServer {
         return super.b(); // CraftBukkit
     }
 
+    @SuppressWarnings("unused")
     public void c() {
         this.worldProvider.q();
     }

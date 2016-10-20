@@ -69,6 +69,7 @@ public class DataWatcher {
         }
     }
 
+    @SuppressWarnings("unused")
     public static void a(List<DataWatcher.Item<?>> list, PacketDataSerializer packetdataserializer) {
         if (list != null) {
             int i = 0;
@@ -97,6 +98,7 @@ public class DataWatcher {
         }
     }
 
+    @SuppressWarnings("unused")
     @Nullable
     public static List<DataWatcher.Item<?>> b(PacketDataSerializer packetdataserializer) {
         ArrayList arraylist = null;
@@ -193,6 +195,7 @@ public class DataWatcher {
         return this.g;
     }
 
+    @SuppressWarnings("unused")
     @Nullable
     public List<DataWatcher.Item<?>> b() {
         ArrayList arraylist = null;
@@ -224,6 +227,7 @@ public class DataWatcher {
         return arraylist;
     }
 
+    @SuppressWarnings("unused")
     public void a(PacketDataSerializer packetdataserializer) {
         this.e.readLock().lock();
         Iterator iterator = this.d.values().iterator();
@@ -239,6 +243,7 @@ public class DataWatcher {
         packetdataserializer.writeByte(255);
     }
 
+    @SuppressWarnings("unused")
     @Nullable
     public List<DataWatcher.Item<?>> c() {
         ArrayList arraylist = null;

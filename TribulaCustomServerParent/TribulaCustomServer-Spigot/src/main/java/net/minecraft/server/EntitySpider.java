@@ -12,6 +12,7 @@ public class EntitySpider extends EntityMonster {
         this.setSize(1.4F, 0.9F);
     }
 
+    @SuppressWarnings("unused")
     public static void d(DataConverterManager dataconvertermanager) {
         EntityInsentient.a(dataconvertermanager, "Spider");
     }

@@ -9,6 +9,7 @@ import org.bukkit.event.player.PlayerEggThrowEvent;
 
 public class EntityEgg extends EntityProjectile {
 
+    @SuppressWarnings("unused")
     public EntityEgg(World world) {
         super(world);
     }
@@ -21,6 +22,7 @@ public class EntityEgg extends EntityProjectile {
         super(world, d0, d1, d2);
     }
 
+    @SuppressWarnings("unused")
     public static void a(DataConverterManager dataconvertermanager) {
         EntityProjectile.a(dataconvertermanager, "ThrownEgg");
     }

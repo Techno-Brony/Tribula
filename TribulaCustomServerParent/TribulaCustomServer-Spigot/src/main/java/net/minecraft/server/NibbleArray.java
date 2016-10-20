@@ -42,6 +42,7 @@ public class NibbleArray {
         // Spigot end
     }
 
+    @SuppressWarnings("unused")
     private boolean b(int i) {
         return (i & 1) == 0;
     }

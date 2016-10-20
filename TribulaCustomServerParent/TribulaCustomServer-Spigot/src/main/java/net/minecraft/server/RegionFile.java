@@ -11,21 +11,19 @@ import java.util.zip.InflaterInputStream;
 public class RegionFile {
 
     private static final byte[] a = new byte[4096];
-    private final File b;
     private final int[] d = new int[1024];
     private final int[] e = new int[1024];
     private RandomAccessFile c;
     private List<Boolean> f;
     private int g;
-    private long h;
 
     public RegionFile(File file) {
-        this.b = file;
+        File b = file;
         this.g = 0;
 
         try {
             if (file.exists()) {
-                this.h = file.lastModified();
+                long h = file.lastModified();
             }
 
             this.c = new RandomAccessFile(file, "rw");
@@ -257,6 +255,7 @@ public class RegionFile {
         return this.d[i + j * 32];
     }
 
+    @SuppressWarnings("unused")
     public boolean c(int i, int j) {
         return this.e(i, j) != 0;
     }

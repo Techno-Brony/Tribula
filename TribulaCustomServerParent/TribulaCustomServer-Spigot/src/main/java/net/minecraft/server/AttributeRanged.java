@@ -26,6 +26,7 @@ public class AttributeRanged extends AttributeBase {
         return this;
     }
 
+    @SuppressWarnings("unused")
     public String g() {
         return this.c;
     }

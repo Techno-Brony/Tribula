@@ -4,14 +4,15 @@ import java.io.IOException;
 
 public class PacketPlayInUseItem implements Packet<PacketListenerPlayIn> {
 
+    public long timestamp;
     private BlockPosition a;
     private EnumDirection b;
     private EnumHand c;
     private float d;
     private float e;
     private float f;
-    public long timestamp;
 
+    @SuppressWarnings("unused")
     public PacketPlayInUseItem() {}
 
     public void a(PacketDataSerializer packetdataserializer) throws IOException {

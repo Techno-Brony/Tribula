@@ -13,6 +13,7 @@ import java.util.*;
 
 public class EntityTrackerEntry {
 
+    @SuppressWarnings("unused")
     private static final Logger c = LogManager.getLogger();
     public final Set<EntityPlayer> trackedPlayers = Sets.newHashSet();
     private final Entity tracker;

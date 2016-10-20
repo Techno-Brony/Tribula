@@ -76,13 +76,14 @@ public class TileEntitySkull extends TileEntity implements ITickable {
                     return profile;
                 }
             } );
+    @SuppressWarnings("unused")
     private static UserCache j;
+    @SuppressWarnings("unused")
     private static MinecraftSessionService k;
     public int rotation;
     private int a;
     private GameProfile g;
     private int h;
-    private boolean i;
     // Spigot end
 
     public TileEntitySkull() {}
@@ -167,11 +168,12 @@ public class TileEntitySkull extends TileEntity implements ITickable {
 
     public void E_() {
         if (this.a == 5) {
+            boolean i;
             if (this.world.isBlockIndirectlyPowered(this.position)) {
-                this.i = true;
+                i = true;
                 ++this.h;
             } else {
-                this.i = false;
+                i = false;
             }
         }
 

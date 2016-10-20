@@ -7,15 +7,14 @@ import java.util.Map;
 public class ItemRecord extends Item {
 
     private static final Map<SoundEffect, ItemRecord> a = Maps.newHashMap();
-    private final SoundEffect b;
-    private final String c;
 
+    @SuppressWarnings("unused")
     protected ItemRecord(String s, SoundEffect soundeffect) {
-        this.c = "item.record." + s + ".desc";
-        this.b = soundeffect;
+        String c = "item.record." + s + ".desc";
+        SoundEffect b = soundeffect;
         this.maxStackSize = 1;
         this.a(CreativeModeTab.f);
-        ItemRecord.a.put(this.b, this);
+        ItemRecord.a.put(b, this);
     }
 
     public EnumInteractionResult a(ItemStack itemstack, EntityHuman entityhuman, World world, BlockPosition blockposition, EnumHand enumhand, EnumDirection enumdirection, float f, float f1, float f2) {

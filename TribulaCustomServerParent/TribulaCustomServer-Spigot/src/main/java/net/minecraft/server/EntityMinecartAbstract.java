@@ -30,10 +30,15 @@ public abstract class EntityMinecartAbstract extends Entity implements INamableT
     public double maxSpeed = 0.4D;
     private boolean g;
     private int au;
+    @SuppressWarnings("unused")
     private double av;
+    @SuppressWarnings("unused")
     private double aw;
+    @SuppressWarnings("unused")
     private double ax;
+    @SuppressWarnings("unused")
     private double ay;
+    @SuppressWarnings("unused")
     private double az;
     private double derailedX = 0.5;
     private double derailedY = 0.5;
@@ -883,6 +888,7 @@ public abstract class EntityMinecartAbstract extends Entity implements INamableT
         private final int i;
         private final String j;
 
+        @SuppressWarnings("unused")
         EnumMinecartType(int i, String s) {
             this.i = i;
             this.j = s;
@@ -892,6 +898,7 @@ public abstract class EntityMinecartAbstract extends Entity implements INamableT
             return this.i;
         }
 
+        @SuppressWarnings("unused")
         public String b() {
             return this.j;
         }

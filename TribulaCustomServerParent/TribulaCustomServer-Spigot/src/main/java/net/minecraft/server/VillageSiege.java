@@ -125,6 +125,7 @@ public class VillageSiege {
         return false;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     private boolean c() {
         Vec3D vec3d = this.a(new BlockPosition(this.g, this.h, this.i));
 

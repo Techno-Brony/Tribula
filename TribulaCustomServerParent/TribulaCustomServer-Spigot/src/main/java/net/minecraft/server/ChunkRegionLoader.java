@@ -20,13 +20,16 @@ public class ChunkRegionLoader implements IChunkLoader, IAsyncChunkSaver {
     private final DataConverterManager e;
     private boolean f;
 
+    @SuppressWarnings("unused")
     public ChunkRegionLoader(File file, DataConverterManager dataconvertermanager) {
         this.d = file;
         this.e = dataconvertermanager;
     }
 
+    @SuppressWarnings("unused")
     public static void a(DataConverterManager dataconvertermanager) {
         dataconvertermanager.a(DataConverterTypes.CHUNK, new DataInspector() {
+            @SuppressWarnings("unused")
             public NBTTagCompound a(DataConverter dataconverter, NBTTagCompound nbttagcompound, int i) {
                 if (nbttagcompound.hasKeyOfType("Level", 10)) {
                     NBTTagCompound nbttagcompound1 = nbttagcompound.getCompound("Level");

@@ -130,6 +130,7 @@ public class BlockRedstoneWire extends Block {
         return world.getType(blockposition.down()).q() || world.getType(blockposition.down()).getBlock() == Blocks.GLOWSTONE;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     private IBlockData e(World world, BlockPosition blockposition, IBlockData iblockdata) {
         iblockdata = this.a(world, blockposition, blockposition, iblockdata);
         ArrayList arraylist = Lists.newArrayList(this.B);
@@ -444,6 +445,7 @@ public class BlockRedstoneWire extends Block {
 
         private final String d;
 
+        @SuppressWarnings("unused")
         EnumRedstoneWireConnection(String s) {
             this.d = s;
         }
@@ -457,9 +459,12 @@ public class BlockRedstoneWire extends Block {
         }
     }
 
+    @SuppressWarnings("unused")
     static class SyntheticClass_1 {
 
+        @SuppressWarnings("unused")
         static final int[] a;
+        @SuppressWarnings("unused")
         static final int[] b = new int[EnumBlockMirror.values().length];
 
         static {

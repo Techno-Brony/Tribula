@@ -18,6 +18,7 @@ public class TileEntityChest extends TileEntityLootable implements ITickable, II
     public TileEntityChest h;
     public TileEntityChest i;
     public float j;
+    @SuppressWarnings("unused")
     public float k;
     public int l;
     // CraftBukkit start - add fields and methods
@@ -33,6 +34,7 @@ public class TileEntityChest extends TileEntityLootable implements ITickable, II
         this.q = blockchest_type;
     }
 
+    @SuppressWarnings("unused")
     public static void a(DataConverterManager dataconvertermanager) {
         dataconvertermanager.a(DataConverterTypes.BLOCK_ENTITY, new DataInspectorItemList("Chest", "Items"));
     }
@@ -100,6 +102,7 @@ public class TileEntityChest extends TileEntityLootable implements ITickable, II
         return this.r != null && !this.r.isEmpty();
     }
 
+    @SuppressWarnings("unused")
     public void a(String s) {
         this.r = s;
     }

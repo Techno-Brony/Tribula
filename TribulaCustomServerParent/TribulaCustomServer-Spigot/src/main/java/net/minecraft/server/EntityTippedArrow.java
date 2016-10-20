@@ -31,6 +31,7 @@ public class EntityTippedArrow extends EntityArrow {
         this.effects = Sets.newHashSet();
     }
 
+    @SuppressWarnings("unused")
     public static void b(DataConverterManager dataconvertermanager) {
         EntityArrow.a(dataconvertermanager, "TippedArrow");
     }

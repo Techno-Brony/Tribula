@@ -25,6 +25,7 @@ public class TileEntityHopper extends TileEntityLootable implements IHopper, ITi
 
     public TileEntityHopper() {}
 
+    @SuppressWarnings("unused")
     public static void a(DataConverterManager dataconvertermanager) {
         dataconvertermanager.a(DataConverterTypes.BLOCK_ENTITY, new DataInspectorItemList("Hopper", "Items"));
     }
@@ -391,6 +392,7 @@ public class TileEntityHopper extends TileEntityLootable implements IHopper, ITi
         return this.f != null && !this.f.isEmpty();
     }
 
+    @SuppressWarnings("unused")
     public void a(String s) {
         this.f = s;
     }
@@ -426,6 +428,7 @@ public class TileEntityHopper extends TileEntityLootable implements IHopper, ITi
         }
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public boolean m() {
         if (this.world != null && !this.world.isClientSide) {
             if (this.o() && BlockHopper.f(this.u())) {

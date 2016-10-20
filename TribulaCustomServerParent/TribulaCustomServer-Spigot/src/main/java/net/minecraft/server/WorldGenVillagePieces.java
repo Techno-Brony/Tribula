@@ -9,6 +9,7 @@ import java.util.Random;
 
 public class WorldGenVillagePieces {
 
+    @SuppressWarnings("unused")
     public static void a() {
         WorldGenFactory.a(WorldGenVillagePieces.WorldGenVillageLibrary.class, "ViBH");
         WorldGenFactory.a(WorldGenVillagePieces.WorldGenVillageFarm2.class, "ViDF");
@@ -167,6 +168,7 @@ public class WorldGenVillagePieces {
         }
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     private static StructurePiece e(WorldGenVillagePieces.WorldGenVillageStartPiece worldgenvillagepieces_worldgenvillagestartpiece, List<StructurePiece> list, Random random, int i, int j, int k, EnumDirection enumdirection, int l) {
         if (l > 3 + worldgenvillagepieces_worldgenvillagestartpiece.b) {
             return null;
@@ -187,8 +189,10 @@ public class WorldGenVillagePieces {
         }
     }
 
+    @SuppressWarnings("unused")
     static class SyntheticClass_1 {
 
+        @SuppressWarnings("unused")
         static final int[] a = new int[EnumDirection.values().length];
 
         static {
@@ -217,8 +221,10 @@ public class WorldGenVillagePieces {
 
     public static class WorldGenVillageLight extends WorldGenVillagePieces.WorldGenVillagePiece {
 
+        @SuppressWarnings("unused")
         public WorldGenVillageLight() {}
 
+        @SuppressWarnings("unused")
         public WorldGenVillageLight(WorldGenVillagePieces.WorldGenVillageStartPiece worldgenvillagepieces_worldgenvillagestartpiece, int i, Random random, StructureBoundingBox structureboundingbox, EnumDirection enumdirection) {
             super(worldgenvillagepieces_worldgenvillagestartpiece, i);
             this.a(enumdirection);
@@ -264,8 +270,10 @@ public class WorldGenVillagePieces {
         private Block c;
         private Block d;
 
+        @SuppressWarnings("unused")
         public WorldGenVillageFarm2() {}
 
+        @SuppressWarnings("unused")
         public WorldGenVillageFarm2(WorldGenVillagePieces.WorldGenVillageStartPiece worldgenvillagepieces_worldgenvillagestartpiece, int i, Random random, StructureBoundingBox structureboundingbox, EnumDirection enumdirection) {
             super(worldgenvillagepieces_worldgenvillagestartpiece, i);
             this.a(enumdirection);
@@ -407,8 +415,10 @@ public class WorldGenVillagePieces {
         private Block a;
         private Block b;
 
+        @SuppressWarnings("unused")
         public WorldGenVillageFarm() {}
 
+        @SuppressWarnings("unused")
         public WorldGenVillageFarm(WorldGenVillagePieces.WorldGenVillageStartPiece worldgenvillagepieces_worldgenvillagestartpiece, int i, Random random, StructureBoundingBox structureboundingbox, EnumDirection enumdirection) {
             super(worldgenvillagepieces_worldgenvillagestartpiece, i);
             this.a(enumdirection);
@@ -509,8 +519,10 @@ public class WorldGenVillagePieces {
 
         private boolean a;
 
+        @SuppressWarnings("unused")
         public WorldGenVillageBlacksmith() {}
 
+        @SuppressWarnings("unused")
         public WorldGenVillageBlacksmith(WorldGenVillagePieces.WorldGenVillageStartPiece worldgenvillagepieces_worldgenvillagestartpiece, int i, Random random, StructureBoundingBox structureboundingbox, EnumDirection enumdirection) {
             super(worldgenvillagepieces_worldgenvillagestartpiece, i);
             this.a(enumdirection);
@@ -620,8 +632,10 @@ public class WorldGenVillagePieces {
 
     public static class WorldGenVillageHouse2 extends WorldGenVillagePieces.WorldGenVillagePiece {
 
+        @SuppressWarnings("unused")
         public WorldGenVillageHouse2() {}
 
+        @SuppressWarnings("unused")
         public WorldGenVillageHouse2(WorldGenVillagePieces.WorldGenVillageStartPiece worldgenvillagepieces_worldgenvillagestartpiece, int i, Random random, StructureBoundingBox structureboundingbox, EnumDirection enumdirection) {
             super(worldgenvillagepieces_worldgenvillagestartpiece, i);
             this.a(enumdirection);
@@ -766,8 +780,10 @@ public class WorldGenVillagePieces {
 
     public static class WorldGenVillageButcher extends WorldGenVillagePieces.WorldGenVillagePiece {
 
+        @SuppressWarnings("unused")
         public WorldGenVillageButcher() {}
 
+        @SuppressWarnings("unused")
         public WorldGenVillageButcher(WorldGenVillagePieces.WorldGenVillageStartPiece worldgenvillagepieces_worldgenvillagestartpiece, int i, Random random, StructureBoundingBox structureboundingbox, EnumDirection enumdirection) {
             super(worldgenvillagepieces_worldgenvillagestartpiece, i);
             this.a(enumdirection);
@@ -887,8 +903,10 @@ public class WorldGenVillagePieces {
         private boolean a;
         private int b;
 
+        @SuppressWarnings("unused")
         public WorldGenVillageHut() {}
 
+        @SuppressWarnings("unused")
         public WorldGenVillageHut(WorldGenVillagePieces.WorldGenVillageStartPiece worldgenvillagepieces_worldgenvillagestartpiece, int i, Random random, StructureBoundingBox structureboundingbox, EnumDirection enumdirection) {
             super(worldgenvillagepieces_worldgenvillagestartpiece, i);
             this.a(enumdirection);
@@ -989,8 +1007,10 @@ public class WorldGenVillagePieces {
 
     public static class WorldGenVillageLibrary extends WorldGenVillagePieces.WorldGenVillagePiece {
 
+        @SuppressWarnings("unused")
         public WorldGenVillageLibrary() {}
 
+        @SuppressWarnings("unused")
         public WorldGenVillageLibrary(WorldGenVillagePieces.WorldGenVillageStartPiece worldgenvillagepieces_worldgenvillagestartpiece, int i, Random random, StructureBoundingBox structureboundingbox, EnumDirection enumdirection) {
             super(worldgenvillagepieces_worldgenvillagestartpiece, i);
             this.a(enumdirection);
@@ -1108,8 +1128,10 @@ public class WorldGenVillagePieces {
 
     public static class WorldGenVillageTemple extends WorldGenVillagePieces.WorldGenVillagePiece {
 
+        @SuppressWarnings("unused")
         public WorldGenVillageTemple() {}
 
+        @SuppressWarnings("unused")
         public WorldGenVillageTemple(WorldGenVillagePieces.WorldGenVillageStartPiece worldgenvillagepieces_worldgenvillagestartpiece, int i, Random random, StructureBoundingBox structureboundingbox, EnumDirection enumdirection) {
             super(worldgenvillagepieces_worldgenvillagestartpiece, i);
             this.a(enumdirection);
@@ -1221,8 +1243,10 @@ public class WorldGenVillagePieces {
 
         private boolean a;
 
+        @SuppressWarnings("unused")
         public WorldGenVillageHouse() {}
 
+        @SuppressWarnings("unused")
         public WorldGenVillageHouse(WorldGenVillagePieces.WorldGenVillageStartPiece worldgenvillagepieces_worldgenvillagestartpiece, int i, Random random, StructureBoundingBox structureboundingbox, EnumDirection enumdirection) {
             super(worldgenvillagepieces_worldgenvillagestartpiece, i);
             this.a(enumdirection);
@@ -1344,8 +1368,10 @@ public class WorldGenVillagePieces {
 
         private int a;
 
+        @SuppressWarnings("unused")
         public WorldGenVillageRoad() {}
 
+        @SuppressWarnings("unused")
         public WorldGenVillageRoad(WorldGenVillagePieces.WorldGenVillageStartPiece worldgenvillagepieces_worldgenvillagestartpiece, int i, Random random, StructureBoundingBox structureboundingbox, EnumDirection enumdirection) {
             super(worldgenvillagepieces_worldgenvillagestartpiece, i);
             this.a(enumdirection);
@@ -1488,8 +1514,10 @@ public class WorldGenVillagePieces {
 
     public abstract static class WorldGenVillageRoadPiece extends WorldGenVillagePieces.WorldGenVillagePiece {
 
+        @SuppressWarnings("unused")
         public WorldGenVillageRoadPiece() {}
 
+        @SuppressWarnings("unused")
         protected WorldGenVillageRoadPiece(WorldGenVillagePieces.WorldGenVillageStartPiece worldgenvillagepieces_worldgenvillagestartpiece, int i) {
             super(worldgenvillagepieces_worldgenvillagestartpiece, i);
         }
@@ -1497,6 +1525,7 @@ public class WorldGenVillagePieces {
 
     public static class WorldGenVillageStartPiece extends WorldGenVillagePieces.WorldGenVillageWell {
 
+        @SuppressWarnings("unused")
         public WorldChunkManager a;
         public int b;
         public WorldGenVillagePieces.WorldGenVillagePieceWeight c;
@@ -1504,8 +1533,10 @@ public class WorldGenVillagePieces {
         public List<StructurePiece> e = Lists.newArrayList();
         public List<StructurePiece> f = Lists.newArrayList();
 
+        @SuppressWarnings("unused")
         public WorldGenVillageStartPiece() {}
 
+        @SuppressWarnings("unused")
         public WorldGenVillageStartPiece(WorldChunkManager worldchunkmanager, @SuppressWarnings("SameParameterValue") int i, Random random, int j, int k, List<WorldGenVillagePieces.WorldGenVillagePieceWeight> list, int l) {
             super(null, 0, random, j, k);
             this.a = worldchunkmanager;
@@ -1528,8 +1559,10 @@ public class WorldGenVillagePieces {
 
     public static class WorldGenVillageWell extends WorldGenVillagePieces.WorldGenVillagePiece {
 
+        @SuppressWarnings("unused")
         public WorldGenVillageWell() {}
 
+        @SuppressWarnings("unused")
         public WorldGenVillageWell(@SuppressWarnings("SameParameterValue") WorldGenVillagePieces.WorldGenVillageStartPiece worldgenvillagepieces_worldgenvillagestartpiece, @SuppressWarnings("SameParameterValue") int i, Random random, int j, int k) {
             super(worldgenvillagepieces_worldgenvillagestartpiece, i);
             this.a(EnumDirection.EnumDirectionLimit.HORIZONTAL.a(random));
@@ -1596,8 +1629,10 @@ public class WorldGenVillagePieces {
         protected boolean i;
         private int a;
 
+        @SuppressWarnings("unused")
         public WorldGenVillagePiece() {}
 
+        @SuppressWarnings("unused")
         protected WorldGenVillagePiece(WorldGenVillagePieces.WorldGenVillageStartPiece worldgenvillagepieces_worldgenvillagestartpiece, int i) {
             super(i);
             if (worldgenvillagepieces_worldgenvillagestartpiece != null) {
@@ -1847,6 +1882,7 @@ public class WorldGenVillagePieces {
         public int c;
         public int d;
 
+        @SuppressWarnings("unused")
         public WorldGenVillagePieceWeight(Class<? extends WorldGenVillagePieces.WorldGenVillagePiece> oclass, int i, int j) {
             this.a = oclass;
             this.b = i;

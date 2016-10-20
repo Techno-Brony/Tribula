@@ -21,6 +21,7 @@ public class WorldBorder {
     private int k;
     private int l;
 
+    @SuppressWarnings("unused")
     public WorldBorder() {
         this.e = this.d;
         this.h = 29999984;
@@ -35,11 +36,13 @@ public class WorldBorder {
     }
 
     // CraftBukkit start - split method
+    @SuppressWarnings("unused")
     public boolean isInBounds(ChunkCoordIntPair chunkcoordintpair) {
         return isInBounds(chunkcoordintpair.x, chunkcoordintpair.z);
     }
 
     // Inlined the getters from ChunkCoordIntPair
+    @SuppressWarnings("unused")
     public boolean isInBounds(long chunkcoords) {
         return isInBounds(org.bukkit.craftbukkit.util.LongHash.msw(chunkcoords), org.bukkit.craftbukkit.util.LongHash.lsw(chunkcoords));
     }
@@ -201,6 +204,7 @@ public class WorldBorder {
         this.h = i;
     }
 
+    @SuppressWarnings("unused")
     public int l() {
         return this.h;
     }

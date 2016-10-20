@@ -14,6 +14,7 @@ public class ItemBucket extends Item {
 
     private final Block a;
 
+    @SuppressWarnings("unused")
     public ItemBucket(Block block) {
         this.maxStackSize = 1;
         this.a = block;

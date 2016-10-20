@@ -13,6 +13,7 @@ import javax.annotation.Nullable;
 
 public class ItemWorldMap extends ItemWorldMapBase {
 
+    @SuppressWarnings("unused")
     protected ItemWorldMap() {
         this.a(true);
     }

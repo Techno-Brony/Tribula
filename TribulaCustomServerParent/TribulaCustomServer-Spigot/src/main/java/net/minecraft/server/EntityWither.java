@@ -50,6 +50,7 @@ public class EntityWither extends EntityMonster implements IRangedEntity {
         this.b_ = 50;
     }
 
+    @SuppressWarnings("unused")
     public static void b(DataConverterManager dataconvertermanager) {
         EntityInsentient.a(dataconvertermanager, "WitherBoss");
     }

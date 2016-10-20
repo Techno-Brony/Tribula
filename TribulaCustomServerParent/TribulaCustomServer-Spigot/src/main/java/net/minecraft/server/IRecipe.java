@@ -11,6 +11,7 @@ public interface IRecipe {
 
     int a();
 
+    @SuppressWarnings("unused")
     @Nullable
     ItemStack b();
 
@@ -18,5 +19,6 @@ public interface IRecipe {
 
     org.bukkit.inventory.Recipe toBukkitRecipe(); // CraftBukkit
 
+    @SuppressWarnings("unused")
     java.util.List<ItemStack> getIngredients(); // Spigot
 }

@@ -21,6 +21,7 @@ import java.util.Random;
 
 public final class ItemStack {
 
+    @SuppressWarnings("unused")
     public static final DecimalFormat a = new DecimalFormat("#.##");
     public int count;
     public int c;
@@ -84,6 +85,7 @@ public final class ItemStack {
         return itemstack.getItem() != null ? itemstack : null;
     }
 
+    @SuppressWarnings("unused")
     public static void a(DataConverterManager dataconvertermanager) {
         dataconvertermanager.a(DataConverterTypes.ITEM_INSTANCE, new DataInspectorBlockEntity());
         dataconvertermanager.a(DataConverterTypes.ITEM_INSTANCE, new DataInspectorEntity());
@@ -585,6 +587,7 @@ public final class ItemStack {
         return s;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public ItemStack c(String s) {
         if (this.tag == null) {
             this.tag = new NBTTagCompound();
@@ -627,6 +630,7 @@ public final class ItemStack {
         return this.getItem().g_(this) && !this.hasEnchantments();
     }
 
+    @SuppressWarnings("unused")
     public void addEnchantment(Enchantment enchantment, int i) {
         if (this.tag == null) {
             this.setTag(new NBTTagCompound());
@@ -709,6 +713,7 @@ public final class ItemStack {
         return (Multimap) object;
     }
 
+    @SuppressWarnings("unused")
     public void a(String s, AttributeModifier attributemodifier, EnumItemSlot enumitemslot) {
         if (this.tag == null) {
             this.tag = new NBTTagCompound();

@@ -12,6 +12,7 @@ public class BlockJukeBox extends BlockTileEntity {
         this.a(CreativeModeTab.c);
     }
 
+    @SuppressWarnings("unused")
     public static void a(DataConverterManager dataconvertermanager) {
         dataconvertermanager.a(DataConverterTypes.BLOCK_ENTITY, new DataInspectorItem("RecordPlayer", "RecordItem"));
     }

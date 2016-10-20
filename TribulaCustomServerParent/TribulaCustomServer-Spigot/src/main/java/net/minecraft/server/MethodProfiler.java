@@ -17,6 +17,7 @@ public class MethodProfiler {
     public void b() {
     }
 
+    @SuppressWarnings("unused")
     public List<MethodProfiler.ProfilerInfo> b(String s) {
         return null;
     }
@@ -31,9 +32,11 @@ public class MethodProfiler {
     public static final class ProfilerInfo implements Comparable<MethodProfiler.ProfilerInfo> {
 
         public double a;
+        @SuppressWarnings("unused")
         public double b;
         public String c;
 
+        @SuppressWarnings("unused")
         public ProfilerInfo(String s, double d0, double d1) {
             this.c = s;
             this.a = d0;

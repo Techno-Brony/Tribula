@@ -1,13 +1,14 @@
 package net.minecraft.server;
 
-import javax.annotation.Nullable;
-// CraftBukkit start
-import java.util.List;
 import org.bukkit.Location;
-
 import org.bukkit.craftbukkit.entity.CraftHumanEntity;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
+
+import javax.annotation.Nullable;
+import java.util.List;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class InventoryCrafting implements IInventory {
@@ -22,7 +23,20 @@ public class InventoryCrafting implements IInventory {
     public IRecipe currentRecipe;
     public IInventory resultInventory;
     private EntityHuman owner;
-    private int maxStack = MAX_STACK;
+
+    public InventoryCrafting(Container container, int i, int j, EntityHuman player) {
+        this(container, i, j);
+        this.owner = player;
+    }
+
+    public InventoryCrafting(Container container, int i, int j) {
+        int k = i * j;
+
+        this.items = new ItemStack[k];
+        this.d = container;
+        this.b = i;
+        this.c = j;
+    }
 
     public ItemStack[] getContents() {
         return this.items;
@@ -32,6 +46,7 @@ public class InventoryCrafting implements IInventory {
         transaction.add(who);
     }
 
+    @SuppressWarnings("unused")
     public InventoryType getInvType() {
         return items.length == 4 ? InventoryType.CRAFTING : InventoryType.WORKBENCH;
     }
@@ -48,30 +63,11 @@ public class InventoryCrafting implements IInventory {
         return (owner == null) ? null : owner.getBukkitEntity();
     }
 
-    public void setMaxStackSize(int size) {
-        maxStack = size;
-        resultInventory.setMaxStackSize(size);
-    }
-
     @Override
     public Location getLocation() {
         return owner.getBukkitEntity().getLocation();
     }
-
-    public InventoryCrafting(Container container, int i, int j, EntityHuman player) {
-        this(container, i, j);
-        this.owner = player;
-    }
     // CraftBukkit end
-
-    public InventoryCrafting(Container container, int i, int j) {
-        int k = i * j;
-
-        this.items = new ItemStack[k];
-        this.d = container;
-        this.b = i;
-        this.c = j;
-    }
 
     public int getSize() {
         return this.items.length;
@@ -122,6 +118,11 @@ public class InventoryCrafting implements IInventory {
 
     public int getMaxStackSize() {
         return 64;
+    }
+
+    public void setMaxStackSize(int size) {
+        int maxStack = size;
+        resultInventory.setMaxStackSize(size);
     }
 
     public void update() {}

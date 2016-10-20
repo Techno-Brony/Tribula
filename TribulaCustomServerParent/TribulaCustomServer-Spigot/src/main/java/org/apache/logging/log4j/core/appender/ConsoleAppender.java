@@ -16,14 +16,6 @@
  */
 package org.apache.logging.log4j.core.appender;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintStream;
-import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Constructor;
-import java.nio.charset.Charset;
-
 import org.apache.logging.log4j.core.Filter;
 import org.apache.logging.log4j.core.Layout;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
@@ -34,6 +26,10 @@ import org.apache.logging.log4j.core.helpers.Booleans;
 import org.apache.logging.log4j.core.helpers.Loader;
 import org.apache.logging.log4j.core.layout.PatternLayout;
 import org.apache.logging.log4j.util.PropertiesUtil;
+
+import java.io.*;
+import java.lang.reflect.Constructor;
+import java.nio.charset.Charset;
 
 /**
  * ConsoleAppender appends log events to <code>System.out</code> or
@@ -50,16 +46,6 @@ public final class ConsoleAppender extends AbstractOutputStreamAppender {
 
     private static final String JANSI_CLASS = "org.fusesource.jansi.WindowsAnsiOutputStream";
     private static ConsoleManagerFactory factory = new ConsoleManagerFactory();
-
-    /**
-     * Enumeration of console destinations.
-     */
-    public enum Target {
-        /** Standard output. */
-        SYSTEM_OUT,
-        /** Standard error output. */
-        SYSTEM_ERR
-    }
 
     private ConsoleAppender(final String name, final Layout<? extends Serializable> layout, final Filter filter,
                             final OutputStreamManager manager,
@@ -78,6 +64,7 @@ public final class ConsoleAppender extends AbstractOutputStreamAppender {
      *               they are propagated to the caller.
      * @return The ConsoleAppender.
      */
+    @SuppressWarnings("unused")
     @PluginFactory
     public static ConsoleAppender createAppender(
             @PluginElement("Layout") Layout<? extends Serializable> layout,
@@ -137,9 +124,21 @@ public final class ConsoleAppender extends AbstractOutputStreamAppender {
     }
 
     /**
+     * Enumeration of console destinations.
+     */
+    @SuppressWarnings("unused")
+    public enum Target {
+        /** Standard output. */
+        @SuppressWarnings("unused")SYSTEM_OUT,
+        /** Standard error output. */
+        @SuppressWarnings("unused")SYSTEM_ERR
+    }
+
+    /**
      * An implementation of OutputStream that redirects to the current System.err.
      */
     private static class SystemErrStream extends OutputStream {
+        @SuppressWarnings("unused")
         public SystemErrStream() {
         }
 
@@ -174,6 +173,7 @@ public final class ConsoleAppender extends AbstractOutputStreamAppender {
      * An implementation of OutputStream that redirects to the current System.out.
      */
     private static class SystemOutStream extends OutputStream {
+        @SuppressWarnings("unused")
         public SystemOutStream() {
         }
 

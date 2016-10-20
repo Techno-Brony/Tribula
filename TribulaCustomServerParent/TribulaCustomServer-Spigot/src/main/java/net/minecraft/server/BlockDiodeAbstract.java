@@ -9,6 +9,7 @@ public abstract class BlockDiodeAbstract extends BlockFacingHorizontal {
     protected static final AxisAlignedBB c = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D);
     protected final boolean d;
 
+    @SuppressWarnings("unused")
     protected BlockDiodeAbstract(boolean flag) {
         super(Material.ORIENTABLE);
         this.d = flag;
@@ -136,6 +137,7 @@ public abstract class BlockDiodeAbstract extends BlockFacingHorizontal {
         }
     }
 
+    @SuppressWarnings("unused")
     protected int c(IBlockAccess iblockaccess, BlockPosition blockposition, IBlockData iblockdata) {
         EnumDirection enumdirection = iblockdata.get(BlockDiodeAbstract.FACING);
         EnumDirection enumdirection1 = enumdirection.e();

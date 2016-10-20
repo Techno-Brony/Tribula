@@ -30,11 +30,15 @@ public abstract class EntityHuman extends EntityLiving {
     public PlayerInventory inventory = new PlayerInventory(this);
     public Container defaultContainer;
     public Container activeContainer;
+    @SuppressWarnings("unused")
     public float by;
     public float bz;
     public int bA;
+    @SuppressWarnings("unused")
     public double bB;
+    @SuppressWarnings("unused")
     public double bC;
+    @SuppressWarnings("unused")
     public double bD;
     public double bE;
     public double bF;
@@ -42,7 +46,9 @@ public abstract class EntityHuman extends EntityLiving {
     public boolean sleeping;
     public BlockPosition bedPosition;
     public int sleepTicks;
+    @SuppressWarnings("unused")
     public float bJ;
+    @SuppressWarnings("unused")
     public float bK;
     public PlayerAbilities abilities = new PlayerAbilities();
     public int expLevel;
@@ -55,6 +61,7 @@ public abstract class EntityHuman extends EntityLiving {
     public int oldLevel = -1;
     protected FoodMetaData foodData = new FoodMetaData(this); // CraftBukkit - add "this" to constructor
     protected int bx;
+    @SuppressWarnings("unused")
     protected float bP = 0.1F;
     protected float bQ = 0.02F;
     private InventoryEnderChest enderChest = new InventoryEnderChest();
@@ -79,8 +86,10 @@ public abstract class EntityHuman extends EntityLiving {
     }
     // CraftBukkit end
 
+    @SuppressWarnings("unused")
     public static void a(DataConverterManager dataconvertermanager) {
         dataconvertermanager.a(DataConverterTypes.PLAYER, new DataInspector() {
+            @SuppressWarnings("unused")
             public NBTTagCompound a(DataConverter dataconverter, NBTTagCompound nbttagcompound, int i) {
                 DataConverterRegistry.b(dataconverter, nbttagcompound, i, "Inventory");
                 DataConverterRegistry.b(dataconverter, nbttagcompound, i, "EnderItems");
@@ -549,6 +558,7 @@ public abstract class EntityHuman extends EntityLiving {
         return Lists.newArrayList();
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     @Nullable
     public EntityItem a(boolean flag) {
         // Called only when dropped by Q or CTRL-Q
@@ -899,12 +909,14 @@ public abstract class EntityHuman extends EntityLiving {
 //        return true; // CraftBukkit
     }
 
+    @SuppressWarnings("unused")
     public void openSign(TileEntitySign tileentitysign) {}
 
     public void a(CommandBlockListenerAbstract commandblocklistenerabstract) {}
 
     public void a(TileEntityCommand tileentitycommand) {}
 
+    @SuppressWarnings("unused")
     public void a(TileEntityStructure tileentitystructure) {}
 
     public void openTrade(IMerchant imerchant) {}
@@ -915,8 +927,10 @@ public abstract class EntityHuman extends EntityLiving {
 
     public void openTileEntity(ITileEntityContainer itileentitycontainer) {}
 
+    @SuppressWarnings("unused")
     public void a(ItemStack itemstack, EnumHand enumhand) {}
 
+    @SuppressWarnings("UnusedReturnValue")
     public EnumInteractionResult a(Entity entity, @Nullable ItemStack itemstack, EnumHand enumhand) {
         if (this.isSpectator()) {
             if (entity instanceof IInventory) {
@@ -1232,6 +1246,7 @@ public abstract class EntityHuman extends EntityLiving {
         return this.bT;
     }
 
+    @SuppressWarnings("unused")
     public EntityHuman.EnumBedResult a(BlockPosition blockposition) {
         if (!this.world.isClientSide) {
             if (this.isSleeping() || !this.isAlive()) {
@@ -1397,6 +1412,7 @@ public abstract class EntityHuman extends EntityLiving {
         return this.sleeping && this.sleepTicks >= 100;
     }
 
+    @SuppressWarnings("unused")
     public void b(IChatBaseComponent ichatbasecomponent) {}
 
     public BlockPosition getBed() {
@@ -1420,6 +1436,7 @@ public abstract class EntityHuman extends EntityLiving {
 
     }
 
+    @SuppressWarnings("unused")
     public boolean a(@SuppressWarnings("SameParameterValue") Achievement achievement) {
         return false;
     }
@@ -1715,8 +1732,10 @@ public abstract class EntityHuman extends EntityLiving {
         return !this.abilities.isFlying;
     }
 
+    @SuppressWarnings("unused")
     public void updateAbilities() {}
 
+    @SuppressWarnings("unused")
     public void a(EnumGamemode enumgamemode) {}
 
     public String getName() {
@@ -1915,6 +1934,7 @@ public abstract class EntityHuman extends EntityLiving {
 
         OK, NOT_POSSIBLE_HERE, NOT_POSSIBLE_NOW, TOO_FAR_AWAY, OTHER_PROBLEM, NOT_SAFE;
 
+        @SuppressWarnings("unused")
         EnumBedResult() {}
     }
 
@@ -1935,16 +1955,20 @@ public abstract class EntityHuman extends EntityLiving {
         }
 
         private final int e;
+        @SuppressWarnings("unused")
         private final String f;
 
+        @SuppressWarnings("unused")
         EnumChatVisibility(int i, String s) {
             this.e = i;
             this.f = s;
         }
     }
 
+    @SuppressWarnings("unused")
     static class SyntheticClass_1 {
 
+        @SuppressWarnings("unused")
         static final int[] a = new int[EnumDirection.values().length];
 
         static {

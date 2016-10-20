@@ -28,6 +28,7 @@ public class TileEntityBrewingStand extends TileEntityContainer implements ITick
     private int maxStack = 64;
     public TileEntityBrewingStand() {}
 
+    @SuppressWarnings("unused")
     public static void a(DataConverterManager dataconvertermanager) {
         dataconvertermanager.a(DataConverterTypes.BLOCK_ENTITY, new DataInspectorItemList("Cauldron", "Items"));
     }
@@ -57,6 +58,7 @@ public class TileEntityBrewingStand extends TileEntityContainer implements ITick
         return this.l != null && !this.l.isEmpty();
     }
 
+    @SuppressWarnings("unused")
     public void a(String s) {
         this.l = s;
     }

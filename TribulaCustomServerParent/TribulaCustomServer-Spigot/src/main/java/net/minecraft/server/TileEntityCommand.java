@@ -83,6 +83,7 @@ public class TileEntityCommand extends TileEntity {
         return this.i;
     }
 
+    @SuppressWarnings("unused")
     public CommandObjectiveExecutor e() {
         return this.i.o();
     }
@@ -157,6 +158,7 @@ public class TileEntityCommand extends TileEntity {
 
         SEQUENCE, AUTO, REDSTONE;
 
+        @SuppressWarnings("unused")
         Type() {}
     }
 }

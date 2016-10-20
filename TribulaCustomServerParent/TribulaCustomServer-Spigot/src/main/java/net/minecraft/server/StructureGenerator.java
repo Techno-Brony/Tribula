@@ -13,6 +13,7 @@ public abstract class StructureGenerator extends WorldGenBase {
     protected Long2ObjectMap<StructureStart> c = new Long2ObjectOpenHashMap(1024);
     private PersistentStructure a;
 
+    @SuppressWarnings("unused")
     public StructureGenerator() {}
 
     public abstract String a();
@@ -94,6 +95,7 @@ public abstract class StructureGenerator extends WorldGenBase {
         return flag;
     }
 
+    @SuppressWarnings("unused")
     public boolean b(BlockPosition blockposition) {
         this.a(this.g);
         return this.c(blockposition) != null;
@@ -140,6 +142,7 @@ public abstract class StructureGenerator extends WorldGenBase {
         return true;
     }
 
+    @SuppressWarnings("unused")
     public synchronized BlockPosition getNearestGeneratedFeature(World world, BlockPosition blockposition) { // CraftBukkit - synchronized
         this.g = world;
         this.a(world);

@@ -17,6 +17,7 @@ public class EntityIronGolem extends EntityGolem {
         this.setSize(1.4F, 2.7F);
     }
 
+    @SuppressWarnings("unused")
     public static void b(DataConverterManager dataconvertermanager) {
         EntityInsentient.a(dataconvertermanager, "VillagerGolem");
     }
@@ -139,6 +140,7 @@ public class EntityIronGolem extends EntityGolem {
         return this.b;
     }
 
+    @SuppressWarnings("unused")
     public void a(boolean flag) {
         this.by = flag ? 400 : 0;
         this.world.broadcastEntityEffect(this, (byte) 11);
@@ -161,6 +163,7 @@ public class EntityIronGolem extends EntityGolem {
         return LootTables.z;
     }
 
+    @SuppressWarnings("unused")
     public int df() {
         return this.by;
     }

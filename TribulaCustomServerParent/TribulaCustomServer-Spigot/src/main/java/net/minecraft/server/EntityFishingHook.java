@@ -25,10 +25,15 @@ public class EntityFishingHook extends Entity {
     private int aw;
     private float ax;
     private int ay;
+    @SuppressWarnings("unused")
     private double az;
+    @SuppressWarnings("unused")
     private double aA;
+    @SuppressWarnings("unused")
     private double aB;
+    @SuppressWarnings("unused")
     private double aC;
+    @SuppressWarnings("unused")
     private double aD;
 
     public EntityFishingHook(World world) {

@@ -12,6 +12,7 @@ public class CraftingManager {
     private static final CraftingManager a = new CraftingManager();
     public List<IRecipe> recipes = Lists.newArrayList();
     // CraftBukkit start
+    @SuppressWarnings("unused")
     public IRecipe lastRecipe;
     public org.bukkit.inventory.InventoryView lastCraftView;
     // CraftBukkit end
@@ -196,6 +197,7 @@ public class CraftingManager {
         });
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public ShapedRecipes registerShapedRecipe(ItemStack itemstack, Object... aobject) {
         String s = "";
         int i = 0;
@@ -312,6 +314,7 @@ public class CraftingManager {
         // CraftBukkit end
     }
 
+    @SuppressWarnings("unused")
     public ItemStack[] b(InventoryCrafting inventorycrafting, World world) {
         Iterator iterator = this.recipes.iterator();
 

@@ -215,11 +215,13 @@ public class BlockChorusFlower extends Block {
         }
     }
 
+    @SuppressWarnings("unused")
     private void a(World world, BlockPosition blockposition, int i) {
         world.setTypeAndData(blockposition, this.getBlockData().set(BlockChorusFlower.AGE, i), 2);
         world.triggerEffect(1033, blockposition, 0);
     }
 
+    @SuppressWarnings("unused")
     private void c(World world, BlockPosition blockposition) {
         world.setTypeAndData(blockposition, this.getBlockData().set(BlockChorusFlower.AGE, 5), 2);
         world.triggerEffect(1034, blockposition, 0);

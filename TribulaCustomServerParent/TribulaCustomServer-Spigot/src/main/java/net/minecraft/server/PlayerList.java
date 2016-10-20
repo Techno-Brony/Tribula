@@ -51,12 +51,15 @@ public abstract class PlayerList {
     protected int maxPlayers;
     private boolean hasWhitelist;
     private int r;
+    @SuppressWarnings("unused")
     private EnumGamemode s;
+    @SuppressWarnings("unused")
     private boolean t;
     private int u;
     // CraftBukkit start
     private CraftServer cserver;
 
+    @SuppressWarnings("unused")
     public PlayerList(MinecraftServer minecraftserver) {
         this.cserver = minecraftserver.server = new CraftServer(minecraftserver, this);
         minecraftserver.console = org.bukkit.craftbukkit.command.ColouredConsoleSender.getInstance();
@@ -758,6 +761,7 @@ public abstract class PlayerList {
         this.b(entityplayer, i);
     }
 
+    @SuppressWarnings("unused")
     public void a(EntityPlayer entityplayer, int i) {
         int j = entityplayer.dimension;
         WorldServer worldserver = this.server.getWorldServer(entityplayer.dimension);
@@ -990,6 +994,7 @@ public abstract class PlayerList {
     }
     // CraftBukkit end
 
+    @SuppressWarnings("unused")
     public void a(Packet<?> packet, int i) {
         for (EntityPlayer entityplayer : this.players) {
             if (entityplayer.dimension == i) {
@@ -1034,6 +1039,7 @@ public abstract class PlayerList {
         }
     }
 
+    @SuppressWarnings("unused")
     public String b(boolean flag) {
         String s = "";
         ArrayList arraylist = Lists.newArrayList(this.players);
@@ -1080,6 +1086,7 @@ public abstract class PlayerList {
         return this.l;
     }
 
+    @SuppressWarnings("unused")
     public void addOp(GameProfile gameprofile) {
         int i = this.server.q();
 
@@ -1093,6 +1100,7 @@ public abstract class PlayerList {
         // CraftBukkit end
     }
 
+    @SuppressWarnings("unused")
     public void removeOp(GameProfile gameprofile) {
         this.operators.remove(gameprofile);
         this.b(this.a(gameprofile.getId()), 0);
@@ -1162,10 +1170,12 @@ public abstract class PlayerList {
 
     }
 
+    @SuppressWarnings("unused")
     public void addWhitelist(GameProfile gameprofile) {
         this.whitelist.add(new WhiteListEntry(gameprofile));
     }
 
+    @SuppressWarnings("unused")
     public void removeWhitelist(GameProfile gameprofile) {
         this.whitelist.remove(gameprofile);
     }
@@ -1182,10 +1192,12 @@ public abstract class PlayerList {
         return this.operators;
     }
 
+    @SuppressWarnings("unused")
     public String[] n() {
         return this.operators.getEntries();
     }
 
+    @SuppressWarnings("unused")
     public void reloadWhitelist() {}
 
     public void b(EntityPlayer entityplayer, WorldServer worldserver) {
@@ -1228,10 +1240,12 @@ public abstract class PlayerList {
         return this.hasWhitelist;
     }
 
+    @SuppressWarnings("unused")
     public void setHasWhitelist(boolean flag) {
         this.hasWhitelist = flag;
     }
 
+    @SuppressWarnings("unused")
     public List<EntityPlayer> b(String s) {
         ArrayList arraylist = Lists.newArrayList();
         Iterator iterator = this.players.iterator();
@@ -1326,6 +1340,7 @@ public abstract class PlayerList {
         return serverstatisticmanager;
     }
 
+    @SuppressWarnings("unused")
     public void a(int i) {
         this.r = i;
         if (this.server.worldServer != null) {

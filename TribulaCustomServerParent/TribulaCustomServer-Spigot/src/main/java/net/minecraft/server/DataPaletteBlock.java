@@ -73,6 +73,7 @@ public class DataPaletteBlock implements DataPaletteExpandable {
         return iblockdata == null ? DataPaletteBlock.a : iblockdata;
     }
 
+    @SuppressWarnings("unused")
     public void b(PacketDataSerializer packetdataserializer) {
         packetdataserializer.writeByte(this.e);
         this.c.b(packetdataserializer);
@@ -132,6 +133,7 @@ public class DataPaletteBlock implements DataPaletteExpandable {
 
     }
 
+    @SuppressWarnings("unused")
     public int a() {
         return 1 + this.c.a() + PacketDataSerializer.a(this.b.b()) + this.b.a().length * 8;
     }

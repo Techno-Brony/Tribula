@@ -215,6 +215,7 @@ public class ChunkProviderServer implements IChunkProvider {
 
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public boolean a(boolean flag) {
         int i = 0;
 
@@ -316,6 +317,7 @@ public class ChunkProviderServer implements IChunkProvider {
         return this.chunkGenerator.getMobsFor(enumcreaturetype, blockposition);
     }
 
+    @SuppressWarnings("unused")
     @Nullable
     public BlockPosition a(World world, String s, BlockPosition blockposition) {
         return this.chunkGenerator.findNearestMapFeature(world, s, blockposition);

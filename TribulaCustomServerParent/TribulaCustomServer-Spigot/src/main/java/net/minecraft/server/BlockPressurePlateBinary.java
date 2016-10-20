@@ -112,6 +112,7 @@ public class BlockPressurePlateBinary extends BlockPressurePlateAbstract {
 
         EVERYTHING, MOBS;
 
+        @SuppressWarnings("unused")
         EnumMobType() {}
     }
 

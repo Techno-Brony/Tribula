@@ -258,8 +258,10 @@ public class BlockSkull extends BlockTileEntity {
         return this.D;
     }
 
+    @SuppressWarnings("unused")
     static class SyntheticClass_1 {
 
+        @SuppressWarnings("unused")
         static final int[] a = new int[EnumDirection.values().length];
 
         static {

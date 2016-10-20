@@ -13,6 +13,7 @@ public abstract class ChatBaseComponent implements IChatBaseComponent {
     protected List<IChatBaseComponent> a = Lists.newArrayList();
     private ChatModifier b;
 
+    @SuppressWarnings("unused")
     public ChatBaseComponent() {}
 
     public static Iterator<IChatBaseComponent> a(Iterable<IChatBaseComponent> iterable) {

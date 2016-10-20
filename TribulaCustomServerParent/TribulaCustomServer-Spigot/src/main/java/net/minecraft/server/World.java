@@ -40,10 +40,12 @@ public abstract class World implements IBlockAccess {
     protected final List<Entity> f = Lists.newArrayList();
     @SuppressWarnings("unchecked")
     protected final IntHashMap<Entity> entitiesById = new IntHashMap();
+    @SuppressWarnings("unused")
     protected final int m = 1013904223;
     protected final IDataManager dataManager;
     private final List<TileEntity> b = Lists.newArrayList();
     private final List<TileEntity> tileEntityListUnload = Lists.newArrayList();
+    @SuppressWarnings("unused")
     private final long I = 16777215L;
     private final Calendar L;
     private final WorldBorder N;
@@ -88,13 +90,13 @@ public abstract class World implements IBlockAccess {
     protected NavigationListener t = new NavigationListener();
     protected List<IWorldAccess> u;
     protected IChunkProvider chunkProvider;
+    @SuppressWarnings("unused")
     protected boolean isLoading;
     protected PersistentVillage villages;
     protected LootTableRegistry B;
     int[] H;
     private int a = 63;
     private int J;
-    private int K;
     private boolean M;
     private int tickPosition;
     private boolean guardEntityList; // Spigot
@@ -193,6 +195,7 @@ public abstract class World implements IBlockAccess {
         return ((ChunkProviderServer) this.chunkProvider).getChunkIfLoaded(x, z);
     }
 
+    @SuppressWarnings("unused")
     public World b() {
         return this;
     }
@@ -228,6 +231,7 @@ public abstract class World implements IBlockAccess {
         return this.worldProvider.k();
     }
 
+    @SuppressWarnings("unused")
     protected abstract IChunkProvider n();
 
     public void a(WorldSettings worldsettings) {
@@ -239,6 +243,7 @@ public abstract class World implements IBlockAccess {
         return null;
     }
 
+    @SuppressWarnings("unused")
     public IBlockData c(BlockPosition blockposition) {
         BlockPosition blockposition1;
 
@@ -284,6 +289,7 @@ public abstract class World implements IBlockAccess {
         return this.isAreaLoaded(blockposition.getX(), blockposition.getY(), blockposition.getZ(), blockposition1.getX(), blockposition1.getY(), blockposition1.getZ(), flag);
     }
 
+    @SuppressWarnings("unused")
     public boolean a(StructureBoundingBox structureboundingbox) {
         return this.b(structureboundingbox, true);
     }
@@ -439,6 +445,7 @@ public abstract class World implements IBlockAccess {
         }
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public boolean setTypeUpdate(BlockPosition blockposition, IBlockData iblockdata) {
         return this.setTypeAndData(blockposition, iblockdata, 3);
     }
@@ -580,6 +587,7 @@ public abstract class World implements IBlockAccess {
         return this.getChunkAtWorldCoords(blockposition).c(blockposition);
     }
 
+    @SuppressWarnings("unused")
     public boolean i(BlockPosition blockposition) {
         if (blockposition.getY() >= this.K()) {
             return this.h(blockposition);
@@ -1571,6 +1579,7 @@ public abstract class World implements IBlockAccess {
 
     protected void l() {}
 
+    @SuppressWarnings("UnusedReturnValue")
     public boolean a(TileEntity tileentity) {
         boolean flag = this.tileEntityList.add(tileentity);
 
@@ -1691,6 +1700,7 @@ public abstract class World implements IBlockAccess {
         }
     }
 
+    @SuppressWarnings("unused")
     public boolean c(AxisAlignedBB axisalignedbb) {
         return this.a(axisalignedbb, (Entity) null);
     }
@@ -1904,6 +1914,7 @@ public abstract class World implements IBlockAccess {
         return false;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public Explosion explode(@Nullable Entity entity, double d0, double d1, double d2, float f, boolean flag) {
         return this.createExplosion(entity, d0, d1, d2, f, false, flag);
     }
@@ -2179,8 +2190,10 @@ public abstract class World implements IBlockAccess {
         }
     }
 
+    @SuppressWarnings("unused")
     protected void j() {}
 
+    @SuppressWarnings("unused")
     public void a(BlockPosition blockposition, IBlockData iblockdata, Random random) {
         this.d = true;
         iblockdata.getBlock().b(this, blockposition, iblockdata, random);
@@ -2430,6 +2443,7 @@ public abstract class World implements IBlockAccess {
         }
     }
 
+    @SuppressWarnings("unused")
     public boolean a(@SuppressWarnings("SameParameterValue") boolean flag) {
         return false;
     }
@@ -2439,6 +2453,7 @@ public abstract class World implements IBlockAccess {
         return null;
     }
 
+    @SuppressWarnings("unused")
     @Nullable
     public List<NextTickListEntry> a(StructureBoundingBox structureboundingbox, boolean flag) {
         return null;
@@ -2468,6 +2483,7 @@ public abstract class World implements IBlockAccess {
         return arraylist;
     }
 
+    @SuppressWarnings("unused")
     public <T extends Entity> List<T> a(Class<? extends T> oclass, Predicate<? super T> predicate) {
         ArrayList arraylist = Lists.newArrayList();
         Iterator iterator = this.entityList.iterator();
@@ -2487,6 +2503,7 @@ public abstract class World implements IBlockAccess {
         return arraylist;
     }
 
+    @SuppressWarnings("unused")
     public <T extends Entity> List<T> b(Class<? extends T> oclass, Predicate<? super T> predicate) {
         ArrayList arraylist = Lists.newArrayList();
         Iterator iterator = this.players.iterator();
@@ -2758,6 +2775,7 @@ public abstract class World implements IBlockAccess {
         return false;
     }
 
+    @SuppressWarnings("unused")
     @Nullable
     public EntityHuman a(Entity entity, double d0, double d1) {
         return this.a(entity.locX, entity.locY, entity.locZ, d0, d1, null, null);
@@ -2817,6 +2835,7 @@ public abstract class World implements IBlockAccess {
         return null;
     }
 
+    @SuppressWarnings("unused")
     @Nullable
     public EntityHuman b(UUID uuid) {
         for (EntityHuman entityhuman : this.players) {
@@ -2858,6 +2877,7 @@ public abstract class World implements IBlockAccess {
         return blockposition;
     }
 
+    @SuppressWarnings("unused")
     public void A(BlockPosition blockposition) {
         this.worldData.setSpawn(blockposition);
     }
@@ -2954,6 +2974,7 @@ public abstract class World implements IBlockAccess {
         return this.worldMaps.a(s);
     }
 
+    @SuppressWarnings("unused")
     public void a(int i, BlockPosition blockposition, int j) {
         for (IWorldAccess anU : this.u) {
             anU.a(i, blockposition, j);
@@ -2998,6 +3019,7 @@ public abstract class World implements IBlockAccess {
         return this.random;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public CrashReportSystemDetails a(CrashReport crashreport) {
         CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Affected level", 1);
 
@@ -3101,7 +3123,7 @@ public abstract class World implements IBlockAccess {
     }
 
     public void d(@SuppressWarnings("SameParameterValue") int i) {
-        this.K = i;
+        int k = i;
     }
 
     public PersistentVillage ai() {
@@ -3112,6 +3134,7 @@ public abstract class World implements IBlockAccess {
         return this.N;
     }
 
+    @SuppressWarnings("unused")
     public boolean d(int i, int j) {
         BlockPosition blockposition = this.getSpawn();
         int k = i * 16 + 8 - blockposition.getX();

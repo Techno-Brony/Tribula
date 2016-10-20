@@ -1,24 +1,30 @@
 package net.minecraft.server;
 
-import java.util.Random;
-import javax.annotation.Nullable;
-
-// CraftBukkit start
-import java.util.List;
-
 import org.bukkit.craftbukkit.entity.CraftHumanEntity;
 import org.bukkit.entity.HumanEntity;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class TileEntityDispenser extends TileEntityLootable implements IInventory {
 
     private static final Random f = new Random();
-    private ItemStack[] items = new ItemStack[9];
-    protected String a;
-
     // CraftBukkit start - add fields and methods
     public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
+    protected String a;
+    private ItemStack[] items = new ItemStack[9];
     private int maxStack = MAX_STACK;
+
+    public TileEntityDispenser() {}
+
+    @SuppressWarnings("unused")
+    public static void a(DataConverterManager dataconvertermanager) {
+        dataconvertermanager.a(DataConverterTypes.BLOCK_ENTITY, new DataInspectorItemList("Trap", "Items"));
+    }
 
     public ItemStack[] getContents() {
         return this.items;
@@ -31,17 +37,11 @@ public class TileEntityDispenser extends TileEntityLootable implements IInventor
     public void onClose(CraftHumanEntity who) {
         transaction.remove(who);
     }
+    // CraftBukkit end
 
     public List<HumanEntity> getViewers() {
         return transaction;
     }
-
-    public void setMaxStackSize(int size) {
-        maxStack = size;
-    }
-    // CraftBukkit end
-
-    public TileEntityDispenser() {}
 
     public int getSize() {
         return 9;
@@ -119,10 +119,6 @@ public class TileEntityDispenser extends TileEntityLootable implements IInventor
         return this.a != null;
     }
 
-    public static void a(DataConverterManager dataconvertermanager) {
-        dataconvertermanager.a(DataConverterTypes.BLOCK_ENTITY, new DataInspectorItemList("Trap", "Items"));
-    }
-
     public void a(NBTTagCompound nbttagcompound) {
         super.a(nbttagcompound);
         if (!this.c(nbttagcompound)) {
@@ -173,6 +169,10 @@ public class TileEntityDispenser extends TileEntityLootable implements IInventor
 
     public int getMaxStackSize() {
         return maxStack; // CraftBukkit
+    }
+
+    public void setMaxStackSize(int size) {
+        maxStack = size;
     }
 
     public boolean a(EntityHuman entityhuman) {

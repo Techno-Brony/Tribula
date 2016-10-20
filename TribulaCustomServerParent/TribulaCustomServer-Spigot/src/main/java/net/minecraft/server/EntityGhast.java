@@ -16,6 +16,7 @@ public class EntityGhast extends EntityFlying implements IMonster {
         this.moveController = new EntityGhast.ControllerGhast(this);
     }
 
+    @SuppressWarnings("unused")
     public static void b(DataConverterManager dataconvertermanager) {
         EntityInsentient.a(dataconvertermanager, "Ghast");
     }

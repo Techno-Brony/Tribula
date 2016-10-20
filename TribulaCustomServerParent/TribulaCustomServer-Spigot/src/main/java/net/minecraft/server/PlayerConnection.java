@@ -54,6 +54,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
     private long g;
     private long h;
     // CraftBukkit start - multithreaded fields
+    @SuppressWarnings("unused")
     private volatile int chatThrottle;
     // CraftBukkit end
     private int j;

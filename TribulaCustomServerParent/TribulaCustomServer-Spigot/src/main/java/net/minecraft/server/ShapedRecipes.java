@@ -14,6 +14,7 @@ public class ShapedRecipes implements IRecipe {
     private final int height;
     private final ItemStack[] items;
     public ItemStack result; // Spigot
+    @SuppressWarnings("unused")
     private boolean e;
 
     public ShapedRecipes(int i, int j, ItemStack[] aitemstack, ItemStack itemstack) {

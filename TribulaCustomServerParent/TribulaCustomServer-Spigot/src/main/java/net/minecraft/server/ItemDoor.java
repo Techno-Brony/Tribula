@@ -4,6 +4,7 @@ public class ItemDoor extends Item {
 
     private final Block a;
 
+    @SuppressWarnings("unused")
     public ItemDoor(Block block) {
         this.a = block;
         this.a(CreativeModeTab.d);

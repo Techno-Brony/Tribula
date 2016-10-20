@@ -176,6 +176,7 @@ public abstract class TileEntity {
         return null;
     }
 
+    @SuppressWarnings("unused")
     public NBTTagCompound c() {
         return this.c(new NBTTagCompound());
     }
@@ -192,6 +193,7 @@ public abstract class TileEntity {
         this.d = false;
     }
 
+    @SuppressWarnings("unused")
     public boolean c(int i, int j) {
         return false;
     }
@@ -256,13 +258,16 @@ public abstract class TileEntity {
         return false;
     }
 
+    @SuppressWarnings("unused")
     @Nullable
     public IChatBaseComponent i_() {
         return null;
     }
 
+    @SuppressWarnings("unused")
     public void a(EnumBlockRotation enumblockrotation) {}
 
+    @SuppressWarnings("unused")
     public void a(EnumBlockMirror enumblockmirror) {}
 
     // CraftBukkit start - add method

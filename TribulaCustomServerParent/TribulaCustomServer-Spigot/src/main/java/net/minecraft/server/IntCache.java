@@ -1,16 +1,18 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Lists;
+
 import java.util.List;
 
 public class IntCache {
 
-    private static int a = 256;
     private static final List<int[]> b = Lists.newArrayList();
     private static final List<int[]> c = Lists.newArrayList();
     private static final List<int[]> d = Lists.newArrayList();
     private static final List<int[]> e = Lists.newArrayList();
+    private static int a = 256;
 
+    @SuppressWarnings("unused")
     public static synchronized int[] a(int i) {
         int[] aint;
 
@@ -42,6 +44,7 @@ public class IntCache {
         }
     }
 
+    @SuppressWarnings("unused")
     public static synchronized void a() {
         if (!IntCache.d.isEmpty()) {
             IntCache.d.remove(IntCache.d.size() - 1);

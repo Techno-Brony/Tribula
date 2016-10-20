@@ -2,6 +2,7 @@ package net.minecraft.server;
 
 public class ItemWaterLily extends ItemWithAuxData {
 
+    @SuppressWarnings("unused")
     public ItemWaterLily(Block block) {
         super(block, false);
     }

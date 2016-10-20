@@ -46,20 +46,24 @@ public class ContainerEnchantTable extends Container {
     };
     // CraftBukkit end
 
+    @SuppressWarnings("unused")
     public ContainerEnchantTable(PlayerInventory playerinventory, World world, BlockPosition blockposition) {
         this.world = world;
         this.position = blockposition;
         this.f = playerinventory.player.cV();
         this.a(new Slot(this.enchantSlots, 0, 15, 47) {
+            @SuppressWarnings("unused")
             public boolean isAllowed(@Nullable ItemStack itemstack) {
                 return true;
             }
 
+            @SuppressWarnings("unused")
             public int getMaxStackSize() {
                 return 1;
             }
         });
         this.a(new Slot(this.enchantSlots, 1, 35, 47) {
+            @SuppressWarnings("unused")
             public boolean isAllowed(@Nullable ItemStack itemstack) {
                 return itemstack.getItem() == Items.DYE && EnumColor.fromInvColorIndex(itemstack.getData()) == EnumColor.BLUE;
             }

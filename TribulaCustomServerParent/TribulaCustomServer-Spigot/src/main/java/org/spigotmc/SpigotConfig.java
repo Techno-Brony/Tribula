@@ -189,11 +189,13 @@ public class SpigotConfig
         return config.getDouble( path, config.getDouble( path ) );
     }
 
+    @SuppressWarnings("unused")
     private static void logCommands()
     {
         logCommands = getBoolean( "commands.log", true );
     }
 
+    @SuppressWarnings("unused")
     private static void tabComplete()
     {
         if ( version < 6 )
@@ -215,6 +217,7 @@ public class SpigotConfig
         return ChatColor.translateAlternateColorCodes( '&', s ).replaceAll( "\\n", "\n" );
     }
 
+    @SuppressWarnings("unused")
     private static void messages()
     {
         if (version < 8)
@@ -230,6 +233,7 @@ public class SpigotConfig
         outdatedServerMessage = transform( getString( "messages.outdated-server", outdatedServerMessage ) );
     }
 
+    @SuppressWarnings("unused")
     private static void watchdog()
     {
         timeoutTime = getInt( "settings.timeout-time", timeoutTime );
@@ -240,6 +244,7 @@ public class SpigotConfig
         WatchdogThread.doStart( timeoutTime, restartOnCrash );
     }
 
+    @SuppressWarnings("unused")
     private static void bungee() {
         if ( version < 4 )
         {
@@ -249,6 +254,7 @@ public class SpigotConfig
         bungee = getBoolean( "settings.bungeecord", false );
     }
     
+    @SuppressWarnings("unused")
     private static void nettyThreads()
     {
         int count = getInt( "settings.netty-threads", 4 );
@@ -257,10 +263,12 @@ public class SpigotConfig
         // Bukkit.getLogger().log( Level.INFO, "Using {0} threads for Netty based IO", count );
     }
 
+    @SuppressWarnings("unused")
     private static void lateBind() {
         lateBind = getBoolean( "settings.late-bind", false );
     }
     
+    @SuppressWarnings("unused")
     private static void stats()
     {
         disableStatSaving = getBoolean( "stats.disable-saving", false );
@@ -286,11 +294,13 @@ public class SpigotConfig
         }
     }
 
+    @SuppressWarnings("unused")
     private static void tpsCommand()
     {
         commands.put( "tps", new TicksPerSecondCommand( "tps" ) );
     }
 
+    @SuppressWarnings("unused")
     private static void playerSample()
     {
         playerSample = getInt( "settings.sample-count", 12 );
@@ -298,27 +308,32 @@ public class SpigotConfig
         // System.out.println( "Server Ping Player Sample Count: " + playerSample );
     }
 
+    @SuppressWarnings("unused")
     private static void playerShuffle()
     {
         playerShuffle = getInt( "settings.player-shuffle", 0 );
     }
 
+    @SuppressWarnings("unused")
     private static void spamExclusions()
     {
         //noinspection unchecked
         spamExclusions = getList( "commands.spam-exclusions", Collections.singletonList("/skill"));
     }
 
+    @SuppressWarnings("unused")
     private static void silentCommandBlocks()
     {
         silentCommandBlocks = getBoolean( "commands.silent-commandblock-console", false );
     }
 
+    @SuppressWarnings("unused")
     private static void filterCreativeItems()
     {
         filterCreativeItems = getBoolean( "settings.filter-creative-items", true );
     }
 
+    @SuppressWarnings("unused")
     private static void replaceCommands()
     {
         if ( config.contains( "replace-commands" ) )
@@ -331,31 +346,37 @@ public class SpigotConfig
                 Arrays.asList( "setblock", "summon", "testforblock", "tellraw" ) ) );
     }
 
+    @SuppressWarnings("unused")
     private static void userCacheCap()
     {
         userCacheCap = getInt( "settings.user-cache-size", 1000 );
     }
 
+    @SuppressWarnings("unused")
     private static void saveUserCacheOnStopOnly()
     {
         saveUserCacheOnStopOnly = getBoolean( "settings.save-user-cache-on-stop-only", false );
     }
 
+    @SuppressWarnings("unused")
     private static void intCacheLimit()
     {
         intCacheLimit = getInt( "settings.int-cache-limit", 1024 );
     }
 
+    @SuppressWarnings("unused")
     private static void movedWronglyThreshold()
     {
         movedWronglyThreshold = getDouble( "settings.moved-wrongly-threshold", 0.0625D );
     }
 
+    @SuppressWarnings("unused")
     private static void movedTooQuicklyMultiplier()
     {
         movedTooQuicklyMultiplier = getDouble( "settings.moved-too-quickly-multiplier", 10.0D );
     }
 
+    @SuppressWarnings("unused")
     private static void attributeMaxes()
     {
         maxHealth = getDouble( "settings.attribute.maxHealth.max", maxHealth );
@@ -366,6 +387,7 @@ public class SpigotConfig
         ( (AttributeRanged) GenericAttributes.ATTACK_DAMAGE ).b = attackDamage;
     }
 
+    @SuppressWarnings("unused")
     private static void debug()
     {
         debug = getBoolean( "settings.debug", false );
@@ -389,6 +411,7 @@ public class SpigotConfig
 //        }
     }
 
+    @SuppressWarnings("unused")
     private static void itemDirtyTicks() {
         itemDirtyTicks = getInt("settings.item-dirty-ticks", 20);
     }

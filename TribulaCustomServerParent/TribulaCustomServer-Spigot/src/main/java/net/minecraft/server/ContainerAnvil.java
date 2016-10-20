@@ -14,6 +14,7 @@ import java.util.Map;
 
 public class ContainerAnvil extends Container {
 
+    @SuppressWarnings("unused")
     private static final Logger f = LogManager.getLogger();
     private final IInventory g = new InventoryCraftResult();
     private final World i;
@@ -33,6 +34,7 @@ public class ContainerAnvil extends Container {
     };
     // CraftBukkit end
 
+    @SuppressWarnings("unused")
     public ContainerAnvil(PlayerInventory playerinventory, final World world, final BlockPosition blockposition, EntityHuman entityhuman) {
         this.player = playerinventory; // CraftBukkit
         this.j = blockposition;
@@ -41,14 +43,17 @@ public class ContainerAnvil extends Container {
         this.a(new Slot(this.h, 0, 27, 47));
         this.a(new Slot(this.h, 1, 76, 47));
         this.a(new Slot(this.g, 2, 134, 47) {
+            @SuppressWarnings("unused")
             public boolean isAllowed(@Nullable ItemStack itemstack) {
                 return false;
             }
 
+            @SuppressWarnings("unused")
             public boolean isAllowed(EntityHuman entityhuman) {
                 return (entityhuman.abilities.canInstantlyBuild || entityhuman.expLevel >= ContainerAnvil.this.a) && ContainerAnvil.this.a > 0 && this.hasItem();
             }
 
+            @SuppressWarnings("unused")
             public void a(EntityHuman entityhuman, ItemStack itemstack) {
                 if (!entityhuman.abilities.canInstantlyBuild) {
                     entityhuman.levelDown(-ContainerAnvil.this.a);

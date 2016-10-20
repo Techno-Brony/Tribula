@@ -6,8 +6,10 @@ public class PacketPlayInArmAnimation implements Packet<PacketListenerPlayIn> {
 
     private EnumHand a;
 
+    @SuppressWarnings("unused")
     public PacketPlayInArmAnimation() {}
 
+    @SuppressWarnings("unused")
     public PacketPlayInArmAnimation(EnumHand enumhand) {
         this.a = enumhand;
     }

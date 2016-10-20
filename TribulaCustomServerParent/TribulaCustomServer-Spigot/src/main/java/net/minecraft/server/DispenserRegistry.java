@@ -18,6 +18,7 @@ public class DispenserRegistry {
     private static final Logger c = LogManager.getLogger();
     private static boolean b;
 
+    @SuppressWarnings("unused")
     public static boolean a() {
         return DispenserRegistry.b;
     }

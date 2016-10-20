@@ -20,6 +20,7 @@ public class EntityPig extends EntityAnimal {
         this.setSize(0.9F, 0.9F);
     }
 
+    @SuppressWarnings("unused")
     public static void b(DataConverterManager dataconvertermanager) {
         EntityInsentient.a(dataconvertermanager, "Pig");
     }
@@ -223,6 +224,7 @@ public class EntityPig extends EntityAnimal {
         }
     }
 
+    @SuppressWarnings("unused")
     public boolean df() {
         if (this.bz) {
             return false;

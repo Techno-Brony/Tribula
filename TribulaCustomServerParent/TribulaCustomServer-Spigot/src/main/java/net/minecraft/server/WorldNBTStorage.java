@@ -19,10 +19,10 @@ public class WorldNBTStorage implements IDataManager, IPlayerFileData {
     private final File playerDir;
     private final File dataDir;
     private final long sessionId = MinecraftServer.av();
-    private final String g;
     private final DefinedStructureManager h;
     private UUID uuid = null; // CraftBukkit
 
+    @SuppressWarnings("unused")
     public WorldNBTStorage(File file, String s, boolean flag, DataConverterManager dataconvertermanager) {
         this.a = dataconvertermanager;
         this.baseDir = new File(file, s);
@@ -30,7 +30,7 @@ public class WorldNBTStorage implements IDataManager, IPlayerFileData {
         this.playerDir = new File(this.baseDir, "playerdata");
         this.dataDir = new File(this.baseDir, "data");
         this.dataDir.mkdirs();
-        this.g = s;
+        String g = s;
         if (flag) {
             this.playerDir.mkdirs();
             this.h = new DefinedStructureManager((new File(this.baseDir, "structures")).toString());

@@ -14,6 +14,7 @@ public class EntityOcelot extends EntityTameableAnimal {
         this.setSize(0.6F, 0.7F);
     }
 
+    @SuppressWarnings("unused")
     public static void b(DataConverterManager dataconvertermanager) {
         EntityInsentient.a(dataconvertermanager, "Ozelot");
     }

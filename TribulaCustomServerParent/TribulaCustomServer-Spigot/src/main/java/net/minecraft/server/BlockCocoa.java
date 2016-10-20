@@ -158,8 +158,10 @@ public class BlockCocoa extends BlockFacingHorizontal implements IBlockFragilePl
         return new BlockStateList(this, BlockCocoa.FACING, BlockCocoa.AGE);
     }
 
+    @SuppressWarnings("unused")
     static class SyntheticClass_1 {
 
+        @SuppressWarnings("unused")
         static final int[] a = new int[EnumDirection.values().length];
 
         static {

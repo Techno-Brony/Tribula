@@ -305,8 +305,10 @@ public abstract class EntityHanging extends Entity {
 
     public void onLightningStrike(EntityLightning entitylightning) {}
 
+    @SuppressWarnings("unused")
     static class SyntheticClass_1 {
 
+        @SuppressWarnings("unused")
         static final int[] a = new int[EnumBlockRotation.values().length];
 
         static {

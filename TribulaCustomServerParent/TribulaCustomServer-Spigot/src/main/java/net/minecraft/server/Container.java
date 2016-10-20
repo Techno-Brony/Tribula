@@ -156,6 +156,7 @@ public abstract class Container {
 
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public boolean a(EntityHuman entityhuman, int i) {
         return false;
     }

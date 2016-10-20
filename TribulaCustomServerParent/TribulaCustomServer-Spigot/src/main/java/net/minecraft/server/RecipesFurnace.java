@@ -106,6 +106,7 @@ public class RecipesFurnace {
         return itemstack1.getItem() != itemstack.getItem() || (itemstack1.getData() != 32767 && itemstack1.getData() != itemstack.getData());
     }
 
+    @SuppressWarnings("unused")
     public Map<ItemStack, ItemStack> getRecipes() {
         return this.recipes;
     }

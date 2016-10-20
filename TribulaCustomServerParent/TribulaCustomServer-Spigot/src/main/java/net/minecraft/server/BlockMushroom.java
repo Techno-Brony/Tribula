@@ -88,6 +88,7 @@ public class BlockMushroom extends BlockPlant implements IBlockFragilePlantEleme
         }
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public boolean c(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
         world.setAir(blockposition);
         WorldGenHugeMushroom worldgenhugemushroom = null;

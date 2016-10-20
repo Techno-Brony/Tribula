@@ -43,12 +43,14 @@ public class ServerConnection {
             return this.a();
         }
     };
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "unused"})
     public static final LazyInitVar<LocalEventLoopGroup> c = new LazyInitVar() {
+        @SuppressWarnings("unused")
         protected LocalEventLoopGroup a() {
             return new LocalEventLoopGroup(0, (new ThreadFactoryBuilder()).setNameFormat("Netty Local Server IO #%d").setDaemon(true).build());
         }
 
+        @SuppressWarnings("unused")
         protected Object init() {
             return this.a();
         }
@@ -57,6 +59,7 @@ public class ServerConnection {
     private final MinecraftServer f;
     private final List<ChannelFuture> g = Collections.synchronizedList(Lists.<ChannelFuture>newArrayList());
     private final List<NetworkManager> h = Collections.synchronizedList(Lists.<NetworkManager>newArrayList());
+    @SuppressWarnings("unused")
     public volatile boolean d;
 
     public ServerConnection(MinecraftServer minecraftserver) {
@@ -181,6 +184,7 @@ public class ServerConnection {
         }
     }
 
+    @SuppressWarnings("unused")
     public MinecraftServer d() {
         return this.f;
     }

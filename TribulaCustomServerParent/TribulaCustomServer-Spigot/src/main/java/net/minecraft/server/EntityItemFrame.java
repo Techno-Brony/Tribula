@@ -21,6 +21,7 @@ public class EntityItemFrame extends EntityHanging {
         this.setDirection(enumdirection);
     }
 
+    @SuppressWarnings("unused")
     public static void a(DataConverterManager dataconvertermanager) {
         dataconvertermanager.a(DataConverterTypes.ENTITY, new DataInspectorItem("ItemFrame", "Item"));
     }
@@ -205,6 +206,7 @@ public class EntityItemFrame extends EntityHanging {
         return false;
     }
 
+    @SuppressWarnings("unused")
     public int t() {
         return this.getItem() == null ? 0 : this.getRotation() % 8 + 1;
     }

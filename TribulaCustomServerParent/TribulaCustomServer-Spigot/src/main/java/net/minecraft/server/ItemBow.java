@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 public class ItemBow extends Item {
 
+    @SuppressWarnings("unused")
     public ItemBow() {
         this.maxStackSize = 1;
         this.setMaxDurability(384);

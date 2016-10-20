@@ -39,7 +39,6 @@ public class TileEntityBeacon extends TileEntityContainer implements ITickable, 
     private boolean j;
     private ItemStack inventorySlot;
     private String o;
-    private int maxStack = MAX_STACK;
 
     public TileEntityBeacon() {}
 
@@ -332,6 +331,7 @@ public class TileEntityBeacon extends TileEntityContainer implements ITickable, 
         return this.o != null && !this.o.isEmpty();
     }
 
+    @SuppressWarnings("unused")
     public void a(String s) {
         this.o = s;
     }
@@ -341,7 +341,7 @@ public class TileEntityBeacon extends TileEntityContainer implements ITickable, 
     }
 
     public void setMaxStackSize(int size) {
-        maxStack = size;
+        int maxStack = size;
     }
 
     public boolean a(EntityHuman entityhuman) {

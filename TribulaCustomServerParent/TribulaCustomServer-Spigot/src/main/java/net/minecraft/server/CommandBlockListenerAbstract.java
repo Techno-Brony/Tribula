@@ -162,6 +162,7 @@ public abstract class CommandBlockListenerAbstract implements ICommandListener {
         return this.d == null ? new ChatComponentText("") : this.d;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public NBTTagCompound a(NBTTagCompound nbttagcompound) {
         nbttagcompound.setString("Command", this.e);
         nbttagcompound.setInt("SuccessCount", this.b);
@@ -307,6 +308,7 @@ public abstract class CommandBlockListenerAbstract implements ICommandListener {
         return this.c;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public boolean a(EntityHuman entityhuman) {
         if (!entityhuman.dh()) {
             return false;

@@ -443,8 +443,10 @@ public class BlockPiston extends BlockDirectional {
         return new BlockStateList(this, BlockPiston.FACING, BlockPiston.EXTENDED);
     }
 
+    @SuppressWarnings("unused")
     static class SyntheticClass_1 {
 
+        @SuppressWarnings("unused")
         static final int[] a = new int[EnumDirection.values().length];
 
         static {

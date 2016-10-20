@@ -105,12 +105,14 @@ public class SpigotWorldConfig
         return config.getInt( "world-settings." + worldName + "." + path, config.getInt( "world-settings.default." + path ) );
     }
 
+    @SuppressWarnings("unused")
     private <T> List getList(String path, T def)
     {
         config.addDefault( "world-settings.default." + path, def );
         return config.getList( "world-settings." + worldName + "." + path, config.getList( "world-settings.default." + path ) );
     }
 
+    @SuppressWarnings("unused")
     private String getString(String path, String def)
     {
         config.addDefault( "world-settings.default." + path, def );
@@ -130,6 +132,7 @@ public class SpigotWorldConfig
         return modifier;
     }
 
+    @SuppressWarnings("unused")
     private void growthModifiers()
     {
         cactusModifier = getAndValidateGrowth( "Cactus" );
@@ -144,36 +147,42 @@ public class SpigotWorldConfig
         cocoaModifier = getAndValidateGrowth( "Cocoa" );
     }
 
+    @SuppressWarnings("unused")
     private void itemMerge()
     {
         itemMerge = getDouble("merge-radius.item", 2.5 );
         log( "Item Merge Radius: " + itemMerge );
     }
 
+    @SuppressWarnings("unused")
     private void expMerge()
     {
         expMerge = getDouble("merge-radius.exp", 3.0 );
         log( "Experience Merge Radius: " + expMerge );
     }
 
+    @SuppressWarnings("unused")
     private void viewDistance()
     {
         viewDistance = getInt( "view-distance", Bukkit.getViewDistance() );
         log( "View Distance: " + viewDistance );
     }
 
+    @SuppressWarnings("unused")
     private void mobSpawnRange()
     {
         mobSpawnRange = (byte) getInt( "mob-spawn-range", 4 );
         log( "Mob Spawn Range: " + mobSpawnRange );
     }
 
+    @SuppressWarnings("unused")
     private void itemDespawnRate()
     {
         itemDespawnRate = getInt( "item-despawn-rate", 6000 );
         log( "Item Despawn Rate: " + itemDespawnRate );
     }
 
+    @SuppressWarnings("unused")
     private void activationRange()
     {
         animalActivationRange = getInt( "entity-activation-range.animals", animalActivationRange );
@@ -182,6 +191,7 @@ public class SpigotWorldConfig
         log( "Entity Activation Range: An " + animalActivationRange + " / Mo " + monsterActivationRange + " / Mi " + miscActivationRange );
     }
 
+    @SuppressWarnings("unused")
     private void trackingRange()
     {
         playerTrackingRange = getInt( "entity-tracking-range.players", playerTrackingRange );
@@ -192,6 +202,7 @@ public class SpigotWorldConfig
         log( "Entity Tracking Range: Pl " + playerTrackingRange + " / An " + animalTrackingRange + " / Mo " + monsterTrackingRange + " / Mi " + miscTrackingRange + " / Other " + otherTrackingRange );
     }
 
+    @SuppressWarnings("unused")
     private void hoppers()
     {
         // Set the tick delay between hopper item movements
@@ -204,12 +215,14 @@ public class SpigotWorldConfig
         log( "Hopper Transfer: " + hopperTransfer + " Hopper Check: " + hopperCheck + " Hopper Amount: " + hopperAmount );
     }
 
+    @SuppressWarnings("unused")
     private void lightUpdates()
     {
         randomLightUpdates = getBoolean( "random-light-updates", false );
         log( "Random Lighting Updates: " + randomLightUpdates );
     }
 
+    @SuppressWarnings("unused")
     private void structureInfo()
     {
         saveStructureInfo = getBoolean( "save-structure-info", true );
@@ -221,46 +234,54 @@ public class SpigotWorldConfig
         }
     }
 
+    @SuppressWarnings("unused")
     private void arrowDespawnRate()
     {
         arrowDespawnRate = getInt( "arrow-despawn-rate", 1200  );
         log( "Arrow Despawn Rate: " + arrowDespawnRate );
     }
 
+    @SuppressWarnings("unused")
     private void zombieAggressiveTowardsVillager()
     {
         zombieAggressiveTowardsVillager = getBoolean( "zombie-aggressive-towards-villager", true );
         log( "Zombie Aggressive Towards Villager: " + zombieAggressiveTowardsVillager );
     }
 
+    @SuppressWarnings("unused")
     private void nerfSpawnerMobs()
     {
         nerfSpawnerMobs = getBoolean( "nerf-spawner-mobs", false );
         log( "Nerfing mobs spawned from spawners: " + nerfSpawnerMobs );
     }
 
+    @SuppressWarnings("unused")
     private void enableZombiePigmenPortalSpawns()
     {
         enableZombiePigmenPortalSpawns = getBoolean( "enable-zombie-pigmen-portal-spawns", true );
         log( "Allow Zombie Pigmen to spawn from portal blocks: " + enableZombiePigmenPortalSpawns );
     }
 
+    @SuppressWarnings("unused")
     private void maxEntityCollision()
     {
         maxCollisionsPerEntity = getInt( "max-entity-collisions", 8 );
         log( "Max Entity Collisions: " + maxCollisionsPerEntity );
     }
 
+    @SuppressWarnings("unused")
     private void keepDragonDeathPerWorld()
     {
         dragonDeathSoundRadius = getInt( "dragon-death-sound-radius", 0 );
     }
 
+    @SuppressWarnings("unused")
     private void witherSpawnSoundRadius()
     {
         witherSpawnSoundRadius = getInt( "wither-spawn-sound-radius", 0 );
     }
 
+    @SuppressWarnings("unused")
     private void initWorldGenSeeds()
     {
         villageSeed = getInt( "seed-village", 10387312 );
@@ -268,6 +289,7 @@ public class SpigotWorldConfig
         log( "Custom Map Seeds:  Village: " + villageSeed + " Feature: " + largeFeatureSeed );
     }
 
+    @SuppressWarnings("unused")
     private void initHunger()
     {
         walkExhaustion = (float) getDouble( "hunger.walk-exhaustion", 0.2 );
@@ -276,6 +298,7 @@ public class SpigotWorldConfig
         regenExhaustion = (float) getDouble( "hunger.regen-exhaustion", 3 );
     }
 
+    @SuppressWarnings("unused")
     private void maxTntPerTick() {
         if ( SpigotConfig.version < 7 )
         {
@@ -285,11 +308,13 @@ public class SpigotWorldConfig
         log( "Max TNT Explosions: " + maxTntTicksPerTick );
     }
 
+    @SuppressWarnings("unused")
     private void hangingTickFrequency()
     {
         hangingTickFrequency = getInt( "hanging-tick-frequency", 100 );
     }
 
+    @SuppressWarnings("unused")
     private void maxTickTimes()
     {
         tileMaxTickTime = getInt("max-tick-time.tile", 50);

@@ -28,6 +28,7 @@ import java.util.List;
 
 public class EntityPlayer extends EntityHuman implements ICrafting {
 
+    @SuppressWarnings("unused")
     private static final Logger bS = LogManager.getLogger();
     public final MinecraftServer server;
     public final PlayerInteractManager playerInteractManager;
@@ -67,7 +68,6 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
     private int cd = -99999999;
     private boolean ce = true;
     private EntityHuman.EnumChatVisibility ch;
-    private boolean ci = true;
     // CraftBukkit end
     private long cj = System.currentTimeMillis();
     private Entity ck;
@@ -1070,7 +1070,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         // CraftBukkit end
         this.locale = packetplayinsettings.a();
         this.ch = packetplayinsettings.c();
-        this.ci = packetplayinsettings.d();
+        boolean ci = packetplayinsettings.d();
         this.getDataWatcher().set(EntityPlayer.br, (byte) packetplayinsettings.e());
         this.getDataWatcher().set(EntityPlayer.bs, (byte) (packetplayinsettings.getMainHand() == EnumMainHand.LEFT ? 0 : 1));
     }
@@ -1154,6 +1154,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         return this.cj;
     }
 
+    @SuppressWarnings("unused")
     @Nullable
     public IChatBaseComponent getPlayerListName() {
         return listName; // CraftBukkit

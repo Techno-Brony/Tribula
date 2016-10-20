@@ -15,6 +15,7 @@ public class EntitySlice<T> extends AbstractSet<T> {
     private final Class<T> d;
     private final List<T> e = Lists.newArrayList();
 
+    @SuppressWarnings("unused")
     public EntitySlice(Class<T> oclass) {
         this.d = oclass;
         this.c.add(oclass);

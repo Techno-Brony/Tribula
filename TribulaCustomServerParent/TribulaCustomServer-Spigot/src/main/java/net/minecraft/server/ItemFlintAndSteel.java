@@ -2,6 +2,7 @@ package net.minecraft.server;
 
 public class ItemFlintAndSteel extends Item {
 
+    @SuppressWarnings("unused")
     public ItemFlintAndSteel() {
         this.maxStackSize = 1;
         this.setMaxDurability(64);

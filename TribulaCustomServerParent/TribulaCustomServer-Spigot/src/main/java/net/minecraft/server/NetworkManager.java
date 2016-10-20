@@ -28,40 +28,46 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
 
     public static final Marker a = MarkerManager.getMarker("NETWORK");
+    @SuppressWarnings("unused")
     public static final Marker b = MarkerManager.getMarker("NETWORK_PACKETS", NetworkManager.a);
     public static final AttributeKey<EnumProtocol> c = AttributeKey.valueOf("protocol");
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "unused"})
     public static final LazyInitVar<NioEventLoopGroup> d = new LazyInitVar() {
+        @SuppressWarnings("unused")
         protected NioEventLoopGroup a() {
             return new NioEventLoopGroup(0, (new ThreadFactoryBuilder()).setNameFormat("Netty Client IO #%d").setDaemon(true).build());
         }
 
+        @SuppressWarnings("unused")
         protected Object init() {
             return this.a();
         }
     };
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "unused"})
     public static final LazyInitVar<EpollEventLoopGroup> e = new LazyInitVar() {
+        @SuppressWarnings("unused")
         protected EpollEventLoopGroup a() {
             return new EpollEventLoopGroup(0, (new ThreadFactoryBuilder()).setNameFormat("Netty Epoll Client IO #%d").setDaemon(true).build());
         }
 
+        @SuppressWarnings("unused")
         protected Object init() {
             return this.a();
         }
     };
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "unused"})
     public static final LazyInitVar<LocalEventLoopGroup> f = new LazyInitVar() {
+        @SuppressWarnings("unused")
         protected LocalEventLoopGroup a() {
             return new LocalEventLoopGroup(0, (new ThreadFactoryBuilder()).setNameFormat("Netty Local Client IO #%d").setDaemon(true).build());
         }
 
+        @SuppressWarnings("unused")
         protected Object init() {
             return this.a();
         }
     };
     private static final Logger g = LogManager.getLogger();
-    private final EnumProtocolDirection h;
     private final Queue<NetworkManager.QueuedPacket> i = Queues.newConcurrentLinkedQueue();
     private final ReentrantReadWriteLock j = new ReentrantReadWriteLock();
     public Channel channel;
@@ -73,11 +79,10 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
     // Spigot End
     private PacketListener m;
     private IChatBaseComponent n;
-    private boolean o;
     private boolean p;
 
     public NetworkManager(@SuppressWarnings("SameParameterValue") EnumProtocolDirection enumprotocoldirection) {
-        this.h = enumprotocoldirection;
+        EnumProtocolDirection h = enumprotocoldirection;
     }
 
     public void channelActive(ChannelHandlerContext channelhandlercontext) throws Exception {
@@ -259,7 +264,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
     }
 
     public void a(SecretKey secretkey) {
-        this.o = true;
+        boolean o = true;
         this.channel.pipeline().addBefore("splitter", "decrypt", new PacketDecrypter(MinecraftEncryption.a(2, secretkey)));
         this.channel.pipeline().addBefore("prepender", "encrypt", new PacketEncrypter(MinecraftEncryption.a(1, secretkey)));
     }

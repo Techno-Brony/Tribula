@@ -31,6 +31,7 @@ public class EntityShulkerBullet extends Entity {
         this.noclip = true;
     }
 
+    @SuppressWarnings("unused")
     public EntityShulkerBullet(World world, EntityLiving entityliving, Entity entity, EnumDirection.EnumAxis enumdirection_enumaxis) {
         this(world);
         this.shooter = entityliving;

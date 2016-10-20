@@ -12,6 +12,7 @@ public class RecipiesShield {
         craftingmanager.a(new RecipiesShield.Decoration(null));
     }
 
+    @SuppressWarnings("unused")
     static class SyntheticClass_1 {    }
 
     static class Decoration extends ShapelessRecipes implements IRecipe { // CraftBukkit - added extends

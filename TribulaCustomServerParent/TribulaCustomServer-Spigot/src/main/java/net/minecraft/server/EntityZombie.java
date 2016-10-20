@@ -34,6 +34,7 @@ public class EntityZombie extends EntityMonster {
         this.setSize(0.6F, 1.95F);
     }
 
+    @SuppressWarnings("unused")
     public static void d(DataConverterManager dataconvertermanager) {
         EntityInsentient.a(dataconvertermanager, "Zombie");
     }
@@ -76,6 +77,7 @@ public class EntityZombie extends EntityMonster {
         this.getDataWatcher().register(EntityZombie.bA, Boolean.FALSE);
     }
 
+    @SuppressWarnings("unused")
     public void a(boolean flag) {
         this.getDataWatcher().set(EntityZombie.bA, flag);
     }
@@ -580,6 +582,7 @@ public class EntityZombie extends EntityMonster {
         return this.hasCustomName() ? this.getCustomName() : this.getVillagerType().d().toPlainText();
     }
 
+    @SuppressWarnings("unused")
     static class SyntheticClass_1 {    }
 
     class GroupDataZombie implements GroupDataEntity {

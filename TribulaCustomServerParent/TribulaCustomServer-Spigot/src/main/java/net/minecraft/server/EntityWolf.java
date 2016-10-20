@@ -16,7 +16,6 @@ public class EntityWolf extends EntityTameableAnimal {
     private static final DataWatcherObject<Boolean> bC = DataWatcher.a(EntityWolf.class, DataWatcherRegistry.h);
     private static final DataWatcherObject<Integer> bD = DataWatcher.a(EntityWolf.class, DataWatcherRegistry.b);
     private float bE;
-    private float bF;
     private boolean bG;
     private boolean bH;
     private float bI;
@@ -28,6 +27,7 @@ public class EntityWolf extends EntityTameableAnimal {
         this.setTamed(false);
     }
 
+    @SuppressWarnings("unused")
     public static void b(DataConverterManager dataconvertermanager) {
         EntityInsentient.a(dataconvertermanager, "Wolf");
     }
@@ -167,7 +167,7 @@ public class EntityWolf extends EntityTameableAnimal {
 
     public void m() {
         super.m();
-        this.bF = this.bE;
+        float bF = this.bE;
         if (this.dq()) {
             this.bE += (1.0F - this.bE) * 0.4F;
         } else {
@@ -362,6 +362,7 @@ public class EntityWolf extends EntityTameableAnimal {
         return entitywolf;
     }
 
+    @SuppressWarnings("unused")
     public void t(boolean flag) {
         this.datawatcher.set(EntityWolf.bC, flag);
     }

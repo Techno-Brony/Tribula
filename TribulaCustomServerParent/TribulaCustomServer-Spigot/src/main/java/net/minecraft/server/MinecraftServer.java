@@ -64,7 +64,6 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
     private final ServerPing q = new ServerPing();
     private final Random r = new Random();
     private final DataConverterManager dataConverterManager;
-    private final YggdrasilAuthenticationService U;
     private final MinecraftSessionService V;
     private final GameProfileRepository W;
     private final UserCache X;
@@ -72,8 +71,11 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
     public Convertable convertable;
     public File universe;
     public WorldServer[] worldServer;
+    @SuppressWarnings("unused")
     public String f;
+    @SuppressWarnings("unused")
     public int g;
+    @SuppressWarnings("unused")
     public long[][] i;
     // CraftBukkit start
     public List<WorldServer> worlds = new ArrayList<WorldServer>();
@@ -103,12 +105,10 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
     private String I;
     private String J;
     private boolean demoMode;
-    private boolean M;
     private String N = "";
     private String O = "";
-    private boolean P;
+    @SuppressWarnings("unused")
     private long Q;
-    private String R;
     private boolean S;
     private boolean T;
     private long Y;
@@ -123,7 +123,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         //noinspection deprecation
         io.netty.util.ResourceLeakDetector.setEnabled( false ); // Spigot - disable
         this.e = proxy;
-        this.U = yggdrasilauthenticationservice;
+        YggdrasilAuthenticationService u1 = yggdrasilauthenticationservice;
         this.V = minecraftsessionservice;
         this.W = gameprofilerepository;
         this.X = usercache;
@@ -322,7 +322,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
     }
 
     protected synchronized void b(String s) {
-        this.R = s;
+        String r1 = s;
     }
 
     public void a(String s, String s1, long i, WorldType worldtype, String s2) {
@@ -509,6 +509,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         this.t();
     }
 
+    @SuppressWarnings("unused")
     protected void a(String s, IDataManager idatamanager) {
         File file = new File(idatamanager.getDirectory(), "resources.zip");
 
@@ -522,6 +523,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
 
     public abstract EnumGamemode getGamemode();
 
+    @SuppressWarnings("unused")
     public void setGamemode(EnumGamemode enumgamemode) {
         // CraftBukkit start
         for (WorldServer world : this.worlds) {
@@ -541,6 +543,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
 
     public abstract boolean s();
 
+    @SuppressWarnings("unused")
     protected void a_(String s, int i) {
         this.f = s;
         this.g = i;
@@ -694,7 +697,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
                     lastTick = curTime;
 
                     this.C();
-                    this.P = true;
+                    boolean p1 = true;
                 }
                 // Spigot end
             } else {
@@ -974,10 +977,12 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         return true;
     }
 
+    @SuppressWarnings("unused")
     public void a(ITickable itickable) {
         this.o.add(itickable);
     }
 
+    @SuppressWarnings("unused")
     public void F() {
         /* CraftBukkit start - prevent abuse
         this.serverThread = new Thread(this, "Server thread");
@@ -989,6 +994,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         return new File(this.A(), s);
     }
 
+    @SuppressWarnings("unused")
     public void info(String s) {
         MinecraftServer.LOGGER.info(s);
     }
@@ -1024,6 +1030,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         return this.v.f();
     }
 
+    @SuppressWarnings("unused")
     public GameProfile[] K() {
         return this.v.g();
     }
@@ -1032,10 +1039,12 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         return this.getPropertyManager().getBoolean("debug", false); // CraftBukkit - don't hardcode
     }
 
+    @SuppressWarnings("unused")
     public void g(String s) {
         MinecraftServer.LOGGER.error(s);
     }
 
+    @SuppressWarnings("unused")
     public void h(String s) {
         if (this.isDebugging()) {
             MinecraftServer.LOGGER.info(s);
@@ -1159,6 +1168,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         return this.I;
     }
 
+    @SuppressWarnings("unused")
     public void i(String s) {
         this.I = s;
     }
@@ -1207,12 +1217,14 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         return this.demoMode;
     }
 
+    @SuppressWarnings("unused")
     public void b(boolean flag) {
         this.demoMode = flag;
     }
 
+    @SuppressWarnings("unused")
     public void c(boolean flag) {
-        this.M = flag;
+        boolean m1 = flag;
     }
 
     public Convertable getConvertable() {
@@ -1370,12 +1382,14 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         return false;
     }
 
+    @SuppressWarnings("unused")
     public abstract String a(EnumGamemode enumgamemode, boolean flag);
 
     public int ap() {
         return this.ticks;
     }
 
+    @SuppressWarnings("unused")
     public void aq() {
         this.S = true;
     }
@@ -1416,6 +1430,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         this.T = flag;
     }
 
+    @SuppressWarnings("unused")
     public Proxy au() {
         return this.e;
     }
@@ -1456,6 +1471,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         this.Y = 0L;
     }
 
+    @SuppressWarnings("unused")
     @Nullable
     public Entity a(UUID uuid) {
         WorldServer[] aworldserver = this.worldServer;
@@ -1524,10 +1540,12 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         return 256;
     }
 
+    @SuppressWarnings("unused")
     public long aG() {
         return this.aa;
     }
 
+    @SuppressWarnings("unused")
     public Thread aH() {
         return this.serverThread;
     }

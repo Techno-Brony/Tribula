@@ -11,15 +11,14 @@ public abstract class MobSpawnerAbstract {
     public int spawnDelay = 20;
     private MobSpawnerData spawnData = new MobSpawnerData();
     private double d;
-    private double e;
     private int minSpawnDelay = 200;
     private int maxSpawnDelay = 800;
     private int spawnCount = 4;
-    private Entity i;
     private int maxNearbyEntities = 6;
     private int requiredPlayerRange = 16;
     private int spawnRange = 4;
 
+    @SuppressWarnings("unused")
     public MobSpawnerAbstract() {}
 
     public String getMobName() {
@@ -36,9 +35,11 @@ public abstract class MobSpawnerAbstract {
         return this.a().isPlayerNearby((double) blockposition.getX() + 0.5D, (double) blockposition.getY() + 0.5D, (double) blockposition.getZ() + 0.5D, (double) this.requiredPlayerRange);
     }
 
+    @SuppressWarnings("unused")
     public void c() {
+        double e;
         if (!this.h()) {
-            this.e = this.d;
+            e = this.d;
         } else {
             BlockPosition blockposition = this.b();
 
@@ -53,7 +54,7 @@ public abstract class MobSpawnerAbstract {
                     --this.spawnDelay;
                 }
 
-                this.e = this.d;
+                e = this.d;
                 this.d = (this.d + (double) (1000.0F / ((float) this.spawnDelay + 200.0F))) % 360.0D;
             } else {
                 if (this.spawnDelay == -1) {
@@ -138,6 +139,7 @@ public abstract class MobSpawnerAbstract {
         this.a(1);
     }
 
+    @SuppressWarnings("unused")
     public void a(NBTTagCompound nbttagcompound) {
         this.spawnDelay = nbttagcompound.getShort("Delay");
         this.mobs.clear();
@@ -172,11 +174,12 @@ public abstract class MobSpawnerAbstract {
         }
 
         if (this.a() != null) {
-            this.i = null;
+            Entity i = null;
         }
 
     }
 
+    @SuppressWarnings("unused")
     public NBTTagCompound b(NBTTagCompound nbttagcompound) {
         String s = this.getMobName();
 
@@ -211,6 +214,7 @@ public abstract class MobSpawnerAbstract {
         }
     }
 
+    @SuppressWarnings("unused")
     public boolean b(int i) {
         if (i == 1 && this.a().isClientSide) {
             this.spawnDelay = this.minSpawnDelay;

@@ -2,6 +2,7 @@ package net.minecraft.server;
 
 public class ItemMapEmpty extends ItemWorldMapBase {
 
+    @SuppressWarnings("unused")
     protected ItemMapEmpty() {
         this.a(CreativeModeTab.f);
     }

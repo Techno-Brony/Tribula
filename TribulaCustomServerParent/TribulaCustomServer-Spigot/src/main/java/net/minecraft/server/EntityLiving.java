@@ -36,6 +36,7 @@ public abstract class EntityLiving extends Entity {
     private final ItemStack[] bv = new ItemStack[4];
     public CombatTracker combatTracker = new CombatTracker(this);
     public boolean av;
+    @SuppressWarnings("unused")
     public EnumHand aw;
     public int ax;
     public int ay;
@@ -43,15 +44,20 @@ public abstract class EntityLiving extends Entity {
     public int aA;
     public float aB;
     public int deathTicks;
+    @SuppressWarnings("unused")
     public float aD;
     public float aE;
+    @SuppressWarnings("unused")
     public float aG;
     public float aH;
     public float aI;
     public int maxNoDamageTicks = 20;
+    @SuppressWarnings("unused")
     public float aK;
     public float aL;
+    @SuppressWarnings("unused")
     public float aM;
+    @SuppressWarnings("unused")
     public float aN;
     public float aO;
     public float aP;
@@ -75,18 +81,27 @@ public abstract class EntityLiving extends Entity {
     protected int lastDamageByPlayerTime;
     protected boolean aV;
     protected int ticksFarFromPlayer;
+    @SuppressWarnings("unused")
     protected float aX;
     protected float aY;
     protected float aZ;
+    @SuppressWarnings("unused")
     protected float ba;
+    @SuppressWarnings("unused")
     protected float bb;
+    @SuppressWarnings("unused")
     protected int bc;
     protected boolean be;
     protected int bi;
+    @SuppressWarnings("unused")
     protected double bj;
+    @SuppressWarnings("unused")
     protected double bk;
+    @SuppressWarnings("unused")
     protected double bl;
+    @SuppressWarnings("unused")
     protected double bm;
+    @SuppressWarnings("unused")
     protected double bn;
     protected ItemStack bo;
     protected int bp;
@@ -413,6 +428,7 @@ public abstract class EntityLiving extends Entity {
         this.bA = this.ticksLived;
     }
 
+    @SuppressWarnings("unused")
     public int bN() {
         return this.ticksFarFromPlayer;
     }
@@ -727,6 +743,7 @@ public abstract class EntityLiving extends Entity {
     }
 
     // CraftBukkit start - Delegate so we can handle providing a reason for health being regained
+    @SuppressWarnings("unused")
     public void heal(float f) {
         heal(f, EntityRegainHealthEvent.RegainReason.CUSTOM);
     }
@@ -903,6 +920,7 @@ public abstract class EntityLiving extends Entity {
         }
     }
 
+    @SuppressWarnings("unused")
     @Nullable
     public DamageSource bU() {
         if (this.world.getTime() - this.bG > 40L) {
@@ -1701,11 +1719,13 @@ public abstract class EntityLiving extends Entity {
         this.bB = f;
     }
 
+    @SuppressWarnings("unused")
     public boolean B(Entity entity) {
         this.z(entity);
         return false;
     }
 
+    @SuppressWarnings("unused")
     public boolean isSleeping() {
         return false;
     }
@@ -2113,10 +2133,13 @@ public abstract class EntityLiving extends Entity {
         this.bD = f;
     }
 
+    @SuppressWarnings("unused")
     public void enterCombat() {}
 
+    @SuppressWarnings("unused")
     public void exitCombat() {}
 
+    @SuppressWarnings("unused")
     protected void cv() {
         this.updateEffects = true;
     }
@@ -2256,6 +2279,7 @@ public abstract class EntityLiving extends Entity {
         return this.bp;
     }
 
+    @SuppressWarnings("unused")
     public int cC() {
         return this.cx() ? this.bo.l() - this.cB() : 0;
     }

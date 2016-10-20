@@ -19,6 +19,7 @@ public class RecipesBanner {
         craftingmanager.a(new RecipesBanner.AddRecipe(null));
     }
 
+    @SuppressWarnings("unused")
     static class SyntheticClass_1 {    }
 
     static class AddRecipe extends ShapelessRecipes implements IRecipe { // CraftBukkit - added extends

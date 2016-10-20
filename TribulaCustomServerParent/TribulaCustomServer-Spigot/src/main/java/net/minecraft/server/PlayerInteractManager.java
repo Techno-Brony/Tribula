@@ -48,6 +48,7 @@ public class PlayerInteractManager {
         this.world.everyoneSleeping();
     }
 
+    @SuppressWarnings("unused")
     public boolean c() {
         return this.gamemode.e();
     }
@@ -255,6 +256,7 @@ public class PlayerInteractManager {
         return flag;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public boolean breakBlock(BlockPosition blockposition) {
         // CraftBukkit start - fire BlockBreakEvent
         BlockBreakEvent event = null;
@@ -381,6 +383,7 @@ public class PlayerInteractManager {
         }
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public EnumInteractionResult a(EntityHuman entityhuman, World world, ItemStack itemstack, EnumHand enumhand) {
         if (this.gamemode == EnumGamemode.SPECTATOR) {
             return EnumInteractionResult.PASS;
@@ -417,6 +420,7 @@ public class PlayerInteractManager {
     }
     // CraftBukkit end
 
+    @SuppressWarnings("UnusedReturnValue")
     public EnumInteractionResult a(EntityHuman entityhuman, World world, @Nullable ItemStack itemstack, EnumHand enumhand, BlockPosition blockposition, EnumDirection enumdirection, float f, float f1, float f2) {
         /* CraftBukkit start - whole method
         if (this.gamemode == EnumGamemode.SPECTATOR) {

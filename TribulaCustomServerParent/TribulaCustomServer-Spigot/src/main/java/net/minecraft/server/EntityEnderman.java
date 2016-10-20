@@ -46,6 +46,7 @@ public class EntityEnderman extends EntityMonster {
         this.a(PathType.WATER, -1.0F);
     }
 
+    @SuppressWarnings("unused")
     public static void b(DataConverterManager dataconvertermanager) {
         EntityInsentient.a(dataconvertermanager, "Enderman");
     }

@@ -38,6 +38,7 @@ public class EntityFallingBlock extends Entity {
         this.a(new BlockPosition(this));
     }
 
+    @SuppressWarnings("unused")
     public static void a(DataConverterManager dataconvertermanager) {}
 
     public void a(BlockPosition blockposition) {
@@ -242,6 +243,7 @@ public class EntityFallingBlock extends Entity {
 
     }
 
+    @SuppressWarnings("unused")
     public void a(boolean flag) {
         this.hurtEntities = flag;
     }

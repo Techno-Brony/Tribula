@@ -9,9 +9,11 @@ public abstract class BlockLeaves extends Block {
 
     public static final BlockStateBoolean DECAYABLE = BlockStateBoolean.of("decayable");
     public static final BlockStateBoolean CHECK_DECAY = BlockStateBoolean.of("check_decay");
+    @SuppressWarnings("unused")
     protected boolean c;
     int[] d;
 
+    @SuppressWarnings("unused")
     public BlockLeaves() {
         super(Material.LEAVES);
         this.a(true);
@@ -201,5 +203,6 @@ public abstract class BlockLeaves extends Block {
         return false;
     }
 
+    @SuppressWarnings("unused")
     public abstract BlockWood.EnumLogVariant e(int i);
 }

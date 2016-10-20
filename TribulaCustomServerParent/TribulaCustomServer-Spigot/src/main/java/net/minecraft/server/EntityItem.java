@@ -13,6 +13,7 @@ public class EntityItem extends Entity {
     private static final Logger b = LogManager.getLogger();
     private static final DataWatcherObject<Optional<ItemStack>> c = DataWatcher.a(EntityItem.class, DataWatcherRegistry.f);
     public int pickupDelay;
+    @SuppressWarnings("unused")
     public float a;
     private int age;
     private int f;
@@ -50,6 +51,7 @@ public class EntityItem extends Entity {
         this.setItemStack(new ItemStack(Blocks.AIR, 0));
     }
 
+    @SuppressWarnings("unused")
     public static void a(DataConverterManager dataconvertermanager) {
         dataconvertermanager.a(DataConverterTypes.ENTITY, new DataInspectorItem("Item", "Item"));
     }
@@ -231,6 +233,7 @@ public class EntityItem extends Entity {
         return this.inWater;
     }
 
+    @SuppressWarnings("unused")
     protected void burn(int i) {
         this.damageEntity(DamageSource.FIRE, (float) i);
     }
@@ -421,6 +424,7 @@ public class EntityItem extends Entity {
         return this.h;
     }
 
+    @SuppressWarnings("unused")
     public void d(String s) {
         this.h = s;
     }
@@ -437,6 +441,7 @@ public class EntityItem extends Entity {
         this.pickupDelay = 10;
     }
 
+    @SuppressWarnings("unused")
     public void r() {
         this.pickupDelay = 0;
     }
@@ -457,6 +462,7 @@ public class EntityItem extends Entity {
         this.age = -6000;
     }
 
+    @SuppressWarnings("unused")
     public void w() {
         this.s();
         this.age = world.spigotConfig.itemDespawnRate - 1; // Spigot

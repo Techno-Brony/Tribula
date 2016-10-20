@@ -12,6 +12,7 @@ public class EntitySilverfish extends EntityMonster {
         this.setSize(0.4F, 0.3F);
     }
 
+    @SuppressWarnings("unused")
     public static void b(DataConverterManager dataconvertermanager) {
         EntityInsentient.a(dataconvertermanager, "Silverfish");
     }

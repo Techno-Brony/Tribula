@@ -2,6 +2,7 @@ package net.minecraft.server;
 
 public class ItemSnowball extends Item {
 
+    @SuppressWarnings("unused")
     public ItemSnowball() {
         this.maxStackSize = 16;
         this.a(CreativeModeTab.f);

@@ -2,6 +2,7 @@ package net.minecraft.server;
 
 public class ItemFireball extends Item {
 
+    @SuppressWarnings("unused")
     public ItemFireball() {
         this.a(CreativeModeTab.f);
     }

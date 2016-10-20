@@ -38,6 +38,7 @@ public class JsonList<K, V extends JsonListEntry<K>> {
     private final Map<String, V> d = Maps.newHashMap();
     private boolean e = true;
 
+    @SuppressWarnings("unused")
     public JsonList(File file) {
         this.c = file;
         GsonBuilder gsonbuilder = (new GsonBuilder()).setPrettyPrinting();
@@ -46,6 +47,7 @@ public class JsonList<K, V extends JsonListEntry<K>> {
         this.b = gsonbuilder.create();
     }
 
+    @SuppressWarnings("unused")
     public boolean isEnabled() {
         return this.e;
     }
@@ -135,6 +137,7 @@ public class JsonList<K, V extends JsonListEntry<K>> {
         return new JsonListEntry(null, jsonobject);
     }
 
+    @SuppressWarnings("unused")
     protected Map<String, V> e() {
         return this.d;
     }
@@ -194,8 +197,10 @@ public class JsonList<K, V extends JsonListEntry<K>> {
 
     class JsonListEntrySerializer implements JsonDeserializer<JsonListEntry<K>>, JsonSerializer<JsonListEntry<K>> {
 
+        @SuppressWarnings("unused")
         private JsonListEntrySerializer() {}
 
+        @SuppressWarnings("unused")
         JsonListEntrySerializer(@SuppressWarnings("SameParameterValue") Object object) {
             this();
         }

@@ -20,6 +20,7 @@ public class Block {
     protected final Material material;
     protected final MaterialMapColor y;
     protected final BlockStateList blockStateList;
+    @SuppressWarnings("unused")
     public float w;
     public float frictionFactor;
     protected boolean l;
@@ -31,9 +32,9 @@ public class Block {
     protected float durability;
     protected boolean s;
     protected boolean t;
+    @SuppressWarnings("unused")
     protected boolean isTileEntity;
     protected SoundEffectType stepSound;
-    private CreativeModeTab creativeTab;
     private IBlockData blockData;
     private String name;
 
@@ -447,41 +448,49 @@ public class Block {
         return value;
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     public boolean k(IBlockData iblockdata) {
         return iblockdata.getMaterial().k() && iblockdata.h();
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     public boolean l(IBlockData iblockdata) {
         return this.l;
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     public boolean a(IBlockData iblockdata, Entity entity) {
         return true;
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     public int m(IBlockData iblockdata) {
         return this.m;
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     public int o(IBlockData iblockdata) {
         return this.o;
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     public boolean p(IBlockData iblockdata) {
         return this.p;
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     public Material q(IBlockData iblockdata) {
         return this.material;
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     public MaterialMapColor r(IBlockData iblockdata) {
         return this.y;
@@ -500,16 +509,19 @@ public class Block {
         }
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     public IBlockData updateState(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         return iblockdata;
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     public IBlockData a(IBlockData iblockdata, EnumBlockRotation enumblockrotation) {
         return iblockdata;
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     public IBlockData a(IBlockData iblockdata, EnumBlockMirror enumblockmirror) {
         return iblockdata;
@@ -535,11 +547,13 @@ public class Block {
         return this;
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     public boolean s(IBlockData iblockdata) {
         return iblockdata.getMaterial().isSolid() && iblockdata.h();
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     public boolean isOccluding(IBlockData iblockdata) {
         return iblockdata.getMaterial().k() && iblockdata.h() && !iblockdata.m();
@@ -549,6 +563,7 @@ public class Block {
         return this.material.isSolid() && this.getBlockData().h();
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     public boolean c(IBlockData iblockdata) {
         return true;
@@ -558,6 +573,7 @@ public class Block {
         return !this.material.isSolid();
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     public EnumRenderType a(IBlockData iblockdata) {
         return EnumRenderType.MODEL;
@@ -581,11 +597,13 @@ public class Block {
         return this;
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     public float b(IBlockData iblockdata, World world, BlockPosition blockposition) {
         return this.strength;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     protected Block a(boolean flag) {
         this.t = flag;
         return this;
@@ -599,26 +617,31 @@ public class Block {
         return this.isTileEntity;
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         return Block.j;
     }
 
+    @SuppressWarnings("unused")
     public boolean a(IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
         return iblockaccess.getType(blockposition).getMaterial().isBuildable();
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, AxisAlignedBB axisalignedbb, List<AxisAlignedBB> list, @Nullable Entity entity) {
         a(blockposition, axisalignedbb, list, iblockdata.d(world, blockposition));
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     @Nullable
     public AxisAlignedBB a(IBlockData iblockdata, World world, BlockPosition blockposition) {
         return iblockdata.c(world, blockposition);
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     public boolean b(IBlockData iblockdata) {
         return true;
@@ -640,6 +663,7 @@ public class Block {
 
     public void postBreak(World world, BlockPosition blockposition, IBlockData iblockdata) {}
 
+    @SuppressWarnings("unused")
     @Deprecated
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {}
 
@@ -664,6 +688,7 @@ public class Block {
         return Item.getItemOf(this);
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     public float getDamage(IBlockData iblockdata, EntityHuman entityhuman, World world, BlockPosition blockposition) {
         float f = iblockdata.b(world, blockposition);
@@ -713,6 +738,7 @@ public class Block {
         return this.durability / 5.0F;
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     @Nullable
     public MovingObjectPosition a(IBlockData iblockdata, World world, BlockPosition blockposition, Vec3D vec3d, Vec3D vec3d1) {
@@ -759,11 +785,13 @@ public class Block {
         return vec3d;
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     public int b(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
         return 0;
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     public boolean isPowerSource(IBlockData iblockdata) {
         return false;
@@ -771,6 +799,7 @@ public class Block {
 
     public void a(World world, BlockPosition blockposition, IBlockData iblockdata, Entity entity) {}
 
+    @SuppressWarnings("unused")
     @Deprecated
     public int c(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
         return 0;
@@ -829,6 +858,7 @@ public class Block {
         return this;
     }
 
+    @SuppressWarnings("unused")
     public String getName() {
         //noinspection deprecation,deprecation
         return LocaleI18n.get(this.a() + ".name");
@@ -838,11 +868,13 @@ public class Block {
         return "tile." + this.name;
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     public boolean a(IBlockData iblockdata, World world, BlockPosition blockposition, int i, int j) {
         return false;
     }
 
+    @SuppressWarnings("unused")
     public boolean p() {
         return this.s;
     }
@@ -852,6 +884,7 @@ public class Block {
         return this;
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     public EnumPistonReaction h(IBlockData iblockdata) {
         return this.material.getPushReaction();
@@ -865,13 +898,14 @@ public class Block {
         entity.motY = 0.0D;
     }
 
+    @SuppressWarnings("unused")
     @Nullable
     public ItemStack a(World world, BlockPosition blockposition, IBlockData iblockdata) {
         return new ItemStack(Item.getItemOf(this), 1, this.getDropData(iblockdata));
     }
 
     public Block a(CreativeModeTab creativemodetab) {
-        this.creativeTab = creativemodetab;
+        CreativeModeTab creativeTab = creativemodetab;
         return this;
     }
 
@@ -891,11 +925,13 @@ public class Block {
         return this == block;
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     public boolean isComplexRedstone(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("unused")
     @Deprecated
     public int d(IBlockData iblockdata, World world, BlockPosition blockposition) {
         return 0;

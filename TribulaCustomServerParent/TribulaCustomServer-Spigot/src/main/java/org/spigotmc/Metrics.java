@@ -161,6 +161,7 @@ public class Metrics {
      * @param name The name of the graph
      * @return Graph object created. Will never return NULL under normal circumstances unless bad parameters are given
      */
+    @SuppressWarnings("unused")
     public Graph createGraph(final String name) {
         if (name == null) {
             throw new IllegalArgumentException("Graph name cannot be null");
@@ -181,6 +182,7 @@ public class Metrics {
      *
      * @param graph The name of the graph
      */
+    @SuppressWarnings("unused")
     public void addGraph(final Graph graph) {
         if (graph == null) {
             throw new IllegalArgumentException("Graph cannot be null");
@@ -194,6 +196,7 @@ public class Metrics {
      *
      * @param plotter The plotter to use to plot custom data
      */
+    @SuppressWarnings("unused")
     public void addCustomData(final Plotter plotter) {
         if (plotter == null) {
             throw new IllegalArgumentException("Plotter cannot be null");
@@ -213,6 +216,7 @@ public class Metrics {
      *
      * @return True if statistics measuring is running, otherwise false.
      */
+    @SuppressWarnings("UnusedReturnValue")
     public boolean start() {
         synchronized (optOutLock) {
             // Did we opt out?
@@ -295,6 +299,7 @@ public class Metrics {
      * Enables metrics for the server by setting "opt-out" to false in the config file and starting the metrics task.
      *
      */
+    @SuppressWarnings("unused")
     public void enable() throws IOException {
         // This has to be synchronized or it can collide with the check in the task.
         synchronized (optOutLock) {
@@ -315,6 +320,7 @@ public class Metrics {
      * Disables metrics for the server by setting "opt-out" to true in the config file and canceling the metrics task.
      *
      */
+    @SuppressWarnings("unused")
     public void disable() throws IOException {
         // This has to be synchronized or it can collide with the check in the task.
         synchronized (optOutLock) {
@@ -528,6 +534,7 @@ public class Metrics {
          *
          * @param plotter the plotter to remove from the graph
          */
+        @SuppressWarnings("unused")
         public void removePlotter(final Plotter plotter) {
             plotters.remove(plotter);
         }
@@ -576,6 +583,7 @@ public class Metrics {
         /**
          * Construct a plotter with the default plot name
          */
+        @SuppressWarnings("unused")
         public Plotter() {
             this("Default");
         }

@@ -213,6 +213,7 @@ public class BlockTrapdoor extends Block {
 
         private final String c;
 
+        @SuppressWarnings("unused")
         EnumTrapdoorHalf(String s) {
             this.c = s;
         }

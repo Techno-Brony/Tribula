@@ -9,8 +9,10 @@ public class NBTTagIntArray extends NBTBase {
 
     private int[] data;
 
+    @SuppressWarnings("unused")
     NBTTagIntArray() {}
 
+    @SuppressWarnings("unused")
     public NBTTagIntArray(int[] aint) {
         this.data = aint;
     }
@@ -71,6 +73,7 @@ public class NBTTagIntArray extends NBTBase {
         return super.hashCode() ^ Arrays.hashCode(this.data);
     }
 
+    @SuppressWarnings("unused")
     public int[] d() {
         return this.data;
     }

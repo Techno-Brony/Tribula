@@ -34,9 +34,6 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
     public final RemoteControlCommandListener remoteControlCommandListener = new RemoteControlCommandListener(this);
     private final List<ServerCommand> serverCommandQueue = Collections.synchronizedList(Lists.<ServerCommand>newArrayList()); // CraftBukkit - fix decompile error
     public PropertyManager propertyManager;
-    private RemoteStatusListener n;
-    private RemoteControlListener p;
-    private EULA r;
     private boolean generateStructures;
     private EnumGamemode t;
     private boolean u;
@@ -124,7 +121,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
         }
 
         this.propertyManager = new PropertyManager(this.options); // CraftBukkit - CLI argument support
-        this.r = new EULA(new File("eula.txt"));
+        EULA r = new EULA(new File("eula.txt"));
         // Spigot Start
         boolean eulaAgreed = Boolean.getBoolean( "com.mojang.eula.agree" );
         if ( eulaAgreed )
@@ -134,9 +131,9 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
             System.err.println( "If you do not agree to the above EULA please stop your server and remove this flag immediately." );
         }
         // Spigot End
-        if (!this.r.a() && !eulaAgreed) { // Spigot
+        if (!r.a() && !eulaAgreed) { // Spigot
             DedicatedServer.LOGGER.info("You need to agree to the EULA in order to run the server. Go to eula.txt for more info.");
-            this.r.b();
+            r.b();
             return false;
         } else {
             if (this.R()) {
@@ -262,14 +259,14 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
                 DedicatedServer.LOGGER.info("Server startup completed in {}", s3);
                 if (this.propertyManager.getBoolean("enable-query", false)) {
                     DedicatedServer.LOGGER.info("Starting GS4 status listener");
-                    this.n = new RemoteStatusListener(this);
-                    this.n.a();
+                    RemoteStatusListener n = new RemoteStatusListener(this);
+                    n.a();
                 }
 
                 if (this.propertyManager.getBoolean("enable-rcon", false)) {
                     DedicatedServer.LOGGER.info("Starting remote control listener");
-                    this.p = new RemoteControlListener(this);
-                    this.p.a();
+                    RemoteControlListener p = new RemoteControlListener(this);
+                    p.a();
                     this.remoteConsole = new org.bukkit.craftbukkit.command.CraftRemoteConsoleCommandSender(this.remoteControlCommandListener); // CraftBukkit
                 }
 
@@ -352,7 +349,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
                 return this.a();
             }
         });
-        //noinspection unchecked
+        //noinspection unchecked,SameReturnValue,SameReturnValue
         crashreport.g().a("Type", new CrashReportCallable() {
             public String a() {
                 return "Dedicated Server (map_server.txt)";
@@ -435,6 +432,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
         return this.propertyManager.getString(s, s1);
     }
 
+    @SuppressWarnings("unused")
     public boolean a(String s, boolean flag) {
         return this.propertyManager.getBoolean(s, flag);
     }
@@ -465,6 +463,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
         return this.getMotd();
     }
 
+    @SuppressWarnings("unused")
     public void aN() {
         ServerGUI.a(this);
         this.u = true;
@@ -613,6 +612,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
         }
     }
 
+    @SuppressWarnings("unused")
     public long aP() {
         return this.propertyManager.getLong("max-tick-time", TimeUnit.MINUTES.toMillis(1L));
     }

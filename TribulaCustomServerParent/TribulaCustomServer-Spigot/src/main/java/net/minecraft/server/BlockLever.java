@@ -312,6 +312,7 @@ public class BlockLever extends Block {
         private final String k;
         private final EnumDirection l;
 
+        @SuppressWarnings("unused")
         EnumLeverPosition(int i, String s, EnumDirection enumdirection) {
             this.j = i;
             this.k = s;

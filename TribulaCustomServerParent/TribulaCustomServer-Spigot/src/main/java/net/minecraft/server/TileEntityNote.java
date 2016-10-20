@@ -21,6 +21,7 @@ public class TileEntityNote extends TileEntity {
         this.f = nbttagcompound.getBoolean("powered");
     }
 
+    @SuppressWarnings("unused")
     public void d() {
         this.note = (byte) ((this.note + 1) % 25);
         this.update();

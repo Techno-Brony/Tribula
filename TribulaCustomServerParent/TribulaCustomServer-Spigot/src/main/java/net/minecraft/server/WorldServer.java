@@ -39,7 +39,6 @@ public class WorldServer extends World implements IAsyncTaskHandler {
     public EntityTracker tracker;
     public boolean savingDisabled;
     private boolean O;
-    private int emptyTime;
     private int T;
 
     // Add env and gen to constructor
@@ -669,7 +668,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
     }
 
     public void m() {
-        this.emptyTime = 0;
+        int emptyTime = 0;
     }
 
     public boolean a(boolean flag) {
@@ -803,10 +802,12 @@ public class WorldServer extends World implements IAsyncTaskHandler {
     }
     // CraftBukkit end */
 
+    @SuppressWarnings("unused")
     private boolean getSpawnNPCs() {
         return this.server.getSpawnNPCs();
     }
 
+    @SuppressWarnings("unused")
     private boolean getSpawnAnimals() {
         return this.server.getSpawnAnimals();
     }
@@ -831,6 +832,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         // CraftBukkit end
     }
 
+    @SuppressWarnings("unused")
     public List<TileEntity> getTileEntities(int i, int j, int k, int l, int i1, int j1) {
         ArrayList arraylist = Lists.newArrayList();
 
@@ -1019,6 +1021,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         }
     }
 
+    @SuppressWarnings("unused")
     public void flushSave() {
         ChunkProviderServer chunkproviderserver = this.getChunkProviderServer();
 
@@ -1306,6 +1309,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         return this.portalTravelAgent;
     }
 
+    @SuppressWarnings("unused")
     public DefinedStructureManager y() {
         return this.dataManager.h();
     }
@@ -1336,6 +1340,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
 
     }
 
+    @SuppressWarnings("unused")
     public void a(EntityPlayer entityplayer, EnumParticle enumparticle, boolean flag, double d0, double d1, double d2, int i, double d3, double d4, double d5, double d6, int... aint) {
         PacketPlayOutWorldParticles packetplayoutworldparticles = new PacketPlayOutWorldParticles(enumparticle, flag, (float) d0, (float) d1, (float) d2, (float) d3, (float) d4, (float) d5, (float) d6, i, aint);
 

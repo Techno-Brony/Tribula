@@ -24,8 +24,10 @@ public class ChunkProviderGenerate implements ChunkGenerator {
     private final WorldGenLargeFeature z;
     private final WorldGenBase A;
     private final WorldGenMonument B;
+    @SuppressWarnings("unused")
     public NoiseGeneratorOctaves b;
     public NoiseGeneratorOctaves c;
+    @SuppressWarnings("unused")
     public NoiseGeneratorOctaves d;
     double[] e;
     double[] f;
@@ -36,6 +38,7 @@ public class ChunkProviderGenerate implements ChunkGenerator {
     private double[] u;
     private BiomeBase[] C;
 
+    @SuppressWarnings("unused")
     public ChunkProviderGenerate(World world, long i, boolean flag, String s) {
         this.t = Blocks.WATER.getBlockData();
         this.u = new double[256];

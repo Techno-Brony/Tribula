@@ -6,6 +6,7 @@ public class ItemSkull extends Item {
 
     private static final String[] a = new String[] { "skeleton", "wither", "zombie", "char", "creeper", "dragon"};
 
+    @SuppressWarnings("unused")
     public ItemSkull() {
         this.a(CreativeModeTab.c);
         this.setMaxDurability(0);

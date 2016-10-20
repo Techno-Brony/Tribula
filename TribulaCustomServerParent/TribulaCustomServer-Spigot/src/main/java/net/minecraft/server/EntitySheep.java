@@ -63,6 +63,7 @@ public class EntitySheep extends EntityAnimal {
         return EntitySheep.bz.get(enumcolor);
     }
 
+    @SuppressWarnings("unused")
     public static void b(DataConverterManager dataconvertermanager) {
         EntityInsentient.a(dataconvertermanager, "Sheep");
     }

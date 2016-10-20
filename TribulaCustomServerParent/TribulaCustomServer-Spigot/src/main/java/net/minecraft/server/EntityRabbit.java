@@ -19,6 +19,7 @@ public class EntityRabbit extends EntityAnimal {
         this.initializePathFinderGoals(); // CraftBukkit - moved code
     }
 
+    @SuppressWarnings("unused")
     public static void b(DataConverterManager dataconvertermanager) {
         EntityInsentient.a(dataconvertermanager, "Rabbit");
     }

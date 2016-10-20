@@ -68,6 +68,7 @@ public abstract class EntityArrow extends Entity implements IProjectile {
 
     public static void a(DataConverterManager dataconvertermanager, String s) {}
 
+    @SuppressWarnings("unused")
     public static void a(DataConverterManager dataconvertermanager) {
         a(dataconvertermanager, "Arrow");
     }
@@ -518,6 +519,7 @@ public abstract class EntityArrow extends Entity implements IProjectile {
 
         DISALLOWED, ALLOWED, CREATIVE_ONLY;
 
+        @SuppressWarnings("unused")
         PickupStatus() {}
 
         public static EntityArrow.PickupStatus a(int i) {

@@ -60,6 +60,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
         this.bL = new DragonControllerManager(this);
     }
 
+    @SuppressWarnings("unused")
     public static void b(DataConverterManager dataconvertermanager) {
         EntityInsentient.a(dataconvertermanager, "EnderDragon");
     }
@@ -525,6 +526,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
         return false;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     protected boolean dealDamage(DamageSource damagesource, float f) {
         return super.damageEntity(damagesource, f);
     }
@@ -614,6 +616,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
 
     }
 
+    @SuppressWarnings("unused")
     public int o() {
         if (this.bO[0] == null) {
             for (int i = 0; i < 24; ++i) {
@@ -697,6 +700,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
         return i;
     }
 
+    @SuppressWarnings("unused")
     @Nullable
     public PathEntity a(int i, int j, @Nullable PathPoint pathpoint) {
         PathPoint pathpoint1;
@@ -867,6 +871,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
         return 5.0F;
     }
 
+    @SuppressWarnings("unused")
     public Vec3D a(float f) {
         IDragonController idragoncontroller = this.bL.a();
         DragonControllerPhase dragoncontrollerphase = idragoncontroller.getControllerPhase();
@@ -900,6 +905,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
         return vec3d;
     }
 
+    @SuppressWarnings("unused")
     public void a(EntityEnderCrystal entityendercrystal, BlockPosition blockposition, DamageSource damagesource) {
         EntityHuman entityhuman;
 
@@ -928,6 +934,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
         return this.bL;
     }
 
+    @SuppressWarnings("unused")
     @Nullable
     public EnderDragonBattle cZ() {
         return this.bK;

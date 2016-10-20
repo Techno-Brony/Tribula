@@ -27,6 +27,7 @@ public class EntitySkeleton extends EntityMonster implements IRangedEntity {
         this.o();
     }
 
+    @SuppressWarnings("unused")
     public static void b(DataConverterManager dataconvertermanager) {
         EntityInsentient.a(dataconvertermanager, "Skeleton");
     }

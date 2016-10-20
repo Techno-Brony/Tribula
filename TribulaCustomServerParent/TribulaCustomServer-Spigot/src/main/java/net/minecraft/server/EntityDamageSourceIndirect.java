@@ -6,6 +6,7 @@ public class EntityDamageSourceIndirect extends EntityDamageSource {
 
     private final Entity owner;
 
+    @SuppressWarnings("unused")
     public EntityDamageSourceIndirect(String s, Entity entity, @Nullable Entity entity1) {
         super(s, entity);
         this.owner = entity1;

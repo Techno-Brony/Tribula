@@ -23,6 +23,7 @@ public class Village {
     private int i;
     private int l;
 
+    @SuppressWarnings("unused")
     public Village() {
         this.c = BlockPosition.ZERO;
         this.d = BlockPosition.ZERO;
@@ -31,6 +32,7 @@ public class Village {
         this.k = Lists.newArrayList();
     }
 
+    @SuppressWarnings("unused")
     public Village(World world) {
         this.c = BlockPosition.ZERO;
         this.d = BlockPosition.ZERO;
@@ -40,10 +42,12 @@ public class Village {
         this.a = world;
     }
 
+    @SuppressWarnings("unused")
     public void a(World world) {
         this.a = world;
     }
 
+    @SuppressWarnings("unused")
     public void a(int i) {
         this.g = i;
         this.m();
@@ -145,10 +149,12 @@ public class Village {
         return this.d.n(blockposition) < (double) (this.e * this.e);
     }
 
+    @SuppressWarnings("unused")
     public List<VillageDoor> f() {
         return this.b;
     }
 
+    @SuppressWarnings("unused")
     public VillageDoor b(BlockPosition blockposition) {
         VillageDoor villagedoor = null;
         int i = Integer.MAX_VALUE;
@@ -168,6 +174,7 @@ public class Village {
         return villagedoor;
     }
 
+    @SuppressWarnings("unused")
     public VillageDoor c(BlockPosition blockposition) {
         VillageDoor villagedoor = null;
         int i = Integer.MAX_VALUE;
@@ -198,6 +205,7 @@ public class Village {
         return villagedoor;
     }
 
+    @SuppressWarnings("unused")
     public VillageDoor e(BlockPosition blockposition) {
         if (this.d.n(blockposition) > (double) (this.e * this.e)) {
             return null;
@@ -218,6 +226,7 @@ public class Village {
         }
     }
 
+    @SuppressWarnings("unused")
     public void a(VillageDoor villagedoor) {
         this.b.add(villagedoor);
         this.c = this.c.a(villagedoor.d());
@@ -225,6 +234,7 @@ public class Village {
         this.f = villagedoor.h();
     }
 
+    @SuppressWarnings("unused")
     public boolean g() {
         return this.b.isEmpty();
     }
@@ -360,6 +370,7 @@ public class Village {
         return integer != null ? integer : 0;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public int a(String s, int i) {
         int j = this.a(s);
         int k = MathHelper.clamp(j + i, -30, 10);
@@ -372,6 +383,7 @@ public class Village {
         return this.a(s) <= -15;
     }
 
+    @SuppressWarnings("unused")
     public void a(NBTTagCompound nbttagcompound) {
         this.h = nbttagcompound.getInt("PopSize");
         this.e = nbttagcompound.getInt("Radius");
@@ -409,6 +421,7 @@ public class Village {
 
     }
 
+    @SuppressWarnings("unused")
     public void b(NBTTagCompound nbttagcompound) {
         nbttagcompound.setInt("PopSize", this.h);
         nbttagcompound.setInt("Radius", this.e);

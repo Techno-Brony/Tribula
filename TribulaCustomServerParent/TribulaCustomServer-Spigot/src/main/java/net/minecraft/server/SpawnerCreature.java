@@ -124,6 +124,7 @@ public final class SpawnerCreature {
         return i;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public int a(WorldServer worldserver, boolean flag, boolean flag1, boolean flag2) {
         if (!flag && !flag1) {
             return 0;

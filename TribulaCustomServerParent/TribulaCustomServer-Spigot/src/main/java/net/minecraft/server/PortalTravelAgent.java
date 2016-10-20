@@ -24,6 +24,7 @@ public class PortalTravelAgent {
         this.b = new Random(worldserver.getSeed());
     }
 
+    @SuppressWarnings("unused")
     public void a(Entity entity, float f) {
         if (this.world.worldProvider.getDimensionManager().getDimensionID() != 1) {
             if (!this.b(entity, f)) {
@@ -257,6 +258,7 @@ public class PortalTravelAgent {
         // CraftBukkit end
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public boolean a(Entity entity) {
         // CraftBukkit start - Allow for portal creation to be based on coordinates instead of entity
         return this.createPortal(entity.locX, entity.locY, entity.locZ, 16);

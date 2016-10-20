@@ -30,18 +30,26 @@ public class EntityBoat extends Entity {
     public double occupiedDeceleration = 0.2D;
     public double unoccupiedDeceleration = -1;
     public boolean landBoats = false;
-    private float g;
     private float h;
     private float au;
     private int av;
+    @SuppressWarnings("unused")
     private double aw;
+    @SuppressWarnings("unused")
     private double ax;
+    @SuppressWarnings("unused")
     private double ay;
+    @SuppressWarnings("unused")
     private double az;
+    @SuppressWarnings("unused")
     private double aA;
+    @SuppressWarnings("unused")
     private boolean aB;
+    @SuppressWarnings("unused")
     private boolean aC;
+    @SuppressWarnings("unused")
     private boolean aD;
+    @SuppressWarnings("unused")
     private boolean aE;
     private double aF;
     private float aG;
@@ -518,7 +526,7 @@ public class EntityBoat extends Entity {
         double d1 = this.isNoGravity() ? 0.0D : -0.03999999910593033D;
         double d2 = 0.0D;
 
-        this.g = 0.05F;
+        float g = 0.05F;
         if (this.aI == EntityBoat.EnumStatus.IN_AIR && this.aH != EntityBoat.EnumStatus.IN_AIR && this.aH != EntityBoat.EnumStatus.ON_LAND) {
             this.aF = this.getBoundingBox().b + (double) this.length;
             this.setPosition(this.locX, (double) (this.k() - this.length) + 0.101D, this.locZ);
@@ -528,25 +536,25 @@ public class EntityBoat extends Entity {
         } else {
             if (this.aH == EntityBoat.EnumStatus.IN_WATER) {
                 d2 = (this.aF - this.getBoundingBox().b) / (double) this.length;
-                this.g = 0.9F;
+                g = 0.9F;
             } else if (this.aH == EntityBoat.EnumStatus.UNDER_FLOWING_WATER) {
                 d1 = -7.0E-4D;
-                this.g = 0.9F;
+                g = 0.9F;
             } else if (this.aH == EntityBoat.EnumStatus.UNDER_WATER) {
                 d2 = 0.009999999776482582D;
-                this.g = 0.45F;
+                g = 0.45F;
             } else if (this.aH == EntityBoat.EnumStatus.IN_AIR) {
-                this.g = 0.9F;
+                g = 0.9F;
             } else if (this.aH == EntityBoat.EnumStatus.ON_LAND) {
-                this.g = this.aG;
+                g = this.aG;
                 if (this.bw() instanceof EntityHuman) {
                     this.aG /= 2.0F;
                 }
             }
 
-            this.motX *= (double) this.g;
-            this.motZ *= (double) this.g;
-            this.au *= this.g;
+            this.motX *= (double) g;
+            this.motZ *= (double) g;
+            this.au *= g;
             this.motY += d1;
             if (d2 > 0.0D) {
                 double d3 = 0.65D;
@@ -750,6 +758,7 @@ public class EntityBoat extends Entity {
         private final String g;
         private final int h;
 
+        @SuppressWarnings("unused")
         EnumBoatType(int i, String s) {
             this.g = s;
             this.h = i;
@@ -790,6 +799,7 @@ public class EntityBoat extends Entity {
 
         IN_WATER, UNDER_WATER, UNDER_FLOWING_WATER, ON_LAND, IN_AIR;
 
+        @SuppressWarnings("unused")
         EnumStatus() {}
     }
 

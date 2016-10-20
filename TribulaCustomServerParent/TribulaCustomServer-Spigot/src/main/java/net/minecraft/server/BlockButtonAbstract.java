@@ -27,6 +27,7 @@ public abstract class BlockButtonAbstract extends BlockDirectional {
     protected static final AxisAlignedBB G = new AxisAlignedBB(0.0D, 0.375D, 0.3125D, 0.0625D, 0.625D, 0.6875D);
     private final boolean I;
 
+    @SuppressWarnings("unused")
     protected BlockButtonAbstract(boolean flag) {
         super(Material.ORIENTABLE);
         this.w(this.blockStateList.getBlockData().set(BlockButtonAbstract.FACING, EnumDirection.NORTH).set(BlockButtonAbstract.POWERED, Boolean.FALSE));

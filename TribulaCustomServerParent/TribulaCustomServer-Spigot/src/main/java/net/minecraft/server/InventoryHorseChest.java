@@ -14,6 +14,7 @@ public class InventoryHorseChest extends InventorySubcontainer {
     public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
     private EntityHorse horse;
     private int maxStack = MAX_STACK;
+    @SuppressWarnings("unused")
     public InventoryHorseChest(String s, int i) {
         super(s, false, i);
     }

@@ -1,15 +1,18 @@
 package net.minecraft.server;
 
-import javax.annotation.Nullable;
-// CraftBukkit start
 import org.bukkit.entity.Player;
 import org.bukkit.event.hanging.HangingPlaceEvent;
+
+import javax.annotation.Nullable;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class ItemHanging extends Item {
 
     private final Class<? extends EntityHanging> a;
 
+    @SuppressWarnings("unused")
     public ItemHanging(Class<? extends EntityHanging> oclass) {
         this.a = oclass;
         this.a(CreativeModeTab.c);

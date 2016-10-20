@@ -27,6 +27,7 @@ public class NameReferencingFileConverter {
     public static final File d = new File("white-list.txt");
     private static final Logger e = LogManager.getLogger();
 
+    @SuppressWarnings("UnusedReturnValue")
     static List<String> a(File file, Map<String, String[]> map) throws IOException {
         List list = Files.readLines(file, Charsets.UTF_8);
         Iterator iterator = list.iterator();
@@ -514,6 +515,7 @@ public class NameReferencingFileConverter {
             super(s);
         }
 
+        @SuppressWarnings("unused")
         FileConversionException(String s, Object object) {
             this(s);
         }

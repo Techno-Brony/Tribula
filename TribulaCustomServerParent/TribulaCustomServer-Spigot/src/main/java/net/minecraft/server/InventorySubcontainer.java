@@ -21,7 +21,6 @@ public class InventorySubcontainer implements IInventory {
     private String a;
     private List<IInventoryListener> d;
     private boolean e;
-    private int maxStack = MAX_STACK;
 
     public InventorySubcontainer(String s, boolean flag, int i) {
         this(s, flag, i, null);
@@ -171,7 +170,7 @@ public class InventorySubcontainer implements IInventory {
     }
 
     public void setMaxStackSize(int i) {
-        maxStack = i;
+        int maxStack = i;
     }
 
     public void update() {

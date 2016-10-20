@@ -18,9 +18,6 @@ public class WorldData {
     public static final EnumDifficulty a = EnumDifficulty.NORMAL;
     private final Map<DimensionManager, NBTTagCompound> N;
     public WorldServer world; // CraftBukkit
-    private String b;
-    private int c;
-    private boolean d;
     private long e;
     private WorldType f;
     private String g;
@@ -58,6 +55,7 @@ public class WorldData {
     private int M;
     private GameRules O;
 
+    @SuppressWarnings("unused")
     protected WorldData() {
         this.f = WorldType.NORMAL;
         this.g = "";
@@ -70,6 +68,7 @@ public class WorldData {
         this.O = new GameRules();
     }
 
+    @SuppressWarnings("unused")
     public WorldData(NBTTagCompound nbttagcompound) {
         this.f = WorldType.NORMAL;
         this.g = "";
@@ -84,9 +83,9 @@ public class WorldData {
 
         if (nbttagcompound.hasKeyOfType("Version", 10)) {
             nbttagcompound1 = nbttagcompound.getCompound("Version");
-            this.b = nbttagcompound1.getString("Name");
-            this.c = nbttagcompound1.getInt("Id");
-            this.d = nbttagcompound1.getBoolean("Snapshot");
+            String b = nbttagcompound1.getString("Name");
+            int c = nbttagcompound1.getInt("Id");
+            boolean d = nbttagcompound1.getBoolean("Snapshot");
         }
 
         this.e = nbttagcompound.getLong("RandomSeed");
@@ -225,6 +224,7 @@ public class WorldData {
         this.B = false;
     }
 
+    @SuppressWarnings("unused")
     public WorldData(WorldData worlddata) {
         this.f = WorldType.NORMAL;
         this.g = "";
@@ -272,8 +272,10 @@ public class WorldData {
         this.L = worlddata.L;
     }
 
+    @SuppressWarnings("unused")
     public static void a(DataConverterManager dataconvertermanager) {
         dataconvertermanager.a(DataConverterTypes.LEVEL, new DataInspector() {
+            @SuppressWarnings("unused")
             public NBTTagCompound a(DataConverter dataconverter, NBTTagCompound nbttagcompound, int i) {
                 if (nbttagcompound.hasKeyOfType("Player", 10)) {
                     nbttagcompound.set("Player", dataconverter.a(DataConverterTypes.PLAYER, nbttagcompound.getCompound("Player"), i));
@@ -414,14 +416,17 @@ public class WorldData {
         return this.levelName;
     }
 
+    @SuppressWarnings("unused")
     public void a(String s) {
         this.levelName = s;
     }
 
+    @SuppressWarnings("unused")
     public int k() {
         return this.r;
     }
 
+    @SuppressWarnings("unused")
     public void e(int i) {
         this.r = i;
     }
@@ -518,10 +523,12 @@ public class WorldData {
         return this.f;
     }
 
+    @SuppressWarnings("unused")
     public void a(WorldType worldtype) {
         this.f = worldtype;
     }
 
+    @SuppressWarnings("unused")
     public String getGeneratorOptions() {
         return this.g == null ? "" : this.g;
     }
@@ -748,12 +755,14 @@ public class WorldData {
         });
     }
 
+    @SuppressWarnings("unused")
     public NBTTagCompound a(DimensionManager dimensionmanager) {
         NBTTagCompound nbttagcompound = this.N.get(dimensionmanager);
 
         return nbttagcompound == null ? new NBTTagCompound() : nbttagcompound;
     }
 
+    @SuppressWarnings("unused")
     public void a(DimensionManager dimensionmanager, NBTTagCompound nbttagcompound) {
         this.N.put(dimensionmanager, nbttagcompound);
     }

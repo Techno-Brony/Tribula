@@ -124,6 +124,7 @@ public class ChatModifier {
         return this.c == null ? this.o().isBold() : this.c;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public ChatModifier setBold(Boolean obool) {
         this.c = obool;
         return this;
@@ -133,6 +134,7 @@ public class ChatModifier {
         return this.d == null ? this.o().isItalic() : this.d;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public ChatModifier setItalic(Boolean obool) {
         this.d = obool;
         return this;
@@ -142,6 +144,7 @@ public class ChatModifier {
         return this.f == null ? this.o().isStrikethrough() : this.f;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public ChatModifier setStrikethrough(Boolean obool) {
         this.f = obool;
         return this;
@@ -155,6 +158,7 @@ public class ChatModifier {
         return this.g == null ? this.o().isRandom() : this.g;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public ChatModifier setRandom(Boolean obool) {
         this.g = obool;
         return this;
@@ -179,26 +183,31 @@ public class ChatModifier {
         return this.j == null ? this.o().j() : this.j;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public ChatModifier setUnderline(Boolean obool) {
         this.e = obool;
         return this;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public ChatModifier setChatClickable(ChatClickable chatclickable) {
         this.h = chatclickable;
         return this;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public ChatModifier setChatHoverable(ChatHoverable chathoverable) {
         this.i = chathoverable;
         return this;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public ChatModifier setInsertion(String s) {
         this.j = s;
         return this;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public ChatModifier setChatModifier(ChatModifier chatmodifier) {
         this.a = chatmodifier;
         return this;
@@ -307,6 +316,7 @@ public class ChatModifier {
 
     public static class ChatModifierSerializer implements JsonDeserializer<ChatModifier>, JsonSerializer<ChatModifier> {
 
+        @SuppressWarnings("unused")
         public ChatModifierSerializer() {}
 
         @Nullable

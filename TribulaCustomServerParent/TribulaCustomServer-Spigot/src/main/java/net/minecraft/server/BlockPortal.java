@@ -217,9 +217,12 @@ public class BlockPortal extends BlockHalfTransparent {
         }
     }
 
+    @SuppressWarnings("unused")
     static class SyntheticClass_1 {
 
+        @SuppressWarnings("unused")
         static final int[] a;
+        @SuppressWarnings("unused")
         static final int[] b = new int[EnumBlockRotation.values().length];
 
         static {

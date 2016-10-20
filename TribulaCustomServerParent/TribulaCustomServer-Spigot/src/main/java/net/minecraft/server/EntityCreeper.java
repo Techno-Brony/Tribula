@@ -13,7 +13,6 @@ public class EntityCreeper extends EntityMonster {
     private static final DataWatcherObject<Integer> a = DataWatcher.a(EntityCreeper.class, DataWatcherRegistry.b);
     private static final DataWatcherObject<Boolean> b = DataWatcher.a(EntityCreeper.class, DataWatcherRegistry.h);
     private static final DataWatcherObject<Boolean> c = DataWatcher.a(EntityCreeper.class, DataWatcherRegistry.h);
-    private int bx;
     private int fuseTicks;
     private int maxFuseTicks = 30;
     private int explosionRadius = 3;
@@ -24,6 +23,7 @@ public class EntityCreeper extends EntityMonster {
         this.setSize(0.6F, 1.7F);
     }
 
+    @SuppressWarnings("unused")
     public static void b(DataConverterManager dataconvertermanager) {
         EntityInsentient.a(dataconvertermanager, "Creeper");
     }
@@ -97,7 +97,7 @@ public class EntityCreeper extends EntityMonster {
 
     public void m() {
         if (this.isAlive()) {
-            this.bx = this.fuseTicks;
+            int bx = this.fuseTicks;
             if (this.isIgnited()) {
                 this.a(1);
             }

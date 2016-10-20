@@ -7,6 +7,7 @@ import java.util.Random;
 
 public class WorldGenRegistration {
 
+    @SuppressWarnings("unused")
     public static void a() {
         WorldGenFactory.a(WorldGenRegistration.WorldGenPyramidPiece.class, "TeDP");
         WorldGenFactory.a(WorldGenRegistration.WorldGenJungleTemple.class, "TeJP");
@@ -14,6 +15,7 @@ public class WorldGenRegistration {
         WorldGenFactory.a(WorldGenRegistration.b.class, "Iglu");
     }
 
+    @SuppressWarnings("unused")
     static class SyntheticClass_1 {    }
 
     public static class b extends WorldGenRegistration.WorldGenScatteredPiece {
@@ -22,8 +24,10 @@ public class WorldGenRegistration {
         private static final MinecraftKey f = new MinecraftKey("igloo/igloo_middle");
         private static final MinecraftKey g = new MinecraftKey("igloo/igloo_bottom");
 
+        @SuppressWarnings("unused")
         public b() {}
 
+        @SuppressWarnings("unused")
         public b(Random random, int i, int j) {
             super(random, i, 64, j, 7, 5, 8);
         }
@@ -88,8 +92,10 @@ public class WorldGenRegistration {
 
         private boolean e;
 
+        @SuppressWarnings("unused")
         public WorldGenWitchHut() {}
 
+        @SuppressWarnings("unused")
         public WorldGenWitchHut(Random random, int i, int j) {
             super(random, i, 64, j, 7, 7, 9);
         }
@@ -183,8 +189,10 @@ public class WorldGenRegistration {
         private boolean g;
         private boolean h;
 
+        @SuppressWarnings("unused")
         public WorldGenJungleTemple() {}
 
+        @SuppressWarnings("unused")
         public WorldGenJungleTemple(Random random, int i, int j) {
             super(random, i, 64, j, 12, 10, 15);
         }
@@ -395,8 +403,10 @@ public class WorldGenRegistration {
 
         static class WorldGenJungleTemple$WorldGenJungleTemplePiece extends StructurePiece.StructurePieceBlockSelector {
 
+            @SuppressWarnings("unused")
             private WorldGenJungleTemple$WorldGenJungleTemplePiece() {}
 
+            @SuppressWarnings("unused")
             WorldGenJungleTemple$WorldGenJungleTemplePiece(WorldGenRegistration.SyntheticClass_1 worldgenregistration_syntheticclass_1) {
                 this();
             }
@@ -416,8 +426,10 @@ public class WorldGenRegistration {
 
         private final boolean[] e = new boolean[4];
 
+        @SuppressWarnings("unused")
         public WorldGenPyramidPiece() {}
 
+        @SuppressWarnings("unused")
         public WorldGenPyramidPiece(Random random, int i, int j) {
             super(random, i, 64, j, 21, 15, 21);
         }
@@ -739,8 +751,10 @@ public class WorldGenRegistration {
         protected int c;
         protected int d = -1;
 
+        @SuppressWarnings("unused")
         public WorldGenScatteredPiece() {}
 
+        @SuppressWarnings("unused")
         protected WorldGenScatteredPiece(Random random, int i, @SuppressWarnings("SameParameterValue") int j, int k, int l, int i1, int j1) {
             super(0);
             this.a = l;

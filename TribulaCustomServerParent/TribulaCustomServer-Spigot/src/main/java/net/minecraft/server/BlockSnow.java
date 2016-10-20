@@ -61,6 +61,7 @@ public class BlockSnow extends Block {
         this.e(world, blockposition, iblockdata);
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     private boolean e(World world, BlockPosition blockposition, IBlockData iblockdata) {
         if (!this.canPlace(world, blockposition)) {
             this.b(world, blockposition, iblockdata, 0);

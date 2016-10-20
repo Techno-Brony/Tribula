@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 public class TicksPerSecondCommand extends Command
 {
 
+    @SuppressWarnings("unused")
     public TicksPerSecondCommand(@SuppressWarnings("SameParameterValue") String name)
     {
         super( name );

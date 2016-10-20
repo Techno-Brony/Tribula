@@ -1,19 +1,25 @@
 package net.minecraft.server;
 
 // CraftBukkit start
-import java.util.List;
+
 import org.bukkit.craftbukkit.entity.CraftHumanEntity;
 import org.bukkit.entity.HumanEntity;
+
+import java.util.List;
 // CraftBukkit end
 
 public class InventoryEnderChest extends InventorySubcontainer {
 
-    private TileEntityEnderChest a;
-
     // CraftBukkit start - add fields and methods
     public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
+    @SuppressWarnings("unused")
     public org.bukkit.entity.Player player;
+    private TileEntityEnderChest a;
     private int maxStack = MAX_STACK;
+
+    public InventoryEnderChest() {
+        super("container.enderchest", false, 27);
+    }
 
     public ItemStack[] getContents() {
         return this.items;
@@ -35,19 +41,16 @@ public class InventoryEnderChest extends InventorySubcontainer {
         return this.player;
     }
 
-    public void setMaxStackSize(int size) {
-        maxStack = size;
-    }
-
     public int getMaxStackSize() {
         return maxStack;
     }
     // CraftBukkit end
 
-    public InventoryEnderChest() {
-        super("container.enderchest", false, 27);
+    public void setMaxStackSize(int size) {
+        maxStack = size;
     }
 
+    @SuppressWarnings("unused")
     public void a(TileEntityEnderChest tileentityenderchest) {
         this.a = tileentityenderchest;
     }

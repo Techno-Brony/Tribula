@@ -19,6 +19,7 @@ public class PlayerInventory implements IInventory {
     private final ItemStack[][] g;
     public int itemInHandIndex;
     public EntityHuman player;
+    @SuppressWarnings("unused")
     public boolean f;
     // CraftBukkit start - add fields and methods
     public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
@@ -46,6 +47,7 @@ public class PlayerInventory implements IInventory {
         return combined;
     }
 
+    @SuppressWarnings("unused")
     public ItemStack[] getArmorContents() {
         return this.armor;
     }
@@ -140,6 +142,7 @@ public class PlayerInventory implements IInventory {
         return this.itemInHandIndex;
     }
 
+    @SuppressWarnings("unused")
     public int a(@Nullable Item item, int i, int j, @Nullable NBTTagCompound nbttagcompound) {
         int k = 0;
 

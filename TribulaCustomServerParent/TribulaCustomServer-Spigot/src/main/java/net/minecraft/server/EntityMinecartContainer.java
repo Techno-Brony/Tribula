@@ -22,14 +22,17 @@ public abstract class EntityMinecartContainer extends EntityMinecartAbstract imp
     private long d;
     private int maxStack = MAX_STACK;
 
+    @SuppressWarnings("unused")
     public EntityMinecartContainer(World world) {
         super(world);
     }
 
+    @SuppressWarnings("unused")
     public EntityMinecartContainer(World world, double d0, double d1, double d2) {
         super(world, d0, d1, d2);
     }
 
+    @SuppressWarnings("unused")
     public static void b(DataConverterManager dataconvertermanager, String s) {
         EntityMinecartAbstract.a(dataconvertermanager, s);
         dataconvertermanager.a(DataConverterTypes.ENTITY, new DataInspectorItemList(s, "Items"));
@@ -266,6 +269,7 @@ public abstract class EntityMinecartContainer extends EntityMinecartAbstract imp
 
     }
 
+    @SuppressWarnings("unused")
     public void a(MinecraftKey minecraftkey, long i) {
         this.c = minecraftkey;
         this.d = i;

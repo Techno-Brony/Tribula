@@ -353,10 +353,14 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
         return new BlockStateList(this, BlockMinecartDetector.SHAPE, BlockMinecartDetector.POWERED);
     }
 
+    @SuppressWarnings("unused")
     static class SyntheticClass_1 {
 
+        @SuppressWarnings("unused")
         static final int[] a;
+        @SuppressWarnings("unused")
         static final int[] b;
+        @SuppressWarnings("unused")
         static final int[] c = new int[EnumBlockMirror.values().length];
 
         static {

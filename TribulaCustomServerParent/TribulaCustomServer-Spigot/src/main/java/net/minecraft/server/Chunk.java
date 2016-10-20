@@ -31,6 +31,7 @@ public class Chunk {
     public boolean d;
     public long chunkKey;
     public org.bukkit.Chunk bukkitChunk;
+    @SuppressWarnings("unused")
     public boolean mustSave;
     protected gnu.trove.map.hash.TObjectIntHashMap<Class> entityCount = new gnu.trove.map.hash.TObjectIntHashMap<Class>(); // Spigot
     private boolean j;
@@ -1062,6 +1063,7 @@ public class Chunk {
         return new ChunkCoordIntPair(this.locX, this.locZ);
     }
 
+    @SuppressWarnings("unused")
     public boolean c(int i, int j) {
         if (i < 0) {
             i = 0;
@@ -1118,6 +1120,7 @@ public class Chunk {
         }
     }
 
+    @SuppressWarnings("unused")
     public void m() {
         this.x = 0;
     }
@@ -1336,6 +1339,7 @@ public class Chunk {
 
         IMMEDIATE, QUEUED, CHECK;
 
+        @SuppressWarnings("unused")
         EnumTileEntityState() {}
     }
 }
