@@ -1,10 +1,11 @@
 package net.minecraft.server;
 
-import java.util.Random;
-import javax.annotation.Nullable;
-// CraftBukkit start
-import org.bukkit.craftbukkit.util.CraftMagicNumbers;
 import org.bukkit.event.block.BlockPhysicsEvent;
+
+import javax.annotation.Nullable;
+import java.util.Random;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class BlockPlant extends Block {
@@ -15,7 +16,7 @@ public class BlockPlant extends Block {
         this(Material.PLANT);
     }
 
-    protected BlockPlant(Material material) {
+    protected BlockPlant(@SuppressWarnings("SameParameterValue") Material material) {
         this(material, material.r());
     }
 
@@ -33,7 +34,9 @@ public class BlockPlant extends Block {
         return iblockdata.getBlock() == Blocks.GRASS || iblockdata.getBlock() == Blocks.DIRT || iblockdata.getBlock() == Blocks.FARMLAND;
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
+        //noinspection deprecation
         super.a(iblockdata, world, blockposition, block);
         this.e(world, blockposition, iblockdata);
     }
@@ -46,6 +49,7 @@ public class BlockPlant extends Block {
         if (!this.f(world, blockposition, iblockdata)) {
             // CraftBukkit Start
             org.bukkit.block.Block block = world.getWorld().getBlockAt(blockposition.getX(), blockposition.getY(), blockposition.getZ());
+            //noinspection deprecation,deprecation
             BlockPhysicsEvent event = new BlockPhysicsEvent(block, block.getTypeId());
             world.getServer().getPluginManager().callEvent(event);
 
@@ -59,23 +63,27 @@ public class BlockPlant extends Block {
 
     }
 
-    public boolean f(World world, BlockPosition blockposition, IBlockData iblockdata) {
+    public boolean f(World world, BlockPosition blockposition, @SuppressWarnings("UnusedParameters") IBlockData iblockdata) {
         return this.i(world.getType(blockposition.down()));
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         return BlockPlant.b;
     }
 
+    @SuppressWarnings("deprecation")
     @Nullable
     public AxisAlignedBB a(IBlockData iblockdata, World world, BlockPosition blockposition) {
         return BlockPlant.k;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }

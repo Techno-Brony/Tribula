@@ -1,30 +1,18 @@
 package net.minecraft.server;
 
+import org.bukkit.event.hanging.HangingPlaceEvent;
+
 import java.util.Iterator;
 import java.util.List;
 
-import org.bukkit.event.hanging.HangingPlaceEvent; // CraftBukkit
-
 public class ItemLeash extends Item {
 
+    @SuppressWarnings("unused")
     public ItemLeash() {
         this.a(CreativeModeTab.i);
     }
 
-    public EnumInteractionResult a(ItemStack itemstack, EntityHuman entityhuman, World world, BlockPosition blockposition, EnumHand enumhand, EnumDirection enumdirection, float f, float f1, float f2) {
-        Block block = world.getType(blockposition).getBlock();
-
-        if (!(block instanceof BlockFence)) {
-            return EnumInteractionResult.PASS;
-        } else {
-            if (!world.isClientSide) {
-                a(entityhuman, world, blockposition);
-            }
-
-            return EnumInteractionResult.SUCCESS;
-        }
-    }
-
+    @SuppressWarnings("UnusedReturnValue")
     public static boolean a(EntityHuman entityhuman, World world, BlockPosition blockposition) {
         EntityLeash entityleash = EntityLeash.b(world, blockposition);
         boolean flag = false;
@@ -35,6 +23,7 @@ public class ItemLeash extends Item {
         List list = world.a(EntityInsentient.class, new AxisAlignedBB((double) i - 7.0D, (double) j - 7.0D, (double) k - 7.0D, (double) i + 7.0D, (double) j + 7.0D, (double) k + 7.0D));
         Iterator iterator = list.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             EntityInsentient entityinsentient = (EntityInsentient) iterator.next();
 
@@ -65,5 +54,19 @@ public class ItemLeash extends Item {
         }
 
         return flag;
+    }
+
+    public EnumInteractionResult a(ItemStack itemstack, EntityHuman entityhuman, World world, BlockPosition blockposition, EnumHand enumhand, EnumDirection enumdirection, float f, float f1, float f2) {
+        Block block = world.getType(blockposition).getBlock();
+
+        if (!(block instanceof BlockFence)) {
+            return EnumInteractionResult.PASS;
+        } else {
+            if (!world.isClientSide) {
+                a(entityhuman, world, blockposition);
+            }
+
+            return EnumInteractionResult.SUCCESS;
+        }
     }
 }

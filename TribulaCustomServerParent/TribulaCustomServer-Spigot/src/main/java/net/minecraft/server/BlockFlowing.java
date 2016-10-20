@@ -1,13 +1,14 @@
 package net.minecraft.server;
 
+import org.bukkit.block.BlockFace;
+import org.bukkit.event.block.BlockFromToEvent;
+
 import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 
 // CraftBukkit start
-import org.bukkit.block.BlockFace;
-import org.bukkit.event.block.BlockFromToEvent;
 // CraftBukkit end
 
 public class BlockFlowing extends BlockFluids {
@@ -28,7 +29,7 @@ public class BlockFlowing extends BlockFluids {
         org.bukkit.Server server = world.getServer();
         org.bukkit.block.Block source = bworld == null ? null : bworld.getBlockAt(blockposition.getX(), blockposition.getY(), blockposition.getZ());
         // CraftBukkit end
-        int i = iblockdata.get(BlockFlowing.LEVEL).intValue();
+        int i = iblockdata.get(BlockFlowing.LEVEL);
         byte b0 = 1;
 
         if (this.material == Material.LAVA && !world.worldProvider.l()) {
@@ -69,7 +70,7 @@ public class BlockFlowing extends BlockFluids {
 
                 if (iblockdata1.getMaterial().isBuildable()) {
                     i1 = 0;
-                } else if (iblockdata1.getMaterial() == this.material && iblockdata1.get(BlockFlowing.LEVEL).intValue() == 0) {
+                } else if (iblockdata1.getMaterial() == this.material && iblockdata1.get(BlockFlowing.LEVEL) == 0) {
                     i1 = 0;
                 }
             }
@@ -85,7 +86,7 @@ public class BlockFlowing extends BlockFluids {
                 if (i1 < 0) {
                     world.setAir(blockposition);
                 } else {
-                    iblockdata = iblockdata.set(BlockFlowing.LEVEL, Integer.valueOf(i1));
+                    iblockdata = iblockdata.set(BlockFlowing.LEVEL, i1);
                     world.setTypeAndData(blockposition, iblockdata, 2);
                     world.a(blockposition, this, j);
                     world.applyPhysics(blockposition, this);
@@ -131,6 +132,7 @@ public class BlockFlowing extends BlockFluids {
 
             Iterator iterator1 = set.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator1.hasNext()) {
                 EnumDirection enumdirection1 = (EnumDirection) iterator1.next();
 
@@ -159,7 +161,7 @@ public class BlockFlowing extends BlockFluids {
                 }
             }
 
-            world.setTypeAndData(blockposition, this.getBlockData().set(BlockFlowing.LEVEL, Integer.valueOf(i)), 3);
+            world.setTypeAndData(blockposition, this.getBlockData().set(BlockFlowing.LEVEL, i), 3);
         }
 
     }
@@ -168,6 +170,7 @@ public class BlockFlowing extends BlockFluids {
         int j = 1000;
         Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             EnumDirection enumdirection1 = (EnumDirection) iterator.next();
 
@@ -175,7 +178,7 @@ public class BlockFlowing extends BlockFluids {
                 BlockPosition blockposition1 = blockposition.shift(enumdirection1);
                 IBlockData iblockdata = world.getType(blockposition1);
 
-                if (!this.g(world, blockposition1, iblockdata) && (iblockdata.getMaterial() != this.material || iblockdata.get(BlockFlowing.LEVEL).intValue() > 0)) {
+                if (!this.g(world, blockposition1, iblockdata) && (iblockdata.getMaterial() != this.material || iblockdata.get(BlockFlowing.LEVEL) > 0)) {
                     if (!this.g(world, blockposition1.down(), iblockdata)) {
                         return i;
                     }
@@ -203,12 +206,13 @@ public class BlockFlowing extends BlockFluids {
         EnumSet enumset = EnumSet.noneOf(EnumDirection.class);
         Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             EnumDirection enumdirection = (EnumDirection) iterator.next();
             BlockPosition blockposition1 = blockposition.shift(enumdirection);
             IBlockData iblockdata = world.getType(blockposition1);
 
-            if (!this.g(world, blockposition1, iblockdata) && (iblockdata.getMaterial() != this.material || iblockdata.get(BlockFlowing.LEVEL).intValue() > 0)) {
+            if (!this.g(world, blockposition1, iblockdata) && (iblockdata.getMaterial() != this.material || iblockdata.get(BlockFlowing.LEVEL) > 0)) {
                 int j;
 
                 if (this.g(world, blockposition1.down(), world.getType(blockposition1.down()))) {
@@ -222,16 +226,18 @@ public class BlockFlowing extends BlockFluids {
                 }
 
                 if (j <= i) {
+                    //noinspection unchecked
                     enumset.add(enumdirection);
                     i = j;
                 }
             }
         }
 
+        //noinspection unchecked
         return enumset;
     }
 
-    private boolean g(World world, BlockPosition blockposition, IBlockData iblockdata) {
+    private boolean g(World world, BlockPosition blockposition, @SuppressWarnings("UnusedParameters") IBlockData iblockdata) {
         Block block = world.getType(blockposition).getBlock();
 
         return !(!(block instanceof BlockDoor) && block != Blocks.STANDING_SIGN && block != Blocks.LADDER && block != Blocks.REEDS) || (!(block.material != Material.PORTAL && block.material != Material.J) || block.material.isSolid());

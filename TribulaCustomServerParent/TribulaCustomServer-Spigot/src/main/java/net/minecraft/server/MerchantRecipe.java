@@ -1,7 +1,8 @@
 package net.minecraft.server;
 
+import org.bukkit.craftbukkit.inventory.CraftMerchantRecipe;
+
 import javax.annotation.Nullable;
-import org.bukkit.craftbukkit.inventory.CraftMerchantRecipe; // CraftBukkit
 
 public class MerchantRecipe {
 
@@ -14,19 +15,16 @@ public class MerchantRecipe {
     // CraftBukkit start
     private CraftMerchantRecipe bukkitHandle;
 
-    public CraftMerchantRecipe asBukkit() {
-        return (bukkitHandle == null) ? bukkitHandle = new CraftMerchantRecipe(this) : bukkitHandle;
-    }
-
-    public MerchantRecipe(ItemStack itemstack, ItemStack itemstack1, ItemStack itemstack2, int i, int j, CraftMerchantRecipe bukkit) {
+    public MerchantRecipe(@SuppressWarnings("SameParameterValue") ItemStack itemstack, @SuppressWarnings("SameParameterValue") ItemStack itemstack1, ItemStack itemstack2, int i, int j, CraftMerchantRecipe bukkit) {
         this(itemstack, itemstack1, itemstack2, i, j);
         this.bukkitHandle = bukkit;
     }
-    // CraftBukkit end
 
+    @SuppressWarnings("unused")
     public MerchantRecipe(NBTTagCompound nbttagcompound) {
         this.a(nbttagcompound);
     }
+    // CraftBukkit end
 
     public MerchantRecipe(ItemStack itemstack, @Nullable ItemStack itemstack1, ItemStack itemstack2) {
         this(itemstack, itemstack1, itemstack2, 0, 7);
@@ -45,18 +43,24 @@ public class MerchantRecipe {
         this(itemstack, null, itemstack1);
     }
 
-    public MerchantRecipe(ItemStack itemstack, Item item) {
+    public MerchantRecipe(ItemStack itemstack, @SuppressWarnings("SameParameterValue") Item item) {
         this(itemstack, new ItemStack(item));
+    }
+
+    public CraftMerchantRecipe asBukkit() {
+        return (bukkitHandle == null) ? bukkitHandle = new CraftMerchantRecipe(this) : bukkitHandle;
     }
 
     public ItemStack getBuyItem1() {
         return this.buyingItem1;
     }
 
+    @SuppressWarnings("unused")
     public ItemStack getBuyItem2() {
         return this.buyingItem2;
     }
 
+    @SuppressWarnings("unused")
     public boolean hasSecondItem() {
         return this.buyingItem2 != null;
     }
@@ -69,6 +73,7 @@ public class MerchantRecipe {
         return this.uses;
     }
 
+    @SuppressWarnings("unused")
     public int f() {
         return this.maxUses;
     }
@@ -110,14 +115,11 @@ public class MerchantRecipe {
             this.maxUses = 7;
         }
 
-        if (nbttagcompound.hasKeyOfType("rewardExp", 1)) {
-            this.rewardExp = nbttagcompound.getBoolean("rewardExp");
-        } else {
-            this.rewardExp = true;
-        }
+        this.rewardExp = !nbttagcompound.hasKeyOfType("rewardExp", 1) || nbttagcompound.getBoolean("rewardExp");
 
     }
 
+    @SuppressWarnings("unused")
     public NBTTagCompound k() {
         NBTTagCompound nbttagcompound = new NBTTagCompound();
 

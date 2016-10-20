@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
-import javax.annotation.Nullable;
-// CraftBukkit start
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.inventory.CraftShapedRecipe;
+
+import javax.annotation.Nullable;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class ShapedRecipes implements IRecipe {
@@ -11,7 +13,9 @@ public class ShapedRecipes implements IRecipe {
     private final int width;
     private final int height;
     private final ItemStack[] items;
+    @SuppressWarnings("CanBeFinal")
     public ItemStack result; // Spigot
+    @SuppressWarnings("unused")
     private boolean e;
 
     public ShapedRecipes(int i, int j, ItemStack[] aitemstack, ItemStack itemstack) {
@@ -69,6 +73,7 @@ public class ShapedRecipes implements IRecipe {
         char c = 'a';
         for (ItemStack stack : this.items) {
             if (stack != null) {
+                //noinspection deprecation
                 recipe.setIngredient(c, org.bukkit.craftbukkit.util.CraftMagicNumbers.getMaterial(stack.getItem()), stack.getData());
             }
             c++;

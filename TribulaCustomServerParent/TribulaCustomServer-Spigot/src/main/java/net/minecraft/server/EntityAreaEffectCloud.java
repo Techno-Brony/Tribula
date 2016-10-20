@@ -2,18 +2,12 @@ package net.minecraft.server;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import org.bukkit.craftbukkit.entity.CraftLivingEntity;
+import org.bukkit.entity.LivingEntity;
 
-import org.bukkit.craftbukkit.entity.CraftLivingEntity; // CraftBukkit
-import org.bukkit.entity.LivingEntity; // CraftBukkit
-
-import java.util.Map.Entry;
 import javax.annotation.Nullable;
+import java.util.*;
+import java.util.Map.Entry;
 
 public class EntityAreaEffectCloud extends Entity {
 
@@ -23,16 +17,17 @@ public class EntityAreaEffectCloud extends Entity {
     private static final DataWatcherObject<Integer> d = DataWatcher.a(EntityAreaEffectCloud.class, DataWatcherRegistry.b);
     private static final DataWatcherObject<Integer> e = DataWatcher.a(EntityAreaEffectCloud.class, DataWatcherRegistry.b);
     private static final DataWatcherObject<Integer> f = DataWatcher.a(EntityAreaEffectCloud.class, DataWatcherRegistry.b);
-    private PotionRegistry potionRegistry;
-    public List<MobEffect> effects;
     private final Map<Entity, Integer> au;
-    private int av;
+    @SuppressWarnings("CanBeFinal")
+    public List<MobEffect> effects;
     public int waitTime;
     public int reapplicationDelay;
-    private boolean hasColor;
     public int durationOnUse;
     public float radiusOnUse;
     public float radiusPerTick;
+    private PotionRegistry potionRegistry;
+    private int av;
+    private boolean hasColor;
     private EntityLiving aC;
     private UUID aD;
 
@@ -55,12 +50,16 @@ public class EntityAreaEffectCloud extends Entity {
     }
 
     protected void i() {
-        this.getDataWatcher().register(EntityAreaEffectCloud.b, Integer.valueOf(0));
-        this.getDataWatcher().register(EntityAreaEffectCloud.a, Float.valueOf(0.5F));
-        this.getDataWatcher().register(EntityAreaEffectCloud.c, Boolean.valueOf(false));
-        this.getDataWatcher().register(EntityAreaEffectCloud.d, Integer.valueOf(EnumParticle.SPELL_MOB.c()));
-        this.getDataWatcher().register(EntityAreaEffectCloud.e, Integer.valueOf(0));
-        this.getDataWatcher().register(EntityAreaEffectCloud.f, Integer.valueOf(0));
+        this.getDataWatcher().register(EntityAreaEffectCloud.b, 0);
+        this.getDataWatcher().register(EntityAreaEffectCloud.a, 0.5F);
+        this.getDataWatcher().register(EntityAreaEffectCloud.c, Boolean.FALSE);
+        this.getDataWatcher().register(EntityAreaEffectCloud.d, EnumParticle.SPELL_MOB.c());
+        this.getDataWatcher().register(EntityAreaEffectCloud.e, 0);
+        this.getDataWatcher().register(EntityAreaEffectCloud.f, 0);
+    }
+
+    public float getRadius() {
+        return this.getDataWatcher().get(EntityAreaEffectCloud.a);
     }
 
     public void setRadius(float f) {
@@ -71,22 +70,19 @@ public class EntityAreaEffectCloud extends Entity {
         this.setSize(f * 2.0F, 0.5F);
         this.setPosition(d0, d1, d2);
         if (!this.world.isClientSide) {
-            this.getDataWatcher().set(EntityAreaEffectCloud.a, Float.valueOf(f));
+            this.getDataWatcher().set(EntityAreaEffectCloud.a, f);
         }
 
-    }
-
-    public float getRadius() {
-        return this.getDataWatcher().get(EntityAreaEffectCloud.a).floatValue();
     }
 
     public void a(PotionRegistry potionregistry) {
         this.potionRegistry = potionregistry;
         if (!this.hasColor) {
             if (potionregistry == Potions.a && this.effects.isEmpty()) {
-                this.getDataWatcher().set(EntityAreaEffectCloud.b, Integer.valueOf(0));
+                this.getDataWatcher().set(EntityAreaEffectCloud.b, 0);
             } else {
-                this.getDataWatcher().set(EntityAreaEffectCloud.b, Integer.valueOf(PotionUtil.a(PotionUtil.a(potionregistry, (Collection) this.effects))));
+                //noinspection unchecked,unchecked
+                this.getDataWatcher().set(EntityAreaEffectCloud.b, PotionUtil.a(PotionUtil.a(potionregistry, (Collection) this.effects)));
             }
         }
 
@@ -95,7 +91,8 @@ public class EntityAreaEffectCloud extends Entity {
     public void a(MobEffect mobeffect) {
         this.effects.add(mobeffect);
         if (!this.hasColor) {
-            this.getDataWatcher().set(EntityAreaEffectCloud.b, Integer.valueOf(PotionUtil.a(PotionUtil.a(this.potionRegistry, (Collection) this.effects))));
+            //noinspection unchecked,unchecked
+            this.getDataWatcher().set(EntityAreaEffectCloud.b, PotionUtil.a(PotionUtil.a(this.potionRegistry, (Collection) this.effects)));
         }
 
     }
@@ -103,7 +100,8 @@ public class EntityAreaEffectCloud extends Entity {
     // CraftBukkit start accessor methods
     public void refreshEffects() {
         if (!this.hasColor) {
-            this.getDataWatcher().set(EntityAreaEffectCloud.b, Integer.valueOf(PotionUtil.a(PotionUtil.a(this.potionRegistry, (Collection) this.effects)))); // PAIL: rename
+            //noinspection unchecked,unchecked
+            this.getDataWatcher().set(EntityAreaEffectCloud.b, PotionUtil.a(PotionUtil.a(this.potionRegistry, (Collection) this.effects))); // PAIL: rename
         }
     }
 
@@ -117,44 +115,44 @@ public class EntityAreaEffectCloud extends Entity {
     // CraftBukkit end
 
     public int getColor() {
-        return this.getDataWatcher().get(EntityAreaEffectCloud.b).intValue();
+        return this.getDataWatcher().get(EntityAreaEffectCloud.b);
     }
 
     public void setColor(int i) {
         this.hasColor = true;
-        this.getDataWatcher().set(EntityAreaEffectCloud.b, Integer.valueOf(i));
+        this.getDataWatcher().set(EntityAreaEffectCloud.b, i);
     }
 
     public EnumParticle getParticle() {
-        return EnumParticle.a(this.getDataWatcher().get(EntityAreaEffectCloud.d).intValue());
+        return EnumParticle.a(this.getDataWatcher().get(EntityAreaEffectCloud.d));
     }
 
     public void setParticle(EnumParticle enumparticle) {
-        this.getDataWatcher().set(EntityAreaEffectCloud.d, Integer.valueOf(enumparticle.c()));
+        this.getDataWatcher().set(EntityAreaEffectCloud.d, enumparticle.c());
     }
 
     public int n() {
-        return this.getDataWatcher().get(EntityAreaEffectCloud.e).intValue();
+        return this.getDataWatcher().get(EntityAreaEffectCloud.e);
     }
 
     public void b(int i) {
-        this.getDataWatcher().set(EntityAreaEffectCloud.e, Integer.valueOf(i));
+        this.getDataWatcher().set(EntityAreaEffectCloud.e, i);
     }
 
     public int o() {
-        return this.getDataWatcher().get(EntityAreaEffectCloud.f).intValue();
+        return this.getDataWatcher().get(EntityAreaEffectCloud.f);
     }
 
     public void d(int i) {
-        this.getDataWatcher().set(EntityAreaEffectCloud.f, Integer.valueOf(i));
+        this.getDataWatcher().set(EntityAreaEffectCloud.f, i);
     }
 
     protected void a(boolean flag) {
-        this.getDataWatcher().set(EntityAreaEffectCloud.c, Boolean.valueOf(flag));
+        this.getDataWatcher().set(EntityAreaEffectCloud.c, flag);
     }
 
     public boolean q() {
-        return this.getDataWatcher().get(EntityAreaEffectCloud.c).booleanValue();
+        return this.getDataWatcher().get(EntityAreaEffectCloud.c);
     }
 
     public int getDuration() {
@@ -262,7 +260,7 @@ public class EntityAreaEffectCloud extends Entity {
                 while (iterator.hasNext()) {
                     Entry entry = (Entry) iterator.next();
 
-                    if (this.ticksLived >= ((Integer) entry.getValue()).intValue()) {
+                    if (this.ticksLived >= (Integer) entry.getValue()) {
                         iterator.remove();
                     }
                 }
@@ -270,12 +268,15 @@ public class EntityAreaEffectCloud extends Entity {
                 ArrayList arraylist = Lists.newArrayList();
                 Iterator iterator1 = this.potionRegistry.a().iterator();
 
+                //noinspection WhileLoopReplaceableByForEach
                 while (iterator1.hasNext()) {
                     MobEffect mobeffect = (MobEffect) iterator1.next();
 
+                    //noinspection unchecked
                     arraylist.add(new MobEffect(mobeffect.getMobEffect(), mobeffect.getDuration() / 4, mobeffect.getAmplifier(), mobeffect.isAmbient(), mobeffect.isShowParticles()));
                 }
 
+                //noinspection unchecked
                 arraylist.addAll(this.effects);
                 if (arraylist.isEmpty()) {
                     this.au.clear();
@@ -301,40 +302,40 @@ public class EntityAreaEffectCloud extends Entity {
                             }
                         }
                         org.bukkit.event.entity.AreaEffectCloudApplyEvent event = org.bukkit.craftbukkit.event.CraftEventFactory.callAreaEffectCloudApplyEvent(this, entities);
-                        if (true) { // Preserve NMS spacing and bracket count for smallest diff
-                            for (LivingEntity entity : event.getAffectedEntities()) {
-                                if (entity instanceof CraftLivingEntity) {
-                                    EntityLiving entityliving = ((CraftLivingEntity) entity).getHandle();
-                                    // CraftBukkit end
-                                    this.au.put(entityliving, Integer.valueOf(this.ticksLived + this.reapplicationDelay));
-                                    Iterator iterator3 = arraylist.iterator();
+                        // Preserve NMS spacing and bracket count for smallest diff
+                        for (LivingEntity entity : event.getAffectedEntities()) {
+                            if (entity instanceof CraftLivingEntity) {
+                                EntityLiving entityliving = ((CraftLivingEntity) entity).getHandle();
+                                // CraftBukkit end
+                                this.au.put(entityliving, this.ticksLived + this.reapplicationDelay);
+                                Iterator iterator3 = arraylist.iterator();
 
-                                    while (iterator3.hasNext()) {
-                                        MobEffect mobeffect1 = (MobEffect) iterator3.next();
+                                //noinspection WhileLoopReplaceableByForEach
+                                while (iterator3.hasNext()) {
+                                    MobEffect mobeffect1 = (MobEffect) iterator3.next();
 
-                                        if (mobeffect1.getMobEffect().isInstant()) {
-                                            mobeffect1.getMobEffect().applyInstantEffect(this, this.y(), entityliving, mobeffect1.getAmplifier(), 0.5D);
-                                        } else {
-                                            entityliving.addEffect(new MobEffect(mobeffect1));
-                                        }
+                                    if (mobeffect1.getMobEffect().isInstant()) {
+                                        mobeffect1.getMobEffect().applyInstantEffect(this, this.y(), entityliving, mobeffect1.getAmplifier(), 0.5D);
+                                    } else {
+                                        entityliving.addEffect(new MobEffect(mobeffect1));
+                                    }
+                                }
+
+                                if (this.radiusOnUse != 0.0F) {
+                                    f += this.radiusOnUse;
+                                    if (f < 0.5F) {
+                                        this.die();
+                                        return;
                                     }
 
-                                    if (this.radiusOnUse != 0.0F) {
-                                        f += this.radiusOnUse;
-                                        if (f < 0.5F) {
-                                            this.die();
-                                            return;
-                                        }
+                                    this.setRadius(f);
+                                }
 
-                                        this.setRadius(f);
-                                    }
-
-                                    if (this.durationOnUse != 0) {
-                                        this.av += this.durationOnUse;
-                                        if (this.av <= 0) {
-                                            this.die();
-                                            return;
-                                        }
+                                if (this.durationOnUse != 0) {
+                                    this.av += this.durationOnUse;
+                                    if (this.av <= 0) {
+                                        this.die();
+                                        return;
                                     }
                                 }
                             }
@@ -448,6 +449,7 @@ public class EntityAreaEffectCloud extends Entity {
             NBTTagList nbttaglist = new NBTTagList();
             Iterator iterator = this.effects.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 MobEffect mobeffect = (MobEffect) iterator.next();
 

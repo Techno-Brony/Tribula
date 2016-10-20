@@ -1,14 +1,14 @@
 package net.minecraft.server;
 
-import org.bukkit.event.entity.ExplosionPrimeEvent; // CraftBukkit
+import org.bukkit.event.entity.ExplosionPrimeEvent;
 
 public class EntityTNTPrimed extends Entity {
 
     private static final DataWatcherObject<Integer> FUSE_TICKS = DataWatcher.a(EntityTNTPrimed.class, DataWatcherRegistry.b);
-    private EntityLiving source;
-    private int c;
     public float yield = 4; // CraftBukkit - add field
     public boolean isIncendiary = false; // CraftBukkit - add field
+    private EntityLiving source;
+    private int c;
 
     public EntityTNTPrimed(World world) {
         super(world);
@@ -33,7 +33,7 @@ public class EntityTNTPrimed extends Entity {
     }
 
     protected void i() {
-        this.datawatcher.register(EntityTNTPrimed.FUSE_TICKS, Integer.valueOf(80));
+        this.datawatcher.register(EntityTNTPrimed.FUSE_TICKS, 80);
     }
 
     protected boolean playStepSound() {
@@ -110,11 +110,6 @@ public class EntityTNTPrimed extends Entity {
         return 0.0F;
     }
 
-    public void setFuseTicks(int i) {
-        this.datawatcher.set(EntityTNTPrimed.FUSE_TICKS, Integer.valueOf(i));
-        this.c = i;
-    }
-
     public void a(DataWatcherObject<?> datawatcherobject) {
         if (EntityTNTPrimed.FUSE_TICKS.equals(datawatcherobject)) {
             this.c = this.k();
@@ -123,10 +118,15 @@ public class EntityTNTPrimed extends Entity {
     }
 
     public int k() {
-        return this.datawatcher.get(EntityTNTPrimed.FUSE_TICKS).intValue();
+        return this.datawatcher.get(EntityTNTPrimed.FUSE_TICKS);
     }
 
     public int getFuseTicks() {
         return this.c;
+    }
+
+    public void setFuseTicks(int i) {
+        this.datawatcher.set(EntityTNTPrimed.FUSE_TICKS, i);
+        this.c = i;
     }
 }

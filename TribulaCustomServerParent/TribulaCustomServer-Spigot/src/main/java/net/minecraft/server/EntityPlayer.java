@@ -4,15 +4,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.mojang.authlib.GameProfile;
 import io.netty.buffer.Unpooled;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import javax.annotation.Nullable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-// CraftBukkit start
 import org.bukkit.Bukkit;
 import org.bukkit.WeatherType;
 import org.bukkit.craftbukkit.CraftWorld;
@@ -23,40 +16,34 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerChangedMainHandEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.inventory.MainHand;
+
+import javax.annotation.Nullable;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class EntityPlayer extends EntityHuman implements ICrafting {
 
+    @SuppressWarnings("unused")
     private static final Logger bS = LogManager.getLogger();
-    public String locale = "en_US"; // Spigot private -> public
-    public PlayerConnection playerConnection;
     public final MinecraftServer server;
     public final PlayerInteractManager playerInteractManager;
-    public double d;
-    public double e;
     public final List<Integer> removeQueue = Lists.newLinkedList();
     private final ServerStatisticManager bV;
-    private float bW = Float.MIN_VALUE;
-    private int bX = Integer.MIN_VALUE;
-    private int bY = Integer.MIN_VALUE;
-    private int bZ = Integer.MIN_VALUE;
-    private int ca = Integer.MIN_VALUE;
-    private int cb = Integer.MIN_VALUE;
-    private float lastHealthSent = -1.0E8F;
-    private int cd = -99999999;
-    private boolean ce = true;
+    public String locale = "en_US"; // Spigot private -> public
+    public PlayerConnection playerConnection;
+    public double d;
+    public double e;
     public int lastSentExp = -99999999;
     public int invulnerableTicks = 60;
-    private EntityHuman.EnumChatVisibility ch;
-    private boolean ci = true;
-    private long cj = System.currentTimeMillis();
-    private Entity ck;
     public boolean worldChangeInvuln;
-    private int containerCounter;
     public boolean f;
     public int ping;
     public boolean viewingCredits;
-
     // CraftBukkit start
     public String displayName;
     public IChatBaseComponent listName;
@@ -67,7 +54,27 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
     public boolean keepLevel = false;
     public double maxHealthCache;
     public boolean joining = true;
+    // CraftBukkit start - Add per-player time and weather.
+    public long timeOffset = 0;
+    public boolean relativeTime = true;
+    public WeatherType weather = null;
+    private float bW = Float.MIN_VALUE;
+    private int bX = Integer.MIN_VALUE;
+    private int bY = Integer.MIN_VALUE;
+    private int bZ = Integer.MIN_VALUE;
+    private int ca = Integer.MIN_VALUE;
+    private int cb = Integer.MIN_VALUE;
+    private float lastHealthSent = -1.0E8F;
+    private int cd = -99999999;
+    private boolean ce = true;
+    private EntityHuman.EnumChatVisibility ch;
     // CraftBukkit end
+    private long cj = System.currentTimeMillis();
+    private Entity ck;
+    private int containerCounter;
+    private float pluginRainPosition;
+    // CraftBukkit end
+    private float pluginRainPositionPrevious;
 
     public EntityPlayer(MinecraftServer minecraftserver, WorldServer worldserver, GameProfile gameprofile, PlayerInteractManager playerinteractmanager) {
         super(worldserver, gameprofile);
@@ -159,7 +166,6 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         this.dimension = ((WorldServer) this.world).dimension;
         this.playerInteractManager.a((WorldServer) world);
     }
-    // CraftBukkit end
 
     public void levelDown(int i) {
         super.levelDown(i);
@@ -202,7 +208,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         }
 
         this.activeContainer.b();
-        if (!this.world.isClientSide && !this.activeContainer.a(this)) {
+        if (!this.world.isClientSide && this.activeContainer.a(this)) {
             this.closeInventory();
             this.activeContainer = this.defaultContainer;
         }
@@ -214,7 +220,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
             int j = 0;
 
             while (iterator.hasNext() && j < i) {
-                aint[j++] = ((Integer) iterator.next()).intValue();
+                aint[j++] = (Integer) iterator.next();
                 iterator.remove();
             }
 
@@ -328,6 +334,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         Collection collection = this.world.getServer().getScoreboardManager().getScoreboardScores(iscoreboardcriteria, this.getName(), new java.util.ArrayList<ScoreboardScore>()); // CraftBukkit - Use our scores instead
         Iterator iterator = collection.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             ScoreboardScore scoreboardscore = (ScoreboardScore) iterator.next(); // CraftBukkit - Use our scores instead
 
@@ -350,6 +357,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
             HashSet hashset = Sets.newHashSet(BiomeBase.i);
             Iterator iterator = achievementset.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 String s1 = (String) iterator.next();
                 Iterator iterator1 = hashset.iterator();
@@ -449,6 +457,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         Collection collection = this.world.getServer().getScoreboardManager().getScoreboardScores(IScoreboardCriteria.d, this.getName(), new java.util.ArrayList<ScoreboardScore>());
         Iterator iterator = collection.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             ScoreboardScore scoreboardscore = (ScoreboardScore) iterator.next(); // CraftBukkit - Use our scores instead
 
@@ -484,14 +493,14 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
                 if (damagesource instanceof EntityDamageSource) {
                     Entity entity = damagesource.getEntity();
 
-                    if (entity instanceof EntityHuman && !this.a((EntityHuman) entity)) {
+                    if (entity instanceof EntityHuman && this.a((EntityHuman) entity)) {
                         return false;
                     }
 
                     if (entity instanceof EntityArrow) {
                         EntityArrow entityarrow = (EntityArrow) entity;
 
-                        if (entityarrow.shooter instanceof EntityHuman && !this.a((EntityHuman) entityarrow.shooter)) {
+                        if (entityarrow.shooter instanceof EntityHuman && this.a((EntityHuman) entityarrow.shooter)) {
                             return false;
                         }
                     }
@@ -503,7 +512,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
     }
 
     public boolean a(EntityHuman entityhuman) {
-        return this.canPvP() && super.a(entityhuman);
+        return !this.canPvP() || super.a(entityhuman);
     }
 
     private boolean canPvP() {
@@ -689,7 +698,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         boolean cancelled = false;
         if (iinventory instanceof ITileInventory) {
             ITileInventory itileinventory = (ITileInventory) iinventory;
-            cancelled = itileinventory.x_() && !this.a(itileinventory.y_()) && !this.isSpectator(); // PAIL: rename
+            cancelled = itileinventory.x_() && this.a(itileinventory.y_()) && !this.isSpectator(); // PAIL: rename
         }
 
         Container container;
@@ -715,7 +724,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
             if (iinventory instanceof ITileInventory) {
                 ITileInventory itileinventory = (ITileInventory) iinventory;
 
-                if (itileinventory.x_() && !this.a(itileinventory.y_()) && !this.isSpectator()) {
+                if (itileinventory.x_() && this.a(itileinventory.y_()) && !this.isSpectator()) {
                     this.playerConnection.sendPacket(new PacketPlayOutChat(new ChatMessage("container.isLocked", iinventory.getScoreboardDisplayName()), (byte) 2));
                     this.playerConnection.sendPacket(new PacketPlayOutNamedSoundEffect(SoundEffects.W, SoundCategory.BLOCKS, this.locX, this.locY, this.locZ, 1.0F, 1.0F));
                     iinventory.closeContainer(this); // CraftBukkit
@@ -871,12 +880,14 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
     public boolean a(Achievement achievement) {
         return this.bV.hasAchievement(achievement);
     }
+    // CraftBukkit end
 
     public void a(Statistic statistic, int i) {
         if (statistic != null) {
             this.bV.b(this, statistic, i);
             Iterator iterator = this.getScoreboard().getObjectivesForCriteria(statistic.k()).iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 ScoreboardObjective scoreboardobjective = (ScoreboardObjective) iterator.next();
 
@@ -895,6 +906,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
             this.bV.setStatistic(this, statistic, 0);
             Iterator iterator = this.getScoreboard().getObjectivesForCriteria(statistic.k()).iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 ScoreboardObjective scoreboardobjective = (ScoreboardObjective) iterator.next();
 
@@ -927,7 +939,6 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
             this.sendMessage(component);
         }
     }
-    // CraftBukkit end
 
     public void b(IChatBaseComponent ichatbasecomponent) {
         this.playerConnection.sendPacket(new PacketPlayOutChat(ichatbasecomponent));
@@ -988,6 +999,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
     }
 
     public void a(EnumGamemode enumgamemode) {
+        //noinspection deprecation
         getBukkitEntity().setGameMode(org.bukkit.GameMode.getByValue(enumgamemode.getId()));
         /* CraftBukkit start - defer to our setGameMode
         this.playerInteractManager.setGameMode(enumgamemode);
@@ -1058,9 +1070,9 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         // CraftBukkit end
         this.locale = packetplayinsettings.a();
         this.ch = packetplayinsettings.c();
-        this.ci = packetplayinsettings.d();
-        this.getDataWatcher().set(EntityPlayer.br, Byte.valueOf((byte) packetplayinsettings.e()));
-        this.getDataWatcher().set(EntityPlayer.bs, Byte.valueOf((byte) (packetplayinsettings.getMainHand() == EnumMainHand.LEFT ? 0 : 1)));
+        boolean ci = packetplayinsettings.d();
+        this.getDataWatcher().set(EntityPlayer.br, (byte) packetplayinsettings.e());
+        this.getDataWatcher().set(EntityPlayer.bs, (byte) (packetplayinsettings.getMainHand() == EnumMainHand.LEFT ? 0 : 1));
     }
 
     public EntityHuman.EnumChatVisibility getChatFlags() {
@@ -1087,7 +1099,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         if (entity instanceof EntityHuman) {
             this.playerConnection.sendPacket(new PacketPlayOutEntityDestroy(entity.getId()));
         } else {
-            this.removeQueue.add(Integer.valueOf(entity.getId()));
+            this.removeQueue.add(entity.getId());
         }
 
     }
@@ -1142,6 +1154,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         return this.cj;
     }
 
+    @SuppressWarnings("unused")
     @Nullable
     public IChatBaseComponent getPlayerListName() {
         return listName; // CraftBukkit
@@ -1174,10 +1187,6 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         // CraftBukkit end
     }
 
-    // CraftBukkit start - Add per-player time and weather.
-    public long timeOffset = 0;
-    public boolean relativeTime = true;
-
     public long getPlayerTime() {
         if (this.relativeTime) {
             // Adds timeOffset to the current server time.
@@ -1187,8 +1196,6 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
             return this.world.getDayTime() - (this.world.getDayTime() % 24000) + this.timeOffset;
         }
     }
-
-    public WeatherType weather = null;
 
     public WeatherType getPlayerWeather() {
         return this.weather;
@@ -1209,9 +1216,6 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
             this.playerConnection.sendPacket(new PacketPlayOutGameStateChange(1, 0));
         }
     }
-
-    private float pluginRainPosition;
-    private float pluginRainPositionPrevious;
 
     public void updateWeather(float oldRain, float newRain, float oldThunder, float newThunder) {
         if (this.weather == null) {

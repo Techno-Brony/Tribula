@@ -5,12 +5,17 @@ import javax.annotation.Nullable;
 public abstract class EntityAgeable extends EntityCreature {
 
     private static final DataWatcherObject<Boolean> bx = DataWatcher.a(EntityAgeable.class, DataWatcherRegistry.h);
+    public boolean ageLocked; // CraftBukkit
     protected int a;
     protected int b;
     protected int c;
     private float by = -1.0F;
     private float bz;
-    public boolean ageLocked; // CraftBukkit
+
+    public EntityAgeable(World world) {
+        super(world);
+    }
+    // Spigot end
 
     // Spigot start
     @Override
@@ -34,11 +39,6 @@ public abstract class EntityAgeable extends EntityCreature {
                 this.setAgeRaw( i );
             }
         }
-    }
-    // Spigot end
-
-    public EntityAgeable(World world) {
-        super(world);
     }
 
     public abstract EntityAgeable createChild(EntityAgeable entityageable);
@@ -71,19 +71,23 @@ public abstract class EntityAgeable extends EntityCreature {
                 }
             }
 
-            return true;
-        } else {
             return false;
+        } else {
+            return true;
         }
     }
 
     protected void i() {
         super.i();
-        this.datawatcher.register(EntityAgeable.bx, Boolean.valueOf(false));
+        this.datawatcher.register(EntityAgeable.bx, Boolean.FALSE);
     }
 
     public int getAge() {
-        return this.world.isClientSide ? (this.datawatcher.get(EntityAgeable.bx).booleanValue() ? -1 : 1) : this.a;
+        return this.world.isClientSide ? (this.datawatcher.get(EntityAgeable.bx) ? -1 : 1) : this.a;
+    }
+
+    public void setAge(int i) {
+        this.setAge(i, false);
     }
 
     public void setAge(int i, boolean flag) {
@@ -114,12 +118,8 @@ public abstract class EntityAgeable extends EntityCreature {
 
     }
 
-    public void setAge(int i) {
-        this.setAge(i, false);
-    }
-
     public void setAgeRaw(int i) {
-        this.datawatcher.set(EntityAgeable.bx, Boolean.valueOf(i < 0));
+        this.datawatcher.set(EntityAgeable.bx, i < 0);
         this.a = i;
         this.a(this.isBaby());
     }

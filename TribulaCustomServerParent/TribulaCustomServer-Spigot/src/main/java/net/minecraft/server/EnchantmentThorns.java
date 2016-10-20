@@ -4,9 +4,17 @@ import java.util.Random;
 
 public class EnchantmentThorns extends Enchantment {
 
-    public EnchantmentThorns(Enchantment.Rarity enchantment_rarity, EnumItemSlot... aenumitemslot) {
+    public EnchantmentThorns(@SuppressWarnings("SameParameterValue") Enchantment.Rarity enchantment_rarity, EnumItemSlot... aenumitemslot) {
         super(enchantment_rarity, EnchantmentSlotType.ARMOR_CHEST, aenumitemslot);
         this.c("thorns");
+    }
+
+    public static boolean a(int i, Random random) {
+        return i > 0 && random.nextFloat() < 0.15F * (float) i;
+    }
+
+    public static int b(int i, Random random) {
+        return i > 10 ? i - 10 : 1 + random.nextInt(4);
     }
 
     public int a(int i) {
@@ -41,13 +49,5 @@ public class EnchantmentThorns extends Enchantment {
             itemstack.damage(1, entityliving);
         }
 
-    }
-
-    public static boolean a(int i, Random random) {
-        return i > 0 && random.nextFloat() < 0.15F * (float) i;
-    }
-
-    public static int b(int i, Random random) {
-        return i > 10 ? i - 10 : 1 + random.nextInt(4);
     }
 }

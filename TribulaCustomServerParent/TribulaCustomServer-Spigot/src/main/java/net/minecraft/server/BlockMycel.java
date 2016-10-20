@@ -1,13 +1,14 @@
 package net.minecraft.server;
 
-import java.util.Random;
-import javax.annotation.Nullable;
-
-// CraftBukkit start
 import org.bukkit.block.BlockState;
 import org.bukkit.craftbukkit.util.CraftMagicNumbers;
 import org.bukkit.event.block.BlockFadeEvent;
 import org.bukkit.event.block.BlockSpreadEvent;
+
+import javax.annotation.Nullable;
+import java.util.Random;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class BlockMycel extends Block {
@@ -16,15 +17,16 @@ public class BlockMycel extends Block {
 
     protected BlockMycel() {
         super(Material.GRASS, MaterialMapColor.z);
-        this.w(this.blockStateList.getBlockData().set(BlockMycel.SNOWY, Boolean.valueOf(false)));
+        this.w(this.blockStateList.getBlockData().set(BlockMycel.SNOWY, Boolean.FALSE));
         this.a(true);
         this.a(CreativeModeTab.b);
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData updateState(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         Block block = iblockaccess.getType(blockposition.up()).getBlock();
 
-        return iblockdata.set(BlockMycel.SNOWY, Boolean.valueOf(block == Blocks.SNOW || block == Blocks.SNOW_LAYER));
+        return iblockdata.set(BlockMycel.SNOWY, block == Blocks.SNOW || block == Blocks.SNOW_LAYER);
     }
 
     public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {

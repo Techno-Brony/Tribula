@@ -1,12 +1,13 @@
 package net.minecraft.server;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 
 public class RecipeMapClone extends ShapelessRecipes implements IRecipe { // CraftBukkit - added extends
 
     // CraftBukkit start - Delegate to new parent class
     public RecipeMapClone() {
-        super(new ItemStack(Items.MAP, 0, -1), java.util.Arrays.asList(new ItemStack(Items.MAP, 0, 0)));
+        super(new ItemStack(Items.MAP, 0, -1), Collections.singletonList(new ItemStack(Items.MAP, 0, 0)));
     }
     // CraftBukkit end
 

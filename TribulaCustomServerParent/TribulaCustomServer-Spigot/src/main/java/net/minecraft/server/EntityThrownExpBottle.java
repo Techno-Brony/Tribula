@@ -14,6 +14,7 @@ public class EntityThrownExpBottle extends EntityProjectile {
         super(world, d0, d1, d2);
     }
 
+    @SuppressWarnings("unused")
     public static void a(DataConverterManager dataconvertermanager) {
         EntityProjectile.a(dataconvertermanager, "ThrowableExpBottle");
     }

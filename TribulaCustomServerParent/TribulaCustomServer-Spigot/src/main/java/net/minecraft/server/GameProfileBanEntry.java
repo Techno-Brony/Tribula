@@ -2,11 +2,13 @@ package net.minecraft.server;
 
 import com.google.gson.JsonObject;
 import com.mojang.authlib.GameProfile;
+
 import java.util.Date;
 import java.util.UUID;
 
 public class GameProfileBanEntry extends ExpirableListEntry<GameProfile> {
 
+    @SuppressWarnings("unused")
     public GameProfileBanEntry(GameProfile gameprofile) {
         this(gameprofile, null, null, null, null);
     }
@@ -15,16 +17,9 @@ public class GameProfileBanEntry extends ExpirableListEntry<GameProfile> {
         super(gameprofile, date, s, date1, s1); // Spigot
     }
 
+    @SuppressWarnings("unused")
     public GameProfileBanEntry(JsonObject jsonobject) {
         super(b(jsonobject), jsonobject);
-    }
-
-    protected void a(JsonObject jsonobject) {
-        if (this.getKey() != null) {
-            jsonobject.addProperty("uuid", this.getKey().getId() == null ? "" : this.getKey().getId().toString());
-            jsonobject.addProperty("name", this.getKey().getName());
-            super.a(jsonobject);
-        }
     }
 
     private static GameProfile b(JsonObject jsonobject) {
@@ -37,7 +32,7 @@ public class GameProfileBanEntry extends ExpirableListEntry<GameProfile> {
 
             try {
                 uuid = UUID.fromString(s);
-            } catch (Throwable throwable) {
+            } catch (Throwable ignored) {
             }
 
         }
@@ -52,5 +47,13 @@ public class GameProfileBanEntry extends ExpirableListEntry<GameProfile> {
             return null;
         }
         // Spigot End
+    }
+
+    protected void a(JsonObject jsonobject) {
+        if (this.getKey() != null) {
+            jsonobject.addProperty("uuid", this.getKey().getId() == null ? "" : this.getKey().getId().toString());
+            jsonobject.addProperty("name", this.getKey().getName());
+            super.a(jsonobject);
+        }
     }
 }

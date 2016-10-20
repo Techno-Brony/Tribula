@@ -2,36 +2,53 @@ package net.minecraft.server;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import javax.annotation.Nullable;
-
-// CraftBukkit start
 import org.bukkit.craftbukkit.entity.CraftHumanEntity;
 import org.bukkit.craftbukkit.potion.CraftPotionUtil;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.potion.PotionEffect;
+
+import javax.annotation.Nullable;
+import java.util.*;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class TileEntityBeacon extends TileEntityContainer implements ITickable, IWorldInventory {
 
     public static final MobEffectList[][] a = new MobEffectList[][] { { MobEffects.FASTER_MOVEMENT, MobEffects.FASTER_DIG}, { MobEffects.RESISTANCE, MobEffects.JUMP}, { MobEffects.INCREASE_DAMAGE}, { MobEffects.REGENERATION}};
     private static final Set<MobEffectList> f = Sets.newHashSet();
+
+    static {
+        MobEffectList[][] amobeffectlist = TileEntityBeacon.a;
+        int i = amobeffectlist.length;
+
+        for (MobEffectList[] amobeffectlist1 : amobeffectlist) {
+            Collections.addAll(TileEntityBeacon.f, amobeffectlist1);
+        }
+
+    }
+
     private final List<TileEntityBeacon.BeaconColorTracker> g = Lists.newArrayList();
-    private boolean j;
     public int k = -1; // PAIL: private -> public
     @Nullable
     public MobEffectList l; // PAIL: private -> public
     @Nullable
     public MobEffectList m; // PAIL: private -> public
+    // CraftBukkit start - add fields and methods
+    @SuppressWarnings("CanBeFinal")
+    public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
+    private boolean j;
     private ItemStack inventorySlot;
     private String o;
-    // CraftBukkit start - add fields and methods
-    public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
-    private int maxStack = MAX_STACK;
+
+    public TileEntityBeacon() {}
+
+    @Nullable
+    private static MobEffectList f(int i) {
+        MobEffectList mobeffectlist = MobEffectList.fromId(i);
+
+        return TileEntityBeacon.f.contains(mobeffectlist) ? mobeffectlist : null;
+    }
 
     public ItemStack[] getContents() {
         return new ItemStack[] { this.inventorySlot };
@@ -48,10 +65,7 @@ public class TileEntityBeacon extends TileEntityContainer implements ITickable, 
     public List<HumanEntity> getViewers() {
         return transaction;
     }
-
-    public void setMaxStackSize(int size) {
-        maxStack = size;
-    }
+    // CraftBukkit end
 
     public PotionEffect getPrimaryEffect() {
         return (this.l != null) ? CraftPotionUtil.toBukkit(new MobEffect(this.l, getLevel(), getAmplification(), true, true)) : null;
@@ -60,9 +74,6 @@ public class TileEntityBeacon extends TileEntityContainer implements ITickable, 
     public PotionEffect getSecondaryEffect() {
         return (hasSecondaryEffect()) ? CraftPotionUtil.toBukkit(new MobEffect(this.m, getLevel(), getAmplification(), true, true)) : null;
     }
-    // CraftBukkit end
-
-    public TileEntityBeacon() {}
 
     public void E_() {
         if (this.world.getTime() % 80L == 0L) {
@@ -94,8 +105,7 @@ public class TileEntityBeacon extends TileEntityContainer implements ITickable, 
 
     private int getLevel() {
         {
-            int i = (9 + this.k * 2) * 20;
-            return i;
+            return (9 + this.k * 2) * 20;
         }
     }
 
@@ -107,9 +117,8 @@ public class TileEntityBeacon extends TileEntityContainer implements ITickable, 
             int k = this.position.getY();
             int l = this.position.getZ();
             AxisAlignedBB axisalignedbb = (new AxisAlignedBB((double) j, (double) k, (double) l, (double) (j + 1), (double) (k + 1), (double) (l + 1))).g(d0).a(0.0D, (double) this.world.getHeight(), 0.0D);
-            List list = this.world.a(EntityHuman.class, axisalignedbb);
 
-            return list;
+            return this.world.a(EntityHuman.class, axisalignedbb);
         }
     }
 
@@ -132,6 +141,7 @@ public class TileEntityBeacon extends TileEntityContainer implements ITickable, 
 
         }
     }
+    // CraftBukkit end
 
     private void E() {
         if (this.j && this.k > 0 && !this.world.isClientSide && this.l != null) {
@@ -148,7 +158,6 @@ public class TileEntityBeacon extends TileEntityContainer implements ITickable, 
         }
 
     }
-    // CraftBukkit end
 
     private void F() {
         int i = this.k;
@@ -236,6 +245,7 @@ public class TileEntityBeacon extends TileEntityContainer implements ITickable, 
         if (!this.world.isClientSide && this.k == 4 && i < this.k) {
             Iterator iterator = this.world.a(EntityHuman.class, (new AxisAlignedBB((double) j, (double) k, (double) l, (double) j, (double) (k - 4), (double) l)).grow(10.0D, 5.0D, 10.0D)).iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 EntityHuman entityhuman = (EntityHuman) iterator.next();
 
@@ -252,13 +262,6 @@ public class TileEntityBeacon extends TileEntityContainer implements ITickable, 
 
     public NBTTagCompound c() {
         return this.save(new NBTTagCompound());
-    }
-
-    @Nullable
-    private static MobEffectList f(int i) {
-        MobEffectList mobeffectlist = MobEffectList.fromId(i);
-
-        return TileEntityBeacon.f.contains(mobeffectlist) ? mobeffectlist : null;
     }
 
     public void a(NBTTagCompound nbttagcompound) {
@@ -329,12 +332,16 @@ public class TileEntityBeacon extends TileEntityContainer implements ITickable, 
         return this.o != null && !this.o.isEmpty();
     }
 
+    @SuppressWarnings("unused")
     public void a(String s) {
         this.o = s;
     }
 
     public int getMaxStackSize() {
         return 1;
+    }
+
+    public void setMaxStackSize(int size) {
     }
 
     public boolean a(EntityHuman entityhuman) {
@@ -416,18 +423,6 @@ public class TileEntityBeacon extends TileEntityContainer implements ITickable, 
 
     public boolean canTakeItemThroughFace(int i, ItemStack itemstack, EnumDirection enumdirection) {
         return false;
-    }
-
-    static {
-        MobEffectList[][] amobeffectlist = TileEntityBeacon.a;
-        int i = amobeffectlist.length;
-
-        for (int j = 0; j < i; ++j) {
-            MobEffectList[] amobeffectlist1 = amobeffectlist[j];
-
-            Collections.addAll(TileEntityBeacon.f, amobeffectlist1);
-        }
-
     }
 
     public static class BeaconColorTracker {

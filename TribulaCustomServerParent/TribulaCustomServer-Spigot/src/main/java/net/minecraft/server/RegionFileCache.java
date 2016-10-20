@@ -1,6 +1,7 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Maps;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -38,6 +39,7 @@ public class RegionFileCache {
     public static synchronized void a() {
         Iterator iterator = RegionFileCache.a.values().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             RegionFile regionfile = (RegionFile) iterator.next();
 

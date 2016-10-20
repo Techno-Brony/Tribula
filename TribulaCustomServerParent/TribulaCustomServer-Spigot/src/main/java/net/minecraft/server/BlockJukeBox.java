@@ -6,20 +6,21 @@ public class BlockJukeBox extends BlockTileEntity {
 
     public static final BlockStateBoolean HAS_RECORD = BlockStateBoolean.of("has_record");
 
+    protected BlockJukeBox() {
+        super(Material.WOOD, MaterialMapColor.l);
+        this.w(this.blockStateList.getBlockData().set(BlockJukeBox.HAS_RECORD, Boolean.FALSE));
+        this.a(CreativeModeTab.c);
+    }
+
+    @SuppressWarnings("unused")
     public static void a(DataConverterManager dataconvertermanager) {
         dataconvertermanager.a(DataConverterTypes.BLOCK_ENTITY, new DataInspectorItem("RecordPlayer", "RecordItem"));
     }
 
-    protected BlockJukeBox() {
-        super(Material.WOOD, MaterialMapColor.l);
-        this.w(this.blockStateList.getBlockData().set(BlockJukeBox.HAS_RECORD, Boolean.valueOf(false)));
-        this.a(CreativeModeTab.c);
-    }
-
     public boolean interact(World world, BlockPosition blockposition, IBlockData iblockdata, EntityHuman entityhuman, EnumHand enumhand, @Nullable ItemStack itemstack, EnumDirection enumdirection, float f, float f1, float f2) {
-        if (iblockdata.get(BlockJukeBox.HAS_RECORD).booleanValue()) {
+        if (iblockdata.get(BlockJukeBox.HAS_RECORD)) {
             this.dropRecord(world, blockposition, iblockdata);
-            iblockdata = iblockdata.set(BlockJukeBox.HAS_RECORD, Boolean.valueOf(false));
+            iblockdata = iblockdata.set(BlockJukeBox.HAS_RECORD, Boolean.FALSE);
             world.setTypeAndData(blockposition, iblockdata, 2);
             return true;
         } else {
@@ -33,12 +34,12 @@ public class BlockJukeBox extends BlockTileEntity {
 
             if (tileentity instanceof BlockJukeBox.TileEntityRecordPlayer) {
                 ((BlockJukeBox.TileEntityRecordPlayer) tileentity).setRecord(itemstack.cloneItemStack());
-                world.setTypeAndData(blockposition, iblockdata.set(BlockJukeBox.HAS_RECORD, Boolean.valueOf(true)), 2);
+                world.setTypeAndData(blockposition, iblockdata.set(BlockJukeBox.HAS_RECORD, Boolean.TRUE), 2);
             }
         }
     }
 
-    public void dropRecord(World world, BlockPosition blockposition, IBlockData iblockdata) {
+    public void dropRecord(World world, BlockPosition blockposition, @SuppressWarnings("UnusedParameters") IBlockData iblockdata) {
         if (!world.isClientSide) {
             TileEntity tileentity = world.getTileEntity(blockposition);
 
@@ -79,10 +80,12 @@ public class BlockJukeBox extends BlockTileEntity {
         return new BlockJukeBox.TileEntityRecordPlayer();
     }
 
+    @SuppressWarnings("deprecation")
     public boolean isComplexRedstone(IBlockData iblockdata) {
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     public int d(IBlockData iblockdata, World world, BlockPosition blockposition) {
         TileEntity tileentity = world.getTileEntity(blockposition);
 
@@ -101,12 +104,13 @@ public class BlockJukeBox extends BlockTileEntity {
         return EnumRenderType.MODEL;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
-        return this.getBlockData().set(BlockJukeBox.HAS_RECORD, Boolean.valueOf(i > 0));
+        return this.getBlockData().set(BlockJukeBox.HAS_RECORD, i > 0);
     }
 
     public int toLegacyData(IBlockData iblockdata) {
-        return iblockdata.get(BlockJukeBox.HAS_RECORD).booleanValue() ? 1 : 0;
+        return iblockdata.get(BlockJukeBox.HAS_RECORD) ? 1 : 0;
     }
 
     protected BlockStateList getStateList() {

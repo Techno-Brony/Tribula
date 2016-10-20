@@ -2,6 +2,7 @@ package net.minecraft.server;
 
 import com.google.common.collect.Lists;
 import com.mojang.authlib.GameProfile;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.TreeMap;
@@ -9,8 +10,10 @@ import java.util.UUID;
 
 public class Village {
 
-    private World a;
     private final List<VillageDoor> b = Lists.newArrayList();
+    private final TreeMap<String, Integer> j;
+    private final List<Village.Aggressor> k;
+    private World a;
     private BlockPosition c;
     private BlockPosition d;
     private int e;
@@ -18,29 +21,33 @@ public class Village {
     private int g;
     private int h;
     private int i;
-    private final TreeMap<String, Integer> j;
-    private final List<Village.Aggressor> k;
     private int l;
 
+    @SuppressWarnings("unused")
     public Village() {
         this.c = BlockPosition.ZERO;
         this.d = BlockPosition.ZERO;
+        //noinspection unchecked
         this.j = new TreeMap();
         this.k = Lists.newArrayList();
     }
 
+    @SuppressWarnings("unused")
     public Village(World world) {
         this.c = BlockPosition.ZERO;
         this.d = BlockPosition.ZERO;
+        //noinspection unchecked
         this.j = new TreeMap();
         this.k = Lists.newArrayList();
         this.a = world;
     }
 
+    @SuppressWarnings("unused")
     public void a(World world) {
         this.a = world;
     }
 
+    @SuppressWarnings("unused")
     public void a(int i) {
         this.g = i;
         this.m();
@@ -69,7 +76,7 @@ public class Village {
 
     }
 
-    private Vec3D a(BlockPosition blockposition, int i, int j, int k) {
+    private Vec3D a(BlockPosition blockposition, @SuppressWarnings("SameParameterValue") int i, @SuppressWarnings("SameParameterValue") int j, @SuppressWarnings("SameParameterValue") int k) {
         for (int l = 0; l < 10; ++l) {
             BlockPosition blockposition1 = blockposition.a(this.a.random.nextInt(16) - 8, this.a.random.nextInt(6) - 3, this.a.random.nextInt(16) - 8);
 
@@ -142,15 +149,18 @@ public class Village {
         return this.d.n(blockposition) < (double) (this.e * this.e);
     }
 
+    @SuppressWarnings("unused")
     public List<VillageDoor> f() {
         return this.b;
     }
 
+    @SuppressWarnings("unused")
     public VillageDoor b(BlockPosition blockposition) {
         VillageDoor villagedoor = null;
         int i = Integer.MAX_VALUE;
         Iterator iterator = this.b.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             VillageDoor villagedoor1 = (VillageDoor) iterator.next();
             int j = villagedoor1.a(blockposition);
@@ -164,11 +174,13 @@ public class Village {
         return villagedoor;
     }
 
+    @SuppressWarnings("unused")
     public VillageDoor c(BlockPosition blockposition) {
         VillageDoor villagedoor = null;
         int i = Integer.MAX_VALUE;
         Iterator iterator = this.b.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             VillageDoor villagedoor1 = (VillageDoor) iterator.next();
             int j = villagedoor1.a(blockposition);
@@ -193,6 +205,7 @@ public class Village {
         return villagedoor;
     }
 
+    @SuppressWarnings("unused")
     public VillageDoor e(BlockPosition blockposition) {
         if (this.d.n(blockposition) > (double) (this.e * this.e)) {
             return null;
@@ -213,6 +226,7 @@ public class Village {
         }
     }
 
+    @SuppressWarnings("unused")
     public void a(VillageDoor villagedoor) {
         this.b.add(villagedoor);
         this.c = this.c.a(villagedoor.d());
@@ -220,6 +234,7 @@ public class Village {
         this.f = villagedoor.h();
     }
 
+    @SuppressWarnings("unused")
     public boolean g() {
         return this.b.isEmpty();
     }
@@ -245,8 +260,7 @@ public class Village {
         double d0 = Double.MAX_VALUE;
         Village.Aggressor village_aggressor = null;
 
-        for (int i = 0; i < this.k.size(); ++i) {
-            Village.Aggressor village_aggressor1 = this.k.get(i);
+        for (Aggressor village_aggressor1 : this.k) {
             double d1 = village_aggressor1.a.h(entityliving);
 
             if (d1 <= d0) {
@@ -263,6 +277,7 @@ public class Village {
         EntityHuman entityhuman = null;
         Iterator iterator = this.j.keySet().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             String s = (String) iterator.next();
 
@@ -352,14 +367,15 @@ public class Village {
     public int a(String s) {
         Integer integer = this.j.get(s);
 
-        return integer != null ? integer.intValue() : 0;
+        return integer != null ? integer : 0;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public int a(String s, int i) {
         int j = this.a(s);
         int k = MathHelper.clamp(j + i, -30, 10);
 
-        this.j.put(s, Integer.valueOf(k));
+        this.j.put(s, k);
         return k;
     }
 
@@ -367,6 +383,7 @@ public class Village {
         return this.a(s) <= -15;
     }
 
+    @SuppressWarnings("unused")
     public void a(NBTTagCompound nbttagcompound) {
         this.h = nbttagcompound.getInt("PopSize");
         this.e = nbttagcompound.getInt("Radius");
@@ -395,15 +412,16 @@ public class Village {
                 GameProfile gameprofile = usercache.a(UUID.fromString(nbttagcompound2.getString("UUID")));
 
                 if (gameprofile != null) {
-                    this.j.put(gameprofile.getName(), Integer.valueOf(nbttagcompound2.getInt("S")));
+                    this.j.put(gameprofile.getName(), nbttagcompound2.getInt("S"));
                 }
             } else {
-                this.j.put(nbttagcompound2.getString("Name"), Integer.valueOf(nbttagcompound2.getInt("S")));
+                this.j.put(nbttagcompound2.getString("Name"), nbttagcompound2.getInt("S"));
             }
         }
 
     }
 
+    @SuppressWarnings("unused")
     public void b(NBTTagCompound nbttagcompound) {
         nbttagcompound.setInt("PopSize", this.h);
         nbttagcompound.setInt("Radius", this.e);
@@ -420,6 +438,7 @@ public class Village {
         NBTTagList nbttaglist = new NBTTagList();
         Iterator iterator = this.b.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             VillageDoor villagedoor = (VillageDoor) iterator.next();
             NBTTagCompound nbttagcompound1 = new NBTTagCompound();
@@ -437,6 +456,7 @@ public class Village {
         NBTTagList nbttaglist1 = new NBTTagList();
         Iterator iterator1 = this.j.keySet().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator1.hasNext()) {
             String s = (String) iterator1.next();
             NBTTagCompound nbttagcompound2 = new NBTTagCompound();
@@ -445,7 +465,7 @@ public class Village {
 
             if (gameprofile != null) {
                 nbttagcompound2.setString("UUID", gameprofile.getId().toString());
-                nbttagcompound2.setInt("S", this.j.get(s).intValue());
+                nbttagcompound2.setInt("S", this.j.get(s));
                 nbttaglist1.add(nbttagcompound2);
             }
         }
@@ -461,9 +481,10 @@ public class Village {
         return this.i == 0 || this.g - this.i >= 3600;
     }
 
-    public void b(int i) {
+    public void b(@SuppressWarnings("SameParameterValue") int i) {
         Iterator iterator = this.j.keySet().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             String s = (String) iterator.next();
 
@@ -474,6 +495,7 @@ public class Village {
 
     class Aggressor {
 
+        @SuppressWarnings("CanBeFinal")
         public EntityLiving a;
         public int b;
 

@@ -1,14 +1,15 @@
 package net.minecraft.server;
 
-import javax.annotation.Nullable;
-// CraftBukkit start
-import java.util.List;
-
+import org.bukkit.craftbukkit.entity.CraftHumanEntity;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.FurnaceBurnEvent;
 import org.bukkit.event.inventory.FurnaceSmeltEvent;
-import org.bukkit.craftbukkit.entity.CraftHumanEntity;
+
+import javax.annotation.Nullable;
+import java.util.List;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class TileEntityFurnace extends TileEntityContainer implements ITickable, IWorldInventory {
@@ -16,21 +17,58 @@ public class TileEntityFurnace extends TileEntityContainer implements ITickable,
     private static final int[] a = new int[] { 0};
     private static final int[] f = new int[] { 2, 1};
     private static final int[] g = new int[] { 1};
+    @SuppressWarnings("CanBeFinal")
+    public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
     private ItemStack[] items = new ItemStack[3];
     private int burnTime;
     private int ticksForCurrentFuel;
     private int cookTime;
     private int cookTimeTotal;
     private String m;
-
     // CraftBukkit start - add fields and methods
     private int lastTick = MinecraftServer.currentTick;
-    private int maxStack = MAX_STACK;
-    public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
+
+    public TileEntityFurnace() {}
+
+    @SuppressWarnings("unused")
+    public static void a(DataConverterManager dataconvertermanager) {
+        dataconvertermanager.a(DataConverterTypes.BLOCK_ENTITY, new DataInspectorItemList("Furnace", "Items"));
+    }
+
+    public static int fuelTime(ItemStack itemstack) {
+        if (itemstack == null) {
+            return 0;
+        } else {
+            Item item = itemstack.getItem();
+
+            if (item instanceof ItemBlock && Block.asBlock(item) != Blocks.AIR) {
+                Block block = Block.asBlock(item);
+
+                if (block == Blocks.WOODEN_SLAB) {
+                    return 150;
+                }
+
+                if (block.getBlockData().getMaterial() == Material.WOOD) {
+                    return 300;
+                }
+
+                if (block == Blocks.COAL_BLOCK) {
+                    return 16000;
+                }
+            }
+
+            return item instanceof ItemTool && "WOOD".equals(((ItemTool) item).h()) ? 200 : (item instanceof ItemSword && "WOOD".equals(((ItemSword) item).h()) ? 200 : (item instanceof ItemHoe && "WOOD".equals(((ItemHoe) item).g()) ? 200 : (item == Items.STICK ? 100 : (item == Items.COAL ? 1600 : (item == Items.LAVA_BUCKET ? 20000 : (item == Item.getItemOf(Blocks.SAPLING) ? 100 : (item == Items.BLAZE_ROD ? 2400 : 0)))))));
+        }
+    }
+
+    public static boolean isFuel(ItemStack itemstack) {
+        return fuelTime(itemstack) > 0;
+    }
 
     public ItemStack[] getContents() {
         return this.items;
     }
+    // CraftBukkit end
 
     public void onOpen(CraftHumanEntity who) {
         transaction.add(who);
@@ -43,13 +81,6 @@ public class TileEntityFurnace extends TileEntityContainer implements ITickable,
     public List<HumanEntity> getViewers() {
         return transaction;
     }
-
-    public void setMaxStackSize(int size) {
-        maxStack = size;
-    }
-    // CraftBukkit end
-
-    public TileEntityFurnace() {}
 
     public int getSize() {
         return this.items.length;
@@ -94,12 +125,9 @@ public class TileEntityFurnace extends TileEntityContainer implements ITickable,
         return this.m != null && !this.m.isEmpty();
     }
 
+    @SuppressWarnings("unused")
     public void a(String s) {
         this.m = s;
-    }
-
-    public static void a(DataConverterManager dataconvertermanager) {
-        dataconvertermanager.a(DataConverterTypes.BLOCK_ENTITY, new DataInspectorItemList("Furnace", "Items"));
     }
 
     public void a(NBTTagCompound nbttagcompound) {
@@ -154,6 +182,9 @@ public class TileEntityFurnace extends TileEntityContainer implements ITickable,
 
     public int getMaxStackSize() {
         return 64;
+    }
+
+    public void setMaxStackSize(int size) {
     }
 
     public boolean isBurning() {
@@ -237,7 +268,7 @@ public class TileEntityFurnace extends TileEntityContainer implements ITickable,
             if (flag != this.isBurning()) {
                 flag1 = true;
                 BlockFurnace.a(this.isBurning(), this.world, this.position);
-                this.invalidateBlockCache(); // CraftBukkit - Invalidate tile entity's cached block type 
+                this.invalidateBlockCache(); // CraftBukkit - Invalidate tile entity's cached block type
             }
         }
 
@@ -247,7 +278,8 @@ public class TileEntityFurnace extends TileEntityContainer implements ITickable,
 
     }
 
-    public int a(@Nullable ItemStack itemstack) {
+    @SuppressWarnings("SameReturnValue")
+    public int a(@SuppressWarnings("UnusedParameters") @Nullable ItemStack itemstack) {
         return 200;
     }
 
@@ -309,36 +341,6 @@ public class TileEntityFurnace extends TileEntityContainer implements ITickable,
             }
 
         }
-    }
-
-    public static int fuelTime(ItemStack itemstack) {
-        if (itemstack == null) {
-            return 0;
-        } else {
-            Item item = itemstack.getItem();
-
-            if (item instanceof ItemBlock && Block.asBlock(item) != Blocks.AIR) {
-                Block block = Block.asBlock(item);
-
-                if (block == Blocks.WOODEN_SLAB) {
-                    return 150;
-                }
-
-                if (block.getBlockData().getMaterial() == Material.WOOD) {
-                    return 300;
-                }
-
-                if (block == Blocks.COAL_BLOCK) {
-                    return 16000;
-                }
-            }
-
-            return item instanceof ItemTool && "WOOD".equals(((ItemTool) item).h()) ? 200 : (item instanceof ItemSword && "WOOD".equals(((ItemSword) item).h()) ? 200 : (item instanceof ItemHoe && "WOOD".equals(((ItemHoe) item).g()) ? 200 : (item == Items.STICK ? 100 : (item == Items.COAL ? 1600 : (item == Items.LAVA_BUCKET ? 20000 : (item == Item.getItemOf(Blocks.SAPLING) ? 100 : (item == Items.BLAZE_ROD ? 2400 : 0)))))));
-        }
-    }
-
-    public static boolean isFuel(ItemStack itemstack) {
-        return fuelTime(itemstack) > 0;
     }
 
     public boolean a(EntityHuman entityhuman) {

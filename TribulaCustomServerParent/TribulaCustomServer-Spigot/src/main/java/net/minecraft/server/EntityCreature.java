@@ -1,18 +1,20 @@
 package net.minecraft.server;
 
+import org.bukkit.event.entity.EntityUnleashEvent;
+
 import java.util.UUID;
 
 // CraftBukkit start
-import org.bukkit.event.entity.EntityUnleashEvent;
 // CraftBukkit end
 
 public abstract class EntityCreature extends EntityInsentient {
 
     public static final UUID bv = UUID.fromString("E199AD21-BA8A-4C53-8D13-6182D5C69D3A");
+    @SuppressWarnings("unused")
     public static final AttributeModifier bw = (new AttributeModifier(EntityCreature.bv, "Fleeing speed bonus", 2.0D, 2)).a(false);
+    private final PathfinderGoal c;
     private BlockPosition a;
     private float b;
-    private final PathfinderGoal c;
     private boolean bx;
     private float by;
 
@@ -36,6 +38,7 @@ public abstract class EntityCreature extends EntityInsentient {
         return !this.navigation.n();
     }
 
+    @SuppressWarnings("unused")
     public boolean cZ() {
         return this.f(new BlockPosition(this));
     }
@@ -49,10 +52,12 @@ public abstract class EntityCreature extends EntityInsentient {
         this.b = (float) i;
     }
 
+    @SuppressWarnings("unused")
     public BlockPosition da() {
         return this.a;
     }
 
+    @SuppressWarnings("unused")
     public float db() {
         return this.b;
     }
@@ -61,6 +66,7 @@ public abstract class EntityCreature extends EntityInsentient {
         this.b = -1.0F;
     }
 
+    @SuppressWarnings("unused")
     public boolean dd() {
         return this.b != -1.0F;
     }

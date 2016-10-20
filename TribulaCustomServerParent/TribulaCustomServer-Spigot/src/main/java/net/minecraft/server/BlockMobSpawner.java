@@ -1,7 +1,7 @@
 package net.minecraft.server;
 
-import java.util.Random;
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockMobSpawner extends BlockTileEntity {
 
@@ -22,6 +22,7 @@ public class BlockMobSpawner extends BlockTileEntity {
         return 0;
     }
 
+    @SuppressWarnings("EmptyMethod")
     public void dropNaturally(World world, BlockPosition blockposition, IBlockData iblockdata, float f, int i) {
         super.dropNaturally(world, blockposition, iblockdata, f, i);
         /* CraftBukkit start - Delegate to getExpDrop
@@ -33,12 +34,12 @@ public class BlockMobSpawner extends BlockTileEntity {
 
     @Override
     public int getExpDrop(World world, IBlockData iblockdata, int enchantmentLevel) {
-        int j = 15 + world.random.nextInt(15) + world.random.nextInt(15);
 
-        return j;
+        return 15 + world.random.nextInt(15) + world.random.nextInt(15);
         // CraftBukkit end
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }

@@ -7,7 +7,7 @@ public class PathfinderGoalVillagerFarm extends PathfinderGoalGotoTarget {
     private boolean e;
     private int f;
 
-    public PathfinderGoalVillagerFarm(EntityVillager entityvillager, double d0) {
+    public PathfinderGoalVillagerFarm(EntityVillager entityvillager, @SuppressWarnings("SameParameterValue") double d0) {
         super(entityvillager, d0, 16);
         this.c = entityvillager;
     }
@@ -30,10 +30,12 @@ public class PathfinderGoalVillagerFarm extends PathfinderGoalGotoTarget {
         return this.f >= 0 && super.b();
     }
 
+    @SuppressWarnings("EmptyMethod")
     public void c() {
         super.c();
     }
 
+    @SuppressWarnings("EmptyMethod")
     public void d() {
         super.d();
     }

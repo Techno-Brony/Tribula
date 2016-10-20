@@ -1,27 +1,22 @@
 package net.minecraft.server;
 
 import com.google.common.base.Predicate;
-import java.util.Arrays;
-import java.util.List;
-import javax.annotation.Nullable;
-
-// CraftBukkit start
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.craftbukkit.CraftEquipmentSlot;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
+import org.bukkit.inventory.EquipmentSlot;
+
+import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.List;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class EntityArmorStand extends EntityLiving {
 
-    private static final Vector3f br = new Vector3f(0.0F, 0.0F, 0.0F);
-    private static final Vector3f bs = new Vector3f(0.0F, 0.0F, 0.0F);
-    private static final Vector3f bt = new Vector3f(-10.0F, 0.0F, -10.0F);
-    private static final Vector3f bu = new Vector3f(-15.0F, 0.0F, 10.0F);
-    private static final Vector3f bv = new Vector3f(-1.0F, 0.0F, -1.0F);
-    private static final Vector3f bw = new Vector3f(1.0F, 0.0F, 1.0F);
     public static final DataWatcherObject<Byte> a = DataWatcher.a(EntityArmorStand.class, DataWatcherRegistry.a);
     public static final DataWatcherObject<Vector3f> b = DataWatcher.a(EntityArmorStand.class, DataWatcherRegistry.i);
     public static final DataWatcherObject<Vector3f> c = DataWatcher.a(EntityArmorStand.class, DataWatcherRegistry.i);
@@ -29,6 +24,13 @@ public class EntityArmorStand extends EntityLiving {
     public static final DataWatcherObject<Vector3f> e = DataWatcher.a(EntityArmorStand.class, DataWatcherRegistry.i);
     public static final DataWatcherObject<Vector3f> f = DataWatcher.a(EntityArmorStand.class, DataWatcherRegistry.i);
     public static final DataWatcherObject<Vector3f> g = DataWatcher.a(EntityArmorStand.class, DataWatcherRegistry.i);
+    private static final Vector3f br = new Vector3f(0.0F, 0.0F, 0.0F);
+    private static final Vector3f bs = new Vector3f(0.0F, 0.0F, 0.0F);
+    private static final Vector3f bt = new Vector3f(-10.0F, 0.0F, -10.0F);
+    private static final Vector3f bu = new Vector3f(-15.0F, 0.0F, 10.0F);
+    private static final Vector3f bv = new Vector3f(-1.0F, 0.0F, -1.0F);
+    private static final Vector3f bw = new Vector3f(1.0F, 0.0F, 1.0F);
+    @SuppressWarnings("unchecked")
     private static final Predicate<Entity> bx = new Predicate() {
         public boolean a(@Nullable Entity entity) {
             return entity instanceof EntityMinecartAbstract && ((EntityMinecartAbstract) entity).v() == EntityMinecartAbstract.EnumMinecartType.RIDEABLE;
@@ -40,16 +42,16 @@ public class EntityArmorStand extends EntityLiving {
     };
     private final ItemStack[] by;
     private final ItemStack[] bz;
-    private boolean bA;
     public long h;
-    private int bB;
-    private boolean bC;
     public Vector3f headPose;
     public Vector3f bodyPose;
     public Vector3f leftArmPose;
     public Vector3f rightArmPose;
     public Vector3f leftLegPose;
     public Vector3f rightLegPose;
+    private boolean bA;
+    private int bB;
+    private boolean bC;
 
     public EntityArmorStand(World world) {
         super(world);
@@ -70,13 +72,18 @@ public class EntityArmorStand extends EntityLiving {
         this.setPosition(d0, d1, d2);
     }
 
+    @SuppressWarnings("unused")
+    public static void a(DataConverterManager dataconvertermanager) {
+        dataconvertermanager.a(DataConverterTypes.ENTITY, new DataInspectorItemList("ArmorStand", "ArmorItems", "HandItems"));
+    }
+
     public boolean ct() {
         return super.ct() && !this.isNoGravity();
     }
 
     protected void i() {
         super.i();
-        this.datawatcher.register(EntityArmorStand.a, Byte.valueOf((byte) 0));
+        this.datawatcher.register(EntityArmorStand.a, (byte) 0);
         this.datawatcher.register(EntityArmorStand.b, EntityArmorStand.br);
         this.datawatcher.register(EntityArmorStand.c, EntityArmorStand.bs);
         this.datawatcher.register(EntityArmorStand.d, EntityArmorStand.bt);
@@ -144,16 +151,12 @@ public class EntityArmorStand extends EntityLiving {
             enumitemslot = EnumItemSlot.FEET;
         }
 
-        if (itemstack != null && !EntityInsentient.b(enumitemslot, itemstack) && enumitemslot != EnumItemSlot.HEAD) {
+        if (itemstack != null && EntityInsentient.b(enumitemslot, itemstack) && enumitemslot != EnumItemSlot.HEAD) {
             return false;
         } else {
             this.setSlot(enumitemslot, itemstack);
             return true;
         }
-    }
-
-    public static void a(DataConverterManager dataconvertermanager) {
-        dataconvertermanager.a(DataConverterTypes.ENTITY, new DataInspectorItemList("ArmorStand", "ArmorItems", "HandItems"));
     }
 
     public void b(NBTTagCompound nbttagcompound) {
@@ -303,8 +306,8 @@ public class EntityArmorStand extends EntityLiving {
     protected void cs() {
         List list = this.world.getEntities(this, this.getBoundingBox(), EntityArmorStand.bx);
 
-        for (int i = 0; i < list.size(); ++i) {
-            Entity entity = (Entity) list.get(i);
+        for (Object aList : list) {
+            Entity entity = (Entity) aList;
 
             if (this.h(entity) <= 0.2D) {
                 entity.collide(this);
@@ -646,36 +649,36 @@ public class EntityArmorStand extends EntityLiving {
         return this.isInvisible();
     }
 
-    public void setSmall(boolean flag) {
-        this.datawatcher.set(EntityArmorStand.a, Byte.valueOf(this.a(this.datawatcher.get(EntityArmorStand.a).byteValue(), 1, flag)));
+    public boolean isSmall() {
+        return (this.datawatcher.get(EntityArmorStand.a) & 1) != 0;
     }
 
-    public boolean isSmall() {
-        return (this.datawatcher.get(EntityArmorStand.a).byteValue() & 1) != 0;
+    public void setSmall(boolean flag) {
+        this.datawatcher.set(EntityArmorStand.a, this.a(this.datawatcher.get(EntityArmorStand.a), 1, flag));
     }
 
     public void setArms(boolean flag) {
-        this.datawatcher.set(EntityArmorStand.a, Byte.valueOf(this.a(this.datawatcher.get(EntityArmorStand.a).byteValue(), 4, flag)));
+        this.datawatcher.set(EntityArmorStand.a, this.a(this.datawatcher.get(EntityArmorStand.a), 4, flag));
     }
 
     public boolean hasArms() {
-        return (this.datawatcher.get(EntityArmorStand.a).byteValue() & 4) != 0;
+        return (this.datawatcher.get(EntityArmorStand.a) & 4) != 0;
     }
 
     public void setBasePlate(boolean flag) {
-        this.datawatcher.set(EntityArmorStand.a, Byte.valueOf(this.a(this.datawatcher.get(EntityArmorStand.a).byteValue(), 8, flag)));
+        this.datawatcher.set(EntityArmorStand.a, this.a(this.datawatcher.get(EntityArmorStand.a), 8, flag));
     }
 
     public boolean hasBasePlate() {
-        return (this.datawatcher.get(EntityArmorStand.a).byteValue() & 8) != 0;
-    }
-
-    public void setMarker(boolean flag) {
-        this.datawatcher.set(EntityArmorStand.a, Byte.valueOf(this.a(this.datawatcher.get(EntityArmorStand.a).byteValue(), 16, flag)));
+        return (this.datawatcher.get(EntityArmorStand.a) & 8) != 0;
     }
 
     public boolean isMarker() {
-        return (this.datawatcher.get(EntityArmorStand.a).byteValue() & 16) != 0;
+        return (this.datawatcher.get(EntityArmorStand.a) & 16) != 0;
+    }
+
+    public void setMarker(boolean flag) {
+        this.datawatcher.set(EntityArmorStand.a, this.a(this.datawatcher.get(EntityArmorStand.a), 16, flag));
     }
 
     private byte a(byte b0, int i, boolean flag) {
@@ -718,10 +721,12 @@ public class EntityArmorStand extends EntityLiving {
         this.datawatcher.set(EntityArmorStand.g, vector3f);
     }
 
+    @SuppressWarnings("unused")
     public Vector3f u() {
         return this.headPose;
     }
 
+    @SuppressWarnings("unused")
     public Vector3f w() {
         return this.bodyPose;
     }
@@ -761,12 +766,12 @@ public class EntityArmorStand extends EntityLiving {
         static {
             try {
                 EntityArmorStand.SyntheticClass_1.a[EnumItemSlot.Function.HAND.ordinal()] = 1;
-            } catch (NoSuchFieldError nosuchfielderror) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 EntityArmorStand.SyntheticClass_1.a[EnumItemSlot.Function.ARMOR.ordinal()] = 2;
-            } catch (NoSuchFieldError nosuchfielderror1) {
+            } catch (NoSuchFieldError ignored) {
             }
 
         }

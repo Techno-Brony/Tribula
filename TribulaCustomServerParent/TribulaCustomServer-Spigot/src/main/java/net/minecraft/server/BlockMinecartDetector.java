@@ -1,15 +1,16 @@
 package net.minecraft.server;
 
 import com.google.common.base.Predicate;
+import org.bukkit.event.block.BlockRedstoneEvent;
+
+import javax.annotation.Nullable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-import javax.annotation.Nullable;
-
-import org.bukkit.event.block.BlockRedstoneEvent; // CraftBukkit
 
 public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
 
+    @SuppressWarnings("unchecked")
     public static final BlockStateEnum<BlockMinecartTrackAbstract.EnumTrackPosition> SHAPE = BlockStateEnum.a("shape", BlockMinecartTrackAbstract.EnumTrackPosition.class, new Predicate() {
         public boolean a(@Nullable BlockMinecartTrackAbstract.EnumTrackPosition blockminecarttrackabstract_enumtrackposition) {
             return blockminecarttrackabstract_enumtrackposition != BlockMinecartTrackAbstract.EnumTrackPosition.NORTH_EAST && blockminecarttrackabstract_enumtrackposition != BlockMinecartTrackAbstract.EnumTrackPosition.NORTH_WEST && blockminecarttrackabstract_enumtrackposition != BlockMinecartTrackAbstract.EnumTrackPosition.SOUTH_EAST && blockminecarttrackabstract_enumtrackposition != BlockMinecartTrackAbstract.EnumTrackPosition.SOUTH_WEST;
@@ -23,7 +24,7 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
 
     public BlockMinecartDetector() {
         super(true);
-        this.w(this.blockStateList.getBlockData().set(BlockMinecartDetector.POWERED, Boolean.valueOf(false)).set(BlockMinecartDetector.SHAPE, BlockMinecartTrackAbstract.EnumTrackPosition.NORTH_SOUTH));
+        this.w(this.blockStateList.getBlockData().set(BlockMinecartDetector.POWERED, Boolean.FALSE).set(BlockMinecartDetector.SHAPE, BlockMinecartTrackAbstract.EnumTrackPosition.NORTH_SOUTH));
         this.a(true);
     }
 
@@ -31,13 +32,14 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
         return 20;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean isPowerSource(IBlockData iblockdata) {
         return true;
     }
 
     public void a(World world, BlockPosition blockposition, IBlockData iblockdata, Entity entity) {
         if (!world.isClientSide) {
-            if (!iblockdata.get(BlockMinecartDetector.POWERED).booleanValue()) {
+            if (!iblockdata.get(BlockMinecartDetector.POWERED)) {
                 this.e(world, blockposition, iblockdata);
             }
         }
@@ -46,22 +48,25 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
     public void a(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {}
 
     public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
-        if (!world.isClientSide && iblockdata.get(BlockMinecartDetector.POWERED).booleanValue()) {
+        if (!world.isClientSide && iblockdata.get(BlockMinecartDetector.POWERED)) {
             this.e(world, blockposition, iblockdata);
         }
     }
 
+    @SuppressWarnings("deprecation")
     public int b(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
-        return iblockdata.get(BlockMinecartDetector.POWERED).booleanValue() ? 15 : 0;
+        return iblockdata.get(BlockMinecartDetector.POWERED) ? 15 : 0;
     }
 
+    @SuppressWarnings("deprecation")
     public int c(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
-        return !iblockdata.get(BlockMinecartDetector.POWERED).booleanValue() ? 0 : (enumdirection == EnumDirection.UP ? 15 : 0);
+        return !iblockdata.get(BlockMinecartDetector.POWERED) ? 0 : (enumdirection == EnumDirection.UP ? 15 : 0);
     }
 
     private void e(World world, BlockPosition blockposition, IBlockData iblockdata) {
-        boolean flag = iblockdata.get(BlockMinecartDetector.POWERED).booleanValue();
+        boolean flag = iblockdata.get(BlockMinecartDetector.POWERED);
         boolean flag1 = false;
+        //noinspection unchecked
         List list = this.a(world, blockposition, EntityMinecartAbstract.class);
 
         if (!list.isEmpty()) {
@@ -80,7 +85,7 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
         // CraftBukkit end
 
         if (flag1 && !flag) {
-            world.setTypeAndData(blockposition, iblockdata.set(BlockMinecartDetector.POWERED, Boolean.valueOf(true)), 3);
+            world.setTypeAndData(blockposition, iblockdata.set(BlockMinecartDetector.POWERED, Boolean.TRUE), 3);
             this.b(world, blockposition, iblockdata, true);
             world.applyPhysics(blockposition, this);
             world.applyPhysics(blockposition.down(), this);
@@ -88,7 +93,7 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
         }
 
         if (!flag1 && flag) {
-            world.setTypeAndData(blockposition, iblockdata.set(BlockMinecartDetector.POWERED, Boolean.valueOf(false)), 3);
+            world.setTypeAndData(blockposition, iblockdata.set(BlockMinecartDetector.POWERED, Boolean.FALSE), 3);
             this.b(world, blockposition, iblockdata, false);
             world.applyPhysics(blockposition, this);
             world.applyPhysics(blockposition.down(), this);
@@ -102,11 +107,12 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
         world.updateAdjacentComparators(blockposition, this);
     }
 
-    protected void b(World world, BlockPosition blockposition, IBlockData iblockdata, boolean flag) {
+    protected void b(World world, BlockPosition blockposition, IBlockData iblockdata, @SuppressWarnings("UnusedParameters") boolean flag) {
         BlockMinecartTrackAbstract.MinecartTrackLogic blockminecarttrackabstract_minecarttracklogic = new BlockMinecartTrackAbstract.MinecartTrackLogic(world, blockposition, iblockdata);
         List list = blockminecarttrackabstract_minecarttracklogic.a();
         Iterator iterator = list.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             BlockPosition blockposition1 = (BlockPosition) iterator.next();
             IBlockData iblockdata1 = world.getType(blockposition1);
@@ -127,18 +133,22 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
         return BlockMinecartDetector.SHAPE;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean isComplexRedstone(IBlockData iblockdata) {
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     public int d(IBlockData iblockdata, World world, BlockPosition blockposition) {
-        if (iblockdata.get(BlockMinecartDetector.POWERED).booleanValue()) {
+        if (iblockdata.get(BlockMinecartDetector.POWERED)) {
+            //noinspection unchecked
             List list = this.a(world, blockposition, EntityMinecartCommandBlock.class);
 
             if (!list.isEmpty()) {
                 return ((EntityMinecartCommandBlock) list.get(0)).getCommandBlock().k();
             }
 
+            //noinspection unchecked
             List list1 = this.a(world, blockposition, EntityMinecartAbstract.class, IEntitySelector.c);
 
             if (!list1.isEmpty()) {
@@ -149,7 +159,7 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
         return 0;
     }
 
-    protected <T extends EntityMinecartAbstract> List<T> a(World world, BlockPosition blockposition, Class<T> oclass, Predicate<Entity>... apredicate) {
+    protected <T extends EntityMinecartAbstract> List<T> a(World world, BlockPosition blockposition, Class<T> oclass, @SuppressWarnings("SameParameterValue") Predicate<Entity>... apredicate) {
         AxisAlignedBB axisalignedbb = this.a(blockposition);
 
         return apredicate.length != 1 ? world.a(oclass, axisalignedbb) : world.a(oclass, axisalignedbb, apredicate[0]);
@@ -161,21 +171,23 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
         return new AxisAlignedBB((double) ((float) blockposition.getX() + 0.2F), (double) blockposition.getY(), (double) ((float) blockposition.getZ() + 0.2F), (double) ((float) (blockposition.getX() + 1) - 0.2F), (double) ((float) (blockposition.getY() + 1) - 0.2F), (double) ((float) (blockposition.getZ() + 1) - 0.2F));
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
-        return this.getBlockData().set(BlockMinecartDetector.SHAPE, BlockMinecartTrackAbstract.EnumTrackPosition.a(i & 7)).set(BlockMinecartDetector.POWERED, Boolean.valueOf((i & 8) > 0));
+        return this.getBlockData().set(BlockMinecartDetector.SHAPE, BlockMinecartTrackAbstract.EnumTrackPosition.a(i & 7)).set(BlockMinecartDetector.POWERED, (i & 8) > 0);
     }
 
     public int toLegacyData(IBlockData iblockdata) {
         byte b0 = 0;
         int i = b0 | iblockdata.get(BlockMinecartDetector.SHAPE).a();
 
-        if (iblockdata.get(BlockMinecartDetector.POWERED).booleanValue()) {
+        if (iblockdata.get(BlockMinecartDetector.POWERED)) {
             i |= 8;
         }
 
         return i;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockRotation enumblockrotation) {
         switch (BlockMinecartDetector.SyntheticClass_1.b[enumblockrotation.ordinal()]) {
         case 1:
@@ -276,6 +288,7 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockMirror enumblockmirror) {
         BlockMinecartTrackAbstract.EnumTrackPosition blockminecarttrackabstract_enumtrackposition = iblockdata.get(BlockMinecartDetector.SHAPE);
 
@@ -301,6 +314,7 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
                 return iblockdata.set(BlockMinecartDetector.SHAPE, BlockMinecartTrackAbstract.EnumTrackPosition.SOUTH_EAST);
 
             default:
+                //noinspection deprecation
                 return super.a(iblockdata, enumblockmirror);
             }
 
@@ -331,6 +345,7 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
             }
         }
 
+        //noinspection deprecation
         return super.a(iblockdata, enumblockmirror);
     }
 
@@ -338,90 +353,94 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
         return new BlockStateList(this, BlockMinecartDetector.SHAPE, BlockMinecartDetector.POWERED);
     }
 
+    @SuppressWarnings("unused")
     static class SyntheticClass_1 {
 
+        @SuppressWarnings("unused")
         static final int[] a;
+        @SuppressWarnings("unused")
         static final int[] b;
+        @SuppressWarnings("unused")
         static final int[] c = new int[EnumBlockMirror.values().length];
 
         static {
             try {
                 BlockMinecartDetector.SyntheticClass_1.c[EnumBlockMirror.LEFT_RIGHT.ordinal()] = 1;
-            } catch (NoSuchFieldError nosuchfielderror) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockMinecartDetector.SyntheticClass_1.c[EnumBlockMirror.FRONT_BACK.ordinal()] = 2;
-            } catch (NoSuchFieldError nosuchfielderror1) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             b = new int[EnumBlockRotation.values().length];
 
             try {
                 BlockMinecartDetector.SyntheticClass_1.b[EnumBlockRotation.CLOCKWISE_180.ordinal()] = 1;
-            } catch (NoSuchFieldError nosuchfielderror2) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockMinecartDetector.SyntheticClass_1.b[EnumBlockRotation.COUNTERCLOCKWISE_90.ordinal()] = 2;
-            } catch (NoSuchFieldError nosuchfielderror3) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockMinecartDetector.SyntheticClass_1.b[EnumBlockRotation.CLOCKWISE_90.ordinal()] = 3;
-            } catch (NoSuchFieldError nosuchfielderror4) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             a = new int[BlockMinecartTrackAbstract.EnumTrackPosition.values().length];
 
             try {
                 BlockMinecartDetector.SyntheticClass_1.a[BlockMinecartTrackAbstract.EnumTrackPosition.ASCENDING_EAST.ordinal()] = 1;
-            } catch (NoSuchFieldError nosuchfielderror5) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockMinecartDetector.SyntheticClass_1.a[BlockMinecartTrackAbstract.EnumTrackPosition.ASCENDING_WEST.ordinal()] = 2;
-            } catch (NoSuchFieldError nosuchfielderror6) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockMinecartDetector.SyntheticClass_1.a[BlockMinecartTrackAbstract.EnumTrackPosition.ASCENDING_NORTH.ordinal()] = 3;
-            } catch (NoSuchFieldError nosuchfielderror7) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockMinecartDetector.SyntheticClass_1.a[BlockMinecartTrackAbstract.EnumTrackPosition.ASCENDING_SOUTH.ordinal()] = 4;
-            } catch (NoSuchFieldError nosuchfielderror8) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockMinecartDetector.SyntheticClass_1.a[BlockMinecartTrackAbstract.EnumTrackPosition.SOUTH_EAST.ordinal()] = 5;
-            } catch (NoSuchFieldError nosuchfielderror9) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockMinecartDetector.SyntheticClass_1.a[BlockMinecartTrackAbstract.EnumTrackPosition.SOUTH_WEST.ordinal()] = 6;
-            } catch (NoSuchFieldError nosuchfielderror10) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockMinecartDetector.SyntheticClass_1.a[BlockMinecartTrackAbstract.EnumTrackPosition.NORTH_WEST.ordinal()] = 7;
-            } catch (NoSuchFieldError nosuchfielderror11) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockMinecartDetector.SyntheticClass_1.a[BlockMinecartTrackAbstract.EnumTrackPosition.NORTH_EAST.ordinal()] = 8;
-            } catch (NoSuchFieldError nosuchfielderror12) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockMinecartDetector.SyntheticClass_1.a[BlockMinecartTrackAbstract.EnumTrackPosition.NORTH_SOUTH.ordinal()] = 9;
-            } catch (NoSuchFieldError nosuchfielderror13) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockMinecartDetector.SyntheticClass_1.a[BlockMinecartTrackAbstract.EnumTrackPosition.EAST_WEST.ordinal()] = 10;
-            } catch (NoSuchFieldError nosuchfielderror14) {
+            } catch (NoSuchFieldError ignored) {
             }
 
         }

@@ -1,20 +1,17 @@
 package net.minecraft.server;
 
 import com.google.common.base.Predicate;
+import org.bukkit.craftbukkit.util.BlockStateListPopulator;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+
 import javax.annotation.Nullable;
 
 // CraftBukkit start
-import org.bukkit.craftbukkit.util.BlockStateListPopulator;
-import org.bukkit.event.block.BlockRedstoneEvent;
-import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 // CraftBukkit end
 
 public class BlockPumpkin extends BlockFacingHorizontal {
 
-    private ShapeDetector snowGolemPart;
-    private ShapeDetector snowGolem;
-    private ShapeDetector ironGolemPart;
-    private ShapeDetector ironGolem;
+    @SuppressWarnings("unchecked")
     private static final Predicate<IBlockData> e = new Predicate() {
         public boolean a(@Nullable IBlockData iblockdata) {
             return iblockdata != null && (iblockdata.getBlock() == Blocks.PUMPKIN || iblockdata.getBlock() == Blocks.LIT_PUMPKIN);
@@ -24,6 +21,10 @@ public class BlockPumpkin extends BlockFacingHorizontal {
             return this.a((IBlockData) object);
         }
     };
+    private ShapeDetector snowGolemPart;
+    private ShapeDetector snowGolem;
+    private ShapeDetector ironGolemPart;
+    private ShapeDetector ironGolem;
 
     protected BlockPumpkin() {
         super(Material.PUMPKIN, MaterialMapColor.q);
@@ -119,10 +120,12 @@ public class BlockPumpkin extends BlockFacingHorizontal {
         return world.getType(blockposition).getBlock().material.isReplaceable() && world.getType(blockposition.down()).q();
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockRotation enumblockrotation) {
         return iblockdata.set(BlockPumpkin.FACING, enumblockrotation.a(iblockdata.get(BlockPumpkin.FACING)));
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockMirror enumblockmirror) {
         return iblockdata.a(enumblockmirror.a(iblockdata.get(BlockPumpkin.FACING)));
     }
@@ -131,6 +134,7 @@ public class BlockPumpkin extends BlockFacingHorizontal {
         return this.getBlockData().set(BlockPumpkin.FACING, entityliving.getDirection().opposite());
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockPumpkin.FACING, EnumDirection.fromType2(i));
     }

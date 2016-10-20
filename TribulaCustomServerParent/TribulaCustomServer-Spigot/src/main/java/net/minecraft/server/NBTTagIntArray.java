@@ -9,8 +9,10 @@ public class NBTTagIntArray extends NBTBase {
 
     private int[] data;
 
+    @SuppressWarnings("unused")
     NBTTagIntArray() {}
 
+    @SuppressWarnings("unused")
     public NBTTagIntArray(int[] aint) {
         this.data = aint;
     }
@@ -20,9 +22,7 @@ public class NBTTagIntArray extends NBTBase {
         int[] aint = this.data;
         int i = aint.length;
 
-        for (int j = 0; j < i; ++j) {
-            int k = aint[j];
-
+        for (int k : aint) {
             dataoutput.writeInt(k);
         }
 
@@ -51,9 +51,7 @@ public class NBTTagIntArray extends NBTBase {
         int[] aint = this.data;
         int i = aint.length;
 
-        for (int j = 0; j < i; ++j) {
-            int k = aint[j];
-
+        for (int k : aint) {
             s = s + k + ",";
         }
 
@@ -75,10 +73,12 @@ public class NBTTagIntArray extends NBTBase {
         return super.hashCode() ^ Arrays.hashCode(this.data);
     }
 
+    @SuppressWarnings("unused")
     public int[] d() {
         return this.data;
     }
 
+    @SuppressWarnings("CloneDoesntCallSuperClone")
     public NBTBase clone() {
         return this.c();
     }

@@ -1,6 +1,7 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Maps;
+
 import java.util.Map;
 
 public class StatisticManager {
@@ -49,10 +50,11 @@ public class StatisticManager {
     public <T extends IJsonStatistic> T b(Statistic statistic) {
         StatisticWrapper statisticwrapper = this.a.get(statistic);
 
+        //noinspection unchecked
         return statisticwrapper != null ? (T) statisticwrapper.b() : null; // CraftBukkit - fix decompile error
     }
 
-    public <T extends IJsonStatistic> T a(Statistic statistic, T t0) {
+    public <T extends IJsonStatistic> T a(@SuppressWarnings("SameParameterValue") Statistic statistic, T t0) {
         StatisticWrapper statisticwrapper = this.a.get(statistic);
 
         if (statisticwrapper == null) {

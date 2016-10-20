@@ -1,43 +1,56 @@
 package net.minecraft.server;
 
-import java.util.Iterator;
-import java.util.List;
-import javax.annotation.Nullable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-// CraftBukkit start
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
+
+import javax.annotation.Nullable;
+import java.util.Iterator;
+import java.util.List;
+
+// CraftBukkit start
 // CraftBukkit end
 
 // PAIL: Fixme
 public class EntityEnderDragon extends EntityInsentient implements IComplex, IMonster {
 
-    private static final Logger bJ = LogManager.getLogger();
     public static final DataWatcherObject<Integer> PHASE = DataWatcher.a(EntityEnderDragon.class, DataWatcherRegistry.b);
+    private static final Logger bJ = LogManager.getLogger();
+    private final EnderDragonBattle bK;
+    private final DragonControllerManager bL;
+    private final PathPoint[] bO = new PathPoint[24];
+    private final int[] bP = new int[24];
+    private final Path bQ = new Path();
+    @SuppressWarnings("CanBeFinal")
     public double[][] b = new double[64][3];
     public int c = -1;
+    @SuppressWarnings("CanBeFinal")
     public EntityComplexPart[] children;
+    @SuppressWarnings("CanBeFinal")
     public EntityComplexPart bw = new EntityComplexPart(this, "head", 6.0F, 6.0F);
+    @SuppressWarnings("CanBeFinal")
     public EntityComplexPart bx = new EntityComplexPart(this, "neck", 6.0F, 6.0F);
+    @SuppressWarnings("CanBeFinal")
     public EntityComplexPart by = new EntityComplexPart(this, "body", 8.0F, 8.0F);
+    @SuppressWarnings("CanBeFinal")
     public EntityComplexPart bz = new EntityComplexPart(this, "tail", 4.0F, 4.0F);
+    @SuppressWarnings("CanBeFinal")
     public EntityComplexPart bA = new EntityComplexPart(this, "tail", 4.0F, 4.0F);
+    @SuppressWarnings("CanBeFinal")
     public EntityComplexPart bB = new EntityComplexPart(this, "tail", 4.0F, 4.0F);
+    @SuppressWarnings("CanBeFinal")
     public EntityComplexPart bC = new EntityComplexPart(this, "wing", 4.0F, 4.0F);
+    @SuppressWarnings("CanBeFinal")
     public EntityComplexPart bD = new EntityComplexPart(this, "wing", 4.0F, 4.0F);
     public float bE;
     public float bF;
     public boolean bG;
     public int bH;
     public EntityEnderCrystal currentEnderCrystal;
-    private final EnderDragonBattle bK;
-    private final DragonControllerManager bL;
     private int bM = 200;
     private int bN;
-    private final PathPoint[] bO = new PathPoint[24];
-    private final int[] bP = new int[24];
-    private final Path bQ = new Path();
+    @SuppressWarnings("CanBeFinal")
     private Explosion explosionSource = new Explosion(null, this, Double.NaN, Double.NaN, Double.NaN, Float.NaN, true, true); // CraftBukkit - reusable source for CraftTNTPrimed.getSource()
 
     public EntityEnderDragon(World world) {
@@ -58,6 +71,11 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
         this.bL = new DragonControllerManager(this);
     }
 
+    @SuppressWarnings("unused")
+    public static void b(DataConverterManager dataconvertermanager) {
+        EntityInsentient.a(dataconvertermanager, "EnderDragon");
+    }
+
     protected void initAttributes() {
         super.initAttributes();
         this.getAttributeInstance(GenericAttributes.maxHealth).setValue(200.0D);
@@ -65,10 +83,10 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
 
     protected void i() {
         super.i();
-        this.getDataWatcher().register(EntityEnderDragon.PHASE, Integer.valueOf(DragonControllerPhase.k.b()));
+        this.getDataWatcher().register(EntityEnderDragon.PHASE, DragonControllerPhase.k.b());
     }
 
-    public double[] a(int i, float f) {
+    public double[] a(int i, @SuppressWarnings("SameParameterValue") float f) {
         if (this.getHealth() <= 0.0F) {
             f = 0.0F;
         }
@@ -300,7 +318,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
         }
     }
 
-    private float q(float f) {
+    private float q(@SuppressWarnings({"SameParameterValue", "UnusedParameters"}) float f) {
         double d0;
 
         if (this.bL.a().a()) {
@@ -337,6 +355,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
             double d0 = Double.MAX_VALUE;
             Iterator iterator = list.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 EntityEnderCrystal entityendercrystal1 = (EntityEnderCrystal) iterator.next();
                 double d1 = entityendercrystal1.h(this);
@@ -357,6 +376,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
         double d1 = (this.by.getBoundingBox().c + this.by.getBoundingBox().f) / 2.0D;
         Iterator iterator = list.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             Entity entity = (Entity) iterator.next();
 
@@ -376,9 +396,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
     }
 
     private void b(List<Entity> list) {
-        for (int i = 0; i < list.size(); ++i) {
-            Entity entity = list.get(i);
-
+        for (Entity entity : list) {
             if (entity instanceof EntityLiving) {
                 entity.damageEntity(DamageSource.mobAttack(this), 10.0F);
                 this.a(this, entity);
@@ -459,6 +477,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
 
                 Block nmsBlock = org.bukkit.craftbukkit.util.CraftMagicNumbers.getBlock(blockId);
                 if (nmsBlock.a(explosionSource)) {
+                    //noinspection deprecation,deprecation
                     nmsBlock.dropNaturally(this.world, new BlockPosition(blockX, blockY, blockZ), nmsBlock.fromLegacyData(block.getData()), event.getYield(), 0);
                 }
                 nmsBlock.wasExploded(world, new BlockPosition(blockX, blockY, blockZ), explosionSource);
@@ -518,6 +537,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
         return false;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     protected boolean dealDamage(DamageSource damagesource, float f) {
         return super.damageEntity(damagesource, f);
     }
@@ -561,6 +581,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
                 // CraftBukkit start - Use relative location for far away sounds
                 // this.world.a(1028, new BlockPosition(this), 0);
                 int viewDistance = this.world.getServer().getViewDistance() * 16;
+                //noinspection deprecation
                 for (EntityPlayer player : MinecraftServer.getServer().getPlayerList().players) {
                     double deltaX = this.locX - player.locX;
                     double deltaZ = this.locZ - player.locZ;
@@ -606,6 +627,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
 
     }
 
+    @SuppressWarnings("unused")
     public int o() {
         if (this.bO[0] == null) {
             for (int i = 0; i < 24; ++i) {
@@ -689,6 +711,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
         return i;
     }
 
+    @SuppressWarnings("unused")
     @Nullable
     public PathEntity a(int i, int j, @Nullable PathPoint pathpoint) {
         PathPoint pathpoint1;
@@ -784,7 +807,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
         if (pathpoint3 == pathpoint2) {
             return null;
         } else {
-            EntityEnderDragon.bJ.debug("Failed to find path from {} to {}", Integer.valueOf(i), Integer.valueOf(j));
+            EntityEnderDragon.bJ.debug("Failed to find path from {} to {}", i, j);
             if (pathpoint != null) {
                 pathpoint.h = pathpoint3;
                 pathpoint3 = pathpoint;
@@ -794,7 +817,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
         }
     }
 
-    private PathEntity a(PathPoint pathpoint, PathPoint pathpoint1) {
+    private PathEntity a(@SuppressWarnings("UnusedParameters") PathPoint pathpoint, PathPoint pathpoint1) {
         int i = 1;
 
         PathPoint pathpoint2;
@@ -814,10 +837,6 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
         }
 
         return new PathEntity(apathpoint);
-    }
-
-    public static void b(DataConverterManager dataconvertermanager) {
-        EntityInsentient.a(dataconvertermanager, "EnderDragon");
     }
 
     public void b(NBTTagCompound nbttagcompound) {
@@ -863,6 +882,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
         return 5.0F;
     }
 
+    @SuppressWarnings("unused")
     public Vec3D a(float f) {
         IDragonController idragoncontroller = this.bL.a();
         DragonControllerPhase dragoncontrollerphase = idragoncontroller.getControllerPhase();
@@ -896,6 +916,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
         return vec3d;
     }
 
+    @SuppressWarnings("unused")
     public void a(EntityEnderCrystal entityendercrystal, BlockPosition blockposition, DamageSource damagesource) {
         EntityHuman entityhuman;
 
@@ -914,7 +935,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
 
     public void a(DataWatcherObject<?> datawatcherobject) {
         if (EntityEnderDragon.PHASE.equals(datawatcherobject) && this.world.isClientSide) {
-            this.bL.setControllerPhase(DragonControllerPhase.getById(this.getDataWatcher().get(EntityEnderDragon.PHASE).intValue()));
+            this.bL.setControllerPhase(DragonControllerPhase.getById(this.getDataWatcher().get(EntityEnderDragon.PHASE)));
         }
 
         super.a(datawatcherobject);
@@ -924,6 +945,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
         return this.bL;
     }
 
+    @SuppressWarnings("unused")
     @Nullable
     public EnderDragonBattle cZ() {
         return this.bK;

@@ -1,138 +1,30 @@
 package net.minecraft.server;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.google.common.base.Joiner;
+import org.bukkit.craftbukkit.command.VanillaCommandWrapper;
+
 import javax.annotation.Nullable;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.logging.Level;
 
 // CraftBukkit start
-import java.util.ArrayList;
-import org.bukkit.craftbukkit.command.VanillaCommandWrapper;
-import com.google.common.base.Joiner;
-import java.util.logging.Level;
 // CraftBukkit end
 
 public abstract class CommandBlockListenerAbstract implements ICommandListener {
 
     private static final SimpleDateFormat a = new SimpleDateFormat("HH:mm:ss");
+    private final CommandObjectiveExecutor g = new CommandObjectiveExecutor();
+    protected org.bukkit.command.CommandSender sender; // CraftBukkit - add sender
     private int b;
     private boolean c = true;
     private IChatBaseComponent d;
     private String e = "";
     private String f = "@";
-    private final CommandObjectiveExecutor g = new CommandObjectiveExecutor();
-    protected org.bukkit.command.CommandSender sender; // CraftBukkit - add sender
 
     public CommandBlockListenerAbstract() {}
-
-    public int k() {
-        return this.b;
-    }
-
-    public void a(int i) {
-        this.b = i;
-    }
-
-    public IChatBaseComponent l() {
-        return this.d == null ? new ChatComponentText("") : this.d;
-    }
-
-    public NBTTagCompound a(NBTTagCompound nbttagcompound) {
-        nbttagcompound.setString("Command", this.e);
-        nbttagcompound.setInt("SuccessCount", this.b);
-        nbttagcompound.setString("CustomName", this.f);
-        nbttagcompound.setBoolean("TrackOutput", this.c);
-        if (this.d != null && this.c) {
-            nbttagcompound.setString("LastOutput", IChatBaseComponent.ChatSerializer.a(this.d));
-        }
-
-        this.g.b(nbttagcompound);
-        return nbttagcompound;
-    }
-
-    public void b(NBTTagCompound nbttagcompound) {
-        this.e = nbttagcompound.getString("Command");
-        this.b = nbttagcompound.getInt("SuccessCount");
-        if (nbttagcompound.hasKeyOfType("CustomName", 8)) {
-            this.f = nbttagcompound.getString("CustomName");
-        }
-
-        if (nbttagcompound.hasKeyOfType("TrackOutput", 1)) {
-            this.c = nbttagcompound.getBoolean("TrackOutput");
-        }
-
-        if (nbttagcompound.hasKeyOfType("LastOutput", 8) && this.c) {
-            try {
-                this.d = IChatBaseComponent.ChatSerializer.a(nbttagcompound.getString("LastOutput"));
-            } catch (Throwable throwable) {
-                this.d = new ChatComponentText(throwable.getMessage());
-            }
-        } else {
-            this.d = null;
-        }
-
-        this.g.a(nbttagcompound);
-    }
-
-    public boolean a(int i, String s) {
-        return i <= 2;
-    }
-
-    public void setCommand(String s) {
-        this.e = s;
-        this.b = 0;
-    }
-
-    public String getCommand() {
-        return this.e;
-    }
-
-    public void a(World world) {
-        if (world.isClientSide) {
-            this.b = 0;
-        } else if ("Searge".equalsIgnoreCase(this.e)) {
-            this.d = new ChatComponentText("#itzlipofutzli");
-            this.b = 1;
-        } else {
-            MinecraftServer minecraftserver = this.h();
-
-            if (minecraftserver != null && minecraftserver.M() && minecraftserver.getEnableCommandBlock()) {
-                ICommandHandler icommandhandler = minecraftserver.getCommandHandler();
-
-                try {
-                    this.d = null;
-                    // CraftBukkit start - Handle command block commands using Bukkit dispatcher
-                    this.b = executeCommand(this, sender, this.e);
-                    // CraftBukkit end
-                } catch (Throwable throwable) {
-                    CrashReport crashreport = CrashReport.a(throwable, "Executing command block");
-                    CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Command to be executed");
-
-                    crashreportsystemdetails.a("Command", new CrashReportCallable() {
-                        public String a() throws Exception {
-                            return CommandBlockListenerAbstract.this.getCommand();
-                        }
-
-                        public Object call() throws Exception {
-                            return this.a();
-                        }
-                    });
-                    crashreportsystemdetails.a("Name", new CrashReportCallable() {
-                        public String a() throws Exception {
-                            return CommandBlockListenerAbstract.this.getName();
-                        }
-
-                        public Object call() throws Exception {
-                            return this.a();
-                        }
-                    });
-                    throw new ReportedException(crashreport);
-                }
-            } else {
-                this.b = 0;
-            }
-
-        }
-    }
 
     // CraftBukkit start
     public static int executeCommand(ICommandListener sender, org.bukkit.command.CommandSender bSender, String command) {
@@ -180,8 +72,10 @@ public abstract class CommandBlockListenerAbstract implements ICommandListener {
 
         commands.add(args);
 
-        // Find positions of command block syntax, if any        
+        // Find positions of command block syntax, if any
+        //noinspection deprecation
         WorldServer[] prev = MinecraftServer.getServer().worldServer;
+        //noinspection deprecation
         MinecraftServer server = MinecraftServer.getServer();
         server.worldServer = new WorldServer[server.worlds.size()];
         server.worldServer[0] = (WorldServer) sender.getWorld();
@@ -198,8 +92,8 @@ public abstract class CommandBlockListenerAbstract implements ICommandListener {
             ArrayList<String[]> newCommands = new ArrayList<String[]>();
             for (int i = 0; i < args.length; i++) {
                 if (PlayerSelector.isPattern(args[i])) {
-                    for (int j = 0; j < commands.size(); j++) {
-                        newCommands.addAll(buildCommands(sender, commands.get(j), i));
+                    for (String[] command1 : commands) {
+                        newCommands.addAll(buildCommands(sender, command1, i));
                     }
                     ArrayList<String[]> temp = commands;
                     commands = newCommands;
@@ -208,25 +102,29 @@ public abstract class CommandBlockListenerAbstract implements ICommandListener {
                 }
             }
         } finally {
+            //noinspection deprecation
             MinecraftServer.getServer().worldServer = prev;
         }
 
         int completed = 0;
 
         // Now dispatch all of the commands we ended up with
-        for (int i = 0; i < commands.size(); i++) {
+        for (String[] command1 : commands) {
             try {
-                if (commandMap.dispatch(bSender, joiner.join(java.util.Arrays.asList(commands.get(i))))) {
+                if (commandMap.dispatch(bSender, joiner.join(Arrays.asList(command1)))) {
                     completed++;
                 }
             } catch (Throwable exception) {
                 if (sender.f() instanceof EntityMinecartCommandBlock) {
+                    //noinspection deprecation
                     MinecraftServer.getServer().server.getLogger().log(Level.WARNING, String.format("MinecartCommandBlock at (%d,%d,%d) failed to handle command", sender.getChunkCoordinates().getX(), sender.getChunkCoordinates().getY(), sender.getChunkCoordinates().getZ()), exception);
                 } else if (sender instanceof CommandBlockListenerAbstract) {
                     CommandBlockListenerAbstract listener = (CommandBlockListenerAbstract) sender;
+                    //noinspection deprecation
                     MinecraftServer.getServer().server.getLogger().log(Level.WARNING, String.format("CommandBlock at (%d,%d,%d) failed to handle command", listener.getChunkCoordinates().getX(), listener.getChunkCoordinates().getY(), listener.getChunkCoordinates().getZ()), exception);
                 } else {
-                    MinecraftServer.getServer().server.getLogger().log(Level.WARNING, String.format("Unknown CommandBlock failed to handle command"), exception);
+                    //noinspection deprecation
+                    MinecraftServer.getServer().server.getLogger().log(Level.WARNING, "Unknown CommandBlock failed to handle command", exception);
                 }
             }
         }
@@ -251,18 +149,131 @@ public abstract class CommandBlockListenerAbstract implements ICommandListener {
 
         return commands;
     }
+
+    public int k() {
+        return this.b;
+    }
+
+    public void a(@SuppressWarnings("SameParameterValue") int i) {
+        this.b = i;
+    }
+
+    public IChatBaseComponent l() {
+        return this.d == null ? new ChatComponentText("") : this.d;
+    }
+
+    @SuppressWarnings("UnusedReturnValue")
+    public NBTTagCompound a(NBTTagCompound nbttagcompound) {
+        nbttagcompound.setString("Command", this.e);
+        nbttagcompound.setInt("SuccessCount", this.b);
+        nbttagcompound.setString("CustomName", this.f);
+        nbttagcompound.setBoolean("TrackOutput", this.c);
+        if (this.d != null && this.c) {
+            nbttagcompound.setString("LastOutput", IChatBaseComponent.ChatSerializer.a(this.d));
+        }
+
+        this.g.b(nbttagcompound);
+        return nbttagcompound;
+    }
+
+    public void b(NBTTagCompound nbttagcompound) {
+        this.e = nbttagcompound.getString("Command");
+        this.b = nbttagcompound.getInt("SuccessCount");
+        if (nbttagcompound.hasKeyOfType("CustomName", 8)) {
+            this.f = nbttagcompound.getString("CustomName");
+        }
+
+        if (nbttagcompound.hasKeyOfType("TrackOutput", 1)) {
+            this.c = nbttagcompound.getBoolean("TrackOutput");
+        }
+
+        if (nbttagcompound.hasKeyOfType("LastOutput", 8) && this.c) {
+            try {
+                this.d = IChatBaseComponent.ChatSerializer.a(nbttagcompound.getString("LastOutput"));
+            } catch (Throwable throwable) {
+                this.d = new ChatComponentText(throwable.getMessage());
+            }
+        } else {
+            this.d = null;
+        }
+
+        this.g.a(nbttagcompound);
+    }
+
+    public boolean a(int i, String s) {
+        return i <= 2;
+    }
+
+    public String getCommand() {
+        return this.e;
+    }
+
+    public void setCommand(String s) {
+        this.e = s;
+        this.b = 0;
+    }
+
+    public void a(World world) {
+        if (world.isClientSide) {
+            this.b = 0;
+        } else if ("Searge".equalsIgnoreCase(this.e)) {
+            this.d = new ChatComponentText("#itzlipofutzli");
+            this.b = 1;
+        } else {
+            MinecraftServer minecraftserver = this.h();
+
+            if (minecraftserver != null && minecraftserver.M() && minecraftserver.getEnableCommandBlock()) {
+                ICommandHandler icommandhandler = minecraftserver.getCommandHandler();
+
+                try {
+                    this.d = null;
+                    // CraftBukkit start - Handle command block commands using Bukkit dispatcher
+                    this.b = executeCommand(this, sender, this.e);
+                    // CraftBukkit end
+                } catch (Throwable throwable) {
+                    CrashReport crashreport = CrashReport.a(throwable, "Executing command block");
+                    CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Command to be executed");
+
+                    //noinspection unchecked
+                    crashreportsystemdetails.a("Command", new CrashReportCallable() {
+                        public String a() {
+                            return CommandBlockListenerAbstract.this.getCommand();
+                        }
+
+                        public Object call() throws Exception {
+                            return this.a();
+                        }
+                    });
+                    //noinspection unchecked
+                    crashreportsystemdetails.a("Name", new CrashReportCallable() {
+                        public String a() {
+                            return CommandBlockListenerAbstract.this.getName();
+                        }
+
+                        public Object call() throws Exception {
+                            return this.a();
+                        }
+                    });
+                    throw new ReportedException(crashreport);
+                }
+            } else {
+                this.b = 0;
+            }
+
+        }
+    }
     // CraftBukkit end
 
     public String getName() {
         return this.f;
     }
 
-    public IChatBaseComponent getScoreboardDisplayName() {
-        return new ChatComponentText(this.getName());
-    }
-
     public void setName(String s) {
         this.f = s;
+    }
+
+    public IChatBaseComponent getScoreboardDisplayName() {
+        return new ChatComponentText(this.getName());
     }
 
     public void sendMessage(IChatBaseComponent ichatbasecomponent) {
@@ -297,6 +308,7 @@ public abstract class CommandBlockListenerAbstract implements ICommandListener {
         return this.c;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public boolean a(EntityHuman entityhuman) {
         if (!entityhuman.dh()) {
             return false;

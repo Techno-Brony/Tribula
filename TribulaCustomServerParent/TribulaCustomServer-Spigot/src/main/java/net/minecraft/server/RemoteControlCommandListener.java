@@ -26,6 +26,7 @@ public class RemoteControlCommandListener implements ICommandListener {
     }
 
     // CraftBukkit start - Send a String
+    @SuppressWarnings("unused")
     public void sendMessage(String message) {
         this.a.append(message);
     }

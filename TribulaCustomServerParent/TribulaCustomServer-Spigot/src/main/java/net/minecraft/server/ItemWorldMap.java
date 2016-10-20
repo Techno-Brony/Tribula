@@ -3,17 +3,58 @@ package net.minecraft.server;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multisets;
+import org.bukkit.Bukkit;
+import org.bukkit.event.server.MapInitializeEvent;
+
 import javax.annotation.Nullable;
 
 // CraftBukkit start
-import org.bukkit.Bukkit;
-import org.bukkit.event.server.MapInitializeEvent;
 // CraftBukkit end
 
 public class ItemWorldMap extends ItemWorldMapBase {
 
+    @SuppressWarnings("unused")
     protected ItemWorldMap() {
         this.a(true);
+    }
+
+    protected static void a(ItemStack itemstack, World world, int i) {
+        WorldMap worldmap = Items.FILLED_MAP.getSavedMap(itemstack, world);
+
+        world = world.getServer().getServer().worlds.get(0); // CraftBukkit - use primary world for maps
+        itemstack.setData(world.b("map"));
+        WorldMap worldmap1 = new WorldMap("map_" + itemstack.getData());
+
+        worldmap1.scale = (byte) MathHelper.clamp(worldmap.scale + i, 0, 4);
+        worldmap1.track = worldmap.track;
+        worldmap1.a((double) worldmap.centerX, (double) worldmap.centerZ, worldmap1.scale);
+        worldmap1.map = worldmap.map;
+        worldmap1.c();
+        world.a("map_" + itemstack.getData(), worldmap1);
+        // CraftBukkit start
+        MapInitializeEvent event = new MapInitializeEvent(worldmap1.mapView);
+        Bukkit.getServer().getPluginManager().callEvent(event);
+        // CraftBukkit end
+    }
+
+    protected static void b(ItemStack itemstack, World world) {
+        WorldMap worldmap = Items.FILLED_MAP.getSavedMap(itemstack, world);
+
+        world = world.getServer().getServer().worlds.get(0); // CraftBukkit - use primary world for maps
+        itemstack.setData(world.b("map"));
+        WorldMap worldmap1 = new WorldMap("map_" + itemstack.getData());
+
+        worldmap1.track = true;
+        worldmap1.centerX = worldmap.centerX;
+        worldmap1.centerZ = worldmap.centerZ;
+        worldmap1.scale = worldmap.scale;
+        worldmap1.map = worldmap.map;
+        worldmap1.c();
+        world.a("map_" + itemstack.getData(), worldmap1);
+        // CraftBukkit start
+        MapInitializeEvent event = new MapInitializeEvent(worldmap1.mapView);
+        Bukkit.getServer().getPluginManager().callEvent(event);
+        // CraftBukkit end
     }
 
     public WorldMap getSavedMap(ItemStack itemstack, World world) {
@@ -74,7 +115,7 @@ public class ItemWorldMap extends ItemWorldMapBase {
                             HashMultiset hashmultiset = HashMultiset.create();
                             Chunk chunk = world.getChunkAtWorldCoords(new BlockPosition(k2, 0, l2));
 
-                            if (!chunk.isEmpty()) {
+                            if (chunk.isEmpty()) {
                                 int i3 = k2 & 15;
                                 int j3 = l2 & 15;
                                 int k3 = 0;
@@ -85,8 +126,10 @@ public class ItemWorldMap extends ItemWorldMapBase {
 
                                     l3 = l3 * l3 * 31287121 + l3 * 11;
                                     if ((l3 >> 20 & 1) == 0) {
+                                        //noinspection unchecked
                                         hashmultiset.add(Blocks.DIRT.getBlockData().set(BlockDirt.VARIANT, BlockDirt.EnumDirtVariant.DIRT).g(), 10);
                                     } else {
+                                        //noinspection unchecked
                                         hashmultiset.add(Blocks.STONE.getBlockData().set(BlockStone.VARIANT, BlockStone.EnumStoneVariant.STONE).g(), 100);
                                     }
 
@@ -118,6 +161,7 @@ public class ItemWorldMap extends ItemWorldMapBase {
                                             }
 
                                             d1 += (double) k4 / (double) (i * i);
+                                            //noinspection unchecked
                                             hashmultiset.add(iblockdata.g());
                                         }
                                     }
@@ -204,44 +248,5 @@ public class ItemWorldMap extends ItemWorldMapBase {
             }
         }
 
-    }
-
-    protected static void a(ItemStack itemstack, World world, int i) {
-        WorldMap worldmap = Items.FILLED_MAP.getSavedMap(itemstack, world);
-
-        world = world.getServer().getServer().worlds.get(0); // CraftBukkit - use primary world for maps
-        itemstack.setData(world.b("map"));
-        WorldMap worldmap1 = new WorldMap("map_" + itemstack.getData());
-
-        worldmap1.scale = (byte) MathHelper.clamp(worldmap.scale + i, 0, 4);
-        worldmap1.track = worldmap.track;
-        worldmap1.a((double) worldmap.centerX, (double) worldmap.centerZ, worldmap1.scale);
-        worldmap1.map = worldmap.map;
-        worldmap1.c();
-        world.a("map_" + itemstack.getData(), worldmap1);
-        // CraftBukkit start
-        MapInitializeEvent event = new MapInitializeEvent(worldmap1.mapView);
-        Bukkit.getServer().getPluginManager().callEvent(event);
-        // CraftBukkit end
-    }
-
-    protected static void b(ItemStack itemstack, World world) {
-        WorldMap worldmap = Items.FILLED_MAP.getSavedMap(itemstack, world);
-
-        world = world.getServer().getServer().worlds.get(0); // CraftBukkit - use primary world for maps
-        itemstack.setData(world.b("map"));
-        WorldMap worldmap1 = new WorldMap("map_" + itemstack.getData());
-
-        worldmap1.track = true;
-        worldmap1.centerX = worldmap.centerX;
-        worldmap1.centerZ = worldmap.centerZ;
-        worldmap1.scale = worldmap.scale;
-        worldmap1.map = worldmap.map;
-        worldmap1.c();
-        world.a("map_" + itemstack.getData(), worldmap1);
-        // CraftBukkit start
-        MapInitializeEvent event = new MapInitializeEvent(worldmap1.mapView);
-        Bukkit.getServer().getPluginManager().callEvent(event);
-        // CraftBukkit end
     }
 }

@@ -1,12 +1,12 @@
 package net.minecraft.server;
 
 import com.mojang.authlib.GameProfile;
-import java.util.UUID;
 
 public class ItemSkull extends Item {
 
     private static final String[] a = new String[] { "skeleton", "wither", "zombie", "char", "creeper", "dragon"};
 
+    @SuppressWarnings("unused")
     public ItemSkull() {
         this.a(CreativeModeTab.c);
         this.setMaxDurability(0);
@@ -99,6 +99,7 @@ public class ItemSkull extends Item {
     public String a(ItemStack itemstack) {
         if (itemstack.getData() == 3 && itemstack.hasTag()) {
             if (itemstack.getTag().hasKeyOfType("SkullOwner", 8)) {
+                //noinspection deprecation,deprecation
                 return LocaleI18n.a("item.skull.player.name", itemstack.getTag().getString("SkullOwner"));
             }
 
@@ -106,6 +107,7 @@ public class ItemSkull extends Item {
                 NBTTagCompound nbttagcompound = itemstack.getTag().getCompound("SkullOwner");
 
                 if (nbttagcompound.hasKeyOfType("Name", 8)) {
+                    //noinspection deprecation,deprecation
                     return LocaleI18n.a("item.skull.player.name", nbttagcompound.getString("Name"));
                 }
             }

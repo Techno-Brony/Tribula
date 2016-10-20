@@ -1,14 +1,12 @@
 package net.minecraft.server;
 
 import com.google.common.base.Charsets;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufAllocator;
-import io.netty.buffer.ByteBufInputStream;
-import io.netty.buffer.ByteBufOutputStream;
-import io.netty.buffer.ByteBufProcessor;
+import io.netty.buffer.*;
 import io.netty.handler.codec.DecoderException;
 import io.netty.handler.codec.EncoderException;
-import java.io.DataInput;
+import org.bukkit.craftbukkit.inventory.CraftItemStack;
+
+import javax.annotation.Nullable;
 import java.io.DataOutput;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,9 +17,6 @@ import java.nio.channels.GatheringByteChannel;
 import java.nio.channels.ScatteringByteChannel;
 import java.nio.charset.Charset;
 import java.util.UUID;
-import javax.annotation.Nullable;
-
-import org.bukkit.craftbukkit.inventory.CraftItemStack; // CraftBukkit
 
 public class PacketDataSerializer extends ByteBuf {
 
@@ -41,12 +36,14 @@ public class PacketDataSerializer extends ByteBuf {
         return 5;
     }
 
+    @SuppressWarnings("unused")
     public PacketDataSerializer a(byte[] abyte) {
         this.d(abyte.length);
         this.writeBytes(abyte);
         return this;
     }
 
+    @SuppressWarnings("unused")
     public byte[] a() {
         return this.b(this.readableBytes());
     }
@@ -64,20 +61,19 @@ public class PacketDataSerializer extends ByteBuf {
         }
     }
 
+    @SuppressWarnings("unused")
     public PacketDataSerializer a(int[] aint) {
         this.d(aint.length);
-        int[] aint1 = aint;
         int i = aint.length;
 
-        for (int j = 0; j < i; ++j) {
-            int k = aint1[j];
-
+        for (int k : aint) {
             this.d(k);
         }
 
         return this;
     }
 
+    @SuppressWarnings("unused")
     public int[] b() {
         return this.c(this.readableBytes());
     }
@@ -98,14 +94,12 @@ public class PacketDataSerializer extends ByteBuf {
         }
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public PacketDataSerializer a(long[] along) {
         this.d(along.length);
-        long[] along1 = along;
         int i = along.length;
 
-        for (int j = 0; j < i; ++j) {
-            long k = along1[j];
-
+        for (long k : along) {
             this.writeLong(k);
         }
 
@@ -116,6 +110,7 @@ public class PacketDataSerializer extends ByteBuf {
         return BlockPosition.fromLong(this.readLong());
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public PacketDataSerializer a(BlockPosition blockposition) {
         this.writeLong(blockposition.asLong());
         return this;
@@ -125,6 +120,7 @@ public class PacketDataSerializer extends ByteBuf {
         return IChatBaseComponent.ChatSerializer.a(this.e(32767));
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public PacketDataSerializer a(IChatBaseComponent ichatbasecomponent) {
         return this.a(IChatBaseComponent.ChatSerializer.a(ichatbasecomponent));
     }
@@ -133,6 +129,7 @@ public class PacketDataSerializer extends ByteBuf {
         return oclass.getEnumConstants()[this.g()]; // CraftBukkit - fix decompile error
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public PacketDataSerializer a(Enum<?> oenum) {
         return this.d(oenum.ordinal());
     }
@@ -171,12 +168,14 @@ public class PacketDataSerializer extends ByteBuf {
         return i;
     }
 
+    @SuppressWarnings("unused")
     public PacketDataSerializer a(UUID uuid) {
         this.writeLong(uuid.getMostSignificantBits());
         this.writeLong(uuid.getLeastSignificantBits());
         return this;
     }
 
+    @SuppressWarnings("unused")
     public UUID i() {
         return new UUID(this.readLong(), this.readLong());
     }
@@ -191,6 +190,7 @@ public class PacketDataSerializer extends ByteBuf {
         return this;
     }
 
+    @SuppressWarnings("unused")
     public PacketDataSerializer b(long i) {
         while ((i & -128L) != 0L) {
             this.writeByte((int) (i & 127L) | 128);
@@ -201,6 +201,7 @@ public class PacketDataSerializer extends ByteBuf {
         return this;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public PacketDataSerializer a(@Nullable NBTTagCompound nbttagcompound) {
         if (nbttagcompound == null) {
             this.writeByte(0);
@@ -233,6 +234,7 @@ public class PacketDataSerializer extends ByteBuf {
         }
     }
 
+    @SuppressWarnings("unused")
     public PacketDataSerializer a(@Nullable ItemStack itemstack) {
         if (itemstack == null || itemstack.getItem() == null) { // CraftBukkit - NPE fix itemstack.getItem()
             this.writeShort(-1);

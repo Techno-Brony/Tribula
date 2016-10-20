@@ -1,11 +1,12 @@
 package net.minecraft.server;
 
 import com.google.common.base.Predicate;
-import java.util.Collections;
-import java.util.List;
-import javax.annotation.Nullable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import javax.annotation.Nullable;
+import java.util.Collections;
+import java.util.List;
 
 public class PathfinderGoalNearestAttackableTargetInsentient extends PathfinderGoal {
 
@@ -13,8 +14,8 @@ public class PathfinderGoalNearestAttackableTargetInsentient extends PathfinderG
     private final EntityInsentient b;
     private final Predicate<EntityLiving> c;
     private final PathfinderGoalNearestAttackableTarget.DistanceComparator d;
-    private EntityLiving e;
     private final Class<? extends EntityLiving> f;
+    private EntityLiving e;
 
     public PathfinderGoalNearestAttackableTargetInsentient(EntityInsentient entityinsentient, Class<? extends EntityLiving> oclass) {
         this.b = entityinsentient;
@@ -23,6 +24,7 @@ public class PathfinderGoalNearestAttackableTargetInsentient extends PathfinderG
             PathfinderGoalNearestAttackableTargetInsentient.a.warn("Use NearestAttackableTargetGoal.class for PathfinerMob mobs!");
         }
 
+        //noinspection unchecked
         this.c = new Predicate() {
             public boolean a(@Nullable EntityLiving entityliving) {
                 double d0 = PathfinderGoalNearestAttackableTargetInsentient.this.f();

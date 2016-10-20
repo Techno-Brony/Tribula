@@ -1,28 +1,41 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Lists;
-import java.util.List;
-import javax.annotation.Nullable;
-
-// CraftBukkit start
-import java.util.List;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.entity.CraftHumanEntity;
 import org.bukkit.entity.HumanEntity;
+
+import javax.annotation.Nullable;
+import java.util.List;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class InventorySubcontainer implements IInventory {
 
-    private String a;
-    private final int b;
     public final ItemStack[] items;
+    private final int b;
+    // CraftBukkit start - add fields and methods
+    @SuppressWarnings("CanBeFinal")
+    public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
+    @SuppressWarnings("CanBeFinal")
+    protected org.bukkit.inventory.InventoryHolder bukkitOwner;
+    private String a;
     private List<IInventoryListener> d;
     private boolean e;
 
-    // CraftBukkit start - add fields and methods
-    public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
-    private int maxStack = MAX_STACK;
-    protected org.bukkit.inventory.InventoryHolder bukkitOwner;
+    public InventorySubcontainer(String s, boolean flag, int i) {
+        this(s, flag, i, null);
+    }
+
+    public InventorySubcontainer(String s, boolean flag, int i, org.bukkit.inventory.InventoryHolder owner) { // Added argument
+        this.bukkitOwner = owner;
+    // CraftBukkit end
+        this.a = s;
+        this.e = flag;
+        this.b = i;
+        this.items = new ItemStack[i];
+    }
 
     public ItemStack[] getContents() {
         return this.items;
@@ -40,10 +53,6 @@ public class InventorySubcontainer implements IInventory {
         return transaction;
     }
 
-    public void setMaxStackSize(int i) {
-        maxStack = i;
-    }
-
     public org.bukkit.inventory.InventoryHolder getOwner() {
         return bukkitOwner;
     }
@@ -51,19 +60,6 @@ public class InventorySubcontainer implements IInventory {
     @Override
     public Location getLocation() {
         return null;
-    }
-
-    public InventorySubcontainer(String s, boolean flag, int i) {
-        this(s, flag, i, null);
-    }
-
-    public InventorySubcontainer(String s, boolean flag, int i, org.bukkit.inventory.InventoryHolder owner) { // Added argument
-        this.bukkitOwner = owner;
-    // CraftBukkit end
-        this.a = s;
-        this.e = flag;
-        this.b = i;
-        this.items = new ItemStack[i];
     }
 
     public void a(IInventoryListener iinventorylistener) {
@@ -175,10 +171,13 @@ public class InventorySubcontainer implements IInventory {
         return 64;
     }
 
+    public void setMaxStackSize(int i) {
+    }
+
     public void update() {
         if (this.d != null) {
-            for (int i = 0; i < this.d.size(); ++i) {
-                this.d.get(i).a(this);
+            for (IInventoryListener aD : this.d) {
+                aD.a(this);
             }
         }
 

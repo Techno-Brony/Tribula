@@ -1,17 +1,18 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Lists;
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Nullable;
-
-// CraftBukkit start
 import org.bukkit.Location;
 import org.bukkit.entity.Vehicle;
 import org.bukkit.event.vehicle.VehicleDamageEvent;
 import org.bukkit.event.vehicle.VehicleDestroyEvent;
 import org.bukkit.event.vehicle.VehicleEntityCollisionEvent;
 import org.bukkit.event.vehicle.VehicleMoveEvent;
+
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class EntityBoat extends Entity {
@@ -20,34 +21,43 @@ public class EntityBoat extends Entity {
     private static final DataWatcherObject<Integer> b = DataWatcher.a(EntityBoat.class, DataWatcherRegistry.b);
     private static final DataWatcherObject<Float> c = DataWatcher.a(EntityBoat.class, DataWatcherRegistry.c);
     private static final DataWatcherObject<Integer> d = DataWatcher.a(EntityBoat.class, DataWatcherRegistry.b);
+    @SuppressWarnings("unchecked")
     private static final DataWatcherObject<Boolean>[] e = new DataWatcherObject[] { DataWatcher.a(EntityBoat.class, DataWatcherRegistry.h), DataWatcher.a(EntityBoat.class, DataWatcherRegistry.h)};
     private final float[] f;
-    private float g;
-    private float h;
-    private float au;
-    private int av;
-    private double aw;
-    private double ax;
-    private double ay;
-    private double az;
-    private double aA;
-    private boolean aB;
-    private boolean aC;
-    private boolean aD;
-    private boolean aE;
-    private double aF;
-    private float aG;
-    private EntityBoat.EnumStatus aH;
-    private EntityBoat.EnumStatus aI;
-    private double aJ;
-
     // CraftBukkit start
     // PAIL: Some of these haven't worked since a few updates, and since 1.9 they are less and less applicable.
     public double maxSpeed = 0.4D;
     public double occupiedDeceleration = 0.2D;
     public double unoccupiedDeceleration = -1;
     public boolean landBoats = false;
+    private float h;
+    private float au;
+    private int av;
+    @SuppressWarnings("unused")
+    private double aw;
+    @SuppressWarnings("unused")
+    private double ax;
+    @SuppressWarnings("unused")
+    private double ay;
+    @SuppressWarnings("unused")
+    private double az;
+    @SuppressWarnings("unused")
+    private double aA;
+    @SuppressWarnings("unused")
+    private boolean aB;
+    @SuppressWarnings("unused")
+    private boolean aC;
+    @SuppressWarnings("unused")
+    private boolean aD;
+    @SuppressWarnings("unused")
+    private boolean aE;
+    private double aF;
+    private float aG;
+    private EntityBoat.EnumStatus aH;
+    private EntityBoat.EnumStatus aI;
+    private double aJ;
     // CraftBukkit end
+    private Location lastLocation; // CraftBukkit
 
     public EntityBoat(World world) {
         super(world);
@@ -68,22 +78,30 @@ public class EntityBoat extends Entity {
         this.world.getServer().getPluginManager().callEvent(new org.bukkit.event.vehicle.VehicleCreateEvent((Vehicle) this.getBukkitEntity())); // CraftBukkit
     }
 
+    public static float a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
+        int i = iblockdata.get(BlockFluids.LEVEL);
+
+        return (i & 7) == 0 && iblockaccess.getType(blockposition.up()).getMaterial() == Material.WATER ? 1.0F : 1.0F - BlockFluids.e(i);
+    }
+
+    public static float b(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
+        return (float) blockposition.getY() + a(iblockdata, iblockaccess, blockposition);
+    }
+
     protected boolean playStepSound() {
         return false;
     }
 
     protected void i() {
-        this.datawatcher.register(EntityBoat.a, Integer.valueOf(0));
-        this.datawatcher.register(EntityBoat.b, Integer.valueOf(1));
-        this.datawatcher.register(EntityBoat.c, Float.valueOf(0.0F));
-        this.datawatcher.register(EntityBoat.d, Integer.valueOf(EntityBoat.EnumBoatType.OAK.ordinal()));
+        this.datawatcher.register(EntityBoat.a, 0);
+        this.datawatcher.register(EntityBoat.b, 1);
+        this.datawatcher.register(EntityBoat.c, 0.0F);
+        this.datawatcher.register(EntityBoat.d, EnumBoatType.OAK.ordinal());
         DataWatcherObject[] adatawatcherobject = EntityBoat.e;
         int i = adatawatcherobject.length;
 
-        for (int j = 0; j < i; ++j) {
-            DataWatcherObject datawatcherobject = adatawatcherobject[j];
-
-            this.datawatcher.register(datawatcherobject, Boolean.valueOf(false));
+        for (DataWatcherObject datawatcherobject : adatawatcherobject) {
+            this.datawatcher.register(datawatcherobject, Boolean.FALSE);
         }
 
     }
@@ -214,8 +232,6 @@ public class EntityBoat extends Entity {
         return this.getDirection().e();
     }
 
-    private Location lastLocation; // CraftBukkit
-
     public void m() {
         this.aI = this.aH;
         this.aH = this.t();
@@ -289,8 +305,8 @@ public class EntityBoat extends Entity {
         if (!list.isEmpty()) {
             boolean flag = !this.world.isClientSide && !(this.bw() instanceof EntityHuman);
 
-            for (int j = 0; j < list.size(); ++j) {
-                Entity entity = (Entity) list.get(j);
+            for (Object aList : list) {
+                Entity entity = (Entity) aList;
 
                 if (!entity.w(this)) {
                     if (flag && this.bx().size() < 2 && !entity.isPassenger() && entity.width < this.width && entity instanceof EntityLiving && !(entity instanceof EntityWaterAnimal) && !(entity instanceof EntityHuman)) {
@@ -320,8 +336,8 @@ public class EntityBoat extends Entity {
     }
 
     public void a(boolean flag, boolean flag1) {
-        this.datawatcher.set(EntityBoat.e[0], Boolean.valueOf(flag));
-        this.datawatcher.set(EntityBoat.e[1], Boolean.valueOf(flag1));
+        this.datawatcher.set(EntityBoat.e[0], flag);
+        this.datawatcher.set(EntityBoat.e[1], flag1);
     }
 
     private EntityBoat.EnumStatus t() {
@@ -375,15 +391,12 @@ public class EntityBoat extends Entity {
                 }
 
                 if (f < 1.0F) {
-                    float f1 = (float) blockposition_pooledblockposition.getY() + f;
 
-                    return f1;
+                    return (float) blockposition_pooledblockposition.getY() + f;
                 }
             }
 
-            float f2 = (float) (l + 1);
-
-            return f2;
+            return (float) (l + 1);
         } finally {
             blockposition_pooledblockposition.t();
         }
@@ -414,6 +427,7 @@ public class EntityBoat extends Entity {
                                 blockposition_pooledblockposition.f(l1, k2, i2);
                                 IBlockData iblockdata = this.world.getType(blockposition_pooledblockposition);
 
+                                //noinspection unchecked
                                 iblockdata.a(this.world, blockposition_pooledblockposition, axisalignedbb1, arraylist, this);
                                 if (!arraylist.isEmpty()) {
                                     f += iblockdata.getBlock().frictionFactor;
@@ -490,10 +504,9 @@ public class EntityBoat extends Entity {
                         IBlockData iblockdata = this.world.getType(blockposition_pooledblockposition);
 
                         if (iblockdata.getMaterial() == Material.WATER && d0 < (double) b(iblockdata, this.world, blockposition_pooledblockposition)) {
-                            if (iblockdata.get(BlockFluids.LEVEL).intValue() != 0) {
-                                EntityBoat.EnumStatus entityboat_enumstatus = EntityBoat.EnumStatus.UNDER_FLOWING_WATER;
+                            if (iblockdata.get(BlockFluids.LEVEL) != 0) {
 
-                                return entityboat_enumstatus;
+                                return EnumStatus.UNDER_FLOWING_WATER;
                             }
 
                             flag = true;
@@ -508,22 +521,12 @@ public class EntityBoat extends Entity {
         }
     }
 
-    public static float a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
-        int i = iblockdata.get(BlockFluids.LEVEL).intValue();
-
-        return (i & 7) == 0 && iblockaccess.getType(blockposition.up()).getMaterial() == Material.WATER ? 1.0F : 1.0F - BlockFluids.e(i);
-    }
-
-    public static float b(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
-        return (float) blockposition.getY() + a(iblockdata, iblockaccess, blockposition);
-    }
-
     private void w() {
         double d0 = -0.03999999910593033D;
         double d1 = this.isNoGravity() ? 0.0D : -0.03999999910593033D;
         double d2 = 0.0D;
 
-        this.g = 0.05F;
+        float g = 0.05F;
         if (this.aI == EntityBoat.EnumStatus.IN_AIR && this.aH != EntityBoat.EnumStatus.IN_AIR && this.aH != EntityBoat.EnumStatus.ON_LAND) {
             this.aF = this.getBoundingBox().b + (double) this.length;
             this.setPosition(this.locX, (double) (this.k() - this.length) + 0.101D, this.locZ);
@@ -533,25 +536,25 @@ public class EntityBoat extends Entity {
         } else {
             if (this.aH == EntityBoat.EnumStatus.IN_WATER) {
                 d2 = (this.aF - this.getBoundingBox().b) / (double) this.length;
-                this.g = 0.9F;
+                g = 0.9F;
             } else if (this.aH == EntityBoat.EnumStatus.UNDER_FLOWING_WATER) {
                 d1 = -7.0E-4D;
-                this.g = 0.9F;
+                g = 0.9F;
             } else if (this.aH == EntityBoat.EnumStatus.UNDER_WATER) {
                 d2 = 0.009999999776482582D;
-                this.g = 0.45F;
+                g = 0.45F;
             } else if (this.aH == EntityBoat.EnumStatus.IN_AIR) {
-                this.g = 0.9F;
+                g = 0.9F;
             } else if (this.aH == EntityBoat.EnumStatus.ON_LAND) {
-                this.g = this.aG;
+                g = this.aG;
                 if (this.bw() instanceof EntityHuman) {
                     this.aG /= 2.0F;
                 }
             }
 
-            this.motX *= (double) this.g;
-            this.motZ *= (double) this.g;
-            this.au *= this.g;
+            this.motX *= (double) g;
+            this.motZ *= (double) g;
+            this.au *= g;
             this.motY += d1;
             if (d2 > 0.0D) {
                 double d3 = 0.65D;
@@ -657,7 +660,7 @@ public class EntityBoat extends Entity {
             entityhuman.startRiding(this);
         }
 
-        return true;
+        return false;
     }
 
     protected void a(double d0, boolean flag, IBlockData iblockdata, BlockPosition blockposition) {
@@ -702,39 +705,39 @@ public class EntityBoat extends Entity {
     }
 
     public boolean a(int i) {
-        return this.datawatcher.get(EntityBoat.e[i]).booleanValue() && this.bw() != null;
+        return this.datawatcher.get(EntityBoat.e[i]) && this.bw() != null;
     }
 
     public void setDamage(float f) {
-        this.datawatcher.set(EntityBoat.c, Float.valueOf(f));
+        this.datawatcher.set(EntityBoat.c, f);
     }
 
     public float n() {
-        return this.datawatcher.get(EntityBoat.c).floatValue();
+        return this.datawatcher.get(EntityBoat.c);
     }
 
     public void b(int i) {
-        this.datawatcher.set(EntityBoat.a, Integer.valueOf(i));
+        this.datawatcher.set(EntityBoat.a, i);
     }
 
     public int o() {
-        return this.datawatcher.get(EntityBoat.a).intValue();
+        return this.datawatcher.get(EntityBoat.a);
     }
 
     public void d(int i) {
-        this.datawatcher.set(EntityBoat.b, Integer.valueOf(i));
+        this.datawatcher.set(EntityBoat.b, i);
     }
 
     public int q() {
-        return this.datawatcher.get(EntityBoat.b).intValue();
-    }
-
-    public void setType(EntityBoat.EnumBoatType entityboat_enumboattype) {
-        this.datawatcher.set(EntityBoat.d, Integer.valueOf(entityboat_enumboattype.ordinal()));
+        return this.datawatcher.get(EntityBoat.b);
     }
 
     public EntityBoat.EnumBoatType getType() {
-        return EntityBoat.EnumBoatType.a(this.datawatcher.get(EntityBoat.d).intValue());
+        return EntityBoat.EnumBoatType.a(this.datawatcher.get(EntityBoat.d));
+    }
+
+    public void setType(EntityBoat.EnumBoatType entityboat_enumboattype) {
+        this.datawatcher.set(EntityBoat.d, entityboat_enumboattype.ordinal());
     }
 
     protected boolean q(Entity entity) {
@@ -748,44 +751,6 @@ public class EntityBoat extends Entity {
         return list.isEmpty() ? null : (Entity) list.get(0);
     }
 
-    static class SyntheticClass_1 {
-
-        static final int[] a = new int[EntityBoat.EnumBoatType.values().length];
-
-        static {
-            try {
-                EntityBoat.SyntheticClass_1.a[EntityBoat.EnumBoatType.OAK.ordinal()] = 1;
-            } catch (NoSuchFieldError nosuchfielderror) {
-            }
-
-            try {
-                EntityBoat.SyntheticClass_1.a[EntityBoat.EnumBoatType.SPRUCE.ordinal()] = 2;
-            } catch (NoSuchFieldError nosuchfielderror1) {
-            }
-
-            try {
-                EntityBoat.SyntheticClass_1.a[EntityBoat.EnumBoatType.BIRCH.ordinal()] = 3;
-            } catch (NoSuchFieldError nosuchfielderror2) {
-            }
-
-            try {
-                EntityBoat.SyntheticClass_1.a[EntityBoat.EnumBoatType.JUNGLE.ordinal()] = 4;
-            } catch (NoSuchFieldError nosuchfielderror3) {
-            }
-
-            try {
-                EntityBoat.SyntheticClass_1.a[EntityBoat.EnumBoatType.ACACIA.ordinal()] = 5;
-            } catch (NoSuchFieldError nosuchfielderror4) {
-            }
-
-            try {
-                EntityBoat.SyntheticClass_1.a[EntityBoat.EnumBoatType.DARK_OAK.ordinal()] = 6;
-            } catch (NoSuchFieldError nosuchfielderror5) {
-            }
-
-        }
-    }
-
     public enum EnumBoatType {
 
         OAK(BlockWood.EnumLogVariant.OAK.a(), "oak"), SPRUCE(BlockWood.EnumLogVariant.SPRUCE.a(), "spruce"), BIRCH(BlockWood.EnumLogVariant.BIRCH.a(), "birch"), JUNGLE(BlockWood.EnumLogVariant.JUNGLE.a(), "jungle"), ACACIA(BlockWood.EnumLogVariant.ACACIA.a(), "acacia"), DARK_OAK(BlockWood.EnumLogVariant.DARK_OAK.a(), "dark_oak");
@@ -793,21 +758,10 @@ public class EntityBoat extends Entity {
         private final String g;
         private final int h;
 
+        @SuppressWarnings("unused")
         EnumBoatType(int i, String s) {
             this.g = s;
             this.h = i;
-        }
-
-        public String a() {
-            return this.g;
-        }
-
-        public int b() {
-            return this.h;
-        }
-
-        public String toString() {
-            return this.g;
         }
 
         public static EntityBoat.EnumBoatType a(int i) {
@@ -827,12 +781,63 @@ public class EntityBoat extends Entity {
 
             return values()[0];
         }
+
+        public String a() {
+            return this.g;
+        }
+
+        public int b() {
+            return this.h;
+        }
+
+        public String toString() {
+            return this.g;
+        }
     }
 
     public enum EnumStatus {
 
         IN_WATER, UNDER_WATER, UNDER_FLOWING_WATER, ON_LAND, IN_AIR;
 
+        @SuppressWarnings("unused")
         EnumStatus() {}
+    }
+
+    static class SyntheticClass_1 {
+
+        static final int[] a = new int[EntityBoat.EnumBoatType.values().length];
+
+        static {
+            try {
+                EntityBoat.SyntheticClass_1.a[EntityBoat.EnumBoatType.OAK.ordinal()] = 1;
+            } catch (NoSuchFieldError ignored) {
+            }
+
+            try {
+                EntityBoat.SyntheticClass_1.a[EntityBoat.EnumBoatType.SPRUCE.ordinal()] = 2;
+            } catch (NoSuchFieldError ignored) {
+            }
+
+            try {
+                EntityBoat.SyntheticClass_1.a[EntityBoat.EnumBoatType.BIRCH.ordinal()] = 3;
+            } catch (NoSuchFieldError ignored) {
+            }
+
+            try {
+                EntityBoat.SyntheticClass_1.a[EntityBoat.EnumBoatType.JUNGLE.ordinal()] = 4;
+            } catch (NoSuchFieldError ignored) {
+            }
+
+            try {
+                EntityBoat.SyntheticClass_1.a[EntityBoat.EnumBoatType.ACACIA.ordinal()] = 5;
+            } catch (NoSuchFieldError ignored) {
+            }
+
+            try {
+                EntityBoat.SyntheticClass_1.a[EntityBoat.EnumBoatType.DARK_OAK.ordinal()] = 6;
+            } catch (NoSuchFieldError ignored) {
+            }
+
+        }
     }
 }

@@ -2,38 +2,108 @@ package net.minecraft.server;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import javax.annotation.Nullable;
-
-// CraftBukkit start
-import java.util.HashMap;
-import java.util.Map;
 import org.bukkit.craftbukkit.inventory.CraftInventory;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.event.Event.Result;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.InventoryView;
+
+import javax.annotation.Nullable;
+import java.util.*;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public abstract class Container {
 
+    private final Set<Slot> h = Sets.newHashSet();
+    private final Set<EntityHuman> i = Sets.newHashSet();
+    @SuppressWarnings("CanBeFinal")
     public List<ItemStack> b = Lists.newArrayList();
+    @SuppressWarnings("CanBeFinal")
     public List<Slot> c = Lists.newArrayList();
     public int windowId;
-    private int dragType = -1;
-    private int g;
-    private final Set<Slot> h = Sets.newHashSet();
-    protected List<ICrafting> listeners = Lists.newArrayList();
-    private final Set<EntityHuman> i = Sets.newHashSet();
-    private int tickCount; // Spigot
-
     // CraftBukkit start
     public boolean checkReachable = true;
+    @SuppressWarnings("CanBeFinal")
+    protected List<ICrafting> listeners = Lists.newArrayList();
+    private int dragType = -1;
+    private int g;
+    private int tickCount; // Spigot
+    public Container() {}
+
+    private static boolean a(ItemStack itemstack, ItemStack itemstack1) {
+        return itemstack1.getItem() == itemstack.getItem() && (!itemstack.usesData() || itemstack.getData() == itemstack1.getData()) && ItemStack.equals(itemstack, itemstack1);
+    }
+    // CraftBukkit end
+
+    public static int b(int i) {
+        return i >> 2 & 3;
+    }
+
+    public static int c(int i) {
+        return i & 3;
+    }
+
+    public static boolean a(int i, EntityHuman entityhuman) {
+        return i == 0 || (i == 1 || i == 2 && entityhuman.abilities.canInstantlyBuild);
+    }
+
+    public static boolean a(Slot slot, ItemStack itemstack, @SuppressWarnings("SameParameterValue") boolean flag) {
+        boolean flag1 = slot == null || !slot.hasItem();
+
+        if (slot != null && slot.hasItem() && itemstack != null && itemstack.doMaterialsMatch(slot.getItem()) && ItemStack.equals(slot.getItem(), itemstack)) {
+            flag1 |= slot.getItem().count + (flag ? 0 : itemstack.count) <= itemstack.getMaxStackSize();
+        }
+
+        return flag1;
+    }
+
+    public static void a(Set<Slot> set, int i, ItemStack itemstack, int j) {
+        switch (i) {
+        case 0:
+            itemstack.count = MathHelper.d((float) itemstack.count / (float) set.size());
+            break;
+
+        case 1:
+            itemstack.count = 1;
+            break;
+
+        case 2:
+            itemstack.count = itemstack.getItem().getMaxStackSize();
+        }
+
+        itemstack.count += j;
+    }
+
+    public static int a(@Nullable TileEntity tileentity) {
+        return tileentity instanceof IInventory ? b((IInventory) tileentity) : 0;
+    }
+
+    public static int b(@Nullable IInventory iinventory) {
+        if (iinventory == null) {
+            return 0;
+        } else {
+            int i = 0;
+            float f = 0.0F;
+
+            for (int j = 0; j < iinventory.getSize(); ++j) {
+                ItemStack itemstack = iinventory.getItem(j);
+
+                if (itemstack != null) {
+                    f += (float) itemstack.count / (float) Math.min(iinventory.getMaxStackSize(), itemstack.getMaxStackSize());
+                    ++i;
+                }
+            }
+
+            f /= (float) iinventory.getSize();
+            return MathHelper.d(f * 14.0F) + (i > 0 ? 1 : 0);
+        }
+    }
+
     public abstract InventoryView getBukkitView();
+
     public void transferTo(Container other, org.bukkit.craftbukkit.entity.CraftHumanEntity player) {
         InventoryView source = this.getBukkitView(), destination = other.getBukkitView();
         ((CraftInventory) source.getTopInventory()).getInventory().onClose(player);
@@ -41,9 +111,6 @@ public abstract class Container {
         ((CraftInventory) destination.getTopInventory()).getInventory().onOpen(player);
         ((CraftInventory) destination.getBottomInventory()).getInventory().onOpen(player);
     }
-    // CraftBukkit end
-
-    public Container() {}
 
     protected Slot a(Slot slot) {
         slot.rawSlotIndex = this.c.size();
@@ -65,10 +132,12 @@ public abstract class Container {
     public List<ItemStack> a() {
         ArrayList arraylist = Lists.newArrayList();
 
-        for (int i = 0; i < this.c.size(); ++i) {
-            arraylist.add(this.c.get(i).getItem());
+        for (Slot aC : this.c) {
+            //noinspection unchecked
+            arraylist.add(aC.getItem());
         }
 
+        //noinspection unchecked
         return arraylist;
     }
 
@@ -81,8 +150,8 @@ public abstract class Container {
                 itemstack1 = itemstack == null ? null : itemstack.cloneItemStack();
                 this.b.set(i, itemstack1);
 
-                for (int j = 0; j < this.listeners.size(); ++j) {
-                    this.listeners.get(j).a(this, i, itemstack1);
+                for (ICrafting listener : this.listeners) {
+                    listener.a(this, i, itemstack1);
                 }
             }
         }
@@ -90,15 +159,14 @@ public abstract class Container {
 
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public boolean a(EntityHuman entityhuman, int i) {
         return false;
     }
 
     @Nullable
     public Slot getSlot(IInventory iinventory, int i) {
-        for (int j = 0; j < this.c.size(); ++j) {
-            Slot slot = this.c.get(j);
-
+        for (Slot slot : this.c) {
             if (slot.a(iinventory, i)) {
                 return slot;
             }
@@ -467,7 +535,7 @@ public abstract class Container {
         return true;
     }
 
-    protected void a(int i, int j, boolean flag, EntityHuman entityhuman) {
+    protected void a(int i, int j, @SuppressWarnings({"SameParameterValue", "UnusedParameters"}) boolean flag, EntityHuman entityhuman) {
         this.a(i, j, InventoryClickType.QUICK_MOVE, entityhuman);
     }
 
@@ -572,23 +640,7 @@ public abstract class Container {
             }
         }
 
-        return flag1;
-    }
-
-    private static boolean a(ItemStack itemstack, ItemStack itemstack1) {
-        return itemstack1.getItem() == itemstack.getItem() && (!itemstack.usesData() || itemstack.getData() == itemstack1.getData()) && ItemStack.equals(itemstack, itemstack1);
-    }
-
-    public static int b(int i) {
-        return i >> 2 & 3;
-    }
-
-    public static int c(int i) {
-        return i & 3;
-    }
-
-    public static boolean a(int i, EntityHuman entityhuman) {
-        return i == 0 || (i == 1 || i == 2 && entityhuman.abilities.canInstantlyBuild);
+        return !flag1;
     }
 
     protected void d() {
@@ -596,59 +648,8 @@ public abstract class Container {
         this.h.clear();
     }
 
-    public static boolean a(Slot slot, ItemStack itemstack, boolean flag) {
-        boolean flag1 = slot == null || !slot.hasItem();
-
-        if (slot != null && slot.hasItem() && itemstack != null && itemstack.doMaterialsMatch(slot.getItem()) && ItemStack.equals(slot.getItem(), itemstack)) {
-            flag1 |= slot.getItem().count + (flag ? 0 : itemstack.count) <= itemstack.getMaxStackSize();
-        }
-
-        return flag1;
-    }
-
-    public static void a(Set<Slot> set, int i, ItemStack itemstack, int j) {
-        switch (i) {
-        case 0:
-            itemstack.count = MathHelper.d((float) itemstack.count / (float) set.size());
-            break;
-
-        case 1:
-            itemstack.count = 1;
-            break;
-
-        case 2:
-            itemstack.count = itemstack.getItem().getMaxStackSize();
-        }
-
-        itemstack.count += j;
-    }
-
-    public boolean b(Slot slot) {
+    @SuppressWarnings("SameReturnValue")
+    public boolean b(@SuppressWarnings("UnusedParameters") Slot slot) {
         return true;
-    }
-
-    public static int a(@Nullable TileEntity tileentity) {
-        return tileentity instanceof IInventory ? b((IInventory) tileentity) : 0;
-    }
-
-    public static int b(@Nullable IInventory iinventory) {
-        if (iinventory == null) {
-            return 0;
-        } else {
-            int i = 0;
-            float f = 0.0F;
-
-            for (int j = 0; j < iinventory.getSize(); ++j) {
-                ItemStack itemstack = iinventory.getItem(j);
-
-                if (itemstack != null) {
-                    f += (float) itemstack.count / (float) Math.min(iinventory.getMaxStackSize(), itemstack.getMaxStackSize());
-                    ++i;
-                }
-            }
-
-            f /= (float) iinventory.getSize();
-            return MathHelper.d(f * 14.0F) + (i > 0 ? 1 : 0);
-        }
     }
 }

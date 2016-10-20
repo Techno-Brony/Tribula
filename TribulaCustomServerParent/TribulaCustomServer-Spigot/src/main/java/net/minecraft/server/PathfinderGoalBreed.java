@@ -7,10 +7,12 @@ import java.util.Random;
 public class PathfinderGoalBreed extends PathfinderGoal {
 
     private final EntityAnimal animal;
+    @SuppressWarnings("CanBeFinal")
     World a;
-    private EntityAnimal partner;
     int b;
+    @SuppressWarnings("CanBeFinal")
     double c;
+    private EntityAnimal partner;
 
     public PathfinderGoalBreed(EntityAnimal entityanimal, double d0) {
         this.animal = entityanimal;
@@ -53,6 +55,7 @@ public class PathfinderGoalBreed extends PathfinderGoal {
         EntityAnimal entityanimal = null;
         Iterator iterator = list.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             EntityAnimal entityanimal1 = (EntityAnimal) iterator.next();
 

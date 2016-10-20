@@ -1,22 +1,28 @@
 package net.minecraft.server;
 
-import javax.annotation.Nullable;
-// CraftBukkit start
 import org.bukkit.craftbukkit.inventory.CraftInventoryCrafting;
 import org.bukkit.craftbukkit.inventory.CraftInventoryView;
+
+import javax.annotation.Nullable;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class ContainerWorkbench extends Container {
 
-    public InventoryCrafting craftInventory; // CraftBukkit - move initialization into constructor
-    public IInventory resultInventory; // CraftBukkit - move initialization into constructor
     private final World g;
     private final BlockPosition h;
+    @SuppressWarnings("CanBeFinal")
+    public InventoryCrafting craftInventory; // CraftBukkit - move initialization into constructor
+    @SuppressWarnings("CanBeFinal")
+    public IInventory resultInventory; // CraftBukkit - move initialization into constructor
     // CraftBukkit start
     private CraftInventoryView bukkitEntity = null;
+    @SuppressWarnings("CanBeFinal")
     private PlayerInventory player;
     // CraftBukkit end
 
+    @SuppressWarnings("unused")
     public ContainerWorkbench(PlayerInventory playerinventory, World world, BlockPosition blockposition) {
         // CraftBukkit start - Switched order of IInventory construction and stored player
         this.resultInventory = new InventoryCraftResult();
@@ -83,8 +89,8 @@ public class ContainerWorkbench extends Container {
     }
 
     public boolean a(EntityHuman entityhuman) {
-        if (!this.checkReachable) return true; // CraftBukkit
-        return this.g.getType(this.h).getBlock() == Blocks.CRAFTING_TABLE && entityhuman.e((double) this.h.getX() + 0.5D, (double) this.h.getY() + 0.5D, (double) this.h.getZ() + 0.5D) <= 64.0D;
+        // CraftBukkit
+        return this.checkReachable && (this.g.getType(this.h).getBlock() != Blocks.CRAFTING_TABLE || entityhuman.e((double) this.h.getX() + 0.5D, (double) this.h.getY() + 0.5D, (double) this.h.getZ() + 0.5D) > 64.0D);
     }
 
     @Nullable
@@ -97,20 +103,20 @@ public class ContainerWorkbench extends Container {
 
             itemstack = itemstack1.cloneItemStack();
             if (i == 0) {
-                if (!this.a(itemstack1, 10, 46, true)) {
+                if (this.a(itemstack1, 10, 46, true)) {
                     return null;
                 }
 
                 slot.a(itemstack1, itemstack);
             } else if (i >= 10 && i < 37) {
-                if (!this.a(itemstack1, 37, 46, false)) {
+                if (this.a(itemstack1, 37, 46, false)) {
                     return null;
                 }
             } else if (i >= 37 && i < 46) {
-                if (!this.a(itemstack1, 10, 37, false)) {
+                if (this.a(itemstack1, 10, 37, false)) {
                     return null;
                 }
-            } else if (!this.a(itemstack1, 10, 46, false)) {
+            } else if (this.a(itemstack1, 10, 46, false)) {
                 return null;
             }
 

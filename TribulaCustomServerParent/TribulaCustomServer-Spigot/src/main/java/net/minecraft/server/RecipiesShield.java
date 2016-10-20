@@ -1,25 +1,31 @@
 package net.minecraft.server;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 
 public class RecipiesShield {
 
     public RecipiesShield() {}
 
     public void a(CraftingManager craftingmanager) {
-        craftingmanager.registerShapedRecipe(new ItemStack(Items.SHIELD), "WoW", "WWW", " W ", Character.valueOf('W'), Blocks.PLANKS, Character.valueOf('o'), Items.IRON_INGOT);
+        craftingmanager.registerShapedRecipe(new ItemStack(Items.SHIELD), "WoW", "WWW", " W ", 'W', Blocks.PLANKS, 'o', Items.IRON_INGOT);
         craftingmanager.a(new RecipiesShield.Decoration(null));
     }
 
+    @SuppressWarnings("unused")
     static class SyntheticClass_1 {    }
 
     static class Decoration extends ShapelessRecipes implements IRecipe { // CraftBukkit - added extends
 
         // CraftBukkit start - Delegate to new parent class with bogus info
         private Decoration() {
-            super(new ItemStack(Items.SHIELD, 0 ,0), java.util.Arrays.asList(new ItemStack(Items.BANNER, 0, 0)));
+            super(new ItemStack(Items.SHIELD, 0 ,0), Collections.singletonList(new ItemStack(Items.BANNER, 0, 0)));
         }
         // CraftBukkit end
+
+        Decoration(@SuppressWarnings({"SameParameterValue", "UnusedParameters"}) RecipiesShield.SyntheticClass_1 recipiesshield_syntheticclass_1) {
+            this();
+        }
 
         public boolean a(InventoryCrafting inventorycrafting, World world) {
             ItemStack itemstack = null;
@@ -106,10 +112,6 @@ public class RecipiesShield {
             }
 
             return aitemstack;
-        }
-
-        Decoration(RecipiesShield.SyntheticClass_1 recipiesshield_syntheticclass_1) {
-            this();
         }
     }
 }

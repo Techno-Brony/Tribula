@@ -1,8 +1,8 @@
 package net.minecraft.server;
 
-import java.util.Random;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
-import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason; // CraftBukkit
+import java.util.Random;
 
 public class BlockMonsterEggs extends Block {
 
@@ -15,14 +15,14 @@ public class BlockMonsterEggs extends Block {
         this.a(CreativeModeTab.c);
     }
 
-    public int a(Random random) {
-        return 0;
-    }
-
     public static boolean i(IBlockData iblockdata) {
         Block block = iblockdata.getBlock();
 
         return iblockdata == Blocks.STONE.getBlockData().set(BlockStone.VARIANT, BlockStone.EnumStoneVariant.STONE) || block == Blocks.COBBLESTONE || block == Blocks.STONEBRICK;
+    }
+
+    public int a(Random random) {
+        return 0;
     }
 
     protected ItemStack u(IBlockData iblockdata) {
@@ -62,6 +62,7 @@ public class BlockMonsterEggs extends Block {
         return new ItemStack(this, 1, iblockdata.getBlock().toLegacyData(iblockdata));
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockMonsterEggs.VARIANT, BlockMonsterEggs.EnumMonsterEggVarient.a(i));
     }
@@ -72,39 +73,6 @@ public class BlockMonsterEggs extends Block {
 
     protected BlockStateList getStateList() {
         return new BlockStateList(this, BlockMonsterEggs.VARIANT);
-    }
-
-    static class SyntheticClass_1 {
-
-        static final int[] a = new int[BlockMonsterEggs.EnumMonsterEggVarient.values().length];
-
-        static {
-            try {
-                BlockMonsterEggs.SyntheticClass_1.a[BlockMonsterEggs.EnumMonsterEggVarient.COBBLESTONE.ordinal()] = 1;
-            } catch (NoSuchFieldError nosuchfielderror) {
-            }
-
-            try {
-                BlockMonsterEggs.SyntheticClass_1.a[BlockMonsterEggs.EnumMonsterEggVarient.STONEBRICK.ordinal()] = 2;
-            } catch (NoSuchFieldError nosuchfielderror1) {
-            }
-
-            try {
-                BlockMonsterEggs.SyntheticClass_1.a[BlockMonsterEggs.EnumMonsterEggVarient.MOSSY_STONEBRICK.ordinal()] = 3;
-            } catch (NoSuchFieldError nosuchfielderror2) {
-            }
-
-            try {
-                BlockMonsterEggs.SyntheticClass_1.a[BlockMonsterEggs.EnumMonsterEggVarient.CRACKED_STONEBRICK.ordinal()] = 4;
-            } catch (NoSuchFieldError nosuchfielderror3) {
-            }
-
-            try {
-                BlockMonsterEggs.SyntheticClass_1.a[BlockMonsterEggs.EnumMonsterEggVarient.CHISELED_STONEBRICK.ordinal()] = 5;
-            } catch (NoSuchFieldError nosuchfielderror4) {
-            }
-
-        }
     }
 
     public enum EnumMonsterEggVarient implements INamable {
@@ -136,26 +104,41 @@ public class BlockMonsterEggs extends Block {
 };
 
         private static final BlockMonsterEggs.EnumMonsterEggVarient[] g = new BlockMonsterEggs.EnumMonsterEggVarient[values().length];
+
+        static {
+            BlockMonsterEggs.EnumMonsterEggVarient[] ablockmonstereggs_enummonstereggvarient = values();
+            int i = ablockmonstereggs_enummonstereggvarient.length;
+
+            for (EnumMonsterEggVarient blockmonstereggs_enummonstereggvarient : ablockmonstereggs_enummonstereggvarient) {
+                EnumMonsterEggVarient.g[blockmonstereggs_enummonstereggvarient.a()] = blockmonstereggs_enummonstereggvarient;
+            }
+
+        }
+
         private final int h;
         private final String i;
         private final String j;
 
+        @SuppressWarnings("unused")
         EnumMonsterEggVarient(int i, String s) {
             this(i, s, s);
         }
 
+        @SuppressWarnings("unused")
         EnumMonsterEggVarient(int i, String s, String s1) {
             this.h = i;
             this.i = s;
             this.j = s1;
         }
 
-        public int a() {
-            return this.h;
+        @SuppressWarnings("unused")
+        EnumMonsterEggVarient(int i, String s, BlockMonsterEggs.SyntheticClass_1 blockmonstereggs_syntheticclass_1) {
+            this(i, s);
         }
 
-        public String toString() {
-            return this.i;
+        @SuppressWarnings("unused")
+        EnumMonsterEggVarient(int i, String s, String s1, BlockMonsterEggs.SyntheticClass_1 blockmonstereggs_syntheticclass_1) {
+            this(i, s, s1);
         }
 
         public static BlockMonsterEggs.EnumMonsterEggVarient a(int i) {
@@ -166,23 +149,11 @@ public class BlockMonsterEggs extends Block {
             return BlockMonsterEggs.EnumMonsterEggVarient.g[i];
         }
 
-        public String getName() {
-            return this.i;
-        }
-
-        public String c() {
-            return this.j;
-        }
-
-        public abstract IBlockData d();
-
         public static BlockMonsterEggs.EnumMonsterEggVarient a(IBlockData iblockdata) {
             BlockMonsterEggs.EnumMonsterEggVarient[] ablockmonstereggs_enummonstereggvarient = values();
             int i = ablockmonstereggs_enummonstereggvarient.length;
 
-            for (int j = 0; j < i; ++j) {
-                BlockMonsterEggs.EnumMonsterEggVarient blockmonstereggs_enummonstereggvarient = ablockmonstereggs_enummonstereggvarient[j];
-
+            for (EnumMonsterEggVarient blockmonstereggs_enummonstereggvarient : ablockmonstereggs_enummonstereggvarient) {
                 if (iblockdata == blockmonstereggs_enummonstereggvarient.d()) {
                     return blockmonstereggs_enummonstereggvarient;
                 }
@@ -191,22 +162,54 @@ public class BlockMonsterEggs extends Block {
             return BlockMonsterEggs.EnumMonsterEggVarient.STONE;
         }
 
-        EnumMonsterEggVarient(int i, String s, BlockMonsterEggs.SyntheticClass_1 blockmonstereggs_syntheticclass_1) {
-            this(i, s);
+        public int a() {
+            return this.h;
         }
 
-        EnumMonsterEggVarient(int i, String s, String s1, BlockMonsterEggs.SyntheticClass_1 blockmonstereggs_syntheticclass_1) {
-            this(i, s, s1);
+        public String toString() {
+            return this.i;
         }
+
+        public String getName() {
+            return this.i;
+        }
+
+        @SuppressWarnings("unused")
+        public String c() {
+            return this.j;
+        }
+
+        public abstract IBlockData d();
+    }
+
+    static class SyntheticClass_1 {
+
+        static final int[] a = new int[BlockMonsterEggs.EnumMonsterEggVarient.values().length];
 
         static {
-            BlockMonsterEggs.EnumMonsterEggVarient[] ablockmonstereggs_enummonstereggvarient = values();
-            int i = ablockmonstereggs_enummonstereggvarient.length;
+            try {
+                BlockMonsterEggs.SyntheticClass_1.a[BlockMonsterEggs.EnumMonsterEggVarient.COBBLESTONE.ordinal()] = 1;
+            } catch (NoSuchFieldError ignored) {
+            }
 
-            for (int j = 0; j < i; ++j) {
-                BlockMonsterEggs.EnumMonsterEggVarient blockmonstereggs_enummonstereggvarient = ablockmonstereggs_enummonstereggvarient[j];
+            try {
+                BlockMonsterEggs.SyntheticClass_1.a[BlockMonsterEggs.EnumMonsterEggVarient.STONEBRICK.ordinal()] = 2;
+            } catch (NoSuchFieldError ignored) {
+            }
 
-                BlockMonsterEggs.EnumMonsterEggVarient.g[blockmonstereggs_enummonstereggvarient.a()] = blockmonstereggs_enummonstereggvarient;
+            try {
+                BlockMonsterEggs.SyntheticClass_1.a[BlockMonsterEggs.EnumMonsterEggVarient.MOSSY_STONEBRICK.ordinal()] = 3;
+            } catch (NoSuchFieldError ignored) {
+            }
+
+            try {
+                BlockMonsterEggs.SyntheticClass_1.a[BlockMonsterEggs.EnumMonsterEggVarient.CRACKED_STONEBRICK.ordinal()] = 4;
+            } catch (NoSuchFieldError ignored) {
+            }
+
+            try {
+                BlockMonsterEggs.SyntheticClass_1.a[BlockMonsterEggs.EnumMonsterEggVarient.CHISELED_STONEBRICK.ordinal()] = 5;
+            } catch (NoSuchFieldError ignored) {
             }
 
         }

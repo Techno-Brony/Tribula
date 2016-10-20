@@ -1,9 +1,10 @@
 package net.minecraft.server;
 
-import org.bukkit.event.player.PlayerFishEvent; // CraftBukkit
+import org.bukkit.event.player.PlayerFishEvent;
 
 public class ItemFishingRod extends Item {
 
+    @SuppressWarnings("unused")
     public ItemFishingRod() {
         this.setMaxDurability(64);
         this.d(1);
@@ -21,11 +22,13 @@ public class ItemFishingRod extends Item {
         } else {
             // CraftBukkit start
             EntityFishingHook hook = new EntityFishingHook(world, entityhuman);
+            //noinspection deprecation
             PlayerFishEvent playerFishEvent = new PlayerFishEvent((org.bukkit.entity.Player) entityhuman.getBukkitEntity(), null, (org.bukkit.entity.Fish) hook.getBukkitEntity(), PlayerFishEvent.State.FISHING);
             world.getServer().getPluginManager().callEvent(playerFishEvent);
 
             if (playerFishEvent.isCancelled()) {
                 entityhuman.hookedFish = null;
+                //noinspection unchecked
                 return new InteractionResultWrapper(EnumInteractionResult.PASS, itemstack);
             }
             // CraftBukkit end
@@ -38,9 +41,11 @@ public class ItemFishingRod extends Item {
             entityhuman.b(StatisticList.b(this));
         }
 
+        //noinspection unchecked
         return new InteractionResultWrapper(EnumInteractionResult.SUCCESS, itemstack);
     }
 
+    @SuppressWarnings("EmptyMethod")
     public boolean g_(ItemStack itemstack) {
         return super.g_(itemstack);
     }

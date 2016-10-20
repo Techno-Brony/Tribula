@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
-import javax.annotation.Nullable;
-// CraftBukkit start
 import org.bukkit.craftbukkit.inventory.CraftInventoryFurnace;
 import org.bukkit.craftbukkit.inventory.CraftInventoryView;
+
+import javax.annotation.Nullable;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class ContainerFurnace extends Container {
@@ -16,19 +18,8 @@ public class ContainerFurnace extends Container {
 
     // CraftBukkit start
     private CraftInventoryView bukkitEntity = null;
+    @SuppressWarnings("CanBeFinal")
     private PlayerInventory player;
-
-    @Override
-    public CraftInventoryView getBukkitView() {
-        if (bukkitEntity != null) {
-            return bukkitEntity;
-        }
-
-        CraftInventoryFurnace inventory = new CraftInventoryFurnace((TileEntityFurnace) this.furnace);
-        bukkitEntity = new CraftInventoryView(this.player.player.getBukkitEntity(), inventory, this);
-        return bukkitEntity;
-    }
-    // CraftBukkit end
 
     public ContainerFurnace(PlayerInventory playerinventory, IInventory iinventory) {
         this.furnace = iinventory;
@@ -50,6 +41,18 @@ public class ContainerFurnace extends Container {
         }
 
     }
+    // CraftBukkit end
+
+    @Override
+    public CraftInventoryView getBukkitView() {
+        if (bukkitEntity != null) {
+            return bukkitEntity;
+        }
+
+        CraftInventoryFurnace inventory = new CraftInventoryFurnace((TileEntityFurnace) this.furnace);
+        bukkitEntity = new CraftInventoryView(this.player.player.getBukkitEntity(), inventory, this);
+        return bukkitEntity;
+    }
 
     public void addSlotListener(ICrafting icrafting) {
         super.addSlotListener(icrafting);
@@ -59,9 +62,7 @@ public class ContainerFurnace extends Container {
     public void b() {
         super.b();
 
-        for (int i = 0; i < this.listeners.size(); ++i) {
-            ICrafting icrafting = this.listeners.get(i);
-
+        for (ICrafting icrafting : this.listeners) {
             if (this.f != this.furnace.getProperty(2)) {
                 icrafting.setContainerData(this, 2, this.furnace.getProperty(2));
             }
@@ -86,8 +87,8 @@ public class ContainerFurnace extends Container {
     }
 
     public boolean a(EntityHuman entityhuman) {
-        if (!this.checkReachable) return true; // CraftBukkit
-        return this.furnace.a(entityhuman);
+        // CraftBukkit
+        return this.checkReachable && !this.furnace.a(entityhuman);
     }
 
     @Nullable
@@ -100,28 +101,28 @@ public class ContainerFurnace extends Container {
 
             itemstack = itemstack1.cloneItemStack();
             if (i == 2) {
-                if (!this.a(itemstack1, 3, 39, true)) {
+                if (this.a(itemstack1, 3, 39, true)) {
                     return null;
                 }
 
                 slot.a(itemstack1, itemstack);
             } else if (i != 1 && i != 0) {
                 if (RecipesFurnace.getInstance().getResult(itemstack1) != null) {
-                    if (!this.a(itemstack1, 0, 1, false)) {
+                    if (this.a(itemstack1, 0, 1, false)) {
                         return null;
                     }
                 } else if (TileEntityFurnace.isFuel(itemstack1)) {
-                    if (!this.a(itemstack1, 1, 2, false)) {
+                    if (this.a(itemstack1, 1, 2, false)) {
                         return null;
                     }
                 } else if (i >= 3 && i < 30) {
-                    if (!this.a(itemstack1, 30, 39, false)) {
+                    if (this.a(itemstack1, 30, 39, false)) {
                         return null;
                     }
-                } else if (i >= 30 && i < 39 && !this.a(itemstack1, 3, 30, false)) {
+                } else if (i >= 30 && i < 39 && this.a(itemstack1, 3, 30, false)) {
                     return null;
                 }
-            } else if (!this.a(itemstack1, 3, 39, false)) {
+            } else if (this.a(itemstack1, 3, 39, false)) {
                 return null;
             }
 

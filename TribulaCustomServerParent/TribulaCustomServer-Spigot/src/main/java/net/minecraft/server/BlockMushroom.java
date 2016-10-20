@@ -1,12 +1,13 @@
 package net.minecraft.server;
 
+import org.bukkit.TreeType;
+import org.bukkit.block.BlockState;
+import org.bukkit.event.block.BlockSpreadEvent;
+
 import java.util.Iterator;
 import java.util.Random;
 
 // CraftBukkit start
-import org.bukkit.TreeType;
-import org.bukkit.block.BlockState;
-import org.bukkit.event.block.BlockSpreadEvent;
 // CraftBukkit end
 
 public class BlockMushroom extends BlockPlant implements IBlockFragilePlantElement {
@@ -28,6 +29,7 @@ public class BlockMushroom extends BlockPlant implements IBlockFragilePlantEleme
             boolean flag = true;
             Iterator iterator = BlockPosition.b(blockposition.a(-4, -1, -4), blockposition.a(4, 1, 4)).iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 BlockPosition blockposition1 = (BlockPosition) iterator.next();
 
@@ -86,6 +88,7 @@ public class BlockMushroom extends BlockPlant implements IBlockFragilePlantEleme
         }
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public boolean c(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
         world.setAir(blockposition);
         WorldGenHugeMushroom worldgenhugemushroom = null;

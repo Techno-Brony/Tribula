@@ -1,15 +1,16 @@
 package net.minecraft.server;
 
-import java.util.Calendar;
-import java.util.List;
-import java.util.UUID;
-import javax.annotation.Nullable;
-
-//CraftBukkit start
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityCombustByEntityEvent;
 import org.bukkit.event.entity.EntityCombustEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
+
+import javax.annotation.Nullable;
+import java.util.Calendar;
+import java.util.List;
+import java.util.UUID;
+
+//CraftBukkit start
 //CraftBukkit end
 
 public class EntityZombie extends EntityMonster {
@@ -33,6 +34,11 @@ public class EntityZombie extends EntityMonster {
         this.setSize(0.6F, 1.95F);
     }
 
+    @SuppressWarnings("unused")
+    public static void d(DataConverterManager dataconvertermanager) {
+        EntityInsentient.a(dataconvertermanager, "Zombie");
+    }
+
     protected void r() {
         this.goalSelector.a(0, new PathfinderGoalFloat(this));
         this.goalSelector.a(2, new PathfinderGoalZombieAttack(this, 1.0D, false));
@@ -46,8 +52,11 @@ public class EntityZombie extends EntityMonster {
     protected void o() {
         this.goalSelector.a(6, new PathfinderGoalMoveThroughVillage(this, 1.0D, false));
         this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, true, new Class[] { EntityPigZombie.class}));
+        //noinspection unchecked
         this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this, EntityHuman.class, true));
-        if ( world.spigotConfig.zombieAggressiveTowardsVillager ) this.targetSelector.a(3, new PathfinderGoalNearestAttackableTarget(this, EntityVillager.class, false)); // Spigot
+        if ( world.spigotConfig.zombieAggressiveTowardsVillager ) //noinspection unchecked
+            this.targetSelector.a(3, new PathfinderGoalNearestAttackableTarget(this, EntityVillager.class, false)); // Spigot
+        //noinspection unchecked
         this.targetSelector.a(3, new PathfinderGoalNearestAttackableTarget(this, EntityIronGolem.class, true));
     }
 
@@ -62,14 +71,15 @@ public class EntityZombie extends EntityMonster {
 
     protected void i() {
         super.i();
-        this.getDataWatcher().register(EntityZombie.bx, Boolean.valueOf(false));
-        this.getDataWatcher().register(EntityZombie.by, Integer.valueOf(0));
-        this.getDataWatcher().register(EntityZombie.bz, Boolean.valueOf(false));
-        this.getDataWatcher().register(EntityZombie.bA, Boolean.valueOf(false));
+        this.getDataWatcher().register(EntityZombie.bx, Boolean.FALSE);
+        this.getDataWatcher().register(EntityZombie.by, 0);
+        this.getDataWatcher().register(EntityZombie.bz, Boolean.FALSE);
+        this.getDataWatcher().register(EntityZombie.bA, Boolean.FALSE);
     }
 
+    @SuppressWarnings("unused")
     public void a(boolean flag) {
-        this.getDataWatcher().set(EntityZombie.bA, Boolean.valueOf(flag));
+        this.getDataWatcher().set(EntityZombie.bA, flag);
     }
 
     public boolean dh() {
@@ -90,19 +100,11 @@ public class EntityZombie extends EntityMonster {
     }
 
     public boolean isBaby() {
-        return this.getDataWatcher().get(EntityZombie.bx).booleanValue();
-    }
-
-    protected int getExpValue(EntityHuman entityhuman) {
-        if (this.isBaby()) {
-            this.b_ = (int) ((float) this.b_ * 2.5F);
-        }
-
-        return super.getExpValue(entityhuman);
+        return this.getDataWatcher().get(EntityZombie.bx);
     }
 
     public void setBaby(boolean flag) {
-        this.getDataWatcher().set(EntityZombie.bx, Boolean.valueOf(flag));
+        this.getDataWatcher().set(EntityZombie.bx, flag);
         if (this.world != null && !this.world.isClientSide) {
             AttributeInstance attributeinstance = this.getAttributeInstance(GenericAttributes.MOVEMENT_SPEED);
 
@@ -115,8 +117,20 @@ public class EntityZombie extends EntityMonster {
         this.r(flag);
     }
 
+    protected int getExpValue(EntityHuman entityhuman) {
+        if (this.isBaby()) {
+            this.b_ = (int) ((float) this.b_ * 2.5F);
+        }
+
+        return super.getExpValue(entityhuman);
+    }
+
     public EnumZombieType getVillagerType() {
-        return EnumZombieType.a(this.getDataWatcher().get(EntityZombie.by).intValue());
+        return EnumZombieType.a(this.getDataWatcher().get(EntityZombie.by));
+    }
+
+    public void setVillagerType(EnumZombieType enumzombietype) {
+        this.getDataWatcher().set(EntityZombie.by, enumzombietype.a());
     }
 
     public boolean isVillager() {
@@ -125,10 +139,6 @@ public class EntityZombie extends EntityMonster {
 
     public int dk() {
         return this.getVillagerType().c();
-    }
-
-    public void setVillagerType(EnumZombieType enumzombietype) {
-        this.getDataWatcher().set(EntityZombie.by, Integer.valueOf(enumzombietype.a()));
     }
 
     public void a(DataWatcherObject<?> datawatcherobject) {
@@ -197,7 +207,7 @@ public class EntityZombie extends EntityMonster {
 
                     if (this.world.getType(new BlockPosition(i1, j1 - 1, k1)).q() && this.world.getLightLevel(new BlockPosition(i1, j1, k1)) < 10) {
                         entityzombie.setPosition((double) i1, (double) j1, (double) k1);
-                        if (!this.world.isPlayerNearby((double) i1, (double) j1, (double) k1, 7.0D) && this.world.a(entityzombie.getBoundingBox(), entityzombie) && this.world.getCubes(entityzombie, entityzombie.getBoundingBox()).isEmpty() && !this.world.containsLiquid(entityzombie.getBoundingBox())) {
+                        if (!this.world.isPlayerNearby((double) i1, (double) j1, (double) k1, 7.0D) && this.world.a(entityzombie.getBoundingBox(), entityzombie) && this.world.getCubes(entityzombie, entityzombie.getBoundingBox()).isEmpty() && this.world.containsLiquid(entityzombie.getBoundingBox())) {
                             this.world.addEntity(entityzombie, CreatureSpawnEvent.SpawnReason.REINFORCEMENTS); // CraftBukkit
                             entityzombie.setGoalTarget(entityliving, EntityTargetEvent.TargetReason.REINFORCEMENT_TARGET, true);
                             entityzombie.prepare(this.world.D(new BlockPosition(entityzombie)), null);
@@ -299,10 +309,6 @@ public class EntityZombie extends EntityMonster {
             }
         }
 
-    }
-
-    public static void d(DataConverterManager dataconvertermanager) {
-        EntityInsentient.a(dataconvertermanager, "Zombie");
     }
 
     public void b(NBTTagCompound nbttagcompound) {
@@ -467,15 +473,15 @@ public class EntityZombie extends EntityMonster {
                 this.a(this.random.nextInt(2401) + 3600);
             }
 
-            return true;
-        } else {
             return false;
+        } else {
+            return true;
         }
     }
 
     protected void a(int i) {
         this.bC = i;
-        this.getDataWatcher().set(EntityZombie.bz, Boolean.valueOf(true));
+        this.getDataWatcher().set(EntityZombie.bz, Boolean.TRUE);
         this.removeEffect(MobEffects.WEAKNESS);
         this.addEffect(new MobEffect(MobEffects.INCREASE_DAMAGE, i, Math.min(this.world.getDifficulty().a() - 1, 0)));
         this.world.broadcastEntityEffect(this, (byte) 16);
@@ -486,7 +492,7 @@ public class EntityZombie extends EntityMonster {
     }
 
     public boolean isConverting() {
-        return this.getDataWatcher().get(EntityZombie.bz).booleanValue();
+        return this.getDataWatcher().get(EntityZombie.bz);
     }
 
     protected void dm() {
@@ -576,11 +582,14 @@ public class EntityZombie extends EntityMonster {
         return this.hasCustomName() ? this.getCustomName() : this.getVillagerType().d().toPlainText();
     }
 
+    @SuppressWarnings("unused")
     static class SyntheticClass_1 {    }
 
     class GroupDataZombie implements GroupDataEntity {
 
+        @SuppressWarnings("CanBeFinal")
         public boolean a;
+        @SuppressWarnings("CanBeFinal")
         public boolean b;
 
         private GroupDataZombie(boolean flag, boolean flag1) {
@@ -588,7 +597,7 @@ public class EntityZombie extends EntityMonster {
             this.b = flag1;
         }
 
-        GroupDataZombie(boolean flag, boolean flag1, EntityZombie.SyntheticClass_1 entityzombie_syntheticclass_1) {
+        GroupDataZombie(boolean flag, boolean flag1, @SuppressWarnings({"SameParameterValue", "UnusedParameters"}) EntityZombie.SyntheticClass_1 entityzombie_syntheticclass_1) {
             this(flag, flag1);
         }
     }

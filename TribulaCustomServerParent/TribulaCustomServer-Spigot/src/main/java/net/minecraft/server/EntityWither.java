@@ -2,14 +2,15 @@ package net.minecraft.server;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import java.util.Iterator;
-import java.util.List;
-import javax.annotation.Nullable;
-
-// CraftBukkit start
 import org.bukkit.craftbukkit.event.CraftEventFactory;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
+
+import javax.annotation.Nullable;
+import java.util.Iterator;
+import java.util.List;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class EntityWither extends EntityMonster implements IRangedEntity {
@@ -17,16 +18,10 @@ public class EntityWither extends EntityMonster implements IRangedEntity {
     private static final DataWatcherObject<Integer> a = DataWatcher.a(EntityWither.class, DataWatcherRegistry.b);
     private static final DataWatcherObject<Integer> b = DataWatcher.a(EntityWither.class, DataWatcherRegistry.b);
     private static final DataWatcherObject<Integer> c = DataWatcher.a(EntityWither.class, DataWatcherRegistry.b);
+    @SuppressWarnings("unchecked")
     private static final DataWatcherObject<Integer>[] bx = new DataWatcherObject[] { EntityWither.a, EntityWither.b, EntityWither.c};
     private static final DataWatcherObject<Integer> by = DataWatcher.a(EntityWither.class, DataWatcherRegistry.b);
-    private final float[] bz = new float[2];
-    private final float[] bA = new float[2];
-    private final float[] bB = new float[2];
-    private final float[] bC = new float[2];
-    private final int[] bD = new int[2];
-    private final int[] bE = new int[2];
-    private int bF;
-    private final BossBattleServer bG;
+    @SuppressWarnings("unchecked")
     private static final Predicate<Entity> bH = new Predicate() {
         public boolean a(@Nullable Entity entity) {
             return entity instanceof EntityLiving && ((EntityLiving) entity).getMonsterType() != EnumMonsterType.UNDEAD;
@@ -36,6 +31,14 @@ public class EntityWither extends EntityMonster implements IRangedEntity {
             return this.a((Entity) object);
         }
     };
+    private final float[] bz = new float[2];
+    private final float[] bA = new float[2];
+    private final float[] bB = new float[2];
+    private final float[] bC = new float[2];
+    private final int[] bD = new int[2];
+    private final int[] bE = new int[2];
+    private final BossBattleServer bG;
+    private int bF;
 
     public EntityWither(World world) {
         super(world);
@@ -47,6 +50,15 @@ public class EntityWither extends EntityMonster implements IRangedEntity {
         this.b_ = 50;
     }
 
+    @SuppressWarnings("unused")
+    public static void b(DataConverterManager dataconvertermanager) {
+        EntityInsentient.a(dataconvertermanager, "WitherBoss");
+    }
+
+    public static boolean a(Block block) {
+        return block != Blocks.BEDROCK && block != Blocks.END_PORTAL && block != Blocks.END_PORTAL_FRAME && block != Blocks.COMMAND_BLOCK && block != Blocks.dc && block != Blocks.dd && block != Blocks.BARRIER;
+    }
+
     protected void r() {
         this.goalSelector.a(0, new EntityWither.a());
         this.goalSelector.a(1, new PathfinderGoalFloat(this));
@@ -55,19 +67,16 @@ public class EntityWither extends EntityMonster implements IRangedEntity {
         this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
         this.goalSelector.a(7, new PathfinderGoalRandomLookaround(this));
         this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, false, new Class[0]));
+        //noinspection unchecked
         this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this, EntityInsentient.class, 0, false, false, EntityWither.bH));
     }
 
     protected void i() {
         super.i();
-        this.datawatcher.register(EntityWither.a, Integer.valueOf(0));
-        this.datawatcher.register(EntityWither.b, Integer.valueOf(0));
-        this.datawatcher.register(EntityWither.c, Integer.valueOf(0));
-        this.datawatcher.register(EntityWither.by, Integer.valueOf(0));
-    }
-
-    public static void b(DataConverterManager dataconvertermanager) {
-        EntityInsentient.a(dataconvertermanager, "WitherBoss");
+        this.datawatcher.register(EntityWither.a, 0);
+        this.datawatcher.register(EntityWither.b, 0);
+        this.datawatcher.register(EntityWither.c, 0);
+        this.datawatcher.register(EntityWither.by, 0);
     }
 
     public void b(NBTTagCompound nbttagcompound) {
@@ -203,6 +212,7 @@ public class EntityWither extends EntityMonster implements IRangedEntity {
                 // CraftBukkit start - Use relative location for far away sounds
                 // this.world.a(1023, new BlockPosition(this), 0);
                 int viewDistance = this.world.getServer().getViewDistance() * 16;
+                //noinspection deprecation
                 for (EntityPlayer player : MinecraftServer.getServer().getPlayerList().players) {
                     double deltaX = this.locX - player.locX;
                     double deltaZ = this.locZ - player.locZ;
@@ -338,10 +348,6 @@ public class EntityWither extends EntityMonster implements IRangedEntity {
         }
     }
 
-    public static boolean a(Block block) {
-        return block != Blocks.BEDROCK && block != Blocks.END_PORTAL && block != Blocks.END_PORTAL_FRAME && block != Blocks.COMMAND_BLOCK && block != Blocks.dc && block != Blocks.dd && block != Blocks.BARRIER;
-    }
-
     public void o() {
         this.g(220);
         this.setHealth(this.getMaxHealth() / 3.0F);
@@ -473,6 +479,7 @@ public class EntityWither extends EntityMonster implements IRangedEntity {
         if (!this.world.isClientSide) {
             Iterator iterator = this.world.a(EntityHuman.class, this.getBoundingBox().grow(50.0D, 100.0D, 50.0D)).iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 EntityHuman entityhuman = (EntityHuman) iterator.next();
 
@@ -499,19 +506,19 @@ public class EntityWither extends EntityMonster implements IRangedEntity {
     }
 
     public int de() {
-        return this.datawatcher.get(EntityWither.by).intValue();
+        return this.datawatcher.get(EntityWither.by);
     }
 
     public void g(int i) {
-        this.datawatcher.set(EntityWither.by, Integer.valueOf(i));
+        this.datawatcher.set(EntityWither.by, i);
     }
 
     public int m(int i) {
-        return this.datawatcher.get(EntityWither.bx[i]).intValue();
+        return this.datawatcher.get(EntityWither.bx[i]);
     }
 
     public void a(int i, int j) {
-        this.datawatcher.set(EntityWither.bx[i], Integer.valueOf(j));
+        this.datawatcher.set(EntityWither.bx[i], j);
     }
 
     public boolean df() {
@@ -536,6 +543,7 @@ public class EntityWither extends EntityMonster implements IRangedEntity {
             this.a(7);
         }
 
+        @SuppressWarnings("MethodNameSameAsClassName")
         public boolean a() {
             return EntityWither.this.de() > 0;
         }

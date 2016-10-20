@@ -1,16 +1,15 @@
 package net.minecraft.server;
 
-import java.util.Random;
-import javax.annotation.Nullable;
-
-// CraftBukkit start
 import org.bukkit.craftbukkit.event.CraftEventFactory;
 import org.bukkit.event.entity.EntityInteractEvent;
+
+import javax.annotation.Nullable;
+import java.util.Random;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class BlockRedstoneOre extends Block {
-
-    private final boolean a;
 
     public BlockRedstoneOre(boolean flag) {
         super(Material.STONE);
@@ -18,7 +17,6 @@ public class BlockRedstoneOre extends Block {
             this.a(true);
         }
 
-        this.a = flag;
     }
 
     public int a(World world) {
@@ -95,6 +93,7 @@ public class BlockRedstoneOre extends Block {
         return 4 + random.nextInt(2);
     }
 
+    @SuppressWarnings("EmptyMethod")
     public void dropNaturally(World world, BlockPosition blockposition, IBlockData iblockdata, float f, int i) {
         super.dropNaturally(world, blockposition, iblockdata, f, i);
         /* CraftBukkit start - Delegated to getExpDrop
@@ -110,9 +109,8 @@ public class BlockRedstoneOre extends Block {
     @Override
     public int getExpDrop(World world, IBlockData data, int i) {
         if (this.getDropType(data, world.random, i) != Item.getItemOf(this)) {
-            int j = 1 + world.random.nextInt(5);
 
-            return j;
+            return 1 + world.random.nextInt(5);
         }
         return 0;
         // CraftBukkit end

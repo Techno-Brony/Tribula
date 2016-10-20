@@ -1,7 +1,8 @@
 package net.minecraft.server;
 
+import org.bukkit.event.player.PlayerShearEntityEvent;
+
 import javax.annotation.Nullable;
-import org.bukkit.event.player.PlayerShearEntityEvent; // CraftBukkit
 
 public class EntityMushroomCow extends EntityCow {
 
@@ -11,6 +12,7 @@ public class EntityMushroomCow extends EntityCow {
         this.bA = Blocks.MYCELIUM;
     }
 
+    @SuppressWarnings("unused")
     public static void c(DataConverterManager dataconvertermanager) {
         EntityInsentient.a(dataconvertermanager, "MushroomCow");
     }
@@ -23,14 +25,14 @@ public class EntityMushroomCow extends EntityCow {
                 entityhuman.drop(new ItemStack(Items.MUSHROOM_STEW), false);
             }
 
-            return true;
+            return false;
         } else if (itemstack != null && itemstack.getItem() == Items.SHEARS && this.getAge() >= 0) {
             // CraftBukkit start
             PlayerShearEntityEvent event = new PlayerShearEntityEvent((org.bukkit.entity.Player) entityhuman.getBukkitEntity(), this.getBukkitEntity());
             this.world.getServer().getPluginManager().callEvent(event);
 
             if (event.isCancelled()) {
-                return false;
+                return true;
             }
             // CraftBukkit end
             this.die();
@@ -55,13 +57,13 @@ public class EntityMushroomCow extends EntityCow {
                 this.a(SoundEffects.dC, 1.0F, 1.0F);
             }
 
-            return true;
+            return false;
         } else {
             return super.a(entityhuman, enumhand, itemstack);
         }
     }
 
-    public EntityMushroomCow c(EntityAgeable entityageable) {
+    public EntityMushroomCow c(@SuppressWarnings("UnusedParameters") EntityAgeable entityageable) {
         return new EntityMushroomCow(this.world);
     }
 

@@ -4,13 +4,14 @@ import javax.annotation.Nullable;
 
 public interface IRecipe {
 
-    boolean a(InventoryCrafting inventorycrafting, World world);
+    boolean a(InventoryCrafting inventorycrafting, @SuppressWarnings("UnusedParameters") World world);
 
     @Nullable
     ItemStack craftItem(InventoryCrafting inventorycrafting);
 
     int a();
 
+    @SuppressWarnings("unused")
     @Nullable
     ItemStack b();
 
@@ -18,5 +19,6 @@ public interface IRecipe {
 
     org.bukkit.inventory.Recipe toBukkitRecipe(); // CraftBukkit
 
+    @SuppressWarnings("unused")
     java.util.List<ItemStack> getIngredients(); // Spigot
 }

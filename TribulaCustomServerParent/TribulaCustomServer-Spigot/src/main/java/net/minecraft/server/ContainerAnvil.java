@@ -1,39 +1,41 @@
 package net.minecraft.server;
 
-import java.util.Iterator;
-import java.util.Map;
-import javax.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
- // CraftBukkit start
 import org.bukkit.craftbukkit.inventory.CraftInventoryView;
-import org.bukkit.craftbukkit.inventory.CraftItemStack;
-import org.bukkit.event.inventory.PrepareAnvilEvent;
+
+import javax.annotation.Nullable;
+import java.util.Iterator;
+import java.util.Map;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class ContainerAnvil extends Container {
 
+    @SuppressWarnings("unused")
     private static final Logger f = LogManager.getLogger();
     private final IInventory g = new InventoryCraftResult();
+    private final World i;
+    private final BlockPosition j;
+    private final EntityHuman m;
+    public int a;
+    private int k;
+    private String l;
+    // CraftBukkit start
+    private CraftInventoryView bukkitEntity = null;
+    @SuppressWarnings("CanBeFinal")
+    private PlayerInventory player;
     private final IInventory h = new InventorySubcontainer("Repair", true, 2) {
         public void update() {
             super.update();
             ContainerAnvil.this.a(this);
         }
     };
-    private final World i;
-    private final BlockPosition j;
-    public int a;
-    private int k;
-    private String l;
-    private final EntityHuman m;
-    // CraftBukkit start
-    private CraftInventoryView bukkitEntity = null;
-    private PlayerInventory player;
     // CraftBukkit end
 
+    @SuppressWarnings("unused")
     public ContainerAnvil(PlayerInventory playerinventory, final World world, final BlockPosition blockposition, EntityHuman entityhuman) {
         this.player = playerinventory; // CraftBukkit
         this.j = blockposition;
@@ -42,14 +44,17 @@ public class ContainerAnvil extends Container {
         this.a(new Slot(this.h, 0, 27, 47));
         this.a(new Slot(this.h, 1, 76, 47));
         this.a(new Slot(this.g, 2, 134, 47) {
+            @SuppressWarnings("unused")
             public boolean isAllowed(@Nullable ItemStack itemstack) {
                 return false;
             }
 
+            @SuppressWarnings("unused")
             public boolean isAllowed(EntityHuman entityhuman) {
                 return (entityhuman.abilities.canInstantlyBuild || entityhuman.expLevel >= ContainerAnvil.this.a) && ContainerAnvil.this.a > 0 && this.hasItem();
             }
 
+            @SuppressWarnings("unused")
             public void a(EntityHuman entityhuman, ItemStack itemstack) {
                 if (!entityhuman.abilities.canInstantlyBuild) {
                     entityhuman.levelDown(-ContainerAnvil.this.a);
@@ -73,14 +78,14 @@ public class ContainerAnvil extends Container {
                 IBlockData iblockdata = world.getType(blockposition);
 
                 if (!entityhuman.abilities.canInstantlyBuild && !world.isClientSide && iblockdata.getBlock() == Blocks.ANVIL && entityhuman.getRandom().nextFloat() < 0.12F) {
-                    int i = iblockdata.get(BlockAnvil.DAMAGE).intValue();
+                    int i = iblockdata.get(BlockAnvil.DAMAGE);
 
                     ++i;
                     if (i > 2) {
                         world.setAir(blockposition);
                         world.triggerEffect(1029, blockposition, 0);
                     } else {
-                        world.setTypeAndData(blockposition, iblockdata.set(BlockAnvil.DAMAGE, Integer.valueOf(i)), 2);
+                        world.setTypeAndData(blockposition, iblockdata.set(BlockAnvil.DAMAGE, i), 2);
                         world.triggerEffect(1030, blockposition, 0);
                     }
                 } else if (!world.isClientSide) {
@@ -181,12 +186,13 @@ public class ContainerAnvil extends Container {
                     Map map1 = EnchantmentManager.a(itemstack2);
                     Iterator iterator = map1.keySet().iterator();
 
+                    //noinspection WhileLoopReplaceableByForEach
                     while (iterator.hasNext()) {
                         Enchantment enchantment = (Enchantment) iterator.next();
 
                         if (enchantment != null) {
-                            j1 = map.containsKey(enchantment) ? ((Integer) map.get(enchantment)).intValue() : 0;
-                            k1 = ((Integer) map1.get(enchantment)).intValue();
+                            j1 = map.containsKey(enchantment) ? (Integer) map.get(enchantment) : 0;
+                            k1 = (Integer) map1.get(enchantment);
                             k1 = j1 == k1 ? k1 + 1 : Math.max(k1, j1);
                             boolean flag1 = enchantment.canEnchant(itemstack);
 
@@ -196,6 +202,7 @@ public class ContainerAnvil extends Container {
 
                             Iterator iterator1 = map.keySet().iterator();
 
+                            //noinspection WhileLoopReplaceableByForEach
                             while (iterator1.hasNext()) {
                                 Enchantment enchantment1 = (Enchantment) iterator1.next();
 
@@ -210,7 +217,8 @@ public class ContainerAnvil extends Container {
                                     k1 = enchantment.getMaxLevel();
                                 }
 
-                                map.put(enchantment, Integer.valueOf(k1));
+                                //noinspection unchecked
+                                map.put(enchantment, k1);
                                 int l1 = 0;
 
                                 switch (ContainerAnvil.SyntheticClass_1.a[enchantment.c().ordinal()]) {
@@ -278,6 +286,7 @@ public class ContainerAnvil extends Container {
                 }
 
                 itemstack1.setRepairCost(i2);
+                //noinspection unchecked
                 EnchantmentManager.a(map, itemstack1);
             }
 
@@ -306,8 +315,8 @@ public class ContainerAnvil extends Container {
     }
 
     public boolean a(EntityHuman entityhuman) {
-        if (!this.checkReachable) return true; // CraftBukkit
-        return this.i.getType(this.j).getBlock() == Blocks.ANVIL && entityhuman.e((double) this.j.getX() + 0.5D, (double) this.j.getY() + 0.5D, (double) this.j.getZ() + 0.5D) <= 64.0D;
+        // CraftBukkit
+        return this.checkReachable && (this.i.getType(this.j).getBlock() != Blocks.ANVIL || entityhuman.e((double) this.j.getX() + 0.5D, (double) this.j.getY() + 0.5D, (double) this.j.getZ() + 0.5D) > 64.0D);
     }
 
     @Nullable
@@ -320,16 +329,16 @@ public class ContainerAnvil extends Container {
 
             itemstack = itemstack1.cloneItemStack();
             if (i == 2) {
-                if (!this.a(itemstack1, 3, 39, true)) {
+                if (this.a(itemstack1, 3, 39, true)) {
                     return null;
                 }
 
                 slot.a(itemstack1, itemstack);
             } else if (i != 0 && i != 1) {
-                if (i >= 3 && i < 39 && !this.a(itemstack1, 0, 2, false)) {
+                if (i >= 3 && i < 39 && this.a(itemstack1, 0, 2, false)) {
                     return null;
                 }
-            } else if (!this.a(itemstack1, 3, 39, false)) {
+            } else if (this.a(itemstack1, 3, 39, false)) {
                 return null;
             }
 
@@ -385,22 +394,22 @@ public class ContainerAnvil extends Container {
         static {
             try {
                 ContainerAnvil.SyntheticClass_1.a[Enchantment.Rarity.COMMON.ordinal()] = 1;
-            } catch (NoSuchFieldError nosuchfielderror) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 ContainerAnvil.SyntheticClass_1.a[Enchantment.Rarity.UNCOMMON.ordinal()] = 2;
-            } catch (NoSuchFieldError nosuchfielderror1) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 ContainerAnvil.SyntheticClass_1.a[Enchantment.Rarity.RARE.ordinal()] = 3;
-            } catch (NoSuchFieldError nosuchfielderror2) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 ContainerAnvil.SyntheticClass_1.a[Enchantment.Rarity.VERY_RARE.ordinal()] = 4;
-            } catch (NoSuchFieldError nosuchfielderror3) {
+            } catch (NoSuchFieldError ignored) {
             }
 
         }

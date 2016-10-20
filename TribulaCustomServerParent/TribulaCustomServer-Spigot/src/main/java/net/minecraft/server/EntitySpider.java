@@ -1,7 +1,7 @@
 package net.minecraft.server;
 
-import java.util.Random;
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class EntitySpider extends EntityMonster {
 
@@ -12,6 +12,7 @@ public class EntitySpider extends EntityMonster {
         this.setSize(1.4F, 0.9F);
     }
 
+    @SuppressWarnings("unused")
     public static void d(DataConverterManager dataconvertermanager) {
         EntityInsentient.a(dataconvertermanager, "Spider");
     }
@@ -24,7 +25,9 @@ public class EntitySpider extends EntityMonster {
         this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
         this.goalSelector.a(6, new PathfinderGoalRandomLookaround(this));
         this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, false, new Class[0]));
+        //noinspection unchecked
         this.targetSelector.a(2, new EntitySpider.PathfinderGoalSpiderNearestAttackableTarget(this, EntityHuman.class));
+        //noinspection unchecked
         this.targetSelector.a(3, new EntitySpider.PathfinderGoalSpiderNearestAttackableTarget(this, EntityIronGolem.class));
     }
 
@@ -38,7 +41,7 @@ public class EntitySpider extends EntityMonster {
 
     protected void i() {
         super.i();
-        this.datawatcher.register(EntitySpider.a, Byte.valueOf((byte) 0));
+        this.datawatcher.register(EntitySpider.a, (byte) 0);
     }
 
     public void m() {
@@ -91,11 +94,11 @@ public class EntitySpider extends EntityMonster {
     }
 
     public boolean o() {
-        return (this.datawatcher.get(EntitySpider.a).byteValue() & 1) != 0;
+        return (this.datawatcher.get(EntitySpider.a) & 1) != 0;
     }
 
     public void a(boolean flag) {
-        byte b0 = this.datawatcher.get(EntitySpider.a).byteValue();
+        byte b0 = this.datawatcher.get(EntitySpider.a);
 
         if (flag) {
             b0 = (byte) (b0 | 1);
@@ -103,7 +106,7 @@ public class EntitySpider extends EntityMonster {
             b0 &= -2;
         }
 
-        this.datawatcher.set(EntitySpider.a, Byte.valueOf(b0));
+        this.datawatcher.set(EntitySpider.a, b0);
     }
 
     @Nullable

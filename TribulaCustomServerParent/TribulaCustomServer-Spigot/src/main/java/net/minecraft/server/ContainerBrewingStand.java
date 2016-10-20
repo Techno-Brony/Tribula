@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
-import javax.annotation.Nullable;
-// CraftBukkit start
 import org.bukkit.craftbukkit.inventory.CraftInventoryBrewer;
 import org.bukkit.craftbukkit.inventory.CraftInventoryView;
+
+import javax.annotation.Nullable;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class ContainerBrewingStand extends Container {
@@ -15,6 +17,7 @@ public class ContainerBrewingStand extends Container {
 
     // CraftBukkit start
     private CraftInventoryView bukkitEntity = null;
+    @SuppressWarnings("CanBeFinal")
     private PlayerInventory player;
     // CraftBukkit end
 
@@ -49,9 +52,7 @@ public class ContainerBrewingStand extends Container {
     public void b() {
         super.b();
 
-        for (int i = 0; i < this.listeners.size(); ++i) {
-            ICrafting icrafting = this.listeners.get(i);
-
+        for (ICrafting icrafting : this.listeners) {
             if (this.g != this.brewingStand.getProperty(0)) {
                 icrafting.setContainerData(this, 0, this.brewingStand.getProperty(0));
             }
@@ -66,8 +67,8 @@ public class ContainerBrewingStand extends Container {
     }
 
     public boolean a(EntityHuman entityhuman) {
-        if (!this.checkReachable) return true; // CraftBukkit
-        return this.brewingStand.a(entityhuman);
+        // CraftBukkit
+        return this.checkReachable && !this.brewingStand.a(entityhuman);
     }
 
     @Nullable
@@ -81,30 +82,30 @@ public class ContainerBrewingStand extends Container {
             itemstack = itemstack1.cloneItemStack();
             if ((i < 0 || i > 2) && i != 3 && i != 4) {
                 if (!this.f.hasItem() && this.f.isAllowed(itemstack1)) {
-                    if (!this.a(itemstack1, 3, 4, false)) {
+                    if (this.a(itemstack1, 3, 4, false)) {
                         return null;
                     }
                 } else if (ContainerBrewingStand.SlotPotionBottle.c_(itemstack)) {
-                    if (!this.a(itemstack1, 0, 3, false)) {
+                    if (this.a(itemstack1, 0, 3, false)) {
                         return null;
                     }
                 } else if (ContainerBrewingStand.a.b_(itemstack)) {
-                    if (!this.a(itemstack1, 4, 5, false)) {
+                    if (this.a(itemstack1, 4, 5, false)) {
                         return null;
                     }
                 } else if (i >= 5 && i < 32) {
-                    if (!this.a(itemstack1, 32, 41, false)) {
+                    if (this.a(itemstack1, 32, 41, false)) {
                         return null;
                     }
                 } else if (i >= 32 && i < 41) {
-                    if (!this.a(itemstack1, 5, 32, false)) {
+                    if (this.a(itemstack1, 5, 32, false)) {
                         return null;
                     }
-                } else if (!this.a(itemstack1, 5, 41, false)) {
+                } else if (this.a(itemstack1, 5, 41, false)) {
                     return null;
                 }
             } else {
-                if (!this.a(itemstack1, 5, 41, true)) {
+                if (this.a(itemstack1, 5, 41, true)) {
                     return null;
                 }
 
@@ -127,18 +128,30 @@ public class ContainerBrewingStand extends Container {
         return itemstack;
     }
 
-    static class a extends Slot {
-
-        public a(IInventory iinventory, int i, int j, int k) {
-            super(iinventory, i, j, k);
+    // CraftBukkit start
+    @Override
+    public CraftInventoryView getBukkitView() {
+        if (bukkitEntity != null) {
+            return bukkitEntity;
         }
 
-        public boolean isAllowed(@Nullable ItemStack itemstack) {
-            return b_(itemstack);
+        CraftInventoryBrewer inventory = new CraftInventoryBrewer(this.brewingStand);
+        bukkitEntity = new CraftInventoryView(this.player.player.getBukkitEntity(), inventory, this);
+        return bukkitEntity;
+    }
+
+    static class a extends Slot {
+
+        public a(IInventory iinventory, @SuppressWarnings("SameParameterValue") int i, @SuppressWarnings("SameParameterValue") int j, @SuppressWarnings("SameParameterValue") int k) {
+            super(iinventory, i, j, k);
         }
 
         public static boolean b_(@Nullable ItemStack itemstack) {
             return itemstack != null && itemstack.getItem() == Items.BLAZE_POWDER;
+        }
+
+        public boolean isAllowed(@Nullable ItemStack itemstack) {
+            return b_(itemstack);
         }
 
         public int getMaxStackSize() {
@@ -148,7 +161,7 @@ public class ContainerBrewingStand extends Container {
 
     static class SlotBrewing extends Slot {
 
-        public SlotBrewing(IInventory iinventory, int i, int j, int k) {
+        public SlotBrewing(IInventory iinventory, @SuppressWarnings("SameParameterValue") int i, @SuppressWarnings("SameParameterValue") int j, @SuppressWarnings("SameParameterValue") int k) {
             super(iinventory, i, j, k);
         }
 
@@ -170,6 +183,16 @@ public class ContainerBrewingStand extends Container {
             this.a = entityhuman;
         }
 
+        public static boolean c_(@Nullable ItemStack itemstack) {
+            if (itemstack == null) {
+                return false;
+            } else {
+                Item item = itemstack.getItem();
+
+                return item == Items.POTION || item == Items.GLASS_BOTTLE || item == Items.SPLASH_POTION || item == Items.LINGERING_POTION;
+            }
+        }
+
         public boolean isAllowed(@Nullable ItemStack itemstack) {
             return c_(itemstack);
         }
@@ -185,28 +208,6 @@ public class ContainerBrewingStand extends Container {
 
             super.a(entityhuman, itemstack);
         }
-
-        public static boolean c_(@Nullable ItemStack itemstack) {
-            if (itemstack == null) {
-                return false;
-            } else {
-                Item item = itemstack.getItem();
-
-                return item == Items.POTION || item == Items.GLASS_BOTTLE || item == Items.SPLASH_POTION || item == Items.LINGERING_POTION;
-            }
-        }
-    }
-
-    // CraftBukkit start
-    @Override
-    public CraftInventoryView getBukkitView() {
-        if (bukkitEntity != null) {
-            return bukkitEntity;
-        }
-
-        CraftInventoryBrewer inventory = new CraftInventoryBrewer(this.brewingStand);
-        bukkitEntity = new CraftInventoryView(this.player.player.getBukkitEntity(), inventory, this);
-        return bukkitEntity;
     }
     // CraftBukkit end
 }

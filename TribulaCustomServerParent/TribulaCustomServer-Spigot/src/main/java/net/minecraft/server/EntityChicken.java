@@ -1,15 +1,18 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Sets;
-import java.util.Set;
+
 import javax.annotation.Nullable;
+import java.util.Set;
 
 public class EntityChicken extends EntityAnimal {
 
     private static final Set<Item> bF = Sets.newHashSet(Items.WHEAT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS, Items.BEETROOT_SEEDS);
     public float bx;
     public float by;
+    @SuppressWarnings("unused")
     public float bz;
+    @SuppressWarnings("unused")
     public float bB;
     public float bC = 1.0F;
     public int bD;
@@ -20,6 +23,11 @@ public class EntityChicken extends EntityAnimal {
         this.setSize(0.4F, 0.7F);
         this.bD = this.random.nextInt(6000) + 6000;
         this.a(PathType.WATER, 0.0F);
+    }
+
+    @SuppressWarnings("unused")
+    public static void b(DataConverterManager dataconvertermanager) {
+        EntityInsentient.a(dataconvertermanager, "Chicken");
     }
 
     protected void r() {
@@ -97,7 +105,7 @@ public class EntityChicken extends EntityAnimal {
         return LootTables.C;
     }
 
-    public EntityChicken b(EntityAgeable entityageable) {
+    public EntityChicken b(@SuppressWarnings("UnusedParameters") EntityAgeable entityageable) {
         return new EntityChicken(this.world);
     }
 
@@ -107,10 +115,6 @@ public class EntityChicken extends EntityAnimal {
 
     protected int getExpValue(EntityHuman entityhuman) {
         return this.isChickenJockey() ? 10 : super.getExpValue(entityhuman);
-    }
-
-    public static void b(DataConverterManager dataconvertermanager) {
-        EntityInsentient.a(dataconvertermanager, "Chicken");
     }
 
     public void a(NBTTagCompound nbttagcompound) {
@@ -150,7 +154,7 @@ public class EntityChicken extends EntityAnimal {
         return this.bE;
     }
 
-    public void p(boolean flag) {
+    public void p(@SuppressWarnings("SameParameterValue") boolean flag) {
         this.bE = flag;
     }
 

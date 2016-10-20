@@ -1,7 +1,8 @@
 package net.minecraft.server;
 
+import org.bukkit.craftbukkit.inventory.CraftInventoryView;
+
 import javax.annotation.Nullable;
-import org.bukkit.craftbukkit.inventory.CraftInventoryView; // CraftBukkit
 
 public class ContainerBeacon extends Container {
 
@@ -9,6 +10,7 @@ public class ContainerBeacon extends Container {
     private final ContainerBeacon.SlotBeacon f;
     // CraftBukkit start
     private CraftInventoryView bukkitEntity = null;
+    @SuppressWarnings("CanBeFinal")
     private PlayerInventory player;
     // CraftBukkit end
 
@@ -56,8 +58,8 @@ public class ContainerBeacon extends Container {
     }
 
     public boolean a(EntityHuman entityhuman) {
-        if (!this.checkReachable) return true; // CraftBukkit
-        return this.beacon.a(entityhuman);
+        // CraftBukkit
+        return this.checkReachable && !this.beacon.a(entityhuman);
     }
 
     @Nullable
@@ -70,24 +72,24 @@ public class ContainerBeacon extends Container {
 
             itemstack = itemstack1.cloneItemStack();
             if (i == 0) {
-                if (!this.a(itemstack1, 1, 37, true)) {
+                if (this.a(itemstack1, 1, 37, true)) {
                     return null;
                 }
 
                 slot.a(itemstack1, itemstack);
             } else if (!this.f.hasItem() && this.f.isAllowed(itemstack1) && itemstack1.count == 1) {
-                if (!this.a(itemstack1, 0, 1, false)) {
+                if (this.a(itemstack1, 0, 1, false)) {
                     return null;
                 }
             } else if (i >= 1 && i < 28) {
-                if (!this.a(itemstack1, 28, 37, false)) {
+                if (this.a(itemstack1, 28, 37, false)) {
                     return null;
                 }
             } else if (i >= 28 && i < 37) {
-                if (!this.a(itemstack1, 1, 28, false)) {
+                if (this.a(itemstack1, 1, 28, false)) {
                     return null;
                 }
-            } else if (!this.a(itemstack1, 1, 37, false)) {
+            } else if (this.a(itemstack1, 1, 37, false)) {
                 return null;
             }
 
@@ -107,21 +109,6 @@ public class ContainerBeacon extends Container {
         return itemstack;
     }
 
-    class SlotBeacon extends Slot {
-
-        public SlotBeacon(IInventory iinventory, int i, int j, int k) {
-            super(iinventory, i, j, k);
-        }
-
-        public boolean isAllowed(@Nullable ItemStack itemstack) {
-            return itemstack != null && (itemstack.getItem() == Items.EMERALD || itemstack.getItem() == Items.DIAMOND || itemstack.getItem() == Items.GOLD_INGOT || itemstack.getItem() == Items.IRON_INGOT);
-        }
-
-        public int getMaxStackSize() {
-            return 1;
-        }
-    }
-
     // CraftBukkit start
     @Override
     public CraftInventoryView getBukkitView() {
@@ -132,6 +119,21 @@ public class ContainerBeacon extends Container {
         org.bukkit.craftbukkit.inventory.CraftInventory inventory = new org.bukkit.craftbukkit.inventory.CraftInventoryBeacon((TileEntityBeacon) this.beacon); // TODO - check this
         bukkitEntity = new CraftInventoryView(this.player.player.getBukkitEntity(), inventory, this);
         return bukkitEntity;
+    }
+
+    class SlotBeacon extends Slot {
+
+        public SlotBeacon(IInventory iinventory, @SuppressWarnings("SameParameterValue") int i, @SuppressWarnings("SameParameterValue") int j, @SuppressWarnings("SameParameterValue") int k) {
+            super(iinventory, i, j, k);
+        }
+
+        public boolean isAllowed(@Nullable ItemStack itemstack) {
+            return itemstack != null && (itemstack.getItem() == Items.EMERALD || itemstack.getItem() == Items.DIAMOND || itemstack.getItem() == Items.GOLD_INGOT || itemstack.getItem() == Items.IRON_INGOT);
+        }
+
+        public int getMaxStackSize() {
+            return 1;
+        }
     }
     // CraftBukkit end
 }

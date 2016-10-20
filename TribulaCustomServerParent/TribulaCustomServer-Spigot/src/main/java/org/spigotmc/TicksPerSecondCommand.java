@@ -1,8 +1,6 @@
 package org.spigotmc;
 
-import com.google.common.base.Joiner;
 import net.minecraft.server.MinecraftServer;
-import com.google.common.collect.Iterables;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -10,7 +8,8 @@ import org.bukkit.command.CommandSender;
 public class TicksPerSecondCommand extends Command
 {
 
-    public TicksPerSecondCommand(String name)
+    @SuppressWarnings("unused")
+    public TicksPerSecondCommand(@SuppressWarnings("SameParameterValue") String name)
     {
         super( name );
         this.description = "Gets the current ticks per second for the server";
@@ -27,6 +26,7 @@ public class TicksPerSecondCommand extends Command
         }
 
         StringBuilder sb = new StringBuilder( ChatColor.GOLD + "TPS from last 1m, 5m, 15m: " );
+        //noinspection deprecation
         for ( double tps : MinecraftServer.getServer().recentTps )
         {
             sb.append( format( tps ) );

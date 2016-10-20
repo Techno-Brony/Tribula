@@ -1,325 +1,43 @@
 package net.minecraft.server;
 
-import java.util.Iterator;
-import java.util.List;
-import javax.annotation.Nullable;
-
-// CraftBukkit start
 import org.bukkit.craftbukkit.entity.CraftHumanEntity;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.inventory.InventoryPickupItemEvent;
 import org.bukkit.inventory.Inventory;
+
+import javax.annotation.Nullable;
+import java.util.Iterator;
+import java.util.List;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class TileEntityHopper extends TileEntityLootable implements IHopper, ITickable {
 
+    // CraftBukkit start - add fields and methods
+    @SuppressWarnings("CanBeFinal")
+    public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
     private ItemStack[] items = new ItemStack[5];
     private String f;
     private int g = -1;
-
-    // CraftBukkit start - add fields and methods
-    public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
     private int maxStack = MAX_STACK;
-
-    public ItemStack[] getContents() {
-        return this.items;
-    }
-
-    public void onOpen(CraftHumanEntity who) {
-        transaction.add(who);
-    }
-
-    public void onClose(CraftHumanEntity who) {
-        transaction.remove(who);
-    }
-
-    public List<HumanEntity> getViewers() {
-        return transaction;
-    }
-
-    public void setMaxStackSize(int size) {
-        maxStack = size;
-    }
-    // CraftBukkit end
 
     public TileEntityHopper() {}
 
+    @SuppressWarnings("unused")
     public static void a(DataConverterManager dataconvertermanager) {
         dataconvertermanager.a(DataConverterTypes.BLOCK_ENTITY, new DataInspectorItemList("Hopper", "Items"));
-    }
-
-    public void a(NBTTagCompound nbttagcompound) {
-        super.a(nbttagcompound);
-        this.items = new ItemStack[this.getSize()];
-        if (nbttagcompound.hasKeyOfType("CustomName", 8)) {
-            this.f = nbttagcompound.getString("CustomName");
-        }
-
-        this.g = nbttagcompound.getInt("TransferCooldown");
-        if (!this.c(nbttagcompound)) {
-            NBTTagList nbttaglist = nbttagcompound.getList("Items", 10);
-
-            for (int i = 0; i < nbttaglist.size(); ++i) {
-                NBTTagCompound nbttagcompound1 = nbttaglist.get(i);
-                byte b0 = nbttagcompound1.getByte("Slot");
-
-                if (b0 >= 0 && b0 < this.items.length) {
-                    this.items[b0] = ItemStack.createStack(nbttagcompound1);
-                }
-            }
-        }
-
-    }
-
-    public NBTTagCompound save(NBTTagCompound nbttagcompound) {
-        super.save(nbttagcompound);
-        if (!this.d(nbttagcompound)) {
-            NBTTagList nbttaglist = new NBTTagList();
-
-            for (int i = 0; i < this.items.length; ++i) {
-                if (this.items[i] != null) {
-                    NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-
-                    nbttagcompound1.setByte("Slot", (byte) i);
-                    this.items[i].save(nbttagcompound1);
-                    nbttaglist.add(nbttagcompound1);
-                }
-            }
-
-            nbttagcompound.set("Items", nbttaglist);
-        }
-
-        nbttagcompound.setInt("TransferCooldown", this.g);
-        if (this.hasCustomName()) {
-            nbttagcompound.setString("CustomName", this.f);
-        }
-
-        return nbttagcompound;
-    }
-
-    public int getSize() {
-        return this.items.length;
-    }
-
-    @Nullable
-    public ItemStack getItem(int i) {
-        this.d((EntityHuman) null);
-        return this.items[i];
-    }
-
-    @Nullable
-    public ItemStack splitStack(int i, int j) {
-        this.d((EntityHuman) null);
-        return ContainerUtil.a(this.items, i, j);
-    }
-
-    @Nullable
-    public ItemStack splitWithoutUpdate(int i) {
-        this.d((EntityHuman) null);
-        return ContainerUtil.a(this.items, i);
-    }
-
-    public void setItem(int i, @Nullable ItemStack itemstack) {
-        this.d((EntityHuman) null);
-        this.items[i] = itemstack;
-        if (itemstack != null && itemstack.count > this.getMaxStackSize()) {
-            itemstack.count = this.getMaxStackSize();
-        }
-
-    }
-
-    public String getName() {
-        return this.hasCustomName() ? this.f : "container.hopper";
-    }
-
-    public boolean hasCustomName() {
-        return this.f != null && !this.f.isEmpty();
-    }
-
-    public void a(String s) {
-        this.f = s;
-    }
-
-    public int getMaxStackSize() {
-        return maxStack; // CraftBukkit
-    }
-
-    public boolean a(EntityHuman entityhuman) {
-        return this.world.getTileEntity(this.position) == this && entityhuman.e((double) this.position.getX() + 0.5D, (double) this.position.getY() + 0.5D, (double) this.position.getZ() + 0.5D) <= 64.0D;
-    }
-
-    public void startOpen(EntityHuman entityhuman) {}
-
-    public void closeContainer(EntityHuman entityhuman) {}
-
-    public boolean b(int i, ItemStack itemstack) {
-        return true;
-    }
-
-    public void E_() {
-        if (this.world != null && !this.world.isClientSide) {
-            --this.g;
-            if (!this.o()) {
-                this.setCooldown(0);
-                this.m();
-            }
-
-        }
-    }
-
-    public boolean m() {
-        if (this.world != null && !this.world.isClientSide) {
-            if (!this.o() && BlockHopper.f(this.u())) {
-                boolean flag = false;
-
-                if (!this.q()) {
-                    flag = this.H();
-                }
-
-                if (!this.r()) {
-                    flag = a(this) || flag;
-                }
-
-                if (flag) {
-                    this.setCooldown(world.spigotConfig.hopperTransfer); // Spigot
-                    this.update();
-                    return true;
-                }
-            }
-            return false;
-        } else {
-            return false;
-        }
-    }
-
-    private boolean q() {
-        ItemStack[] aitemstack = this.items;
-        int i = aitemstack.length;
-
-        for (int j = 0; j < i; ++j) {
-            ItemStack itemstack = aitemstack[j];
-
-            if (itemstack != null) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    private boolean r() {
-        ItemStack[] aitemstack = this.items;
-        int i = aitemstack.length;
-
-        for (int j = 0; j < i; ++j) {
-            ItemStack itemstack = aitemstack[j];
-
-            if (itemstack == null || itemstack.count != itemstack.getMaxStackSize()) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    private boolean H() {
-        IInventory iinventory = this.I();
-
-        if (iinventory == null) {
-            return false;
-        } else {
-            EnumDirection enumdirection = BlockHopper.e(this.u()).opposite();
-
-            if (this.a(iinventory, enumdirection)) {
-                return false;
-            } else {
-                for (int i = 0; i < this.getSize(); ++i) {
-                    if (this.getItem(i) != null) {
-                        ItemStack itemstack = this.getItem(i).cloneItemStack();
-                        // ItemStack itemstack1 = addItem(iinventory, this.splitStack(i, 1), enumdirection);
-
-                        // CraftBukkit start - Call event when pushing items into other inventories
-                        CraftItemStack oitemstack = CraftItemStack.asCraftMirror(this.splitStack(i, world.spigotConfig.hopperAmount)); // Spigot
-
-                        Inventory destinationInventory;
-                        // Have to special case large chests as they work oddly
-                        if (iinventory instanceof InventoryLargeChest) {
-                            destinationInventory = new org.bukkit.craftbukkit.inventory.CraftInventoryDoubleChest((InventoryLargeChest) iinventory);
-                        } else {
-                            destinationInventory = iinventory.getOwner().getInventory();
-                        }
-
-                        InventoryMoveItemEvent event = new InventoryMoveItemEvent(this.getOwner().getInventory(), oitemstack.clone(), destinationInventory, true);
-                        this.getWorld().getServer().getPluginManager().callEvent(event);
-                        if (event.isCancelled()) {
-                            this.setItem(i, itemstack);
-                            this.setCooldown(world.spigotConfig.hopperTransfer); // Spigot
-                            return false;
-                        }
-                        int origCount = event.getItem().getAmount(); // Spigot
-                        ItemStack itemstack1 = addItem(iinventory, CraftItemStack.asNMSCopy(event.getItem()), enumdirection);
-
-                        if (itemstack1 == null || itemstack1.count == 0) {
-                            if (event.getItem().equals(oitemstack)) {
-                                iinventory.update();
-                            } else {
-                                this.setItem(i, itemstack);
-                            }
-                            // CraftBukkit end
-                            return true;
-                        }
-                        itemstack.count -= origCount - itemstack1.count; // Spigot
-                        this.setItem(i, itemstack);
-                    }
-                }
-
-                return false;
-            }
-        }
-    }
-
-    private boolean a(IInventory iinventory, EnumDirection enumdirection) {
-        if (iinventory instanceof IWorldInventory) {
-            IWorldInventory iworldinventory = (IWorldInventory) iinventory;
-            int[] aint = iworldinventory.getSlotsForFace(enumdirection);
-            int[] aint1 = aint;
-            int i = aint.length;
-
-            for (int j = 0; j < i; ++j) {
-                int k = aint1[j];
-                ItemStack itemstack = iworldinventory.getItem(k);
-
-                if (itemstack == null || itemstack.count != itemstack.getMaxStackSize()) {
-                    return false;
-                }
-            }
-        } else {
-            int l = iinventory.getSize();
-
-            for (int i1 = 0; i1 < l; ++i1) {
-                ItemStack itemstack1 = iinventory.getItem(i1);
-
-                if (itemstack1 == null || itemstack1.count != itemstack1.getMaxStackSize()) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
     }
 
     private static boolean b(IInventory iinventory, EnumDirection enumdirection) {
         if (iinventory instanceof IWorldInventory) {
             IWorldInventory iworldinventory = (IWorldInventory) iinventory;
             int[] aint = iworldinventory.getSlotsForFace(enumdirection);
-            int[] aint1 = aint;
             int i = aint.length;
 
-            for (int j = 0; j < i; ++j) {
-                int k = aint1[j];
-
+            for (int k : aint) {
                 if (iworldinventory.getItem(k) != null) {
                     return false;
                 }
@@ -350,12 +68,9 @@ public class TileEntityHopper extends TileEntityLootable implements IHopper, ITi
             if (iinventory instanceof IWorldInventory) {
                 IWorldInventory iworldinventory = (IWorldInventory) iinventory;
                 int[] aint = iworldinventory.getSlotsForFace(enumdirection);
-                int[] aint1 = aint;
                 int i = aint.length;
 
-                for (int j = 0; j < i; ++j) {
-                    int k = aint1[j];
-
+                for (int k : aint) {
                     if (a(ihopper, iinventory, k, enumdirection)) {
                         return true;
                     }
@@ -372,6 +87,7 @@ public class TileEntityHopper extends TileEntityLootable implements IHopper, ITi
         } else {
             Iterator iterator = a(ihopper.getWorld(), ihopper.E(), ihopper.F(), ihopper.G()).iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 EntityItem entityitem = (EntityItem) iterator.next();
 
@@ -433,6 +149,7 @@ public class TileEntityHopper extends TileEntityLootable implements IHopper, ITi
 
         return false;
     }
+    // CraftBukkit end
 
     public static boolean a(IInventory iinventory, EntityItem entityitem) {
         boolean flag = false;
@@ -529,12 +246,6 @@ public class TileEntityHopper extends TileEntityLootable implements IHopper, ITi
         return itemstack;
     }
 
-    private IInventory I() {
-        EnumDirection enumdirection = BlockHopper.e(this.u());
-
-        return b(this.getWorld(), this.E() + (double) enumdirection.getAdjacentX(), this.F() + (double) enumdirection.getAdjacentY(), this.G() + (double) enumdirection.getAdjacentZ());
-    }
-
     public static IInventory b(IHopper ihopper) {
         return b(ihopper.getWorld(), ihopper.E(), ihopper.F() + 1.0D, ihopper.G());
     }
@@ -578,6 +289,288 @@ public class TileEntityHopper extends TileEntityLootable implements IHopper, ITi
         return itemstack.getItem() == itemstack1.getItem() && (itemstack.getData() == itemstack1.getData() && (itemstack.count <= itemstack.getMaxStackSize() && ItemStack.equals(itemstack, itemstack1)));
     }
 
+    public ItemStack[] getContents() {
+        return this.items;
+    }
+
+    public void onOpen(CraftHumanEntity who) {
+        transaction.add(who);
+    }
+
+    public void onClose(CraftHumanEntity who) {
+        transaction.remove(who);
+    }
+
+    public List<HumanEntity> getViewers() {
+        return transaction;
+    }
+
+    public void a(NBTTagCompound nbttagcompound) {
+        super.a(nbttagcompound);
+        this.items = new ItemStack[this.getSize()];
+        if (nbttagcompound.hasKeyOfType("CustomName", 8)) {
+            this.f = nbttagcompound.getString("CustomName");
+        }
+
+        this.g = nbttagcompound.getInt("TransferCooldown");
+        if (!this.c(nbttagcompound)) {
+            NBTTagList nbttaglist = nbttagcompound.getList("Items", 10);
+
+            for (int i = 0; i < nbttaglist.size(); ++i) {
+                NBTTagCompound nbttagcompound1 = nbttaglist.get(i);
+                byte b0 = nbttagcompound1.getByte("Slot");
+
+                if (b0 >= 0 && b0 < this.items.length) {
+                    this.items[b0] = ItemStack.createStack(nbttagcompound1);
+                }
+            }
+        }
+
+    }
+
+    public NBTTagCompound save(NBTTagCompound nbttagcompound) {
+        super.save(nbttagcompound);
+        if (!this.d(nbttagcompound)) {
+            NBTTagList nbttaglist = new NBTTagList();
+
+            for (int i = 0; i < this.items.length; ++i) {
+                if (this.items[i] != null) {
+                    NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+
+                    nbttagcompound1.setByte("Slot", (byte) i);
+                    this.items[i].save(nbttagcompound1);
+                    nbttaglist.add(nbttagcompound1);
+                }
+            }
+
+            nbttagcompound.set("Items", nbttaglist);
+        }
+
+        nbttagcompound.setInt("TransferCooldown", this.g);
+        if (this.hasCustomName()) {
+            nbttagcompound.setString("CustomName", this.f);
+        }
+
+        return nbttagcompound;
+    }
+
+    public int getSize() {
+        return this.items.length;
+    }
+
+    @Nullable
+    public ItemStack getItem(int i) {
+        this.d((EntityHuman) null);
+        return this.items[i];
+    }
+
+    @Nullable
+    public ItemStack splitStack(int i, int j) {
+        this.d((EntityHuman) null);
+        return ContainerUtil.a(this.items, i, j);
+    }
+
+    @Nullable
+    public ItemStack splitWithoutUpdate(int i) {
+        this.d((EntityHuman) null);
+        return ContainerUtil.a(this.items, i);
+    }
+
+    public void setItem(int i, @Nullable ItemStack itemstack) {
+        this.d((EntityHuman) null);
+        this.items[i] = itemstack;
+        if (itemstack != null && itemstack.count > this.getMaxStackSize()) {
+            itemstack.count = this.getMaxStackSize();
+        }
+
+    }
+
+    public String getName() {
+        return this.hasCustomName() ? this.f : "container.hopper";
+    }
+
+    public boolean hasCustomName() {
+        return this.f != null && !this.f.isEmpty();
+    }
+
+    @SuppressWarnings("unused")
+    public void a(String s) {
+        this.f = s;
+    }
+
+    public int getMaxStackSize() {
+        return maxStack; // CraftBukkit
+    }
+
+    public void setMaxStackSize(int size) {
+        maxStack = size;
+    }
+
+    public boolean a(EntityHuman entityhuman) {
+        return this.world.getTileEntity(this.position) == this && entityhuman.e((double) this.position.getX() + 0.5D, (double) this.position.getY() + 0.5D, (double) this.position.getZ() + 0.5D) <= 64.0D;
+    }
+
+    public void startOpen(EntityHuman entityhuman) {}
+
+    public void closeContainer(EntityHuman entityhuman) {}
+
+    public boolean b(int i, ItemStack itemstack) {
+        return true;
+    }
+
+    public void E_() {
+        if (this.world != null && !this.world.isClientSide) {
+            --this.g;
+            if (this.o()) {
+                this.setCooldown(0);
+                this.m();
+            }
+
+        }
+    }
+
+    @SuppressWarnings("UnusedReturnValue")
+    public boolean m() {
+        if (this.world != null && !this.world.isClientSide) {
+            if (this.o() && BlockHopper.f(this.u())) {
+                boolean flag = false;
+
+                if (!this.q()) {
+                    flag = this.H();
+                }
+
+                if (!this.r()) {
+                    flag = a(this) || flag;
+                }
+
+                if (flag) {
+                    this.setCooldown(world.spigotConfig.hopperTransfer); // Spigot
+                    this.update();
+                    return true;
+                }
+            }
+            return false;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean q() {
+        ItemStack[] aitemstack = this.items;
+        int i = aitemstack.length;
+
+        for (ItemStack itemstack : aitemstack) {
+            if (itemstack != null) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean r() {
+        ItemStack[] aitemstack = this.items;
+        int i = aitemstack.length;
+
+        for (ItemStack itemstack : aitemstack) {
+            if (itemstack == null || itemstack.count != itemstack.getMaxStackSize()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean H() {
+        IInventory iinventory = this.I();
+
+        if (iinventory == null) {
+            return false;
+        } else {
+            EnumDirection enumdirection = BlockHopper.e(this.u()).opposite();
+
+            if (this.a(iinventory, enumdirection)) {
+                return false;
+            } else {
+                for (int i = 0; i < this.getSize(); ++i) {
+                    if (this.getItem(i) != null) {
+                        ItemStack itemstack = this.getItem(i).cloneItemStack();
+                        // ItemStack itemstack1 = addItem(iinventory, this.splitStack(i, 1), enumdirection);
+
+                        // CraftBukkit start - Call event when pushing items into other inventories
+                        CraftItemStack oitemstack = CraftItemStack.asCraftMirror(this.splitStack(i, world.spigotConfig.hopperAmount)); // Spigot
+
+                        Inventory destinationInventory;
+                        // Have to special case large chests as they work oddly
+                        if (iinventory instanceof InventoryLargeChest) {
+                            destinationInventory = new org.bukkit.craftbukkit.inventory.CraftInventoryDoubleChest((InventoryLargeChest) iinventory);
+                        } else {
+                            destinationInventory = iinventory.getOwner().getInventory();
+                        }
+
+                        InventoryMoveItemEvent event = new InventoryMoveItemEvent(this.getOwner().getInventory(), oitemstack.clone(), destinationInventory, true);
+                        this.getWorld().getServer().getPluginManager().callEvent(event);
+                        if (event.isCancelled()) {
+                            this.setItem(i, itemstack);
+                            this.setCooldown(world.spigotConfig.hopperTransfer); // Spigot
+                            return false;
+                        }
+                        int origCount = event.getItem().getAmount(); // Spigot
+                        ItemStack itemstack1 = addItem(iinventory, CraftItemStack.asNMSCopy(event.getItem()), enumdirection);
+
+                        if (itemstack1 == null || itemstack1.count == 0) {
+                            if (event.getItem().equals(oitemstack)) {
+                                iinventory.update();
+                            } else {
+                                this.setItem(i, itemstack);
+                            }
+                            // CraftBukkit end
+                            return true;
+                        }
+                        itemstack.count -= origCount - itemstack1.count; // Spigot
+                        this.setItem(i, itemstack);
+                    }
+                }
+
+                return false;
+            }
+        }
+    }
+
+    private boolean a(IInventory iinventory, EnumDirection enumdirection) {
+        if (iinventory instanceof IWorldInventory) {
+            IWorldInventory iworldinventory = (IWorldInventory) iinventory;
+            int[] aint = iworldinventory.getSlotsForFace(enumdirection);
+            int i = aint.length;
+
+            for (int k : aint) {
+                ItemStack itemstack = iworldinventory.getItem(k);
+
+                if (itemstack == null || itemstack.count != itemstack.getMaxStackSize()) {
+                    return false;
+                }
+            }
+        } else {
+            int l = iinventory.getSize();
+
+            for (int i1 = 0; i1 < l; ++i1) {
+                ItemStack itemstack1 = iinventory.getItem(i1);
+
+                if (itemstack1 == null || itemstack1.count != itemstack1.getMaxStackSize()) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private IInventory I() {
+        EnumDirection enumdirection = BlockHopper.e(this.u());
+
+        return b(this.getWorld(), this.E() + (double) enumdirection.getAdjacentX(), this.F() + (double) enumdirection.getAdjacentY(), this.G() + (double) enumdirection.getAdjacentZ());
+    }
+
     public double E() {
         return (double) this.position.getX() + 0.5D;
     }
@@ -595,7 +588,7 @@ public class TileEntityHopper extends TileEntityLootable implements IHopper, ITi
     }
 
     public boolean o() {
-        return this.g > 0;
+        return this.g <= 0;
     }
 
     public boolean p() {

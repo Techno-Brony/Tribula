@@ -88,6 +88,7 @@ public class ItemMinecart extends Item {
     };
     private final EntityMinecartAbstract.EnumMinecartType b;
 
+    @SuppressWarnings("unused")
     public ItemMinecart(EntityMinecartAbstract.EnumMinecartType entityminecartabstract_enumminecarttype) {
         this.maxStackSize = 1;
         this.b = entityminecartabstract_enumminecarttype;

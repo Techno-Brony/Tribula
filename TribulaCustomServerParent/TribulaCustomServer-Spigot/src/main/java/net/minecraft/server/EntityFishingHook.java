@@ -1,21 +1,23 @@
 package net.minecraft.server;
 
+import org.bukkit.entity.Fish;
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerFishEvent;
+
 import java.util.Iterator;
 import java.util.List;
 
 // CraftBukkit start
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Fish;
-import org.bukkit.event.player.PlayerFishEvent;
 // CraftBukkit end
 
 public class EntityFishingHook extends Entity {
 
     private static final DataWatcherObject<Integer> c = DataWatcher.a(EntityFishingHook.class, DataWatcherRegistry.b);
+    public EntityHuman owner;
+    public Entity hooked;
     private BlockPosition d = new BlockPosition(-1, -1, -1);
     private Block e;
     private boolean isInGround;
-    public EntityHuman owner;
     private int g;
     private int h;
     private int au;
@@ -23,12 +25,16 @@ public class EntityFishingHook extends Entity {
     private int aw;
     private float ax;
     private int ay;
+    @SuppressWarnings("unused")
     private double az;
+    @SuppressWarnings("unused")
     private double aA;
+    @SuppressWarnings("unused")
     private double aB;
+    @SuppressWarnings("unused")
     private double aC;
+    @SuppressWarnings("unused")
     private double aD;
-    public Entity hooked;
 
     public EntityFishingHook(World world) {
         super(world);
@@ -56,12 +62,12 @@ public class EntityFishingHook extends Entity {
     }
 
     protected void i() {
-        this.getDataWatcher().register(EntityFishingHook.c, Integer.valueOf(0));
+        this.getDataWatcher().register(EntityFishingHook.c, 0);
     }
 
     public void a(DataWatcherObject<?> datawatcherobject) {
         if (EntityFishingHook.c.equals(datawatcherobject)) {
-            int i = this.getDataWatcher().get(EntityFishingHook.c).intValue();
+            int i = this.getDataWatcher().get(EntityFishingHook.c);
 
             if (i > 0 && this.hooked != null) {
                 this.hooked = null;
@@ -71,7 +77,7 @@ public class EntityFishingHook extends Entity {
         super.a(datawatcherobject);
     }
 
-    public void c(double d0, double d1, double d2, float f, float f1) {
+    public void c(double d0, double d1, double d2, @SuppressWarnings("SameParameterValue") float f, @SuppressWarnings("SameParameterValue") float f1) {
         float f2 = MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
 
         d0 /= (double) f2;
@@ -98,7 +104,7 @@ public class EntityFishingHook extends Entity {
     public void m() {
         super.m();
         if (this.world.isClientSide) {
-            int i = this.getDataWatcher().get(EntityFishingHook.c).intValue();
+            int i = this.getDataWatcher().get(EntityFishingHook.c);
 
             if (i > 0 && this.hooked == null) {
                 this.hooked = this.world.getEntity(i - 1);
@@ -177,8 +183,8 @@ public class EntityFishingHook extends Entity {
 
                 d5 = 0.0D;
 
-                for (int j = 0; j < list.size(); ++j) {
-                    Entity entity1 = (Entity) list.get(j);
+                for (Object aList : list) {
+                    Entity entity1 = (Entity) aList;
 
                     if (this.a(entity1) && (entity1 != this.owner || this.h >= 5)) {
                         AxisAlignedBB axisalignedbb = entity1.getBoundingBox().g(0.30000001192092896D);
@@ -202,7 +208,7 @@ public class EntityFishingHook extends Entity {
                     org.bukkit.craftbukkit.event.CraftEventFactory.callProjectileHitEvent(this); // Craftbukkit - Call event
                     if (movingobjectposition.entity != null) {
                         this.hooked = movingobjectposition.entity;
-                        this.getDataWatcher().set(EntityFishingHook.c, Integer.valueOf(this.hooked.getId() + 1));
+                        this.getDataWatcher().set(EntityFishingHook.c, this.hooked.getId() + 1);
                     } else {
                         this.isInGround = true;
                     }
@@ -273,6 +279,7 @@ public class EntityFishingHook extends Entity {
                             this.av = 0;
                             this.aw = 0;
                             // CraftBukkit start
+                            //noinspection deprecation
                             PlayerFishEvent playerFishEvent = new PlayerFishEvent((Player) this.owner.getBukkitEntity(), null, (Fish) this.getBukkitEntity(), PlayerFishEvent.State.FAILED_ATTEMPT);
                             this.world.getServer().getPluginManager().callEvent(playerFishEvent);
                             // CraftBukkit end
@@ -289,6 +296,7 @@ public class EntityFishingHook extends Entity {
                             this.aw -= l;
                             if (this.aw <= 0) {
                                 // CraftBukkit start
+                                //noinspection deprecation
                                 PlayerFishEvent playerFishEvent = new PlayerFishEvent((Player) this.owner.getBukkitEntity(), null, (Fish) this.getBukkitEntity(), PlayerFishEvent.State.BITE);
                                 this.world.getServer().getPluginManager().callEvent(playerFishEvent);
                                 if (playerFishEvent.isCancelled()) {
@@ -408,6 +416,7 @@ public class EntityFishingHook extends Entity {
 
             if (this.hooked != null) {
                 // CraftBukkit start
+                //noinspection deprecation
                 PlayerFishEvent playerFishEvent = new PlayerFishEvent((Player) this.owner.getBukkitEntity(), this.hooked.getBukkitEntity(), (Fish) this.getBukkitEntity(), PlayerFishEvent.State.CAUGHT_ENTITY);
                 this.world.getServer().getPluginManager().callEvent(playerFishEvent);
 
@@ -424,10 +433,12 @@ public class EntityFishingHook extends Entity {
                 loottableinfo_a.a((float) EnchantmentManager.f(this.owner) + this.owner.dg());
                 Iterator iterator = this.world.ak().a(LootTables.ao).a(this.random, loottableinfo_a.a()).iterator();
 
+                //noinspection WhileLoopReplaceableByForEach
                 while (iterator.hasNext()) {
                     ItemStack itemstack = (ItemStack) iterator.next();
                     EntityItem entityitem = new EntityItem(this.world, this.locX, this.locY, this.locZ, itemstack);
                     // CraftBukkit start
+                    //noinspection deprecation
                     PlayerFishEvent playerFishEvent = new PlayerFishEvent((Player) this.owner.getBukkitEntity(), entityitem.getBukkitEntity(), (Fish) this.getBukkitEntity(), PlayerFishEvent.State.CAUGHT_FISH);
                     playerFishEvent.setExpToDrop(this.random.nextInt(6) + 1);
                     this.world.getServer().getPluginManager().callEvent(playerFishEvent);
@@ -458,6 +469,7 @@ public class EntityFishingHook extends Entity {
 
             if (this.isInGround) {
                 // CraftBukkit start
+                //noinspection deprecation
                 PlayerFishEvent playerFishEvent = new PlayerFishEvent((Player) this.owner.getBukkitEntity(), null, (Fish) this.getBukkitEntity(), PlayerFishEvent.State.IN_GROUND);
                 this.world.getServer().getPluginManager().callEvent(playerFishEvent);
 
@@ -469,6 +481,7 @@ public class EntityFishingHook extends Entity {
             }
             // CraftBukkit start
             if (i == 0) {
+                //noinspection deprecation
                 PlayerFishEvent playerFishEvent = new PlayerFishEvent((Player) this.owner.getBukkitEntity(), null, (Fish) this.getBukkitEntity(), PlayerFishEvent.State.FAILED_ATTEMPT);
                 this.world.getServer().getPluginManager().callEvent(playerFishEvent);
                 if (playerFishEvent.isCancelled()) {

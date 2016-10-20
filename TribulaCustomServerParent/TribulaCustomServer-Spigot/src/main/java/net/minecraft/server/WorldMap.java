@@ -3,33 +3,35 @@ package net.minecraft.server;
 import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import javax.annotation.Nullable;
-
-// CraftBukkit start
-import java.util.UUID;
-
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.craftbukkit.map.CraftMapView;
+
+import javax.annotation.Nullable;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class WorldMap extends PersistentBase {
 
+    public final Map<EntityHuman, WorldMap.WorldMapHumanTracker> j = Maps.newHashMap(); // Spigot
+    // CraftBukkit start
+    public final CraftMapView mapView;
     public int centerX;
     public int centerZ;
     public byte map;
     public boolean track;
     public byte scale;
     public byte[] colors = new byte[16384];
+    @SuppressWarnings("CanBeFinal")
     public List<WorldMap.WorldMapHumanTracker> h = Lists.newArrayList();
-    public final Map<EntityHuman, WorldMap.WorldMapHumanTracker> j = Maps.newHashMap(); // Spigot
+    @SuppressWarnings("CanBeFinal")
     public Map<UUID, MapIcon> decorations = Maps.newLinkedHashMap(); // Spigot
-
-    // CraftBukkit start
-    public final CraftMapView mapView;
+    @SuppressWarnings("CanBeFinal")
     private CraftServer server;
     private UUID uniqueId = null;
     // CraftBukkit end
@@ -80,11 +82,7 @@ public class WorldMap extends PersistentBase {
         this.centerZ = nbttagcompound.getInt("zCenter");
         this.scale = nbttagcompound.getByte("scale");
         this.scale = (byte) MathHelper.clamp(this.scale, 0, 4);
-        if (nbttagcompound.hasKeyOfType("trackingPosition", 1)) {
-            this.track = nbttagcompound.getBoolean("trackingPosition");
-        } else {
-            this.track = true;
-        }
+        this.track = !nbttagcompound.hasKeyOfType("trackingPosition", 1) || nbttagcompound.getBoolean("trackingPosition");
 
         short short0 = nbttagcompound.getShort("width");
         short short1 = nbttagcompound.getShort("height");
@@ -241,7 +239,7 @@ public class WorldMap extends PersistentBase {
     }
 
     @Nullable
-    public Packet<?> a(ItemStack itemstack, World world, EntityHuman entityhuman) {
+    public Packet<?> a(ItemStack itemstack, @SuppressWarnings("UnusedParameters") World world, EntityHuman entityhuman) {
         WorldMap.WorldMapHumanTracker worldmap_worldmaphumantracker = this.j.get(entityhuman);
 
         return worldmap_worldmaphumantracker == null ? null : worldmap_worldmaphumantracker.a(itemstack);
@@ -251,6 +249,7 @@ public class WorldMap extends PersistentBase {
         super.c();
         Iterator iterator = this.h.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             WorldMap.WorldMapHumanTracker worldmap_worldmaphumantracker = (WorldMap.WorldMapHumanTracker) iterator.next();
 
@@ -274,13 +273,13 @@ public class WorldMap extends PersistentBase {
     public class WorldMapHumanTracker {
 
         public final EntityHuman trackee;
+        public int b;
         private boolean d = true;
         private int e;
         private int f;
         private int g = 127;
         private int h = 127;
         private int i;
-        public int b;
 
         public WorldMapHumanTracker(EntityHuman entityhuman) {
             this.trackee = entityhuman;
@@ -295,6 +294,7 @@ public class WorldMap extends PersistentBase {
             for ( org.bukkit.map.MapCursor cursor : render.cursors) {
 
                 if (cursor.isVisible()) {
+                    //noinspection deprecation
                     icons.add(new MapIcon(cursor.getRawType(), cursor.getX(), cursor.getY(), cursor.getDirection()));
                 }
             }

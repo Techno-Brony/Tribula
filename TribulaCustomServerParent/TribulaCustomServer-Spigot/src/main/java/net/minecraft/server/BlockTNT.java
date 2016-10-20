@@ -8,22 +8,23 @@ public class BlockTNT extends Block {
 
     public BlockTNT() {
         super(Material.TNT);
-        this.w(this.blockStateList.getBlockData().set(BlockTNT.EXPLODE, Boolean.valueOf(false)));
+        this.w(this.blockStateList.getBlockData().set(BlockTNT.EXPLODE, Boolean.FALSE));
         this.a(CreativeModeTab.d);
     }
 
     public void onPlace(World world, BlockPosition blockposition, IBlockData iblockdata) {
         super.onPlace(world, blockposition, iblockdata);
         if (world.isBlockIndirectlyPowered(blockposition)) {
-            this.postBreak(world, blockposition, iblockdata.set(BlockTNT.EXPLODE, Boolean.valueOf(true)));
+            this.postBreak(world, blockposition, iblockdata.set(BlockTNT.EXPLODE, Boolean.TRUE));
             world.setAir(blockposition);
         }
 
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         if (world.isBlockIndirectlyPowered(blockposition)) {
-            this.postBreak(world, blockposition, iblockdata.set(BlockTNT.EXPLODE, Boolean.valueOf(true)));
+            this.postBreak(world, blockposition, iblockdata.set(BlockTNT.EXPLODE, Boolean.TRUE));
             world.setAir(blockposition);
         }
 
@@ -44,7 +45,7 @@ public class BlockTNT extends Block {
 
     public void a(World world, BlockPosition blockposition, IBlockData iblockdata, EntityLiving entityliving) {
         if (!world.isClientSide) {
-            if (iblockdata.get(BlockTNT.EXPLODE).booleanValue()) {
+            if (iblockdata.get(BlockTNT.EXPLODE)) {
                 EntityTNTPrimed entitytntprimed = new EntityTNTPrimed(world, (double) ((float) blockposition.getX() + 0.5F), (double) blockposition.getY(), (double) ((float) blockposition.getZ() + 0.5F), entityliving);
 
                 world.addEntity(entitytntprimed);
@@ -56,7 +57,7 @@ public class BlockTNT extends Block {
 
     public boolean interact(World world, BlockPosition blockposition, IBlockData iblockdata, EntityHuman entityhuman, EnumHand enumhand, @Nullable ItemStack itemstack, EnumDirection enumdirection, float f, float f1, float f2) {
         if (itemstack != null && (itemstack.getItem() == Items.FLINT_AND_STEEL || itemstack.getItem() == Items.FIRE_CHARGE)) {
-            this.a(world, blockposition, iblockdata.set(BlockTNT.EXPLODE, Boolean.valueOf(true)), (EntityLiving) entityhuman);
+            this.a(world, blockposition, iblockdata.set(BlockTNT.EXPLODE, Boolean.TRUE), (EntityLiving) entityhuman);
             world.setTypeAndData(blockposition, Blocks.AIR.getBlockData(), 11);
             if (itemstack.getItem() == Items.FLINT_AND_STEEL) {
                 itemstack.damage(1, entityhuman);
@@ -80,7 +81,7 @@ public class BlockTNT extends Block {
                     return;
                 }
                 // CraftBukkit end
-                this.a(world, blockposition, world.getType(blockposition).set(BlockTNT.EXPLODE, Boolean.valueOf(true)), entityarrow.shooter instanceof EntityLiving ? (EntityLiving) entityarrow.shooter : null);
+                this.a(world, blockposition, world.getType(blockposition).set(BlockTNT.EXPLODE, Boolean.TRUE), entityarrow.shooter instanceof EntityLiving ? (EntityLiving) entityarrow.shooter : null);
                 world.setAir(blockposition);
             }
         }
@@ -91,12 +92,13 @@ public class BlockTNT extends Block {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
-        return this.getBlockData().set(BlockTNT.EXPLODE, Boolean.valueOf((i & 1) > 0));
+        return this.getBlockData().set(BlockTNT.EXPLODE, (i & 1) > 0);
     }
 
     public int toLegacyData(IBlockData iblockdata) {
-        return iblockdata.get(BlockTNT.EXPLODE).booleanValue() ? 1 : 0;
+        return iblockdata.get(BlockTNT.EXPLODE) ? 1 : 0;
     }
 
     protected BlockStateList getStateList() {

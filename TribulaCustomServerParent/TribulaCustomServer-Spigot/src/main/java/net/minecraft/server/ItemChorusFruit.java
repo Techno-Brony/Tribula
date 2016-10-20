@@ -1,14 +1,17 @@
 package net.minecraft.server;
 
-import javax.annotation.Nullable;
-// CraftBukkit start
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent;
+
+import javax.annotation.Nullable;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class ItemChorusFruit extends ItemFood {
 
+    @SuppressWarnings("unused")
     public ItemChorusFruit(int i, float f) {
         super(i, f, false);
     }

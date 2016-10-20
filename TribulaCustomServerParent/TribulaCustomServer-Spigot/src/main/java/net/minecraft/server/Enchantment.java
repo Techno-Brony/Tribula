@@ -1,16 +1,25 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Lists;
-import java.util.ArrayList;
+
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 
 public abstract class Enchantment {
 
+    @SuppressWarnings("unchecked")
     public static final RegistryMaterials<MinecraftKey, Enchantment> enchantments = new RegistryMaterials();
     private final EnumItemSlot[] a;
     private final Enchantment.Rarity e;
+    @SuppressWarnings("CanBeFinal")
     public EnchantmentSlotType itemTarget;
     protected String d;
+
+    protected Enchantment(Enchantment.Rarity enchantment_rarity, EnchantmentSlotType enchantmentslottype, EnumItemSlot[] aenumitemslot) {
+        this.e = enchantment_rarity;
+        this.itemTarget = enchantmentslottype;
+        this.a = aenumitemslot;
+    }
 
     @Nullable
     public static Enchantment c(int i) {
@@ -21,92 +30,10 @@ public abstract class Enchantment {
         return Enchantment.enchantments.a(enchantment); // CraftBukkit - fix decompile error
     }
 
+    @SuppressWarnings("unused")
     @Nullable
     public static Enchantment b(String s) {
         return Enchantment.enchantments.get(new MinecraftKey(s));
-    }
-
-    protected Enchantment(Enchantment.Rarity enchantment_rarity, EnchantmentSlotType enchantmentslottype, EnumItemSlot[] aenumitemslot) {
-        this.e = enchantment_rarity;
-        this.itemTarget = enchantmentslottype;
-        this.a = aenumitemslot;
-    }
-
-    @Nullable
-    public Iterable<ItemStack> a(EntityLiving entityliving) {
-        ArrayList arraylist = Lists.newArrayList();
-        EnumItemSlot[] aenumitemslot = this.a;
-        int i = aenumitemslot.length;
-
-        for (int j = 0; j < i; ++j) {
-            EnumItemSlot enumitemslot = aenumitemslot[j];
-            ItemStack itemstack = entityliving.getEquipment(enumitemslot);
-
-            if (itemstack != null) {
-                arraylist.add(itemstack);
-            }
-        }
-
-        return arraylist.size() > 0 ? arraylist : null;
-    }
-
-    public Enchantment.Rarity c() {
-        return this.e;
-    }
-
-    public int getStartLevel() {
-        return 1;
-    }
-
-    public int getMaxLevel() {
-        return 1;
-    }
-
-    public int a(int i) {
-        return 1 + i * 10;
-    }
-
-    public int b(int i) {
-        return this.a(i) + 5;
-    }
-
-    public int a(int i, DamageSource damagesource) {
-        return 0;
-    }
-
-    public float a(int i, EnumMonsterType enummonstertype) {
-        return 0.0F;
-    }
-
-    public boolean a(Enchantment enchantment) {
-        return this != enchantment;
-    }
-
-    public Enchantment c(String s) {
-        this.d = s;
-        return this;
-    }
-
-    public String a() {
-        return "enchantment." + this.d;
-    }
-
-    public String d(int i) {
-        String s = LocaleI18n.get(this.a());
-
-        return i == 1 && this.getMaxLevel() == 1 ? s : s + " " + LocaleI18n.get("enchantment.level." + i);
-    }
-
-    public boolean canEnchant(ItemStack itemstack) {
-        return this.itemTarget.canEnchant(itemstack.getItem());
-    }
-
-    public void a(EntityLiving entityliving, Entity entity, int i) {}
-
-    public void b(EntityLiving entityliving, Entity entity, int i) {}
-
-    public boolean e() {
-        return false;
     }
 
     public static void f() {
@@ -146,16 +73,107 @@ public abstract class Enchantment {
         // CraftBukkit end
     }
 
+    @SuppressWarnings("unused")
+    @Nullable
+    public Iterable<ItemStack> a(EntityLiving entityliving) {
+        ArrayList arraylist = Lists.newArrayList();
+        EnumItemSlot[] aenumitemslot = this.a;
+        int i = aenumitemslot.length;
+
+        for (EnumItemSlot enumitemslot : aenumitemslot) {
+            ItemStack itemstack = entityliving.getEquipment(enumitemslot);
+
+            if (itemstack != null) {
+                //noinspection unchecked
+                arraylist.add(itemstack);
+            }
+        }
+
+        //noinspection unchecked
+        return arraylist.size() > 0 ? arraylist : null;
+    }
+
+    public Enchantment.Rarity c() {
+        return this.e;
+    }
+
+    @SuppressWarnings("SameReturnValue")
+    public int getStartLevel() {
+        return 1;
+    }
+
+    public int getMaxLevel() {
+        return 1;
+    }
+
+    public int a(int i) {
+        return 1 + i * 10;
+    }
+
+    @SuppressWarnings("unused")
+    public int b(int i) {
+        return this.a(i) + 5;
+    }
+
+    @SuppressWarnings({"unused", "SameReturnValue"})
+    public int a(int i, DamageSource damagesource) {
+        return 0;
+    }
+
+    @SuppressWarnings({"unused", "SameReturnValue"})
+    public float a(int i, EnumMonsterType enummonstertype) {
+        return 0.0F;
+    }
+
+    public boolean a(Enchantment enchantment) {
+        return this != enchantment;
+    }
+
+    @SuppressWarnings("UnusedReturnValue")
+    public Enchantment c(String s) {
+        this.d = s;
+        return this;
+    }
+
+    public String a() {
+        return "enchantment." + this.d;
+    }
+
+    @SuppressWarnings("unused")
+    public String d(int i) {
+        //noinspection deprecation,deprecation
+        String s = LocaleI18n.get(this.a());
+
+        //noinspection deprecation,deprecation
+        return i == 1 && this.getMaxLevel() == 1 ? s : s + " " + LocaleI18n.get("enchantment.level." + i);
+    }
+
+    public boolean canEnchant(ItemStack itemstack) {
+        return this.itemTarget.canEnchant(itemstack.getItem());
+    }
+
+    @SuppressWarnings({"unused", "EmptyMethod"})
+    public void a(EntityLiving entityliving, Entity entity, int i) {}
+
+    @SuppressWarnings("unused")
+    public void b(EntityLiving entityliving, Entity entity, int i) {}
+
+    public boolean e() {
+        return false;
+    }
+
     public enum Rarity {
 
         COMMON(10), UNCOMMON(5), RARE(2), VERY_RARE(1);
 
         private final int e;
 
+        @SuppressWarnings("unused")
         Rarity(int i) {
             this.e = i;
         }
 
+        @SuppressWarnings("unused")
         public int a() {
             return this.e;
         }

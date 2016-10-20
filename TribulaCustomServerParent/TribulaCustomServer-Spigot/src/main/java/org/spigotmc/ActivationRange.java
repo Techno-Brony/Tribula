@@ -1,35 +1,9 @@
 package org.spigotmc;
 
-import java.util.List;
-import java.util.Set;
-import net.minecraft.server.AxisAlignedBB;
-import net.minecraft.server.Chunk;
-import net.minecraft.server.Entity;
-import net.minecraft.server.EntityAmbient;
-import net.minecraft.server.EntityAnimal;
-import net.minecraft.server.EntityArrow;
-import net.minecraft.server.EntityComplexPart;
-import net.minecraft.server.EntityCreature;
-import net.minecraft.server.EntityCreeper;
-import net.minecraft.server.EntityEnderCrystal;
-import net.minecraft.server.EntityEnderDragon;
-import net.minecraft.server.EntityFireball;
-import net.minecraft.server.EntityFireworks;
-import net.minecraft.server.EntityHuman;
-import net.minecraft.server.EntityLiving;
-import net.minecraft.server.EntityMonster;
-import net.minecraft.server.EntityProjectile;
-import net.minecraft.server.EntitySheep;
-import net.minecraft.server.EntitySlice;
-import net.minecraft.server.EntitySlime;
-import net.minecraft.server.EntityTNTPrimed;
-import net.minecraft.server.EntityVillager;
-import net.minecraft.server.EntityWeather;
-import net.minecraft.server.EntityWither;
-import net.minecraft.server.MathHelper;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.World;
+import net.minecraft.server.*;
 import org.bukkit.craftbukkit.SpigotTimings;
+
+import java.util.List;
 
 public class ActivationRange
 {
@@ -43,7 +17,6 @@ public class ActivationRange
      * Initializes an entities type on construction to specify what group this
      * entity is in for activation ranges.
      *
-     * @param entity
      * @return group id
      */
     public static byte initializeEntityActivationType(Entity entity)
@@ -63,8 +36,6 @@ public class ActivationRange
     /**
      * These entities are excluded from Activation range checks.
      *
-     * @param entity
-     * @param world
      * @return boolean If it should always tick.
      */
     public static boolean initializeEntityActivationState(Entity entity, SpigotWorldConfig config)
@@ -89,7 +60,6 @@ public class ActivationRange
      * Find what entities are in range of the players in the world and set
      * active if in range.
      *
-     * @param world
      */
     public static void activateEntities(World world)
     {
@@ -133,7 +103,6 @@ public class ActivationRange
     /**
      * Checks for the activation state of all entities in this chunk.
      *
-     * @param chunk
      */
     private static void activateChunkEntities(Chunk chunk)
     {
@@ -178,8 +147,6 @@ public class ActivationRange
      * If an entity is not in range, do some more checks to see if we should
      * give it a shot.
      *
-     * @param entity
-     * @return
      */
     public static boolean checkEntityImmunities(Entity entity)
     {
@@ -236,8 +203,6 @@ public class ActivationRange
     /**
      * Checks if the entity is active for this tick.
      *
-     * @param entity
-     * @return
      */
     public static boolean checkIfActive(Entity entity)
     {
@@ -273,7 +238,7 @@ public class ActivationRange
         int z = MathHelper.floor( entity.locZ );
         // Make sure not on edge of unloaded chunk
         Chunk chunk = entity.world.getChunkIfLoaded( x >> 4, z >> 4 );
-        if ( isActive && !( chunk != null && chunk.areNeighborsLoaded( 1 ) ) )
+        if ( isActive && !( chunk != null && !chunk.areNeighborsLoaded( 1 )) )
         {
             isActive = false;
         }

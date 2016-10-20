@@ -4,9 +4,38 @@ public class ItemDoor extends Item {
 
     private final Block a;
 
+    @SuppressWarnings("unused")
     public ItemDoor(Block block) {
         this.a = block;
         this.a(CreativeModeTab.d);
+    }
+
+    public static void a(World world, BlockPosition blockposition, EnumDirection enumdirection, Block block, boolean flag) {
+        BlockPosition blockposition1 = blockposition.shift(enumdirection.e());
+        BlockPosition blockposition2 = blockposition.shift(enumdirection.f());
+        int i = (world.getType(blockposition2).l() ? 1 : 0) + (world.getType(blockposition2.up()).l() ? 1 : 0);
+        int j = (world.getType(blockposition1).l() ? 1 : 0) + (world.getType(blockposition1.up()).l() ? 1 : 0);
+        boolean flag1 = world.getType(blockposition2).getBlock() == block || world.getType(blockposition2.up()).getBlock() == block;
+        boolean flag2 = world.getType(blockposition1).getBlock() == block || world.getType(blockposition1.up()).getBlock() == block;
+
+        if ((!flag1 || flag2) && j <= i) {
+            if (flag2 && !flag1 || j < i) {
+                flag = false;
+            }
+        } else {
+            flag = true;
+        }
+
+        BlockPosition blockposition3 = blockposition.up();
+        boolean flag3 = world.isBlockIndirectlyPowered(blockposition) || world.isBlockIndirectlyPowered(blockposition3);
+        IBlockData iblockdata = block.getBlockData().set(BlockDoor.FACING, enumdirection).set(BlockDoor.HINGE, flag ? BlockDoor.EnumDoorHinge.RIGHT : BlockDoor.EnumDoorHinge.LEFT).set(BlockDoor.POWERED, flag3).set(BlockDoor.OPEN, flag3);
+
+        // Spigot start - update physics after the block multi place event
+        world.setTypeAndData(blockposition, iblockdata.set(BlockDoor.HALF, BlockDoor.EnumDoorHalf.LOWER), 3);
+        world.setTypeAndData(blockposition3, iblockdata.set(BlockDoor.HALF, BlockDoor.EnumDoorHalf.UPPER), 3);
+        // world.applyPhysics(blockposition, block);
+        // world.applyPhysics(blockposition3, block);
+        // Spigot end
     }
 
     public EnumInteractionResult a(ItemStack itemstack, EntityHuman entityhuman, World world, BlockPosition blockposition, EnumHand enumhand, EnumDirection enumdirection, float f, float f1, float f2) {
@@ -36,33 +65,5 @@ public class ItemDoor extends Item {
                 return EnumInteractionResult.FAIL;
             }
         }
-    }
-
-    public static void a(World world, BlockPosition blockposition, EnumDirection enumdirection, Block block, boolean flag) {
-        BlockPosition blockposition1 = blockposition.shift(enumdirection.e());
-        BlockPosition blockposition2 = blockposition.shift(enumdirection.f());
-        int i = (world.getType(blockposition2).l() ? 1 : 0) + (world.getType(blockposition2.up()).l() ? 1 : 0);
-        int j = (world.getType(blockposition1).l() ? 1 : 0) + (world.getType(blockposition1.up()).l() ? 1 : 0);
-        boolean flag1 = world.getType(blockposition2).getBlock() == block || world.getType(blockposition2.up()).getBlock() == block;
-        boolean flag2 = world.getType(blockposition1).getBlock() == block || world.getType(blockposition1.up()).getBlock() == block;
-
-        if ((!flag1 || flag2) && j <= i) {
-            if (flag2 && !flag1 || j < i) {
-                flag = false;
-            }
-        } else {
-            flag = true;
-        }
-
-        BlockPosition blockposition3 = blockposition.up();
-        boolean flag3 = world.isBlockIndirectlyPowered(blockposition) || world.isBlockIndirectlyPowered(blockposition3);
-        IBlockData iblockdata = block.getBlockData().set(BlockDoor.FACING, enumdirection).set(BlockDoor.HINGE, flag ? BlockDoor.EnumDoorHinge.RIGHT : BlockDoor.EnumDoorHinge.LEFT).set(BlockDoor.POWERED, Boolean.valueOf(flag3)).set(BlockDoor.OPEN, Boolean.valueOf(flag3));
-
-        // Spigot start - update physics after the block multi place event
-        world.setTypeAndData(blockposition, iblockdata.set(BlockDoor.HALF, BlockDoor.EnumDoorHalf.LOWER), 3);
-        world.setTypeAndData(blockposition3, iblockdata.set(BlockDoor.HALF, BlockDoor.EnumDoorHalf.UPPER), 3);
-        // world.applyPhysics(blockposition, block);
-        // world.applyPhysics(blockposition3, block);
-        // Spigot end
     }
 }

@@ -1,8 +1,8 @@
 package net.minecraft.server;
 
+import javax.annotation.Nullable;
 import java.util.Iterator;
 import java.util.List;
-import javax.annotation.Nullable;
 
 public class VillageSiege {
 
@@ -67,6 +67,7 @@ public class VillageSiege {
         List list = this.a.players;
         Iterator iterator = list.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             EntityHuman entityhuman = (EntityHuman) iterator.next();
 
@@ -88,6 +89,7 @@ public class VillageSiege {
                             flag = false;
                             Iterator iterator1 = this.a.ai().getVillages().iterator();
 
+                            //noinspection WhileLoopReplaceableByForEach
                             while (iterator1.hasNext()) {
                                 Village village = (Village) iterator1.next();
 
@@ -123,6 +125,7 @@ public class VillageSiege {
         return false;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     private boolean c() {
         Vec3D vec3d = this.a(new BlockPosition(this.g, this.h, this.i));
 

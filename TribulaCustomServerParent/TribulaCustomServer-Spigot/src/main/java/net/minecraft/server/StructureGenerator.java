@@ -2,15 +2,18 @@ package net.minecraft.server;
 
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
 public abstract class StructureGenerator extends WorldGenBase {
 
-    private PersistentStructure a;
+    @SuppressWarnings({"unchecked", "CanBeFinal"})
     protected Long2ObjectMap<StructureStart> c = new Long2ObjectOpenHashMap(1024);
+    private PersistentStructure a;
 
+    @SuppressWarnings("unused")
     public StructureGenerator() {}
 
     public abstract String a();
@@ -34,8 +37,9 @@ public abstract class StructureGenerator extends WorldGenBase {
                 CrashReport crashreport = CrashReport.a(throwable, "Exception preparing structure feature");
                 CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Feature being prepared");
 
+                //noinspection unchecked
                 crashreportsystemdetails.a("Is feature chunk", new CrashReportCallable() {
-                    public String a() throws Exception {
+                    public String a() {
                         return StructureGenerator.this.a(i, j) ? "True" : "False";
                     }
 
@@ -43,9 +47,10 @@ public abstract class StructureGenerator extends WorldGenBase {
                         return this.a();
                     }
                 });
-                crashreportsystemdetails.a("Chunk location", String.format("%d,%d", Integer.valueOf(i), Integer.valueOf(j)));
+                crashreportsystemdetails.a("Chunk location", String.format("%d,%d", i, j));
+                //noinspection unchecked
                 crashreportsystemdetails.a("Chunk pos hash", new CrashReportCallable() {
-                    public String a() throws Exception {
+                    public String a() {
                         return String.valueOf(ChunkCoordIntPair.a(i, j));
                     }
 
@@ -53,8 +58,9 @@ public abstract class StructureGenerator extends WorldGenBase {
                         return this.a();
                     }
                 });
+                //noinspection unchecked
                 crashreportsystemdetails.a("Structure type", new CrashReportCallable() {
-                    public String a() throws Exception {
+                    public String a() {
                         return StructureGenerator.this.getClass().getCanonicalName();
                     }
 
@@ -74,6 +80,7 @@ public abstract class StructureGenerator extends WorldGenBase {
         boolean flag = false;
         Iterator iterator = this.c.values().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             StructureStart structurestart = (StructureStart) iterator.next();
 
@@ -88,6 +95,7 @@ public abstract class StructureGenerator extends WorldGenBase {
         return flag;
     }
 
+    @SuppressWarnings("unused")
     public boolean b(BlockPosition blockposition) {
         this.a(this.g);
         return this.c(blockposition) != null;
@@ -96,12 +104,14 @@ public abstract class StructureGenerator extends WorldGenBase {
     protected synchronized StructureStart c(BlockPosition blockposition) { // CraftBukkit - synchronized
         Iterator iterator = this.c.values().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             StructureStart structurestart = (StructureStart) iterator.next();
 
             if (structurestart.a() && structurestart.b().b(blockposition)) {
                 Iterator iterator1 = structurestart.c().iterator();
 
+                //noinspection WhileLoopReplaceableByForEach
                 while (iterator1.hasNext()) {
                     StructurePiece structurepiece = (StructurePiece) iterator1.next();
 
@@ -132,6 +142,7 @@ public abstract class StructureGenerator extends WorldGenBase {
         return true;
     }
 
+    @SuppressWarnings("unused")
     public synchronized BlockPosition getNearestGeneratedFeature(World world, BlockPosition blockposition) { // CraftBukkit - synchronized
         this.g = world;
         this.a(world);
@@ -174,6 +185,7 @@ public abstract class StructureGenerator extends WorldGenBase {
                 BlockPosition blockposition3 = null;
                 Iterator iterator1 = list.iterator();
 
+                //noinspection WhileLoopReplaceableByForEach
                 while (iterator1.hasNext()) {
                     blockposition2 = (BlockPosition) iterator1.next();
                     d1 = blockposition2.n(blockposition);
@@ -190,6 +202,7 @@ public abstract class StructureGenerator extends WorldGenBase {
         }
     }
 
+    @SuppressWarnings("SameReturnValue")
     protected List<BlockPosition> G_() {
         return null;
     }
@@ -210,6 +223,7 @@ public abstract class StructureGenerator extends WorldGenBase {
                 NBTTagCompound nbttagcompound = this.a.a();
                 Iterator iterator = nbttagcompound.c().iterator();
 
+                //noinspection WhileLoopReplaceableByForEach
                 while (iterator.hasNext()) {
                     String s = (String) iterator.next();
                     NBTBase nbtbase = nbttagcompound.get(s);

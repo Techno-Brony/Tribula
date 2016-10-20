@@ -1,8 +1,8 @@
 package net.minecraft.server;
 
-import java.util.Random;
+import org.bukkit.craftbukkit.event.CraftEventFactory;
 
-import org.bukkit.craftbukkit.event.CraftEventFactory; // CraftBukkit
+import java.util.Random;
 
 public class BlockCocoa extends BlockFacingHorizontal implements IBlockFragilePlantElement {
 
@@ -14,19 +14,19 @@ public class BlockCocoa extends BlockFacingHorizontal implements IBlockFragilePl
 
     public BlockCocoa() {
         super(Material.PLANT);
-        this.w(this.blockStateList.getBlockData().set(BlockCocoa.FACING, EnumDirection.NORTH).set(BlockCocoa.AGE, Integer.valueOf(0)));
+        this.w(this.blockStateList.getBlockData().set(BlockCocoa.FACING, EnumDirection.NORTH).set(BlockCocoa.AGE, 0));
         this.a(true);
     }
 
     public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
-        if (!this.e(world, blockposition, iblockdata)) {
+        if (this.e(world, blockposition, iblockdata)) {
             this.f(world, blockposition, iblockdata);
         } else if (world.random.nextInt(Math.max(1, (int) (100.0F / world.spigotConfig.cocoaModifier) * 5)) == 0) { // Spigot
-            int i = iblockdata.get(BlockCocoa.AGE).intValue();
+            int i = iblockdata.get(BlockCocoa.AGE);
 
             if (i < 2) {
                 // CraftBukkit start
-                IBlockData data = iblockdata.set(AGE, Integer.valueOf(i + 1));
+                IBlockData data = iblockdata.set(AGE, i + 1);
                 CraftEventFactory.handleBlockGrowEvent(world, blockposition.getX(), blockposition.getY(), blockposition.getZ(), this, toLegacyData(data));
                 // CraftBukkit end
             }
@@ -38,19 +38,22 @@ public class BlockCocoa extends BlockFacingHorizontal implements IBlockFragilePl
         blockposition = blockposition.shift(iblockdata.get(BlockCocoa.FACING));
         IBlockData iblockdata1 = world.getType(blockposition);
 
-        return iblockdata1.getBlock() == Blocks.LOG && iblockdata1.get(BlockLog1.VARIANT) == BlockWood.EnumLogVariant.JUNGLE;
+        return iblockdata1.getBlock() != Blocks.LOG || iblockdata1.get(BlockLog1.VARIANT) != BlockWood.EnumLogVariant.JUNGLE;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
-        int i = iblockdata.get(BlockCocoa.AGE).intValue();
+        int i = iblockdata.get(BlockCocoa.AGE);
 
         switch (BlockCocoa.SyntheticClass_1.a[iblockdata.get(BlockCocoa.FACING).ordinal()]) {
         case 1:
@@ -68,10 +71,12 @@ public class BlockCocoa extends BlockFacingHorizontal implements IBlockFragilePl
         }
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockRotation enumblockrotation) {
         return iblockdata.set(BlockCocoa.FACING, enumblockrotation.a(iblockdata.get(BlockCocoa.FACING)));
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockMirror enumblockmirror) {
         return iblockdata.a(enumblockmirror.a(iblockdata.get(BlockCocoa.FACING)));
     }
@@ -87,11 +92,12 @@ public class BlockCocoa extends BlockFacingHorizontal implements IBlockFragilePl
             enumdirection = EnumDirection.NORTH;
         }
 
-        return this.getBlockData().set(BlockCocoa.FACING, enumdirection.opposite()).set(BlockCocoa.AGE, Integer.valueOf(0));
+        return this.getBlockData().set(BlockCocoa.FACING, enumdirection.opposite()).set(BlockCocoa.AGE, 0);
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
-        if (!this.e(world, blockposition, iblockdata)) {
+        if (this.e(world, blockposition, iblockdata)) {
             this.f(world, blockposition, iblockdata);
         }
 
@@ -103,7 +109,7 @@ public class BlockCocoa extends BlockFacingHorizontal implements IBlockFragilePl
     }
 
     public void dropNaturally(World world, BlockPosition blockposition, IBlockData iblockdata, float f, int i) {
-        int j = iblockdata.get(BlockCocoa.AGE).intValue();
+        int j = iblockdata.get(BlockCocoa.AGE);
         byte b0 = 1;
 
         if (j >= 2) {
@@ -121,7 +127,7 @@ public class BlockCocoa extends BlockFacingHorizontal implements IBlockFragilePl
     }
 
     public boolean a(World world, BlockPosition blockposition, IBlockData iblockdata, boolean flag) {
-        return iblockdata.get(BlockCocoa.AGE).intValue() < 2;
+        return iblockdata.get(BlockCocoa.AGE) < 2;
     }
 
     public boolean a(World world, Random random, BlockPosition blockposition, IBlockData iblockdata) {
@@ -130,20 +136,21 @@ public class BlockCocoa extends BlockFacingHorizontal implements IBlockFragilePl
 
     public void b(World world, Random random, BlockPosition blockposition, IBlockData iblockdata) {
         // CraftBukkit start
-        IBlockData data = iblockdata.set(AGE, Integer.valueOf(iblockdata.get(AGE).intValue() + 1));
+        IBlockData data = iblockdata.set(AGE, iblockdata.get(AGE) + 1);
         CraftEventFactory.handleBlockGrowEvent(world, blockposition.getX(), blockposition.getY(), blockposition.getZ(), this, toLegacyData(data));
         // CraftBukkit end
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
-        return this.getBlockData().set(BlockCocoa.FACING, EnumDirection.fromType2(i)).set(BlockCocoa.AGE, Integer.valueOf((i & 15) >> 2));
+        return this.getBlockData().set(BlockCocoa.FACING, EnumDirection.fromType2(i)).set(BlockCocoa.AGE, (i & 15) >> 2);
     }
 
     public int toLegacyData(IBlockData iblockdata) {
         byte b0 = 0;
         int i = b0 | iblockdata.get(BlockCocoa.FACING).get2DRotationValue();
 
-        i |= iblockdata.get(BlockCocoa.AGE).intValue() << 2;
+        i |= iblockdata.get(BlockCocoa.AGE) << 2;
         return i;
     }
 
@@ -151,29 +158,31 @@ public class BlockCocoa extends BlockFacingHorizontal implements IBlockFragilePl
         return new BlockStateList(this, BlockCocoa.FACING, BlockCocoa.AGE);
     }
 
+    @SuppressWarnings("unused")
     static class SyntheticClass_1 {
 
+        @SuppressWarnings("unused")
         static final int[] a = new int[EnumDirection.values().length];
 
         static {
             try {
                 BlockCocoa.SyntheticClass_1.a[EnumDirection.SOUTH.ordinal()] = 1;
-            } catch (NoSuchFieldError nosuchfielderror) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockCocoa.SyntheticClass_1.a[EnumDirection.NORTH.ordinal()] = 2;
-            } catch (NoSuchFieldError nosuchfielderror1) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockCocoa.SyntheticClass_1.a[EnumDirection.WEST.ordinal()] = 3;
-            } catch (NoSuchFieldError nosuchfielderror2) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockCocoa.SyntheticClass_1.a[EnumDirection.EAST.ordinal()] = 4;
-            } catch (NoSuchFieldError nosuchfielderror3) {
+            } catch (NoSuchFieldError ignored) {
             }
 
         }

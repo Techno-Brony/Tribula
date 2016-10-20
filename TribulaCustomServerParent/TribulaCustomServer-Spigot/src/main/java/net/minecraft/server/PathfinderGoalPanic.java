@@ -3,6 +3,7 @@ package net.minecraft.server;
 public class PathfinderGoalPanic extends PathfinderGoal {
 
     private final EntityCreature b;
+    @SuppressWarnings("CanBeFinal")
     protected double a;
     private double c;
     private double d;
@@ -56,7 +57,7 @@ public class PathfinderGoalPanic extends PathfinderGoal {
         return !this.b.getNavigation().n();
     }
 
-    private BlockPosition a(World world, Entity entity, int i, int j) {
+    private BlockPosition a(World world, Entity entity, @SuppressWarnings("SameParameterValue") int i, @SuppressWarnings("SameParameterValue") int j) {
         BlockPosition blockposition = new BlockPosition(entity);
         BlockPosition.MutableBlockPosition blockposition_mutableblockposition = new BlockPosition.MutableBlockPosition();
         int k = blockposition.getX();

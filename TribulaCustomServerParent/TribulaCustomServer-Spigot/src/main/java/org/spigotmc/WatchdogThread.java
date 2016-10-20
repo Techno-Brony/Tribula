@@ -1,12 +1,13 @@
 package org.spigotmc;
 
+import net.minecraft.server.MinecraftServer;
+import org.bukkit.Bukkit;
+
 import java.lang.management.ManagementFactory;
 import java.lang.management.MonitorInfo;
 import java.lang.management.ThreadInfo;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import net.minecraft.server.MinecraftServer;
-import org.bukkit.Bukkit;
 
 public class WatchdogThread extends Thread
 {
@@ -46,6 +47,31 @@ public class WatchdogThread extends Thread
         }
     }
 
+    private static void dumpThread(ThreadInfo thread, Logger log)
+    {
+        log.log( Level.SEVERE, "------------------------------" );
+        //
+        log.log( Level.SEVERE, "Current Thread: " + thread.getThreadName() );
+        log.log( Level.SEVERE, "\tPID: " + thread.getThreadId()
+                + " | Suspended: " + thread.isSuspended()
+                + " | Native: " + thread.isInNative()
+                + " | State: " + thread.getThreadState() );
+        if ( thread.getLockedMonitors().length != 0 )
+        {
+            log.log( Level.SEVERE, "\tThread is waiting on monitor(s):" );
+            for ( MonitorInfo monitor : thread.getLockedMonitors() )
+            {
+                log.log( Level.SEVERE, "\t\tLocked on:" + monitor.getLockedStackFrame() );
+            }
+        }
+        log.log( Level.SEVERE, "\tStack:" );
+        //
+        for ( StackTraceElement stack : thread.getStackTrace() )
+        {
+            log.log( Level.SEVERE, "\t\t" + stack );
+        }
+    }
+
     @Override
     public void run()
     {
@@ -69,6 +95,7 @@ public class WatchdogThread extends Thread
                 //
                 log.log( Level.SEVERE, "------------------------------" );
                 log.log( Level.SEVERE, "Server thread dump (Look for plugins here before reporting to Spigot!):" );
+                //noinspection deprecation
                 dumpThread( ManagementFactory.getThreadMXBean().getThreadInfo( MinecraftServer.getServer().primaryThread.getId(), Integer.MAX_VALUE ), log );
                 log.log( Level.SEVERE, "------------------------------" );
                 //
@@ -94,31 +121,6 @@ public class WatchdogThread extends Thread
             {
                 interrupt();
             }
-        }
-    }
-
-    private static void dumpThread(ThreadInfo thread, Logger log)
-    {
-        log.log( Level.SEVERE, "------------------------------" );
-        //
-        log.log( Level.SEVERE, "Current Thread: " + thread.getThreadName() );
-        log.log( Level.SEVERE, "\tPID: " + thread.getThreadId()
-                + " | Suspended: " + thread.isSuspended()
-                + " | Native: " + thread.isInNative()
-                + " | State: " + thread.getThreadState() );
-        if ( thread.getLockedMonitors().length != 0 )
-        {
-            log.log( Level.SEVERE, "\tThread is waiting on monitor(s):" );
-            for ( MonitorInfo monitor : thread.getLockedMonitors() )
-            {
-                log.log( Level.SEVERE, "\t\tLocked on:" + monitor.getLockedStackFrame() );
-            }
-        }
-        log.log( Level.SEVERE, "\tStack:" );
-        //
-        for ( StackTraceElement stack : thread.getStackTrace() )
-        {
-            log.log( Level.SEVERE, "\t\t" + stack );
         }
     }
 }

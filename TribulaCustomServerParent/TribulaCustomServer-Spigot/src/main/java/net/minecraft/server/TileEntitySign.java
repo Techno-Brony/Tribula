@@ -1,14 +1,18 @@
 package net.minecraft.server;
 
+import org.bukkit.craftbukkit.command.CraftBlockCommandSender;
+import org.bukkit.craftbukkit.command.ProxiedNativeCommandSender;
+
 import javax.annotation.Nullable;
 
 public class TileEntitySign extends TileEntity {
 
     public final IChatBaseComponent[] lines = new IChatBaseComponent[] { new ChatComponentText(""), new ChatComponentText(""), new ChatComponentText(""), new ChatComponentText("")};
+    private final CommandObjectiveExecutor i = new CommandObjectiveExecutor();
+    @SuppressWarnings("unused")
     public int f = -1;
     public boolean isEditable = true;
     private EntityHuman h;
-    private final CommandObjectiveExecutor i = new CommandObjectiveExecutor();
 
     public TileEntitySign() {}
 
@@ -139,42 +143,53 @@ public class TileEntitySign extends TileEntity {
         return this.h;
     }
 
+    @SuppressWarnings("unused")
     public boolean b(final EntityHuman entityhuman) {
         ICommandListener icommandlistener = new ICommandListener() {
+            @SuppressWarnings("unused")
             public String getName() {
                 return entityhuman.getName();
             }
 
+            @SuppressWarnings("unused")
             public IChatBaseComponent getScoreboardDisplayName() {
                 return entityhuman.getScoreboardDisplayName();
             }
 
+            @SuppressWarnings("unused")
             public void sendMessage(IChatBaseComponent ichatbasecomponent) {}
 
+            @SuppressWarnings("unused")
             public boolean a(int i, String s) {
                 return i <= 2;
             }
 
+            @SuppressWarnings("unused")
             public BlockPosition getChunkCoordinates() {
                 return TileEntitySign.this.position;
             }
 
+            @SuppressWarnings("unused")
             public Vec3D d() {
                 return new Vec3D((double) TileEntitySign.this.position.getX() + 0.5D, (double) TileEntitySign.this.position.getY() + 0.5D, (double) TileEntitySign.this.position.getZ() + 0.5D);
             }
 
+            @SuppressWarnings("unused")
             public World getWorld() {
                 return entityhuman.getWorld();
             }
 
+            @SuppressWarnings("unused")
             public Entity f() {
                 return entityhuman;
             }
 
+            @SuppressWarnings("unused")
             public boolean getSendCommandFeedback() {
                 return false;
             }
 
+            @SuppressWarnings("unused")
             public void a(CommandObjectiveExecutor.EnumCommandResult commandobjectiveexecutor_enumcommandresult, int i) {
                 if (TileEntitySign.this.world != null && !TileEntitySign.this.world.isClientSide) {
                     TileEntitySign.this.i.a(TileEntitySign.this.world.getMinecraftServer(), this, commandobjectiveexecutor_enumcommandresult, i);
@@ -182,6 +197,7 @@ public class TileEntitySign extends TileEntity {
 
             }
 
+            @SuppressWarnings("unused")
             public MinecraftServer h() {
                 return entityhuman.h();
             }
@@ -189,8 +205,7 @@ public class TileEntitySign extends TileEntity {
         IChatBaseComponent[] aichatbasecomponent = this.lines;
         int i = aichatbasecomponent.length;
 
-        for (int j = 0; j < i; ++j) {
-            IChatBaseComponent ichatbasecomponent = aichatbasecomponent[j];
+        for (IChatBaseComponent ichatbasecomponent : aichatbasecomponent) {
             ChatModifier chatmodifier = ichatbasecomponent == null ? null : ichatbasecomponent.getChatModifier();
 
             if (chatmodifier != null && chatmodifier.h() != null) {
@@ -199,9 +214,9 @@ public class TileEntitySign extends TileEntity {
                 if (chatclickable.a() == ChatClickable.EnumClickAction.RUN_COMMAND) {
                     // CraftBukkit start
                     // entityhuman.h().getCommandHandler().a(icommandlistener, chatclickable.b());
-                    CommandBlockListenerAbstract.executeCommand(icommandlistener, new org.bukkit.craftbukkit.command.ProxiedNativeCommandSender(
+                    CommandBlockListenerAbstract.executeCommand(icommandlistener, new ProxiedNativeCommandSender(
                             icommandlistener,
-                            new org.bukkit.craftbukkit.command.CraftBlockCommandSender(icommandlistener),
+                            new CraftBlockCommandSender(icommandlistener),
                             entityhuman.getBukkitEntity()
                     ), chatclickable.b());
                     // CraftBukkit end
@@ -212,6 +227,7 @@ public class TileEntitySign extends TileEntity {
         return true;
     }
 
+    @SuppressWarnings("unused")
     public CommandObjectiveExecutor g() {
         return this.i;
     }

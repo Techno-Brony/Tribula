@@ -1,11 +1,11 @@
 package net.minecraft.server;
 
 import com.google.common.cache.LoadingCache;
-import java.util.Random;
-import javax.annotation.Nullable;
+import org.bukkit.event.entity.EntityPortalEnterEvent;
+import org.bukkit.event.world.PortalCreateEvent;
 
-import org.bukkit.event.entity.EntityPortalEnterEvent; // CraftBukkit
-import org.bukkit.event.world.PortalCreateEvent; // CraftBukkit
+import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockPortal extends BlockHalfTransparent {
 
@@ -20,6 +20,11 @@ public class BlockPortal extends BlockHalfTransparent {
         this.a(true);
     }
 
+    public static int a(EnumDirection.EnumAxis enumdirection_enumaxis) {
+        return enumdirection_enumaxis == EnumDirection.EnumAxis.X ? 1 : (enumdirection_enumaxis == EnumDirection.EnumAxis.Z ? 2 : 0);
+    }
+
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         switch (BlockPortal.SyntheticClass_1.a[iblockdata.get(BlockPortal.AXIS).ordinal()]) {
         case 1:
@@ -56,15 +61,13 @@ public class BlockPortal extends BlockHalfTransparent {
 
     }
 
+    @SuppressWarnings("deprecation")
     @Nullable
     public AxisAlignedBB a(IBlockData iblockdata, World world, BlockPosition blockposition) {
         return BlockPortal.k;
     }
 
-    public static int a(EnumDirection.EnumAxis enumdirection_enumaxis) {
-        return enumdirection_enumaxis == EnumDirection.EnumAxis.X ? 1 : (enumdirection_enumaxis == EnumDirection.EnumAxis.Z ? 2 : 0);
-    }
-
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
@@ -79,16 +82,13 @@ public class BlockPortal extends BlockHalfTransparent {
         } else {
             BlockPortal.Shape blockportal_shape1 = new BlockPortal.Shape(world, blockposition, EnumDirection.EnumAxis.Z);
 
-            if (blockportal_shape1.d() && blockportal_shape1.e == 0) {
-                return blockportal_shape1.createPortal();
-                // return true;
-                // CraftBukkit end
-            } else {
-                return false;
-            }
+            // return true;
+// CraftBukkit end
+            return blockportal_shape1.d() && blockportal_shape1.e == 0 && blockportal_shape1.createPortal();
         }
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         EnumDirection.EnumAxis enumdirection_enumaxis = iblockdata.get(BlockPortal.AXIS);
         BlockPortal.Shape blockportal_shape;
@@ -127,6 +127,7 @@ public class BlockPortal extends BlockHalfTransparent {
         return null;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockPortal.AXIS, (i & 3) == 2 ? EnumDirection.EnumAxis.Z : EnumDirection.EnumAxis.X);
     }
@@ -135,6 +136,7 @@ public class BlockPortal extends BlockHalfTransparent {
         return a(iblockdata.get(BlockPortal.AXIS));
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockRotation enumblockrotation) {
         switch (BlockPortal.SyntheticClass_1.b[enumblockrotation.ordinal()]) {
         case 1:
@@ -170,6 +172,7 @@ public class BlockPortal extends BlockHalfTransparent {
         }
 
         if (!blockportal_shape.d()) {
+            //noinspection unchecked
             return new ShapeDetector.ShapeDetectorCollection(blockposition, EnumDirection.NORTH, EnumDirection.UP, loadingcache, 1, 1, 1);
         } else {
             int[] aint = new int[EnumDirection.EnumAxisDirection.values().length];
@@ -182,6 +185,7 @@ public class BlockPortal extends BlockHalfTransparent {
 
             for (j = 0; j < i; ++j) {
                 EnumDirection.EnumAxisDirection enumdirection_enumaxisdirection = aenumdirection_enumaxisdirection[j];
+                //noinspection unchecked
                 ShapeDetector.ShapeDetectorCollection shapedetector_shapedetectorcollection = new ShapeDetector.ShapeDetectorCollection(enumdirection.c() == enumdirection_enumaxisdirection ? blockposition1 : blockposition1.shift(blockportal_shape.c, blockportal_shape.b() - 1), EnumDirection.a(enumdirection_enumaxisdirection, enumdirection_enumaxis), EnumDirection.UP, loadingcache, blockportal_shape.b(), blockportal_shape.a(), 1);
 
                 for (int k = 0; k < blockportal_shape.b(); ++k) {
@@ -208,41 +212,45 @@ public class BlockPortal extends BlockHalfTransparent {
                 }
             }
 
+            //noinspection unchecked
             return new ShapeDetector.ShapeDetectorCollection(enumdirection.c() == enumdirection_enumaxisdirection1 ? blockposition1 : blockposition1.shift(blockportal_shape.c, blockportal_shape.b() - 1), EnumDirection.a(enumdirection_enumaxisdirection1, enumdirection_enumaxis), EnumDirection.UP, loadingcache, blockportal_shape.b(), blockportal_shape.a(), 1);
         }
     }
 
+    @SuppressWarnings("unused")
     static class SyntheticClass_1 {
 
+        @SuppressWarnings("unused")
         static final int[] a;
+        @SuppressWarnings("unused")
         static final int[] b = new int[EnumBlockRotation.values().length];
 
         static {
             try {
                 BlockPortal.SyntheticClass_1.b[EnumBlockRotation.COUNTERCLOCKWISE_90.ordinal()] = 1;
-            } catch (NoSuchFieldError nosuchfielderror) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockPortal.SyntheticClass_1.b[EnumBlockRotation.CLOCKWISE_90.ordinal()] = 2;
-            } catch (NoSuchFieldError nosuchfielderror1) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             a = new int[EnumDirection.EnumAxis.values().length];
 
             try {
                 BlockPortal.SyntheticClass_1.a[EnumDirection.EnumAxis.X.ordinal()] = 1;
-            } catch (NoSuchFieldError nosuchfielderror2) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockPortal.SyntheticClass_1.a[EnumDirection.EnumAxis.Y.ordinal()] = 2;
-            } catch (NoSuchFieldError nosuchfielderror3) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockPortal.SyntheticClass_1.a[EnumDirection.EnumAxis.Z.ordinal()] = 3;
-            } catch (NoSuchFieldError nosuchfielderror4) {
+            } catch (NoSuchFieldError ignored) {
             }
 
         }
@@ -254,11 +262,12 @@ public class BlockPortal extends BlockHalfTransparent {
         private final EnumDirection.EnumAxis b;
         private final EnumDirection c;
         private final EnumDirection d;
+        @SuppressWarnings("CanBeFinal")
+        java.util.Collection<org.bukkit.block.Block> blocks = new java.util.HashSet<org.bukkit.block.Block>(); // CraftBukkit - add field
         private int e;
         private BlockPosition position;
         private int height;
         private int width;
-        java.util.Collection<org.bukkit.block.Block> blocks = new java.util.HashSet<org.bukkit.block.Block>(); // CraftBukkit - add field
 
         public Shape(World world, BlockPosition blockposition, EnumDirection.EnumAxis enumdirection_enumaxis) {
             this.a = world;

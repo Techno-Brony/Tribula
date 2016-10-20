@@ -1,22 +1,32 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Sets;
+
+import javax.annotation.Nullable;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-import javax.annotation.Nullable;
 
 public class Block {
 
-    private static final MinecraftKey a = new MinecraftKey("air");
-    public static final RegistryBlocks<MinecraftKey, Block> REGISTRY = new RegistryBlocks(Block.a);
+    @SuppressWarnings("unchecked")
     public static final RegistryBlockID<IBlockData> REGISTRY_ID = new RegistryBlockID();
     public static final AxisAlignedBB j = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
     public static final AxisAlignedBB k = null;
-    private CreativeModeTab creativeTab;
+    private static final MinecraftKey a = new MinecraftKey("air");
+    @SuppressWarnings("unchecked")
+    public static final RegistryBlocks<MinecraftKey, Block> REGISTRY = new RegistryBlocks(Block.a);
+    protected final Material material;
+    protected final MaterialMapColor y;
+    protected final BlockStateList blockStateList;
+    @SuppressWarnings({"unused", "CanBeFinal"})
+    public float w;
+    public float frictionFactor;
+    @SuppressWarnings("CanBeFinal")
     protected boolean l;
     protected int m;
+    @SuppressWarnings("CanBeFinal")
     protected boolean n;
     protected int o;
     protected boolean p;
@@ -24,15 +34,29 @@ public class Block {
     protected float durability;
     protected boolean s;
     protected boolean t;
+    @SuppressWarnings("unused")
     protected boolean isTileEntity;
     protected SoundEffectType stepSound;
-    public float w;
-    protected final Material material;
-    protected final MaterialMapColor y;
-    public float frictionFactor;
-    protected final BlockStateList blockStateList;
     private IBlockData blockData;
     private String name;
+
+    public Block(Material material, MaterialMapColor materialmapcolor) {
+        this.s = true;
+        this.stepSound = SoundEffectType.d;
+        this.w = 1.0F;
+        this.frictionFactor = 0.6F;
+        this.material = material;
+        this.y = materialmapcolor;
+        this.blockStateList = this.getStateList();
+        this.w(this.blockStateList.getBlockData());
+        this.l = this.getBlockData().p();
+        this.m = this.l ? 255 : 0;
+        this.n = !material.blocksLight();
+    }
+
+    protected Block(Material material) {
+        this(material, material.r());
+    }
 
     public static int getId(Block block) {
         return Block.REGISTRY.a(block); // CraftBukkit - decompile error
@@ -52,6 +76,7 @@ public class Block {
         int j = i & 4095;
         int k = i >> 12 & 15;
 
+        //noinspection deprecation
         return getById(j).fromLegacyData(k);
     }
 
@@ -74,190 +99,6 @@ public class Block {
         }
     }
 
-    @Deprecated
-    public boolean k(IBlockData iblockdata) {
-        return iblockdata.getMaterial().k() && iblockdata.h();
-    }
-
-    @Deprecated
-    public boolean l(IBlockData iblockdata) {
-        return this.l;
-    }
-
-    @Deprecated
-    public boolean a(IBlockData iblockdata, Entity entity) {
-        return true;
-    }
-
-    @Deprecated
-    public int m(IBlockData iblockdata) {
-        return this.m;
-    }
-
-    @Deprecated
-    public int o(IBlockData iblockdata) {
-        return this.o;
-    }
-
-    @Deprecated
-    public boolean p(IBlockData iblockdata) {
-        return this.p;
-    }
-
-    @Deprecated
-    public Material q(IBlockData iblockdata) {
-        return this.material;
-    }
-
-    @Deprecated
-    public MaterialMapColor r(IBlockData iblockdata) {
-        return this.y;
-    }
-
-    @Deprecated
-    public IBlockData fromLegacyData(int i) {
-        return this.getBlockData();
-    }
-
-    public int toLegacyData(IBlockData iblockdata) {
-        if (iblockdata != null && !iblockdata.r().isEmpty()) {
-            throw new IllegalArgumentException("Don\'t know how to convert " + iblockdata + " back into data...");
-        } else {
-            return 0;
-        }
-    }
-
-    @Deprecated
-    public IBlockData updateState(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
-        return iblockdata;
-    }
-
-    @Deprecated
-    public IBlockData a(IBlockData iblockdata, EnumBlockRotation enumblockrotation) {
-        return iblockdata;
-    }
-
-    @Deprecated
-    public IBlockData a(IBlockData iblockdata, EnumBlockMirror enumblockmirror) {
-        return iblockdata;
-    }
-
-    public Block(Material material, MaterialMapColor materialmapcolor) {
-        this.s = true;
-        this.stepSound = SoundEffectType.d;
-        this.w = 1.0F;
-        this.frictionFactor = 0.6F;
-        this.material = material;
-        this.y = materialmapcolor;
-        this.blockStateList = this.getStateList();
-        this.w(this.blockStateList.getBlockData());
-        this.l = this.getBlockData().p();
-        this.m = this.l ? 255 : 0;
-        this.n = !material.blocksLight();
-    }
-
-    protected Block(Material material) {
-        this(material, material.r());
-    }
-
-    protected Block a(SoundEffectType soundeffecttype) {
-        this.stepSound = soundeffecttype;
-        return this;
-    }
-
-    protected Block d(int i) {
-        this.m = i;
-        return this;
-    }
-
-    protected Block a(float f) {
-        this.o = (int) (15.0F * f);
-        return this;
-    }
-
-    protected Block b(float f) {
-        this.durability = f * 3.0F;
-        return this;
-    }
-
-    @Deprecated
-    public boolean s(IBlockData iblockdata) {
-        return iblockdata.getMaterial().isSolid() && iblockdata.h();
-    }
-
-    @Deprecated
-    public boolean isOccluding(IBlockData iblockdata) {
-        return iblockdata.getMaterial().k() && iblockdata.h() && !iblockdata.m();
-    }
-
-    public boolean j() {
-        return this.material.isSolid() && this.getBlockData().h();
-    }
-
-    @Deprecated
-    public boolean c(IBlockData iblockdata) {
-        return true;
-    }
-
-    public boolean b(IBlockAccess iblockaccess, BlockPosition blockposition) {
-        return !this.material.isSolid();
-    }
-
-    @Deprecated
-    public EnumRenderType a(IBlockData iblockdata) {
-        return EnumRenderType.MODEL;
-    }
-
-    public boolean a(IBlockAccess iblockaccess, BlockPosition blockposition) {
-        return false;
-    }
-
-    protected Block c(float f) {
-        this.strength = f;
-        if (this.durability < f * 5.0F) {
-            this.durability = f * 5.0F;
-        }
-
-        return this;
-    }
-
-    protected Block k() {
-        this.c(-1.0F);
-        return this;
-    }
-
-    @Deprecated
-    public float b(IBlockData iblockdata, World world, BlockPosition blockposition) {
-        return this.strength;
-    }
-
-    protected Block a(boolean flag) {
-        this.t = flag;
-        return this;
-    }
-
-    public boolean isTicking() {
-        return this.t;
-    }
-
-    public boolean isTileEntity() {
-        return this.isTileEntity;
-    }
-
-    @Deprecated
-    public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
-        return Block.j;
-    }
-
-    public boolean a(IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
-        return iblockaccess.getType(blockposition).getMaterial().isBuildable();
-    }
-
-    @Deprecated
-    public void a(IBlockData iblockdata, World world, BlockPosition blockposition, AxisAlignedBB axisalignedbb, List<AxisAlignedBB> list, @Nullable Entity entity) {
-        a(blockposition, axisalignedbb, list, iblockdata.d(world, blockposition));
-    }
-
     protected static void a(BlockPosition blockposition, AxisAlignedBB axisalignedbb, List<AxisAlignedBB> list, @Nullable AxisAlignedBB axisalignedbb1) {
         if (axisalignedbb1 != Block.k) {
             AxisAlignedBB axisalignedbb2 = axisalignedbb1.a(blockposition);
@@ -267,86 +108,6 @@ public class Block {
             }
         }
 
-    }
-
-    @Deprecated
-    @Nullable
-    public AxisAlignedBB a(IBlockData iblockdata, World world, BlockPosition blockposition) {
-        return iblockdata.c(world, blockposition);
-    }
-
-    @Deprecated
-    public boolean b(IBlockData iblockdata) {
-        return true;
-    }
-
-    public boolean a(IBlockData iblockdata, boolean flag) {
-        return this.n();
-    }
-
-    public boolean n() {
-        return true;
-    }
-
-    public void a(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
-        this.b(world, blockposition, iblockdata, random);
-    }
-
-    public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {}
-
-    public void postBreak(World world, BlockPosition blockposition, IBlockData iblockdata) {}
-
-    @Deprecated
-    public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {}
-
-    public int a(World world) {
-        return 10;
-    }
-
-    public void onPlace(World world, BlockPosition blockposition, IBlockData iblockdata) {
-        org.spigotmc.AsyncCatcher.catchOp( "block onPlace"); // Spigot
-    }
-
-    public void remove(World world, BlockPosition blockposition, IBlockData iblockdata) {
-        org.spigotmc.AsyncCatcher.catchOp( "block remove"); // Spigot
-    }
-
-    public int a(Random random) {
-        return 1;
-    }
-
-    @Nullable
-    public Item getDropType(IBlockData iblockdata, Random random, int i) {
-        return Item.getItemOf(this);
-    }
-
-    @Deprecated
-    public float getDamage(IBlockData iblockdata, EntityHuman entityhuman, World world, BlockPosition blockposition) {
-        float f = iblockdata.b(world, blockposition);
-
-        return f < 0.0F ? 0.0F : (!entityhuman.hasBlock(iblockdata) ? entityhuman.a(iblockdata) / f / 100.0F : entityhuman.a(iblockdata) / f / 30.0F);
-    }
-
-    public final void b(World world, BlockPosition blockposition, IBlockData iblockdata, int i) {
-        this.dropNaturally(world, blockposition, iblockdata, 1.0F, i);
-    }
-
-    public void dropNaturally(World world, BlockPosition blockposition, IBlockData iblockdata, float f, int i) {
-        if (!world.isClientSide) {
-            int j = this.getDropCount(i, world.random);
-
-            for (int k = 0; k < j; ++k) {
-                // CraftBukkit - <= to < to allow for plugins to completely disable block drops from explosions
-                if (world.random.nextFloat() < f) {
-                    Item item = this.getDropType(iblockdata, world.random, i);
-
-                    if (item != null) {
-                        a(world, blockposition, new ItemStack(item, 1, this.getDropData(iblockdata)));
-                    }
-                }
-            }
-
-        }
     }
 
     public static void a(World world, BlockPosition blockposition, ItemStack itemstack) {
@@ -362,238 +123,8 @@ public class Block {
         }
     }
 
-    protected void dropExperience(World world, BlockPosition blockposition, int i) {
-        if (!world.isClientSide && world.getGameRules().getBoolean("doTileDrops")) {
-            while (i > 0) {
-                int j = EntityExperienceOrb.getOrbValue(i);
-
-                i -= j;
-                world.addEntity(new EntityExperienceOrb(world, (double) blockposition.getX() + 0.5D, (double) blockposition.getY() + 0.5D, (double) blockposition.getZ() + 0.5D, j));
-            }
-        }
-
-    }
-
-    public int getDropData(IBlockData iblockdata) {
-        return 0;
-    }
-
-    public float a(Entity entity) {
-        return this.durability / 5.0F;
-    }
-
-    @Deprecated
-    @Nullable
-    public MovingObjectPosition a(IBlockData iblockdata, World world, BlockPosition blockposition, Vec3D vec3d, Vec3D vec3d1) {
-        return this.a(blockposition, vec3d, vec3d1, iblockdata.c(world, blockposition));
-    }
-
-    @Nullable
-    protected MovingObjectPosition a(BlockPosition blockposition, Vec3D vec3d, Vec3D vec3d1, AxisAlignedBB axisalignedbb) {
-        Vec3D vec3d2 = vec3d.a((double) blockposition.getX(), (double) blockposition.getY(), (double) blockposition.getZ());
-        Vec3D vec3d3 = vec3d1.a((double) blockposition.getX(), (double) blockposition.getY(), (double) blockposition.getZ());
-        MovingObjectPosition movingobjectposition = axisalignedbb.b(vec3d2, vec3d3);
-
-        return movingobjectposition == null ? null : new MovingObjectPosition(movingobjectposition.pos.add((double) blockposition.getX(), (double) blockposition.getY(), (double) blockposition.getZ()), movingobjectposition.direction, blockposition);
-    }
-
-    public void wasExploded(World world, BlockPosition blockposition, Explosion explosion) {}
-
-    public boolean canPlace(World world, BlockPosition blockposition, EnumDirection enumdirection, @Nullable ItemStack itemstack) {
-        return this.canPlace(world, blockposition, enumdirection);
-    }
-
-    public boolean canPlace(World world, BlockPosition blockposition, EnumDirection enumdirection) {
-        return this.canPlace(world, blockposition);
-    }
-
-    public boolean canPlace(World world, BlockPosition blockposition) {
-        return world.getType(blockposition).getBlock().material.isReplaceable();
-    }
-
-    public boolean interact(World world, BlockPosition blockposition, IBlockData iblockdata, EntityHuman entityhuman, EnumHand enumhand, @Nullable ItemStack itemstack, EnumDirection enumdirection, float f, float f1, float f2) {
-        return false;
-    }
-
-    public void stepOn(World world, BlockPosition blockposition, Entity entity) {}
-
-    public IBlockData getPlacedState(World world, BlockPosition blockposition, EnumDirection enumdirection, float f, float f1, float f2, int i, EntityLiving entityliving) {
-        return this.fromLegacyData(i);
-    }
-
-    public void attack(World world, BlockPosition blockposition, EntityHuman entityhuman) {}
-
-    public Vec3D a(World world, BlockPosition blockposition, Entity entity, Vec3D vec3d) {
-        return vec3d;
-    }
-
-    @Deprecated
-    public int b(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
-        return 0;
-    }
-
-    @Deprecated
-    public boolean isPowerSource(IBlockData iblockdata) {
-        return false;
-    }
-
-    public void a(World world, BlockPosition blockposition, IBlockData iblockdata, Entity entity) {}
-
-    @Deprecated
-    public int c(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
-        return 0;
-    }
-
-    public void a(World world, EntityHuman entityhuman, BlockPosition blockposition, IBlockData iblockdata, @Nullable TileEntity tileentity, @Nullable ItemStack itemstack) {
-        entityhuman.b(StatisticList.a(this));
-        entityhuman.applyExhaustion(0.025F);
-        if (this.o() && EnchantmentManager.getEnchantmentLevel(Enchantments.SILK_TOUCH, itemstack) > 0) {
-            ItemStack itemstack1 = this.u(iblockdata);
-
-            if (itemstack1 != null) {
-                a(world, blockposition, itemstack1);
-            }
-        } else {
-            int i = EnchantmentManager.getEnchantmentLevel(Enchantments.LOOT_BONUS_BLOCKS, itemstack);
-
-            this.b(world, blockposition, iblockdata, i);
-        }
-
-    }
-
-    protected boolean o() {
-        return this.getBlockData().h() && !this.isTileEntity;
-    }
-
-    @Nullable
-    protected ItemStack u(IBlockData iblockdata) {
-        Item item = Item.getItemOf(this);
-
-        if (item == null) {
-            return null;
-        } else {
-            int i = 0;
-
-            if (item.k()) {
-                i = this.toLegacyData(iblockdata);
-            }
-
-            return new ItemStack(item, 1, i);
-        }
-    }
-
-    public int getDropCount(int i, Random random) {
-        return this.a(random);
-    }
-
-    public void postPlace(World world, BlockPosition blockposition, IBlockData iblockdata, EntityLiving entityliving, ItemStack itemstack) {}
-
-    public boolean d() {
-        return !this.material.isBuildable() && !this.material.isLiquid();
-    }
-
-    public Block c(String s) {
-        this.name = s;
-        return this;
-    }
-
-    public String getName() {
-        return LocaleI18n.get(this.a() + ".name");
-    }
-
-    public String a() {
-        return "tile." + this.name;
-    }
-
-    @Deprecated
-    public boolean a(IBlockData iblockdata, World world, BlockPosition blockposition, int i, int j) {
-        return false;
-    }
-
-    public boolean p() {
-        return this.s;
-    }
-
-    protected Block q() {
-        this.s = false;
-        return this;
-    }
-
-    @Deprecated
-    public EnumPistonReaction h(IBlockData iblockdata) {
-        return this.material.getPushReaction();
-    }
-
-    public void fallOn(World world, BlockPosition blockposition, Entity entity, float f) {
-        entity.e(f, 1.0F);
-    }
-
-    public void a(World world, Entity entity) {
-        entity.motY = 0.0D;
-    }
-
-    @Nullable
-    public ItemStack a(World world, BlockPosition blockposition, IBlockData iblockdata) {
-        return new ItemStack(Item.getItemOf(this), 1, this.getDropData(iblockdata));
-    }
-
-    public Block a(CreativeModeTab creativemodetab) {
-        this.creativeTab = creativemodetab;
-        return this;
-    }
-
-    public void a(World world, BlockPosition blockposition, IBlockData iblockdata, EntityHuman entityhuman) {}
-
-    public void h(World world, BlockPosition blockposition) {}
-
-    public boolean s() {
-        return true;
-    }
-
-    public boolean a(Explosion explosion) {
-        return true;
-    }
-
-    public boolean b(Block block) {
-        return this == block;
-    }
-
     public static boolean a(Block block, Block block1) {
         return (block != null && block1 != null) && (block == block1 || block.b(block1));
-    }
-
-    @Deprecated
-    public boolean isComplexRedstone(IBlockData iblockdata) {
-        return false;
-    }
-
-    @Deprecated
-    public int d(IBlockData iblockdata, World world, BlockPosition blockposition) {
-        return 0;
-    }
-
-    protected BlockStateList getStateList() {
-        return new BlockStateList(this);
-    }
-
-    public BlockStateList t() {
-        return this.blockStateList;
-    }
-
-    protected final void w(IBlockData iblockdata) {
-        this.blockData = iblockdata;
-    }
-
-    public final IBlockData getBlockData() {
-        return this.blockData;
-    }
-
-    public SoundEffectType w() {
-        return this.stepSound;
-    }
-
-    public String toString() {
-        return "Block{" + Block.REGISTRY.b(this) + "}";
     }
 
     public static void x() {
@@ -849,6 +380,7 @@ public class Block {
         Block.REGISTRY.a();
         Iterator iterator = Block.REGISTRY.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             Block block15 = (Block) iterator.next();
 
@@ -873,6 +405,7 @@ public class Block {
         HashSet hashset = Sets.newHashSet(Block.REGISTRY.get(new MinecraftKey("tripwire")));
         Iterator iterator1 = Block.REGISTRY.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator1.hasNext()) {
             Block block16 = (Block) iterator1.next();
 
@@ -880,11 +413,13 @@ public class Block {
                 for (int i = 0; i < 15; ++i) {
                     int j = Block.REGISTRY.a(block16) << 4 | i; // CraftBukkit - decompile error
 
+                    //noinspection deprecation
                     Block.REGISTRY_ID.a(block16.fromLegacyData(i), j);
                 }
             } else {
                 Iterator iterator2 = block16.t().a().iterator();
 
+                //noinspection WhileLoopReplaceableByForEach
                 while (iterator2.hasNext()) {
                     IBlockData iblockdata = (IBlockData) iterator2.next();
                     int k = Block.REGISTRY.a(block16) << 4 | block16.toLegacyData(iblockdata); // CraftBukkit - decompile error
@@ -896,12 +431,6 @@ public class Block {
 
     }
 
-    // CraftBukkit start
-    public int getExpDrop(World world, IBlockData data, int enchantmentLevel) {
-        return 0;
-    }
-    // CraftBukkit end
-
     private static void a(int i, MinecraftKey minecraftkey, Block block) {
         Block.REGISTRY.a(i, minecraftkey, block);
     }
@@ -911,7 +440,7 @@ public class Block {
     }
 
     // Spigot start
-    public static float range(float min, float value, float max) {
+    public static float range(@SuppressWarnings("SameParameterValue") float min, float value, @SuppressWarnings("SameParameterValue") float max) {
         if (value < min) {
             return min;
         }
@@ -919,6 +448,524 @@ public class Block {
             return max;
         }
         return value;
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    public boolean k(IBlockData iblockdata) {
+        return iblockdata.getMaterial().k() && iblockdata.h();
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    public boolean l(IBlockData iblockdata) {
+        return this.l;
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    public boolean a(IBlockData iblockdata, Entity entity) {
+        return true;
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    public int m(IBlockData iblockdata) {
+        return this.m;
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    public int o(IBlockData iblockdata) {
+        return this.o;
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    public boolean p(IBlockData iblockdata) {
+        return this.p;
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    public Material q(IBlockData iblockdata) {
+        return this.material;
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    public MaterialMapColor r(IBlockData iblockdata) {
+        return this.y;
+    }
+
+    @Deprecated
+    public IBlockData fromLegacyData(int i) {
+        return this.getBlockData();
+    }
+
+    public int toLegacyData(IBlockData iblockdata) {
+        if (iblockdata != null && !iblockdata.r().isEmpty()) {
+            throw new IllegalArgumentException("Don\'t know how to convert " + iblockdata + " back into data...");
+        } else {
+            return 0;
+        }
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    public IBlockData updateState(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
+        return iblockdata;
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    public IBlockData a(IBlockData iblockdata, EnumBlockRotation enumblockrotation) {
+        return iblockdata;
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    public IBlockData a(IBlockData iblockdata, EnumBlockMirror enumblockmirror) {
+        return iblockdata;
+    }
+
+    protected Block a(SoundEffectType soundeffecttype) {
+        this.stepSound = soundeffecttype;
+        return this;
+    }
+
+    protected Block d(int i) {
+        this.m = i;
+        return this;
+    }
+
+    protected Block a(float f) {
+        this.o = (int) (15.0F * f);
+        return this;
+    }
+
+    protected Block b(float f) {
+        this.durability = f * 3.0F;
+        return this;
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    public boolean s(IBlockData iblockdata) {
+        return iblockdata.getMaterial().isSolid() && iblockdata.h();
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    public boolean isOccluding(IBlockData iblockdata) {
+        return iblockdata.getMaterial().k() && iblockdata.h() && !iblockdata.m();
+    }
+
+    public boolean j() {
+        return this.material.isSolid() && this.getBlockData().h();
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    public boolean c(IBlockData iblockdata) {
+        return true;
+    }
+
+    public boolean b(IBlockAccess iblockaccess, BlockPosition blockposition) {
+        return !this.material.isSolid();
+    }
+
+    @SuppressWarnings({"unused", "SameReturnValue"})
+    @Deprecated
+    public EnumRenderType a(IBlockData iblockdata) {
+        return EnumRenderType.MODEL;
+    }
+
+    public boolean a(IBlockAccess iblockaccess, BlockPosition blockposition) {
+        return false;
+    }
+
+    protected Block c(float f) {
+        this.strength = f;
+        if (this.durability < f * 5.0F) {
+            this.durability = f * 5.0F;
+        }
+
+        return this;
+    }
+
+    protected Block k() {
+        this.c(-1.0F);
+        return this;
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    public float b(IBlockData iblockdata, World world, BlockPosition blockposition) {
+        return this.strength;
+    }
+
+    @SuppressWarnings("UnusedReturnValue")
+    protected Block a(boolean flag) {
+        this.t = flag;
+        return this;
+    }
+
+    public boolean isTicking() {
+        return this.t;
+    }
+
+    public boolean isTileEntity() {
+        return this.isTileEntity;
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
+        return Block.j;
+    }
+
+    @SuppressWarnings("unused")
+    public boolean a(IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
+        return iblockaccess.getType(blockposition).getMaterial().isBuildable();
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    public void a(IBlockData iblockdata, World world, BlockPosition blockposition, AxisAlignedBB axisalignedbb, List<AxisAlignedBB> list, @Nullable Entity entity) {
+        a(blockposition, axisalignedbb, list, iblockdata.d(world, blockposition));
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    @Nullable
+    public AxisAlignedBB a(IBlockData iblockdata, World world, BlockPosition blockposition) {
+        return iblockdata.c(world, blockposition);
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    public boolean b(IBlockData iblockdata) {
+        return true;
+    }
+
+    public boolean a(@SuppressWarnings("UnusedParameters") IBlockData iblockdata, @SuppressWarnings("UnusedParameters") boolean flag) {
+        return this.n();
+    }
+
+    public boolean n() {
+        return true;
+    }
+
+    public void a(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
+        this.b(world, blockposition, iblockdata, random);
+    }
+
+    public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {}
+
+    public void postBreak(World world, BlockPosition blockposition, IBlockData iblockdata) {}
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {}
+
+    public int a(@SuppressWarnings("UnusedParameters") World world) {
+        return 10;
+    }
+
+    public void onPlace(World world, BlockPosition blockposition, IBlockData iblockdata) {
+        org.spigotmc.AsyncCatcher.catchOp( "block onPlace"); // Spigot
+    }
+
+    public void remove(World world, BlockPosition blockposition, IBlockData iblockdata) {
+        org.spigotmc.AsyncCatcher.catchOp( "block remove"); // Spigot
+    }
+
+    public int a(Random random) {
+        return 1;
+    }
+
+    @Nullable
+    public Item getDropType(IBlockData iblockdata, Random random, int i) {
+        return Item.getItemOf(this);
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    public float getDamage(IBlockData iblockdata, EntityHuman entityhuman, World world, BlockPosition blockposition) {
+        float f = iblockdata.b(world, blockposition);
+
+        return f < 0.0F ? 0.0F : (!entityhuman.hasBlock(iblockdata) ? entityhuman.a(iblockdata) / f / 100.0F : entityhuman.a(iblockdata) / f / 30.0F);
+    }
+
+    public final void b(World world, BlockPosition blockposition, IBlockData iblockdata, int i) {
+        this.dropNaturally(world, blockposition, iblockdata, 1.0F, i);
+    }
+
+    public void dropNaturally(World world, BlockPosition blockposition, IBlockData iblockdata, float f, int i) {
+        if (!world.isClientSide) {
+            int j = this.getDropCount(i, world.random);
+
+            for (int k = 0; k < j; ++k) {
+                // CraftBukkit - <= to < to allow for plugins to completely disable block drops from explosions
+                if (world.random.nextFloat() < f) {
+                    Item item = this.getDropType(iblockdata, world.random, i);
+
+                    if (item != null) {
+                        a(world, blockposition, new ItemStack(item, 1, this.getDropData(iblockdata)));
+                    }
+                }
+            }
+
+        }
+    }
+
+    protected void dropExperience(World world, BlockPosition blockposition, int i) {
+        if (!world.isClientSide && world.getGameRules().getBoolean("doTileDrops")) {
+            while (i > 0) {
+                int j = EntityExperienceOrb.getOrbValue(i);
+
+                i -= j;
+                world.addEntity(new EntityExperienceOrb(world, (double) blockposition.getX() + 0.5D, (double) blockposition.getY() + 0.5D, (double) blockposition.getZ() + 0.5D, j));
+            }
+        }
+
+    }
+
+    public int getDropData(IBlockData iblockdata) {
+        return 0;
+    }
+
+    public float a(@SuppressWarnings("UnusedParameters") Entity entity) {
+        return this.durability / 5.0F;
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    @Nullable
+    public MovingObjectPosition a(IBlockData iblockdata, World world, BlockPosition blockposition, Vec3D vec3d, Vec3D vec3d1) {
+        return this.a(blockposition, vec3d, vec3d1, iblockdata.c(world, blockposition));
+    }
+
+    @Nullable
+    protected MovingObjectPosition a(BlockPosition blockposition, Vec3D vec3d, Vec3D vec3d1, AxisAlignedBB axisalignedbb) {
+        Vec3D vec3d2 = vec3d.a((double) blockposition.getX(), (double) blockposition.getY(), (double) blockposition.getZ());
+        Vec3D vec3d3 = vec3d1.a((double) blockposition.getX(), (double) blockposition.getY(), (double) blockposition.getZ());
+        MovingObjectPosition movingobjectposition = axisalignedbb.b(vec3d2, vec3d3);
+
+        return movingobjectposition == null ? null : new MovingObjectPosition(movingobjectposition.pos.add((double) blockposition.getX(), (double) blockposition.getY(), (double) blockposition.getZ()), movingobjectposition.direction, blockposition);
+    }
+
+    public void wasExploded(World world, BlockPosition blockposition, Explosion explosion) {}
+
+    public boolean canPlace(World world, BlockPosition blockposition, EnumDirection enumdirection, @SuppressWarnings("UnusedParameters") @Nullable ItemStack itemstack) {
+        return this.canPlace(world, blockposition, enumdirection);
+    }
+
+    public boolean canPlace(World world, BlockPosition blockposition, EnumDirection enumdirection) {
+        return this.canPlace(world, blockposition);
+    }
+
+    public boolean canPlace(World world, BlockPosition blockposition) {
+        return world.getType(blockposition).getBlock().material.isReplaceable();
+    }
+
+    public boolean interact(World world, BlockPosition blockposition, IBlockData iblockdata, EntityHuman entityhuman, EnumHand enumhand, @Nullable ItemStack itemstack, EnumDirection enumdirection, float f, float f1, float f2) {
+        return false;
+    }
+
+    public void stepOn(World world, BlockPosition blockposition, Entity entity) {}
+
+    public IBlockData getPlacedState(World world, BlockPosition blockposition, EnumDirection enumdirection, @SuppressWarnings("UnusedParameters") float f, float f1, @SuppressWarnings("UnusedParameters") float f2, int i, EntityLiving entityliving) {
+        //noinspection deprecation
+        return this.fromLegacyData(i);
+    }
+
+    public void attack(World world, BlockPosition blockposition, EntityHuman entityhuman) {}
+
+    public Vec3D a(@SuppressWarnings("UnusedParameters") World world, @SuppressWarnings("UnusedParameters") BlockPosition blockposition, @SuppressWarnings("UnusedParameters") Entity entity, Vec3D vec3d) {
+        return vec3d;
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    public int b(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
+        return 0;
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    public boolean isPowerSource(IBlockData iblockdata) {
+        return false;
+    }
+
+    public void a(World world, BlockPosition blockposition, IBlockData iblockdata, Entity entity) {}
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    public int c(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
+        return 0;
+    }
+
+    public void a(World world, EntityHuman entityhuman, BlockPosition blockposition, IBlockData iblockdata, @Nullable TileEntity tileentity, @Nullable ItemStack itemstack) {
+        entityhuman.b(StatisticList.a(this));
+        entityhuman.applyExhaustion(0.025F);
+        if (this.o() && EnchantmentManager.getEnchantmentLevel(Enchantments.SILK_TOUCH, itemstack) > 0) {
+            ItemStack itemstack1 = this.u(iblockdata);
+
+            if (itemstack1 != null) {
+                a(world, blockposition, itemstack1);
+            }
+        } else {
+            int i = EnchantmentManager.getEnchantmentLevel(Enchantments.LOOT_BONUS_BLOCKS, itemstack);
+
+            this.b(world, blockposition, iblockdata, i);
+        }
+
+    }
+
+    protected boolean o() {
+        return this.getBlockData().h() && !this.isTileEntity;
+    }
+
+    @Nullable
+    protected ItemStack u(IBlockData iblockdata) {
+        Item item = Item.getItemOf(this);
+
+        if (item == null) {
+            return null;
+        } else {
+            int i = 0;
+
+            if (item.k()) {
+                i = this.toLegacyData(iblockdata);
+            }
+
+            return new ItemStack(item, 1, i);
+        }
+    }
+
+    public int getDropCount(int i, Random random) {
+        return this.a(random);
+    }
+
+    public void postPlace(World world, BlockPosition blockposition, IBlockData iblockdata, EntityLiving entityliving, ItemStack itemstack) {}
+
+    public boolean d() {
+        return !this.material.isBuildable() && !this.material.isLiquid();
+    }
+
+    public Block c(String s) {
+        this.name = s;
+        return this;
+    }
+
+    @SuppressWarnings("unused")
+    public String getName() {
+        //noinspection deprecation,deprecation
+        return LocaleI18n.get(this.a() + ".name");
+    }
+
+    public String a() {
+        return "tile." + this.name;
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    public boolean a(IBlockData iblockdata, World world, BlockPosition blockposition, int i, int j) {
+        return false;
+    }
+
+    @SuppressWarnings("unused")
+    public boolean p() {
+        return this.s;
+    }
+
+    protected Block q() {
+        this.s = false;
+        return this;
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    public EnumPistonReaction h(IBlockData iblockdata) {
+        return this.material.getPushReaction();
+    }
+
+    public void fallOn(World world, BlockPosition blockposition, Entity entity, float f) {
+        entity.e(f, 1.0F);
+    }
+
+    public void a(@SuppressWarnings("UnusedParameters") World world, Entity entity) {
+        entity.motY = 0.0D;
+    }
+
+    @SuppressWarnings("unused")
+    @Nullable
+    public ItemStack a(World world, BlockPosition blockposition, IBlockData iblockdata) {
+        return new ItemStack(Item.getItemOf(this), 1, this.getDropData(iblockdata));
+    }
+
+    public Block a(@SuppressWarnings("UnusedParameters") CreativeModeTab creativemodetab) {
+        return this;
+    }
+
+    public void a(World world, BlockPosition blockposition, IBlockData iblockdata, EntityHuman entityhuman) {}
+
+    public void h(World world, BlockPosition blockposition) {}
+
+    public boolean s() {
+        return true;
+    }
+
+    public boolean a(@SuppressWarnings("UnusedParameters") Explosion explosion) {
+        return true;
+    }
+
+    public boolean b(Block block) {
+        return this == block;
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    public boolean isComplexRedstone(IBlockData iblockdata) {
+        return false;
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
+    public int d(IBlockData iblockdata, World world, BlockPosition blockposition) {
+        return 0;
+    }
+
+    protected BlockStateList getStateList() {
+        return new BlockStateList(this);
+    }
+
+    public BlockStateList t() {
+        return this.blockStateList;
+    }
+
+    protected final void w(IBlockData iblockdata) {
+        this.blockData = iblockdata;
+    }
+
+    public final IBlockData getBlockData() {
+        return this.blockData;
+    }
+    // CraftBukkit end
+
+    public SoundEffectType w() {
+        return this.stepSound;
+    }
+
+    public String toString() {
+        return "Block{" + Block.REGISTRY.b(this) + "}";
+    }
+
+    // CraftBukkit start
+    public int getExpDrop(World world, IBlockData data, int enchantmentLevel) {
+        return 0;
     }
     // Spigot end
 }

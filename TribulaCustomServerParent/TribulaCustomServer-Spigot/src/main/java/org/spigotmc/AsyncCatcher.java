@@ -9,6 +9,7 @@ public class AsyncCatcher
 
     public static void catchOp(String reason)
     {
+        //noinspection deprecation
         if ( enabled && Thread.currentThread() != MinecraftServer.getServer().primaryThread )
         {
             throw new IllegalStateException( "Asynchronous " + reason + "!" );

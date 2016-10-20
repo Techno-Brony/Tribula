@@ -1,12 +1,14 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Lists;
+
 import java.util.Iterator;
 import java.util.List;
 
 public class WorldBorder {
 
     private final List<IWorldBorderListener> a = Lists.newArrayList();
+    public WorldServer world; // CraftBukkit
     private double b;
     private double c;
     private double d = 6.0E7D;
@@ -18,8 +20,8 @@ public class WorldBorder {
     private double j;
     private int k;
     private int l;
-    public WorldServer world; // CraftBukkit
 
+    @SuppressWarnings("unused")
     public WorldBorder() {
         this.e = this.d;
         this.h = 29999984;
@@ -34,11 +36,13 @@ public class WorldBorder {
     }
 
     // CraftBukkit start - split method
+    @SuppressWarnings("unused")
     public boolean isInBounds(ChunkCoordIntPair chunkcoordintpair) {
         return isInBounds(chunkcoordintpair.x, chunkcoordintpair.z);
     }
 
     // Inlined the getters from ChunkCoordIntPair
+    @SuppressWarnings("unused")
     public boolean isInBounds(long chunkcoords) {
         return isInBounds(org.bukkit.craftbukkit.util.LongHash.msw(chunkcoords), org.bukkit.craftbukkit.util.LongHash.lsw(chunkcoords));
     }
@@ -124,6 +128,7 @@ public class WorldBorder {
         this.c = d1;
         Iterator iterator = this.k().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             IWorldBorderListener iworldborderlistener = (IWorldBorderListener) iterator.next();
 
@@ -146,14 +151,6 @@ public class WorldBorder {
         return this.d;
     }
 
-    public long i() {
-        return this.getState() == EnumWorldBorderState.STATIONARY ? 0L : this.f - System.currentTimeMillis();
-    }
-
-    public double j() {
-        return this.e;
-    }
-
     public void setSize(double d0) {
         this.d = d0;
         this.e = d0;
@@ -161,12 +158,21 @@ public class WorldBorder {
         this.g = this.f;
         Iterator iterator = this.k().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             IWorldBorderListener iworldborderlistener = (IWorldBorderListener) iterator.next();
 
             iworldborderlistener.a(this, d0);
         }
 
+    }
+
+    public long i() {
+        return this.getState() == EnumWorldBorderState.STATIONARY ? 0L : this.f - System.currentTimeMillis();
+    }
+
+    public double j() {
+        return this.e;
     }
 
     public void transitionSizeBetween(double d0, double d1, long i) {
@@ -176,6 +182,7 @@ public class WorldBorder {
         this.f = this.g + i;
         Iterator iterator = this.k().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             IWorldBorderListener iworldborderlistener = (IWorldBorderListener) iterator.next();
 
@@ -197,6 +204,7 @@ public class WorldBorder {
         this.h = i;
     }
 
+    @SuppressWarnings("unused")
     public int l() {
         return this.h;
     }
@@ -209,6 +217,7 @@ public class WorldBorder {
         this.j = d0;
         Iterator iterator = this.k().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             IWorldBorderListener iworldborderlistener = (IWorldBorderListener) iterator.next();
 
@@ -225,6 +234,7 @@ public class WorldBorder {
         this.i = d0;
         Iterator iterator = this.k().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             IWorldBorderListener iworldborderlistener = (IWorldBorderListener) iterator.next();
 
@@ -241,6 +251,7 @@ public class WorldBorder {
         this.k = i;
         Iterator iterator = this.k().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             IWorldBorderListener iworldborderlistener = (IWorldBorderListener) iterator.next();
 
@@ -257,6 +268,7 @@ public class WorldBorder {
         this.l = i;
         Iterator iterator = this.k().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             IWorldBorderListener iworldborderlistener = (IWorldBorderListener) iterator.next();
 

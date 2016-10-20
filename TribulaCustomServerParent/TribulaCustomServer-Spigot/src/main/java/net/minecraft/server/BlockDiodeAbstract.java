@@ -1,23 +1,30 @@
 package net.minecraft.server;
 
-import java.util.Random;
+import org.bukkit.craftbukkit.event.CraftEventFactory;
 
-import org.bukkit.craftbukkit.event.CraftEventFactory; // CraftBukkit
+import java.util.Random;
 
 public abstract class BlockDiodeAbstract extends BlockFacingHorizontal {
 
     protected static final AxisAlignedBB c = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D);
     protected final boolean d;
 
+    @SuppressWarnings("unused")
     protected BlockDiodeAbstract(boolean flag) {
         super(Material.ORIENTABLE);
         this.d = flag;
     }
 
+    public static boolean isDiode(IBlockData iblockdata) {
+        return Blocks.UNPOWERED_REPEATER.C(iblockdata) || Blocks.UNPOWERED_COMPARATOR.C(iblockdata);
+    }
+
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         return BlockDiodeAbstract.c;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
@@ -33,7 +40,7 @@ public abstract class BlockDiodeAbstract extends BlockFacingHorizontal {
     public void a(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {}
 
     public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
-        if (!this.b(world, blockposition, iblockdata)) {
+        if (this.b(world, blockposition, iblockdata)) {
             boolean flag = this.e(world, blockposition, iblockdata);
 
             if (this.d && !flag) {
@@ -58,18 +65,21 @@ public abstract class BlockDiodeAbstract extends BlockFacingHorizontal {
         }
     }
 
-    protected boolean z(IBlockData iblockdata) {
+    protected boolean z(@SuppressWarnings("UnusedParameters") IBlockData iblockdata) {
         return this.d;
     }
 
+    @SuppressWarnings("deprecation")
     public int c(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
         return iblockdata.a(iblockaccess, blockposition, enumdirection);
     }
 
+    @SuppressWarnings("deprecation")
     public int b(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
         return !this.z(iblockdata) ? 0 : (iblockdata.get(BlockDiodeAbstract.FACING) == enumdirection ? this.a(iblockaccess, blockposition, iblockdata) : 0);
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         if (this.b(world, blockposition)) {
             this.g(world, blockposition, iblockdata);
@@ -79,9 +89,7 @@ public abstract class BlockDiodeAbstract extends BlockFacingHorizontal {
             EnumDirection[] aenumdirection = EnumDirection.values();
             int i = aenumdirection.length;
 
-            for (int j = 0; j < i; ++j) {
-                EnumDirection enumdirection = aenumdirection[j];
-
+            for (EnumDirection enumdirection : aenumdirection) {
                 world.applyPhysics(blockposition.shift(enumdirection), this);
             }
 
@@ -89,7 +97,7 @@ public abstract class BlockDiodeAbstract extends BlockFacingHorizontal {
     }
 
     protected void g(World world, BlockPosition blockposition, IBlockData iblockdata) {
-        if (!this.b(world, blockposition, iblockdata)) {
+        if (this.b(world, blockposition, iblockdata)) {
             boolean flag = this.e(world, blockposition, iblockdata);
 
             if ((this.d && !flag || !this.d && flag) && !world.a(blockposition, this)) {
@@ -107,8 +115,9 @@ public abstract class BlockDiodeAbstract extends BlockFacingHorizontal {
         }
     }
 
-    public boolean b(IBlockAccess iblockaccess, BlockPosition blockposition, IBlockData iblockdata) {
-        return false;
+    @SuppressWarnings("SameReturnValue")
+    public boolean b(@SuppressWarnings("UnusedParameters") IBlockAccess iblockaccess, @SuppressWarnings("UnusedParameters") BlockPosition blockposition, @SuppressWarnings("UnusedParameters") IBlockData iblockdata) {
+        return true;
     }
 
     protected boolean e(World world, BlockPosition blockposition, IBlockData iblockdata) {
@@ -125,10 +134,11 @@ public abstract class BlockDiodeAbstract extends BlockFacingHorizontal {
         } else {
             IBlockData iblockdata1 = world.getType(blockposition1);
 
-            return Math.max(i, iblockdata1.getBlock() == Blocks.REDSTONE_WIRE ? iblockdata1.get(BlockRedstoneWire.POWER).intValue() : 0);
+            return Math.max(i, iblockdata1.getBlock() == Blocks.REDSTONE_WIRE ? iblockdata1.get(BlockRedstoneWire.POWER) : 0);
         }
     }
 
+    @SuppressWarnings("unused")
     protected int c(IBlockAccess iblockaccess, BlockPosition blockposition, IBlockData iblockdata) {
         EnumDirection enumdirection = iblockdata.get(BlockDiodeAbstract.FACING);
         EnumDirection enumdirection1 = enumdirection.e();
@@ -141,9 +151,10 @@ public abstract class BlockDiodeAbstract extends BlockFacingHorizontal {
         IBlockData iblockdata = iblockaccess.getType(blockposition);
         Block block = iblockdata.getBlock();
 
-        return this.A(iblockdata) ? (block == Blocks.REDSTONE_BLOCK ? 15 : (block == Blocks.REDSTONE_WIRE ? iblockdata.get(BlockRedstoneWire.POWER).intValue() : iblockaccess.getBlockPower(blockposition, enumdirection))) : 0;
+        return this.A(iblockdata) ? (block == Blocks.REDSTONE_BLOCK ? 15 : (block == Blocks.REDSTONE_WIRE ? iblockdata.get(BlockRedstoneWire.POWER) : iblockaccess.getBlockPower(blockposition, enumdirection))) : 0;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean isPowerSource(IBlockData iblockdata) {
         return true;
     }
@@ -176,9 +187,7 @@ public abstract class BlockDiodeAbstract extends BlockFacingHorizontal {
             EnumDirection[] aenumdirection = EnumDirection.values();
             int i = aenumdirection.length;
 
-            for (int j = 0; j < i; ++j) {
-                EnumDirection enumdirection = aenumdirection[j];
-
+            for (EnumDirection enumdirection : aenumdirection) {
                 world.applyPhysics(blockposition.shift(enumdirection), this);
             }
         }
@@ -186,6 +195,7 @@ public abstract class BlockDiodeAbstract extends BlockFacingHorizontal {
         super.postBreak(world, blockposition, iblockdata);
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
@@ -194,12 +204,9 @@ public abstract class BlockDiodeAbstract extends BlockFacingHorizontal {
         return iblockdata.m();
     }
 
-    protected int a(IBlockAccess iblockaccess, BlockPosition blockposition, IBlockData iblockdata) {
+    @SuppressWarnings("SameReturnValue")
+    protected int a(@SuppressWarnings("UnusedParameters") IBlockAccess iblockaccess, @SuppressWarnings("UnusedParameters") BlockPosition blockposition, @SuppressWarnings("UnusedParameters") IBlockData iblockdata) {
         return 15;
-    }
-
-    public static boolean isDiode(IBlockData iblockdata) {
-        return Blocks.UNPOWERED_REPEATER.C(iblockdata) || Blocks.UNPOWERED_COMPARATOR.C(iblockdata);
     }
 
     public boolean C(IBlockData iblockdata) {

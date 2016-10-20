@@ -1,23 +1,26 @@
 package net.minecraft.server;
 
 // CraftBukkit start
-import java.util.List;
+
 import org.bukkit.craftbukkit.entity.CraftHumanEntity;
 import org.bukkit.entity.HumanEntity;
+
+import java.util.List;
 // CraftBukkit end
 
 public class InventoryHorseChest extends InventorySubcontainer {
 
+    // CraftBukkit start - add fields and methods
+    @SuppressWarnings("CanBeFinal")
+    public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
+    private EntityHorse horse;
+    private int maxStack = MAX_STACK;
+    @SuppressWarnings("unused")
     public InventoryHorseChest(String s, int i) {
         super(s, false, i);
     }
 
-    // CraftBukkit start - add fields and methods
-    public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
-    private EntityHorse horse;
-    private int maxStack = MAX_STACK;
-
-    public InventoryHorseChest(String s, int i, EntityHorse horse) {
+    public InventoryHorseChest(@SuppressWarnings("SameParameterValue") String s, int i, EntityHorse horse) {
         super(s, false, i, (org.bukkit.craftbukkit.entity.CraftHorse) horse.getBukkitEntity());
         this.horse = horse;
     }
@@ -44,17 +47,18 @@ public class InventoryHorseChest extends InventorySubcontainer {
 
     @Override
     public org.bukkit.inventory.InventoryHolder getOwner() {
+        //noinspection deprecation
         return (org.bukkit.entity.Horse) this.horse.getBukkitEntity();
-    }
-
-    @Override
-    public void setMaxStackSize(int size) {
-        maxStack = size;
     }
 
     @Override
     public int getMaxStackSize() {
         return maxStack;
+    }
+
+    @Override
+    public void setMaxStackSize(int size) {
+        maxStack = size;
     }
     // CraftBukkit end
 }

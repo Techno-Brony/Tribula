@@ -3,20 +3,22 @@ package net.minecraft.server;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import java.util.Iterator;
-import java.util.List;
-import javax.annotation.Nullable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-// CraftBukkit Start
 import org.bukkit.craftbukkit.chunkio.ChunkIOExecutor;
+
+import javax.annotation.Nullable;
+import java.util.Iterator;
+import java.util.List;
+
+// CraftBukkit Start
 // CraftBukkit end
 
 public class PlayerChunk {
 
     private static final Logger a = LogManager.getLogger();
-    private final PlayerChunkMap playerChunkMap;
     public final List<EntityPlayer> c = Lists.newArrayList(); // CraftBukkit - public
+    private final PlayerChunkMap playerChunkMap;
     private final ChunkCoordIntPair location;
     private final short[] dirtyBlocks = new short[64];
     @Nullable
@@ -28,6 +30,7 @@ public class PlayerChunk {
 
     // CraftBukkit start - add fields
     private boolean loadInProgress = false;
+    @SuppressWarnings("CanBeFinal")
     private Runnable loadedRunnable = new Runnable() {
         public void run() {
             loadInProgress = false;
@@ -51,7 +54,7 @@ public class PlayerChunk {
 
     public void a(final EntityPlayer entityplayer) { // CraftBukkit - added final to argument
         if (this.c.contains(entityplayer)) {
-            PlayerChunk.a.debug("Failed to add player. {} already is in chunk {}, {}", entityplayer, Integer.valueOf(this.location.x), Integer.valueOf(this.location.z));
+            PlayerChunk.a.debug("Failed to add player. {} already is in chunk {}, {}", entityplayer, this.location.x, this.location.z);
         } else {
             if (this.c.isEmpty()) {
                 this.i = this.playerChunkMap.getWorld().getTime();
@@ -131,6 +134,7 @@ public class PlayerChunk {
             PacketPlayOutMapChunk packetplayoutmapchunk = new PacketPlayOutMapChunk(this.chunk, '\uffff');
             Iterator iterator = this.c.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 EntityPlayer entityplayer = (EntityPlayer) iterator.next();
 
@@ -183,8 +187,8 @@ public class PlayerChunk {
 
     public void a(Packet<?> packet) {
         if (this.done) {
-            for (int i = 0; i < this.c.size(); ++i) {
-                this.c.get(i).playerConnection.sendPacket(packet);
+            for (EntityPlayer aC : this.c) {
+                aC.playerConnection.sendPacket(packet);
             }
 
         }
@@ -245,22 +249,22 @@ public class PlayerChunk {
         return this.c.contains(entityplayer);
     }
 
-    public boolean a(Predicate<EntityPlayer> predicate) {
+    public boolean a(@SuppressWarnings("SameParameterValue") Predicate<EntityPlayer> predicate) {
         return Iterables.tryFind(this.c, predicate).isPresent();
     }
 
-    public boolean a(double d0, Predicate<EntityPlayer> predicate) {
+    public boolean a(@SuppressWarnings("SameParameterValue") double d0, @SuppressWarnings("SameParameterValue") Predicate<EntityPlayer> predicate) {
         int i = 0;
 
         for (int j = this.c.size(); i < j; ++i) {
             EntityPlayer entityplayer = this.c.get(i);
 
             if (predicate.apply(entityplayer) && this.location.a(entityplayer) < d0 * d0) {
-                return true;
+                return false;
             }
         }
 
-        return false;
+        return true;
     }
 
     public boolean e() {
@@ -276,6 +280,7 @@ public class PlayerChunk {
         double d0 = Double.MAX_VALUE;
         Iterator iterator = this.c.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             EntityPlayer entityplayer = (EntityPlayer) iterator.next();
             double d1 = this.location.a(entityplayer);

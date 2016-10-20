@@ -1,20 +1,11 @@
 package net.minecraft.server;
 
-import com.google.common.base.Objects;
-import com.google.common.collect.Maps;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
-import javax.annotation.Nullable;
-
-// CraftBukkit start
-import java.util.ArrayList;
 import com.google.common.base.Function;
+import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.bukkit.Location;
+import org.bukkit.craftbukkit.SpigotTimings;
 import org.bukkit.craftbukkit.attribute.CraftAttributeMap;
 import org.bukkit.craftbukkit.event.CraftEventFactory;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
@@ -24,25 +15,28 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.EntityTeleportEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
-// CraftBukkit end
 
-import org.bukkit.craftbukkit.SpigotTimings; // Spigot
+import javax.annotation.Nullable;
+import java.util.*;
+
+// CraftBukkit start
+// CraftBukkit end
 
 public abstract class EntityLiving extends Entity {
 
+    public static final DataWatcherObject<Float> HEALTH = DataWatcher.a(EntityLiving.class, DataWatcherRegistry.c);
+    protected static final DataWatcherObject<Byte> au = DataWatcher.a(EntityLiving.class, DataWatcherRegistry.a);
     private static final UUID a = UUID.fromString("662A6B8D-DA3E-4C1C-8813-96EA6097278D");
     private static final AttributeModifier b = (new AttributeModifier(EntityLiving.a, "Sprinting speed boost", 0.30000001192092896D, 2)).a(false);
-    protected static final DataWatcherObject<Byte> au = DataWatcher.a(EntityLiving.class, DataWatcherRegistry.a);
-    public static final DataWatcherObject<Float> HEALTH = DataWatcher.a(EntityLiving.class, DataWatcherRegistry.c);
     private static final DataWatcherObject<Integer> f = DataWatcher.a(EntityLiving.class, DataWatcherRegistry.b);
     private static final DataWatcherObject<Boolean> g = DataWatcher.a(EntityLiving.class, DataWatcherRegistry.h);
     private static final DataWatcherObject<Integer> h = DataWatcher.a(EntityLiving.class, DataWatcherRegistry.b);
-    private AttributeMapBase br;
-    public CombatTracker combatTracker = new CombatTracker(this);
     public final Map<MobEffectList, MobEffect> effects = Maps.newHashMap();
     private final ItemStack[] bu = new ItemStack[2];
     private final ItemStack[] bv = new ItemStack[4];
+    public CombatTracker combatTracker = new CombatTracker(this);
     public boolean av;
+    @SuppressWarnings("unused")
     public EnumHand aw;
     public int ax;
     public int ay;
@@ -50,16 +44,20 @@ public abstract class EntityLiving extends Entity {
     public int aA;
     public float aB;
     public int deathTicks;
+    @SuppressWarnings("unused")
     public float aD;
     public float aE;
-    protected int aF;
+    @SuppressWarnings("unused")
     public float aG;
     public float aH;
     public float aI;
     public int maxNoDamageTicks = 20;
+    @SuppressWarnings("unused")
     public float aK;
     public float aL;
+    @SuppressWarnings({"unused", "CanBeFinal"})
     public float aM;
+    @SuppressWarnings({"unused", "CanBeFinal"})
     public float aN;
     public float aO;
     public float aP;
@@ -67,59 +65,63 @@ public abstract class EntityLiving extends Entity {
     public float aR;
     public float aS = 0.02F;
     public EntityHuman killer;
-    protected int lastDamageByPlayerTime;
-    protected boolean aV;
-    protected int ticksFarFromPlayer;
-    protected float aX;
-    protected float aY;
-    protected float aZ;
-    protected float ba;
-    protected float bb;
-    protected int bc;
     public float lastDamage;
-    protected boolean be;
     public float bf;
     public float bg;
     public float bh;
-    protected int bi;
-    protected double bj;
-    protected double bk;
-    protected double bl;
-    protected double bm;
-    protected double bn;
     public boolean updateEffects = true;
     public EntityLiving lastDamager;
     public int hurtTimestamp;
+    // CraftBukkit start
+    public int expToDrop;
+    public int maxAirTicks = 300;
+    public org.bukkit.craftbukkit.attribute.CraftAttributeMap craftAttributes;
+    public boolean collides = true;
+    protected int aF;
+    protected int lastDamageByPlayerTime;
+    protected boolean aV;
+    protected int ticksFarFromPlayer;
+    @SuppressWarnings("unused")
+    protected float aX;
+    protected float aY;
+    protected float aZ;
+    @SuppressWarnings("unused")
+    protected float ba;
+    @SuppressWarnings("unused")
+    protected float bb;
+    @SuppressWarnings("unused")
+    protected int bc;
+    protected boolean be;
+    protected int bi;
+    @SuppressWarnings("unused")
+    protected double bj;
+    @SuppressWarnings("unused")
+    protected double bk;
+    @SuppressWarnings("unused")
+    protected double bl;
+    @SuppressWarnings("unused")
+    protected double bm;
+    @SuppressWarnings("unused")
+    protected double bn;
+    protected ItemStack bo;
+    protected int bp;
+    protected int bq;
+    boolean forceDrops;
+    ArrayList<org.bukkit.inventory.ItemStack> drops = new ArrayList<org.bukkit.inventory.ItemStack>();
+    private AttributeMapBase br;
     private EntityLiving bz;
     private int bA;
     private float bB;
     private int bC;
     private float bD;
-    protected ItemStack bo;
-    protected int bp;
-    protected int bq;
     private BlockPosition bE;
     private DamageSource bF;
     private long bG;
     // CraftBukkit start
-    public int expToDrop;
-    public int maxAirTicks = 300;
-    boolean forceDrops;
-    ArrayList<org.bukkit.inventory.ItemStack> drops = new ArrayList<org.bukkit.inventory.ItemStack>();
-    public org.bukkit.craftbukkit.attribute.CraftAttributeMap craftAttributes;
-    public boolean collides = true;
-    // CraftBukkit end
-    // Spigot start
-    public void inactiveTick()
-    {
-        super.inactiveTick();
-        ++this.ticksFarFromPlayer; // Above all the floats
-    }
+    private boolean isTickingEffects = false;
     // Spigot end
-
-    public void Q() {
-        this.damageEntity(DamageSource.OUT_OF_WORLD, Float.MAX_VALUE);
-    }
+    @SuppressWarnings("CanBeFinal")
+    private List<Object> effectsToProcess = Lists.newArrayList();
 
     public EntityLiving(World world) {
         super(world);
@@ -135,12 +137,40 @@ public abstract class EntityLiving extends Entity {
         this.P = 0.6F;
     }
 
+    public static boolean a(Collection<MobEffect> collection) {
+        Iterator iterator = collection.iterator();
+
+        MobEffect mobeffect;
+
+        do {
+            if (!iterator.hasNext()) {
+                return true;
+            }
+
+            mobeffect = (MobEffect) iterator.next();
+        } while (mobeffect.isAmbient());
+
+        return false;
+    }
+
+    // CraftBukkit end
+    // Spigot start
+    public void inactiveTick()
+    {
+        super.inactiveTick();
+        ++this.ticksFarFromPlayer; // Above all the floats
+    }
+
+    public void Q() {
+        this.damageEntity(DamageSource.OUT_OF_WORLD, Float.MAX_VALUE);
+    }
+
     protected void i() {
-        this.datawatcher.register(EntityLiving.au, Byte.valueOf((byte) 0));
-        this.datawatcher.register(EntityLiving.f, Integer.valueOf(0));
-        this.datawatcher.register(EntityLiving.g, Boolean.valueOf(false));
-        this.datawatcher.register(EntityLiving.h, Integer.valueOf(0));
-        this.datawatcher.register(EntityLiving.HEALTH, Float.valueOf(1.0F));
+        this.datawatcher.register(EntityLiving.au, (byte) 0);
+        this.datawatcher.register(EntityLiving.f, 0);
+        this.datawatcher.register(EntityLiving.g, Boolean.FALSE);
+        this.datawatcher.register(EntityLiving.h, 0);
+        this.datawatcher.register(EntityLiving.HEALTH, 1.0F);
     }
 
     protected void initAttributes() {
@@ -175,7 +205,9 @@ public abstract class EntityLiving extends Entity {
 
         super.a(d0, flag, iblockdata, blockposition);
     }
+    // CraftBukkit end
 
+    @SuppressWarnings("SameReturnValue")
     public boolean bE() {
         return false;
     }
@@ -302,7 +334,6 @@ public abstract class EntityLiving extends Entity {
             return 0;
         }
     }
-    // CraftBukkit end
 
     protected void b(BlockPosition blockposition) {
         int i = EnchantmentManager.a(Enchantments.j, this);
@@ -399,6 +430,7 @@ public abstract class EntityLiving extends Entity {
         this.bA = this.ticksLived;
     }
 
+    @SuppressWarnings("unused")
     public int bN() {
         return this.ticksFarFromPlayer;
     }
@@ -455,6 +487,7 @@ public abstract class EntityLiving extends Entity {
             NBTTagList nbttaglist = new NBTTagList();
             Iterator iterator = this.effects.values().iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 MobEffect mobeffect = (MobEffect) iterator.next();
 
@@ -466,6 +499,7 @@ public abstract class EntityLiving extends Entity {
 
         nbttagcompound.setBoolean("FallFlying", this.cG());
     }
+    // CraftBukkit end
 
     public void a(NBTTagCompound nbttagcompound) {
         this.setAbsorptionHearts(nbttagcompound.getFloat("AbsorptionAmount"));
@@ -516,11 +550,6 @@ public abstract class EntityLiving extends Entity {
 
     }
 
-    // CraftBukkit start
-    private boolean isTickingEffects = false;
-    private List<Object> effectsToProcess = Lists.newArrayList();
-    // CraftBukkit end
-
     protected void tickPotionEffects() {
         Iterator iterator = this.effects.keySet().iterator();
 
@@ -557,8 +586,8 @@ public abstract class EntityLiving extends Entity {
             this.updateEffects = false;
         }
 
-        int i = this.datawatcher.get(EntityLiving.f).intValue();
-        boolean flag = this.datawatcher.get(EntityLiving.g).booleanValue();
+        int i = this.datawatcher.get(EntityLiving.f);
+        boolean flag = this.datawatcher.get(EntityLiving.g);
 
         if (i > 0) {
             boolean flag1;
@@ -576,7 +605,7 @@ public abstract class EntityLiving extends Entity {
             if (flag1 && i > 0) {
                 double d0 = (double) (i >> 16 & 255) / 255.0D;
                 double d1 = (double) (i >> 8 & 255) / 255.0D;
-                double d2 = (double) (i >> 0 & 255) / 255.0D;
+                double d2 = (double) (i & 255) / 255.0D;
 
                 this.world.addParticle(flag ? EnumParticle.SPELL_MOB_AMBIENT : EnumParticle.SPELL_MOB, this.locX + (this.random.nextDouble() - 0.5D) * (double) this.width, this.locY + this.random.nextDouble() * (double) this.length, this.locZ + (this.random.nextDouble() - 0.5D) * (double) this.width, d0, d1, d2);
             }
@@ -591,32 +620,18 @@ public abstract class EntityLiving extends Entity {
         } else {
             Collection collection = this.effects.values();
 
-            this.datawatcher.set(EntityLiving.g, Boolean.valueOf(a(collection)));
-            this.datawatcher.set(EntityLiving.f, Integer.valueOf(PotionUtil.a(collection)));
+            //noinspection unchecked
+            this.datawatcher.set(EntityLiving.g, a(collection));
+            //noinspection unchecked
+            this.datawatcher.set(EntityLiving.f, PotionUtil.a(collection));
             this.setInvisible(this.hasEffect(MobEffects.INVISIBILITY));
         }
 
     }
 
-    public static boolean a(Collection<MobEffect> collection) {
-        Iterator iterator = collection.iterator();
-
-        MobEffect mobeffect;
-
-        do {
-            if (!iterator.hasNext()) {
-                return true;
-            }
-
-            mobeffect = (MobEffect) iterator.next();
-        } while (mobeffect.isAmbient());
-
-        return false;
-    }
-
     protected void bP() {
-        this.datawatcher.set(EntityLiving.g, Boolean.valueOf(false));
-        this.datawatcher.set(EntityLiving.f, Integer.valueOf(0));
+        this.datawatcher.set(EntityLiving.g, Boolean.FALSE);
+        this.datawatcher.set(EntityLiving.f, 0);
     }
 
     public void removeAllEffects() {
@@ -730,6 +745,7 @@ public abstract class EntityLiving extends Entity {
     }
 
     // CraftBukkit start - Delegate so we can handle providing a reason for health being regained
+    @SuppressWarnings("unused")
     public void heal(float f) {
         heal(f, EntityRegainHealthEvent.RegainReason.CUSTOM);
     }
@@ -755,7 +771,7 @@ public abstract class EntityLiving extends Entity {
             return (float) ((EntityPlayer) this).getBukkitEntity().getHealth();
         }
         // CraftBukkit end
-        return this.datawatcher.get(EntityLiving.HEALTH).floatValue();
+        return this.datawatcher.get(EntityLiving.HEALTH);
     }
 
     public void setHealth(float f) {
@@ -771,11 +787,11 @@ public abstract class EntityLiving extends Entity {
                 player.setRealHealth(f);
             }
 
-            this.datawatcher.set(EntityLiving.HEALTH, Float.valueOf(player.getScaledHealth()));
+            this.datawatcher.set(EntityLiving.HEALTH, player.getScaledHealth());
             return;
         }
         // CraftBukkit end
-        this.datawatcher.set(EntityLiving.HEALTH, Float.valueOf(MathHelper.a(f, 0.0F, this.getMaxHealth())));
+        this.datawatcher.set(EntityLiving.HEALTH, MathHelper.a(f, 0.0F, this.getMaxHealth()));
     }
 
     public boolean damageEntity(DamageSource damagesource, float f) {
@@ -791,27 +807,10 @@ public abstract class EntityLiving extends Entity {
                 return false;
             } else {
                 // CraftBukkit - Moved into damageEntity0(DamageSource, float)
-                if (false && (damagesource == DamageSource.ANVIL || damagesource == DamageSource.FALLING_BLOCK) && this.getEquipment(EnumItemSlot.HEAD) != null) {
-                    this.getEquipment(EnumItemSlot.HEAD).damage((int) (f * 4.0F + this.random.nextFloat() * f * 2.0F), this);
-                    f *= 0.75F;
-                }
 
                 boolean flag = f > 0.0F && this.d(damagesource); // Copied from below
 
                 // CraftBukkit - Moved into damageEntity0(DamageSource, float)
-                if (false && f > 0.0F && this.d(damagesource)) {
-                    this.k(f);
-                    if (damagesource.a()) {
-                        f = 0.0F;
-                    } else {
-                        f *= 0.33F;
-                        if (damagesource.i() instanceof EntityLiving) {
-                            ((EntityLiving) damagesource.i()).a(this, 0.5F, this.locX - damagesource.i().locX, this.locZ - damagesource.i().locZ);
-                        }
-                    }
-
-                    flag = true;
-                }
 
                 this.aH = 1.5F;
                 boolean flag1 = true;
@@ -823,7 +822,7 @@ public abstract class EntityLiving extends Entity {
                     }
 
                     // CraftBukkit start
-                    if (!this.damageEntity0(damagesource, f - this.lastDamage)) {
+                    if (this.damageEntity0(damagesource, f - this.lastDamage)) {
                         return false;
                     }
                     // CraftBukkit end
@@ -831,7 +830,7 @@ public abstract class EntityLiving extends Entity {
                     flag1 = false;
                 } else {
                     // CraftBukkit start
-                    if (!this.damageEntity0(damagesource, f)) {
+                    if (this.damageEntity0(damagesource, f)) {
                         return false;
                     }
                     this.lastDamage = f;
@@ -923,6 +922,7 @@ public abstract class EntityLiving extends Entity {
         }
     }
 
+    @SuppressWarnings("unused")
     @Nullable
     public DamageSource bU() {
         if (this.world.getTime() - this.bG > 40L) {
@@ -1024,7 +1024,7 @@ public abstract class EntityLiving extends Entity {
 
     protected void dropEquipment(boolean flag, int i) {}
 
-    public void a(Entity entity, float f, double d0, double d1) {
+    public void a(@SuppressWarnings("UnusedParameters") Entity entity, float f, double d0, double d1) {
         if (this.random.nextDouble() >= this.getAttributeInstance(GenericAttributes.c).getValue()) {
             this.impulse = true;
             float f1 = MathHelper.sqrt(d0 * d0 + d1 * d1);
@@ -1058,7 +1058,7 @@ public abstract class EntityLiving extends Entity {
         return i > 4 ? SoundEffects.bA : SoundEffects.bI;
     }
 
-    protected void dropDeathLoot(boolean flag, int i) {}
+    protected void dropDeathLoot(@SuppressWarnings("UnusedParameters") boolean flag, int i) {}
 
     public boolean m_() {
         int i = MathHelper.floor(this.locX);
@@ -1077,7 +1077,7 @@ public abstract class EntityLiving extends Entity {
     }
 
     private boolean a(BlockPosition blockposition, IBlockData iblockdata) {
-        if (iblockdata.get(BlockTrapdoor.OPEN).booleanValue()) {
+        if (iblockdata.get(BlockTrapdoor.OPEN)) {
             IBlockData iblockdata1 = this.world.getType(blockposition.down());
 
             if (iblockdata1.getBlock() == Blocks.LADDER && iblockdata1.get(BlockLadder.FACING) == iblockdata.get(BlockTrapdoor.FACING)) {
@@ -1146,13 +1146,6 @@ public abstract class EntityLiving extends Entity {
             int i;
 
             // CraftBukkit - Moved to damageEntity0(DamageSource, float)
-            if (false && this.hasEffect(MobEffects.RESISTANCE) && damagesource != DamageSource.OUT_OF_WORLD) {
-                i = (this.getEffect(MobEffects.RESISTANCE).getAmplifier() + 1) * 5;
-                int j = 25 - i;
-                float f1 = f * (float) j;
-
-                f = f1 / 25.0F;
-            }
 
             if (f <= 0.0F) {
                 return 0.0F;
@@ -1237,7 +1230,7 @@ public abstract class EntityLiving extends Entity {
 
             EntityDamageEvent event = CraftEventFactory.handleLivingEntityDamageEvent(this, damagesource, originalDamage, hardHatModifier, blockingModifier, armorModifier, resistanceModifier, magicModifier, absorptionModifier, hardHat, blocking, armor, resistance, magic, absorption);
             if (event.isCancelled()) {
-                return false;
+                return true;
             }
 
             f = (float) event.getFinalDamage();
@@ -1260,7 +1253,7 @@ public abstract class EntityLiving extends Entity {
                     ((EntityLiving) damagesource.i()).a(EntityLiving.this, 0.5F, EntityLiving.this.locX - damagesource.i().locX, EntityLiving.this.locZ - damagesource.i().locZ);
                 }
                 if (f <= 0) {
-                    return false;
+                    return true;
                 }
             }
 
@@ -1285,9 +1278,9 @@ public abstract class EntityLiving extends Entity {
                 }
                 // CraftBukkit end
             }
-            return true;
+            return false;
         }
-        return false; // CraftBukkit
+        return true; // CraftBukkit
     }
 
     public CombatTracker getCombatTracker() {
@@ -1304,11 +1297,11 @@ public abstract class EntityLiving extends Entity {
     }
 
     public final int cb() {
-        return this.datawatcher.get(EntityLiving.h).intValue();
+        return this.datawatcher.get(EntityLiving.h);
     }
 
     public final void f(int i) {
-        this.datawatcher.set(EntityLiving.h, Integer.valueOf(i));
+        this.datawatcher.set(EntityLiving.h, i);
     }
 
     private int o() {
@@ -1447,11 +1440,9 @@ public abstract class EntityLiving extends Entity {
             double d5 = this.getBoundingBox().d - this.getBoundingBox().a;
             double d6 = this.getBoundingBox().f - this.getBoundingBox().c;
             AxisAlignedBB axisalignedbb = new AxisAlignedBB(d3 - d5 / 2.0D, this.getBoundingBox().b, d4 - d6 / 2.0D, d3 + d5 / 2.0D, this.getBoundingBox().e, d4 + d6 / 2.0D);
-            int[][] aint1 = aint;
             int i = aint.length;
 
-            for (int j = 0; j < i; ++j) {
-                int[] aint2 = aint1[j];
+            for (int[] aint2 : aint) {
                 double d7 = (double) (enumdirection.getAdjacentX() * aint2[0] + enumdirection1.getAdjacentX() * aint2[1]);
                 double d8 = (double) (enumdirection.getAdjacentZ() * aint2[0] + enumdirection1.getAdjacentZ() * aint2[1]);
                 double d9 = d3 + d7;
@@ -1534,6 +1525,7 @@ public abstract class EntityLiving extends Entity {
         this.motY += 0.03999999910593033D;
     }
 
+    @SuppressWarnings("SameReturnValue")
     protected float co() {
         return 0.8F;
     }
@@ -1730,11 +1722,13 @@ public abstract class EntityLiving extends Entity {
         this.bB = f;
     }
 
+    @SuppressWarnings("unused")
     public boolean B(Entity entity) {
         this.z(entity);
         return false;
     }
 
+    @SuppressWarnings("unused")
     public boolean isSleeping() {
         return false;
     }
@@ -1760,21 +1754,20 @@ public abstract class EntityLiving extends Entity {
             EnumItemSlot[] aenumitemslot = EnumItemSlot.values();
             int j = aenumitemslot.length;
 
-            for (int k = 0; k < j; ++k) {
-                EnumItemSlot enumitemslot = aenumitemslot[k];
+            for (EnumItemSlot enumitemslot : aenumitemslot) {
                 ItemStack itemstack;
 
-                switch (EntityLiving.SyntheticClass_1.a[enumitemslot.a().ordinal()]) {
-                case 1:
-                    itemstack = this.bu[enumitemslot.b()];
-                    break;
+                switch (SyntheticClass_1.a[enumitemslot.a().ordinal()]) {
+                    case 1:
+                        itemstack = this.bu[enumitemslot.b()];
+                        break;
 
-                case 2:
-                    itemstack = this.bv[enumitemslot.b()];
-                    break;
+                    case 2:
+                        itemstack = this.bv[enumitemslot.b()];
+                        break;
 
-                default:
-                    continue;
+                    default:
+                        continue;
                 }
 
                 ItemStack itemstack1 = this.getEquipment(enumitemslot);
@@ -1789,13 +1782,13 @@ public abstract class EntityLiving extends Entity {
                         this.getAttributeMap().b(itemstack1.a(enumitemslot));
                     }
 
-                    switch (EntityLiving.SyntheticClass_1.a[enumitemslot.a().ordinal()]) {
-                    case 1:
-                        this.bu[enumitemslot.b()] = itemstack1 == null ? null : itemstack1.cloneItemStack();
-                        break;
+                    switch (SyntheticClass_1.a[enumitemslot.a().ordinal()]) {
+                        case 1:
+                            this.bu[enumitemslot.b()] = itemstack1 == null ? null : itemstack1.cloneItemStack();
+                            break;
 
-                    case 2:
-                        this.bv[enumitemslot.b()] = itemstack1 == null ? null : itemstack1.cloneItemStack();
+                        case 2:
+                            this.bv[enumitemslot.b()] = itemstack1 == null ? null : itemstack1.cloneItemStack();
                     }
                 }
             }
@@ -2143,10 +2136,13 @@ public abstract class EntityLiving extends Entity {
         this.bD = f;
     }
 
+    @SuppressWarnings("unused")
     public void enterCombat() {}
 
+    @SuppressWarnings("unused")
     public void exitCombat() {}
 
+    @SuppressWarnings("unused")
     protected void cv() {
         this.updateEffects = true;
     }
@@ -2154,11 +2150,11 @@ public abstract class EntityLiving extends Entity {
     public abstract EnumMainHand getMainHand();
 
     public boolean cx() {
-        return (this.datawatcher.get(EntityLiving.au).byteValue() & 1) > 0;
+        return (this.datawatcher.get(EntityLiving.au) & 1) > 0;
     }
 
     public EnumHand cy() {
-        return (this.datawatcher.get(EntityLiving.au).byteValue() & 2) > 0 ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND;
+        return (this.datawatcher.get(EntityLiving.au) & 2) > 0 ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND;
     }
 
     protected void cz() {
@@ -2193,7 +2189,7 @@ public abstract class EntityLiving extends Entity {
                     i |= 2;
                 }
 
-                this.datawatcher.set(EntityLiving.au, Byte.valueOf((byte) i));
+                this.datawatcher.set(EntityLiving.au, (byte) i);
             }
 
         }
@@ -2257,6 +2253,7 @@ public abstract class EntityLiving extends Entity {
             if (event.isCancelled()) {
                 // Update client
                 if (this instanceof EntityPlayer) {
+                    //noinspection deprecation
                     ((EntityPlayer) this).getBukkitEntity().updateInventory();
                     ((EntityPlayer) this).getBukkitEntity().updateScaledHealth();
                 }
@@ -2285,6 +2282,7 @@ public abstract class EntityLiving extends Entity {
         return this.bp;
     }
 
+    @SuppressWarnings("unused")
     public int cC() {
         return this.cx() ? this.bo.l() - this.cB() : 0;
     }
@@ -2299,7 +2297,7 @@ public abstract class EntityLiving extends Entity {
 
     public void cE() {
         if (!this.world.isClientSide) {
-            this.datawatcher.set(EntityLiving.au, Byte.valueOf((byte) 0));
+            this.datawatcher.set(EntityLiving.au, (byte) 0);
         }
 
         this.bo = null;
@@ -2357,7 +2355,7 @@ public abstract class EntityLiving extends Entity {
                 if (!teleport.isCancelled()) {
                     Location to = teleport.getTo();
                     this.enderTeleportTo(to.getX(), to.getY(), to.getZ());
-                    if (world.getCubes(this, this.getBoundingBox()).isEmpty() && !world.containsLiquid(this.getBoundingBox())) {
+                    if (world.getCubes(this, this.getBoundingBox()).isEmpty() && world.containsLiquid(this.getBoundingBox())) {
                         flag = true;
                     }
                 }
@@ -2402,12 +2400,12 @@ public abstract class EntityLiving extends Entity {
         static {
             try {
                 EntityLiving.SyntheticClass_1.a[EnumItemSlot.Function.HAND.ordinal()] = 1;
-            } catch (NoSuchFieldError nosuchfielderror) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 EntityLiving.SyntheticClass_1.a[EnumItemSlot.Function.ARMOR.ordinal()] = 2;
-            } catch (NoSuchFieldError nosuchfielderror1) {
+            } catch (NoSuchFieldError ignored) {
             }
 
         }

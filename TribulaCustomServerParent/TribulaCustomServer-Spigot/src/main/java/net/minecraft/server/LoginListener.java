@@ -5,24 +5,22 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.exceptions.AuthenticationUnavailableException;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
-import io.netty.util.concurrent.Future;
-import io.netty.util.concurrent.GenericFutureListener;
+import org.apache.commons.lang3.Validate;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.bukkit.craftbukkit.util.Waitable;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
+import org.bukkit.event.player.PlayerPreLoginEvent;
+
+import javax.crypto.SecretKey;
 import java.math.BigInteger;
 import java.security.PrivateKey;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Level;
-import javax.crypto.SecretKey;
-import org.apache.commons.lang3.Validate;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 // CraftBukkit start
-import org.bukkit.craftbukkit.util.Waitable;
-import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
-import org.bukkit.event.player.PlayerPreLoginEvent;
 // CraftBukkit end
 
 public class LoginListener implements PacketLoginInListener, ITickable {
@@ -30,20 +28,19 @@ public class LoginListener implements PacketLoginInListener, ITickable {
     private static final AtomicInteger b = new AtomicInteger(0);
     private static final Logger c = LogManager.getLogger();
     private static final Random random = new Random();
+    public final NetworkManager networkManager;
     private final byte[] e = new byte[4];
     private final MinecraftServer server;
-    public final NetworkManager networkManager;
+    public String hostname = ""; // CraftBukkit - add field
     private LoginListener.EnumProtocolState g;
     private int h;
     private GameProfile i;
-    private final String j;
     private SecretKey loginKey;
     private EntityPlayer l;
-    public String hostname = ""; // CraftBukkit - add field
 
     public LoginListener(MinecraftServer minecraftserver, NetworkManager networkmanager) {
         this.g = LoginListener.EnumProtocolState.HELLO;
-        this.j = "";
+        String j = "";
         this.server = minecraftserver;
         this.networkManager = networkmanager;
         LoginListener.random.nextBytes(this.e);
@@ -123,8 +120,9 @@ public class LoginListener implements PacketLoginInListener, ITickable {
         } else {
             this.g = LoginListener.EnumProtocolState.ACCEPTED;
             if (this.server.aF() >= 0 && !this.networkManager.isLocal()) {
+                //noinspection unchecked,UnusedParameters,UnusedParameters
                 this.networkManager.sendPacket(new PacketLoginOutSetCompression(this.server.aF()), new ChannelFutureListener() {
-                    public void a(ChannelFuture channelfuture) throws Exception {
+                    public void a(@SuppressWarnings("UnusedParameters") ChannelFuture channelfuture) {
                         LoginListener.this.networkManager.setCompressionLevel(LoginListener.this.server.aF());
                     }
 
@@ -235,6 +233,21 @@ public class LoginListener implements PacketLoginInListener, ITickable {
         }
     }
 
+    protected GameProfile a(GameProfile gameprofile) {
+        UUID uuid = UUID.nameUUIDFromBytes(("OfflinePlayer:" + gameprofile.getName()).getBytes(Charsets.UTF_8));
+
+        return new GameProfile(uuid, gameprofile.getName());
+    }
+    // Spigot end
+
+    enum EnumProtocolState {
+
+        HELLO, KEY, AUTHENTICATING, READY_TO_ACCEPT, DELAY_ACCEPT, ACCEPTED;
+
+        @SuppressWarnings("unused")
+        EnumProtocolState() {}
+    }
+
     // Spigot start
     public class LoginHandler {
 
@@ -247,11 +260,16 @@ public class LoginListener implements PacketLoginInListener, ITickable {
                             AsyncPlayerPreLoginEvent asyncEvent = new AsyncPlayerPreLoginEvent(playerName, address, uniqueId);
                             server.getPluginManager().callEvent(asyncEvent);
 
-                            if (PlayerPreLoginEvent.getHandlerList().getRegisteredListeners().length != 0) {
+            //noinspection deprecation
+            if (PlayerPreLoginEvent.getHandlerList().getRegisteredListeners().length != 0) {
+                                //noinspection deprecation,deprecation
                                 final PlayerPreLoginEvent event = new PlayerPreLoginEvent(playerName, address, uniqueId);
-                                if (asyncEvent.getResult() != PlayerPreLoginEvent.Result.ALLOWED) {
-                                    event.disallow(asyncEvent.getResult(), asyncEvent.getKickMessage());
+                //noinspection deprecation,deprecation
+                if (asyncEvent.getResult() != PlayerPreLoginEvent.Result.ALLOWED) {
+                    //noinspection deprecation
+                    event.disallow(asyncEvent.getResult(), asyncEvent.getKickMessage());
                                 }
+                                //noinspection deprecation,deprecation,deprecation
                                 Waitable<PlayerPreLoginEvent.Result> waitable = new Waitable<PlayerPreLoginEvent.Result>() {
                                     @Override
                                     protected PlayerPreLoginEvent.Result evaluate() {
@@ -260,6 +278,7 @@ public class LoginListener implements PacketLoginInListener, ITickable {
                                     }};
 
                                 LoginListener.this.server.processQueue.add(waitable);
+                                //noinspection deprecation
                                 if (waitable.get() != PlayerPreLoginEvent.Result.ALLOWED) {
                                     disconnect(event.getKickMessage());
                                     return;
@@ -275,18 +294,4 @@ public class LoginListener implements PacketLoginInListener, ITickable {
                             LoginListener.this.g = LoginListener.EnumProtocolState.READY_TO_ACCEPT;
                 }
         }
-    // Spigot end
-
-    protected GameProfile a(GameProfile gameprofile) {
-        UUID uuid = UUID.nameUUIDFromBytes(("OfflinePlayer:" + gameprofile.getName()).getBytes(Charsets.UTF_8));
-
-        return new GameProfile(uuid, gameprofile.getName());
-    }
-
-    enum EnumProtocolState {
-
-        HELLO, KEY, AUTHENTICATING, READY_TO_ACCEPT, DELAY_ACCEPT, ACCEPTED;
-
-        EnumProtocolState() {}
-    }
 }

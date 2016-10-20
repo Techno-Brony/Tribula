@@ -1,35 +1,28 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Iterables;
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.minecraft.MinecraftSessionService;
-import com.mojang.authlib.properties.Property;
-import java.util.UUID;
-import javax.annotation.Nullable;
-
-// Spigot start
 import com.google.common.base.Predicate;
-import com.google.common.cache.LoadingCache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
+import com.google.common.collect.Iterables;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import com.mojang.authlib.Agent;
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.ProfileLookupCallback;
+import com.mojang.authlib.minecraft.MinecraftSessionService;
+import com.mojang.authlib.properties.Property;
+
+import javax.annotation.Nullable;
+import java.util.UUID;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import com.mojang.authlib.Agent;
-import com.mojang.authlib.ProfileLookupCallback;
+// Spigot start
 // Spigot end
 
 public class TileEntitySkull extends TileEntity implements ITickable {
 
-    private int a;
-    public int rotation;
-    private GameProfile g;
-    private int h;
-    private boolean i;
-    private static UserCache j;
-    private static MinecraftSessionService k;
     // Spigot start
     public static final Executor executor = Executors.newFixedThreadPool(3,
             new ThreadFactoryBuilder()
@@ -58,6 +51,7 @@ public class TileEntitySkull extends TileEntity implements ITickable {
                         }
                     };
 
+                    //noinspection deprecation
                     MinecraftServer.getServer().getGameProfileRepository().findProfilesByNames(new String[] { key }, Agent.MINECRAFT, gameProfileLookup);
 
                     GameProfile profile = profiles[ 0 ];
@@ -73,6 +67,7 @@ public class TileEntitySkull extends TileEntity implements ITickable {
 
                         if ( property == null )
                         {
+                            //noinspection deprecation
                             profile = MinecraftServer.getServer().ay().fillProfileProperties( profile, true );
                         }
                     }
@@ -81,6 +76,14 @@ public class TileEntitySkull extends TileEntity implements ITickable {
                     return profile;
                 }
             } );
+    @SuppressWarnings("unused")
+    private static UserCache j;
+    @SuppressWarnings("unused")
+    private static MinecraftSessionService k;
+    public int rotation;
+    private int a;
+    private GameProfile g;
+    private int h;
     // Spigot end
 
     public TileEntitySkull() {}
@@ -91,6 +94,43 @@ public class TileEntitySkull extends TileEntity implements ITickable {
 
     public static void a(MinecraftSessionService minecraftsessionservice) {
         TileEntitySkull.k = minecraftsessionservice;
+    }
+
+    // Spigot start - Support async lookups
+    public static void b(final GameProfile gameprofile, final Predicate<GameProfile> callback) {
+        if (gameprofile != null && !UtilColor.b(gameprofile.getName())) {
+            if (gameprofile.isComplete() && gameprofile.getProperties().containsKey("textures")) {
+                callback.apply(gameprofile);
+            } else //noinspection deprecation
+                if (MinecraftServer.getServer() == null) {
+                callback.apply(gameprofile);
+            } else {
+                GameProfile profile = skinCache.getIfPresent(gameprofile.getName());
+                if (profile != null && Iterables.getFirst(profile.getProperties().get("textures"), (Object) null) != null) {
+                    callback.apply(profile);
+                } else {
+                    executor.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            final GameProfile profile = skinCache.getUnchecked(gameprofile.getName().toLowerCase());
+                            //noinspection deprecation
+                            MinecraftServer.getServer().processQueue.add(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (profile == null) {
+                                        callback.apply(gameprofile);
+                                    } else {
+                                        callback.apply(profile);
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+        } else {
+            callback.apply(gameprofile);
+        }
     }
 
     public NBTTagCompound save(NBTTagCompound nbttagcompound) {
@@ -128,11 +168,12 @@ public class TileEntitySkull extends TileEntity implements ITickable {
 
     public void E_() {
         if (this.a == 5) {
+            boolean i;
             if (this.world.isBlockIndirectlyPowered(this.position)) {
-                this.i = true;
+                i = true;
                 ++this.h;
             } else {
-                this.i = false;
+                i = false;
             }
         }
 
@@ -143,6 +184,12 @@ public class TileEntitySkull extends TileEntity implements ITickable {
         return this.g;
     }
 
+    public void setGameProfile(@Nullable GameProfile gameprofile) {
+        this.a = 3;
+        this.g = gameprofile;
+        this.h();
+    }
+
     @Nullable
     public PacketPlayOutTileEntityData getUpdatePacket() {
         return new PacketPlayOutTileEntityData(this.position, 4, this.c());
@@ -150,17 +197,6 @@ public class TileEntitySkull extends TileEntity implements ITickable {
 
     public NBTTagCompound c() {
         return this.save(new NBTTagCompound());
-    }
-
-    public void setSkullType(int i) {
-        this.a = i;
-        this.g = null;
-    }
-
-    public void setGameProfile(@Nullable GameProfile gameprofile) {
-        this.a = 3;
-        this.g = gameprofile;
-        this.h();
     }
 
     private void h() {
@@ -183,44 +219,14 @@ public class TileEntitySkull extends TileEntity implements ITickable {
         // Spigot end
     }
 
-    // Spigot start - Support async lookups
-    public static void b(final GameProfile gameprofile, final Predicate<GameProfile> callback) {
-        if (gameprofile != null && !UtilColor.b(gameprofile.getName())) {
-            if (gameprofile.isComplete() && gameprofile.getProperties().containsKey("textures")) {
-                callback.apply(gameprofile);
-            } else if (MinecraftServer.getServer() == null) {
-                callback.apply(gameprofile);
-            } else {
-                GameProfile profile = skinCache.getIfPresent(gameprofile.getName());
-                if (profile != null && Iterables.getFirst(profile.getProperties().get("textures"), (Object) null) != null) {
-                    callback.apply(profile);
-                } else {
-                    executor.execute(new Runnable() {
-                        @Override
-                        public void run() {
-                            final GameProfile profile = skinCache.getUnchecked(gameprofile.getName().toLowerCase());                            
-                            MinecraftServer.getServer().processQueue.add(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (profile == null) {
-                                        callback.apply(gameprofile);
-                                    } else {
-                                        callback.apply(profile);
-                                    }
-                                }
-                            });
-                        }
-                    });
-                }
-            }
-        } else {
-            callback.apply(gameprofile);
-        }
+    public int getSkullType() {
+        return this.a;
     }
     // Spigot end
 
-    public int getSkullType() {
-        return this.a;
+    public void setSkullType(int i) {
+        this.a = i;
+        this.g = null;
     }
 
     public void setRotation(int i) {

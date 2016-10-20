@@ -3,14 +3,9 @@ package net.minecraft.server;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+
 import javax.annotation.Nullable;
+import java.util.*;
 
 public class CommandSpreadPlayers extends CommandAbstract {
 
@@ -53,6 +48,7 @@ public class CommandSpreadPlayers extends CommandAbstract {
                         throw new ExceptionEntityNotFound();
                     }
 
+                    //noinspection unchecked
                     arraylist.addAll(list);
                 } else {
                     EntityPlayer entityplayer = minecraftserver.getPlayerList().getPlayer(s);
@@ -61,6 +57,7 @@ public class CommandSpreadPlayers extends CommandAbstract {
                         throw new ExceptionPlayerNotFound();
                     }
 
+                    //noinspection unchecked
                     arraylist.add(entityplayer);
                 }
             }
@@ -69,7 +66,8 @@ public class CommandSpreadPlayers extends CommandAbstract {
             if (arraylist.isEmpty()) {
                 throw new ExceptionEntityNotFound();
             } else {
-                icommandlistener.sendMessage(new ChatMessage("commands.spreadplayers.spreading." + (flag ? "teams" : "players"), Integer.valueOf(arraylist.size()), Double.valueOf(d4), Double.valueOf(d1), Double.valueOf(d2), Double.valueOf(d3)));
+                icommandlistener.sendMessage(new ChatMessage("commands.spreadplayers.spreading." + (flag ? "teams" : "players"), arraylist.size(), d4, d1, d2, d3));
+                //noinspection unchecked
                 this.a(icommandlistener, arraylist, new CommandSpreadPlayers.Location2D(d1, d2), d3, d4, ((Entity) arraylist.get(0)).world, flag);
             }
         }
@@ -85,9 +83,9 @@ public class CommandSpreadPlayers extends CommandAbstract {
         int i = this.a(commandspreadplayers_location2d, d0, world, random, d2, d3, d4, d5, acommandspreadplayers_location2d, flag);
         double d6 = this.a(list, world, acommandspreadplayers_location2d, flag);
 
-        a(icommandlistener, this, "commands.spreadplayers.success." + (flag ? "teams" : "players"), Integer.valueOf(acommandspreadplayers_location2d.length), Double.valueOf(commandspreadplayers_location2d.a), Double.valueOf(commandspreadplayers_location2d.b));
+        a(icommandlistener, this, "commands.spreadplayers.success." + (flag ? "teams" : "players"), acommandspreadplayers_location2d.length, commandspreadplayers_location2d.a, commandspreadplayers_location2d.b);
         if (acommandspreadplayers_location2d.length > 1) {
-            icommandlistener.sendMessage(new ChatMessage("commands.spreadplayers.info." + (flag ? "teams" : "players"), String.format("%.2f", Double.valueOf(d6)), Integer.valueOf(i)));
+            icommandlistener.sendMessage(new ChatMessage("commands.spreadplayers.info." + (flag ? "teams" : "players"), String.format("%.2f", d6), i));
         }
 
     }
@@ -96,12 +94,15 @@ public class CommandSpreadPlayers extends CommandAbstract {
         HashSet hashset = Sets.newHashSet();
         Iterator iterator = list.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             Entity entity = (Entity) iterator.next();
 
             if (entity instanceof EntityHuman) {
+                //noinspection unchecked
                 hashset.add(entity.aQ());
             } else {
+                //noinspection unchecked
                 hashset.add(null);
             }
         }
@@ -163,11 +164,10 @@ public class CommandSpreadPlayers extends CommandAbstract {
             }
 
             if (!flag1) {
-                CommandSpreadPlayers.Location2D[] acommandspreadplayers_location2d1 = acommandspreadplayers_location2d;
                 int i1 = acommandspreadplayers_location2d.length;
 
                 for (j = 0; j < i1; ++j) {
-                    commandspreadplayers_location2d1 = acommandspreadplayers_location2d1[j];
+                    commandspreadplayers_location2d1 = acommandspreadplayers_location2d[j];
                     if (!commandspreadplayers_location2d1.b(world)) {
                         commandspreadplayers_location2d1.a(random, d1, d2, d3, d4);
                         flag1 = true;
@@ -177,7 +177,7 @@ public class CommandSpreadPlayers extends CommandAbstract {
         }
 
         if (i >= 10000) {
-            throw new CommandException("commands.spreadplayers.failure." + (flag ? "teams" : "players"), Integer.valueOf(acommandspreadplayers_location2d.length), Double.valueOf(commandspreadplayers_location2d.a), Double.valueOf(commandspreadplayers_location2d.b), String.format("%.2f", Double.valueOf(d5)));
+            throw new CommandException("commands.spreadplayers.failure." + (flag ? "teams" : "players"), acommandspreadplayers_location2d.length, commandspreadplayers_location2d.a, commandspreadplayers_location2d.b, String.format("%.2f", d5));
         } else {
             return i;
         }
@@ -188,30 +188,27 @@ public class CommandSpreadPlayers extends CommandAbstract {
         int i = 0;
         HashMap hashmap = Maps.newHashMap();
 
-        for (int j = 0; j < list.size(); ++j) {
-            Entity entity = list.get(j);
-            CommandSpreadPlayers.Location2D commandspreadplayers_location2d;
+        for (Entity entity : list) {
+            Location2D commandspreadplayers_location2d;
 
             if (flag) {
                 ScoreboardTeamBase scoreboardteambase = entity instanceof EntityHuman ? entity.aQ() : null;
 
                 if (!hashmap.containsKey(scoreboardteambase)) {
+                    //noinspection unchecked
                     hashmap.put(scoreboardteambase, acommandspreadplayers_location2d[i++]);
                 }
 
-                commandspreadplayers_location2d = (CommandSpreadPlayers.Location2D) hashmap.get(scoreboardteambase);
+                commandspreadplayers_location2d = (Location2D) hashmap.get(scoreboardteambase);
             } else {
                 commandspreadplayers_location2d = acommandspreadplayers_location2d[i++];
             }
 
             entity.enderTeleportTo((double) ((float) MathHelper.floor(commandspreadplayers_location2d.a) + 0.5F), (double) commandspreadplayers_location2d.a(world), (double) MathHelper.floor(commandspreadplayers_location2d.b) + 0.5D);
             double d1 = Double.MAX_VALUE;
-            CommandSpreadPlayers.Location2D[] acommandspreadplayers_location2d1 = acommandspreadplayers_location2d;
             int k = acommandspreadplayers_location2d.length;
 
-            for (int l = 0; l < k; ++l) {
-                CommandSpreadPlayers.Location2D commandspreadplayers_location2d1 = acommandspreadplayers_location2d1[l];
-
+            for (Location2D commandspreadplayers_location2d1 : acommandspreadplayers_location2d) {
                 if (commandspreadplayers_location2d != commandspreadplayers_location2d1) {
                     double d2 = commandspreadplayers_location2d.a(commandspreadplayers_location2d1);
 
@@ -260,6 +257,12 @@ public class CommandSpreadPlayers extends CommandAbstract {
         Location2D(double d0, double d1) {
             this.a = d0;
             this.b = d1;
+        }
+
+        // CraftBukkit start - add a version of getType which force loads chunks
+        private static IBlockData getType(World world, BlockPosition position) {
+            world.chunkProvider.getChunkAt(position.getX() >> 4, position.getZ() >> 4);
+            return world.getType(position);
         }
 
         double a(CommandSpreadPlayers.Location2D commandspreadplayers_location2d) {
@@ -341,12 +344,6 @@ public class CommandSpreadPlayers extends CommandAbstract {
         public void a(Random random, double d0, double d1, double d2, double d3) {
             this.a = MathHelper.a(random, d0, d2);
             this.b = MathHelper.a(random, d1, d3);
-        }
-
-        // CraftBukkit start - add a version of getType which force loads chunks
-        private static IBlockData getType(World world, BlockPosition position) {
-            world.chunkProvider.getChunkAt(position.getX() >> 4, position.getZ() >> 4);
-            return world.getType(position);
         }
         // CraftBukkit end
     }

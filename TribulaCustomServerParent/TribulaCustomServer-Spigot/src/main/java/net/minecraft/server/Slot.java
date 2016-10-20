@@ -7,7 +7,9 @@ public class Slot {
     public final int index;
     public final IInventory inventory;
     public int rawSlotIndex;
+    @SuppressWarnings({"unused", "CanBeFinal"})
     public int f;
+    @SuppressWarnings({"unused", "CanBeFinal"})
     public int g;
 
     public Slot(IInventory iinventory, int i, int j, int k) {
@@ -32,6 +34,7 @@ public class Slot {
 
     protected void a(ItemStack itemstack, int i) {}
 
+    @SuppressWarnings("unused")
     protected void c(ItemStack itemstack) {}
 
     public void a(EntityHuman entityhuman, ItemStack itemstack) {
@@ -67,7 +70,7 @@ public class Slot {
         return this.inventory.getMaxStackSize();
     }
 
-    public int getMaxStackSize(ItemStack itemstack) {
+    public int getMaxStackSize(@SuppressWarnings("UnusedParameters") ItemStack itemstack) {
         return this.getMaxStackSize();
     }
 

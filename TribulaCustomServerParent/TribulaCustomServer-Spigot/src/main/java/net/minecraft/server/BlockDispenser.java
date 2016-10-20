@@ -1,20 +1,31 @@
 package net.minecraft.server;
 
-import java.util.Random;
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockDispenser extends BlockTileEntity {
 
     public static final BlockStateDirection FACING = BlockDirectional.FACING;
     public static final BlockStateBoolean TRIGGERED = BlockStateBoolean.of("triggered");
+    @SuppressWarnings("unchecked")
     public static final RegistryDefault<Item, IDispenseBehavior> REGISTRY = new RegistryDefault(new DispenseBehaviorItem());
-    protected Random d = new Random();
     public static boolean eventFired = false; // CraftBukkit
+    @SuppressWarnings("unused")
+    protected Random d = new Random();
 
     protected BlockDispenser() {
         super(Material.STONE);
-        this.w(this.blockStateList.getBlockData().set(BlockDispenser.FACING, EnumDirection.NORTH).set(BlockDispenser.TRIGGERED, Boolean.valueOf(false)));
+        this.w(this.blockStateList.getBlockData().set(BlockDispenser.FACING, EnumDirection.NORTH).set(BlockDispenser.TRIGGERED, Boolean.FALSE));
         this.a(CreativeModeTab.d);
+    }
+
+    public static IPosition a(ISourceBlock isourceblock) {
+        EnumDirection enumdirection = isourceblock.e().get(BlockDispenser.FACING);
+        double d0 = isourceblock.getX() + 0.7D * (double) enumdirection.getAdjacentX();
+        double d1 = isourceblock.getY() + 0.7D * (double) enumdirection.getAdjacentY();
+        double d2 = isourceblock.getZ() + 0.7D * (double) enumdirection.getAdjacentZ();
+
+        return new Position(d0, d1, d2);
     }
 
     public int a(World world) {
@@ -47,7 +58,7 @@ public class BlockDispenser extends BlockTileEntity {
                 }
             }
 
-            world.setTypeAndData(blockposition, iblockdata.set(BlockDispenser.FACING, enumdirection).set(BlockDispenser.TRIGGERED, Boolean.valueOf(false)), 2);
+            world.setTypeAndData(blockposition, iblockdata.set(BlockDispenser.FACING, enumdirection).set(BlockDispenser.TRIGGERED, Boolean.FALSE), 2);
         }
     }
 
@@ -98,15 +109,16 @@ public class BlockDispenser extends BlockTileEntity {
         return BlockDispenser.REGISTRY.get(itemstack == null ? null : itemstack.getItem());
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         boolean flag = world.isBlockIndirectlyPowered(blockposition) || world.isBlockIndirectlyPowered(blockposition.up());
-        boolean flag1 = iblockdata.get(BlockDispenser.TRIGGERED).booleanValue();
+        boolean flag1 = iblockdata.get(BlockDispenser.TRIGGERED);
 
         if (flag && !flag1) {
             world.a(blockposition, this, this.a(world));
-            world.setTypeAndData(blockposition, iblockdata.set(BlockDispenser.TRIGGERED, Boolean.valueOf(true)), 4);
+            world.setTypeAndData(blockposition, iblockdata.set(BlockDispenser.TRIGGERED, Boolean.TRUE), 4);
         } else if (!flag && flag1) {
-            world.setTypeAndData(blockposition, iblockdata.set(BlockDispenser.TRIGGERED, Boolean.valueOf(false)), 4);
+            world.setTypeAndData(blockposition, iblockdata.set(BlockDispenser.TRIGGERED, Boolean.FALSE), 4);
         }
 
     }
@@ -123,7 +135,7 @@ public class BlockDispenser extends BlockTileEntity {
     }
 
     public IBlockData getPlacedState(World world, BlockPosition blockposition, EnumDirection enumdirection, float f, float f1, float f2, int i, EntityLiving entityliving) {
-        return this.getBlockData().set(BlockDispenser.FACING, BlockPiston.a(blockposition, entityliving)).set(BlockDispenser.TRIGGERED, Boolean.valueOf(false));
+        return this.getBlockData().set(BlockDispenser.FACING, BlockPiston.a(blockposition, entityliving)).set(BlockDispenser.TRIGGERED, Boolean.FALSE);
     }
 
     public void postPlace(World world, BlockPosition blockposition, IBlockData iblockdata, EntityLiving entityliving, ItemStack itemstack) {
@@ -149,19 +161,12 @@ public class BlockDispenser extends BlockTileEntity {
         super.remove(world, blockposition, iblockdata);
     }
 
-    public static IPosition a(ISourceBlock isourceblock) {
-        EnumDirection enumdirection = isourceblock.e().get(BlockDispenser.FACING);
-        double d0 = isourceblock.getX() + 0.7D * (double) enumdirection.getAdjacentX();
-        double d1 = isourceblock.getY() + 0.7D * (double) enumdirection.getAdjacentY();
-        double d2 = isourceblock.getZ() + 0.7D * (double) enumdirection.getAdjacentZ();
-
-        return new Position(d0, d1, d2);
-    }
-
+    @SuppressWarnings("deprecation")
     public boolean isComplexRedstone(IBlockData iblockdata) {
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     public int d(IBlockData iblockdata, World world, BlockPosition blockposition) {
         return Container.a(world.getTileEntity(blockposition));
     }
@@ -170,25 +175,28 @@ public class BlockDispenser extends BlockTileEntity {
         return EnumRenderType.MODEL;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
-        return this.getBlockData().set(BlockDispenser.FACING, EnumDirection.fromType1(i & 7)).set(BlockDispenser.TRIGGERED, Boolean.valueOf((i & 8) > 0));
+        return this.getBlockData().set(BlockDispenser.FACING, EnumDirection.fromType1(i & 7)).set(BlockDispenser.TRIGGERED, (i & 8) > 0);
     }
 
     public int toLegacyData(IBlockData iblockdata) {
         byte b0 = 0;
         int i = b0 | iblockdata.get(BlockDispenser.FACING).a();
 
-        if (iblockdata.get(BlockDispenser.TRIGGERED).booleanValue()) {
+        if (iblockdata.get(BlockDispenser.TRIGGERED)) {
             i |= 8;
         }
 
         return i;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockRotation enumblockrotation) {
         return iblockdata.set(BlockDispenser.FACING, enumblockrotation.a(iblockdata.get(BlockDispenser.FACING)));
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockMirror enumblockmirror) {
         return iblockdata.a(enumblockmirror.a(iblockdata.get(BlockDispenser.FACING)));
     }

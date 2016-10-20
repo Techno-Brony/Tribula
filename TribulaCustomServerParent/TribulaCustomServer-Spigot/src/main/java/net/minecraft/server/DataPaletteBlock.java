@@ -4,8 +4,8 @@ import javax.annotation.Nullable;
 
 public class DataPaletteBlock implements DataPaletteExpandable {
 
-    private static final DataPalette d = new DataPaletteGlobal();
     protected static final IBlockData a = Blocks.AIR.getBlockData();
+    private static final DataPalette d = new DataPaletteGlobal();
     protected DataBits b;
     protected DataPalette c;
     private int e;
@@ -73,6 +73,7 @@ public class DataPaletteBlock implements DataPaletteExpandable {
         return iblockdata == null ? DataPaletteBlock.a : iblockdata;
     }
 
+    @SuppressWarnings("unused")
     public void b(PacketDataSerializer packetdataserializer) {
         packetdataserializer.writeByte(this.e);
         this.c.b(packetdataserializer);
@@ -118,6 +119,7 @@ public class DataPaletteBlock implements DataPaletteExpandable {
                 Block block = Block.getById(j1 >> 4);
                 if (block != null) {
                     try {
+                        //noinspection deprecation
                         data = block.fromLegacyData(j1 & 0xF);
                     } catch (Exception ignored) {
                         data = block.getBlockData();
@@ -131,6 +133,7 @@ public class DataPaletteBlock implements DataPaletteExpandable {
 
     }
 
+    @SuppressWarnings("unused")
     public int a() {
         return 1 + this.c.a() + PacketDataSerializer.a(this.b.b()) + this.b.a().length * 8;
     }

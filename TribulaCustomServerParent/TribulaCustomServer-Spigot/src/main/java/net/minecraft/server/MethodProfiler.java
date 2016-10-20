@@ -1,14 +1,6 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 // CraftBukkit start - Strip down to empty methods, performance cost
 public class MethodProfiler {
@@ -16,32 +8,42 @@ public class MethodProfiler {
     public boolean a;
     public MethodProfiler() {}
 
+    @SuppressWarnings("EmptyMethod")
     public void a() {
     }
 
-    public void a(String s) {
+    @SuppressWarnings("EmptyMethod")
+    public void a(@SuppressWarnings("UnusedParameters") String s) {
     }
 
+    @SuppressWarnings("EmptyMethod")
     public void b() {
     }
 
+    @SuppressWarnings({"unused", "SameReturnValue"})
     public List<MethodProfiler.ProfilerInfo> b(String s) {
         return null;
     }
 
-    public void c(String s) {
+    @SuppressWarnings("EmptyMethod")
+    public void c(@SuppressWarnings("UnusedParameters") String s) {
     }
 
+    @SuppressWarnings("SameReturnValue")
     public String c() {
         return "";
     }
 
     public static final class ProfilerInfo implements Comparable<MethodProfiler.ProfilerInfo> {
 
+        @SuppressWarnings("CanBeFinal")
         public double a;
+        @SuppressWarnings({"unused", "CanBeFinal"})
         public double b;
+        @SuppressWarnings("CanBeFinal")
         public String c;
 
+        @SuppressWarnings("unused")
         public ProfilerInfo(String s, double d0, double d1) {
             this.c = s;
             this.a = d0;

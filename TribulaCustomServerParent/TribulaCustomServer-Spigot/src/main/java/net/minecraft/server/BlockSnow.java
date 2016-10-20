@@ -1,7 +1,7 @@
 package net.minecraft.server;
 
-import java.util.Random;
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockSnow extends Block {
 
@@ -10,36 +10,41 @@ public class BlockSnow extends Block {
 
     protected BlockSnow() {
         super(Material.PACKED_ICE);
-        this.w(this.blockStateList.getBlockData().set(BlockSnow.LAYERS, Integer.valueOf(1)));
+        this.w(this.blockStateList.getBlockData().set(BlockSnow.LAYERS, 1));
         this.a(true);
         this.a(CreativeModeTab.c);
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
-        return BlockSnow.b[iblockdata.get(BlockSnow.LAYERS).intValue()];
+        return BlockSnow.b[iblockdata.get(BlockSnow.LAYERS)];
     }
 
     public boolean b(IBlockAccess iblockaccess, BlockPosition blockposition) {
-        return iblockaccess.getType(blockposition).get(BlockSnow.LAYERS).intValue() < 5;
+        return iblockaccess.getType(blockposition).get(BlockSnow.LAYERS) < 5;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean k(IBlockData iblockdata) {
-        return iblockdata.get(BlockSnow.LAYERS).intValue() == 7;
+        return iblockdata.get(BlockSnow.LAYERS) == 7;
     }
 
+    @SuppressWarnings("deprecation")
     @Nullable
     public AxisAlignedBB a(IBlockData iblockdata, World world, BlockPosition blockposition) {
-        int i = iblockdata.get(BlockSnow.LAYERS).intValue() - 1;
+        int i = iblockdata.get(BlockSnow.LAYERS) - 1;
         float f = 0.125F;
         AxisAlignedBB axisalignedbb = iblockdata.c(world, blockposition);
 
         return new AxisAlignedBB(axisalignedbb.a, axisalignedbb.b, axisalignedbb.c, axisalignedbb.d, (double) ((float) i * 0.125F), axisalignedbb.f);
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
@@ -48,13 +53,15 @@ public class BlockSnow extends Block {
         IBlockData iblockdata = world.getType(blockposition.down());
         Block block = iblockdata.getBlock();
 
-        return (block != Blocks.ICE && block != Blocks.PACKED_ICE) && (iblockdata.getMaterial() == Material.LEAVES || (block == this && iblockdata.get(BlockSnow.LAYERS).intValue() >= 7 || iblockdata.p() && iblockdata.getMaterial().isSolid()));
+        return (block != Blocks.ICE && block != Blocks.PACKED_ICE) && (iblockdata.getMaterial() == Material.LEAVES || (block == this && iblockdata.get(BlockSnow.LAYERS) >= 7 || iblockdata.p() && iblockdata.getMaterial().isSolid()));
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         this.e(world, blockposition, iblockdata);
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     private boolean e(World world, BlockPosition blockposition, IBlockData iblockdata) {
         if (!this.canPlace(world, blockposition)) {
             this.b(world, blockposition, iblockdata, 0);
@@ -66,7 +73,7 @@ public class BlockSnow extends Block {
     }
 
     public void a(World world, EntityHuman entityhuman, BlockPosition blockposition, IBlockData iblockdata, @Nullable TileEntity tileentity, @Nullable ItemStack itemstack) {
-        a(world, blockposition, new ItemStack(Items.SNOWBALL, iblockdata.get(BlockSnow.LAYERS).intValue() + 1, 0));
+        a(world, blockposition, new ItemStack(Items.SNOWBALL, iblockdata.get(BlockSnow.LAYERS) + 1, 0));
         world.setAir(blockposition);
         entityhuman.b(StatisticList.a(this));
     }
@@ -93,16 +100,17 @@ public class BlockSnow extends Block {
 
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
-        return this.getBlockData().set(BlockSnow.LAYERS, Integer.valueOf((i & 7) + 1));
+        return this.getBlockData().set(BlockSnow.LAYERS, (i & 7) + 1);
     }
 
     public boolean a(IBlockAccess iblockaccess, BlockPosition blockposition) {
-        return iblockaccess.getType(blockposition).get(BlockSnow.LAYERS).intValue() == 1;
+        return iblockaccess.getType(blockposition).get(BlockSnow.LAYERS) == 1;
     }
 
     public int toLegacyData(IBlockData iblockdata) {
-        return iblockdata.get(BlockSnow.LAYERS).intValue() - 1;
+        return iblockdata.get(BlockSnow.LAYERS) - 1;
     }
 
     protected BlockStateList getStateList() {

@@ -1,6 +1,6 @@
 package net.minecraft.server;
 
-import org.bukkit.event.entity.EntityCombustByEntityEvent; // CraftBukkit
+import org.bukkit.event.entity.EntityCombustByEntityEvent;
 
 public abstract class EntityMonster extends EntityCreature implements IMonster {
 
@@ -9,6 +9,7 @@ public abstract class EntityMonster extends EntityCreature implements IMonster {
         this.b_ = 5;
     }
 
+    @SuppressWarnings("unused")
     public static void c(DataConverterManager dataconvertermanager) {
         EntityInsentient.a(dataconvertermanager, "Monster");
     }

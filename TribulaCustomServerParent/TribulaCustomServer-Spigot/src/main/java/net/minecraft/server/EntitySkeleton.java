@@ -1,8 +1,9 @@
 package net.minecraft.server;
 
-import java.util.Calendar;
+import org.bukkit.event.entity.EntityCombustEvent;
+
 import javax.annotation.Nullable;
-import org.bukkit.event.entity.EntityCombustEvent; // CraftBukkit
+import java.util.Calendar;
 
 public class EntitySkeleton extends EntityMonster implements IRangedEntity {
 
@@ -26,16 +27,24 @@ public class EntitySkeleton extends EntityMonster implements IRangedEntity {
         this.o();
     }
 
+    @SuppressWarnings("unused")
+    public static void b(DataConverterManager dataconvertermanager) {
+        EntityInsentient.a(dataconvertermanager, "Skeleton");
+    }
+
     protected void r() {
         this.goalSelector.a(1, new PathfinderGoalFloat(this));
         this.goalSelector.a(2, new PathfinderGoalRestrictSun(this));
         this.goalSelector.a(3, new PathfinderGoalFleeSun(this, 1.0D));
+        //noinspection unchecked
         this.goalSelector.a(3, new PathfinderGoalAvoidTarget(this, EntityWolf.class, 6.0F, 1.0D, 1.2D));
         this.goalSelector.a(5, new PathfinderGoalRandomStroll(this, 1.0D));
         this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
         this.goalSelector.a(6, new PathfinderGoalRandomLookaround(this));
         this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, false, new Class[0]));
+        //noinspection unchecked
         this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this, EntityHuman.class, true));
+        //noinspection unchecked
         this.targetSelector.a(3, new PathfinderGoalNearestAttackableTarget(this, EntityIronGolem.class, true));
     }
 
@@ -46,8 +55,8 @@ public class EntitySkeleton extends EntityMonster implements IRangedEntity {
 
     protected void i() {
         super.i();
-        this.datawatcher.register(EntitySkeleton.a, Integer.valueOf(EnumSkeletonType.NORMAL.a()));
-        this.datawatcher.register(EntitySkeleton.b, Boolean.valueOf(false));
+        this.datawatcher.register(EntitySkeleton.a, EnumSkeletonType.NORMAL.a());
+        this.datawatcher.register(EntitySkeleton.b, Boolean.FALSE);
     }
 
     protected SoundEffect G() {
@@ -278,11 +287,11 @@ public class EntitySkeleton extends EntityMonster implements IRangedEntity {
     }
 
     public EnumSkeletonType getSkeletonType() {
-        return EnumSkeletonType.a(this.datawatcher.get(EntitySkeleton.a).intValue());
+        return EnumSkeletonType.a(this.datawatcher.get(EntitySkeleton.a));
     }
 
     public void setSkeletonType(EnumSkeletonType enumskeletontype) {
-        this.datawatcher.set(EntitySkeleton.a, Integer.valueOf(enumskeletontype.a()));
+        this.datawatcher.set(EntitySkeleton.a, enumskeletontype.a());
         this.fireProof = enumskeletontype == EnumSkeletonType.WITHER;
         this.b(enumskeletontype);
     }
@@ -294,10 +303,6 @@ public class EntitySkeleton extends EntityMonster implements IRangedEntity {
             this.setSize(0.6F, 1.99F);
         }
 
-    }
-
-    public static void b(DataConverterManager dataconvertermanager) {
-        EntityInsentient.a(dataconvertermanager, "Skeleton");
     }
 
     public void a(NBTTagCompound nbttagcompound) {
@@ -333,6 +338,6 @@ public class EntitySkeleton extends EntityMonster implements IRangedEntity {
     }
 
     public void a(boolean flag) {
-        this.datawatcher.set(EntitySkeleton.b, Boolean.valueOf(flag));
+        this.datawatcher.set(EntitySkeleton.b, flag);
     }
 }

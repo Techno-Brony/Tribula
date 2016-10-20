@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
-import javax.annotation.Nullable;
-// CraftBukkit start
 import org.bukkit.craftbukkit.inventory.CraftInventory;
 import org.bukkit.craftbukkit.inventory.CraftInventoryView;
 import org.bukkit.inventory.InventoryView;
+
+import javax.annotation.Nullable;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class ContainerHorse extends Container {
@@ -14,17 +16,8 @@ public class ContainerHorse extends Container {
 
     // CraftBukkit start
     org.bukkit.craftbukkit.inventory.CraftInventoryView bukkitEntity;
+    @SuppressWarnings("CanBeFinal")
     PlayerInventory player;
-
-    @Override
-    public InventoryView getBukkitView() {
-        if (bukkitEntity != null) {
-            return bukkitEntity;
-        }
-
-        CraftInventory inventory = new org.bukkit.craftbukkit.inventory.CraftInventoryHorse(this.a);
-        return bukkitEntity = new CraftInventoryView(player.player.getBukkitEntity(), inventory, this);
-    }
 
     public ContainerHorse(IInventory iinventory, final IInventory iinventory1, final EntityHorse entityhorse, EntityHuman entityhuman) {
         player = (PlayerInventory) iinventory;
@@ -69,8 +62,18 @@ public class ContainerHorse extends Container {
 
     }
 
+    @Override
+    public InventoryView getBukkitView() {
+        if (bukkitEntity != null) {
+            return bukkitEntity;
+        }
+
+        CraftInventory inventory = new org.bukkit.craftbukkit.inventory.CraftInventoryHorse(this.a);
+        return bukkitEntity = new CraftInventoryView(player.player.getBukkitEntity(), inventory, this);
+    }
+
     public boolean a(EntityHuman entityhuman) {
-        return this.a.a(entityhuman) && this.f.isAlive() && this.f.g((Entity) entityhuman) < 8.0F;
+        return !this.a.a(entityhuman) || !this.f.isAlive() || this.f.g((Entity) entityhuman) >= 8.0F;
     }
 
     @Nullable
@@ -83,18 +86,18 @@ public class ContainerHorse extends Container {
 
             itemstack = itemstack1.cloneItemStack();
             if (i < this.a.getSize()) {
-                if (!this.a(itemstack1, this.a.getSize(), this.c.size(), true)) {
+                if (this.a(itemstack1, this.a.getSize(), this.c.size(), true)) {
                     return null;
                 }
             } else if (this.getSlot(1).isAllowed(itemstack1) && !this.getSlot(1).hasItem()) {
-                if (!this.a(itemstack1, 1, 2, false)) {
+                if (this.a(itemstack1, 1, 2, false)) {
                     return null;
                 }
             } else if (this.getSlot(0).isAllowed(itemstack1)) {
-                if (!this.a(itemstack1, 0, 1, false)) {
+                if (this.a(itemstack1, 0, 1, false)) {
                     return null;
                 }
-            } else if (this.a.getSize() <= 2 || !this.a(itemstack1, 2, this.a.getSize(), false)) {
+            } else if (this.a.getSize() <= 2 || this.a(itemstack1, 2, this.a.getSize(), false)) {
                 return null;
             }
 

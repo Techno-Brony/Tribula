@@ -2,11 +2,7 @@ package net.minecraft.server;
 
 import com.google.common.collect.Queues;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.channel.*;
 import io.netty.channel.epoll.EpollEventLoopGroup;
 import io.netty.channel.local.LocalChannel;
 import io.netty.channel.local.LocalEventLoopGroup;
@@ -16,11 +12,6 @@ import io.netty.handler.timeout.TimeoutException;
 import io.netty.util.AttributeKey;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
-import java.net.SocketAddress;
-import java.util.Queue;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
-import javax.annotation.Nullable;
-import javax.crypto.SecretKey;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.logging.log4j.LogManager;
@@ -28,40 +19,55 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 
+import javax.annotation.Nullable;
+import javax.crypto.SecretKey;
+import java.net.SocketAddress;
+import java.util.Queue;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
 
-    private static final Logger g = LogManager.getLogger();
     public static final Marker a = MarkerManager.getMarker("NETWORK");
+    @SuppressWarnings("unused")
     public static final Marker b = MarkerManager.getMarker("NETWORK_PACKETS", NetworkManager.a);
     public static final AttributeKey<EnumProtocol> c = AttributeKey.valueOf("protocol");
+    @SuppressWarnings({"unchecked", "unused"})
     public static final LazyInitVar<NioEventLoopGroup> d = new LazyInitVar() {
+        @SuppressWarnings("unused")
         protected NioEventLoopGroup a() {
             return new NioEventLoopGroup(0, (new ThreadFactoryBuilder()).setNameFormat("Netty Client IO #%d").setDaemon(true).build());
         }
 
+        @SuppressWarnings("unused")
         protected Object init() {
             return this.a();
         }
     };
+    @SuppressWarnings({"unchecked", "unused"})
     public static final LazyInitVar<EpollEventLoopGroup> e = new LazyInitVar() {
+        @SuppressWarnings("unused")
         protected EpollEventLoopGroup a() {
             return new EpollEventLoopGroup(0, (new ThreadFactoryBuilder()).setNameFormat("Netty Epoll Client IO #%d").setDaemon(true).build());
         }
 
+        @SuppressWarnings("unused")
         protected Object init() {
             return this.a();
         }
     };
+    @SuppressWarnings({"unchecked", "unused"})
     public static final LazyInitVar<LocalEventLoopGroup> f = new LazyInitVar() {
+        @SuppressWarnings("unused")
         protected LocalEventLoopGroup a() {
             return new LocalEventLoopGroup(0, (new ThreadFactoryBuilder()).setNameFormat("Netty Local Client IO #%d").setDaemon(true).build());
         }
 
+        @SuppressWarnings("unused")
         protected Object init() {
             return this.a();
         }
     };
-    private final EnumProtocolDirection h;
+    private static final Logger g = LogManager.getLogger();
     private final Queue<NetworkManager.QueuedPacket> i = Queues.newConcurrentLinkedQueue();
     private final ReentrantReadWriteLock j = new ReentrantReadWriteLock();
     public Channel channel;
@@ -73,11 +79,9 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
     // Spigot End
     private PacketListener m;
     private IChatBaseComponent n;
-    private boolean o;
     private boolean p;
 
-    public NetworkManager(EnumProtocolDirection enumprotocoldirection) {
-        this.h = enumprotocoldirection;
+    public NetworkManager(@SuppressWarnings({"SameParameterValue", "UnusedParameters"}) EnumProtocolDirection enumprotocoldirection) {
     }
 
     public void channelActive(ChannelHandlerContext channelhandlercontext) throws Exception {
@@ -117,14 +121,16 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
 
         NetworkManager.g.debug(throwable);
         this.close(chatmessage);
+        //noinspection deprecation
         if (MinecraftServer.getServer().isDebugging()) throwable.printStackTrace(); // Spigot
     }
 
-    protected void a(ChannelHandlerContext channelhandlercontext, Packet<?> packet) throws Exception {
+    protected void a(@SuppressWarnings("UnusedParameters") ChannelHandlerContext channelhandlercontext, Packet<?> packet) {
         if (this.channel.isOpen()) {
             try {
+                //noinspection unchecked
                 ((Packet) packet).a(this.m); // CraftBukkit - decompile error
-            } catch (CancelledPacketHandleException cancelledpackethandleexception) {
+            } catch (CancelledPacketHandleException ignored) {
             }
         }
 
@@ -144,6 +150,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
             this.j.writeLock().lock();
 
             try {
+                //noinspection unchecked
                 this.i.add(new NetworkManager.QueuedPacket(packet, (GenericFutureListener[]) null));
             } finally {
                 this.j.writeLock().unlock();
@@ -160,6 +167,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
             this.j.writeLock().lock();
 
             try {
+                //noinspection unchecked
                 this.i.add(new NetworkManager.QueuedPacket(packet, (GenericFutureListener[]) ArrayUtils.add(agenericfuturelistener, 0, genericfuturelistener)));
             } finally {
                 this.j.writeLock().unlock();
@@ -255,7 +263,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
     }
 
     public void a(SecretKey secretkey) {
-        this.o = true;
+        boolean o = true;
         this.channel.pipeline().addBefore("splitter", "decrypt", new PacketDecrypter(MinecraftEncryption.a(2, secretkey)));
         this.channel.pipeline().addBefore("prepender", "encrypt", new PacketEncrypter(MinecraftEncryption.a(1, secretkey)));
     }
@@ -326,6 +334,12 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
         this.a(channelhandlercontext, object);
     }
 
+    // Spigot Start
+    public SocketAddress getRawAddress()
+    {
+        return this.channel.remoteAddress();
+    }
+
     static class QueuedPacket {
 
         private final Packet<?> a;
@@ -335,12 +349,6 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
             this.a = packet;
             this.b = agenericfuturelistener;
         }
-    }
-
-    // Spigot Start
-    public SocketAddress getRawAddress()
-    {
-        return this.channel.remoteAddress();
     }
     // Spigot End
 }

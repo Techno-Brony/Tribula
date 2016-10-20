@@ -2,15 +2,19 @@ package net.minecraft.server;
 
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
+import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason;
+
+import javax.annotation.Nullable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
-import javax.annotation.Nullable;
-
-import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason; // CraftBukkit
 
 public class EntityHorse extends EntityAnimal implements IInventoryListener, IJumpable {
 
+    public static final IAttribute attributeJumpStrength = (new AttributeRanged(null, "horse.jumpStrength", 0.7D, 0.0D, 2.0D)).a("Jump Strength").a(true);
+    private static final UUID bF = UUID.fromString("556E1665-8B10-40C8-8F9D-CF9B1667F295");
+    private static final DataWatcherObject<Byte> bG = DataWatcher.a(EntityHorse.class, DataWatcherRegistry.a);
+    @SuppressWarnings("unchecked")
     private static final Predicate<Entity> bD = new Predicate() {
         public boolean a(@Nullable Entity entity) {
             return entity instanceof EntityHorse && ((EntityHorse) entity).dt();
@@ -20,41 +24,40 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
             return this.a((Entity) object);
         }
     };
-    public static final IAttribute attributeJumpStrength = (new AttributeRanged(null, "horse.jumpStrength", 0.7D, 0.0D, 2.0D)).a("Jump Strength").a(true);
-    private static final UUID bF = UUID.fromString("556E1665-8B10-40C8-8F9D-CF9B1667F295");
-    private static final DataWatcherObject<Byte> bG = DataWatcher.a(EntityHorse.class, DataWatcherRegistry.a);
     private static final DataWatcherObject<Integer> bH = DataWatcher.a(EntityHorse.class, DataWatcherRegistry.b);
     private static final DataWatcherObject<Integer> bI = DataWatcher.a(EntityHorse.class, DataWatcherRegistry.b);
     private static final DataWatcherObject<Optional<UUID>> bJ = DataWatcher.a(EntityHorse.class, DataWatcherRegistry.m);
     private static final DataWatcherObject<Integer> bK = DataWatcher.a(EntityHorse.class, DataWatcherRegistry.b);
+    @SuppressWarnings("unused")
     private static final String[] bL = new String[] { "textures/entity/horse/horse_white.png", "textures/entity/horse/horse_creamy.png", "textures/entity/horse/horse_chestnut.png", "textures/entity/horse/horse_brown.png", "textures/entity/horse/horse_black.png", "textures/entity/horse/horse_gray.png", "textures/entity/horse/horse_darkbrown.png"};
+    @SuppressWarnings("unused")
     private static final String[] bM = new String[] { "hwh", "hcr", "hch", "hbr", "hbl", "hgr", "hdb"};
+    @SuppressWarnings("unused")
     private static final String[] bN = new String[] { null, "textures/entity/horse/horse_markings_white.png", "textures/entity/horse/horse_markings_whitefield.png", "textures/entity/horse/horse_markings_whitedots.png", "textures/entity/horse/horse_markings_blackdots.png"};
+    @SuppressWarnings("unused")
     private static final String[] bO = new String[] { "", "wo_", "wmo", "wdo", "bdo"};
     private final PathfinderGoalHorseTrap bP = new PathfinderGoalHorseTrap(this);
+    @SuppressWarnings("unused")
+    private final String[] cg = new String[3];
+    public int bx;
+    public int by;
+    public InventoryHorseChest inventoryChest;
+    public int maxDomestication = 100; // CraftBukkit - store max domestication value
+    protected boolean bz;
+    protected int bB;
+    protected float jumpPower;
     private int bQ;
     private int bR;
     private int bS;
-    public int bx;
-    public int by;
-    protected boolean bz;
-    public InventoryHorseChest inventoryChest;
     private boolean bU;
-    protected int bB;
-    protected float jumpPower;
     private boolean canSlide;
     private boolean bW;
     private int bX;
     private float bY;
-    private float bZ;
     private float ca;
     private float cb;
     private float cc;
-    private float cd;
     private int ce;
-    private String cf;
-    private final String[] cg = new String[3];
-    public int maxDomestication = 100; // CraftBukkit - store max domestication value
 
     public EntityHorse(World world) {
         super(world);
@@ -63,6 +66,13 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
         this.setHasChest(false);
         this.P = 1.0F;
         this.loadChest();
+    }
+
+    @SuppressWarnings("unused")
+    public static void b(DataConverterManager dataconvertermanager) {
+        EntityInsentient.a(dataconvertermanager, "EntityHorse");
+        dataconvertermanager.a(DataConverterTypes.ENTITY, new DataInspectorItemList("EntityHorse", "Items"));
+        dataconvertermanager.a(DataConverterTypes.ENTITY, new DataInspectorItem("EntityHorse", "ArmorItem", "SaddleItem"));
     }
 
     protected void r() {
@@ -78,29 +88,29 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
 
     protected void i() {
         super.i();
-        this.datawatcher.register(EntityHorse.bG, Byte.valueOf((byte) 0));
-        this.datawatcher.register(EntityHorse.bH, Integer.valueOf(EnumHorseType.HORSE.k()));
-        this.datawatcher.register(EntityHorse.bI, Integer.valueOf(0));
+        this.datawatcher.register(EntityHorse.bG, (byte) 0);
+        this.datawatcher.register(EntityHorse.bH, EnumHorseType.HORSE.k());
+        this.datawatcher.register(EntityHorse.bI, 0);
         this.datawatcher.register(EntityHorse.bJ, Optional.absent());
-        this.datawatcher.register(EntityHorse.bK, Integer.valueOf(EnumHorseArmor.NONE.a()));
-    }
-
-    public void setType(EnumHorseType enumhorsetype) {
-        this.datawatcher.set(EntityHorse.bH, Integer.valueOf(enumhorsetype.k()));
-        this.dQ();
+        this.datawatcher.register(EntityHorse.bK, EnumHorseArmor.NONE.a());
     }
 
     public EnumHorseType getType() {
-        return EnumHorseType.a(this.datawatcher.get(EntityHorse.bH).intValue());
+        return EnumHorseType.a(this.datawatcher.get(EntityHorse.bH));
     }
 
-    public void setVariant(int i) {
-        this.datawatcher.set(EntityHorse.bI, Integer.valueOf(i));
+    public void setType(EnumHorseType enumhorsetype) {
+        this.datawatcher.set(EntityHorse.bH, enumhorsetype.k());
         this.dQ();
     }
 
     public int getVariant() {
-        return this.datawatcher.get(EntityHorse.bI).intValue();
+        return this.datawatcher.get(EntityHorse.bI);
+    }
+
+    public void setVariant(int i) {
+        this.datawatcher.set(EntityHorse.bI, i);
+        this.dQ();
     }
 
     public String getName() {
@@ -108,16 +118,16 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
     }
 
     private boolean o(int i) {
-        return (this.datawatcher.get(EntityHorse.bG).byteValue() & i) != 0;
+        return (this.datawatcher.get(EntityHorse.bG) & i) != 0;
     }
 
     private void c(int i, boolean flag) {
-        byte b0 = this.datawatcher.get(EntityHorse.bG).byteValue();
+        byte b0 = this.datawatcher.get(EntityHorse.bG);
 
         if (flag) {
-            this.datawatcher.set(EntityHorse.bG, Byte.valueOf((byte) (b0 | i)));
+            this.datawatcher.set(EntityHorse.bG, (byte) (b0 | i));
         } else {
-            this.datawatcher.set(EntityHorse.bG, Byte.valueOf((byte) (b0 & ~i)));
+            this.datawatcher.set(EntityHorse.bG, (byte) (b0 & ~i));
         }
 
     }
@@ -143,6 +153,7 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
         this.datawatcher.set(EntityHorse.bJ, Optional.fromNullable(uuid));
     }
 
+    @SuppressWarnings("SameReturnValue")
     public float dn() {
         return 0.5F;
     }
@@ -184,7 +195,7 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
     }
 
     public EnumHorseArmor dq() {
-        return EnumHorseArmor.a(this.datawatcher.get(EntityHorse.bK).intValue());
+        return EnumHorseArmor.a(this.datawatcher.get(EntityHorse.bK));
     }
 
     public boolean dr() {
@@ -206,7 +217,7 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
     public void f(ItemStack itemstack) {
         EnumHorseArmor enumhorsearmor = EnumHorseArmor.a(itemstack);
 
-        this.datawatcher.set(EntityHorse.bK, Integer.valueOf(enumhorsearmor.a()));
+        this.datawatcher.set(EntityHorse.bK, enumhorsearmor.a());
         this.dQ();
         if (!this.world.isClientSide) {
             this.getAttributeInstance(GenericAttributes.g).b(EntityHorse.bF);
@@ -243,6 +254,7 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
         this.bB = i;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public int n(int i) {
         int j = MathHelper.clamp(this.getTemper() + i, 0, this.getMaxDomestication());
 
@@ -253,13 +265,14 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
     public boolean damageEntity(DamageSource damagesource, float f) {
         Entity entity = damagesource.getEntity();
 
-        return !(this.isVehicle() && entity != null && this.y(entity)) && super.damageEntity(damagesource, f);
+        return !(this.isVehicle() && entity != null && !this.y(entity)) && super.damageEntity(damagesource, f);
     }
 
     public boolean isCollidable() {
         return !this.isVehicle();
     }
 
+    @SuppressWarnings({"UnusedReturnValue", "SameReturnValue"})
     public boolean dw() {
         int i = MathHelper.floor(this.locX);
         int j = MathHelper.floor(this.locZ);
@@ -295,6 +308,7 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
             if (this.isVehicle()) {
                 Iterator iterator = this.by().iterator();
 
+                //noinspection WhileLoopReplaceableByForEach
                 while (iterator.hasNext()) {
                     Entity entity = (Entity) iterator.next();
 
@@ -376,12 +390,13 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
         return super.cK();
     }
 
-    protected EntityHorse a(Entity entity, double d0) {
+    protected EntityHorse a(Entity entity, @SuppressWarnings("SameParameterValue") double d0) {
         double d1 = Double.MAX_VALUE;
         Entity entity1 = null;
         List list = this.world.getEntities(entity, entity.getBoundingBox().a(d0, d0, d0), EntityHorse.bD);
         Iterator iterator = list.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             Entity entity2 = (Entity) iterator.next();
             double d2 = entity2.e(entity.locX, entity.locY, entity.locZ);
@@ -488,7 +503,7 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
     }
 
     private void dQ() {
-        this.cf = null;
+        String cf = null;
     }
 
     public void f(EntityHuman entityhuman) {
@@ -503,10 +518,10 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
         if (itemstack != null && itemstack.getItem() == Items.SPAWN_EGG) {
             return super.a(entityhuman, enumhand, itemstack);
         } else if (!this.isTamed() && this.getType().h()) {
-            return false;
+            return true;
         } else if (this.isTamed() && this.dg() && entityhuman.isSneaking()) {
             this.f(entityhuman);
-            return true;
+            return false;
         } else if (this.di() && this.isVehicle()) {
             return super.a(entityhuman, enumhand, itemstack);
         } else {
@@ -517,11 +532,11 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
                     if (enumhorsearmor != EnumHorseArmor.NONE) {
                         if (!this.isTamed()) {
                             this.dJ();
-                            return true;
+                            return false;
                         }
 
                         this.f(entityhuman);
-                        return true;
+                        return false;
                     }
                 }
 
@@ -592,11 +607,11 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
 
                 if (!this.isTamed() && !flag) {
                     if (itemstack.a(entityhuman, this, enumhand)) {
-                        return true;
+                        return false;
                     }
 
                     this.dJ();
-                    return true;
+                    return false;
                 }
 
                 if (!flag && this.getType().f() && !this.hasChest() && itemstack.getItem() == Item.getItemOf(Blocks.CHEST)) {
@@ -608,7 +623,7 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
 
                 if (!flag && this.di() && !this.dz() && itemstack.getItem() == Items.SADDLE) {
                     this.f(entityhuman);
-                    return true;
+                    return false;
                 }
 
                 if (flag) {
@@ -616,16 +631,16 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
                         --itemstack.count;
                     }
 
-                    return true;
+                    return false;
                 }
             }
 
             if (this.di() && !this.isVehicle()) {
                 if (itemstack != null && itemstack.a(entityhuman, this, enumhand)) {
-                    return true;
+                    return false;
                 } else {
                     this.h(entityhuman);
-                    return true;
+                    return false;
                 }
             } else {
                 return super.a(entityhuman, enumhand, itemstack);
@@ -727,7 +742,7 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
             }
         }
 
-        this.bZ = this.bY;
+        float bZ = this.bY;
         if (this.dr()) {
             this.bY += (1.0F - this.bY) * 0.4F + 0.05F;
             if (this.bY > 1.0F) {
@@ -743,7 +758,7 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
         this.cb = this.ca;
         if (this.ds()) {
             this.bY = 0.0F;
-            this.bZ = this.bY;
+            bZ = this.bY;
             this.ca += (1.0F - this.ca) * 0.4F + 0.05F;
             if (this.ca > 1.0F) {
                 this.ca = 1.0F;
@@ -756,7 +771,7 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
             }
         }
 
-        this.cd = this.cc;
+        float cd = this.cc;
         if (this.o(128)) {
             this.cc += (1.0F - this.cc) * 0.7F + 0.05F;
             if (this.cc > 1.0F) {
@@ -818,7 +833,7 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
         this.dx();
     }
 
-    private void a(Entity entity, InventoryHorseChest inventoryhorsechest) {
+    private void a(@SuppressWarnings("UnusedParameters") Entity entity, InventoryHorseChest inventoryhorsechest) {
         if (inventoryhorsechest != null && !this.world.isClientSide) {
             for (int i = 0; i < inventoryhorsechest.getSize(); ++i) {
                 ItemStack itemstack = inventoryhorsechest.getItem(i);
@@ -831,6 +846,7 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
         }
     }
 
+    @SuppressWarnings({"UnusedReturnValue", "SameReturnValue"})
     public boolean g(EntityHuman entityhuman) {
         this.setOwnerUUID(entityhuman.getUniqueID());
         this.setTame(true);
@@ -909,12 +925,6 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
             this.aS = 0.02F;
             super.g(f, f1);
         }
-    }
-
-    public static void b(DataConverterManager dataconvertermanager) {
-        EntityInsentient.a(dataconvertermanager, "EntityHorse");
-        dataconvertermanager.a(DataConverterTypes.ENTITY, new DataInspectorItemList("EntityHorse", "Items"));
-        dataconvertermanager.a(DataConverterTypes.ENTITY, new DataInspectorItem("EntityHorse", "ArmorItem", "SaddleItem"));
     }
 
     public void b(NBTTagCompound nbttagcompound) {
@@ -1320,7 +1330,9 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
 
     public static class a implements GroupDataEntity {
 
+        @SuppressWarnings("CanBeFinal")
         public EnumHorseType a;
+        @SuppressWarnings("CanBeFinal")
         public int b;
 
         public a(EnumHorseType enumhorsetype, int i) {

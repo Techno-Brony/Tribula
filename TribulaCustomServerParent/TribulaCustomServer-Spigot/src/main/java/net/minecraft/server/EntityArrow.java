@@ -2,17 +2,19 @@ package net.minecraft.server;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import java.util.List;
-import javax.annotation.Nullable;
-
-// CraftBukkit start
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityCombustByEntityEvent;
 import org.bukkit.event.player.PlayerPickupArrowEvent;
+
+import javax.annotation.Nullable;
+import java.util.List;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public abstract class EntityArrow extends Entity implements IProjectile {
 
+    @SuppressWarnings("unchecked")
     private static final Predicate<Entity> f = Predicates.and(IEntitySelector.e, IEntitySelector.a, new Predicate() {
         public boolean a(@Nullable Entity entity) {
             return entity.isInteractable();
@@ -23,32 +25,20 @@ public abstract class EntityArrow extends Entity implements IProjectile {
         }
     });
     private static final DataWatcherObject<Byte> g = DataWatcher.a(EntityArrow.class, DataWatcherRegistry.a);
+    public boolean inGround; // Spigot - protected -> public
+    public EntityArrow.PickupStatus fromPlayer;
+    public int shake;
+    public Entity shooter;
+    public int knockbackStrength;
+    protected int b;
     private int h;
     private int au;
     private int av;
     private Block aw;
     private int ax;
-    public boolean inGround; // Spigot - protected -> public
-    protected int b;
-    public EntityArrow.PickupStatus fromPlayer;
-    public int shake;
-    public Entity shooter;
     private int ay;
     private int az;
     private double damage;
-    public int knockbackStrength;
-
-    // Spigot Start
-    @Override
-    public void inactiveTick()
-    {
-        if ( this.inGround )
-        {
-            this.ay += 1; // Despawn counter. First int after shooter
-        }
-        super.inactiveTick();
-    }
-    // Spigot End
 
     public EntityArrow(World world) {
         super(world);
@@ -59,6 +49,7 @@ public abstract class EntityArrow extends Entity implements IProjectile {
         this.damage = 2.0D;
         this.setSize(0.5F, 0.5F);
     }
+    // Spigot End
 
     public EntityArrow(World world, double d0, double d1, double d2) {
         this(world);
@@ -75,11 +66,30 @@ public abstract class EntityArrow extends Entity implements IProjectile {
 
     }
 
-    protected void i() {
-        this.datawatcher.register(EntityArrow.g, Byte.valueOf((byte) 0));
+    @SuppressWarnings("EmptyMethod")
+    public static void a(@SuppressWarnings("UnusedParameters") DataConverterManager dataconvertermanager, @SuppressWarnings("UnusedParameters") String s) {}
+
+    @SuppressWarnings("unused")
+    public static void a(DataConverterManager dataconvertermanager) {
+        a(dataconvertermanager, "Arrow");
     }
 
-    public void a(Entity entity, float f, float f1, float f2, float f3, float f4) {
+    // Spigot Start
+    @Override
+    public void inactiveTick()
+    {
+        if ( this.inGround )
+        {
+            this.ay += 1; // Despawn counter. First int after shooter
+        }
+        super.inactiveTick();
+    }
+
+    protected void i() {
+        this.datawatcher.register(EntityArrow.g, (byte) 0);
+    }
+
+    public void a(Entity entity, float f, float f1, @SuppressWarnings({"SameParameterValue", "UnusedParameters"}) float f2, float f3, @SuppressWarnings("SameParameterValue") float f4) {
         float f5 = -MathHelper.sin(f1 * 0.017453292F) * MathHelper.cos(f * 0.017453292F);
         float f6 = -MathHelper.sin(f * 0.017453292F);
         float f7 = MathHelper.cos(f1 * 0.017453292F) * MathHelper.cos(f * 0.017453292F);
@@ -184,7 +194,7 @@ public abstract class EntityArrow extends Entity implements IProjectile {
             if (movingobjectposition != null && movingobjectposition.entity != null && movingobjectposition.entity instanceof EntityHuman) {
                 EntityHuman entityhuman = (EntityHuman) movingobjectposition.entity;
 
-                if (this.shooter instanceof EntityHuman && !((EntityHuman) this.shooter).a(entityhuman)) {
+                if (this.shooter instanceof EntityHuman && ((EntityHuman) this.shooter).a(entityhuman)) {
                     movingobjectposition = null;
                 }
             }
@@ -364,8 +374,8 @@ public abstract class EntityArrow extends Entity implements IProjectile {
         List list = this.world.getEntities(this, this.getBoundingBox().a(this.motX, this.motY, this.motZ).g(1.0D), EntityArrow.f);
         double d0 = 0.0D;
 
-        for (int i = 0; i < list.size(); ++i) {
-            Entity entity1 = (Entity) list.get(i);
+        for (Object aList : list) {
+            Entity entity1 = (Entity) aList;
 
             if (entity1 != this.shooter || this.az >= 5) {
                 AxisAlignedBB axisalignedbb = entity1.getBoundingBox().g(0.30000001192092896D);
@@ -383,12 +393,6 @@ public abstract class EntityArrow extends Entity implements IProjectile {
         }
 
         return entity;
-    }
-
-    public static void a(DataConverterManager dataconvertermanager, String s) {}
-
-    public static void a(DataConverterManager dataconvertermanager) {
-        a(dataconvertermanager, "Arrow");
     }
 
     public void b(NBTTagCompound nbttagcompound) {
@@ -489,21 +493,21 @@ public abstract class EntityArrow extends Entity implements IProjectile {
         return 0.0F;
     }
 
-    public void setCritical(boolean flag) {
-        byte b0 = this.datawatcher.get(EntityArrow.g).byteValue();
-
-        if (flag) {
-            this.datawatcher.set(EntityArrow.g, Byte.valueOf((byte) (b0 | 1)));
-        } else {
-            this.datawatcher.set(EntityArrow.g, Byte.valueOf((byte) (b0 & -2)));
-        }
-
-    }
-
     public boolean isCritical() {
-        byte b0 = this.datawatcher.get(EntityArrow.g).byteValue();
+        byte b0 = this.datawatcher.get(EntityArrow.g);
 
         return (b0 & 1) != 0;
+    }
+
+    public void setCritical(boolean flag) {
+        byte b0 = this.datawatcher.get(EntityArrow.g);
+
+        if (flag) {
+            this.datawatcher.set(EntityArrow.g, (byte) (b0 | 1));
+        } else {
+            this.datawatcher.set(EntityArrow.g, (byte) (b0 & -2));
+        }
+
     }
 
     // CraftBukkit start
@@ -516,6 +520,7 @@ public abstract class EntityArrow extends Entity implements IProjectile {
 
         DISALLOWED, ALLOWED, CREATIVE_ONLY;
 
+        @SuppressWarnings("unused")
         PickupStatus() {}
 
         public static EntityArrow.PickupStatus a(int i) {

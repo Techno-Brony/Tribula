@@ -3,17 +3,20 @@ package net.minecraft.server;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
-import java.util.Random;
-// CraftBukkit start
 import org.bukkit.Location;
 import org.bukkit.event.entity.EntityPortalExitEvent;
 import org.bukkit.util.Vector;
+
+import java.util.Random;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class PortalTravelAgent {
 
     private final WorldServer world;
     private final Random b;
+    @SuppressWarnings("unchecked")
     private final Long2ObjectMap<PortalTravelAgent.ChunkCoordinatesPortal> c = new Long2ObjectOpenHashMap(4096);
 
     public PortalTravelAgent(WorldServer worldserver) {
@@ -21,6 +24,7 @@ public class PortalTravelAgent {
         this.b = new Random(worldserver.getSeed());
     }
 
+    @SuppressWarnings("unused")
     public void a(Entity entity, float f) {
         if (this.world.worldProvider.getDimensionManager().getDimensionID() != 1) {
             if (!this.b(entity, f)) {
@@ -50,9 +54,9 @@ public class PortalTravelAgent {
             for (int l = -2; l <= 2; ++l) {
                 for (int i1 = -2; i1 <= 2; ++i1) {
                     for (int j1 = -1; j1 < 3; ++j1) {
-                        int k1 = i + i1 * 1 + l * 0;
+                        int k1 = i + i1;
                         int l1 = j + j1;
-                        int i2 = k + i1 * 0 - l * 1;
+                        int i2 = k - l;
                         boolean flag2 = j1 < 0;
 
                         this.world.setTypeUpdate(new BlockPosition(k1, l1, i2), flag2 ? Blocks.OBSIDIAN.getBlockData() : Blocks.AIR.getBlockData());
@@ -254,12 +258,14 @@ public class PortalTravelAgent {
         // CraftBukkit end
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public boolean a(Entity entity) {
         // CraftBukkit start - Allow for portal creation to be based on coordinates instead of entity
         return this.createPortal(entity.locX, entity.locY, entity.locZ, 16);
     }
 
-    public boolean createPortal(double x, double y, double z, int b0) {
+    @SuppressWarnings("SameReturnValue")
+    public boolean createPortal(double x, double y, double z, @SuppressWarnings("UnusedParameters") int b0) {
         if (this.world.getWorld().getEnvironment() == org.bukkit.World.Environment.THE_END) {
             createEndPortal(x, y, z);
             return true;

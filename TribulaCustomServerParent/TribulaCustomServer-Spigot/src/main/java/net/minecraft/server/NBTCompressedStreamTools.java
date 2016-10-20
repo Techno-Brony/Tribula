@@ -1,14 +1,6 @@
 package net.minecraft.server;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.DataInput;
-import java.io.DataInputStream;
-import java.io.DataOutput;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
@@ -71,7 +63,7 @@ public class NBTCompressedStreamTools {
         }
     }
 
-    private static NBTBase a(DataInput datainput, int i, NBTReadLimiter nbtreadlimiter) throws IOException {
+    private static NBTBase a(DataInput datainput, @SuppressWarnings("SameParameterValue") int i, NBTReadLimiter nbtreadlimiter) throws IOException {
         byte b0 = datainput.readByte();
 
         if (b0 == 0) {
@@ -88,7 +80,7 @@ public class NBTCompressedStreamTools {
                 CrashReportSystemDetails crashreportsystemdetails = crashreport.a("NBT Tag");
 
                 crashreportsystemdetails.a("Tag name", "[UNNAMED TAG]");
-                crashreportsystemdetails.a("Tag type", Byte.valueOf(b0));
+                crashreportsystemdetails.a("Tag type", b0);
                 throw new ReportedException(crashreport);
             }
         }

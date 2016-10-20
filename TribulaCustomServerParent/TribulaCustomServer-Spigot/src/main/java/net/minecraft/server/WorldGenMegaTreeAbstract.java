@@ -5,10 +5,13 @@ import java.util.Random;
 public abstract class WorldGenMegaTreeAbstract extends WorldGenTreeAbstract {
 
     protected final int a;
+    @SuppressWarnings("unused")
     protected final IBlockData b;
     protected final IBlockData c;
+    @SuppressWarnings("CanBeFinal")
     protected int d;
 
+    @SuppressWarnings("unused")
     public WorldGenMegaTreeAbstract(boolean flag, int i, int j, IBlockData iblockdata, IBlockData iblockdata1) {
         super(flag);
         this.a = i;
@@ -17,6 +20,7 @@ public abstract class WorldGenMegaTreeAbstract extends WorldGenTreeAbstract {
         this.c = iblockdata1;
     }
 
+    @SuppressWarnings("unused")
     protected int a(Random random) {
         int i = random.nextInt(3) + this.a;
 
@@ -70,10 +74,12 @@ public abstract class WorldGenMegaTreeAbstract extends WorldGenTreeAbstract {
         }
     }
 
+    @SuppressWarnings("unused")
     protected boolean a(World world, Random random, BlockPosition blockposition, int i) {
         return this.c(world, blockposition, i) && this.a(blockposition, world);
     }
 
+    @SuppressWarnings("unused")
     protected void a(World world, BlockPosition blockposition, int i) {
         int j = i * i;
 
@@ -95,6 +101,7 @@ public abstract class WorldGenMegaTreeAbstract extends WorldGenTreeAbstract {
 
     }
 
+    @SuppressWarnings("unused")
     protected void b(World world, BlockPosition blockposition, int i) {
         int j = i * i;
 

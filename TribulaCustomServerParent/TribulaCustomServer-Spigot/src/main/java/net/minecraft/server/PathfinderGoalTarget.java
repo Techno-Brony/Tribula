@@ -5,13 +5,14 @@ import org.bukkit.event.entity.EntityTargetEvent;
 public abstract class PathfinderGoalTarget extends PathfinderGoal {
 
     protected final EntityCreature e;
-    protected boolean f;
     private final boolean a;
+    @SuppressWarnings("CanBeFinal")
+    protected boolean f;
+    protected EntityLiving g;
+    protected int h;
     private int b;
     private int c;
     private int d;
-    protected EntityLiving g;
-    protected int h;
 
     public PathfinderGoalTarget(EntityCreature entitycreature, boolean flag) {
         this(entitycreature, flag, false);
@@ -22,6 +23,34 @@ public abstract class PathfinderGoalTarget extends PathfinderGoal {
         this.e = entitycreature;
         this.f = flag;
         this.a = flag1;
+    }
+
+    public static boolean a(EntityInsentient entityinsentient, EntityLiving entityliving, boolean flag, boolean flag1) {
+        if (entityliving == null) {
+            return false;
+        } else if (entityliving == entityinsentient) {
+            return false;
+        } else if (!entityliving.isAlive()) {
+            return false;
+        } else if (entityinsentient.d(entityliving.getClass())) {
+            return false;
+        } else if (entityinsentient.r(entityliving)) {
+            return false;
+        } else {
+            if (entityinsentient instanceof EntityOwnable && ((EntityOwnable) entityinsentient).getOwnerUUID() != null) {
+                if (entityliving instanceof EntityOwnable && ((EntityOwnable) entityinsentient).getOwnerUUID().equals(entityliving.getUniqueID())) {
+                    return false;
+                }
+
+                if (entityliving == ((EntityOwnable) entityinsentient).getOwner()) {
+                    return false;
+                }
+            } else if (entityliving instanceof EntityHuman && !flag && ((EntityHuman) entityliving).abilities.isInvulnerable) {
+                return false;
+            }
+
+            return !flag1 || entityinsentient.getEntitySenses().a(entityliving);
+        }
     }
 
     public boolean b() {
@@ -83,35 +112,7 @@ public abstract class PathfinderGoalTarget extends PathfinderGoal {
         this.g = null;
     }
 
-    public static boolean a(EntityInsentient entityinsentient, EntityLiving entityliving, boolean flag, boolean flag1) {
-        if (entityliving == null) {
-            return false;
-        } else if (entityliving == entityinsentient) {
-            return false;
-        } else if (!entityliving.isAlive()) {
-            return false;
-        } else if (!entityinsentient.d(entityliving.getClass())) {
-            return false;
-        } else if (entityinsentient.r(entityliving)) {
-            return false;
-        } else {
-            if (entityinsentient instanceof EntityOwnable && ((EntityOwnable) entityinsentient).getOwnerUUID() != null) {
-                if (entityliving instanceof EntityOwnable && ((EntityOwnable) entityinsentient).getOwnerUUID().equals(entityliving.getUniqueID())) {
-                    return false;
-                }
-
-                if (entityliving == ((EntityOwnable) entityinsentient).getOwner()) {
-                    return false;
-                }
-            } else if (entityliving instanceof EntityHuman && !flag && ((EntityHuman) entityliving).abilities.isInvulnerable) {
-                return false;
-            }
-
-            return !flag1 || entityinsentient.getEntitySenses().a(entityliving);
-        }
-    }
-
-    protected boolean a(EntityLiving entityliving, boolean flag) {
+    protected boolean a(EntityLiving entityliving, @SuppressWarnings("SameParameterValue") boolean flag) {
         if (!a(this.e, entityliving, flag, this.f)) {
             return false;
         } else if (!this.e.f(new BlockPosition(entityliving))) {

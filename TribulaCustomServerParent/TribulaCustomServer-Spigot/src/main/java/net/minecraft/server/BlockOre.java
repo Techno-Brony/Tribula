@@ -1,7 +1,7 @@
 package net.minecraft.server;
 
-import java.util.Random;
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockOre extends Block {
 
@@ -37,6 +37,7 @@ public class BlockOre extends Block {
         }
     }
 
+    @SuppressWarnings("EmptyMethod")
     public void dropNaturally(World world, BlockPosition blockposition, IBlockData iblockdata, float f, int i) {
         super.dropNaturally(world, blockposition, iblockdata, f, i);
         /* CraftBukkit start - Delegated to getExpDrop

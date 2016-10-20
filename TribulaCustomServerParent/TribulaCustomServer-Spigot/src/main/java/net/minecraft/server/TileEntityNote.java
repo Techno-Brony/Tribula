@@ -21,6 +21,7 @@ public class TileEntityNote extends TileEntity {
         this.f = nbttagcompound.getBoolean("powered");
     }
 
+    @SuppressWarnings("unused")
     public void d() {
         this.note = (byte) ((this.note + 1) % 25);
         this.update();
@@ -50,6 +51,7 @@ public class TileEntityNote extends TileEntity {
             // CraftBukkit start
             org.bukkit.event.block.NotePlayEvent event = org.bukkit.craftbukkit.event.CraftEventFactory.callNotePlayEvent(this.world, blockposition.getX(), blockposition.getY(), blockposition.getZ(), b0, this.note);
             if (!event.isCancelled()) {
+                //noinspection deprecation,deprecation
                 world.playBlockAction(blockposition, Blocks.NOTEBLOCK, event.getInstrument().getType(), event.getNote().getId());
             }
             // CraftBukkit end

@@ -1,22 +1,43 @@
 package net.minecraft.server;
 
-import javax.annotation.Nullable;
-// CraftBukkit start
-import java.util.List;
 import org.bukkit.Location;
-
 import org.bukkit.craftbukkit.entity.CraftHumanEntity;
 import org.bukkit.entity.HumanEntity;
+
+import javax.annotation.Nullable;
+import java.util.List;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class InventoryLargeChest implements ITileInventory {
 
-    private final String a;
     public final ITileInventory left;
     public final ITileInventory right;
-
+    private final String a;
     // CraftBukkit start - add fields and methods
+    @SuppressWarnings("CanBeFinal")
     public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
+
+    public InventoryLargeChest(@SuppressWarnings("SameParameterValue") String s, ITileInventory itileinventory, ITileInventory itileinventory1) {
+        this.a = s;
+        if (itileinventory == null) {
+            itileinventory = itileinventory1;
+        }
+
+        if (itileinventory1 == null) {
+            itileinventory1 = itileinventory;
+        }
+
+        this.left = itileinventory;
+        this.right = itileinventory1;
+        if (itileinventory.x_()) {
+            itileinventory1.a(itileinventory.y_());
+        } else if (itileinventory1.x_()) {
+            itileinventory.a(itileinventory1.y_());
+        }
+
+    }
 
     public ItemStack[] getContents() {
         ItemStack[] result = new ItemStack[this.getSize()];
@@ -46,36 +67,11 @@ public class InventoryLargeChest implements ITileInventory {
         return null; // This method won't be called since CraftInventoryDoubleChest doesn't defer to here
     }
 
-    public void setMaxStackSize(int size) {
-        this.left.setMaxStackSize(size);
-        this.right.setMaxStackSize(size);
-    }
-
     @Override
     public Location getLocation() {
         return left.getLocation(); // TODO: right?
     }
     // CraftBukkit end
-
-    public InventoryLargeChest(String s, ITileInventory itileinventory, ITileInventory itileinventory1) {
-        this.a = s;
-        if (itileinventory == null) {
-            itileinventory = itileinventory1;
-        }
-
-        if (itileinventory1 == null) {
-            itileinventory1 = itileinventory;
-        }
-
-        this.left = itileinventory;
-        this.right = itileinventory1;
-        if (itileinventory.x_()) {
-            itileinventory1.a(itileinventory.y_());
-        } else if (itileinventory1.x_()) {
-            itileinventory.a(itileinventory1.y_());
-        }
-
-    }
 
     public int getSize() {
         return this.left.getSize() + this.right.getSize();
@@ -123,6 +119,11 @@ public class InventoryLargeChest implements ITileInventory {
 
     public int getMaxStackSize() {
         return Math.min(this.left.getMaxStackSize(), this.right.getMaxStackSize()); // CraftBukkit - check both sides
+    }
+
+    public void setMaxStackSize(int size) {
+        this.left.setMaxStackSize(size);
+        this.right.setMaxStackSize(size);
     }
 
     public void update() {

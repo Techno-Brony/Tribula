@@ -1,9 +1,10 @@
 package net.minecraft.server;
 
-import java.util.UUID;
-import org.apache.commons.codec.Charsets;
 import com.google.common.base.Optional;
+import org.apache.commons.codec.Charsets;
+
 import javax.annotation.Nullable;
+import java.util.UUID;
 
 public class EntityItemFrame extends EntityHanging {
 
@@ -20,9 +21,14 @@ public class EntityItemFrame extends EntityHanging {
         this.setDirection(enumdirection);
     }
 
+    @SuppressWarnings("unused")
+    public static void a(DataConverterManager dataconvertermanager) {
+        dataconvertermanager.a(DataConverterTypes.ENTITY, new DataInspectorItem("ItemFrame", "Item"));
+    }
+
     protected void i() {
         this.getDataWatcher().register(EntityItemFrame.c, Optional.absent());
-        this.getDataWatcher().register(EntityItemFrame.d, Integer.valueOf(0));
+        this.getDataWatcher().register(EntityItemFrame.d, 0);
     }
 
     public float aA() {
@@ -145,7 +151,7 @@ public class EntityItemFrame extends EntityHanging {
     }
 
     public int getRotation() {
-        return this.getDataWatcher().get(EntityItemFrame.d).intValue();
+        return this.getDataWatcher().get(EntityItemFrame.d);
     }
 
     public void setRotation(int i) {
@@ -153,15 +159,11 @@ public class EntityItemFrame extends EntityHanging {
     }
 
     private void setRotation(int i, boolean flag) {
-        this.getDataWatcher().set(EntityItemFrame.d, Integer.valueOf(i % 8));
+        this.getDataWatcher().set(EntityItemFrame.d, i % 8);
         if (flag && this.blockPosition != null) {
             this.world.updateAdjacentComparators(this.blockPosition, Blocks.AIR);
         }
 
-    }
-
-    public static void a(DataConverterManager dataconvertermanager) {
-        dataconvertermanager.a(DataConverterTypes.ENTITY, new DataInspectorItem("ItemFrame", "Item"));
     }
 
     public void b(NBTTagCompound nbttagcompound) {
@@ -201,9 +203,10 @@ public class EntityItemFrame extends EntityHanging {
             this.setRotation(this.getRotation() + 1);
         }
 
-        return true;
+        return false;
     }
 
+    @SuppressWarnings("unused")
     public int t() {
         return this.getItem() == null ? 0 : this.getRotation() % 8 + 1;
     }

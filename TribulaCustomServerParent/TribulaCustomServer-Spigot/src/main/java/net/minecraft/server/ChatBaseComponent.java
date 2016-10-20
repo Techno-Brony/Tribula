@@ -3,77 +3,22 @@ package net.minecraft.server;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
+
+import javax.annotation.Nullable;
 import java.util.Iterator;
 import java.util.List;
-import javax.annotation.Nullable;
 
 public abstract class ChatBaseComponent implements IChatBaseComponent {
 
+    @SuppressWarnings("CanBeFinal")
     protected List<IChatBaseComponent> a = Lists.newArrayList();
     private ChatModifier b;
 
+    @SuppressWarnings("unused")
     public ChatBaseComponent() {}
 
-    public IChatBaseComponent addSibling(IChatBaseComponent ichatbasecomponent) {
-        ichatbasecomponent.getChatModifier().setChatModifier(this.getChatModifier());
-        this.a.add(ichatbasecomponent);
-        return this;
-    }
-
-    public List<IChatBaseComponent> a() {
-        return this.a;
-    }
-
-    public IChatBaseComponent a(String s) {
-        return this.addSibling(new ChatComponentText(s));
-    }
-
-    public IChatBaseComponent setChatModifier(ChatModifier chatmodifier) {
-        this.b = chatmodifier;
-        Iterator iterator = this.a.iterator();
-
-        while (iterator.hasNext()) {
-            IChatBaseComponent ichatbasecomponent = (IChatBaseComponent) iterator.next();
-
-            ichatbasecomponent.getChatModifier().setChatModifier(this.getChatModifier());
-        }
-
-        return this;
-    }
-
-    public ChatModifier getChatModifier() {
-        if (this.b == null) {
-            this.b = new ChatModifier();
-            Iterator iterator = this.a.iterator();
-
-            while (iterator.hasNext()) {
-                IChatBaseComponent ichatbasecomponent = (IChatBaseComponent) iterator.next();
-
-                ichatbasecomponent.getChatModifier().setChatModifier(this.b);
-            }
-        }
-
-        return this.b;
-    }
-
-    public Iterator<IChatBaseComponent> iterator() {
-        return Iterators.concat(Iterators.forArray(this), a((Iterable) this.a));
-    }
-
-    public final String toPlainText() {
-        StringBuilder stringbuilder = new StringBuilder();
-        Iterator iterator = this.iterator();
-
-        while (iterator.hasNext()) {
-            IChatBaseComponent ichatbasecomponent = (IChatBaseComponent) iterator.next();
-
-            stringbuilder.append(ichatbasecomponent.getText());
-        }
-
-        return stringbuilder.toString();
-    }
-
     public static Iterator<IChatBaseComponent> a(Iterable<IChatBaseComponent> iterable) {
+        //noinspection unchecked
         Iterator iterator = Iterators.concat(Iterators.transform(iterable.iterator(), new Function() {
             public Iterator<IChatBaseComponent> a(@Nullable IChatBaseComponent ichatbasecomponent) {
                 return ichatbasecomponent.iterator();
@@ -96,7 +41,71 @@ public abstract class ChatBaseComponent implements IChatBaseComponent {
                 return this.a((IChatBaseComponent) object);
             }
         });
+        //noinspection unchecked
         return iterator;
+    }
+
+    public IChatBaseComponent addSibling(IChatBaseComponent ichatbasecomponent) {
+        ichatbasecomponent.getChatModifier().setChatModifier(this.getChatModifier());
+        this.a.add(ichatbasecomponent);
+        return this;
+    }
+
+    public List<IChatBaseComponent> a() {
+        return this.a;
+    }
+
+    public IChatBaseComponent a(String s) {
+        return this.addSibling(new ChatComponentText(s));
+    }
+
+    public IChatBaseComponent setChatModifier(ChatModifier chatmodifier) {
+        this.b = chatmodifier;
+        Iterator iterator = this.a.iterator();
+
+        //noinspection WhileLoopReplaceableByForEach
+        while (iterator.hasNext()) {
+            IChatBaseComponent ichatbasecomponent = (IChatBaseComponent) iterator.next();
+
+            ichatbasecomponent.getChatModifier().setChatModifier(this.getChatModifier());
+        }
+
+        return this;
+    }
+
+    public ChatModifier getChatModifier() {
+        if (this.b == null) {
+            this.b = new ChatModifier();
+            Iterator iterator = this.a.iterator();
+
+            //noinspection WhileLoopReplaceableByForEach
+            while (iterator.hasNext()) {
+                IChatBaseComponent ichatbasecomponent = (IChatBaseComponent) iterator.next();
+
+                ichatbasecomponent.getChatModifier().setChatModifier(this.b);
+            }
+        }
+
+        return this.b;
+    }
+
+    public Iterator<IChatBaseComponent> iterator() {
+        //noinspection unchecked,unchecked
+        return Iterators.concat(Iterators.forArray(this), a((Iterable) this.a));
+    }
+
+    public final String toPlainText() {
+        StringBuilder stringbuilder = new StringBuilder();
+        Iterator iterator = this.iterator();
+
+        //noinspection WhileLoopReplaceableByForEach
+        while (iterator.hasNext()) {
+            IChatBaseComponent ichatbasecomponent = (IChatBaseComponent) iterator.next();
+
+            stringbuilder.append(ichatbasecomponent.getText());
+        }
+
+        return stringbuilder.toString();
     }
 
     public boolean equals(Object object) {

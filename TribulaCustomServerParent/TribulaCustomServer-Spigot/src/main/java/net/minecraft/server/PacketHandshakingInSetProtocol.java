@@ -4,11 +4,12 @@ import java.io.IOException;
 
 public class PacketHandshakingInSetProtocol implements Packet<PacketHandshakingInListener> {
 
-    private int a;
     public String hostname;
     public int port;
+    private int a;
     private EnumProtocol d;
 
+    @SuppressWarnings("unused")
     public PacketHandshakingInSetProtocol() {}
 
     public void a(PacketDataSerializer packetdataserializer) throws IOException {

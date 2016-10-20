@@ -1,34 +1,28 @@
 package net.minecraft.server;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import javax.annotation.Nullable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.bukkit.craftbukkit.entity.CraftPlayer;
+
+import javax.annotation.Nullable;
+import java.io.*;
+import java.util.UUID;
 
 // CraftBukkit start
-import java.util.UUID;
-import org.bukkit.craftbukkit.entity.CraftPlayer;
 // CraftBukkit end
 
 public class WorldNBTStorage implements IDataManager, IPlayerFileData {
 
     private static final Logger b = LogManager.getLogger();
+    protected final DataConverterManager a;
     private final File baseDir;
     private final File playerDir;
     private final File dataDir;
     private final long sessionId = MinecraftServer.av();
-    private final String g;
     private final DefinedStructureManager h;
-    protected final DataConverterManager a;
     private UUID uuid = null; // CraftBukkit
 
+    @SuppressWarnings("unused")
     public WorldNBTStorage(File file, String s, boolean flag, DataConverterManager dataconvertermanager) {
         this.a = dataconvertermanager;
         this.baseDir = new File(file, s);
@@ -36,7 +30,6 @@ public class WorldNBTStorage implements IDataManager, IPlayerFileData {
         this.playerDir = new File(this.baseDir, "playerdata");
         this.dataDir = new File(this.baseDir, "data");
         this.dataDir.mkdirs();
-        this.g = s;
         if (flag) {
             this.playerDir.mkdirs();
             this.h = new DefinedStructureManager((new File(this.baseDir, "structures")).toString());

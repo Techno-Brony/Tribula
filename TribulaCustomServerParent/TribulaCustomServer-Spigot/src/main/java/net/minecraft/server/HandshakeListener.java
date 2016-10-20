@@ -30,6 +30,7 @@ public class HandshakeListener implements PacketHandshakingInListener {
             // CraftBukkit start - Connection throttle
             try {
                 long currentTime = System.currentTimeMillis();
+                //noinspection deprecation
                 long connectionThrottle = MinecraftServer.getServer().server.getConnectionThrottle();
                 InetAddress address = ((java.net.InetSocketAddress) this.b.getSocketAddress()).getAddress();
 
@@ -50,6 +51,7 @@ public class HandshakeListener implements PacketHandshakingInListener {
                         // Cleanup stale entries
                         java.util.Iterator iter = throttleTracker.entrySet().iterator();
                         while (iter.hasNext()) {
+                            //noinspection unchecked
                             java.util.Map.Entry<InetAddress, Long> entry = (java.util.Map.Entry) iter.next();
                             if (entry.getValue() > connectionThrottle) {
                                 iter.remove();
@@ -116,12 +118,12 @@ public class HandshakeListener implements PacketHandshakingInListener {
         static {
             try {
                 HandshakeListener.SyntheticClass_1.a[EnumProtocol.LOGIN.ordinal()] = 1;
-            } catch (NoSuchFieldError nosuchfielderror) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 HandshakeListener.SyntheticClass_1.a[EnumProtocol.STATUS.ordinal()] = 2;
-            } catch (NoSuchFieldError nosuchfielderror1) {
+            } catch (NoSuchFieldError ignored) {
             }
 
         }

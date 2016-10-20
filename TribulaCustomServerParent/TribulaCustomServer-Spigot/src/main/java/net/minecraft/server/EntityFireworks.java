@@ -1,29 +1,18 @@
 package net.minecraft.server;
 
 import com.google.common.base.Optional;
+
 import javax.annotation.Nullable;
 
 public class EntityFireworks extends Entity {
 
     public static final DataWatcherObject<Optional<ItemStack>> FIREWORK_ITEM = DataWatcher.a(EntityFireworks.class, DataWatcherRegistry.f);
-    private int ticksFlown;
     public int expectedLifespan;
+    private int ticksFlown;
 
     public EntityFireworks(World world) {
         super(world);
         this.setSize(0.25F, 0.25F);
-    }
-
-    // Spigot Start
-    @Override
-    public void inactiveTick() {
-        this.ticksFlown += 1;
-        super.inactiveTick();
-    }
-    // Spigot End
-
-    protected void i() {
-        this.datawatcher.register(EntityFireworks.FIREWORK_ITEM, Optional.absent());
     }
 
     public EntityFireworks(World world, double d0, double d1, double d2, @Nullable ItemStack itemstack) {
@@ -45,6 +34,23 @@ public class EntityFireworks extends Entity {
         this.motZ = this.random.nextGaussian() * 0.001D;
         this.motY = 0.05D;
         this.expectedLifespan = 10 * i + this.random.nextInt(6) + this.random.nextInt(7);
+    }
+    // Spigot End
+
+    @SuppressWarnings("unused")
+    public static void a(DataConverterManager dataconvertermanager) {
+        dataconvertermanager.a(DataConverterTypes.ENTITY, new DataInspectorItem("FireworksRocketEntity", "FireworksItem"));
+    }
+
+    // Spigot Start
+    @Override
+    public void inactiveTick() {
+        this.ticksFlown += 1;
+        super.inactiveTick();
+    }
+
+    protected void i() {
+        this.datawatcher.register(EntityFireworks.FIREWORK_ITEM, Optional.absent());
     }
 
     public void m() {
@@ -93,10 +99,6 @@ public class EntityFireworks extends Entity {
 
     }
 
-    public static void a(DataConverterManager dataconvertermanager) {
-        dataconvertermanager.a(DataConverterTypes.ENTITY, new DataInspectorItem("FireworksRocketEntity", "FireworksItem"));
-    }
-
     public void b(NBTTagCompound nbttagcompound) {
         nbttagcompound.setInt("Life", this.ticksFlown);
         nbttagcompound.setInt("LifeTime", this.expectedLifespan);
@@ -123,6 +125,7 @@ public class EntityFireworks extends Entity {
 
     }
 
+    @SuppressWarnings("EmptyMethod")
     public float e(float f) {
         return super.e(f);
     }

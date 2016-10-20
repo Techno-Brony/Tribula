@@ -1,20 +1,24 @@
 package net.minecraft.server;
 
-import javax.annotation.Nullable;
-// CraftBukkit start
 import org.bukkit.craftbukkit.inventory.CraftInventoryCrafting;
 import org.bukkit.craftbukkit.inventory.CraftInventoryView;
+
+import javax.annotation.Nullable;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class ContainerPlayer extends Container {
 
     private static final EnumItemSlot[] h = new EnumItemSlot[] { EnumItemSlot.HEAD, EnumItemSlot.CHEST, EnumItemSlot.LEGS, EnumItemSlot.FEET};
+    private final EntityHuman owner;
     public InventoryCrafting craftInventory = new InventoryCrafting(this, 2, 2);
     public IInventory resultInventory = new InventoryCraftResult();
+    @SuppressWarnings({"unused", "CanBeFinal"})
     public boolean g;
-    private final EntityHuman owner;
     // CraftBukkit start
     private CraftInventoryView bukkitEntity = null;
+    @SuppressWarnings("CanBeFinal")
     private PlayerInventory player;
     // CraftBukkit end
 
@@ -68,7 +72,9 @@ public class ContainerPlayer extends Container {
             this.a(new Slot(playerinventory, i, 8 + i * 18, 142));
         }
 
+        //noinspection EmptyMethod,EmptyMethod,EmptyMethod
         this.a(new Slot(playerinventory, 40, 77, 62) {
+            @SuppressWarnings("EmptyMethod")
             public boolean isAllowed(@Nullable ItemStack itemstack) {
                 return super.isAllowed(itemstack);
             }
@@ -106,7 +112,7 @@ public class ContainerPlayer extends Container {
     }
 
     public boolean a(EntityHuman entityhuman) {
-        return true;
+        return false;
     }
 
     @Nullable
@@ -121,38 +127,38 @@ public class ContainerPlayer extends Container {
             EnumItemSlot enumitemslot = EntityInsentient.d(itemstack);
 
             if (i == 0) {
-                if (!this.a(itemstack1, 9, 45, true)) {
+                if (this.a(itemstack1, 9, 45, true)) {
                     return null;
                 }
 
                 slot.a(itemstack1, itemstack);
             } else if (i >= 1 && i < 5) {
-                if (!this.a(itemstack1, 9, 45, false)) {
+                if (this.a(itemstack1, 9, 45, false)) {
                     return null;
                 }
             } else if (i >= 5 && i < 9) {
-                if (!this.a(itemstack1, 9, 45, false)) {
+                if (this.a(itemstack1, 9, 45, false)) {
                     return null;
                 }
             } else if (enumitemslot.a() == EnumItemSlot.Function.ARMOR && !this.c.get(8 - enumitemslot.b()).hasItem()) {
                 int j = 8 - enumitemslot.b();
 
-                if (!this.a(itemstack1, j, j + 1, false)) {
+                if (this.a(itemstack1, j, j + 1, false)) {
                     return null;
                 }
             } else if (enumitemslot == EnumItemSlot.OFFHAND && !this.c.get(45).hasItem()) {
-                if (!this.a(itemstack1, 45, 46, false)) {
+                if (this.a(itemstack1, 45, 46, false)) {
                     return null;
                 }
             } else if (i >= 9 && i < 36) {
-                if (!this.a(itemstack1, 36, 45, false)) {
+                if (this.a(itemstack1, 36, 45, false)) {
                     return null;
                 }
             } else if (i >= 36 && i < 45) {
-                if (!this.a(itemstack1, 9, 36, false)) {
+                if (this.a(itemstack1, 9, 36, false)) {
                     return null;
                 }
-            } else if (!this.a(itemstack1, 9, 45, false)) {
+            } else if (this.a(itemstack1, 9, 45, false)) {
                 return null;
             }
 

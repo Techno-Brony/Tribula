@@ -1,11 +1,8 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Lists;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+
+import java.util.*;
 import java.util.Map.Entry;
 
 public class WorldGenLargeFeature extends StructureGenerator {
@@ -13,19 +10,21 @@ public class WorldGenLargeFeature extends StructureGenerator {
     private static final List<BiomeBase> a = Arrays.asList(Biomes.d, Biomes.s, Biomes.w, Biomes.x, Biomes.h, Biomes.n, Biomes.F);
     private final List<BiomeBase.BiomeMeta> b;
     private int d;
-    private final int h;
 
+    @SuppressWarnings("unused")
     public WorldGenLargeFeature() {
         this.b = Lists.newArrayList();
         this.d = 32;
-        this.h = 8;
+        int h = 8;
         this.b.add(new BiomeBase.BiomeMeta(EntityWitch.class, 1, 1, 1));
     }
 
+    @SuppressWarnings("unused")
     public WorldGenLargeFeature(Map<String, String> map) {
         this();
         Iterator iterator = map.entrySet().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             Entry entry = (Entry) iterator.next();
 
@@ -69,6 +68,7 @@ public class WorldGenLargeFeature extends StructureGenerator {
 
             Iterator iterator = WorldGenLargeFeature.a.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 BiomeBase biomebase1 = (BiomeBase) iterator.next();
 
@@ -103,12 +103,14 @@ public class WorldGenLargeFeature extends StructureGenerator {
 
     public static class WorldGenLargeFeatureStart extends StructureStart {
 
+        @SuppressWarnings("unused")
         public WorldGenLargeFeatureStart() {}
 
         public WorldGenLargeFeatureStart(World world, Random random, int i, int j) {
             this(world, random, i, j, world.getBiome(new BlockPosition(i * 16 + 8, 0, j * 16 + 8)));
         }
 
+        @SuppressWarnings("unused")
         public WorldGenLargeFeatureStart(World world, Random random, int i, int j, BiomeBase biomebase) {
             super(i, j);
             if (biomebase != Biomes.w && biomebase != Biomes.x) {

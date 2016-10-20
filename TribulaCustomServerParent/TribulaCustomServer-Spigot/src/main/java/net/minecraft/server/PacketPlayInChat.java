@@ -4,10 +4,15 @@ import java.io.IOException;
 
 public class PacketPlayInChat implements Packet<PacketListenerPlayIn> {
 
+    // Spigot Start
+    private static final java.util.concurrent.ExecutorService executors = java.util.concurrent.Executors.newCachedThreadPool(
+            new com.google.common.util.concurrent.ThreadFactoryBuilder().setDaemon( true ).setNameFormat( "Async Chat Thread - #%d" ).build() );
     private String a;
 
+    @SuppressWarnings("unused")
     public PacketPlayInChat() {}
 
+    @SuppressWarnings("unused")
     public PacketPlayInChat(String s) {
         if (s.length() > 100) {
             s = s.substring(0, 100);
@@ -24,9 +29,6 @@ public class PacketPlayInChat implements Packet<PacketListenerPlayIn> {
         packetdataserializer.a(this.a);
     }
 
-    // Spigot Start
-    private static final java.util.concurrent.ExecutorService executors = java.util.concurrent.Executors.newCachedThreadPool(
-            new com.google.common.util.concurrent.ThreadFactoryBuilder().setDaemon( true ).setNameFormat( "Async Chat Thread - #%d" ).build() );
     public void a(final PacketListenerPlayIn packetlistenerplayin) {
         if ( !a.startsWith("/") )
         {

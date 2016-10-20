@@ -1,19 +1,19 @@
 package net.minecraft.server;
 
-import org.bukkit.event.entity.EntityInteractEvent; // CraftBukkit
+import org.bukkit.event.entity.EntityInteractEvent;
 
 public class BlockPressurePlateWeighted extends BlockPressurePlateAbstract {
 
     public static final BlockStateInteger POWER = BlockStateInteger.of("power", 0, 15);
     private final int weight;
 
-    protected BlockPressurePlateWeighted(Material material, int i) {
+    protected BlockPressurePlateWeighted(@SuppressWarnings("SameParameterValue") Material material, @SuppressWarnings("SameParameterValue") int i) {
         this(material, i, material.r());
     }
 
     protected BlockPressurePlateWeighted(Material material, int i, MaterialMapColor materialmapcolor) {
         super(material, materialmapcolor);
-        this.w(this.blockStateList.getBlockData().set(BlockPressurePlateWeighted.POWER, Integer.valueOf(0)));
+        this.w(this.blockStateList.getBlockData().set(BlockPressurePlateWeighted.POWER, 0));
         this.weight = i;
     }
 
@@ -23,6 +23,7 @@ public class BlockPressurePlateWeighted extends BlockPressurePlateAbstract {
         int i = 0;
         java.util.Iterator iterator = world.a(Entity.class, BlockPressurePlateWeighted.c.a(blockposition)).iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             Entity entity = (Entity) iterator.next();
 
@@ -62,23 +63,24 @@ public class BlockPressurePlateWeighted extends BlockPressurePlateAbstract {
     }
 
     protected int getPower(IBlockData iblockdata) {
-        return iblockdata.get(BlockPressurePlateWeighted.POWER).intValue();
+        return iblockdata.get(BlockPressurePlateWeighted.POWER);
     }
 
     protected IBlockData a(IBlockData iblockdata, int i) {
-        return iblockdata.set(BlockPressurePlateWeighted.POWER, Integer.valueOf(i));
+        return iblockdata.set(BlockPressurePlateWeighted.POWER, i);
     }
 
     public int a(World world) {
         return 10;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
-        return this.getBlockData().set(BlockPressurePlateWeighted.POWER, Integer.valueOf(i));
+        return this.getBlockData().set(BlockPressurePlateWeighted.POWER, i);
     }
 
     public int toLegacyData(IBlockData iblockdata) {
-        return iblockdata.get(BlockPressurePlateWeighted.POWER).intValue();
+        return iblockdata.get(BlockPressurePlateWeighted.POWER);
     }
 
     protected BlockStateList getStateList() {

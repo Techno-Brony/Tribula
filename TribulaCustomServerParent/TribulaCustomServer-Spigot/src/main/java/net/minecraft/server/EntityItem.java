@@ -1,22 +1,24 @@
 package net.minecraft.server;
 
 import com.google.common.base.Optional;
-import java.util.Iterator;
-import javax.annotation.Nullable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.bukkit.event.player.PlayerPickupItemEvent; // CraftBukkit
+import org.bukkit.event.player.PlayerPickupItemEvent;
+
+import javax.annotation.Nullable;
+import java.util.Iterator;
 
 public class EntityItem extends Entity {
 
     private static final Logger b = LogManager.getLogger();
     private static final DataWatcherObject<Optional<ItemStack>> c = DataWatcher.a(EntityItem.class, DataWatcherRegistry.f);
-    private int age;
     public int pickupDelay;
+    @SuppressWarnings({"unused", "CanBeFinal"})
+    public float a;
+    private int age;
     private int f;
     private String g;
     private String h;
-    public float a;
     private int lastTick = MinecraftServer.currentTick; // CraftBukkit
 
     public EntityItem(World world, double d0, double d1, double d2) {
@@ -41,16 +43,21 @@ public class EntityItem extends Entity {
         this.setItemStack(itemstack);
     }
 
-    protected boolean playStepSound() {
-        return false;
-    }
-
     public EntityItem(World world) {
         super(world);
         this.f = 5;
         this.a = (float) (Math.random() * 3.141592653589793D * 2.0D);
         this.setSize(0.25F, 0.25F);
         this.setItemStack(new ItemStack(Blocks.AIR, 0));
+    }
+
+    @SuppressWarnings("unused")
+    public static void a(DataConverterManager dataconvertermanager) {
+        dataconvertermanager.a(DataConverterTypes.ENTITY, new DataInspectorItem("Item", "Item"));
+    }
+
+    protected boolean playStepSound() {
+        return false;
     }
 
     protected void i() {
@@ -125,6 +132,7 @@ public class EntityItem extends Entity {
 
         }
     }
+    // Spigot end
 
     // Spigot start - copied from above
     @Override
@@ -146,7 +154,6 @@ public class EntityItem extends Entity {
             this.die();
         }
     }
-    // Spigot end
 
     private void x() {
         // Spigot start
@@ -154,6 +161,7 @@ public class EntityItem extends Entity {
         Iterator iterator = this.world.a(EntityItem.class, this.getBoundingBox().grow(radius, radius, radius)).iterator();
         // Spigot end
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             EntityItem entityitem = (EntityItem) iterator.next();
 
@@ -225,6 +233,7 @@ public class EntityItem extends Entity {
         return this.inWater;
     }
 
+    @SuppressWarnings("unused")
     protected void burn(int i) {
         this.damageEntity(DamageSource.FIRE, (float) i);
     }
@@ -248,10 +257,6 @@ public class EntityItem extends Entity {
 
             return false;
         }
-    }
-
-    public static void a(DataConverterManager dataconvertermanager) {
-        dataconvertermanager.a(DataConverterTypes.ENTITY, new DataInspectorItem("Item", "Item"));
     }
 
     public void b(NBTTagCompound nbttagcompound) {
@@ -377,6 +382,7 @@ public class EntityItem extends Entity {
     }
 
     public String getName() {
+        //noinspection deprecation,deprecation
         return this.hasCustomName() ? this.getCustomName() : LocaleI18n.get("item." + this.getItemStack().a());
     }
 
@@ -400,7 +406,7 @@ public class EntityItem extends Entity {
 
         if (itemstack == null) {
             if (this.world != null) {
-                EntityItem.b.error("Item entity {} has no item?!", Integer.valueOf(this.getId()));
+                EntityItem.b.error("Item entity {} has no item?!", this.getId());
             }
 
             return new ItemStack(Blocks.STONE);
@@ -418,6 +424,7 @@ public class EntityItem extends Entity {
         return this.h;
     }
 
+    @SuppressWarnings("unused")
     public void d(String s) {
         this.h = s;
     }
@@ -434,6 +441,7 @@ public class EntityItem extends Entity {
         this.pickupDelay = 10;
     }
 
+    @SuppressWarnings("unused")
     public void r() {
         this.pickupDelay = 0;
     }
@@ -442,7 +450,7 @@ public class EntityItem extends Entity {
         this.pickupDelay = 32767;
     }
 
-    public void a(int i) {
+    public void a(@SuppressWarnings("SameParameterValue") int i) {
         this.pickupDelay = i;
     }
 
@@ -454,6 +462,7 @@ public class EntityItem extends Entity {
         this.age = -6000;
     }
 
+    @SuppressWarnings("unused")
     public void w() {
         this.s();
         this.age = world.spigotConfig.itemDespawnRate - 1; // Spigot

@@ -1,24 +1,39 @@
 package net.minecraft.server;
 
-import java.util.List;
-import java.util.Random;
-import javax.annotation.Nullable;
-
-// CraftBukkit start
-import java.util.Map;
 import org.bukkit.Location;
-
 import org.bukkit.craftbukkit.inventory.CraftInventoryEnchanting;
 import org.bukkit.craftbukkit.inventory.CraftInventoryView;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
+import org.bukkit.entity.Player;
 import org.bukkit.event.enchantment.EnchantItemEvent;
 import org.bukkit.event.enchantment.PrepareItemEnchantEvent;
-import org.bukkit.entity.Player;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class ContainerEnchantTable extends Container {
 
+    private final BlockPosition position;
+    private final Random l = new Random();
+    public World world;
+    public int f;
+    @SuppressWarnings("CanBeFinal")
+    public int[] costs = new int[3];
+    @SuppressWarnings("CanBeFinal")
+    public int[] h = new int[] { -1, -1, -1};
+    @SuppressWarnings("CanBeFinal")
+    public int[] i = new int[] { -1, -1, -1};
+    // CraftBukkit start
+    private CraftInventoryView bukkitEntity = null;
+    @SuppressWarnings("CanBeFinal")
+    private Player player;
     // CraftBukkit - make type specific (changed from IInventory)
+    @SuppressWarnings("CanBeFinal")
     public InventorySubcontainer enchantSlots = new InventorySubcontainer("Enchant", true, 2) {
         public int getMaxStackSize() {
             return 64;
@@ -34,32 +49,26 @@ public class ContainerEnchantTable extends Container {
             return new org.bukkit.Location(world.getWorld(), position.getX(), position.getY(), position.getZ());
         }
     };
-    public World world;
-    private final BlockPosition position;
-    private final Random l = new Random();
-    public int f;
-    public int[] costs = new int[3];
-    public int[] h = new int[] { -1, -1, -1};
-    public int[] i = new int[] { -1, -1, -1};
-    // CraftBukkit start
-    private CraftInventoryView bukkitEntity = null;
-    private Player player;
     // CraftBukkit end
 
+    @SuppressWarnings("unused")
     public ContainerEnchantTable(PlayerInventory playerinventory, World world, BlockPosition blockposition) {
         this.world = world;
         this.position = blockposition;
         this.f = playerinventory.player.cV();
         this.a(new Slot(this.enchantSlots, 0, 15, 47) {
+            @SuppressWarnings("unused")
             public boolean isAllowed(@Nullable ItemStack itemstack) {
                 return true;
             }
 
+            @SuppressWarnings("unused")
             public int getMaxStackSize() {
                 return 1;
             }
         });
         this.a(new Slot(this.enchantSlots, 1, 35, 47) {
+            @SuppressWarnings("unused")
             public boolean isAllowed(@Nullable ItemStack itemstack) {
                 return itemstack.getItem() == Items.DYE && EnumColor.fromInvColorIndex(itemstack.getData()) == EnumColor.BLUE;
             }
@@ -103,9 +112,7 @@ public class ContainerEnchantTable extends Container {
     public void b() {
         super.b();
 
-        for (int i = 0; i < this.listeners.size(); ++i) {
-            ICrafting icrafting = this.listeners.get(i);
-
+        for (ICrafting icrafting : this.listeners) {
             this.c(icrafting);
         }
 
@@ -227,6 +234,7 @@ public class ContainerEnchantTable extends Container {
                     Map<org.bukkit.enchantments.Enchantment, Integer> enchants = new java.util.HashMap<org.bukkit.enchantments.Enchantment, Integer>();
                     for (Object obj : list) {
                         WeightedRandomEnchant instance = (WeightedRandomEnchant) obj;
+                        //noinspection deprecation
                         enchants.put(org.bukkit.enchantments.Enchantment.getById(Enchantment.getId(instance.enchantment)), instance.level);
                     }
                     CraftItemStack item = CraftItemStack.asCraftMirror(itemstack);
@@ -239,12 +247,14 @@ public class ContainerEnchantTable extends Container {
                         return false;
                     }
                     if (flag) {
+                        //noinspection deprecation
                         itemstack.setItem(Items.ENCHANTED_BOOK);
                     }
 
                     for (Map.Entry<org.bukkit.enchantments.Enchantment, Integer> entry : event.getEnchantsToAdd().entrySet()) {
                         try {
                             if (flag) {
+                                //noinspection deprecation
                                 int enchantId = entry.getKey().getId();
                                 if (Enchantment.c(enchantId) == null) {
                                     continue;
@@ -293,6 +303,7 @@ public class ContainerEnchantTable extends Container {
             list.remove(this.l.nextInt(list.size()));
         }
 
+        //noinspection unchecked
         return list;
     }
 
@@ -316,8 +327,8 @@ public class ContainerEnchantTable extends Container {
     }
 
     public boolean a(EntityHuman entityhuman) {
-        if (!this.checkReachable) return true; // CraftBukkit
-        return this.world.getType(this.position).getBlock() == Blocks.ENCHANTING_TABLE && entityhuman.e((double) this.position.getX() + 0.5D, (double) this.position.getY() + 0.5D, (double) this.position.getZ() + 0.5D) <= 64.0D;
+        // CraftBukkit
+        return this.checkReachable && (this.world.getType(this.position).getBlock() != Blocks.ENCHANTING_TABLE || entityhuman.e((double) this.position.getX() + 0.5D, (double) this.position.getY() + 0.5D, (double) this.position.getZ() + 0.5D) > 64.0D);
     }
 
     @Nullable
@@ -330,15 +341,15 @@ public class ContainerEnchantTable extends Container {
 
             itemstack = itemstack1.cloneItemStack();
             if (i == 0) {
-                if (!this.a(itemstack1, 2, 38, true)) {
+                if (this.a(itemstack1, 2, 38, true)) {
                     return null;
                 }
             } else if (i == 1) {
-                if (!this.a(itemstack1, 2, 38, true)) {
+                if (this.a(itemstack1, 2, 38, true)) {
                     return null;
                 }
             } else if (itemstack1.getItem() == Items.DYE && EnumColor.fromInvColorIndex(itemstack1.getData()) == EnumColor.BLUE) {
-                if (!this.a(itemstack1, 1, 2, true)) {
+                if (this.a(itemstack1, 1, 2, true)) {
                     return null;
                 }
             } else {

@@ -1,18 +1,22 @@
 package net.minecraft.server;
 
-import com.google.common.base.Predicate;
 import javax.annotation.Nullable;
 
 public class EntityOcelot extends EntityTameableAnimal {
 
     private static final DataWatcherObject<Integer> bB = DataWatcher.a(EntityOcelot.class, DataWatcherRegistry.b);
+    public boolean spawnBonus = true; // Spigot
     private PathfinderGoalAvoidTarget<EntityHuman> bC;
     private PathfinderGoalTempt bD;
-    public boolean spawnBonus = true; // Spigot
 
     public EntityOcelot(World world) {
         super(world);
         this.setSize(0.6F, 0.7F);
+    }
+
+    @SuppressWarnings("unused")
+    public static void b(DataConverterManager dataconvertermanager) {
+        EntityInsentient.a(dataconvertermanager, "Ozelot");
     }
 
     protected void r() {
@@ -28,12 +32,13 @@ public class EntityOcelot extends EntityTameableAnimal {
         this.goalSelector.a(9, new PathfinderGoalBreed(this, 0.8D));
         this.goalSelector.a(10, new PathfinderGoalRandomStroll(this, 0.8D));
         this.goalSelector.a(11, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 10.0F));
+        //noinspection unchecked
         this.targetSelector.a(1, new PathfinderGoalRandomTargetNonTamed(this, EntityChicken.class, false, null));
     }
 
     protected void i() {
         super.i();
-        this.datawatcher.register(EntityOcelot.bB, Integer.valueOf(0));
+        this.datawatcher.register(EntityOcelot.bB, 0);
     }
 
     public void M() {
@@ -68,10 +73,6 @@ public class EntityOcelot extends EntityTameableAnimal {
     }
 
     public void e(float f, float f1) {}
-
-    public static void b(DataConverterManager dataconvertermanager) {
-        EntityInsentient.a(dataconvertermanager, "Ozelot");
-    }
 
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
@@ -153,10 +154,10 @@ public class EntityOcelot extends EntityTameableAnimal {
             return true;
         }
 
-        return super.a(entityhuman, enumhand, itemstack);
+        return !super.a(entityhuman, enumhand, itemstack);
     }
 
-    public EntityOcelot b(EntityAgeable entityageable) {
+    public EntityOcelot b(@SuppressWarnings("UnusedParameters") EntityAgeable entityageable) {
         EntityOcelot entityocelot = new EntityOcelot(this.world);
 
         if (this.isTamed()) {
@@ -187,11 +188,11 @@ public class EntityOcelot extends EntityTameableAnimal {
     }
 
     public int getCatType() {
-        return this.datawatcher.get(EntityOcelot.bB).intValue();
+        return this.datawatcher.get(EntityOcelot.bB);
     }
 
     public void setCatType(int i) {
-        this.datawatcher.set(EntityOcelot.bB, Integer.valueOf(i));
+        this.datawatcher.set(EntityOcelot.bB, i);
     }
 
     public boolean cK() {
@@ -199,7 +200,7 @@ public class EntityOcelot extends EntityTameableAnimal {
     }
 
     public boolean canSpawn() {
-        if (this.world.a(this.getBoundingBox(), this) && this.world.getCubes(this, this.getBoundingBox()).isEmpty() && !this.world.containsLiquid(this.getBoundingBox())) {
+        if (this.world.a(this.getBoundingBox(), this) && this.world.getCubes(this, this.getBoundingBox()).isEmpty() && this.world.containsLiquid(this.getBoundingBox())) {
             BlockPosition blockposition = new BlockPosition(this.locX, this.getBoundingBox().b, this.locZ);
 
             if (blockposition.getY() < this.world.K()) {
@@ -218,15 +219,18 @@ public class EntityOcelot extends EntityTameableAnimal {
     }
 
     public String getName() {
+        //noinspection deprecation,deprecation
         return this.hasCustomName() ? this.getCustomName() : (this.isTamed() ? LocaleI18n.get("entity.Cat.name") : super.getName());
     }
 
+    @SuppressWarnings("EmptyMethod")
     public void setTamed(boolean flag) {
         super.setTamed(flag);
     }
 
     protected void df() {
         if (this.bC == null) {
+            //noinspection unchecked
             this.bC = new PathfinderGoalAvoidTarget(this, EntityHuman.class, 16.0F, 0.8D, 1.33D);
         }
 

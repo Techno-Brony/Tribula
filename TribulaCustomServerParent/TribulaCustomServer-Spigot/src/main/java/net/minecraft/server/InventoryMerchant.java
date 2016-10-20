@@ -1,12 +1,14 @@
 package net.minecraft.server;
 
-import javax.annotation.Nullable;
-// CraftBukkit start
-import java.util.List;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.entity.CraftHumanEntity;
 import org.bukkit.craftbukkit.entity.CraftVillager;
 import org.bukkit.entity.HumanEntity;
+
+import javax.annotation.Nullable;
+import java.util.List;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class InventoryMerchant implements IInventory {
@@ -14,12 +16,17 @@ public class InventoryMerchant implements IInventory {
     private final IMerchant merchant;
     private final ItemStack[] itemsInSlots = new ItemStack[3];
     private final EntityHuman player;
-    private MerchantRecipe recipe;
     public int selectedIndex;
-
     // CraftBukkit start - add fields and methods
+    @SuppressWarnings("CanBeFinal")
     public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
+    private MerchantRecipe recipe;
     private int maxStack = MAX_STACK;
+
+    public InventoryMerchant(EntityHuman entityhuman, IMerchant imerchant) {
+        this.player = entityhuman;
+        this.merchant = imerchant;
+    }
 
     public ItemStack[] getContents() {
         return this.itemsInSlots;
@@ -37,10 +44,6 @@ public class InventoryMerchant implements IInventory {
         return transaction;
     }
 
-    public void setMaxStackSize(int i) {
-        maxStack = i;
-    }
-
     public org.bukkit.inventory.InventoryHolder getOwner() {
         return (CraftVillager) ((EntityVillager) this.merchant).getBukkitEntity();
     }
@@ -50,11 +53,6 @@ public class InventoryMerchant implements IInventory {
         return ((EntityVillager) this.merchant).getBukkitEntity().getLocation();
     }
     // CraftBukkit end
-
-    public InventoryMerchant(EntityHuman entityhuman, IMerchant imerchant) {
-        this.player = entityhuman;
-        this.merchant = imerchant;
-    }
 
     public int getSize() {
         return this.itemsInSlots.length;
@@ -115,6 +113,10 @@ public class InventoryMerchant implements IInventory {
 
     public int getMaxStackSize() {
         return maxStack; // CraftBukkit
+    }
+
+    public void setMaxStackSize(int i) {
+        maxStack = i;
     }
 
     public boolean a(EntityHuman entityhuman) {

@@ -2,18 +2,20 @@ package net.minecraft.server;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class EntityTracker {
 
     private static final Logger a = LogManager.getLogger();
+    @SuppressWarnings("unchecked")
+    public final IntHashMap<EntityTrackerEntry> trackedEntities = new IntHashMap();
     private final WorldServer world;
     private final Set<EntityTrackerEntry> c = Sets.newHashSet();
-    public final IntHashMap<EntityTrackerEntry> trackedEntities = new IntHashMap();
     private int e;
 
     public EntityTracker(WorldServer worldserver) {
@@ -31,6 +33,7 @@ public class EntityTracker {
             EntityPlayer entityplayer = (EntityPlayer) entity;
             Iterator iterator = this.c.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 EntityTrackerEntry entitytrackerentry = (EntityTrackerEntry) iterator.next();
 
@@ -96,7 +99,7 @@ public class EntityTracker {
 
     }
 
-    public void addEntity(Entity entity, int i, int j) {
+    public void addEntity(Entity entity, @SuppressWarnings("SameParameterValue") int i, @SuppressWarnings("SameParameterValue") int j) {
         this.addEntity(entity, i, j, false);
     }
 
@@ -119,8 +122,9 @@ public class EntityTracker {
 
             crashreportsystemdetails.a("Tracking range", i + " blocks");
             final int finalI = i; // CraftBukkit - fix decompile error
+            //noinspection unchecked
             crashreportsystemdetails.a("Update interval", new CrashReportCallable() {
-                public String a() throws Exception {
+                public String a() {
                     String s = "Once per " + finalI + " ticks"; // CraftBukkit
 
                     if (finalI == Integer.MAX_VALUE) { // CraftBukkit
@@ -152,6 +156,7 @@ public class EntityTracker {
             EntityPlayer entityplayer = (EntityPlayer) entity;
             Iterator iterator = this.c.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 EntityTrackerEntry entitytrackerentry = (EntityTrackerEntry) iterator.next();
 
@@ -172,6 +177,7 @@ public class EntityTracker {
         ArrayList arraylist = Lists.newArrayList();
         Iterator iterator = this.c.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             EntityTrackerEntry entitytrackerentry = (EntityTrackerEntry) iterator.next();
 
@@ -180,15 +186,17 @@ public class EntityTracker {
                 Entity entity = entitytrackerentry.b();
 
                 if (entity instanceof EntityPlayer) {
+                    //noinspection unchecked
                     arraylist.add(entity);
                 }
             }
         }
 
-        for (int i = 0; i < arraylist.size(); ++i) {
-            EntityPlayer entityplayer = (EntityPlayer) arraylist.get(i);
+        for (Object anArraylist : arraylist) {
+            EntityPlayer entityplayer = (EntityPlayer) anArraylist;
             Iterator iterator1 = this.c.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator1.hasNext()) {
                 EntityTrackerEntry entitytrackerentry1 = (EntityTrackerEntry) iterator1.next();
 
@@ -203,6 +211,7 @@ public class EntityTracker {
     public void a(EntityPlayer entityplayer) {
         Iterator iterator = this.c.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             EntityTrackerEntry entitytrackerentry = (EntityTrackerEntry) iterator.next();
 
@@ -236,6 +245,7 @@ public class EntityTracker {
     public void untrackPlayer(EntityPlayer entityplayer) {
         Iterator iterator = this.c.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             EntityTrackerEntry entitytrackerentry = (EntityTrackerEntry) iterator.next();
 
@@ -249,6 +259,7 @@ public class EntityTracker {
         ArrayList arraylist1 = Lists.newArrayList();
         Iterator iterator = this.c.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             EntityTrackerEntry entitytrackerentry = (EntityTrackerEntry) iterator.next();
             Entity entity = entitytrackerentry.b();
@@ -256,10 +267,12 @@ public class EntityTracker {
             if (entity != entityplayer && entity.ac == chunk.locX && entity.ae == chunk.locZ) {
                 entitytrackerentry.updatePlayer(entityplayer);
                 if (entity instanceof EntityInsentient && ((EntityInsentient) entity).getLeashHolder() != null) {
+                    //noinspection unchecked
                     arraylist.add(entity);
                 }
 
                 if (!entity.bx().isEmpty()) {
+                    //noinspection unchecked
                     arraylist1.add(entity);
                 }
             }
@@ -291,6 +304,7 @@ public class EntityTracker {
         this.e = (i - 1) * 16;
         Iterator iterator = this.c.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             EntityTrackerEntry entitytrackerentry = (EntityTrackerEntry) iterator.next();
 

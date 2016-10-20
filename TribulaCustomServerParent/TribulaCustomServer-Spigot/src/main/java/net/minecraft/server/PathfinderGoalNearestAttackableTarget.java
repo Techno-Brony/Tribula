@@ -2,24 +2,25 @@ package net.minecraft.server;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+
+import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import javax.annotation.Nullable;
 
 public class PathfinderGoalNearestAttackableTarget<T extends EntityLiving> extends PathfinderGoalTarget {
 
     protected final Class<T> a;
-    private final int i;
     protected final PathfinderGoalNearestAttackableTarget.DistanceComparator b;
     protected final Predicate<? super T> c;
+    private final int i;
     protected T d;
 
     public PathfinderGoalNearestAttackableTarget(EntityCreature entitycreature, Class<T> oclass, boolean flag) {
         this(entitycreature, oclass, flag, false);
     }
 
-    public PathfinderGoalNearestAttackableTarget(EntityCreature entitycreature, Class<T> oclass, boolean flag, boolean flag1) {
+    public PathfinderGoalNearestAttackableTarget(EntityCreature entitycreature, Class<T> oclass, boolean flag, @SuppressWarnings("SameParameterValue") boolean flag1) {
         this(entitycreature, oclass, 10, flag, flag1, null);
     }
 
@@ -29,12 +30,14 @@ public class PathfinderGoalNearestAttackableTarget<T extends EntityLiving> exten
         this.i = i;
         this.b = new PathfinderGoalNearestAttackableTarget.DistanceComparator(entitycreature);
         this.a(1);
+        //noinspection unchecked
         this.c = new Predicate() {
             public boolean a(@Nullable T t0) {
                 return t0 != null && (!(predicate != null && !predicate.apply(t0)) && (IEntitySelector.e.apply(t0) && PathfinderGoalNearestAttackableTarget.this.a(t0, false)));
             }
 
             public boolean apply(Object object) {
+                //noinspection unchecked
                 return this.a((T) object); // CraftBukkit - fix decompile error
             }
         };
@@ -50,10 +53,12 @@ public class PathfinderGoalNearestAttackableTarget<T extends EntityLiving> exten
                 return false;
             } else {
                 Collections.sort(list, this.b);
+                //noinspection unchecked
                 this.d = (T) list.get(0); // CraftBukkit - fix decompile error
                 return true;
             }
         } else {
+            //noinspection unchecked,unchecked
             this.d = (T) this.e.world.a(this.e.locX, this.e.locY + (double) this.e.getHeadHeight(), this.e.locZ, this.i(), this.i(), new Function<EntityHuman, Double>() { // CraftBukkit - fix decompile error
                 @Nullable
                 public Double a(@Nullable EntityHuman entityhuman) {
@@ -66,11 +71,11 @@ public class PathfinderGoalNearestAttackableTarget<T extends EntityLiving> exten
                         boolean flag2 = PathfinderGoalNearestAttackableTarget.this.e instanceof EntityCreeper && i == 4;
 
                         if (flag || flag1 || flag2) {
-                            return Double.valueOf(0.5D);
+                            return 0.5D;
                         }
                     }
 
-                    return Double.valueOf(1.0D);
+                    return 1.0D;
                 }
 
                 public Double apply(EntityHuman object) { // CraftBukkit - fix decompile error

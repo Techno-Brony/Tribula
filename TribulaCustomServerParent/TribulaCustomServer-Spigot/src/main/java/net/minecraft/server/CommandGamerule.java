@@ -1,13 +1,28 @@
 package net.minecraft.server;
 
+import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import javax.annotation.Nullable;
 
 public class CommandGamerule extends CommandAbstract {
 
     public CommandGamerule() {}
+
+    public static void a(GameRules gamerules, String s, MinecraftServer minecraftserver) {
+        if ("reducedDebugInfo".equals(s)) {
+            int i = gamerules.getBoolean(s) ? 22 : 23;
+            Iterator iterator = minecraftserver.getPlayerList().v().iterator();
+
+            //noinspection WhileLoopReplaceableByForEach
+            while (iterator.hasNext()) {
+                EntityPlayer entityplayer = (EntityPlayer) iterator.next();
+
+                entityplayer.playerConnection.sendPacket(new PacketPlayOutEntityStatus(entityplayer, (byte) i));
+            }
+        }
+
+    }
 
     public String getCommand() {
         return "gamerule";
@@ -50,20 +65,6 @@ public class CommandGamerule extends CommandAbstract {
             gamerules.set(s, s1);
             a(gamerules, s, minecraftserver);
             a(icommandlistener, this, "commands.gamerule.success", s, s1);
-        }
-
-    }
-
-    public static void a(GameRules gamerules, String s, MinecraftServer minecraftserver) {
-        if ("reducedDebugInfo".equals(s)) {
-            int i = gamerules.getBoolean(s) ? 22 : 23;
-            Iterator iterator = minecraftserver.getPlayerList().v().iterator();
-
-            while (iterator.hasNext()) {
-                EntityPlayer entityplayer = (EntityPlayer) iterator.next();
-
-                entityplayer.playerConnection.sendPacket(new PacketPlayOutEntityStatus(entityplayer, (byte) i));
-            }
         }
 
     }

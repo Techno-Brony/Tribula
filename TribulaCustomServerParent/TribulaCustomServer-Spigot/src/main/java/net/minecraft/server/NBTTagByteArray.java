@@ -9,8 +9,10 @@ public class NBTTagByteArray extends NBTBase {
 
     private byte[] data;
 
+    @SuppressWarnings("unused")
     NBTTagByteArray() {}
 
+    @SuppressWarnings("unused")
     public NBTTagByteArray(byte[] abyte) {
         this.data = abyte;
     }
@@ -38,6 +40,7 @@ public class NBTTagByteArray extends NBTBase {
         return "[" + this.data.length + " bytes]";
     }
 
+    @SuppressWarnings("CloneDoesntCallSuperClone")
     public NBTBase clone() {
         byte[] abyte = new byte[this.data.length];
 
@@ -53,6 +56,7 @@ public class NBTTagByteArray extends NBTBase {
         return super.hashCode() ^ Arrays.hashCode(this.data);
     }
 
+    @SuppressWarnings("unused")
     public byte[] c() {
         return this.data;
     }

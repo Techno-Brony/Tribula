@@ -11,6 +11,7 @@ public class BlockMagma extends Block {
         this.a(true);
     }
 
+    @SuppressWarnings("deprecation")
     public MaterialMapColor r(IBlockData iblockdata) {
         return MaterialMapColor.K;
     }
@@ -39,6 +40,7 @@ public class BlockMagma extends Block {
 
     }
 
+    @SuppressWarnings("deprecation")
     public boolean a(IBlockData iblockdata, Entity entity) {
         return entity.isFireProof();
     }

@@ -1,8 +1,8 @@
 package net.minecraft.server;
 
+import javax.annotation.Nullable;
 import java.util.Iterator;
 import java.util.Random;
-import javax.annotation.Nullable;
 
 public class BlockReed extends Block {
 
@@ -11,10 +11,11 @@ public class BlockReed extends Block {
 
     protected BlockReed() {
         super(Material.PLANT);
-        this.w(this.blockStateList.getBlockData().set(BlockReed.AGE, Integer.valueOf(0)));
+        this.w(this.blockStateList.getBlockData().set(BlockReed.AGE, 0));
         this.a(true);
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         return BlockReed.b;
     }
@@ -28,17 +29,17 @@ public class BlockReed extends Block {
                 }
 
                 if (i < 3) {
-                    int j = iblockdata.get(BlockReed.AGE).intValue();
+                    int j = iblockdata.get(BlockReed.AGE);
 
                     if (j >= (byte) range(3, ((100.0F / world.spigotConfig.caneModifier) * 15) + 0.5F, 15)) { // Spigot
                         // CraftBukkit start
                         // world.setTypeUpdate(blockposition.up(), this.getBlockData()); // CraftBukkit
                         BlockPosition upPos = blockposition.up();
                         org.bukkit.craftbukkit.event.CraftEventFactory.handleBlockGrowEvent(world, upPos.getX(), upPos.getY(), upPos.getZ(), this, 0);
-                        world.setTypeAndData(blockposition, iblockdata.set(BlockReed.AGE, Integer.valueOf(0)), 4);
+                        world.setTypeAndData(blockposition, iblockdata.set(BlockReed.AGE, 0), 4);
                         // CraftBukkit end
                     } else {
-                        world.setTypeAndData(blockposition, iblockdata.set(BlockReed.AGE, Integer.valueOf(j + 1)), 4);
+                        world.setTypeAndData(blockposition, iblockdata.set(BlockReed.AGE, j + 1), 4);
                     }
                 }
             }
@@ -73,6 +74,7 @@ public class BlockReed extends Block {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         this.e(world, blockposition, iblockdata);
     }
@@ -91,6 +93,7 @@ public class BlockReed extends Block {
         return this.canPlace(world, blockposition);
     }
 
+    @SuppressWarnings("deprecation")
     @Nullable
     public AxisAlignedBB a(IBlockData iblockdata, World world, BlockPosition blockposition) {
         return BlockReed.k;
@@ -101,10 +104,12 @@ public class BlockReed extends Block {
         return Items.REEDS;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
@@ -113,12 +118,13 @@ public class BlockReed extends Block {
         return new ItemStack(Items.REEDS);
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
-        return this.getBlockData().set(BlockReed.AGE, Integer.valueOf(i));
+        return this.getBlockData().set(BlockReed.AGE, i);
     }
 
     public int toLegacyData(IBlockData iblockdata) {
-        return iblockdata.get(BlockReed.AGE).intValue();
+        return iblockdata.get(BlockReed.AGE);
     }
 
     protected BlockStateList getStateList() {

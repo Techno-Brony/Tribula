@@ -1,6 +1,7 @@
 package net.minecraft.server;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 
 public class RecipesBanner {
 
@@ -10,25 +11,28 @@ public class RecipesBanner {
         EnumColor[] aenumcolor = EnumColor.values();
         int i = aenumcolor.length;
 
-        for (int j = 0; j < i; ++j) {
-            EnumColor enumcolor = aenumcolor[j];
-
-            craftingmanager.registerShapedRecipe(new ItemStack(Items.BANNER, 1, enumcolor.getInvColorIndex()), "###", "###", " | ", Character.valueOf('#'), new ItemStack(Blocks.WOOL, 1, enumcolor.getColorIndex()), Character.valueOf('|'), Items.STICK);
+        for (EnumColor enumcolor : aenumcolor) {
+            craftingmanager.registerShapedRecipe(new ItemStack(Items.BANNER, 1, enumcolor.getInvColorIndex()), "###", "###", " | ", '#', new ItemStack(Blocks.WOOL, 1, enumcolor.getColorIndex()), '|', Items.STICK);
         }
 
         craftingmanager.a(new RecipesBanner.DuplicateRecipe(null));
         craftingmanager.a(new RecipesBanner.AddRecipe(null));
     }
 
+    @SuppressWarnings("unused")
     static class SyntheticClass_1 {    }
 
     static class AddRecipe extends ShapelessRecipes implements IRecipe { // CraftBukkit - added extends
 
         // CraftBukkit start - Delegate to new parent class with bogus info
         private AddRecipe() {
-            super(new ItemStack(Items.BANNER, 0, 0), java.util.Arrays.asList(new ItemStack(Items.BANNER)));
+            super(new ItemStack(Items.BANNER, 0, 0), Collections.singletonList(new ItemStack(Items.BANNER)));
         }
         // CraftBukkit end
+
+        AddRecipe(@SuppressWarnings({"SameParameterValue", "UnusedParameters"}) RecipesBanner.SyntheticClass_1 recipesbanner_syntheticclass_1) {
+            this();
+        }
 
         public boolean a(InventoryCrafting inventorycrafting, World world) {
             boolean flag = false;
@@ -49,11 +53,7 @@ public class RecipesBanner {
                 }
             }
 
-            if (!flag) {
-                return false;
-            } else {
-                return this.c(inventorycrafting) != null;
-            }
+            return flag && this.c(inventorycrafting) != null;
         }
 
         @Nullable
@@ -132,9 +132,7 @@ public class RecipesBanner {
             TileEntityBanner.EnumBannerPatternType[] atileentitybanner_enumbannerpatterntype = TileEntityBanner.EnumBannerPatternType.values();
             int i = atileentitybanner_enumbannerpatterntype.length;
 
-            for (int j = 0; j < i; ++j) {
-                TileEntityBanner.EnumBannerPatternType tileentitybanner_enumbannerpatterntype = atileentitybanner_enumbannerpatterntype[j];
-
+            for (TileEntityBanner.EnumBannerPatternType tileentitybanner_enumbannerpatterntype : atileentitybanner_enumbannerpatterntype) {
                 if (tileentitybanner_enumbannerpatterntype.d()) {
                     boolean flag = true;
                     int k;
@@ -210,19 +208,19 @@ public class RecipesBanner {
 
             return null;
         }
-
-        AddRecipe(RecipesBanner.SyntheticClass_1 recipesbanner_syntheticclass_1) {
-            this();
-        }
     }
 
     static class DuplicateRecipe extends ShapelessRecipes implements IRecipe { // CraftBukkit - added extends
 
         // CraftBukkit start - Delegate to new parent class with bogus info
         private DuplicateRecipe() {
-            super(new ItemStack(Items.BANNER, 0, 0), java.util.Arrays.asList(new ItemStack(Items.DYE, 0, 5)));
+            super(new ItemStack(Items.BANNER, 0, 0), Collections.singletonList(new ItemStack(Items.DYE, 0, 5)));
         }
         // CraftBukkit end
+
+        DuplicateRecipe(@SuppressWarnings({"SameParameterValue", "UnusedParameters"}) RecipesBanner.SyntheticClass_1 recipesbanner_syntheticclass_1) {
+            this();
+        }
 
         public boolean a(InventoryCrafting inventorycrafting, World world) {
             ItemStack itemstack = null;
@@ -316,10 +314,6 @@ public class RecipesBanner {
             }
 
             return aitemstack;
-        }
-
-        DuplicateRecipe(RecipesBanner.SyntheticClass_1 recipesbanner_syntheticclass_1) {
-            this();
         }
     }
 }

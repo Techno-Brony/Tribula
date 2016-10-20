@@ -1,8 +1,8 @@
 package net.minecraft.server;
 
+import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
-import javax.annotation.Nullable;
 
 public class CommandGamemode extends CommandAbstract {
 
@@ -49,7 +49,7 @@ public class CommandGamemode extends CommandAbstract {
         }
     }
 
-    protected EnumGamemode c(ICommandListener icommandlistener, String s) throws ExceptionInvalidNumber {
+    protected EnumGamemode c(@SuppressWarnings("UnusedParameters") ICommandListener icommandlistener, String s) throws ExceptionInvalidNumber {
         EnumGamemode enumgamemode = EnumGamemode.a(s, EnumGamemode.NOT_SET);
 
         return enumgamemode == EnumGamemode.NOT_SET ? WorldSettings.a(a(s, 0, EnumGamemode.values().length - 2)) : enumgamemode;

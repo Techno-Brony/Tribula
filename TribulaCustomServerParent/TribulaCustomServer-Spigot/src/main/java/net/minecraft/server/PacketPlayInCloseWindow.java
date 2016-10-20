@@ -6,6 +6,7 @@ public class PacketPlayInCloseWindow implements Packet<PacketListenerPlayIn> {
 
     private int id;
 
+    @SuppressWarnings("unused")
     public PacketPlayInCloseWindow() {}
 
     // CraftBukkit start

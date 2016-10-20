@@ -1,25 +1,43 @@
 package net.minecraft.server;
 
-import java.util.Random;
-import javax.annotation.Nullable;
-// CraftBukkit start
-import java.util.List;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.entity.CraftHumanEntity;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.InventoryHolder;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public abstract class EntityMinecartContainer extends EntityMinecartAbstract implements ITileInventory, ILootable {
 
+    // CraftBukkit start
+    @SuppressWarnings("CanBeFinal")
+    public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
     private ItemStack[] items = new ItemStack[27]; // CraftBukkit - 36 -> 27
     private boolean b = true;
     private MinecraftKey c;
     private long d;
-
-    // CraftBukkit start
-    public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
     private int maxStack = MAX_STACK;
+
+    @SuppressWarnings("unused")
+    public EntityMinecartContainer(World world) {
+        super(world);
+    }
+
+    @SuppressWarnings("unused")
+    public EntityMinecartContainer(World world, double d0, double d1, double d2) {
+        super(world, d0, d1, d2);
+    }
+
+    @SuppressWarnings("unused")
+    public static void b(DataConverterManager dataconvertermanager, String s) {
+        EntityMinecartAbstract.a(dataconvertermanager, s);
+        dataconvertermanager.a(DataConverterTypes.ENTITY, new DataInspectorItemList(s, "Items"));
+    }
 
     public ItemStack[] getContents() {
         return this.items;
@@ -36,6 +54,7 @@ public abstract class EntityMinecartContainer extends EntityMinecartAbstract imp
     public List<HumanEntity> getViewers() {
         return transaction;
     }
+    // CraftBukkit end
 
     public InventoryHolder getOwner() {
         org.bukkit.entity.Entity cart = getBukkitEntity();
@@ -43,22 +62,9 @@ public abstract class EntityMinecartContainer extends EntityMinecartAbstract imp
         return null;
     }
 
-    public void setMaxStackSize(int size) {
-        maxStack = size;
-    }
-
     @Override
     public Location getLocation() {
         return getBukkitEntity().getLocation();
-    }
-    // CraftBukkit end
-
-    public EntityMinecartContainer(World world) {
-        super(world);
-    }
-
-    public EntityMinecartContainer(World world, double d0, double d1, double d2) {
-        super(world, d0, d1, d2);
     }
 
     public void a(DamageSource damagesource) {
@@ -121,6 +127,10 @@ public abstract class EntityMinecartContainer extends EntityMinecartAbstract imp
         return maxStack; // CraftBukkit
     }
 
+    public void setMaxStackSize(int size) {
+        maxStack = size;
+    }
+
     @Nullable
     public Entity c(int i) {
         this.b = false;
@@ -137,11 +147,6 @@ public abstract class EntityMinecartContainer extends EntityMinecartAbstract imp
 
     public void b(boolean flag) {
         this.b = flag;
-    }
-
-    public static void b(DataConverterManager dataconvertermanager, String s) {
-        EntityMinecartAbstract.a(dataconvertermanager, s);
-        dataconvertermanager.a(DataConverterTypes.ENTITY, new DataInspectorItemList(s, "Items"));
     }
 
     protected void b(NBTTagCompound nbttagcompound) {
@@ -195,7 +200,7 @@ public abstract class EntityMinecartContainer extends EntityMinecartAbstract imp
             entityhuman.openContainer(this);
         }
 
-        return true;
+        return false;
     }
 
     protected void r() {
@@ -265,6 +270,7 @@ public abstract class EntityMinecartContainer extends EntityMinecartAbstract imp
 
     }
 
+    @SuppressWarnings("unused")
     public void a(MinecraftKey minecraftkey, long i) {
         this.c = minecraftkey;
         this.d = i;

@@ -1,12 +1,13 @@
 package net.minecraft.server;
 
+import org.bukkit.craftbukkit.event.CraftEventFactory;
+import org.bukkit.event.entity.EntityInteractEvent;
+
+import javax.annotation.Nullable;
 import java.util.Iterator;
 import java.util.Random;
-import javax.annotation.Nullable;
 
 // CraftBukkit start
-import org.bukkit.event.entity.EntityInteractEvent;
-import org.bukkit.craftbukkit.event.CraftEventFactory;
 // CraftBukkit end
 
 public class BlockSoil extends Block {
@@ -16,29 +17,32 @@ public class BlockSoil extends Block {
 
     protected BlockSoil() {
         super(Material.EARTH);
-        this.w(this.blockStateList.getBlockData().set(BlockSoil.MOISTURE, Integer.valueOf(0)));
+        this.w(this.blockStateList.getBlockData().set(BlockSoil.MOISTURE, 0));
         this.a(true);
         this.d(255);
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         return BlockSoil.b;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
 
     public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
-        int i = iblockdata.get(BlockSoil.MOISTURE).intValue();
+        int i = iblockdata.get(BlockSoil.MOISTURE);
 
         if (!this.c(world, blockposition) && !world.isRainingAt(blockposition.up())) {
             if (i > 0) {
-                world.setTypeAndData(blockposition, iblockdata.set(BlockSoil.MOISTURE, Integer.valueOf(i - 1)), 2);
+                world.setTypeAndData(blockposition, iblockdata.set(BlockSoil.MOISTURE, i - 1), 2);
             } else if (!this.b(world, blockposition)) {
                 // CraftBukkit start
                 org.bukkit.block.Block block = world.getWorld().getBlockAt(blockposition.getX(), blockposition.getY(), blockposition.getZ());
@@ -49,7 +53,7 @@ public class BlockSoil extends Block {
                 world.setTypeUpdate(blockposition, Blocks.DIRT.getBlockData());
             }
         } else if (i < 7) {
-            world.setTypeAndData(blockposition, iblockdata.set(BlockSoil.MOISTURE, Integer.valueOf(7)), 2);
+            world.setTypeAndData(blockposition, iblockdata.set(BlockSoil.MOISTURE, 7), 2);
         }
 
     }
@@ -104,7 +108,9 @@ public class BlockSoil extends Block {
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
+        //noinspection deprecation
         super.a(iblockdata, world, blockposition, block);
         if (world.getType(blockposition.up()).getMaterial().isBuildable()) {
             world.setTypeUpdate(blockposition, Blocks.DIRT.getBlockData());
@@ -121,12 +127,13 @@ public class BlockSoil extends Block {
         return new ItemStack(Blocks.DIRT);
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
-        return this.getBlockData().set(BlockSoil.MOISTURE, Integer.valueOf(i & 7));
+        return this.getBlockData().set(BlockSoil.MOISTURE, i & 7);
     }
 
     public int toLegacyData(IBlockData iblockdata) {
-        return iblockdata.get(BlockSoil.MOISTURE).intValue();
+        return iblockdata.get(BlockSoil.MOISTURE);
     }
 
     protected BlockStateList getStateList() {

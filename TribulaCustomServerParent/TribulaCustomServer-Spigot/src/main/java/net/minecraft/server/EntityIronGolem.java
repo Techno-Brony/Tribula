@@ -1,19 +1,25 @@
 package net.minecraft.server;
 
 import com.google.common.base.Predicate;
+
 import javax.annotation.Nullable;
 
 public class EntityIronGolem extends EntityGolem {
 
     protected static final DataWatcherObject<Byte> a = DataWatcher.a(EntityIronGolem.class, DataWatcherRegistry.a);
-    private int c;
     Village b;
+    private int c;
     private int bx;
     private int by;
 
     public EntityIronGolem(World world) {
         super(world);
         this.setSize(1.4F, 2.7F);
+    }
+
+    @SuppressWarnings("unused")
+    public static void b(DataConverterManager dataconvertermanager) {
+        EntityInsentient.a(dataconvertermanager, "VillagerGolem");
     }
 
     protected void r() {
@@ -27,6 +33,7 @@ public class EntityIronGolem extends EntityGolem {
         this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
         this.targetSelector.a(1, new PathfinderGoalDefendVillage(this));
         this.targetSelector.a(2, new PathfinderGoalHurtByTarget(this, false, new Class[0]));
+        //noinspection unchecked
         this.targetSelector.a(3, new PathfinderGoalNearestAttackableTarget(this, EntityInsentient.class, 10, false, true, new Predicate() {
             public boolean a(@Nullable EntityInsentient entityinsentient) {
                 return entityinsentient != null && IMonster.e.apply(entityinsentient) && !(entityinsentient instanceof EntityCreeper);
@@ -40,7 +47,7 @@ public class EntityIronGolem extends EntityGolem {
 
     protected void i() {
         super.i();
-        this.datawatcher.register(EntityIronGolem.a, Byte.valueOf((byte) 0));
+        this.datawatcher.register(EntityIronGolem.a, (byte) 0);
     }
 
     protected void M() {
@@ -102,11 +109,7 @@ public class EntityIronGolem extends EntityGolem {
     }
 
     public boolean d(Class<? extends EntityLiving> oclass) {
-        return !(this.isPlayerCreated() && EntityHuman.class.isAssignableFrom(oclass)) && (oclass != EntityCreeper.class && super.d(oclass));
-    }
-
-    public static void b(DataConverterManager dataconvertermanager) {
-        EntityInsentient.a(dataconvertermanager, "VillagerGolem");
+        return !(this.isPlayerCreated() && EntityHuman.class.isAssignableFrom(oclass)) && (oclass != EntityCreeper.class && !super.d(oclass));
     }
 
     public void b(NBTTagCompound nbttagcompound) {
@@ -137,6 +140,7 @@ public class EntityIronGolem extends EntityGolem {
         return this.b;
     }
 
+    @SuppressWarnings("unused")
     public void a(boolean flag) {
         this.by = flag ? 400 : 0;
         this.world.broadcastEntityEffect(this, (byte) 11);
@@ -159,21 +163,22 @@ public class EntityIronGolem extends EntityGolem {
         return LootTables.z;
     }
 
+    @SuppressWarnings("unused")
     public int df() {
         return this.by;
     }
 
     public boolean isPlayerCreated() {
-        return (this.datawatcher.get(EntityIronGolem.a).byteValue() & 1) != 0;
+        return (this.datawatcher.get(EntityIronGolem.a) & 1) != 0;
     }
 
     public void setPlayerCreated(boolean flag) {
-        byte b0 = this.datawatcher.get(EntityIronGolem.a).byteValue();
+        byte b0 = this.datawatcher.get(EntityIronGolem.a);
 
         if (flag) {
-            this.datawatcher.set(EntityIronGolem.a, Byte.valueOf((byte) (b0 | 1)));
+            this.datawatcher.set(EntityIronGolem.a, (byte) (b0 | 1));
         } else {
-            this.datawatcher.set(EntityIronGolem.a, Byte.valueOf((byte) (b0 & -2)));
+            this.datawatcher.set(EntityIronGolem.a, (byte) (b0 & -2));
         }
 
     }

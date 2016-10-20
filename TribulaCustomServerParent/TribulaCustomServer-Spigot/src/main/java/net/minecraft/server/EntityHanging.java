@@ -1,16 +1,18 @@
 package net.minecraft.server;
 
 import com.google.common.base.Predicate;
-import javax.annotation.Nullable;
 import org.apache.commons.lang3.Validate;
-
-// CraftBukkit start
 import org.bukkit.entity.Hanging;
 import org.bukkit.event.hanging.HangingBreakEvent;
+
+import javax.annotation.Nullable;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public abstract class EntityHanging extends Entity {
 
+    @SuppressWarnings("unchecked")
     private static final Predicate<Entity> c = new Predicate() {
         public boolean a(@Nullable Entity entity) {
             return entity instanceof EntityHanging;
@@ -20,10 +22,10 @@ public abstract class EntityHanging extends Entity {
             return this.a((Entity) object);
         }
     };
-    private int d;
     public BlockPosition blockPosition;
     @Nullable
     public EnumDirection direction;
+    private int d;
 
     public EntityHanging(World world) {
         super(world);
@@ -33,17 +35,6 @@ public abstract class EntityHanging extends Entity {
     public EntityHanging(World world, BlockPosition blockposition) {
         this(world);
         this.blockPosition = blockposition;
-    }
-
-    protected void i() {}
-
-    public void setDirection(EnumDirection enumdirection) {
-        Validate.notNull(enumdirection);
-        Validate.isTrue(enumdirection.k().c());
-        this.direction = enumdirection;
-        this.yaw = (float) (this.direction.get2DRotationValue() * 90);
-        this.lastYaw = this.yaw;
-        this.updateBoundingBox();
     }
 
     // CraftBukkit start - break out BB calc into own method
@@ -83,16 +74,18 @@ public abstract class EntityHanging extends Entity {
         return new AxisAlignedBB(d0 - d6, d1 - d7, d2 - d8, d0 + d6, d1 + d7, d2 + d8);
     }
 
+    private static double a(int i) { // CraftBukkit - static
+        return i % 32 == 0 ? 0.5D : 0.0D;
+    }
+
+    protected void i() {}
+
     protected void updateBoundingBox() {
         if (this.direction != null) {
             // CraftBukkit start code moved in to calculateBoundingBox
             this.a(calculateBoundingBox(this, this.blockPosition, this.direction, this.getWidth(), this.getHeight()));
             // CraftBukkit end
         }
-    }
-
-    private static double a(int i) { // CraftBukkit - static
-        return i % 32 == 0 ? 0.5D : 0.0D;
     }
 
     public void m() {
@@ -167,6 +160,15 @@ public abstract class EntityHanging extends Entity {
         return this.direction;
     }
 
+    public void setDirection(EnumDirection enumdirection) {
+        Validate.notNull(enumdirection);
+        Validate.isTrue(enumdirection.k().c());
+        this.direction = enumdirection;
+        this.yaw = (float) (this.direction.get2DRotationValue() * 90);
+        this.lastYaw = this.yaw;
+        this.updateBoundingBox();
+    }
+
     public boolean damageEntity(DamageSource damagesource, float f) {
         if (this.isInvulnerable(damagesource)) {
             return false;
@@ -217,10 +219,6 @@ public abstract class EntityHanging extends Entity {
     }
 
     public void g(double d0, double d1, double d2) {
-        if (false && !this.world.isClientSide && !this.dead && d0 * d0 + d1 * d1 + d2 * d2 > 0.0D) { // CraftBukkit - not needed
-            this.die();
-            this.a((Entity) null);
-        }
 
     }
 
@@ -307,24 +305,26 @@ public abstract class EntityHanging extends Entity {
 
     public void onLightningStrike(EntityLightning entitylightning) {}
 
+    @SuppressWarnings("unused")
     static class SyntheticClass_1 {
 
+        @SuppressWarnings("unused")
         static final int[] a = new int[EnumBlockRotation.values().length];
 
         static {
             try {
                 EntityHanging.SyntheticClass_1.a[EnumBlockRotation.CLOCKWISE_180.ordinal()] = 1;
-            } catch (NoSuchFieldError nosuchfielderror) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 EntityHanging.SyntheticClass_1.a[EnumBlockRotation.COUNTERCLOCKWISE_90.ordinal()] = 2;
-            } catch (NoSuchFieldError nosuchfielderror1) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 EntityHanging.SyntheticClass_1.a[EnumBlockRotation.CLOCKWISE_90.ordinal()] = 3;
-            } catch (NoSuchFieldError nosuchfielderror2) {
+            } catch (NoSuchFieldError ignored) {
             }
 
         }

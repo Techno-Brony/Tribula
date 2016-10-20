@@ -6,8 +6,44 @@ public class ItemBlock extends Item {
 
     protected final Block a;
 
+    @SuppressWarnings("unused")
     public ItemBlock(Block block) {
         this.a = block;
+    }
+
+    @SuppressWarnings("UnusedReturnValue")
+    public static boolean a(World world, @Nullable EntityHuman entityhuman, BlockPosition blockposition, ItemStack itemstack) {
+        MinecraftServer minecraftserver = world.getMinecraftServer();
+
+        if (minecraftserver == null) {
+            return false;
+        } else {
+            if (itemstack.hasTag() && itemstack.getTag().hasKeyOfType("BlockEntityTag", 10)) {
+                TileEntity tileentity = world.getTileEntity(blockposition);
+
+                if (tileentity != null) {
+                    if (!world.isClientSide && tileentity.isFilteredNBT() && (entityhuman == null || !entityhuman.dh())) {
+                        return false;
+                    }
+
+                    NBTTagCompound nbttagcompound = tileentity.save(new NBTTagCompound());
+                    NBTTagCompound nbttagcompound1 = nbttagcompound.g();
+                    NBTTagCompound nbttagcompound2 = (NBTTagCompound) itemstack.getTag().get("BlockEntityTag");
+
+                    nbttagcompound.a(nbttagcompound2);
+                    nbttagcompound.setInt("x", blockposition.getX());
+                    nbttagcompound.setInt("y", blockposition.getY());
+                    nbttagcompound.setInt("z", blockposition.getZ());
+                    if (!nbttagcompound.equals(nbttagcompound1)) {
+                        tileentity.a(nbttagcompound);
+                        tileentity.update();
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
     }
 
     public ItemBlock b(String s) {
@@ -43,40 +79,6 @@ public class ItemBlock extends Item {
             return EnumInteractionResult.SUCCESS;
         } else {
             return EnumInteractionResult.FAIL;
-        }
-    }
-
-    public static boolean a(World world, @Nullable EntityHuman entityhuman, BlockPosition blockposition, ItemStack itemstack) {
-        MinecraftServer minecraftserver = world.getMinecraftServer();
-
-        if (minecraftserver == null) {
-            return false;
-        } else {
-            if (itemstack.hasTag() && itemstack.getTag().hasKeyOfType("BlockEntityTag", 10)) {
-                TileEntity tileentity = world.getTileEntity(blockposition);
-
-                if (tileentity != null) {
-                    if (!world.isClientSide && tileentity.isFilteredNBT() && (entityhuman == null || !entityhuman.dh())) {
-                        return false;
-                    }
-
-                    NBTTagCompound nbttagcompound = tileentity.save(new NBTTagCompound());
-                    NBTTagCompound nbttagcompound1 = nbttagcompound.g();
-                    NBTTagCompound nbttagcompound2 = (NBTTagCompound) itemstack.getTag().get("BlockEntityTag");
-
-                    nbttagcompound.a(nbttagcompound2);
-                    nbttagcompound.setInt("x", blockposition.getX());
-                    nbttagcompound.setInt("y", blockposition.getY());
-                    nbttagcompound.setInt("z", blockposition.getZ());
-                    if (!nbttagcompound.equals(nbttagcompound1)) {
-                        tileentity.a(nbttagcompound);
-                        tileentity.update();
-                        return true;
-                    }
-                }
-            }
-
-            return false;
         }
     }
 

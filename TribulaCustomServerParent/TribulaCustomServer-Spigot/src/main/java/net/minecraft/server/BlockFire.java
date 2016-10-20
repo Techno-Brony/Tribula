@@ -1,14 +1,15 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Maps;
-import java.util.Map;
-import java.util.Random;
-import javax.annotation.Nullable;
-
-// CraftBukkit start
 import org.bukkit.craftbukkit.event.CraftEventFactory;
 import org.bukkit.event.block.BlockBurnEvent;
 import org.bukkit.event.block.BlockSpreadEvent;
+
+import javax.annotation.Nullable;
+import java.util.Map;
+import java.util.Random;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class BlockFire extends Block {
@@ -22,13 +23,9 @@ public class BlockFire extends Block {
     private final Map<Block, Integer> flameChances = Maps.newIdentityHashMap();
     private final Map<Block, Integer> B = Maps.newIdentityHashMap();
 
-    public IBlockData updateState(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
-        return !iblockaccess.getType(blockposition.down()).q() && !Blocks.FIRE.c(iblockaccess, blockposition.down()) ? iblockdata.set(BlockFire.NORTH, Boolean.valueOf(this.c(iblockaccess, blockposition.north()))).set(BlockFire.EAST, Boolean.valueOf(this.c(iblockaccess, blockposition.east()))).set(BlockFire.SOUTH, Boolean.valueOf(this.c(iblockaccess, blockposition.south()))).set(BlockFire.WEST, Boolean.valueOf(this.c(iblockaccess, blockposition.west()))).set(BlockFire.UPPER, Boolean.valueOf(this.c(iblockaccess, blockposition.up()))) : this.getBlockData();
-    }
-
     protected BlockFire() {
         super(Material.FIRE);
-        this.w(this.blockStateList.getBlockData().set(BlockFire.AGE, Integer.valueOf(0)).set(BlockFire.NORTH, Boolean.valueOf(false)).set(BlockFire.EAST, Boolean.valueOf(false)).set(BlockFire.SOUTH, Boolean.valueOf(false)).set(BlockFire.WEST, Boolean.valueOf(false)).set(BlockFire.UPPER, Boolean.valueOf(false)));
+        this.w(this.blockStateList.getBlockData().set(BlockFire.AGE, 0).set(BlockFire.NORTH, Boolean.FALSE).set(BlockFire.EAST, Boolean.FALSE).set(BlockFire.SOUTH, Boolean.FALSE).set(BlockFire.WEST, Boolean.FALSE).set(BlockFire.UPPER, Boolean.FALSE));
         this.a(true);
     }
 
@@ -72,20 +69,28 @@ public class BlockFire extends Block {
         Blocks.FIRE.a(Blocks.CARPET, 60, 20);
     }
 
-    public void a(Block block, int i, int j) {
-        this.flameChances.put(block, Integer.valueOf(i));
-        this.B.put(block, Integer.valueOf(j));
+    @SuppressWarnings("deprecation")
+    public IBlockData updateState(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
+        return !iblockaccess.getType(blockposition.down()).q() && !Blocks.FIRE.c(iblockaccess, blockposition.down()) ? iblockdata.set(BlockFire.NORTH, this.c(iblockaccess, blockposition.north())).set(BlockFire.EAST, this.c(iblockaccess, blockposition.east())).set(BlockFire.SOUTH, this.c(iblockaccess, blockposition.south())).set(BlockFire.WEST, this.c(iblockaccess, blockposition.west())).set(BlockFire.UPPER, this.c(iblockaccess, blockposition.up())) : this.getBlockData();
     }
 
+    public void a(Block block, int i, int j) {
+        this.flameChances.put(block, i);
+        this.B.put(block, j);
+    }
+
+    @SuppressWarnings("deprecation")
     @Nullable
     public AxisAlignedBB a(IBlockData iblockdata, World world, BlockPosition blockposition) {
         return BlockFire.k;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
@@ -111,13 +116,13 @@ public class BlockFire extends Block {
                 flag = true;
             }
 
-            int i = iblockdata.get(BlockFire.AGE).intValue();
+            int i = iblockdata.get(BlockFire.AGE);
 
             if (!flag && world.W() && this.b(world, blockposition) && random.nextFloat() < 0.2F + (float) i * 0.03F) {
                 fireExtinguished(world, blockposition); // CraftBukkit - extinguished by rain
             } else {
                 if (i < 15) {
-                    iblockdata = iblockdata.set(BlockFire.AGE, Integer.valueOf(i + random.nextInt(3) / 2));
+                    iblockdata = iblockdata.set(BlockFire.AGE, i + random.nextInt(3) / 2);
                     world.setTypeAndData(blockposition, iblockdata, 4);
                 }
 
@@ -187,7 +192,9 @@ public class BlockFire extends Block {
                                             org.bukkit.Server server = world.getServer();
                                             org.bukkit.World bworld = world.getWorld();
                                             org.bukkit.block.BlockState blockState = bworld.getBlockAt(blockposition1.getX(), blockposition1.getY(), blockposition1.getZ()).getState();
+                                            //noinspection deprecation
                                             blockState.setTypeId(Block.getId(this));
+                                            //noinspection deprecation
                                             blockState.setData(new org.bukkit.material.MaterialData(Block.getId(this), (byte) l1));
 
                                             BlockSpreadEvent spreadEvent = new BlockSpreadEvent(blockState.getBlock(), bworld.getBlockAt(blockposition.getX(), blockposition.getY(), blockposition.getZ()), blockState);
@@ -220,13 +227,13 @@ public class BlockFire extends Block {
     private int c(Block block) {
         Integer integer = this.B.get(block);
 
-        return integer == null ? 0 : integer.intValue();
+        return integer == null ? 0 : integer;
     }
 
     private int d(Block block) {
         Integer integer = this.flameChances.get(block);
 
-        return integer == null ? 0 : integer.intValue();
+        return integer == null ? 0 : integer;
     }
 
     private void a(World world, BlockPosition blockposition, int i, Random random, int j) {
@@ -253,13 +260,13 @@ public class BlockFire extends Block {
                     l = 15;
                 }
 
-                world.setTypeAndData(blockposition, this.getBlockData().set(BlockFire.AGE, Integer.valueOf(l)), 3);
+                world.setTypeAndData(blockposition, this.getBlockData().set(BlockFire.AGE, l), 3);
             } else {
                 world.setAir(blockposition);
             }
 
             if (iblockdata.getBlock() == Blocks.TNT) {
-                Blocks.TNT.postBreak(world, blockposition, iblockdata.set(BlockTNT.EXPLODE, Boolean.valueOf(true)));
+                Blocks.TNT.postBreak(world, blockposition, iblockdata.set(BlockTNT.EXPLODE, Boolean.TRUE));
             }
         }
 
@@ -269,9 +276,7 @@ public class BlockFire extends Block {
         EnumDirection[] aenumdirection = EnumDirection.values();
         int i = aenumdirection.length;
 
-        for (int j = 0; j < i; ++j) {
-            EnumDirection enumdirection = aenumdirection[j];
-
+        for (EnumDirection enumdirection : aenumdirection) {
             if (this.c((IBlockAccess) world, blockposition.shift(enumdirection))) {
                 return true;
             }
@@ -288,9 +293,7 @@ public class BlockFire extends Block {
             EnumDirection[] aenumdirection = EnumDirection.values();
             int j = aenumdirection.length;
 
-            for (int k = 0; k < j; ++k) {
-                EnumDirection enumdirection = aenumdirection[k];
-
+            for (EnumDirection enumdirection : aenumdirection) {
                 i = Math.max(this.d(world.getType(blockposition.shift(enumdirection)).getBlock()), i);
             }
 
@@ -310,6 +313,7 @@ public class BlockFire extends Block {
         return world.getType(blockposition.down()).q() || this.c(world, blockposition);
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         if (!world.getType(blockposition.down()).q() && !this.c(world, blockposition)) {
             fireExtinguished(world, blockposition); // CraftBukkit - fuel block gone
@@ -327,16 +331,18 @@ public class BlockFire extends Block {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public MaterialMapColor r(IBlockData iblockdata) {
         return MaterialMapColor.f;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
-        return this.getBlockData().set(BlockFire.AGE, Integer.valueOf(i));
+        return this.getBlockData().set(BlockFire.AGE, i);
     }
 
     public int toLegacyData(IBlockData iblockdata) {
-        return iblockdata.get(BlockFire.AGE).intValue();
+        return iblockdata.get(BlockFire.AGE);
     }
 
     protected BlockStateList getStateList() {

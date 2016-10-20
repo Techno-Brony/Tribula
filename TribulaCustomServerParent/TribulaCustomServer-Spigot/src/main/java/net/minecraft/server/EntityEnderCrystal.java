@@ -1,11 +1,12 @@
 package net.minecraft.server;
 
 import com.google.common.base.Optional;
+import org.bukkit.craftbukkit.event.CraftEventFactory;
+import org.bukkit.event.entity.ExplosionPrimeEvent;
+
 import javax.annotation.Nullable;
 
 // CraftBukkit start
-import org.bukkit.craftbukkit.event.CraftEventFactory;
-import org.bukkit.event.entity.ExplosionPrimeEvent;
 // CraftBukkit end
 
 public class EntityEnderCrystal extends Entity {
@@ -32,7 +33,7 @@ public class EntityEnderCrystal extends Entity {
 
     protected void i() {
         this.getDataWatcher().register(EntityEnderCrystal.b, Optional.absent());
-        this.getDataWatcher().register(EntityEnderCrystal.c, Boolean.valueOf(true));
+        this.getDataWatcher().register(EntityEnderCrystal.c, Boolean.TRUE);
     }
 
     public void m() {
@@ -125,20 +126,20 @@ public class EntityEnderCrystal extends Entity {
 
     }
 
-    public void setBeamTarget(@Nullable BlockPosition blockposition) {
-        this.getDataWatcher().set(EntityEnderCrystal.b, Optional.fromNullable(blockposition));
-    }
-
     @Nullable
     public BlockPosition getBeamTarget() {
         return (BlockPosition) ((Optional) this.getDataWatcher().get(EntityEnderCrystal.b)).orNull();
     }
 
-    public void setShowingBottom(boolean flag) {
-        this.getDataWatcher().set(EntityEnderCrystal.c, Boolean.valueOf(flag));
+    public void setBeamTarget(@Nullable BlockPosition blockposition) {
+        this.getDataWatcher().set(EntityEnderCrystal.b, Optional.fromNullable(blockposition));
     }
 
     public boolean isShowingBottom() {
-        return this.getDataWatcher().get(EntityEnderCrystal.c).booleanValue();
+        return this.getDataWatcher().get(EntityEnderCrystal.c);
+    }
+
+    public void setShowingBottom(boolean flag) {
+        this.getDataWatcher().set(EntityEnderCrystal.c, flag);
     }
 }

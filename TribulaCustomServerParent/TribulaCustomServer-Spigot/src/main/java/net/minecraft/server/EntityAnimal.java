@@ -4,10 +4,10 @@ import javax.annotation.Nullable;
 
 public abstract class EntityAnimal extends EntityAgeable implements IAnimal {
 
+    public ItemStack breedItem; // CraftBukkit - Add breedItem variable
     protected Block bA;
     private int bx;
     private EntityHuman by;
-    public ItemStack breedItem; // CraftBukkit - Add breedItem variable
 
     public EntityAnimal(World world) {
         super(world);
@@ -102,13 +102,13 @@ public abstract class EntityAnimal extends EntityAgeable implements IAnimal {
             if (this.e(itemstack) && this.getAge() == 0 && this.bx <= 0) {
                 this.a(entityhuman, itemstack);
                 this.c(entityhuman);
-                return true;
+                return false;
             }
 
             if (this.isBaby() && this.e(itemstack)) {
                 this.a(entityhuman, itemstack);
                 this.setAge((int) ((float) (-this.getAge() / 20) * 0.1F), true);
-                return true;
+                return false;
             }
         }
 

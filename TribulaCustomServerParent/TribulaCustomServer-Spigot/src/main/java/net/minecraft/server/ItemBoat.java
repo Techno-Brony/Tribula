@@ -6,6 +6,7 @@ public class ItemBoat extends Item {
 
     private final EntityBoat.EnumBoatType a;
 
+    @SuppressWarnings("unused")
     public ItemBoat(EntityBoat.EnumBoatType entityboat_enumboattype) {
         this.a = entityboat_enumboattype;
         this.maxStackSize = 1;
@@ -32,14 +33,15 @@ public class ItemBoat extends Item {
         MovingObjectPosition movingobjectposition = world.rayTrace(vec3d, vec3d1, true);
 
         if (movingobjectposition == null) {
+            //noinspection unchecked
             return new InteractionResultWrapper(EnumInteractionResult.PASS, itemstack);
         } else {
             Vec3D vec3d2 = entityhuman.f(1.0F);
             boolean flag = false;
             List list = world.getEntities(entityhuman, entityhuman.getBoundingBox().a(vec3d2.x * 5.0D, vec3d2.y * 5.0D, vec3d2.z * 5.0D).g(1.0D));
 
-            for (int i = 0; i < list.size(); ++i) {
-                Entity entity = (Entity) list.get(i);
+            for (Object aList : list) {
+                Entity entity = (Entity) aList;
 
                 if (entity.isInteractable()) {
                     AxisAlignedBB axisalignedbb = entity.getBoundingBox().g((double) entity.aA());
@@ -51,14 +53,17 @@ public class ItemBoat extends Item {
             }
 
             if (flag) {
+                //noinspection unchecked
                 return new InteractionResultWrapper(EnumInteractionResult.PASS, itemstack);
             } else if (movingobjectposition.type != MovingObjectPosition.EnumMovingObjectType.BLOCK) {
+                //noinspection unchecked
                 return new InteractionResultWrapper(EnumInteractionResult.PASS, itemstack);
             } else {
                 // CraftBukkit start - Boat placement
                 org.bukkit.event.player.PlayerInteractEvent event = org.bukkit.craftbukkit.event.CraftEventFactory.callPlayerInteractEvent(entityhuman, org.bukkit.event.block.Action.RIGHT_CLICK_BLOCK, movingobjectposition.a(), movingobjectposition.direction, itemstack, enumhand);
 
                 if (event.isCancelled()) {
+                    //noinspection unchecked
                     return new InteractionResultWrapper(EnumInteractionResult.PASS, itemstack);
                 }
                 // CraftBukkit end
@@ -69,6 +74,7 @@ public class ItemBoat extends Item {
                 entityboat.setType(this.a);
                 entityboat.yaw = entityhuman.yaw;
                 if (!world.getCubes(entityboat, entityboat.getBoundingBox().g(-0.1D)).isEmpty()) {
+                    //noinspection unchecked
                     return new InteractionResultWrapper(EnumInteractionResult.FAIL, itemstack);
                 } else {
                     if (!world.isClientSide) {
@@ -80,6 +86,7 @@ public class ItemBoat extends Item {
                     }
 
                     entityhuman.b(StatisticList.b(this));
+                    //noinspection unchecked
                     return new InteractionResultWrapper(EnumInteractionResult.SUCCESS, itemstack);
                 }
             }

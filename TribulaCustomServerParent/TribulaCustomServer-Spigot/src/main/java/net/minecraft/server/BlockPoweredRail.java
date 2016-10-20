@@ -1,12 +1,13 @@
 package net.minecraft.server;
 
 import com.google.common.base.Predicate;
-import javax.annotation.Nullable;
+import org.bukkit.craftbukkit.event.CraftEventFactory;
 
-import org.bukkit.craftbukkit.event.CraftEventFactory; // CraftBukkit
+import javax.annotation.Nullable;
 
 public class BlockPoweredRail extends BlockMinecartTrackAbstract {
 
+    @SuppressWarnings("unchecked")
     public static final BlockStateEnum<BlockMinecartTrackAbstract.EnumTrackPosition> SHAPE = BlockStateEnum.a("shape", BlockMinecartTrackAbstract.EnumTrackPosition.class, new Predicate() {
         public boolean a(@Nullable BlockMinecartTrackAbstract.EnumTrackPosition blockminecarttrackabstract_enumtrackposition) {
             return blockminecarttrackabstract_enumtrackposition != BlockMinecartTrackAbstract.EnumTrackPosition.NORTH_EAST && blockminecarttrackabstract_enumtrackposition != BlockMinecartTrackAbstract.EnumTrackPosition.NORTH_WEST && blockminecarttrackabstract_enumtrackposition != BlockMinecartTrackAbstract.EnumTrackPosition.SOUTH_EAST && blockminecarttrackabstract_enumtrackposition != BlockMinecartTrackAbstract.EnumTrackPosition.SOUTH_WEST;
@@ -20,7 +21,7 @@ public class BlockPoweredRail extends BlockMinecartTrackAbstract {
 
     protected BlockPoweredRail() {
         super(true);
-        this.w(this.blockStateList.getBlockData().set(BlockPoweredRail.SHAPE, BlockMinecartTrackAbstract.EnumTrackPosition.NORTH_SOUTH).set(BlockPoweredRail.POWERED, Boolean.valueOf(false)));
+        this.w(this.blockStateList.getBlockData().set(BlockPoweredRail.SHAPE, BlockMinecartTrackAbstract.EnumTrackPosition.NORTH_SOUTH).set(BlockPoweredRail.POWERED, Boolean.FALSE));
     }
 
     protected boolean a(World world, BlockPosition blockposition, IBlockData iblockdata, boolean flag, int i) {
@@ -110,12 +111,12 @@ public class BlockPoweredRail extends BlockMinecartTrackAbstract {
         } else {
             BlockMinecartTrackAbstract.EnumTrackPosition blockminecarttrackabstract_enumtrackposition1 = iblockdata.get(BlockPoweredRail.SHAPE);
 
-            return !(blockminecarttrackabstract_enumtrackposition == EnumTrackPosition.EAST_WEST && (blockminecarttrackabstract_enumtrackposition1 == EnumTrackPosition.NORTH_SOUTH || blockminecarttrackabstract_enumtrackposition1 == EnumTrackPosition.ASCENDING_NORTH || blockminecarttrackabstract_enumtrackposition1 == EnumTrackPosition.ASCENDING_SOUTH)) && (!(blockminecarttrackabstract_enumtrackposition == EnumTrackPosition.NORTH_SOUTH && (blockminecarttrackabstract_enumtrackposition1 == EnumTrackPosition.EAST_WEST || blockminecarttrackabstract_enumtrackposition1 == EnumTrackPosition.ASCENDING_EAST || blockminecarttrackabstract_enumtrackposition1 == EnumTrackPosition.ASCENDING_WEST)) && (iblockdata.get(BlockPoweredRail.POWERED).booleanValue() && (world.isBlockIndirectlyPowered(blockposition) || this.a(world, blockposition, iblockdata, flag, i + 1))));
+            return !(blockminecarttrackabstract_enumtrackposition == EnumTrackPosition.EAST_WEST && (blockminecarttrackabstract_enumtrackposition1 == EnumTrackPosition.NORTH_SOUTH || blockminecarttrackabstract_enumtrackposition1 == EnumTrackPosition.ASCENDING_NORTH || blockminecarttrackabstract_enumtrackposition1 == EnumTrackPosition.ASCENDING_SOUTH)) && (!(blockminecarttrackabstract_enumtrackposition == EnumTrackPosition.NORTH_SOUTH && (blockminecarttrackabstract_enumtrackposition1 == EnumTrackPosition.EAST_WEST || blockminecarttrackabstract_enumtrackposition1 == EnumTrackPosition.ASCENDING_EAST || blockminecarttrackabstract_enumtrackposition1 == EnumTrackPosition.ASCENDING_WEST)) && (iblockdata.get(BlockPoweredRail.POWERED) && (world.isBlockIndirectlyPowered(blockposition) || this.a(world, blockposition, iblockdata, flag, i + 1))));
         }
     }
 
     protected void b(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
-        boolean flag = iblockdata.get(BlockPoweredRail.POWERED).booleanValue();
+        boolean flag = iblockdata.get(BlockPoweredRail.POWERED);
         boolean flag1 = world.isBlockIndirectlyPowered(blockposition) || this.a(world, blockposition, iblockdata, true, 0) || this.a(world, blockposition, iblockdata, false, 0);
 
         if (flag1 != flag) {
@@ -126,7 +127,7 @@ public class BlockPoweredRail extends BlockMinecartTrackAbstract {
                 return;
             }
             // CraftBukkit end
-            world.setTypeAndData(blockposition, iblockdata.set(BlockPoweredRail.POWERED, Boolean.valueOf(flag1)), 3);
+            world.setTypeAndData(blockposition, iblockdata.set(BlockPoweredRail.POWERED, flag1), 3);
             world.applyPhysics(blockposition.down(), this);
             if (iblockdata.get(BlockPoweredRail.SHAPE).c()) {
                 world.applyPhysics(blockposition.up(), this);
@@ -139,21 +140,23 @@ public class BlockPoweredRail extends BlockMinecartTrackAbstract {
         return BlockPoweredRail.SHAPE;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
-        return this.getBlockData().set(BlockPoweredRail.SHAPE, BlockMinecartTrackAbstract.EnumTrackPosition.a(i & 7)).set(BlockPoweredRail.POWERED, Boolean.valueOf((i & 8) > 0));
+        return this.getBlockData().set(BlockPoweredRail.SHAPE, BlockMinecartTrackAbstract.EnumTrackPosition.a(i & 7)).set(BlockPoweredRail.POWERED, (i & 8) > 0);
     }
 
     public int toLegacyData(IBlockData iblockdata) {
         byte b0 = 0;
         int i = b0 | iblockdata.get(BlockPoweredRail.SHAPE).a();
 
-        if (iblockdata.get(BlockPoweredRail.POWERED).booleanValue()) {
+        if (iblockdata.get(BlockPoweredRail.POWERED)) {
             i |= 8;
         }
 
         return i;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockRotation enumblockrotation) {
         switch (BlockPoweredRail.SyntheticClass_1.b[enumblockrotation.ordinal()]) {
         case 1:
@@ -254,6 +257,7 @@ public class BlockPoweredRail extends BlockMinecartTrackAbstract {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockMirror enumblockmirror) {
         BlockMinecartTrackAbstract.EnumTrackPosition blockminecarttrackabstract_enumtrackposition = iblockdata.get(BlockPoweredRail.SHAPE);
 
@@ -279,6 +283,7 @@ public class BlockPoweredRail extends BlockMinecartTrackAbstract {
                 return iblockdata.set(BlockPoweredRail.SHAPE, BlockMinecartTrackAbstract.EnumTrackPosition.SOUTH_EAST);
 
             default:
+                //noinspection deprecation
                 return super.a(iblockdata, enumblockmirror);
             }
 
@@ -309,6 +314,7 @@ public class BlockPoweredRail extends BlockMinecartTrackAbstract {
             }
         }
 
+        //noinspection deprecation
         return super.a(iblockdata, enumblockmirror);
     }
 
@@ -325,81 +331,81 @@ public class BlockPoweredRail extends BlockMinecartTrackAbstract {
         static {
             try {
                 BlockPoweredRail.SyntheticClass_1.c[EnumBlockMirror.LEFT_RIGHT.ordinal()] = 1;
-            } catch (NoSuchFieldError nosuchfielderror) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockPoweredRail.SyntheticClass_1.c[EnumBlockMirror.FRONT_BACK.ordinal()] = 2;
-            } catch (NoSuchFieldError nosuchfielderror1) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             b = new int[EnumBlockRotation.values().length];
 
             try {
                 BlockPoweredRail.SyntheticClass_1.b[EnumBlockRotation.CLOCKWISE_180.ordinal()] = 1;
-            } catch (NoSuchFieldError nosuchfielderror2) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockPoweredRail.SyntheticClass_1.b[EnumBlockRotation.COUNTERCLOCKWISE_90.ordinal()] = 2;
-            } catch (NoSuchFieldError nosuchfielderror3) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockPoweredRail.SyntheticClass_1.b[EnumBlockRotation.CLOCKWISE_90.ordinal()] = 3;
-            } catch (NoSuchFieldError nosuchfielderror4) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             a = new int[BlockMinecartTrackAbstract.EnumTrackPosition.values().length];
 
             try {
                 BlockPoweredRail.SyntheticClass_1.a[BlockMinecartTrackAbstract.EnumTrackPosition.NORTH_SOUTH.ordinal()] = 1;
-            } catch (NoSuchFieldError nosuchfielderror5) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockPoweredRail.SyntheticClass_1.a[BlockMinecartTrackAbstract.EnumTrackPosition.EAST_WEST.ordinal()] = 2;
-            } catch (NoSuchFieldError nosuchfielderror6) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockPoweredRail.SyntheticClass_1.a[BlockMinecartTrackAbstract.EnumTrackPosition.ASCENDING_EAST.ordinal()] = 3;
-            } catch (NoSuchFieldError nosuchfielderror7) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockPoweredRail.SyntheticClass_1.a[BlockMinecartTrackAbstract.EnumTrackPosition.ASCENDING_WEST.ordinal()] = 4;
-            } catch (NoSuchFieldError nosuchfielderror8) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockPoweredRail.SyntheticClass_1.a[BlockMinecartTrackAbstract.EnumTrackPosition.ASCENDING_NORTH.ordinal()] = 5;
-            } catch (NoSuchFieldError nosuchfielderror9) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockPoweredRail.SyntheticClass_1.a[BlockMinecartTrackAbstract.EnumTrackPosition.ASCENDING_SOUTH.ordinal()] = 6;
-            } catch (NoSuchFieldError nosuchfielderror10) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockPoweredRail.SyntheticClass_1.a[BlockMinecartTrackAbstract.EnumTrackPosition.SOUTH_EAST.ordinal()] = 7;
-            } catch (NoSuchFieldError nosuchfielderror11) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockPoweredRail.SyntheticClass_1.a[BlockMinecartTrackAbstract.EnumTrackPosition.SOUTH_WEST.ordinal()] = 8;
-            } catch (NoSuchFieldError nosuchfielderror12) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockPoweredRail.SyntheticClass_1.a[BlockMinecartTrackAbstract.EnumTrackPosition.NORTH_WEST.ordinal()] = 9;
-            } catch (NoSuchFieldError nosuchfielderror13) {
+            } catch (NoSuchFieldError ignored) {
             }
 
             try {
                 BlockPoweredRail.SyntheticClass_1.a[BlockMinecartTrackAbstract.EnumTrackPosition.NORTH_EAST.ordinal()] = 10;
-            } catch (NoSuchFieldError nosuchfielderror14) {
+            } catch (NoSuchFieldError ignored) {
             }
 
         }

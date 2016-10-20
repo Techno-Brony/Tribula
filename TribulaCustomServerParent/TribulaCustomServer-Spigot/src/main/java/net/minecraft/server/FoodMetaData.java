@@ -7,8 +7,8 @@ public class FoodMetaData {
     public float exhaustionLevel;
     private int foodTickTimer;
     private EntityHuman entityhuman; // CraftBukkit
-    private int e = 20;
 
+    @SuppressWarnings("unused")
     public FoodMetaData() { throw new AssertionError("Whoopsie, we missed the bukkit."); } // CraftBukkit start - throw an error
 
     // CraftBukkit start - added EntityHuman constructor
@@ -23,6 +23,7 @@ public class FoodMetaData {
         this.saturationLevel = Math.min(this.saturationLevel + (float) i * f * 2.0F, (float) this.foodLevel);
     }
 
+    @SuppressWarnings("unused")
     public void a(ItemFood itemfood, ItemStack itemstack) {
         // CraftBukkit start
         int oldFoodLevel = foodLevel;
@@ -40,7 +41,7 @@ public class FoodMetaData {
     public void a(EntityHuman entityhuman) {
         EnumDifficulty enumdifficulty = entityhuman.world.getDifficulty();
 
-        this.e = this.foodLevel;
+        int e = this.foodLevel;
         if (this.exhaustionLevel > 4.0F) {
             this.exhaustionLevel -= 4.0F;
             if (this.saturationLevel > 0.0F) {

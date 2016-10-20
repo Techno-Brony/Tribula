@@ -1,13 +1,13 @@
 package net.minecraft.server;
 
 // CraftBukkit start
-import com.mojang.authlib.GameProfile;
-import io.netty.channel.ChannelFutureListener;
-import java.net.InetSocketAddress;
-import java.util.Iterator;
 
+import com.mojang.authlib.GameProfile;
 import org.bukkit.craftbukkit.util.CraftIconCache;
 import org.bukkit.entity.Player;
+
+import java.net.InetSocketAddress;
+import java.util.Iterator;
 
 // CraftBukkit end
 
@@ -61,9 +61,8 @@ public class PacketStatusListener implements PacketStatusInListener {
                             if (player != null) {
                                 return true;
                             }
-                            final Object[] currentPlayers = players;
-                            for (int length = currentPlayers.length, i = this.i; i < length; i++) {
-                                final EntityPlayer player = (EntityPlayer) currentPlayers[i];
+                            for (int length = players.length, i = this.i; i < length; i++) {
+                                final EntityPlayer player = (EntityPlayer) players[i];
                                 if (player != null) {
                                     this.i = i + 1;
                                     this.player = player;
@@ -86,12 +85,11 @@ public class PacketStatusListener implements PacketStatusInListener {
 
                         @Override
                         public void remove() {
-                            final Object[] currentPlayers = players;
                             final int i = this.ret;
-                            if (i < 0 || currentPlayers[i] == null) {
+                            if (i < 0 || players[i] == null) {
                                 throw new IllegalStateException();
                             }
-                            currentPlayers[i] = null;
+                            players[i] = null;
                         }
                     };
                 }

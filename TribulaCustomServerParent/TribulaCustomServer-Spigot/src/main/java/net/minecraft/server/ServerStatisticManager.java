@@ -6,18 +6,15 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.util.*;
+import java.util.Map.Entry;
 
 public class ServerStatisticManager extends StatisticManager {
 
@@ -39,6 +36,34 @@ public class ServerStatisticManager extends StatisticManager {
             a.put( StatisticList.getStatistic( name ), wrapper );
         }
         // Spigot end
+    }
+
+    public static String a(Map<Statistic, StatisticWrapper> map) {
+        JsonObject jsonobject = new JsonObject();
+        Iterator iterator = map.entrySet().iterator();
+
+        //noinspection WhileLoopReplaceableByForEach
+        while (iterator.hasNext()) {
+            Entry entry = (Entry) iterator.next();
+
+            if (((StatisticWrapper) entry.getValue()).b() != null) {
+                JsonObject jsonobject1 = new JsonObject();
+
+                jsonobject1.addProperty("value", ((StatisticWrapper) entry.getValue()).a());
+
+                try {
+                    jsonobject1.add("progress", ((StatisticWrapper) entry.getValue()).b().a());
+                } catch (Throwable throwable) {
+                    ServerStatisticManager.b.warn("Couldn\'t save statistic {}: error serializing progress", ((Statistic) entry.getKey()).e(), throwable);
+                }
+
+                jsonobject.add(((Statistic) entry.getKey()).name, jsonobject1);
+            } else {
+                jsonobject.addProperty(((Statistic) entry.getKey()).name, ((StatisticWrapper) entry.getValue()).a());
+            }
+        }
+
+        return jsonobject.toString();
     }
 
     public void a() {
@@ -92,6 +117,7 @@ public class ServerStatisticManager extends StatisticManager {
 
         this.e.clear();
         this.g = false;
+        //noinspection unchecked
         return hashset;
     }
 
@@ -105,6 +131,7 @@ public class ServerStatisticManager extends StatisticManager {
             HashMap hashmap = Maps.newHashMap();
             Iterator iterator = jsonobject.entrySet().iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 Entry entry = (Entry) iterator.next();
                 Statistic statistic = StatisticList.getStatistic((String) entry.getKey());
@@ -134,46 +161,22 @@ public class ServerStatisticManager extends StatisticManager {
                         }
                     }
 
+                    //noinspection unchecked
                     hashmap.put(statistic, statisticwrapper);
                 } else {
                     ServerStatisticManager.b.warn("Invalid statistic in {}: Don\'t know what {} is", this.d, entry.getKey());
                 }
             }
 
+            //noinspection unchecked
             return hashmap;
         }
-    }
-
-    public static String a(Map<Statistic, StatisticWrapper> map) {
-        JsonObject jsonobject = new JsonObject();
-        Iterator iterator = map.entrySet().iterator();
-
-        while (iterator.hasNext()) {
-            Entry entry = (Entry) iterator.next();
-
-            if (((StatisticWrapper) entry.getValue()).b() != null) {
-                JsonObject jsonobject1 = new JsonObject();
-
-                jsonobject1.addProperty("value", Integer.valueOf(((StatisticWrapper) entry.getValue()).a()));
-
-                try {
-                    jsonobject1.add("progress", ((StatisticWrapper) entry.getValue()).b().a());
-                } catch (Throwable throwable) {
-                    ServerStatisticManager.b.warn("Couldn\'t save statistic {}: error serializing progress", ((Statistic) entry.getKey()).e(), throwable);
-                }
-
-                jsonobject.add(((Statistic) entry.getKey()).name, jsonobject1);
-            } else {
-                jsonobject.addProperty(((Statistic) entry.getKey()).name, Integer.valueOf(((StatisticWrapper) entry.getValue()).a()));
-            }
-        }
-
-        return jsonobject.toString();
     }
 
     public void d() {
         Iterator iterator = this.a.keySet().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             Statistic statistic = (Statistic) iterator.next();
 
@@ -190,13 +193,16 @@ public class ServerStatisticManager extends StatisticManager {
             this.f = i;
             Iterator iterator = this.c().iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator.hasNext()) {
                 Statistic statistic = (Statistic) iterator.next();
 
-                hashmap.put(statistic, Integer.valueOf(this.getStatisticValue(statistic)));
+                //noinspection unchecked
+                hashmap.put(statistic, this.getStatisticValue(statistic));
             }
         }
 
+        //noinspection unchecked
         entityplayer.playerConnection.sendPacket(new PacketPlayOutStatistic(hashmap));
     }
 
@@ -204,15 +210,18 @@ public class ServerStatisticManager extends StatisticManager {
         HashMap hashmap = Maps.newHashMap();
         Iterator iterator = AchievementList.e.iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             Achievement achievement = (Achievement) iterator.next();
 
             if (this.hasAchievement(achievement)) {
-                hashmap.put(achievement, Integer.valueOf(this.getStatisticValue(achievement)));
+                //noinspection unchecked
+                hashmap.put(achievement, this.getStatisticValue(achievement));
                 this.e.remove(achievement);
             }
         }
 
+        //noinspection unchecked
         entityplayer.playerConnection.sendPacket(new PacketPlayOutStatistic(hashmap));
     }
 

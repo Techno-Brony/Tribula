@@ -2,11 +2,8 @@ package net.minecraft.server;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+
+import java.util.*;
 
 public class ScoreboardServer extends Scoreboard {
 
@@ -66,7 +63,7 @@ public class ScoreboardServer extends Scoreboard {
         if (super.addPlayerToTeam(s, s1)) {
             ScoreboardTeam scoreboardteam = this.getTeam(s1);
 
-            this.sendAll(new PacketPlayOutScoreboardTeam(scoreboardteam, Arrays.asList(s), 3));
+            this.sendAll(new PacketPlayOutScoreboardTeam(scoreboardteam, Collections.singletonList(s), 3));
             this.b();
             return true;
         } else {
@@ -76,7 +73,7 @@ public class ScoreboardServer extends Scoreboard {
 
     public void removePlayerFromTeam(String s, ScoreboardTeam scoreboardteam) {
         super.removePlayerFromTeam(s, scoreboardteam);
-        this.sendAll(new PacketPlayOutScoreboardTeam(scoreboardteam, Arrays.asList(s), 4));
+        this.sendAll(new PacketPlayOutScoreboardTeam(scoreboardteam, Collections.singletonList(s), 4));
         this.b();
     }
 
@@ -130,9 +127,7 @@ public class ScoreboardServer extends Scoreboard {
         Runnable[] arunnable = this.c;
         int i = arunnable.length;
 
-        for (int j = 0; j < i; ++j) {
-            Runnable runnable = arunnable[j];
-
+        for (Runnable runnable : arunnable) {
             runnable.run();
         }
 
@@ -141,22 +136,27 @@ public class ScoreboardServer extends Scoreboard {
     public List<Packet<?>> getScoreboardScorePacketsForObjective(ScoreboardObjective scoreboardobjective) {
         ArrayList arraylist = Lists.newArrayList();
 
+        //noinspection unchecked
         arraylist.add(new PacketPlayOutScoreboardObjective(scoreboardobjective, 0));
 
         for (int i = 0; i < 19; ++i) {
             if (this.getObjectiveForSlot(i) == scoreboardobjective) {
+                //noinspection unchecked
                 arraylist.add(new PacketPlayOutScoreboardDisplayObjective(i, scoreboardobjective));
             }
         }
 
         Iterator iterator = this.getScoresForObjective(scoreboardobjective).iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             ScoreboardScore scoreboardscore = (ScoreboardScore) iterator.next();
 
+            //noinspection unchecked
             arraylist.add(new PacketPlayOutScoreboardScore(scoreboardscore));
         }
 
+        //noinspection unchecked
         return arraylist;
     }
 
@@ -164,11 +164,13 @@ public class ScoreboardServer extends Scoreboard {
         List list = this.getScoreboardScorePacketsForObjective(scoreboardobjective);
         Iterator iterator = this.a.getPlayerList().v().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             EntityPlayer entityplayer = (EntityPlayer) iterator.next();
             if (entityplayer.getBukkitEntity().getScoreboard().getHandle() != this) continue; // CraftBukkit - Only players on this board
             Iterator iterator1 = list.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator1.hasNext()) {
                 Packet packet = (Packet) iterator1.next();
 
@@ -182,14 +184,17 @@ public class ScoreboardServer extends Scoreboard {
     public List<Packet<?>> f(ScoreboardObjective scoreboardobjective) {
         ArrayList arraylist = Lists.newArrayList();
 
+        //noinspection unchecked
         arraylist.add(new PacketPlayOutScoreboardObjective(scoreboardobjective, 1));
 
         for (int i = 0; i < 19; ++i) {
             if (this.getObjectiveForSlot(i) == scoreboardobjective) {
+                //noinspection unchecked
                 arraylist.add(new PacketPlayOutScoreboardDisplayObjective(i, scoreboardobjective));
             }
         }
 
+        //noinspection unchecked
         return arraylist;
     }
 
@@ -197,11 +202,13 @@ public class ScoreboardServer extends Scoreboard {
         List list = this.f(scoreboardobjective);
         Iterator iterator = this.a.getPlayerList().v().iterator();
 
+        //noinspection WhileLoopReplaceableByForEach
         while (iterator.hasNext()) {
             EntityPlayer entityplayer = (EntityPlayer) iterator.next();
             if (entityplayer.getBukkitEntity().getScoreboard().getHandle() != this) continue; // CraftBukkit - Only players on this board
             Iterator iterator1 = list.iterator();
 
+            //noinspection WhileLoopReplaceableByForEach
             while (iterator1.hasNext()) {
                 Packet packet = (Packet) iterator1.next();
 

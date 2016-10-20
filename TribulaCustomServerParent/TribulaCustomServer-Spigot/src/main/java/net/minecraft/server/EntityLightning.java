@@ -1,17 +1,19 @@
 package net.minecraft.server;
 
-import java.util.List;
+import org.bukkit.craftbukkit.event.CraftEventFactory;
 
-import org.bukkit.craftbukkit.event.CraftEventFactory; // CraftBukkit
+import java.util.List;
 
 public class EntityLightning extends EntityWeather {
 
-    private int lifeTicks;
-    public long a;
-    private int c;
     private final boolean d;
+    @SuppressWarnings("unused")
+    public long a;
+    @SuppressWarnings("CanBeFinal")
     public boolean isEffect; // CraftBukkit
     public boolean isSilent = false; // Spigot
+    private int lifeTicks;
+    private int c;
 
     public EntityLightning(World world, double d0, double d1, double d2, boolean flag) {
         super(world);
@@ -66,6 +68,7 @@ public class EntityLightning extends EntityWeather {
             // this.world.a((EntityHuman) null, this.locX, this.locY, this.locZ, SoundEffects.dn, SoundCategory.WEATHER, 10000.0F, 0.8F + this.random.nextFloat() * 0.2F);
             float pitch = 0.8F + this.random.nextFloat() * 0.2F;
             int viewDistance = this.world.getServer().getViewDistance() * 16;
+            //noinspection unchecked
             for (EntityPlayer player : (List<EntityPlayer>) (List) this.world.players) {
                 double deltaX = this.locX - player.locX;
                 double deltaZ = this.locZ - player.locZ;
@@ -112,8 +115,8 @@ public class EntityLightning extends EntityWeather {
                 double d0 = 3.0D;
                 List list = this.world.getEntities(this, new AxisAlignedBB(this.locX - 3.0D, this.locY - 3.0D, this.locZ - 3.0D, this.locX + 3.0D, this.locY + 6.0D + 3.0D, this.locZ + 3.0D));
 
-                for (int i = 0; i < list.size(); ++i) {
-                    Entity entity = (Entity) list.get(i);
+                for (Object aList : list) {
+                    Entity entity = (Entity) aList;
 
                     entity.onLightningStrike(this);
                 }
