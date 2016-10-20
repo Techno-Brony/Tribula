@@ -94,7 +94,6 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
             }
         };
 
-        // CraftBukkit start - TODO: handle command-line logging arguments
         java.util.logging.Logger global = java.util.logging.Logger.getLogger("");
         global.setUseParentHandlers(false);
         for (java.util.logging.Handler handler : global.getHandlers()) {
@@ -155,9 +154,9 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
             this.setForceGamemode(this.propertyManager.getBoolean("force-gamemode", false));
             this.setIdleTimeout(this.propertyManager.getInt("player-idle-timeout", 0));
             if (this.propertyManager.getInt("difficulty", 1) < 0) {
-                this.propertyManager.setProperty("difficulty", Integer.valueOf(0));
+                this.propertyManager.setProperty("difficulty", 0);
             } else if (this.propertyManager.getInt("difficulty", 1) > 3) {
-                this.propertyManager.setProperty("difficulty", Integer.valueOf(3));
+                this.propertyManager.setProperty("difficulty", 3);
             }
 
             this.generateStructures = this.propertyManager.getBoolean("generate-structures", true);
@@ -190,7 +189,6 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
             } catch (IOException ioexception) {
                 DedicatedServer.LOGGER.warn("**** FAILED TO BIND TO PORT!");
                 DedicatedServer.LOGGER.warn("The exception was: {}", ioexception.toString());
-                DedicatedServer.LOGGER.warn("Perhaps a server is already running on that port?");
                 return false;
             }
         }
@@ -293,23 +291,15 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
                 }
                 // CraftBukkit end
 
-        if (org.spigotmc.SpigotConfig.lateBind) {
-            try {
-                this.am().a(inetaddress, this.P());
-            } catch (IOException ioexception) {
-                DedicatedServer.LOGGER.warn("**** FAILED TO BIND TO PORT!");
-                DedicatedServer.LOGGER.warn("The exception was: {}", ioexception.toString());
-                DedicatedServer.LOGGER.warn("Perhaps a server is already running on that port?");
-                return false;
-            }
-        }
-
-                if (false && this.aP() > 0L) {  // Spigot - disable
-                    Thread thread1 = new Thread(new ThreadWatchdog(this));
-
-                    thread1.setName("Server Watchdog");
-                    thread1.setDaemon(true);
-                    thread1.start();
+                if (org.spigotmc.SpigotConfig.lateBind) {
+                    try {
+                        this.am().a(inetaddress, this.P());
+                    } catch (IOException ioexception) {
+                        DedicatedServer.LOGGER.warn("**** FAILED TO BIND TO PORT!");
+                        DedicatedServer.LOGGER.warn("The exception was: {}", ioexception.toString());
+                        DedicatedServer.LOGGER.warn("Perhaps a server is already running on that port?");
+                        return false;
+                    }
                 }
 
                 return true;
@@ -407,8 +397,8 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
     }
 
     public void a(MojangStatisticsGenerator mojangstatisticsgenerator) {
-        mojangstatisticsgenerator.a("whitelist_enabled", Boolean.valueOf(this.aM().getHasWhitelist()));
-        mojangstatisticsgenerator.a("whitelist_count", Integer.valueOf(this.aM().getWhitelisted().length));
+        mojangstatisticsgenerator.a("whitelist_enabled", this.aM().getHasWhitelist());
+        mojangstatisticsgenerator.a("whitelist_count", this.aM().getWhitelisted().length);
         super.a(mojangstatisticsgenerator);
     }
 
@@ -535,7 +525,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
 
     public void setIdleTimeout(int i) {
         super.setIdleTimeout(i);
-        this.propertyManager.setProperty("player-idle-timeout", Integer.valueOf(i));
+        this.propertyManager.setProperty("player-idle-timeout", i);
         this.a();
     }
 
