@@ -770,7 +770,7 @@ public final class CraftServer implements Server {
         }
 
         if (perms == null) {
-            getLogger().log(Level.INFO, "Server permissions file " + file + " is empty, ignoring it");
+            // getLogger().log(Level.INFO, "Server permissions file " + file + " is empty, ignoring it");  <-- Log not required
             return;
         }
 

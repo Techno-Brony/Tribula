@@ -244,7 +244,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
                 long i1 = System.nanoTime() - j;
                 String s3 = String.format("%.3fs", new Object[] { Double.valueOf((double) i1 / 1.0E9D)});
 
-                DedicatedServer.LOGGER.info("Done ({})! For help, type \"help\" or \"?\"", new Object[] { s3});
+                DedicatedServer.LOGGER.info("Startup finished in {}", new Object[] { s3});
                 if (this.propertyManager.getBoolean("enable-query", false)) {
                     DedicatedServer.LOGGER.info("Starting GS4 status listener");
                     this.n = new RemoteStatusListener(this);

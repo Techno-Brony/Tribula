@@ -1,5 +1,10 @@
 package org.bukkit.craftbukkit;
 
+import joptsimple.OptionParser;
+import joptsimple.OptionSet;
+import net.minecraft.server.MinecraftServer;
+import org.fusesource.jansi.AnsiConsole;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -7,10 +12,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import joptsimple.OptionParser;
-import joptsimple.OptionSet;
-import net.minecraft.server.MinecraftServer;
-import org.fusesource.jansi.AnsiConsole;
 
 public class Main {
     public static boolean useJline = true;
@@ -189,7 +190,7 @@ public class Main {
                     System.out.println( "Please see http://www.spigotmc.org/wiki/changing-permgen-size/ for more details and more in-depth instructions." );
                 }
                 // Spigot End
-                System.out.println("Loading libraries, please wait...");
+                // System.out.println("Loading libraries, please wait..."); <-- Log not required
                 MinecraftServer.main(options);
             } catch (Throwable t) {
                 t.printStackTrace();

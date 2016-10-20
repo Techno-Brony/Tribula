@@ -1,52 +1,34 @@
 package org.bukkit.craftbukkit;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Pattern;
-
-import javax.imageio.ImageIO;
-
+import com.avaje.ebean.config.DataSourceConfig;
+import com.avaje.ebean.config.ServerConfig;
+import com.avaje.ebean.config.dbplatform.SQLitePlatform;
+import com.avaje.ebeaninternal.server.lib.sql.TransactionIsolation;
+import com.google.common.base.Charsets;
+import com.google.common.base.Function;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
+import com.google.common.collect.MapMaker;
+import com.mojang.authlib.GameProfile;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufOutputStream;
+import io.netty.buffer.Unpooled;
+import io.netty.handler.codec.base64.Base64;
+import jline.console.ConsoleReader;
+import net.md_5.bungee.api.chat.BaseComponent;
 import net.minecraft.server.*;
-
-import org.bukkit.BanList;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.Server;
-import org.bukkit.UnsafeValues;
+import net.minecraft.server.WorldType;
+import org.apache.commons.lang.Validate;
+import org.bukkit.*;
 import org.bukkit.Warning.WarningState;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
-import org.bukkit.WorldCreator;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
-import org.bukkit.command.Command;
+import org.bukkit.command.*;
 import org.bukkit.command.CommandException;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.command.PluginCommand;
-import org.bukkit.command.SimpleCommandMap;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
@@ -56,13 +38,7 @@ import org.bukkit.craftbukkit.command.VanillaCommandWrapper;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.craftbukkit.generator.CraftChunkData;
 import org.bukkit.craftbukkit.help.SimpleHelpMap;
-import org.bukkit.craftbukkit.inventory.CraftFurnaceRecipe;
-import org.bukkit.craftbukkit.inventory.CraftInventoryCustom;
-import org.bukkit.craftbukkit.inventory.CraftItemFactory;
-import org.bukkit.craftbukkit.inventory.CraftRecipe;
-import org.bukkit.craftbukkit.inventory.CraftShapedRecipe;
-import org.bukkit.craftbukkit.inventory.CraftShapelessRecipe;
-import org.bukkit.craftbukkit.inventory.RecipeIterator;
+import org.bukkit.craftbukkit.inventory.*;
 import org.bukkit.craftbukkit.map.CraftMapView;
 import org.bukkit.craftbukkit.metadata.EntityMetadataStore;
 import org.bukkit.craftbukkit.metadata.PlayerMetadataStore;
@@ -78,60 +54,47 @@ import org.bukkit.craftbukkit.util.permissions.CraftDefaultPermissions;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerChatTabCompleteEvent;
+import org.bukkit.event.server.TabCompleteEvent;
 import org.bukkit.event.world.WorldInitEvent;
 import org.bukkit.event.world.WorldLoadEvent;
 import org.bukkit.event.world.WorldUnloadEvent;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.help.HelpMap;
-import org.bukkit.inventory.FurnaceRecipe;
+import org.bukkit.inventory.*;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
-import org.bukkit.inventory.Recipe;
-import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.Permission;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginLoadOrder;
-import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.ServicesManager;
-import org.bukkit.plugin.SimplePluginManager;
-import org.bukkit.plugin.SimpleServicesManager;
+import org.bukkit.plugin.*;
 import org.bukkit.plugin.java.JavaPluginLoader;
 import org.bukkit.plugin.messaging.Messenger;
+import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.scheduler.BukkitWorker;
 import org.bukkit.util.StringUtil;
 import org.bukkit.util.permissions.DefaultPermissions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.SafeConstructor;
 import org.yaml.snakeyaml.error.MarkedYAMLException;
-import org.apache.commons.lang.Validate;
 
-import com.avaje.ebean.config.DataSourceConfig;
-import com.avaje.ebean.config.ServerConfig;
-import com.avaje.ebean.config.dbplatform.SQLitePlatform;
-import com.avaje.ebeaninternal.server.lib.sql.TransactionIsolation;
-import com.google.common.base.Charsets;
-import com.google.common.base.Function;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
-import com.google.common.collect.MapMaker;
-import com.mojang.authlib.GameProfile;
-
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufOutputStream;
-import io.netty.buffer.Unpooled;
-import io.netty.handler.codec.base64.Base64;
-import jline.console.ConsoleReader;
-import org.bukkit.event.server.TabCompleteEvent;
-import net.md_5.bungee.api.chat.BaseComponent;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 public final class CraftServer implements Server {
     private static final Player[] EMPTY_PLAYER_ARRAY = new Player[0];
+
+    static {
+        ConfigurationSerialization.registerClass(CraftOfflinePlayer.class);
+        CraftItemFactory.instance();
+    }
+
+    protected final MinecraftServer console;
+    protected final DedicatedPlayerList playerList;
     private final String serverName = "CraftBukkit";
     private final String serverVersion;
     private final String bukkitVersion = Versioning.getBukkitVersion();
@@ -142,43 +105,60 @@ public final class CraftServer implements Server {
     private final SimpleHelpMap helpMap = new SimpleHelpMap(this);
     private final StandardMessenger messenger = new StandardMessenger();
     private final PluginManager pluginManager = new SimplePluginManager(this, commandMap);
-    protected final MinecraftServer console;
-    protected final DedicatedPlayerList playerList;
     private final Map<String, World> worlds = new LinkedHashMap<String, World>();
-    private YamlConfiguration configuration;
-    private YamlConfiguration commandsConfiguration;
     private final Yaml yaml = new Yaml(new SafeConstructor());
     private final Map<UUID, OfflinePlayer> offlinePlayers = new MapMaker().softValues().makeMap();
     private final EntityMetadataStore entityMetadata = new EntityMetadataStore();
     private final PlayerMetadataStore playerMetadata = new PlayerMetadataStore();
     private final WorldMetadataStore worldMetadata = new WorldMetadataStore();
+    private final BooleanWrapper online = new BooleanWrapper();
+    private final Pattern validUserPattern = Pattern.compile("^[a-zA-Z0-9_]{2,16}$");
+    private final UUID invalidUserUUID = UUID.nameUUIDFromBytes("InvalidUsername".getBytes(Charsets.UTF_8));
+    private final List<CraftPlayer> playerView;
+    private final Spigot spigot = new Spigot()
+    {
+
+        @Override
+        public YamlConfiguration getConfig()
+        {
+            return org.spigotmc.SpigotConfig.config;
+        }
+
+        @Override
+        public void restart() {
+            org.spigotmc.RestartCommand.restart();
+        }
+
+        @Override
+        public void broadcast(BaseComponent component) {
+            for (Player player : getOnlinePlayers()) {
+                player.spigot().sendMessage(component);
+            }
+        }
+
+        @Override
+        public void broadcast(BaseComponent... components) {
+            for (Player player : getOnlinePlayers()) {
+                player.spigot().sendMessage(components);
+            }
+        }
+    };
+    public int chunkGCPeriod = -1;
+    public int chunkGCLoadThresh = 0;
+    public CraftScoreboardManager scoreboardManager;
+    public boolean playerCommandState;
+    public int reloadCount;
+    private YamlConfiguration configuration;
+    private YamlConfiguration commandsConfiguration;
     private int monsterSpawn = -1;
     private int animalSpawn = -1;
     private int waterAnimalSpawn = -1;
     private int ambientSpawn = -1;
-    public int chunkGCPeriod = -1;
-    public int chunkGCLoadThresh = 0;
     private File container;
     private WarningState warningState = WarningState.DEFAULT;
-    private final BooleanWrapper online = new BooleanWrapper();
-    public CraftScoreboardManager scoreboardManager;
-    public boolean playerCommandState;
     private boolean printSaveWarning;
     private CraftIconCache icon;
     private boolean overrideAllCommandBlockCommands = false;
-    private final Pattern validUserPattern = Pattern.compile("^[a-zA-Z0-9_]{2,16}$");
-    private final UUID invalidUserUUID = UUID.nameUUIDFromBytes("InvalidUsername".getBytes(Charsets.UTF_8));
-    private final List<CraftPlayer> playerView;
-    public int reloadCount;
-
-    private final class BooleanWrapper {
-        private boolean value = true;
-    }
-
-    static {
-        ConfigurationSerialization.registerClass(CraftOfflinePlayer.class);
-        CraftItemFactory.instance();
-    }
 
     public CraftServer(MinecraftServer console, PlayerList playerList) {
         this.console = console;
@@ -259,6 +239,21 @@ public final class CraftServer implements Server {
         // loadPlugins();
         // enablePlugins(PluginLoadOrder.STARTUP);
         // Spigot End
+    }
+
+    static CraftIconCache loadServerIcon0(File file) throws Exception {
+        return loadServerIcon0(ImageIO.read(file));
+    }
+
+    static CraftIconCache loadServerIcon0(BufferedImage image) throws Exception {
+        ByteBuf bytebuf = Unpooled.buffer();
+
+        Validate.isTrue(image.getWidth() == 64, "Must be 64 pixels wide");
+        Validate.isTrue(image.getHeight() == 64, "Must be 64 pixels high");
+        ImageIO.write(image, "PNG", new ByteBufOutputStream(bytebuf));
+        ByteBuf bytebuf1 = Base64.encode(bytebuf);
+
+        return new CraftIconCache("data:image/png;base64," + bytebuf1.toString(Charsets.UTF_8));
     }
 
     public boolean getCommandBlockOverride(String command) {
@@ -553,6 +548,8 @@ public final class CraftServer implements Server {
         return this.console.getPropertyManager().getString(variable, defaultValue);
     }
 
+    // End Temporary calls
+
     private int getConfigInt(String variable, int defaultValue) {
         return this.console.getPropertyManager().getInt(variable, defaultValue);
     }
@@ -560,8 +557,6 @@ public final class CraftServer implements Server {
     private boolean getConfigBoolean(String variable, boolean defaultValue) {
         return this.console.getPropertyManager().getBoolean(variable, defaultValue);
     }
-
-    // End Temporary calls
 
     @Override
     public String getUpdateFolder() {
@@ -791,7 +786,7 @@ public final class CraftServer implements Server {
         }
 
         if (perms == null) {
-            getLogger().log(Level.INFO, "Server permissions file " + file + " is empty, ignoring it");
+            // getLogger().log(Level.INFO, "Server permissions file " + file + " is empty, ignoring it");  <-- Log not required
             return;
         }
 
@@ -1371,7 +1366,7 @@ public final class CraftServer implements Server {
 
         for (JsonListEntry entry : playerList.getProfileBans().getValues()) {
             result.add(getOfflinePlayer((GameProfile) entry.getKey()));
-        }        
+        }
 
         return result;
     }
@@ -1674,35 +1669,20 @@ public final class CraftServer implements Server {
         return loadServerIcon0(file);
     }
 
-    static CraftIconCache loadServerIcon0(File file) throws Exception {
-        return loadServerIcon0(ImageIO.read(file));
-    }
-
     @Override
     public CraftIconCache loadServerIcon(BufferedImage image) throws Exception {
         Validate.notNull(image, "Image cannot be null");
         return loadServerIcon0(image);
     }
 
-    static CraftIconCache loadServerIcon0(BufferedImage image) throws Exception {
-        ByteBuf bytebuf = Unpooled.buffer();
-
-        Validate.isTrue(image.getWidth() == 64, "Must be 64 pixels wide");
-        Validate.isTrue(image.getHeight() == 64, "Must be 64 pixels high");
-        ImageIO.write(image, "PNG", new ByteBufOutputStream(bytebuf));
-        ByteBuf bytebuf1 = Base64.encode(bytebuf);
-
-        return new CraftIconCache("data:image/png;base64," + bytebuf1.toString(Charsets.UTF_8));
+    @Override
+    public int getIdleTimeout() {
+        return console.getIdleTimeout();
     }
 
     @Override
     public void setIdleTimeout(int threshold) {
         console.setIdleTimeout(threshold);
-    }
-
-    @Override
-    public int getIdleTimeout() {
-        return console.getIdleTimeout();
     }
 
     @Override
@@ -1721,37 +1701,12 @@ public final class CraftServer implements Server {
         return CraftMagicNumbers.INSTANCE;
     }
 
-    private final Spigot spigot = new Spigot()
-    {
-
-        @Override
-        public YamlConfiguration getConfig()
-        {
-            return org.spigotmc.SpigotConfig.config;
-        }
-
-        @Override
-        public void restart() {
-            org.spigotmc.RestartCommand.restart();
-        }
-
-        @Override
-        public void broadcast(BaseComponent component) {
-            for (Player player : getOnlinePlayers()) {
-                player.spigot().sendMessage(component);
-            }
-        }
-
-        @Override
-        public void broadcast(BaseComponent... components) {
-            for (Player player : getOnlinePlayers()) {
-                player.spigot().sendMessage(components);
-            }
-        }
-    };
-
     public Spigot spigot()
     {
         return spigot;
+    }
+
+    private final class BooleanWrapper {
+        private boolean value = true;
     }
 }
