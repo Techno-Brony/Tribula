@@ -153,6 +153,7 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
         this.datawatcher.set(EntityHorse.bJ, Optional.fromNullable(uuid));
     }
 
+    @SuppressWarnings("SameReturnValue")
     public float dn() {
         return 0.5F;
     }
@@ -271,7 +272,7 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
         return !this.isVehicle();
     }
 
-    @SuppressWarnings("UnusedReturnValue")
+    @SuppressWarnings({"UnusedReturnValue", "SameReturnValue"})
     public boolean dw() {
         int i = MathHelper.floor(this.locX);
         int j = MathHelper.floor(this.locZ);
@@ -832,7 +833,7 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
         this.dx();
     }
 
-    private void a(Entity entity, InventoryHorseChest inventoryhorsechest) {
+    private void a(@SuppressWarnings("UnusedParameters") Entity entity, InventoryHorseChest inventoryhorsechest) {
         if (inventoryhorsechest != null && !this.world.isClientSide) {
             for (int i = 0; i < inventoryhorsechest.getSize(); ++i) {
                 ItemStack itemstack = inventoryhorsechest.getItem(i);
@@ -845,7 +846,7 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
         }
     }
 
-    @SuppressWarnings("UnusedReturnValue")
+    @SuppressWarnings({"UnusedReturnValue", "SameReturnValue"})
     public boolean g(EntityHuman entityhuman) {
         this.setOwnerUUID(entityhuman.getUniqueID());
         this.setTame(true);
@@ -1329,7 +1330,9 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
 
     public static class a implements GroupDataEntity {
 
+        @SuppressWarnings("CanBeFinal")
         public EnumHorseType a;
+        @SuppressWarnings("CanBeFinal")
         public int b;
 
         public a(EnumHorseType enumhorsetype, int i) {

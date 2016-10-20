@@ -2,6 +2,7 @@ package net.minecraft.server;
 
 public class PathfinderGoalDefendVillage extends PathfinderGoalTarget {
 
+    @SuppressWarnings("CanBeFinal")
     EntityIronGolem a;
     EntityLiving b;
 

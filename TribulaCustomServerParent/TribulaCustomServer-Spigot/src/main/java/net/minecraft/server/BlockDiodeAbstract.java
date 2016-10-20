@@ -65,7 +65,7 @@ public abstract class BlockDiodeAbstract extends BlockFacingHorizontal {
         }
     }
 
-    protected boolean z(IBlockData iblockdata) {
+    protected boolean z(@SuppressWarnings("UnusedParameters") IBlockData iblockdata) {
         return this.d;
     }
 
@@ -115,7 +115,8 @@ public abstract class BlockDiodeAbstract extends BlockFacingHorizontal {
         }
     }
 
-    public boolean b(IBlockAccess iblockaccess, BlockPosition blockposition, IBlockData iblockdata) {
+    @SuppressWarnings("SameReturnValue")
+    public boolean b(@SuppressWarnings("UnusedParameters") IBlockAccess iblockaccess, @SuppressWarnings("UnusedParameters") BlockPosition blockposition, @SuppressWarnings("UnusedParameters") IBlockData iblockdata) {
         return true;
     }
 
@@ -203,7 +204,8 @@ public abstract class BlockDiodeAbstract extends BlockFacingHorizontal {
         return iblockdata.m();
     }
 
-    protected int a(IBlockAccess iblockaccess, BlockPosition blockposition, IBlockData iblockdata) {
+    @SuppressWarnings("SameReturnValue")
+    protected int a(@SuppressWarnings("UnusedParameters") IBlockAccess iblockaccess, @SuppressWarnings("UnusedParameters") BlockPosition blockposition, @SuppressWarnings("UnusedParameters") IBlockData iblockdata) {
         return 15;
     }
 

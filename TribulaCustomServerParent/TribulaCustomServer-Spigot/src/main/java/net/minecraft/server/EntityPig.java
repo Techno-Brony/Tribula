@@ -236,7 +236,7 @@ public class EntityPig extends EntityAnimal {
         }
     }
 
-    public EntityPig b(EntityAgeable entityageable) {
+    public EntityPig b(@SuppressWarnings("UnusedParameters") EntityAgeable entityageable) {
         return new EntityPig(this.world);
     }
 

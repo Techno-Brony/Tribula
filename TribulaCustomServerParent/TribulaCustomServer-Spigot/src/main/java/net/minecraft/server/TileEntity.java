@@ -41,6 +41,7 @@ public abstract class TileEntity {
         a(TileEntityCommand.class, "Control");
     }
 
+    @SuppressWarnings("CanBeFinal")
     public CustomTimingsHandler tickTimer = org.bukkit.craftbukkit.SpigotTimings.getTileEntityTimings(this); // Spigot
     protected World world;
     protected BlockPosition position;
@@ -258,7 +259,7 @@ public abstract class TileEntity {
         return false;
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "SameReturnValue"})
     @Nullable
     public IChatBaseComponent i_() {
         return null;

@@ -217,6 +217,7 @@ public class EntityRabbit extends EntityAnimal {
         this.bD = nbttagcompound.getInt("MoreCarrotTicks");
     }
 
+    @SuppressWarnings("SameReturnValue")
     protected SoundEffect df() {
         return SoundEffects.eE;
     }
@@ -341,6 +342,7 @@ public class EntityRabbit extends EntityAnimal {
         this.bD = 40;
     }
 
+    @SuppressWarnings("EmptyMethod")
     public void a(DataWatcherObject<?> datawatcherobject) {
         super.a(datawatcherobject);
     }
@@ -404,10 +406,12 @@ public class EntityRabbit extends EntityAnimal {
             return this.e && super.b();
         }
 
+        @SuppressWarnings("EmptyMethod")
         public void c() {
             super.c();
         }
 
+        @SuppressWarnings("EmptyMethod")
         public void d() {
             super.d();
         }
@@ -522,6 +526,7 @@ public class EntityRabbit extends EntityAnimal {
 
     public static class GroupDataRabbit implements GroupDataEntity {
 
+        @SuppressWarnings("CanBeFinal")
         public int a;
 
         public GroupDataRabbit(int i) {

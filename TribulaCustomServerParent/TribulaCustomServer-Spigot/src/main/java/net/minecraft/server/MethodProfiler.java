@@ -8,32 +8,39 @@ public class MethodProfiler {
     public boolean a;
     public MethodProfiler() {}
 
+    @SuppressWarnings("EmptyMethod")
     public void a() {
     }
 
-    public void a(String s) {
+    @SuppressWarnings("EmptyMethod")
+    public void a(@SuppressWarnings("UnusedParameters") String s) {
     }
 
+    @SuppressWarnings("EmptyMethod")
     public void b() {
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "SameReturnValue"})
     public List<MethodProfiler.ProfilerInfo> b(String s) {
         return null;
     }
 
-    public void c(String s) {
+    @SuppressWarnings("EmptyMethod")
+    public void c(@SuppressWarnings("UnusedParameters") String s) {
     }
 
+    @SuppressWarnings("SameReturnValue")
     public String c() {
         return "";
     }
 
     public static final class ProfilerInfo implements Comparable<MethodProfiler.ProfilerInfo> {
 
+        @SuppressWarnings("CanBeFinal")
         public double a;
-        @SuppressWarnings("unused")
+        @SuppressWarnings({"unused", "CanBeFinal"})
         public double b;
+        @SuppressWarnings("CanBeFinal")
         public String c;
 
         @SuppressWarnings("unused")

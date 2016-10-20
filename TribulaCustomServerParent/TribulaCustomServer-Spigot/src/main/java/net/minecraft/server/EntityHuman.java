@@ -27,7 +27,9 @@ public abstract class EntityHuman extends EntityLiving {
     private static final DataWatcherObject<Integer> b = DataWatcher.a(EntityHuman.class, DataWatcherRegistry.b);
     private final GameProfile bT;
     private final ItemCooldown bW = this.l();
+    @SuppressWarnings("CanBeFinal")
     public PlayerInventory inventory = new PlayerInventory(this);
+    @SuppressWarnings("CanBeFinal")
     public Container defaultContainer;
     public Container activeContainer;
     @SuppressWarnings("unused")
@@ -50,6 +52,7 @@ public abstract class EntityHuman extends EntityLiving {
     public float bJ;
     @SuppressWarnings("unused")
     public float bK;
+    @SuppressWarnings("CanBeFinal")
     public PlayerAbilities abilities = new PlayerAbilities();
     public int expLevel;
     public int expTotal;
@@ -63,6 +66,7 @@ public abstract class EntityHuman extends EntityLiving {
     protected int bx;
     @SuppressWarnings("unused")
     protected float bP = 0.1F;
+    @SuppressWarnings("CanBeFinal")
     protected float bQ = 0.02F;
     private InventoryEnderChest enderChest = new InventoryEnderChest();
     private BlockPosition e;
@@ -566,7 +570,7 @@ public abstract class EntityHuman extends EntityLiving {
     }
 
     @Nullable
-    public EntityItem drop(@Nullable ItemStack itemstack, boolean flag) {
+    public EntityItem drop(@Nullable ItemStack itemstack, @SuppressWarnings("UnusedParameters") boolean flag) {
         return this.a(itemstack, false, false);
     }
 
@@ -885,6 +889,7 @@ public abstract class EntityHuman extends EntityLiving {
     }
 
     // CraftBukkit start
+    @SuppressWarnings("EmptyMethod")
     protected boolean damageEntity0(DamageSource damagesource, float f) { // void -> boolean
         return super.damageEntity0(damagesource, f);
         // CraftBukkit end
@@ -912,11 +917,12 @@ public abstract class EntityHuman extends EntityLiving {
     @SuppressWarnings("unused")
     public void openSign(TileEntitySign tileentitysign) {}
 
-    public void a(CommandBlockListenerAbstract commandblocklistenerabstract) {}
+    @SuppressWarnings("EmptyMethod")
+    public void a(@SuppressWarnings("UnusedParameters") CommandBlockListenerAbstract commandblocklistenerabstract) {}
 
     public void a(TileEntityCommand tileentitycommand) {}
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "EmptyMethod"})
     public void a(TileEntityStructure tileentitystructure) {}
 
     public void openTrade(IMerchant imerchant) {}
@@ -1238,6 +1244,7 @@ public abstract class EntityHuman extends EntityLiving {
         return !this.sleeping && super.inBlock();
     }
 
+    @SuppressWarnings("SameReturnValue")
     public boolean cO() {
         return false;
     }

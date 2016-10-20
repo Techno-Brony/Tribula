@@ -48,6 +48,7 @@ public abstract class PlayerList {
     private final Map<UUID, ServerStatisticManager> o;
     private final Map<String,EntityPlayer> playersByName = new org.spigotmc.CaseInsensitiveMap<EntityPlayer>();
     public IPlayerFileData playerFileData;
+    @SuppressWarnings("CanBeFinal")
     protected int maxPlayers;
     private boolean hasWhitelist;
     private int r;
@@ -57,6 +58,7 @@ public abstract class PlayerList {
     private boolean t;
     private int u;
     // CraftBukkit start
+    @SuppressWarnings("CanBeFinal")
     private CraftServer cserver;
 
     @SuppressWarnings("unused")
@@ -509,7 +511,7 @@ public abstract class PlayerList {
         return entity;
     }
 
-    public EntityPlayer processLogin(GameProfile gameprofile, EntityPlayer player) { // CraftBukkit - added EntityPlayer
+    public EntityPlayer processLogin(@SuppressWarnings("UnusedParameters") GameProfile gameprofile, EntityPlayer player) { // CraftBukkit - added EntityPlayer
         /* CraftBukkit startMoved up
         UUID uuid = EntityHuman.a(gameprofile);
         ArrayList arraylist = Lists.newArrayList();
@@ -791,7 +793,7 @@ public abstract class PlayerList {
 
     }
 
-    public void changeWorld(Entity entity, int i, WorldServer worldserver, WorldServer worldserver1) {
+    public void changeWorld(Entity entity, @SuppressWarnings("UnusedParameters") int i, @SuppressWarnings("UnusedParameters") WorldServer worldserver, WorldServer worldserver1) {
         // CraftBukkit start - Split into modular functions
         Location exit = calculateTarget(entity.getBukkitEntity().getLocation(), worldserver1);
         repositionEntity(entity, exit, true);
@@ -1197,7 +1199,7 @@ public abstract class PlayerList {
         return this.operators.getEntries();
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "EmptyMethod"})
     public void reloadWhitelist() {}
 
     public void b(EntityPlayer entityplayer, WorldServer worldserver) {
@@ -1272,6 +1274,7 @@ public abstract class PlayerList {
         return this.server;
     }
 
+    @SuppressWarnings("SameReturnValue")
     public NBTTagCompound t() {
         return null;
     }
@@ -1369,7 +1372,8 @@ public abstract class PlayerList {
         return this.j.get(uuid);
     }
 
-    public boolean f(GameProfile gameprofile) {
+    @SuppressWarnings("SameReturnValue")
+    public boolean f(@SuppressWarnings("UnusedParameters") GameProfile gameprofile) {
         return false;
     }
 }

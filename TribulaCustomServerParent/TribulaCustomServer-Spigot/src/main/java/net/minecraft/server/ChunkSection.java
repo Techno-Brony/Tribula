@@ -63,6 +63,7 @@ public class ChunkSection {
         this.blockIds.setBlock(i, j, k, iblockdata);
     }
 
+    @SuppressWarnings("SameReturnValue")
     public boolean a() {
         return false; // CraftBukkit - MC-80966
     }

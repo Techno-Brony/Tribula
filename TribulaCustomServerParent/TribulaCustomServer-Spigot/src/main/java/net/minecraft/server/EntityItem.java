@@ -13,7 +13,7 @@ public class EntityItem extends Entity {
     private static final Logger b = LogManager.getLogger();
     private static final DataWatcherObject<Optional<ItemStack>> c = DataWatcher.a(EntityItem.class, DataWatcherRegistry.f);
     public int pickupDelay;
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "CanBeFinal"})
     public float a;
     private int age;
     private int f;

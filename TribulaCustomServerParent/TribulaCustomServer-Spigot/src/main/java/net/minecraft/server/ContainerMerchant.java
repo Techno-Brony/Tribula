@@ -12,6 +12,7 @@ public class ContainerMerchant extends Container {
 
     // CraftBukkit start
     private CraftInventoryView bukkitEntity = null;
+    @SuppressWarnings("CanBeFinal")
     private PlayerInventory player;
 
     public ContainerMerchant(PlayerInventory playerinventory, IMerchant imerchant, World world) {
@@ -50,10 +51,12 @@ public class ContainerMerchant extends Container {
         return this.f;
     }
 
+    @SuppressWarnings("EmptyMethod")
     public void addSlotListener(ICrafting icrafting) {
         super.addSlotListener(icrafting);
     }
 
+    @SuppressWarnings("EmptyMethod")
     public void b() {
         super.b();
     }

@@ -14,6 +14,7 @@ public class PersistentCollection {
     public final List<PersistentBase> c = Lists.newArrayList(); // Spigot
     private final IDataManager b;
     private final Map<String, Short> d = Maps.newHashMap();
+    @SuppressWarnings("CanBeFinal")
     protected Map<String, PersistentBase> a = Maps.newHashMap();
 
     public PersistentCollection(IDataManager idatamanager) {

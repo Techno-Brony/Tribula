@@ -441,7 +441,9 @@ public class PlayerChunkMap {
 
     // CraftBukkit start - Sorter to load nearby chunks first
     private static class ChunkCoordComparator implements java.util.Comparator<ChunkCoordIntPair> {
+        @SuppressWarnings("CanBeFinal")
         private int x;
+        @SuppressWarnings("CanBeFinal")
         private int z;
 
         public ChunkCoordComparator (EntityPlayer entityplayer) {

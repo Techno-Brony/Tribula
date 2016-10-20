@@ -30,10 +30,12 @@ public class PathfinderGoalVillagerFarm extends PathfinderGoalGotoTarget {
         return this.f >= 0 && super.b();
     }
 
+    @SuppressWarnings("EmptyMethod")
     public void c() {
         super.c();
     }
 
+    @SuppressWarnings("EmptyMethod")
     public void d() {
         super.d();
     }

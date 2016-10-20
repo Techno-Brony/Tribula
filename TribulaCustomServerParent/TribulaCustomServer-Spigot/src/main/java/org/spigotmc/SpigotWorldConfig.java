@@ -73,7 +73,7 @@ public class SpigotWorldConfig
         SpigotConfig.readConfig( SpigotWorldConfig.class, this );
     }
 
-    private void log(String s)
+    private void log(@SuppressWarnings("UnusedParameters") String s)
     {
         if ( verbose )
         {

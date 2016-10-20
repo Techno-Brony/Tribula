@@ -1378,7 +1378,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
 
         private BlockActionDataList() {}
 
-        BlockActionDataList(@SuppressWarnings("SameParameterValue") Object object) {
+        BlockActionDataList(@SuppressWarnings({"SameParameterValue", "UnusedParameters"}) Object object) {
             this();
         }
     }

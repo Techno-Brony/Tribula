@@ -157,7 +157,7 @@ public class EntityOcelot extends EntityTameableAnimal {
         return !super.a(entityhuman, enumhand, itemstack);
     }
 
-    public EntityOcelot b(EntityAgeable entityageable) {
+    public EntityOcelot b(@SuppressWarnings("UnusedParameters") EntityAgeable entityageable) {
         EntityOcelot entityocelot = new EntityOcelot(this.world);
 
         if (this.isTamed()) {
@@ -223,6 +223,7 @@ public class EntityOcelot extends EntityTameableAnimal {
         return this.hasCustomName() ? this.getCustomName() : (this.isTamed() ? LocaleI18n.get("entity.Cat.name") : super.getName());
     }
 
+    @SuppressWarnings("EmptyMethod")
     public void setTamed(boolean flag) {
         super.setTamed(flag);
     }

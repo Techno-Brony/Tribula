@@ -264,7 +264,8 @@ public class PortalTravelAgent {
         return this.createPortal(entity.locX, entity.locY, entity.locZ, 16);
     }
 
-    public boolean createPortal(double x, double y, double z, int b0) {
+    @SuppressWarnings("SameReturnValue")
+    public boolean createPortal(double x, double y, double z, @SuppressWarnings("UnusedParameters") int b0) {
         if (this.world.getWorld().getEnvironment() == org.bukkit.World.Environment.THE_END) {
             createEndPortal(x, y, z);
             return true;

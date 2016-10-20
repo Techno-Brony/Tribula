@@ -53,6 +53,7 @@ public class SpigotConfig
     public static boolean bungee;
     public static boolean lateBind;
     public static boolean disableStatSaving;
+    @SuppressWarnings("CanBeFinal")
     public static TObjectIntHashMap<String> forcedStats = new TObjectIntHashMap<String>();
     public static int playerSample;
     public static int playerShuffle;

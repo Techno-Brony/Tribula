@@ -16,6 +16,7 @@ public class InventoryLargeChest implements ITileInventory {
     public final ITileInventory right;
     private final String a;
     // CraftBukkit start - add fields and methods
+    @SuppressWarnings("CanBeFinal")
     public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
 
     public InventoryLargeChest(@SuppressWarnings("SameParameterValue") String s, ITileInventory itileinventory, ITileInventory itileinventory1) {

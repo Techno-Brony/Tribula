@@ -18,6 +18,7 @@ public class EntityAreaEffectCloud extends Entity {
     private static final DataWatcherObject<Integer> e = DataWatcher.a(EntityAreaEffectCloud.class, DataWatcherRegistry.b);
     private static final DataWatcherObject<Integer> f = DataWatcher.a(EntityAreaEffectCloud.class, DataWatcherRegistry.b);
     private final Map<Entity, Integer> au;
+    @SuppressWarnings("CanBeFinal")
     public List<MobEffect> effects;
     public int waitTime;
     public int reapplicationDelay;

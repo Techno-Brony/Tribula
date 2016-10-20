@@ -17,6 +17,7 @@ public class TileEntityFurnace extends TileEntityContainer implements ITickable,
     private static final int[] a = new int[] { 0};
     private static final int[] f = new int[] { 2, 1};
     private static final int[] g = new int[] { 1};
+    @SuppressWarnings("CanBeFinal")
     public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
     private ItemStack[] items = new ItemStack[3];
     private int burnTime;
@@ -184,7 +185,6 @@ public class TileEntityFurnace extends TileEntityContainer implements ITickable,
     }
 
     public void setMaxStackSize(int size) {
-        int maxStack = size;
     }
 
     public boolean isBurning() {
@@ -278,7 +278,8 @@ public class TileEntityFurnace extends TileEntityContainer implements ITickable,
 
     }
 
-    public int a(@Nullable ItemStack itemstack) {
+    @SuppressWarnings("SameReturnValue")
+    public int a(@SuppressWarnings("UnusedParameters") @Nullable ItemStack itemstack) {
         return 200;
     }
 

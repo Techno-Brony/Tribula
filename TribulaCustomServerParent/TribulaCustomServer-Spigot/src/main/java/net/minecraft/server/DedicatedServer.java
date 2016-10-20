@@ -349,8 +349,9 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
                 return this.a();
             }
         });
-        //noinspection unchecked,SameReturnValue,SameReturnValue
+        //noinspection unchecked,SameReturnValue,SameReturnValue,SameReturnValue
         crashreport.g().a("Type", new CrashReportCallable() {
+            @SuppressWarnings("SameReturnValue")
             public String a() {
                 return "Dedicated Server (map_server.txt)";
             }

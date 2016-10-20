@@ -30,7 +30,7 @@ public class RecipesBanner {
         }
         // CraftBukkit end
 
-        AddRecipe(@SuppressWarnings("SameParameterValue") RecipesBanner.SyntheticClass_1 recipesbanner_syntheticclass_1) {
+        AddRecipe(@SuppressWarnings({"SameParameterValue", "UnusedParameters"}) RecipesBanner.SyntheticClass_1 recipesbanner_syntheticclass_1) {
             this();
         }
 
@@ -218,7 +218,7 @@ public class RecipesBanner {
         }
         // CraftBukkit end
 
-        DuplicateRecipe(@SuppressWarnings("SameParameterValue") RecipesBanner.SyntheticClass_1 recipesbanner_syntheticclass_1) {
+        DuplicateRecipe(@SuppressWarnings({"SameParameterValue", "UnusedParameters"}) RecipesBanner.SyntheticClass_1 recipesbanner_syntheticclass_1) {
             this();
         }
 

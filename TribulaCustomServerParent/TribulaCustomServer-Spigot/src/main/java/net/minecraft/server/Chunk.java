@@ -29,10 +29,12 @@ public class Chunk {
     private final int[] h;
     private final boolean[] i;
     public boolean d;
+    @SuppressWarnings("CanBeFinal")
     public long chunkKey;
     public org.bukkit.Chunk bukkitChunk;
     @SuppressWarnings("unused")
     public boolean mustSave;
+    @SuppressWarnings("CanBeFinal")
     protected gnu.trove.map.hash.TObjectIntHashMap<Class> entityCount = new gnu.trove.map.hash.TObjectIntHashMap<Class>(); // Spigot
     private boolean j;
     private boolean m;
@@ -45,6 +47,7 @@ public class Chunk {
     private int v;
     private long w;
     private int x;
+    @SuppressWarnings("CanBeFinal")
     private ConcurrentLinkedQueue<BlockPosition> y;
     // CraftBukkit start - Neighbor loaded cache for chunk lighting and entity ticking
     private int neighbors = 0x1 << 12;
@@ -894,6 +897,7 @@ public class Chunk {
         return new Random(this.world.getSeed() + (long) (this.locX * this.locX * 4987142) + (long) (this.locX * 5947611) + (long) (this.locZ * this.locZ) * 4392871L + (long) (this.locZ * 389711) ^ i);
     }
 
+    @SuppressWarnings("SameReturnValue")
     public boolean isEmpty() {
         return true;
     }
@@ -1043,6 +1047,7 @@ public class Chunk {
 
     }
 
+    @SuppressWarnings("SameReturnValue")
     public boolean isReady() {
         // Spigot Start
         /*

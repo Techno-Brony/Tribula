@@ -63,7 +63,7 @@ public class EntityMushroomCow extends EntityCow {
         }
     }
 
-    public EntityMushroomCow c(EntityAgeable entityageable) {
+    public EntityMushroomCow c(@SuppressWarnings("UnusedParameters") EntityAgeable entityageable) {
         return new EntityMushroomCow(this.world);
     }
 

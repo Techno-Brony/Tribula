@@ -11,6 +11,7 @@ import java.util.List;
 public class InventoryHorseChest extends InventorySubcontainer {
 
     // CraftBukkit start - add fields and methods
+    @SuppressWarnings("CanBeFinal")
     public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
     private EntityHorse horse;
     private int maxStack = MAX_STACK;

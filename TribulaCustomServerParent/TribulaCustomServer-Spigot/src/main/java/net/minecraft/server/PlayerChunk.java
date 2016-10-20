@@ -30,6 +30,7 @@ public class PlayerChunk {
 
     // CraftBukkit start - add fields
     private boolean loadInProgress = false;
+    @SuppressWarnings("CanBeFinal")
     private Runnable loadedRunnable = new Runnable() {
         public void run() {
             loadInProgress = false;

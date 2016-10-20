@@ -1,29 +1,27 @@
 package net.minecraft.server;
 
-import org.bukkit.craftbukkit.event.CraftEventFactory; // CraftBukkit
+import org.bukkit.craftbukkit.event.CraftEventFactory;
 
 public abstract class EntityFireball extends Entity {
 
-    private int e = -1;
-    private int f = -1;
-    private int g = -1;
-    private Block h;
-    private boolean au;
     public EntityLiving shooter;
-    private int av;
-    private int aw;
     public double dirX;
     public double dirY;
     public double dirZ;
     public float bukkitYield = 1; // CraftBukkit
     public boolean isIncendiary = true; // CraftBukkit
+    private int e = -1;
+    private int f = -1;
+    private int g = -1;
+    private Block h;
+    private boolean au;
+    private int av;
+    private int aw;
 
     public EntityFireball(World world) {
         super(world);
         this.setSize(1.0F, 1.0F);
     }
-
-    protected void i() {}
 
     public EntityFireball(World world, double d0, double d1, double d2, double d3, double d4, double d5) {
         super(world);
@@ -50,6 +48,11 @@ public abstract class EntityFireball extends Entity {
         // CraftBukkit start - Added setDirection method
         this.setDirection(d0, d1, d2);
     }
+
+    @SuppressWarnings("EmptyMethod")
+    public static void a(@SuppressWarnings("UnusedParameters") DataConverterManager dataconvertermanager, @SuppressWarnings("UnusedParameters") String s) {}
+
+    protected void i() {}
 
     public void setDirection(double d0, double d1, double d2) {
         // CraftBukkit end
@@ -135,6 +138,7 @@ public abstract class EntityFireball extends Entity {
         return true;
     }
 
+    @SuppressWarnings("SameReturnValue")
     protected EnumParticle j() {
         return EnumParticle.SMOKE_NORMAL;
     }
@@ -144,8 +148,6 @@ public abstract class EntityFireball extends Entity {
     }
 
     protected abstract void a(MovingObjectPosition movingobjectposition);
-
-    public static void a(DataConverterManager dataconvertermanager, String s) {}
 
     public void b(NBTTagCompound nbttagcompound) {
         nbttagcompound.setInt("xTile", this.e);

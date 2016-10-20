@@ -262,6 +262,7 @@ public class BlockPortal extends BlockHalfTransparent {
         private final EnumDirection.EnumAxis b;
         private final EnumDirection c;
         private final EnumDirection d;
+        @SuppressWarnings("CanBeFinal")
         java.util.Collection<org.bukkit.block.Block> blocks = new java.util.HashSet<org.bukkit.block.Block>(); // CraftBukkit - add field
         private int e;
         private BlockPosition position;

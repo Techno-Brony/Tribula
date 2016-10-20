@@ -19,11 +19,14 @@ public abstract class Container {
 
     private final Set<Slot> h = Sets.newHashSet();
     private final Set<EntityHuman> i = Sets.newHashSet();
+    @SuppressWarnings("CanBeFinal")
     public List<ItemStack> b = Lists.newArrayList();
+    @SuppressWarnings("CanBeFinal")
     public List<Slot> c = Lists.newArrayList();
     public int windowId;
     // CraftBukkit start
     public boolean checkReachable = true;
+    @SuppressWarnings("CanBeFinal")
     protected List<ICrafting> listeners = Lists.newArrayList();
     private int dragType = -1;
     private int g;
@@ -532,7 +535,7 @@ public abstract class Container {
         return true;
     }
 
-    protected void a(int i, int j, @SuppressWarnings("SameParameterValue") boolean flag, EntityHuman entityhuman) {
+    protected void a(int i, int j, @SuppressWarnings({"SameParameterValue", "UnusedParameters"}) boolean flag, EntityHuman entityhuman) {
         this.a(i, j, InventoryClickType.QUICK_MOVE, entityhuman);
     }
 
@@ -645,7 +648,8 @@ public abstract class Container {
         this.h.clear();
     }
 
-    public boolean b(Slot slot) {
+    @SuppressWarnings("SameReturnValue")
+    public boolean b(@SuppressWarnings("UnusedParameters") Slot slot) {
         return true;
     }
 }

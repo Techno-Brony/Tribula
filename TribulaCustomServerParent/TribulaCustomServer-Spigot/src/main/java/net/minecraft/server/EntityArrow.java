@@ -66,7 +66,8 @@ public abstract class EntityArrow extends Entity implements IProjectile {
 
     }
 
-    public static void a(DataConverterManager dataconvertermanager, String s) {}
+    @SuppressWarnings("EmptyMethod")
+    public static void a(@SuppressWarnings("UnusedParameters") DataConverterManager dataconvertermanager, @SuppressWarnings("UnusedParameters") String s) {}
 
     @SuppressWarnings("unused")
     public static void a(DataConverterManager dataconvertermanager) {
@@ -88,7 +89,7 @@ public abstract class EntityArrow extends Entity implements IProjectile {
         this.datawatcher.register(EntityArrow.g, (byte) 0);
     }
 
-    public void a(Entity entity, float f, float f1, @SuppressWarnings("SameParameterValue") float f2, float f3, @SuppressWarnings("SameParameterValue") float f4) {
+    public void a(Entity entity, float f, float f1, @SuppressWarnings({"SameParameterValue", "UnusedParameters"}) float f2, float f3, @SuppressWarnings("SameParameterValue") float f4) {
         float f5 = -MathHelper.sin(f1 * 0.017453292F) * MathHelper.cos(f * 0.017453292F);
         float f6 = -MathHelper.sin(f * 0.017453292F);
         float f7 = MathHelper.cos(f1 * 0.017453292F) * MathHelper.cos(f * 0.017453292F);

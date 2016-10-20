@@ -63,7 +63,7 @@ public class BlockPlant extends Block {
 
     }
 
-    public boolean f(World world, BlockPosition blockposition, IBlockData iblockdata) {
+    public boolean f(World world, BlockPosition blockposition, @SuppressWarnings("UnusedParameters") IBlockData iblockdata) {
         return this.i(world.getType(blockposition.down()));
     }
 

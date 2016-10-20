@@ -17,6 +17,7 @@ import java.util.List;
 public class TileEntityHopper extends TileEntityLootable implements IHopper, ITickable {
 
     // CraftBukkit start - add fields and methods
+    @SuppressWarnings("CanBeFinal")
     public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
     private ItemStack[] items = new ItemStack[5];
     private String f;

@@ -16,6 +16,7 @@ public class ContainerHorse extends Container {
 
     // CraftBukkit start
     org.bukkit.craftbukkit.inventory.CraftInventoryView bukkitEntity;
+    @SuppressWarnings("CanBeFinal")
     PlayerInventory player;
 
     public ContainerHorse(IInventory iinventory, final IInventory iinventory1, final EntityHorse entityhorse, EntityHuman entityhuman) {

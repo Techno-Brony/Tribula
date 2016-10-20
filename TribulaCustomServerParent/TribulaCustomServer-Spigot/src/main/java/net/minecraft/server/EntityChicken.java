@@ -105,7 +105,7 @@ public class EntityChicken extends EntityAnimal {
         return LootTables.C;
     }
 
-    public EntityChicken b(EntityAgeable entityageable) {
+    public EntityChicken b(@SuppressWarnings("UnusedParameters") EntityAgeable entityageable) {
         return new EntityChicken(this.world);
     }
 

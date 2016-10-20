@@ -45,6 +45,7 @@ public class ItemFishingRod extends Item {
         return new InteractionResultWrapper(EnumInteractionResult.SUCCESS, itemstack);
     }
 
+    @SuppressWarnings("EmptyMethod")
     public boolean g_(ItemStack itemstack) {
         return super.g_(itemstack);
     }

@@ -11,6 +11,7 @@ public abstract class Enchantment {
     public static final RegistryMaterials<MinecraftKey, Enchantment> enchantments = new RegistryMaterials();
     private final EnumItemSlot[] a;
     private final Enchantment.Rarity e;
+    @SuppressWarnings("CanBeFinal")
     public EnchantmentSlotType itemTarget;
     protected String d;
 
@@ -96,6 +97,7 @@ public abstract class Enchantment {
         return this.e;
     }
 
+    @SuppressWarnings("SameReturnValue")
     public int getStartLevel() {
         return 1;
     }
@@ -113,12 +115,12 @@ public abstract class Enchantment {
         return this.a(i) + 5;
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "SameReturnValue"})
     public int a(int i, DamageSource damagesource) {
         return 0;
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "SameReturnValue"})
     public float a(int i, EnumMonsterType enummonstertype) {
         return 0.0F;
     }
@@ -150,7 +152,7 @@ public abstract class Enchantment {
         return this.itemTarget.canEnchant(itemstack.getItem());
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "EmptyMethod"})
     public void a(EntityLiving entityliving, Entity entity, int i) {}
 
     @SuppressWarnings("unused")

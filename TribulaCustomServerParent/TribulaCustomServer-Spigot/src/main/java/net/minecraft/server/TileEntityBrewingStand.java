@@ -17,6 +17,7 @@ public class TileEntityBrewingStand extends TileEntityContainer implements ITick
     private static final int[] f = new int[] { 0, 1, 2, 3};
     private static final int[] g = new int[] { 0, 1, 2, 4};
     // CraftBukkit start - add fields and methods
+    @SuppressWarnings("CanBeFinal")
     public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
     private ItemStack[] items = new ItemStack[5];
     private int brewTime;

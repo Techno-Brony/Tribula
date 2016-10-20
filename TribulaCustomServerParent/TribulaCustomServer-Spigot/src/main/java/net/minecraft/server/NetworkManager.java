@@ -81,8 +81,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
     private IChatBaseComponent n;
     private boolean p;
 
-    public NetworkManager(@SuppressWarnings("SameParameterValue") EnumProtocolDirection enumprotocoldirection) {
-        EnumProtocolDirection h = enumprotocoldirection;
+    public NetworkManager(@SuppressWarnings({"SameParameterValue", "UnusedParameters"}) EnumProtocolDirection enumprotocoldirection) {
     }
 
     public void channelActive(ChannelHandlerContext channelhandlercontext) throws Exception {
@@ -126,7 +125,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
         if (MinecraftServer.getServer().isDebugging()) throwable.printStackTrace(); // Spigot
     }
 
-    protected void a(ChannelHandlerContext channelhandlercontext, Packet<?> packet) {
+    protected void a(@SuppressWarnings("UnusedParameters") ChannelHandlerContext channelhandlercontext, Packet<?> packet) {
         if (this.channel.isOpen()) {
             try {
                 //noinspection unchecked

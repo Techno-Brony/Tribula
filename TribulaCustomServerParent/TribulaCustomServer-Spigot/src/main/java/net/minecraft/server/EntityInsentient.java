@@ -26,13 +26,16 @@ public abstract class EntityInsentient extends EntityLiving {
     public int a_;
     public PathfinderGoalSelector goalSelector;
     public PathfinderGoalSelector targetSelector;
+    @SuppressWarnings("CanBeFinal")
     public float[] dropChanceHand = new float[2];
+    @SuppressWarnings("CanBeFinal")
     public float[] dropChanceArmor = new float[4];
     public boolean canPickUpLoot;
     public boolean persistent;
     protected int b_;
     protected ControllerMove moveController;
     protected ControllerJump g;
+    @SuppressWarnings("CanBeFinal")
     protected NavigationAbstract navigation;
     private EntityLiving goalTarget;
     private MinecraftKey bC;
@@ -762,6 +765,7 @@ public abstract class EntityInsentient extends EntityLiving {
         return 40;
     }
 
+    @SuppressWarnings("SameReturnValue")
     public int cJ() {
         return 10;
     }

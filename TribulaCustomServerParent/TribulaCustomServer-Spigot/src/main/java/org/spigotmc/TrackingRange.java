@@ -11,7 +11,7 @@ public class TrackingRange
      *
      * @param defaultRange Default range defined by Mojang
      */
-    public static int getEntityTrackingRange(Entity entity, int defaultRange)
+    public static int getEntityTrackingRange(Entity entity, @SuppressWarnings("UnusedParameters") int defaultRange)
     {
         SpigotWorldConfig config = entity.world.spigotConfig;
         if ( entity instanceof EntityPlayer )

@@ -13,6 +13,7 @@ public class ShapedRecipes implements IRecipe {
     private final int width;
     private final int height;
     private final ItemStack[] items;
+    @SuppressWarnings("CanBeFinal")
     public ItemStack result; // Spigot
     @SuppressWarnings("unused")
     private boolean e;

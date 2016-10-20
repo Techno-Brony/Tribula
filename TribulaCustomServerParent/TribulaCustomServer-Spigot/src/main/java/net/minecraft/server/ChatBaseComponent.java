@@ -10,6 +10,7 @@ import java.util.List;
 
 public abstract class ChatBaseComponent implements IChatBaseComponent {
 
+    @SuppressWarnings("CanBeFinal")
     protected List<IChatBaseComponent> a = Lists.newArrayList();
     private ChatModifier b;
 

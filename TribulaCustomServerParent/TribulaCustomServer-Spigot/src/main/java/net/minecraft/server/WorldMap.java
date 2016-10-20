@@ -27,8 +27,11 @@ public class WorldMap extends PersistentBase {
     public boolean track;
     public byte scale;
     public byte[] colors = new byte[16384];
+    @SuppressWarnings("CanBeFinal")
     public List<WorldMap.WorldMapHumanTracker> h = Lists.newArrayList();
+    @SuppressWarnings("CanBeFinal")
     public Map<UUID, MapIcon> decorations = Maps.newLinkedHashMap(); // Spigot
+    @SuppressWarnings("CanBeFinal")
     private CraftServer server;
     private UUID uniqueId = null;
     // CraftBukkit end
@@ -236,7 +239,7 @@ public class WorldMap extends PersistentBase {
     }
 
     @Nullable
-    public Packet<?> a(ItemStack itemstack, World world, EntityHuman entityhuman) {
+    public Packet<?> a(ItemStack itemstack, @SuppressWarnings("UnusedParameters") World world, EntityHuman entityhuman) {
         WorldMap.WorldMapHumanTracker worldmap_worldmaphumantracker = this.j.get(entityhuman);
 
         return worldmap_worldmaphumantracker == null ? null : worldmap_worldmaphumantracker.a(itemstack);

@@ -98,7 +98,7 @@ public class ItemBucket extends Item {
     }
 
     // CraftBukkit - added ob.ItemStack result - TODO: Is this... the right way to handle this?
-    private ItemStack a(ItemStack itemstack, EntityHuman entityhuman, Item item, org.bukkit.inventory.ItemStack result) {
+    private ItemStack a(ItemStack itemstack, EntityHuman entityhuman, @SuppressWarnings("UnusedParameters") Item item, org.bukkit.inventory.ItemStack result) {
         if (entityhuman.abilities.canInstantlyBuild) {
             return itemstack;
         } else if (--itemstack.count <= 0) {

@@ -52,6 +52,7 @@ public abstract class World implements IBlockAccess {
     // CraftBukkit start Added the following
     private final CraftWorld world;
     public WorldProvider worldProvider;
+    @SuppressWarnings("CanBeFinal")
     public WorldData worldData;
     public PersistentCollection worldMaps;
     public Scoreboard scoreboard;
@@ -59,9 +60,11 @@ public abstract class World implements IBlockAccess {
     public boolean allowAnimals;
     public boolean pvpMode;
     public boolean keepSpawnInMemory = true;
+    @SuppressWarnings("CanBeFinal")
     public ChunkGenerator generator;
     public boolean captureBlockStates = false;
     public boolean captureTreeGeneration = false;
+    @SuppressWarnings("CanBeFinal")
     public ArrayList<BlockState> capturedBlockStates= new ArrayList<BlockState>(){
         @Override
         public boolean add( BlockState blockState ) {
@@ -80,6 +83,7 @@ public abstract class World implements IBlockAccess {
     public long ticksPerAnimalSpawns;
     public long ticksPerMonsterSpawns;
     public boolean populating;
+    @SuppressWarnings("CanBeFinal")
     public Map<BlockPosition, TileEntity> capturedTileEntities = Maps.newHashMap();
     protected boolean d;
     protected int l = (new Random()).nextInt();
@@ -87,13 +91,16 @@ public abstract class World implements IBlockAccess {
     protected float o;
     protected float p;
     protected float q;
+    @SuppressWarnings("CanBeFinal")
     protected NavigationListener t = new NavigationListener();
+    @SuppressWarnings("CanBeFinal")
     protected List<IWorldAccess> u;
     protected IChunkProvider chunkProvider;
     @SuppressWarnings("unused")
     protected boolean isLoading;
     protected PersistentVillage villages;
     protected LootTableRegistry B;
+    @SuppressWarnings("CanBeFinal")
     int[] H;
     private int a = 63;
     private int J;
@@ -125,7 +132,9 @@ public abstract class World implements IBlockAccess {
             }
         }
     };
+    @SuppressWarnings("CanBeFinal")
     private org.spigotmc.TickLimiter entityLimiter;
+    @SuppressWarnings("CanBeFinal")
     private org.spigotmc.TickLimiter tileLimiter;
     private int tileTickPosition;
 
@@ -319,7 +328,7 @@ public abstract class World implements IBlockAccess {
         }
     }
 
-    protected abstract boolean isChunkLoaded(int i, int j, boolean flag);
+    protected abstract boolean isChunkLoaded(int i, int j, @SuppressWarnings("UnusedParameters") boolean flag);
 
     public Chunk getChunkAtWorldCoords(BlockPosition blockposition) {
         return this.getChunkAt(blockposition.getX() >> 4, blockposition.getZ() >> 4);
@@ -927,7 +936,8 @@ public abstract class World implements IBlockAccess {
 
     }
 
-    public void a(double d0, double d1, double d2, SoundEffect soundeffect, SoundCategory soundcategory, float f, float f1, @SuppressWarnings("SameParameterValue") boolean flag) {}
+    @SuppressWarnings("EmptyMethod")
+    public void a(@SuppressWarnings("UnusedParameters") double d0, @SuppressWarnings("UnusedParameters") double d1, @SuppressWarnings("UnusedParameters") double d2, @SuppressWarnings("UnusedParameters") SoundEffect soundeffect, @SuppressWarnings("UnusedParameters") SoundCategory soundcategory, @SuppressWarnings("UnusedParameters") float f, @SuppressWarnings("UnusedParameters") float f1, @SuppressWarnings({"SameParameterValue", "UnusedParameters"}) boolean flag) {}
 
     public void a(BlockPosition blockposition, @Nullable SoundEffect soundeffect) {
         for (IWorldAccess anU : this.u) {
@@ -2574,7 +2584,7 @@ public abstract class World implements IBlockAccess {
         return this.entitiesById.get(i);
     }
 
-    public void b(BlockPosition blockposition, TileEntity tileentity) {
+    public void b(BlockPosition blockposition, @SuppressWarnings("UnusedParameters") TileEntity tileentity) {
         if (this.isLoaded(blockposition)) {
             this.getChunkAtWorldCoords(blockposition).e();
         }
@@ -3004,6 +3014,7 @@ public abstract class World implements IBlockAccess {
         }
     }
 
+    @SuppressWarnings("SameReturnValue")
     public int getHeight() {
         return 256;
     }
@@ -3122,8 +3133,8 @@ public abstract class World implements IBlockAccess {
         this.J = i;
     }
 
-    public void d(@SuppressWarnings("SameParameterValue") int i) {
-        int k = i;
+    @SuppressWarnings("EmptyMethod")
+    public void d(@SuppressWarnings({"SameParameterValue", "UnusedParameters"}) int i) {
     }
 
     public PersistentVillage ai() {
@@ -3144,7 +3155,7 @@ public abstract class World implements IBlockAccess {
         return k >= -128 && k <= 128 && l >= -128 && l <= 128 && this.keepSpawnInMemory; // CraftBukkit - Added 'this.keepSpawnInMemory'
     }
 
-    public void a(Packet<?> packet) {
+    public void a(@SuppressWarnings("UnusedParameters") Packet<?> packet) {
         throw new UnsupportedOperationException("Can\'t send packets to server unless you\'re on the client.");
     }
 

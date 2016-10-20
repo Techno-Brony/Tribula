@@ -23,7 +23,6 @@ public class MobEffectList {
     private String e = "";
 
     protected MobEffectList(boolean flag, int i) {
-        boolean c = flag;
         if (flag) {
             this.durationModifier = 0.5D;
         } else {
@@ -164,6 +163,7 @@ public class MobEffectList {
         }
     }
 
+    @SuppressWarnings("SameReturnValue")
     public boolean isInstant() {
         return false;
     }
@@ -194,7 +194,7 @@ public class MobEffectList {
         return this;
     }
 
-    public void a(EntityLiving entityliving, AttributeMapBase attributemapbase, int i) {
+    public void a(@SuppressWarnings("UnusedParameters") EntityLiving entityliving, AttributeMapBase attributemapbase, @SuppressWarnings("UnusedParameters") int i) {
         Iterator iterator = this.a.entrySet().iterator();
 
         //noinspection WhileLoopReplaceableByForEach
@@ -209,7 +209,7 @@ public class MobEffectList {
 
     }
 
-    public void b(EntityLiving entityliving, AttributeMapBase attributemapbase, int i) {
+    public void b(@SuppressWarnings("UnusedParameters") EntityLiving entityliving, AttributeMapBase attributemapbase, int i) {
         Iterator iterator = this.a.entrySet().iterator();
 
         //noinspection WhileLoopReplaceableByForEach

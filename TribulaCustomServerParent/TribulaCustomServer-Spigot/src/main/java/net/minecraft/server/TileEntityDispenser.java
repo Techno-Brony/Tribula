@@ -14,6 +14,7 @@ public class TileEntityDispenser extends TileEntityLootable implements IInventor
 
     private static final Random f = new Random();
     // CraftBukkit start - add fields and methods
+    @SuppressWarnings("CanBeFinal")
     public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
     protected String a;
     private ItemStack[] items = new ItemStack[9];

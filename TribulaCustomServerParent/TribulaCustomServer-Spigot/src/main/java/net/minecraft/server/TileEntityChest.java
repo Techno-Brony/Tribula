@@ -22,6 +22,7 @@ public class TileEntityChest extends TileEntityLootable implements ITickable, II
     public float k;
     public int l;
     // CraftBukkit start - add fields and methods
+    @SuppressWarnings("CanBeFinal")
     public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
     private ItemStack[] items = new ItemStack[27];
     private int p;

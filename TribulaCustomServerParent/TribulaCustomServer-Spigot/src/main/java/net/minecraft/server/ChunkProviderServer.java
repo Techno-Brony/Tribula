@@ -215,7 +215,7 @@ public class ChunkProviderServer implements IChunkProvider {
 
     }
 
-    @SuppressWarnings("UnusedReturnValue")
+    @SuppressWarnings({"UnusedReturnValue", "SameReturnValue"})
     public boolean a(boolean flag) {
         int i = 0;
 

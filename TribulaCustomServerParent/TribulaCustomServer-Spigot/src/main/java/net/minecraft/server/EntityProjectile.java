@@ -38,7 +38,8 @@ public abstract class EntityProjectile extends Entity implements IProjectile {
         this.projectileSource = (org.bukkit.entity.LivingEntity) entityliving.getBukkitEntity(); // CraftBukkit
     }
 
-    public static void a(DataConverterManager dataconvertermanager, String s) {}
+    @SuppressWarnings("EmptyMethod")
+    public static void a(@SuppressWarnings("UnusedParameters") DataConverterManager dataconvertermanager, @SuppressWarnings("UnusedParameters") String s) {}
 
     protected void i() {}
 

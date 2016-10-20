@@ -107,7 +107,7 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
         world.updateAdjacentComparators(blockposition, this);
     }
 
-    protected void b(World world, BlockPosition blockposition, IBlockData iblockdata, boolean flag) {
+    protected void b(World world, BlockPosition blockposition, IBlockData iblockdata, @SuppressWarnings("UnusedParameters") boolean flag) {
         BlockMinecartTrackAbstract.MinecartTrackLogic blockminecarttrackabstract_minecarttracklogic = new BlockMinecartTrackAbstract.MinecartTrackLogic(world, blockposition, iblockdata);
         List list = blockminecarttrackabstract_minecarttracklogic.a();
         Iterator iterator = list.iterator();

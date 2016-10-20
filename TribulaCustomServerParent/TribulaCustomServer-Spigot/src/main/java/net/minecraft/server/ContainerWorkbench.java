@@ -12,10 +12,13 @@ public class ContainerWorkbench extends Container {
 
     private final World g;
     private final BlockPosition h;
+    @SuppressWarnings("CanBeFinal")
     public InventoryCrafting craftInventory; // CraftBukkit - move initialization into constructor
+    @SuppressWarnings("CanBeFinal")
     public IInventory resultInventory; // CraftBukkit - move initialization into constructor
     // CraftBukkit start
     private CraftInventoryView bukkitEntity = null;
+    @SuppressWarnings("CanBeFinal")
     private PlayerInventory player;
     // CraftBukkit end
 

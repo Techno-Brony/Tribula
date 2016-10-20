@@ -25,6 +25,7 @@ public class ContainerAnvil extends Container {
     private String l;
     // CraftBukkit start
     private CraftInventoryView bukkitEntity = null;
+    @SuppressWarnings("CanBeFinal")
     private PlayerInventory player;
     private final IInventory h = new InventorySubcontainer("Repair", true, 2) {
         public void update() {

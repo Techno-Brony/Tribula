@@ -11,10 +11,9 @@ public class ItemRecord extends Item {
     @SuppressWarnings("unused")
     protected ItemRecord(String s, SoundEffect soundeffect) {
         String c = "item.record." + s + ".desc";
-        SoundEffect b = soundeffect;
         this.maxStackSize = 1;
         this.a(CreativeModeTab.f);
-        ItemRecord.a.put(b, this);
+        ItemRecord.a.put(soundeffect, this);
     }
 
     public EnumInteractionResult a(ItemStack itemstack, EntityHuman entityhuman, World world, BlockPosition blockposition, EnumHand enumhand, EnumDirection enumdirection, float f, float f1, float f2) {

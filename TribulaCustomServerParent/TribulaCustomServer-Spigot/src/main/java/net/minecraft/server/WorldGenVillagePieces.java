@@ -231,7 +231,7 @@ public class WorldGenVillagePieces {
             this.l = structureboundingbox;
         }
 
-        public static StructureBoundingBox a(WorldGenVillagePieces.WorldGenVillageStartPiece worldgenvillagepieces_worldgenvillagestartpiece, List<StructurePiece> list, Random random, int i, int j, int k, EnumDirection enumdirection) {
+        public static StructureBoundingBox a(@SuppressWarnings("UnusedParameters") WorldGenVillagePieces.WorldGenVillageStartPiece worldgenvillagepieces_worldgenvillagestartpiece, List<StructurePiece> list, @SuppressWarnings("UnusedParameters") Random random, int i, int j, int k, EnumDirection enumdirection) {
             StructureBoundingBox structureboundingbox = StructureBoundingBox.a(i, j, k, 0, 0, 0, 3, 4, 2, enumdirection);
 
             return StructurePiece.a(list, structureboundingbox) != null ? null : structureboundingbox;
@@ -1379,7 +1379,7 @@ public class WorldGenVillagePieces {
             this.a = Math.max(structureboundingbox.c(), structureboundingbox.e());
         }
 
-        public static StructureBoundingBox a(WorldGenVillagePieces.WorldGenVillageStartPiece worldgenvillagepieces_worldgenvillagestartpiece, List<StructurePiece> list, Random random, int i, int j, int k, EnumDirection enumdirection) {
+        public static StructureBoundingBox a(@SuppressWarnings("UnusedParameters") WorldGenVillagePieces.WorldGenVillageStartPiece worldgenvillagepieces_worldgenvillagestartpiece, List<StructurePiece> list, Random random, int i, int j, int k, EnumDirection enumdirection) {
             for (int l = 7 * MathHelper.nextInt(random, 3, 5); l >= 7; l -= 7) {
                 StructureBoundingBox structureboundingbox = StructureBoundingBox.a(i, j, k, 0, 0, 0, 3, 3, l, enumdirection);
 
@@ -1530,7 +1530,9 @@ public class WorldGenVillagePieces {
         public int b;
         public WorldGenVillagePieces.WorldGenVillagePieceWeight c;
         public List<WorldGenVillagePieces.WorldGenVillagePieceWeight> d;
+        @SuppressWarnings("CanBeFinal")
         public List<StructurePiece> e = Lists.newArrayList();
+        @SuppressWarnings("CanBeFinal")
         public List<StructurePiece> f = Lists.newArrayList();
 
         @SuppressWarnings("unused")
@@ -1850,7 +1852,7 @@ public class WorldGenVillagePieces {
             }
         }
 
-        protected void a(World world, StructureBoundingBox structureboundingbox, Random random, int i, @SuppressWarnings("SameParameterValue") int j, int k, EnumDirection enumdirection) {
+        protected void a(World world, StructureBoundingBox structureboundingbox, Random random, int i, @SuppressWarnings("SameParameterValue") int j, int k, @SuppressWarnings("UnusedParameters") EnumDirection enumdirection) {
             if (!this.i) {
                 this.a(world, structureboundingbox, random, i, j, k, EnumDirection.NORTH, this.i());
             }
@@ -1878,8 +1880,10 @@ public class WorldGenVillagePieces {
     public static class WorldGenVillagePieceWeight {
 
         public final int b;
+        @SuppressWarnings("CanBeFinal")
         public Class<? extends WorldGenVillagePieces.WorldGenVillagePiece> a;
         public int c;
+        @SuppressWarnings("CanBeFinal")
         public int d;
 
         @SuppressWarnings("unused")
@@ -1889,7 +1893,7 @@ public class WorldGenVillagePieces {
             this.d = j;
         }
 
-        public boolean a(int i) {
+        public boolean a(@SuppressWarnings("UnusedParameters") int i) {
             return this.d == 0 || this.c < this.d;
         }
 

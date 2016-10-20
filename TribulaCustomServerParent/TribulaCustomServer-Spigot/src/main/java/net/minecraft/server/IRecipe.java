@@ -4,7 +4,7 @@ import javax.annotation.Nullable;
 
 public interface IRecipe {
 
-    boolean a(InventoryCrafting inventorycrafting, World world);
+    boolean a(InventoryCrafting inventorycrafting, @SuppressWarnings("UnusedParameters") World world);
 
     @Nullable
     ItemStack craftItem(InventoryCrafting inventorycrafting);

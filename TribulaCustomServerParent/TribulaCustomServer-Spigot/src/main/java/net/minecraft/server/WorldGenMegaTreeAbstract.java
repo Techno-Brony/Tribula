@@ -8,6 +8,7 @@ public abstract class WorldGenMegaTreeAbstract extends WorldGenTreeAbstract {
     @SuppressWarnings("unused")
     protected final IBlockData b;
     protected final IBlockData c;
+    @SuppressWarnings("CanBeFinal")
     protected int d;
 
     @SuppressWarnings("unused")

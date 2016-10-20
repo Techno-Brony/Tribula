@@ -172,7 +172,7 @@ public class ChunkRegionLoader implements IChunkLoader, IAsyncChunkSaver {
     }
 
     // CraftBukkit start
-    public boolean chunkExists(World world, int i, int j) {
+    public boolean chunkExists(@SuppressWarnings("UnusedParameters") World world, int i, int j) {
         ChunkCoordIntPair chunkcoordintpair = new ChunkCoordIntPair(i, j);
 
         if (this.c.contains(chunkcoordintpair)) {

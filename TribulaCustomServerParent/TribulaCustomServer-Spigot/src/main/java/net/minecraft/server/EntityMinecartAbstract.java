@@ -92,7 +92,8 @@ public abstract class EntityMinecartAbstract extends Entity implements INamableT
         }
     }
 
-    public static void a(DataConverterManager dataconvertermanager, String s) {}
+    @SuppressWarnings("EmptyMethod")
+    public static void a(@SuppressWarnings("UnusedParameters") DataConverterManager dataconvertermanager, @SuppressWarnings("UnusedParameters") String s) {}
 
     protected boolean playStepSound() {
         return false;
@@ -192,6 +193,7 @@ public abstract class EntityMinecartAbstract extends Entity implements INamableT
         return !this.dead;
     }
 
+    @SuppressWarnings("EmptyMethod")
     public void die() {
         super.die();
     }
@@ -399,7 +401,7 @@ public abstract class EntityMinecartAbstract extends Entity implements INamableT
         return this.maxSpeed; // CraftBukkit
     }
 
-    public void a(int i, int j, int k, boolean flag) {}
+    public void a(@SuppressWarnings("UnusedParameters") int i, @SuppressWarnings("UnusedParameters") int j, @SuppressWarnings("UnusedParameters") int k, boolean flag) {}
 
     protected void q() {
         double d0 = this.o();
@@ -812,6 +814,7 @@ public abstract class EntityMinecartAbstract extends Entity implements INamableT
         return this.datawatcher.get(EntityMinecartAbstract.b);
     }
 
+    @SuppressWarnings("SameReturnValue")
     public abstract EntityMinecartAbstract.EnumMinecartType v();
 
     public IBlockData getDisplayBlock() {
@@ -836,6 +839,7 @@ public abstract class EntityMinecartAbstract extends Entity implements INamableT
         this.a(true);
     }
 
+    @SuppressWarnings("SameReturnValue")
     public int z() {
         return 6;
     }

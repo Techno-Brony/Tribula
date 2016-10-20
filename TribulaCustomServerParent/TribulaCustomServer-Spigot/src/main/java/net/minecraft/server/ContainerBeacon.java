@@ -10,6 +10,7 @@ public class ContainerBeacon extends Container {
     private final ContainerBeacon.SlotBeacon f;
     // CraftBukkit start
     private CraftInventoryView bukkitEntity = null;
+    @SuppressWarnings("CanBeFinal")
     private PlayerInventory player;
     // CraftBukkit end
 

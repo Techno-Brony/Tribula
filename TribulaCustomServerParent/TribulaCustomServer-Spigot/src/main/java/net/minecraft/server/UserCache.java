@@ -253,7 +253,7 @@ public class UserCache {
             this.c = date;
         }
 
-        UserCacheEntry(GameProfile gameprofile, Date date, @SuppressWarnings("SameParameterValue") Object object) {
+        UserCacheEntry(GameProfile gameprofile, Date date, @SuppressWarnings({"SameParameterValue", "UnusedParameters"}) Object object) {
             this(gameprofile, date);
         }
 
@@ -270,11 +270,11 @@ public class UserCache {
 
         private BanEntrySerializer() {}
 
-        BanEntrySerializer(@SuppressWarnings("SameParameterValue") Object object) {
+        BanEntrySerializer(@SuppressWarnings({"SameParameterValue", "UnusedParameters"}) Object object) {
             this();
         }
 
-        public JsonElement a(UserCache.UserCacheEntry usercache_usercacheentry, Type type, JsonSerializationContext jsonserializationcontext) {
+        public JsonElement a(UserCache.UserCacheEntry usercache_usercacheentry, @SuppressWarnings("UnusedParameters") Type type, @SuppressWarnings("UnusedParameters") JsonSerializationContext jsonserializationcontext) {
             JsonObject jsonobject = new JsonObject();
 
             jsonobject.addProperty("name", usercache_usercacheentry.a().getName());
@@ -285,7 +285,7 @@ public class UserCache {
             return jsonobject;
         }
 
-        public UserCache.UserCacheEntry a(JsonElement jsonelement, Type type, JsonDeserializationContext jsondeserializationcontext) throws JsonParseException {
+        public UserCache.UserCacheEntry a(JsonElement jsonelement, @SuppressWarnings("UnusedParameters") Type type, @SuppressWarnings("UnusedParameters") JsonDeserializationContext jsondeserializationcontext) throws JsonParseException {
             if (jsonelement.isJsonObject()) {
                 JsonObject jsonobject = jsonelement.getAsJsonObject();
                 JsonElement jsonelement1 = jsonobject.get("name");

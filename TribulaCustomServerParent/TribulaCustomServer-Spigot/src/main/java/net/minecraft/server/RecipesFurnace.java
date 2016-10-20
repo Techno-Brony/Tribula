@@ -12,7 +12,9 @@ public class RecipesFurnace {
     private static final RecipesFurnace a = new RecipesFurnace();
     private final Map<ItemStack, Float> experience = Maps.newHashMap();
     public Map<ItemStack, ItemStack> recipes = Maps.newHashMap();
+    @SuppressWarnings("CanBeFinal")
     public Map<ItemStack,ItemStack> customRecipes = Maps.newHashMap(); // CraftBukkit - add field
+    @SuppressWarnings("CanBeFinal")
     public Map<ItemStack,Float> customExperience = Maps.newHashMap(); // CraftBukkit - add field
 
     public RecipesFurnace() {
@@ -57,7 +59,7 @@ public class RecipesFurnace {
     }
 
     // CraftBukkit start - add method
-    public void registerRecipe(ItemStack itemstack, ItemStack itemstack1, float f) {
+    public void registerRecipe(ItemStack itemstack, ItemStack itemstack1, @SuppressWarnings("UnusedParameters") float f) {
         this.customRecipes.put(itemstack, itemstack1);
     }
     // CraftBukkit end

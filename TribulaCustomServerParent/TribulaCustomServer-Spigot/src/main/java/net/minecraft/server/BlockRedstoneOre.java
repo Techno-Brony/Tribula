@@ -17,7 +17,6 @@ public class BlockRedstoneOre extends Block {
             this.a(true);
         }
 
-        boolean a = flag;
     }
 
     public int a(World world) {
@@ -94,6 +93,7 @@ public class BlockRedstoneOre extends Block {
         return 4 + random.nextInt(2);
     }
 
+    @SuppressWarnings("EmptyMethod")
     public void dropNaturally(World world, BlockPosition blockposition, IBlockData iblockdata, float f, int i) {
         super.dropNaturally(world, blockposition, iblockdata, f, i);
         /* CraftBukkit start - Delegated to getExpDrop

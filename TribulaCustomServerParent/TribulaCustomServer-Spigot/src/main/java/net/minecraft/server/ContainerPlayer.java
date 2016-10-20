@@ -14,10 +14,11 @@ public class ContainerPlayer extends Container {
     private final EntityHuman owner;
     public InventoryCrafting craftInventory = new InventoryCrafting(this, 2, 2);
     public IInventory resultInventory = new InventoryCraftResult();
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "CanBeFinal"})
     public boolean g;
     // CraftBukkit start
     private CraftInventoryView bukkitEntity = null;
+    @SuppressWarnings("CanBeFinal")
     private PlayerInventory player;
     // CraftBukkit end
 
@@ -71,8 +72,9 @@ public class ContainerPlayer extends Container {
             this.a(new Slot(playerinventory, i, 8 + i * 18, 142));
         }
 
-        //noinspection EmptyMethod,EmptyMethod
+        //noinspection EmptyMethod,EmptyMethod,EmptyMethod
         this.a(new Slot(playerinventory, 40, 77, 62) {
+            @SuppressWarnings("EmptyMethod")
             public boolean isAllowed(@Nullable ItemStack itemstack) {
                 return super.isAllowed(itemstack);
             }

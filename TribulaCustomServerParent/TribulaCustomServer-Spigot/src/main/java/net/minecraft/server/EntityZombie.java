@@ -587,7 +587,9 @@ public class EntityZombie extends EntityMonster {
 
     class GroupDataZombie implements GroupDataEntity {
 
+        @SuppressWarnings("CanBeFinal")
         public boolean a;
+        @SuppressWarnings("CanBeFinal")
         public boolean b;
 
         private GroupDataZombie(boolean flag, boolean flag1) {
@@ -595,7 +597,7 @@ public class EntityZombie extends EntityMonster {
             this.b = flag1;
         }
 
-        GroupDataZombie(boolean flag, boolean flag1, @SuppressWarnings("SameParameterValue") EntityZombie.SyntheticClass_1 entityzombie_syntheticclass_1) {
+        GroupDataZombie(boolean flag, boolean flag1, @SuppressWarnings({"SameParameterValue", "UnusedParameters"}) EntityZombie.SyntheticClass_1 entityzombie_syntheticclass_1) {
             this(flag, flag1);
         }
     }

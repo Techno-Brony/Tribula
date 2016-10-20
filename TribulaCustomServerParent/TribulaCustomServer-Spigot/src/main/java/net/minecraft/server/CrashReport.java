@@ -57,8 +57,9 @@ public class CrashReport {
     }
 
     private void h() {
-        //noinspection unchecked,SameReturnValue,SameReturnValue
+        //noinspection unchecked,SameReturnValue,SameReturnValue,SameReturnValue
         this.d.a("Minecraft Version", new CrashReportCallable() {
+            @SuppressWarnings("SameReturnValue")
             public String a() {
                 return "1.10.2";
             }

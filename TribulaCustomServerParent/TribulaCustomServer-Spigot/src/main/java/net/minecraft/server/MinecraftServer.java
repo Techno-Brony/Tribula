@@ -78,12 +78,15 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
     @SuppressWarnings("unused")
     public long[][] i;
     // CraftBukkit start
+    @SuppressWarnings("CanBeFinal")
     public List<WorldServer> worlds = new ArrayList<WorldServer>();
     public org.bukkit.craftbukkit.CraftServer server;
+    @SuppressWarnings("CanBeFinal")
     public OptionSet options;
     public org.bukkit.command.ConsoleCommandSender console;
     public org.bukkit.command.RemoteConsoleCommandSender remoteConsole;
     public ConsoleReader reader;
+    @SuppressWarnings("CanBeFinal")
     public java.util.Queue<Runnable> processQueue = new java.util.concurrent.ConcurrentLinkedQueue<Runnable>();
     public int autosavePeriod;
     private ServerConnection p; // Spigot
@@ -112,6 +115,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
     private boolean S;
     private boolean T;
     private long Y;
+    @SuppressWarnings("CanBeFinal")
     private Thread serverThread;
     // Spigot end
     private long aa = av();
@@ -119,11 +123,10 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
     private boolean hasStopped = false;
     // CraftBukkit end
 
-    public MinecraftServer(OptionSet options, @SuppressWarnings("SameParameterValue") Proxy proxy, DataConverterManager dataconvertermanager, YggdrasilAuthenticationService yggdrasilauthenticationservice, MinecraftSessionService minecraftsessionservice, GameProfileRepository gameprofilerepository, UserCache usercache) {
+    public MinecraftServer(OptionSet options, @SuppressWarnings("SameParameterValue") Proxy proxy, DataConverterManager dataconvertermanager, @SuppressWarnings("UnusedParameters") YggdrasilAuthenticationService yggdrasilauthenticationservice, MinecraftSessionService minecraftsessionservice, GameProfileRepository gameprofilerepository, UserCache usercache) {
         //noinspection deprecation
         io.netty.util.ResourceLeakDetector.setEnabled( false ); // Spigot - disable
         this.e = proxy;
-        YggdrasilAuthenticationService u1 = yggdrasilauthenticationservice;
         this.V = minecraftsessionservice;
         this.W = gameprofilerepository;
         this.X = usercache;
@@ -321,8 +324,8 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
 
     }
 
-    protected synchronized void b(String s) {
-        String r1 = s;
+    @SuppressWarnings("EmptyMethod")
+    protected synchronized void b(@SuppressWarnings("UnusedParameters") String s) {
     }
 
     public void a(String s, String s1, long i, WorldType worldtype, String s2) {
@@ -781,7 +784,8 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         return new File(".");
     }
 
-    public void a(CrashReport crashreport) {}
+    @SuppressWarnings("EmptyMethod")
+    public void a(@SuppressWarnings("UnusedParameters") CrashReport crashreport) {}
 
     public void B() {}
 
@@ -982,7 +986,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         this.o.add(itickable);
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "EmptyMethod"})
     public void F() {
         /* CraftBukkit start - prevent abuse
         this.serverThread = new Thread(this, "Server thread");
@@ -1014,6 +1018,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         // CraftBukkit end
     }
 
+    @SuppressWarnings("SameReturnValue")
     public String getVersion() {
         return "1.10.2";
     }
@@ -1052,6 +1057,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
 
     }
 
+    @SuppressWarnings("SameReturnValue")
     public String getServerModName() {
         return "Spigot"; // Spigot - Spigot > // CraftBukkit - cb > vanilla!
     }
@@ -1083,7 +1089,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         return crashreport;
     }
 
-    public List<String> tabCompleteCommand(ICommandListener icommandlistener, String s, @Nullable BlockPosition blockposition, boolean flag) {
+    public List<String> tabCompleteCommand(ICommandListener icommandlistener, String s, @Nullable BlockPosition blockposition, @SuppressWarnings("UnusedParameters") boolean flag) {
         /* CraftBukkit start - Allow tab-completion of Bukkit commands
         ArrayList arraylist = Lists.newArrayList();
         boolean flag1 = s.startsWith("/");
@@ -1132,6 +1138,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         // CraftBukkit end
     }
 
+    @SuppressWarnings("SameReturnValue")
     public boolean M() {
         return true; // CraftBukkit
     }
@@ -1222,9 +1229,8 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         this.demoMode = flag;
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "EmptyMethod"})
     public void c(boolean flag) {
-        boolean m1 = flag;
     }
 
     public Convertable getConvertable() {
@@ -1293,6 +1299,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         return true;
     }
 
+    @SuppressWarnings("SameReturnValue")
     public abstract boolean aa();
 
     public boolean getOnlineMode() {
@@ -1382,7 +1389,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         return false;
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "SameReturnValue"})
     public abstract String a(EnumGamemode enumgamemode, boolean flag);
 
     public int ap() {

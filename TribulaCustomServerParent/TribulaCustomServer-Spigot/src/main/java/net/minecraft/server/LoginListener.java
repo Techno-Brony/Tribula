@@ -120,9 +120,9 @@ public class LoginListener implements PacketLoginInListener, ITickable {
         } else {
             this.g = LoginListener.EnumProtocolState.ACCEPTED;
             if (this.server.aF() >= 0 && !this.networkManager.isLocal()) {
-                //noinspection unchecked,UnusedParameters
+                //noinspection unchecked,UnusedParameters,UnusedParameters
                 this.networkManager.sendPacket(new PacketLoginOutSetCompression(this.server.aF()), new ChannelFutureListener() {
-                    public void a(ChannelFuture channelfuture) {
+                    public void a(@SuppressWarnings("UnusedParameters") ChannelFuture channelfuture) {
                         LoginListener.this.networkManager.setCompressionLevel(LoginListener.this.server.aF());
                     }
 

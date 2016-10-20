@@ -12,14 +12,13 @@ public class TileEntityPiston extends TileEntity implements ITickable {
 
     public TileEntityPiston() {}
 
-    public TileEntityPiston(IBlockData iblockdata, EnumDirection enumdirection, boolean flag, boolean flag1) {
+    public TileEntityPiston(IBlockData iblockdata, EnumDirection enumdirection, boolean flag, @SuppressWarnings("UnusedParameters") boolean flag1) {
         this.a = iblockdata;
         this.f = enumdirection;
         this.g = flag;
-        boolean h = flag1;
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "EmptyMethod"})
     public static void a(DataConverterManager dataconvertermanager) {}
 
     @SuppressWarnings("unused")

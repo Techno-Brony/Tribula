@@ -23,7 +23,7 @@ public class RecipiesShield {
         }
         // CraftBukkit end
 
-        Decoration(@SuppressWarnings("SameParameterValue") RecipiesShield.SyntheticClass_1 recipiesshield_syntheticclass_1) {
+        Decoration(@SuppressWarnings({"SameParameterValue", "UnusedParameters"}) RecipiesShield.SyntheticClass_1 recipiesshield_syntheticclass_1) {
             this();
         }
 

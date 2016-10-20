@@ -125,6 +125,7 @@ public class EntityFireworks extends Entity {
 
     }
 
+    @SuppressWarnings("EmptyMethod")
     public float e(float f) {
         return super.e(f);
     }

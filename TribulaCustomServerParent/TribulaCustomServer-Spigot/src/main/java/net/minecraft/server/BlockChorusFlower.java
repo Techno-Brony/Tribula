@@ -302,6 +302,7 @@ public class BlockChorusFlower extends Block {
         return new BlockStateList(this, BlockChorusFlower.AGE);
     }
 
+    @SuppressWarnings("EmptyMethod")
     public void onPlace(World world, BlockPosition blockposition, IBlockData iblockdata) {
         super.onPlace(world, blockposition, iblockdata);
     }

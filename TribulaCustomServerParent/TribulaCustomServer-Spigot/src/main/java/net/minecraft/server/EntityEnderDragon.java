@@ -22,16 +22,26 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
     private final PathPoint[] bO = new PathPoint[24];
     private final int[] bP = new int[24];
     private final Path bQ = new Path();
+    @SuppressWarnings("CanBeFinal")
     public double[][] b = new double[64][3];
     public int c = -1;
+    @SuppressWarnings("CanBeFinal")
     public EntityComplexPart[] children;
+    @SuppressWarnings("CanBeFinal")
     public EntityComplexPart bw = new EntityComplexPart(this, "head", 6.0F, 6.0F);
+    @SuppressWarnings("CanBeFinal")
     public EntityComplexPart bx = new EntityComplexPart(this, "neck", 6.0F, 6.0F);
+    @SuppressWarnings("CanBeFinal")
     public EntityComplexPart by = new EntityComplexPart(this, "body", 8.0F, 8.0F);
+    @SuppressWarnings("CanBeFinal")
     public EntityComplexPart bz = new EntityComplexPart(this, "tail", 4.0F, 4.0F);
+    @SuppressWarnings("CanBeFinal")
     public EntityComplexPart bA = new EntityComplexPart(this, "tail", 4.0F, 4.0F);
+    @SuppressWarnings("CanBeFinal")
     public EntityComplexPart bB = new EntityComplexPart(this, "tail", 4.0F, 4.0F);
+    @SuppressWarnings("CanBeFinal")
     public EntityComplexPart bC = new EntityComplexPart(this, "wing", 4.0F, 4.0F);
+    @SuppressWarnings("CanBeFinal")
     public EntityComplexPart bD = new EntityComplexPart(this, "wing", 4.0F, 4.0F);
     public float bE;
     public float bF;
@@ -40,6 +50,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
     public EntityEnderCrystal currentEnderCrystal;
     private int bM = 200;
     private int bN;
+    @SuppressWarnings("CanBeFinal")
     private Explosion explosionSource = new Explosion(null, this, Double.NaN, Double.NaN, Double.NaN, Float.NaN, true, true); // CraftBukkit - reusable source for CraftTNTPrimed.getSource()
 
     public EntityEnderDragon(World world) {
@@ -307,7 +318,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
         }
     }
 
-    private float q(@SuppressWarnings("SameParameterValue") float f) {
+    private float q(@SuppressWarnings({"SameParameterValue", "UnusedParameters"}) float f) {
         double d0;
 
         if (this.bL.a().a()) {
@@ -806,7 +817,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
         }
     }
 
-    private PathEntity a(PathPoint pathpoint, PathPoint pathpoint1) {
+    private PathEntity a(@SuppressWarnings("UnusedParameters") PathPoint pathpoint, PathPoint pathpoint1) {
         int i = 1;
 
         PathPoint pathpoint2;

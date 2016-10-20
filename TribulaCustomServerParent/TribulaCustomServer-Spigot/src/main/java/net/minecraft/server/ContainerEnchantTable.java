@@ -22,13 +22,18 @@ public class ContainerEnchantTable extends Container {
     private final Random l = new Random();
     public World world;
     public int f;
+    @SuppressWarnings("CanBeFinal")
     public int[] costs = new int[3];
+    @SuppressWarnings("CanBeFinal")
     public int[] h = new int[] { -1, -1, -1};
+    @SuppressWarnings("CanBeFinal")
     public int[] i = new int[] { -1, -1, -1};
     // CraftBukkit start
     private CraftInventoryView bukkitEntity = null;
+    @SuppressWarnings("CanBeFinal")
     private Player player;
     // CraftBukkit - make type specific (changed from IInventory)
+    @SuppressWarnings("CanBeFinal")
     public InventorySubcontainer enchantSlots = new InventorySubcontainer("Enchant", true, 2) {
         public int getMaxStackSize() {
             return 64;

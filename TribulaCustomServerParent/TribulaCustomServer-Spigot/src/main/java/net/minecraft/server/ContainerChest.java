@@ -14,6 +14,7 @@ public class ContainerChest extends Container {
     private final int f;
     // CraftBukkit start
     private CraftInventoryView bukkitEntity = null;
+    @SuppressWarnings("CanBeFinal")
     private PlayerInventory player;
 
     public ContainerChest(IInventory iinventory, IInventory iinventory1, EntityHuman entityhuman) {

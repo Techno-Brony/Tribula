@@ -18,6 +18,7 @@ public class ContainerFurnace extends Container {
 
     // CraftBukkit start
     private CraftInventoryView bukkitEntity = null;
+    @SuppressWarnings("CanBeFinal")
     private PlayerInventory player;
 
     public ContainerFurnace(PlayerInventory playerinventory, IInventory iinventory) {

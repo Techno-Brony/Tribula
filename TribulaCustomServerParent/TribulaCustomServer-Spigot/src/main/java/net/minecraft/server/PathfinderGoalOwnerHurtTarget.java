@@ -2,6 +2,7 @@ package net.minecraft.server;
 
 public class PathfinderGoalOwnerHurtTarget extends PathfinderGoalTarget {
 
+    @SuppressWarnings("CanBeFinal")
     EntityTameableAnimal a;
     EntityLiving b;
     private int c;

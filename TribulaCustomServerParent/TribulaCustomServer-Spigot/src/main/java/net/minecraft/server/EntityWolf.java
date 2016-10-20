@@ -350,7 +350,7 @@ public class EntityWolf extends EntityTameableAnimal {
         this.datawatcher.set(EntityWolf.bD, enumcolor.getInvColorIndex());
     }
 
-    public EntityWolf b(EntityAgeable entityageable) {
+    public EntityWolf b(@SuppressWarnings("UnusedParameters") EntityAgeable entityageable) {
         EntityWolf entitywolf = new EntityWolf(this.world);
         UUID uuid = this.getOwnerUUID();
 

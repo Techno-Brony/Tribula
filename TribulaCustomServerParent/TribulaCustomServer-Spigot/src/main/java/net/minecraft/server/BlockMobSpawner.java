@@ -22,6 +22,7 @@ public class BlockMobSpawner extends BlockTileEntity {
         return 0;
     }
 
+    @SuppressWarnings("EmptyMethod")
     public void dropNaturally(World world, BlockPosition blockposition, IBlockData iblockdata, float f, int i) {
         super.dropNaturally(world, blockposition, iblockdata, f, i);
         /* CraftBukkit start - Delegate to getExpDrop

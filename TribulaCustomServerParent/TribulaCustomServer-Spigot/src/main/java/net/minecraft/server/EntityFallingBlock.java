@@ -38,7 +38,7 @@ public class EntityFallingBlock extends Entity {
         this.a(new BlockPosition(this));
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "EmptyMethod"})
     public static void a(DataConverterManager dataconvertermanager) {}
 
     public void a(BlockPosition blockposition) {

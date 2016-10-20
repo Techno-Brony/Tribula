@@ -17,6 +17,7 @@ public class ContainerBrewingStand extends Container {
 
     // CraftBukkit start
     private CraftInventoryView bukkitEntity = null;
+    @SuppressWarnings("CanBeFinal")
     private PlayerInventory player;
     // CraftBukkit end
 

@@ -24,10 +24,11 @@ public class ChunkProviderGenerate implements ChunkGenerator {
     private final WorldGenLargeFeature z;
     private final WorldGenBase A;
     private final WorldGenMonument B;
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "CanBeFinal"})
     public NoiseGeneratorOctaves b;
+    @SuppressWarnings("CanBeFinal")
     public NoiseGeneratorOctaves c;
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "CanBeFinal"})
     public NoiseGeneratorOctaves d;
     double[] e;
     double[] f;

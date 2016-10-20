@@ -9,6 +9,7 @@ public class EntityLightning extends EntityWeather {
     private final boolean d;
     @SuppressWarnings("unused")
     public long a;
+    @SuppressWarnings("CanBeFinal")
     public boolean isEffect; // CraftBukkit
     public boolean isSilent = false; // Spigot
     private int lifeTicks;

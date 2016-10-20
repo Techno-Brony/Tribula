@@ -495,6 +495,7 @@ public class Village {
 
     class Aggressor {
 
+        @SuppressWarnings("CanBeFinal")
         public EntityLiving a;
         public int b;
 

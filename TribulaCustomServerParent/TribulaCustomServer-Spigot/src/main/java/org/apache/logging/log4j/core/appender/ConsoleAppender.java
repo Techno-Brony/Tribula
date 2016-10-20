@@ -45,6 +45,7 @@ import java.nio.charset.Charset;
 public final class ConsoleAppender extends AbstractOutputStreamAppender {
 
     private static final String JANSI_CLASS = "org.fusesource.jansi.WindowsAnsiOutputStream";
+    @SuppressWarnings("CanBeFinal")
     private static ConsoleManagerFactory factory = new ConsoleManagerFactory();
 
     private ConsoleAppender(final String name, final Layout<? extends Serializable> layout, final Filter filter,

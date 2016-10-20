@@ -180,7 +180,9 @@ public class BlockRedstoneTorch extends BlockTorch {
 
     static class RedstoneUpdateInfo {
 
+        @SuppressWarnings("CanBeFinal")
         BlockPosition a;
+        @SuppressWarnings("CanBeFinal")
         long b;
 
         public RedstoneUpdateInfo(BlockPosition blockposition, long i) {

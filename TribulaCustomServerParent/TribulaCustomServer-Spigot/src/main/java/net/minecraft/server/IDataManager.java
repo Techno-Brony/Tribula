@@ -8,7 +8,7 @@ public interface IDataManager {
 
     void checkSession() throws ExceptionWorldConflict;
 
-    IChunkLoader createChunkLoader(WorldProvider worldprovider);
+    IChunkLoader createChunkLoader(@SuppressWarnings("UnusedParameters") WorldProvider worldprovider);
 
     void saveWorldData(WorldData worlddata, NBTTagCompound nbttagcompound);
 
@@ -17,6 +17,7 @@ public interface IDataManager {
 
     IPlayerFileData getPlayerFileData();
 
+    @SuppressWarnings("EmptyMethod")
     void a();
 
     File getDirectory();

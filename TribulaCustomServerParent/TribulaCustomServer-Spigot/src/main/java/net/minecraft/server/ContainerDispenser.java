@@ -13,6 +13,7 @@ public class ContainerDispenser extends Container {
     public final IInventory items;
     // CraftBukkit start
     private CraftInventoryView bukkitEntity = null;
+    @SuppressWarnings("CanBeFinal")
     private PlayerInventory player;
     // CraftBukkit end
 

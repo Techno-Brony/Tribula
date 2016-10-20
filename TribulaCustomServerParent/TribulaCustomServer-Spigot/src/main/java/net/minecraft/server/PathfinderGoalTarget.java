@@ -6,6 +6,7 @@ public abstract class PathfinderGoalTarget extends PathfinderGoal {
 
     protected final EntityCreature e;
     private final boolean a;
+    @SuppressWarnings("CanBeFinal")
     protected boolean f;
     protected EntityLiving g;
     protected int h;

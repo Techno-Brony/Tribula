@@ -19,6 +19,7 @@ public class InventoryCrafting implements IInventory {
     private final Container d;
 
     // CraftBukkit start - add fields
+    @SuppressWarnings("CanBeFinal")
     public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
     public IRecipe currentRecipe;
     public IInventory resultInventory;
@@ -121,7 +122,6 @@ public class InventoryCrafting implements IInventory {
     }
 
     public void setMaxStackSize(int size) {
-        int maxStack = size;
         resultInventory.setMaxStackSize(size);
     }
 

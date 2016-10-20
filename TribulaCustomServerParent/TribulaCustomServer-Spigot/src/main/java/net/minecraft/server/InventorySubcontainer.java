@@ -16,7 +16,9 @@ public class InventorySubcontainer implements IInventory {
     public final ItemStack[] items;
     private final int b;
     // CraftBukkit start - add fields and methods
+    @SuppressWarnings("CanBeFinal")
     public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
+    @SuppressWarnings("CanBeFinal")
     protected org.bukkit.inventory.InventoryHolder bukkitOwner;
     private String a;
     private List<IInventoryListener> d;
@@ -170,7 +172,6 @@ public class InventorySubcontainer implements IInventory {
     }
 
     public void setMaxStackSize(int i) {
-        int maxStack = i;
     }
 
     public void update() {

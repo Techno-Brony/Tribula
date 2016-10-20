@@ -7,8 +7,10 @@ import java.util.Random;
 public class PathfinderGoalBreed extends PathfinderGoal {
 
     private final EntityAnimal animal;
+    @SuppressWarnings("CanBeFinal")
     World a;
     int b;
+    @SuppressWarnings("CanBeFinal")
     double c;
     private EntityAnimal partner;
 

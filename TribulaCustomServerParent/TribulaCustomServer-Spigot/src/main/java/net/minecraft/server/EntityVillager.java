@@ -556,7 +556,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, NPC {
         this.bL = true;
     }
 
-    public EntityVillager b(EntityAgeable entityageable) {
+    public EntityVillager b(@SuppressWarnings("UnusedParameters") EntityAgeable entityageable) {
         EntityVillager entityvillager = new EntityVillager(this.world);
 
         entityvillager.prepare(this.world.D(new BlockPosition(entityvillager)), null);
@@ -681,9 +681,13 @@ public class EntityVillager extends EntityAgeable implements IMerchant, NPC {
 
     static class MerchantRecipeOptionProcess implements EntityVillager.IMerchantRecipeOption {
 
+        @SuppressWarnings("CanBeFinal")
         public ItemStack a;
+        @SuppressWarnings("CanBeFinal")
         public EntityVillager.MerchantOptionRandomRange b;
+        @SuppressWarnings("CanBeFinal")
         public ItemStack c;
+        @SuppressWarnings("CanBeFinal")
         public EntityVillager.MerchantOptionRandomRange d;
 
         public MerchantRecipeOptionProcess(Item item, EntityVillager.MerchantOptionRandomRange entityvillager_merchantoptionrandomrange, Item item1, EntityVillager.MerchantOptionRandomRange entityvillager_merchantoptionrandomrange1) {
@@ -734,7 +738,9 @@ public class EntityVillager extends EntityAgeable implements IMerchant, NPC {
 
     static class MerchantRecipeOptionEnchant implements EntityVillager.IMerchantRecipeOption {
 
+        @SuppressWarnings("CanBeFinal")
         public ItemStack a;
+        @SuppressWarnings("CanBeFinal")
         public EntityVillager.MerchantOptionRandomRange b;
 
         public MerchantRecipeOptionEnchant(Item item, EntityVillager.MerchantOptionRandomRange entityvillager_merchantoptionrandomrange) {
@@ -759,7 +765,9 @@ public class EntityVillager extends EntityAgeable implements IMerchant, NPC {
 
     static class MerchantRecipeOptionSell implements EntityVillager.IMerchantRecipeOption {
 
+        @SuppressWarnings("CanBeFinal")
         public ItemStack a;
+        @SuppressWarnings("CanBeFinal")
         public EntityVillager.MerchantOptionRandomRange b;
 
         public MerchantRecipeOptionSell(Item item, EntityVillager.MerchantOptionRandomRange entityvillager_merchantoptionrandomrange) {
@@ -796,7 +804,9 @@ public class EntityVillager extends EntityAgeable implements IMerchant, NPC {
 
     static class MerchantRecipeOptionBuy implements EntityVillager.IMerchantRecipeOption {
 
+        @SuppressWarnings("CanBeFinal")
         public Item a;
+        @SuppressWarnings("CanBeFinal")
         public EntityVillager.MerchantOptionRandomRange b;
 
         public MerchantRecipeOptionBuy(Item item, EntityVillager.MerchantOptionRandomRange entityvillager_merchantoptionrandomrange) {

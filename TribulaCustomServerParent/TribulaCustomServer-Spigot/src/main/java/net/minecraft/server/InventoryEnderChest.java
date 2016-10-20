@@ -11,6 +11,7 @@ import java.util.List;
 public class InventoryEnderChest extends InventorySubcontainer {
 
     // CraftBukkit start - add fields and methods
+    @SuppressWarnings("CanBeFinal")
     public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
     @SuppressWarnings("unused")
     public org.bukkit.entity.Player player;

@@ -566,6 +566,7 @@ public class Metrics {
         /**
          * Called when the server owner decides to opt-out of BukkitMetrics while the server is running.
          */
+        @SuppressWarnings("EmptyMethod")
         protected void onOptOut() {
         }
     }
@@ -618,6 +619,7 @@ public class Metrics {
         /**
          * Called after the website graphs have been updated
          */
+        @SuppressWarnings("EmptyMethod")
         public void reset() {
         }
 

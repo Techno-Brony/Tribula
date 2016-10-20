@@ -76,6 +76,7 @@ public class EntitySlime extends EntityInsentient implements IMonster {
         return this.getSize() <= 1;
     }
 
+    @SuppressWarnings("SameReturnValue")
     protected EnumParticle o() {
         return EnumParticle.SLIME;
     }

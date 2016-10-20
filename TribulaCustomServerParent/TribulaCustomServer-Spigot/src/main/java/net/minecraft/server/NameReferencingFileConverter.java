@@ -132,7 +132,7 @@ public class NameReferencingFileConverter {
         }
     }
 
-    public static boolean b(MinecraftServer minecraftserver) {
+    public static boolean b(@SuppressWarnings("UnusedParameters") MinecraftServer minecraftserver) {
         IpBanList ipbanlist = new IpBanList(PlayerList.b);
 
         if (NameReferencingFileConverter.a.exists() && NameReferencingFileConverter.a.isFile()) {
@@ -416,7 +416,7 @@ public class NameReferencingFileConverter {
         return flag;
     }
 
-    private static boolean b(PropertyManager propertymanager) {
+    private static boolean b(@SuppressWarnings("UnusedParameters") PropertyManager propertymanager) {
         boolean flag = false;
 
         if (NameReferencingFileConverter.b.exists() && NameReferencingFileConverter.b.isFile()) {
@@ -520,7 +520,7 @@ public class NameReferencingFileConverter {
             this(s);
         }
 
-        FileConversionException(String s, Throwable throwable, @SuppressWarnings("SameParameterValue") Object object) {
+        FileConversionException(String s, Throwable throwable, @SuppressWarnings({"SameParameterValue", "UnusedParameters"}) Object object) {
             this(s, throwable);
         }
     }

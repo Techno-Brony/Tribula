@@ -18,10 +18,12 @@ public class PlayerInventory implements IInventory {
     public final ItemStack[] extraSlots = new ItemStack[1];
     private final ItemStack[][] g;
     public int itemInHandIndex;
+    @SuppressWarnings("CanBeFinal")
     public EntityHuman player;
     @SuppressWarnings("unused")
     public boolean f;
     // CraftBukkit start - add fields and methods
+    @SuppressWarnings("CanBeFinal")
     public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
     private ItemStack carried;
     private int maxStack = MAX_STACK;
@@ -31,6 +33,7 @@ public class PlayerInventory implements IInventory {
         this.player = entityhuman;
     }
 
+    @SuppressWarnings("SameReturnValue")
     public static int getHotbarSize() {
         return 9;
     }

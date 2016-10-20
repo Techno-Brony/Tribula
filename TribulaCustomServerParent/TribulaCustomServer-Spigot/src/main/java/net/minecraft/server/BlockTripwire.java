@@ -25,7 +25,7 @@ public class BlockTripwire extends Block {
         this.a(true);
     }
 
-    public static boolean a(IBlockAccess iblockaccess, BlockPosition blockposition, IBlockData iblockdata, EnumDirection enumdirection) {
+    public static boolean a(IBlockAccess iblockaccess, BlockPosition blockposition, @SuppressWarnings("UnusedParameters") IBlockData iblockdata, EnumDirection enumdirection) {
         BlockPosition blockposition1 = blockposition.shift(enumdirection);
         IBlockData iblockdata1 = iblockaccess.getType(blockposition1);
         Block block = iblockdata1.getBlock();

@@ -18,7 +18,6 @@ public class RegionFile {
     private int g;
 
     public RegionFile(File file) {
-        File b = file;
         this.g = 0;
 
         try {

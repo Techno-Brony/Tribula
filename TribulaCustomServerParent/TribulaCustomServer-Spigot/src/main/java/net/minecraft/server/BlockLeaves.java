@@ -188,9 +188,11 @@ public abstract class BlockLeaves extends Block {
 
     }
 
-    protected void a(World world, BlockPosition blockposition, IBlockData iblockdata, int i) {}
+    @SuppressWarnings("EmptyMethod")
+    protected void a(@SuppressWarnings("UnusedParameters") World world, @SuppressWarnings("UnusedParameters") BlockPosition blockposition, @SuppressWarnings("UnusedParameters") IBlockData iblockdata, @SuppressWarnings("UnusedParameters") int i) {}
 
-    protected int i(IBlockData iblockdata) {
+    @SuppressWarnings("SameReturnValue")
+    protected int i(@SuppressWarnings("UnusedParameters") IBlockData iblockdata) {
         return 20;
     }
 

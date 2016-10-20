@@ -112,15 +112,18 @@ public abstract class Entity implements ICommandListener {
     public boolean valid; // CraftBukkit
     public org.bukkit.projectiles.ProjectileSource projectileSource; // CraftBukkit - For projectiles only
     public boolean forceExplosionKnockback; // CraftBukkit - SPIGOT-949
+    @SuppressWarnings("CanBeFinal")
     public CustomTimingsHandler tickTimer = org.bukkit.craftbukkit.SpigotTimings.getEntityTimings(this); // Spigot
     public long activatedTick = Integer.MIN_VALUE;
     public boolean fromMobSpawner;
     protected CraftEntity bukkitEntity;
     protected int j;
     protected boolean E;
+    @SuppressWarnings("CanBeFinal")
     protected Random random;
     protected boolean justCreated;
     protected boolean fireProof;
+    @SuppressWarnings("CanBeFinal")
     protected DataWatcher datawatcher;
     protected boolean al;
     protected int am;
@@ -1677,7 +1680,7 @@ public abstract class Entity implements ICommandListener {
         }
     }
 
-    protected boolean n(Entity entity) {
+    protected boolean n(@SuppressWarnings("UnusedParameters") Entity entity) {
         return this.j <= 0;
     }
 
@@ -1762,7 +1765,7 @@ public abstract class Entity implements ICommandListener {
         }
     }
 
-    protected boolean q(Entity entity) {
+    protected boolean q(@SuppressWarnings("UnusedParameters") Entity entity) {
         return this.bx().size() < 1;
     }
 
@@ -1812,7 +1815,7 @@ public abstract class Entity implements ICommandListener {
         return Iterables.concat(this.aG(), this.getArmorItems());
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "EmptyMethod"})
     public void setEquipment(EnumItemSlot enumitemslot, @Nullable ItemStack itemstack) {}
 
     public boolean isBurning() {
@@ -2217,7 +2220,8 @@ public abstract class Entity implements ICommandListener {
         return iblockdata.getBlock().a(this);
     }
 
-    public boolean a(Explosion explosion, World world, BlockPosition blockposition, IBlockData iblockdata, float f) {
+    @SuppressWarnings("SameReturnValue")
+    public boolean a(@SuppressWarnings("UnusedParameters") Explosion explosion, @SuppressWarnings("UnusedParameters") World world, @SuppressWarnings("UnusedParameters") BlockPosition blockposition, @SuppressWarnings("UnusedParameters") IBlockData iblockdata, @SuppressWarnings("UnusedParameters") float f) {
         return true;
     }
 
@@ -2234,6 +2238,7 @@ public abstract class Entity implements ICommandListener {
         return this.aq;
     }
 
+    @SuppressWarnings("SameReturnValue")
     public boolean isIgnoreBlockTrigger() {
         return true;
     }

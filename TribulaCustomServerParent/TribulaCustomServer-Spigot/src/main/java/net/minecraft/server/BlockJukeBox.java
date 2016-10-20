@@ -39,7 +39,7 @@ public class BlockJukeBox extends BlockTileEntity {
         }
     }
 
-    public void dropRecord(World world, BlockPosition blockposition, IBlockData iblockdata) {
+    public void dropRecord(World world, BlockPosition blockposition, @SuppressWarnings("UnusedParameters") IBlockData iblockdata) {
         if (!world.isClientSide) {
             TileEntity tileentity = world.getTileEntity(blockposition);
 

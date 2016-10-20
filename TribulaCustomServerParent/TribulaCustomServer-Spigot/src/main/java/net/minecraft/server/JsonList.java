@@ -205,14 +205,14 @@ public class JsonList<K, V extends JsonListEntry<K>> {
             this();
         }
 
-        public JsonElement a(JsonListEntry<K> jsonlistentry, Type type, JsonSerializationContext jsonserializationcontext) {
+        public JsonElement a(JsonListEntry<K> jsonlistentry, @SuppressWarnings("UnusedParameters") Type type, @SuppressWarnings("UnusedParameters") JsonSerializationContext jsonserializationcontext) {
             JsonObject jsonobject = new JsonObject();
 
             jsonlistentry.a(jsonobject);
             return jsonobject;
         }
 
-        public JsonListEntry<K> a(JsonElement jsonelement, Type type, JsonDeserializationContext jsondeserializationcontext) throws JsonParseException {
+        public JsonListEntry<K> a(JsonElement jsonelement, @SuppressWarnings("UnusedParameters") Type type, @SuppressWarnings("UnusedParameters") JsonDeserializationContext jsondeserializationcontext) throws JsonParseException {
             if (jsonelement.isJsonObject()) {
                 JsonObject jsonobject = jsonelement.getAsJsonObject();
 

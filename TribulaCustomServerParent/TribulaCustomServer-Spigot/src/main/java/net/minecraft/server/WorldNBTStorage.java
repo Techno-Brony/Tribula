@@ -30,7 +30,6 @@ public class WorldNBTStorage implements IDataManager, IPlayerFileData {
         this.playerDir = new File(this.baseDir, "playerdata");
         this.dataDir = new File(this.baseDir, "data");
         this.dataDir.mkdirs();
-        String g = s;
         if (flag) {
             this.playerDir.mkdirs();
             this.h = new DefinedStructureManager((new File(this.baseDir, "structures")).toString());

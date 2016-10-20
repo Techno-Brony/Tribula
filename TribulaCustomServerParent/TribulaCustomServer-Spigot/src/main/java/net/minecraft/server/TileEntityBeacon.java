@@ -35,6 +35,7 @@ public class TileEntityBeacon extends TileEntityContainer implements ITickable, 
     @Nullable
     public MobEffectList m; // PAIL: private -> public
     // CraftBukkit start - add fields and methods
+    @SuppressWarnings("CanBeFinal")
     public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
     private boolean j;
     private ItemStack inventorySlot;
@@ -341,7 +342,6 @@ public class TileEntityBeacon extends TileEntityContainer implements ITickable, 
     }
 
     public void setMaxStackSize(int size) {
-        int maxStack = size;
     }
 
     public boolean a(EntityHuman entityhuman) {

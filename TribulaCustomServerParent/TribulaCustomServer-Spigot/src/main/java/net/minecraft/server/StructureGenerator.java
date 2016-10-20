@@ -9,7 +9,7 @@ import java.util.Random;
 
 public abstract class StructureGenerator extends WorldGenBase {
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "CanBeFinal"})
     protected Long2ObjectMap<StructureStart> c = new Long2ObjectOpenHashMap(1024);
     private PersistentStructure a;
 
@@ -202,6 +202,7 @@ public abstract class StructureGenerator extends WorldGenBase {
         }
     }
 
+    @SuppressWarnings("SameReturnValue")
     protected List<BlockPosition> G_() {
         return null;
     }

@@ -71,10 +71,12 @@ public class BlockCrops extends BlockPlant implements IBlockFragilePlantElement 
         return iblockdata.getBlock() == Blocks.FARMLAND;
     }
 
+    @SuppressWarnings("SameReturnValue")
     protected BlockStateInteger e() {
         return BlockCrops.AGE;
     }
 
+    @SuppressWarnings("SameReturnValue")
     public int g() {
         return 7;
     }
@@ -132,10 +134,12 @@ public class BlockCrops extends BlockPlant implements IBlockFragilePlantElement 
         return (world.j(blockposition) >= 8 || world.h(blockposition)) && this.i(world.getType(blockposition.down()));
     }
 
+    @SuppressWarnings("SameReturnValue")
     protected Item h() {
         return Items.WHEAT_SEEDS;
     }
 
+    @SuppressWarnings("SameReturnValue")
     protected Item i() {
         return Items.WHEAT;
     }

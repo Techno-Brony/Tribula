@@ -3,6 +3,7 @@ package net.minecraft.server;
 public class PathfinderGoalPanic extends PathfinderGoal {
 
     private final EntityCreature b;
+    @SuppressWarnings("CanBeFinal")
     protected double a;
     private double c;
     private double d;

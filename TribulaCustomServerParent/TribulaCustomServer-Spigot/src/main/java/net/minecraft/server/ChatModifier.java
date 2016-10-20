@@ -320,7 +320,7 @@ public class ChatModifier {
         public ChatModifierSerializer() {}
 
         @Nullable
-        public ChatModifier a(JsonElement jsonelement, Type type, JsonDeserializationContext jsondeserializationcontext) throws JsonParseException {
+        public ChatModifier a(JsonElement jsonelement, @SuppressWarnings("UnusedParameters") Type type, JsonDeserializationContext jsondeserializationcontext) throws JsonParseException {
             if (jsonelement.isJsonObject()) {
                 ChatModifier chatmodifier = new ChatModifier();
                 JsonObject jsonobject = jsonelement.getAsJsonObject();
@@ -394,7 +394,7 @@ public class ChatModifier {
         }
 
         @Nullable
-        public JsonElement a(ChatModifier chatmodifier, Type type, JsonSerializationContext jsonserializationcontext) {
+        public JsonElement a(ChatModifier chatmodifier, @SuppressWarnings("UnusedParameters") Type type, JsonSerializationContext jsonserializationcontext) {
             if (chatmodifier.g()) {
                 return null;
             } else {

@@ -237,7 +237,7 @@ public class BlockFlowing extends BlockFluids {
         return enumset;
     }
 
-    private boolean g(World world, BlockPosition blockposition, IBlockData iblockdata) {
+    private boolean g(World world, BlockPosition blockposition, @SuppressWarnings("UnusedParameters") IBlockData iblockdata) {
         Block block = world.getType(blockposition).getBlock();
 
         return !(!(block instanceof BlockDoor) && block != Blocks.STANDING_SIGN && block != Blocks.LADDER && block != Blocks.REEDS) || (!(block.material != Material.PORTAL && block.material != Material.J) || block.material.isSolid());

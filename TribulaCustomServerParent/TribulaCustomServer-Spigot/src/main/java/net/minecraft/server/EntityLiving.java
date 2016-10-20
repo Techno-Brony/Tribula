@@ -55,9 +55,9 @@ public abstract class EntityLiving extends Entity {
     @SuppressWarnings("unused")
     public float aK;
     public float aL;
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "CanBeFinal"})
     public float aM;
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "CanBeFinal"})
     public float aN;
     public float aO;
     public float aP;
@@ -120,6 +120,7 @@ public abstract class EntityLiving extends Entity {
     // CraftBukkit start
     private boolean isTickingEffects = false;
     // Spigot end
+    @SuppressWarnings("CanBeFinal")
     private List<Object> effectsToProcess = Lists.newArrayList();
 
     public EntityLiving(World world) {
@@ -206,6 +207,7 @@ public abstract class EntityLiving extends Entity {
     }
     // CraftBukkit end
 
+    @SuppressWarnings("SameReturnValue")
     public boolean bE() {
         return false;
     }
@@ -1022,7 +1024,7 @@ public abstract class EntityLiving extends Entity {
 
     protected void dropEquipment(boolean flag, int i) {}
 
-    public void a(Entity entity, float f, double d0, double d1) {
+    public void a(@SuppressWarnings("UnusedParameters") Entity entity, float f, double d0, double d1) {
         if (this.random.nextDouble() >= this.getAttributeInstance(GenericAttributes.c).getValue()) {
             this.impulse = true;
             float f1 = MathHelper.sqrt(d0 * d0 + d1 * d1);
@@ -1056,7 +1058,7 @@ public abstract class EntityLiving extends Entity {
         return i > 4 ? SoundEffects.bA : SoundEffects.bI;
     }
 
-    protected void dropDeathLoot(boolean flag, int i) {}
+    protected void dropDeathLoot(@SuppressWarnings("UnusedParameters") boolean flag, int i) {}
 
     public boolean m_() {
         int i = MathHelper.floor(this.locX);
@@ -1523,6 +1525,7 @@ public abstract class EntityLiving extends Entity {
         this.motY += 0.03999999910593033D;
     }
 
+    @SuppressWarnings("SameReturnValue")
     protected float co() {
         return 0.8F;
     }

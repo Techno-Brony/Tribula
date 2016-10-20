@@ -20,11 +20,13 @@ public class Block {
     protected final Material material;
     protected final MaterialMapColor y;
     protected final BlockStateList blockStateList;
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "CanBeFinal"})
     public float w;
     public float frictionFactor;
+    @SuppressWarnings("CanBeFinal")
     protected boolean l;
     protected int m;
+    @SuppressWarnings("CanBeFinal")
     protected boolean n;
     protected int o;
     protected boolean p;
@@ -573,7 +575,7 @@ public class Block {
         return !this.material.isSolid();
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "SameReturnValue"})
     @Deprecated
     public EnumRenderType a(IBlockData iblockdata) {
         return EnumRenderType.MODEL;
@@ -647,7 +649,7 @@ public class Block {
         return true;
     }
 
-    public boolean a(IBlockData iblockdata, boolean flag) {
+    public boolean a(@SuppressWarnings("UnusedParameters") IBlockData iblockdata, @SuppressWarnings("UnusedParameters") boolean flag) {
         return this.n();
     }
 
@@ -667,7 +669,7 @@ public class Block {
     @Deprecated
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {}
 
-    public int a(World world) {
+    public int a(@SuppressWarnings("UnusedParameters") World world) {
         return 10;
     }
 
@@ -734,7 +736,7 @@ public class Block {
         return 0;
     }
 
-    public float a(Entity entity) {
+    public float a(@SuppressWarnings("UnusedParameters") Entity entity) {
         return this.durability / 5.0F;
     }
 
@@ -756,7 +758,7 @@ public class Block {
 
     public void wasExploded(World world, BlockPosition blockposition, Explosion explosion) {}
 
-    public boolean canPlace(World world, BlockPosition blockposition, EnumDirection enumdirection, @Nullable ItemStack itemstack) {
+    public boolean canPlace(World world, BlockPosition blockposition, EnumDirection enumdirection, @SuppressWarnings("UnusedParameters") @Nullable ItemStack itemstack) {
         return this.canPlace(world, blockposition, enumdirection);
     }
 
@@ -774,14 +776,14 @@ public class Block {
 
     public void stepOn(World world, BlockPosition blockposition, Entity entity) {}
 
-    public IBlockData getPlacedState(World world, BlockPosition blockposition, EnumDirection enumdirection, float f, float f1, float f2, int i, EntityLiving entityliving) {
+    public IBlockData getPlacedState(World world, BlockPosition blockposition, EnumDirection enumdirection, @SuppressWarnings("UnusedParameters") float f, float f1, @SuppressWarnings("UnusedParameters") float f2, int i, EntityLiving entityliving) {
         //noinspection deprecation
         return this.fromLegacyData(i);
     }
 
     public void attack(World world, BlockPosition blockposition, EntityHuman entityhuman) {}
 
-    public Vec3D a(World world, BlockPosition blockposition, Entity entity, Vec3D vec3d) {
+    public Vec3D a(@SuppressWarnings("UnusedParameters") World world, @SuppressWarnings("UnusedParameters") BlockPosition blockposition, @SuppressWarnings("UnusedParameters") Entity entity, Vec3D vec3d) {
         return vec3d;
     }
 
@@ -894,7 +896,7 @@ public class Block {
         entity.e(f, 1.0F);
     }
 
-    public void a(World world, Entity entity) {
+    public void a(@SuppressWarnings("UnusedParameters") World world, Entity entity) {
         entity.motY = 0.0D;
     }
 
@@ -904,8 +906,7 @@ public class Block {
         return new ItemStack(Item.getItemOf(this), 1, this.getDropData(iblockdata));
     }
 
-    public Block a(CreativeModeTab creativemodetab) {
-        CreativeModeTab creativeTab = creativemodetab;
+    public Block a(@SuppressWarnings("UnusedParameters") CreativeModeTab creativemodetab) {
         return this;
     }
 
@@ -917,7 +918,7 @@ public class Block {
         return true;
     }
 
-    public boolean a(Explosion explosion) {
+    public boolean a(@SuppressWarnings("UnusedParameters") Explosion explosion) {
         return true;
     }
 
