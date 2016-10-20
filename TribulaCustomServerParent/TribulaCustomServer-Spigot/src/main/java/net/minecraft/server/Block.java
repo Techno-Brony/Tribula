@@ -10,10 +10,12 @@ import java.util.Random;
 
 public class Block {
 
+    @SuppressWarnings("unchecked")
     public static final RegistryBlockID<IBlockData> REGISTRY_ID = new RegistryBlockID();
     public static final AxisAlignedBB j = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
     public static final AxisAlignedBB k = null;
     private static final MinecraftKey a = new MinecraftKey("air");
+    @SuppressWarnings("unchecked")
     public static final RegistryBlocks<MinecraftKey, Block> REGISTRY = new RegistryBlocks(Block.a);
     protected final Material material;
     protected final MaterialMapColor y;

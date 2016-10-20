@@ -7,6 +7,7 @@ public class BlockDispenser extends BlockTileEntity {
 
     public static final BlockStateDirection FACING = BlockDirectional.FACING;
     public static final BlockStateBoolean TRIGGERED = BlockStateBoolean.of("triggered");
+    @SuppressWarnings("unchecked")
     public static final RegistryDefault<Item, IDispenseBehavior> REGISTRY = new RegistryDefault(new DispenseBehaviorItem());
     public static boolean eventFired = false; // CraftBukkit
     protected Random d = new Random();
@@ -107,6 +108,7 @@ public class BlockDispenser extends BlockTileEntity {
         return BlockDispenser.REGISTRY.get(itemstack == null ? null : itemstack.getItem());
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         boolean flag = world.isBlockIndirectlyPowered(blockposition) || world.isBlockIndirectlyPowered(blockposition.up());
         boolean flag1 = iblockdata.get(BlockDispenser.TRIGGERED);
@@ -158,10 +160,12 @@ public class BlockDispenser extends BlockTileEntity {
         super.remove(world, blockposition, iblockdata);
     }
 
+    @SuppressWarnings("deprecation")
     public boolean isComplexRedstone(IBlockData iblockdata) {
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     public int d(IBlockData iblockdata, World world, BlockPosition blockposition) {
         return Container.a(world.getTileEntity(blockposition));
     }
@@ -170,6 +174,7 @@ public class BlockDispenser extends BlockTileEntity {
         return EnumRenderType.MODEL;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockDispenser.FACING, EnumDirection.fromType1(i & 7)).set(BlockDispenser.TRIGGERED, (i & 8) > 0);
     }
@@ -185,10 +190,12 @@ public class BlockDispenser extends BlockTileEntity {
         return i;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockRotation enumblockrotation) {
         return iblockdata.set(BlockDispenser.FACING, enumblockrotation.a(iblockdata.get(BlockDispenser.FACING)));
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockMirror enumblockmirror) {
         return iblockdata.a(enumblockmirror.a(iblockdata.get(BlockDispenser.FACING)));
     }

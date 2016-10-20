@@ -225,10 +225,12 @@ public class BlockChorusFlower extends Block {
         world.triggerEffect(1034, blockposition, 0);
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
@@ -237,6 +239,7 @@ public class BlockChorusFlower extends Block {
         return super.canPlace(world, blockposition) && this.b(world, blockposition);
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         if (!this.b(world, blockposition)) {
             world.a(blockposition, this, 1);
@@ -284,6 +287,7 @@ public class BlockChorusFlower extends Block {
         return null;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockChorusFlower.AGE, i);
     }

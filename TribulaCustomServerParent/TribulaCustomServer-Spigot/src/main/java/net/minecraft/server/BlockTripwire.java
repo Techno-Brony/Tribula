@@ -39,23 +39,28 @@ public class BlockTripwire extends Block {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         return !iblockdata.get(BlockTripwire.ATTACHED) ? BlockTripwire.C : BlockTripwire.B;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData updateState(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         return iblockdata.set(BlockTripwire.NORTH, a(iblockaccess, blockposition, iblockdata, EnumDirection.NORTH)).set(BlockTripwire.EAST, a(iblockaccess, blockposition, iblockdata, EnumDirection.EAST)).set(BlockTripwire.SOUTH, a(iblockaccess, blockposition, iblockdata, EnumDirection.SOUTH)).set(BlockTripwire.WEST, a(iblockaccess, blockposition, iblockdata, EnumDirection.WEST));
     }
 
+    @SuppressWarnings("deprecation")
     @Nullable
     public AxisAlignedBB a(IBlockData iblockdata, World world, BlockPosition blockposition) {
         return BlockTripwire.k;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
@@ -202,6 +207,7 @@ public class BlockTripwire extends Block {
 
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockTripwire.POWERED, (i & 1) > 0).set(BlockTripwire.ATTACHED, (i & 4) > 0).set(BlockTripwire.DISARMED, (i & 8) > 0);
     }
@@ -224,6 +230,7 @@ public class BlockTripwire extends Block {
         return i;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockRotation enumblockrotation) {
         switch (BlockTripwire.SyntheticClass_1.a[enumblockrotation.ordinal()]) {
         case 1:
@@ -240,6 +247,7 @@ public class BlockTripwire extends Block {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockMirror enumblockmirror) {
         switch (BlockTripwire.SyntheticClass_1.b[enumblockmirror.ordinal()]) {
         case 1:

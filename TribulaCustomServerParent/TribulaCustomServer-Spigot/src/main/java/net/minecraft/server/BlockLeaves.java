@@ -192,6 +192,7 @@ public abstract class BlockLeaves extends Block {
         return 20;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return !this.c;
     }

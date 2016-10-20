@@ -23,6 +23,7 @@ public class ChunkProviderServer implements IChunkProvider {
     private static final Logger a = LogManager.getLogger();
     public final Set<Long> unloadQueue = Sets.newHashSet();
     public final ChunkGenerator chunkGenerator;
+    @SuppressWarnings("unchecked")
     public final Long2ObjectMap<Chunk> chunks = new Long2ObjectOpenHashMap(8192);
     public final WorldServer world;
     private final IChunkLoader chunkLoader;

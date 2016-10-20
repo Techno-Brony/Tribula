@@ -37,6 +37,7 @@ public abstract class PlayerList {
     public static final File d = new File("whitelist.json");
     private static final Logger f = LogManager.getLogger();
     private static final SimpleDateFormat g = new SimpleDateFormat("yyyy-MM-dd \'at\' HH:mm:ss z");
+    @SuppressWarnings("unchecked")
     public final List<EntityPlayer> players = new java.util.concurrent.CopyOnWriteArrayList(); // CraftBukkit - ArrayList -> CopyOnWriteArrayList: Iterator safety
     private final MinecraftServer server;
     private final Map<UUID, EntityPlayer> j = Maps.newHashMap();

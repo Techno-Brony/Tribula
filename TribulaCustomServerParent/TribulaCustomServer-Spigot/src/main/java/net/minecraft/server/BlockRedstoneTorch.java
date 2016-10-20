@@ -10,6 +10,7 @@ import java.util.Random;
 
 public class BlockRedstoneTorch extends BlockTorch {
 
+    @SuppressWarnings("unchecked")
     private static final Map<World, List<BlockRedstoneTorch.RedstoneUpdateInfo>> g = new java.util.WeakHashMap(); // Spigot
     private final boolean isOn;
 
@@ -75,6 +76,7 @@ public class BlockRedstoneTorch extends BlockTorch {
 
     }
 
+    @SuppressWarnings("deprecation")
     public int b(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
         return this.isOn && iblockdata.get(BlockRedstoneTorch.FACING) != enumdirection ? 15 : 0;
     }
@@ -153,6 +155,7 @@ public class BlockRedstoneTorch extends BlockTorch {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public int c(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
         return enumdirection == EnumDirection.DOWN ? iblockdata.a(iblockaccess, blockposition, enumdirection) : 0;
     }
@@ -162,6 +165,7 @@ public class BlockRedstoneTorch extends BlockTorch {
         return Item.getItemOf(Blocks.REDSTONE_TORCH);
     }
 
+    @SuppressWarnings("deprecation")
     public boolean isPowerSource(IBlockData iblockdata) {
         return true;
     }

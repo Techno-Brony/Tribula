@@ -11,6 +11,7 @@ public class BlockWaterLily extends BlockPlant {
         this.a(CreativeModeTab.c);
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, AxisAlignedBB axisalignedbb, List<AxisAlignedBB> list, @Nullable Entity entity) {
         if (!(entity instanceof EntityBoat)) {
             a(blockposition, axisalignedbb, list, BlockWaterLily.a);

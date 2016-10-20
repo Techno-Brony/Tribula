@@ -34,6 +34,7 @@ public class BlockPlant extends Block {
         return iblockdata.getBlock() == Blocks.GRASS || iblockdata.getBlock() == Blocks.DIRT || iblockdata.getBlock() == Blocks.FARMLAND;
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         //noinspection deprecation
         super.a(iblockdata, world, blockposition, block);
@@ -66,19 +67,23 @@ public class BlockPlant extends Block {
         return this.i(world.getType(blockposition.down()));
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         return BlockPlant.b;
     }
 
+    @SuppressWarnings("deprecation")
     @Nullable
     public AxisAlignedBB a(IBlockData iblockdata, World world, BlockPosition blockposition) {
         return BlockPlant.k;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }

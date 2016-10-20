@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public abstract class Enchantment {
 
+    @SuppressWarnings("unchecked")
     public static final RegistryMaterials<MinecraftKey, Enchantment> enchantments = new RegistryMaterials();
     private final EnumItemSlot[] a;
     private final Enchantment.Rarity e;

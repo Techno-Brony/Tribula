@@ -10,6 +10,7 @@ import java.util.Random;
 
 public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
 
+    @SuppressWarnings("unchecked")
     public static final BlockStateEnum<BlockMinecartTrackAbstract.EnumTrackPosition> SHAPE = BlockStateEnum.a("shape", BlockMinecartTrackAbstract.EnumTrackPosition.class, new Predicate() {
         public boolean a(@Nullable BlockMinecartTrackAbstract.EnumTrackPosition blockminecarttrackabstract_enumtrackposition) {
             return blockminecarttrackabstract_enumtrackposition != BlockMinecartTrackAbstract.EnumTrackPosition.NORTH_EAST && blockminecarttrackabstract_enumtrackposition != BlockMinecartTrackAbstract.EnumTrackPosition.NORTH_WEST && blockminecarttrackabstract_enumtrackposition != BlockMinecartTrackAbstract.EnumTrackPosition.SOUTH_EAST && blockminecarttrackabstract_enumtrackposition != BlockMinecartTrackAbstract.EnumTrackPosition.SOUTH_WEST;
@@ -31,6 +32,7 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
         return 20;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean isPowerSource(IBlockData iblockdata) {
         return true;
     }
@@ -51,10 +53,12 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public int b(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
         return iblockdata.get(BlockMinecartDetector.POWERED) ? 15 : 0;
     }
 
+    @SuppressWarnings("deprecation")
     public int c(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
         return !iblockdata.get(BlockMinecartDetector.POWERED) ? 0 : (enumdirection == EnumDirection.UP ? 15 : 0);
     }
@@ -129,10 +133,12 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
         return BlockMinecartDetector.SHAPE;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean isComplexRedstone(IBlockData iblockdata) {
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     public int d(IBlockData iblockdata, World world, BlockPosition blockposition) {
         if (iblockdata.get(BlockMinecartDetector.POWERED)) {
             //noinspection unchecked
@@ -165,6 +171,7 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
         return new AxisAlignedBB((double) ((float) blockposition.getX() + 0.2F), (double) blockposition.getY(), (double) ((float) blockposition.getZ() + 0.2F), (double) ((float) (blockposition.getX() + 1) - 0.2F), (double) ((float) (blockposition.getY() + 1) - 0.2F), (double) ((float) (blockposition.getZ() + 1) - 0.2F));
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockMinecartDetector.SHAPE, BlockMinecartTrackAbstract.EnumTrackPosition.a(i & 7)).set(BlockMinecartDetector.POWERED, (i & 8) > 0);
     }
@@ -180,6 +187,7 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
         return i;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockRotation enumblockrotation) {
         switch (BlockMinecartDetector.SyntheticClass_1.b[enumblockrotation.ordinal()]) {
         case 1:
@@ -280,6 +288,7 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockMirror enumblockmirror) {
         BlockMinecartTrackAbstract.EnumTrackPosition blockminecarttrackabstract_enumtrackposition = iblockdata.get(BlockMinecartDetector.SHAPE);
 

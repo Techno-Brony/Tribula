@@ -71,10 +71,12 @@ public class BlockRedstoneWire extends Block {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         return BlockRedstoneWire.f[x(iblockdata.b(iblockaccess, blockposition))];
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData updateState(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         iblockdata = iblockdata.set(BlockRedstoneWire.WEST, this.b(iblockaccess, blockposition, EnumDirection.WEST));
         iblockdata = iblockdata.set(BlockRedstoneWire.EAST, this.b(iblockaccess, blockposition, EnumDirection.EAST));
@@ -108,15 +110,18 @@ public class BlockRedstoneWire extends Block {
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Nullable
     public AxisAlignedBB a(IBlockData iblockdata, World world, BlockPosition blockposition) {
         return BlockRedstoneWire.k;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
@@ -311,6 +316,7 @@ public class BlockRedstoneWire extends Block {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         if (!world.isClientSide) {
             if (this.canPlace(world, blockposition)) {
@@ -328,10 +334,12 @@ public class BlockRedstoneWire extends Block {
         return Items.REDSTONE;
     }
 
+    @SuppressWarnings("deprecation")
     public int c(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
         return !this.g ? 0 : iblockdata.a(iblockaccess, blockposition, enumdirection);
     }
 
+    @SuppressWarnings("deprecation")
     public int b(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
         if (!this.g) {
             return 0;
@@ -376,6 +384,7 @@ public class BlockRedstoneWire extends Block {
         return !flag1 && flag && c(iblockaccess, blockposition1.up()) || (a(iblockdata, enumdirection) || (iblockdata.getBlock() == Blocks.POWERED_REPEATER && iblockdata.get(BlockDiodeAbstract.FACING) == enumdirection || !flag && c(iblockaccess, blockposition1.down())));
     }
 
+    @SuppressWarnings("deprecation")
     public boolean isPowerSource(IBlockData iblockdata) {
         return this.g;
     }
@@ -384,6 +393,7 @@ public class BlockRedstoneWire extends Block {
         return new ItemStack(Items.REDSTONE);
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockRedstoneWire.POWER, i);
     }
@@ -392,6 +402,7 @@ public class BlockRedstoneWire extends Block {
         return iblockdata.get(BlockRedstoneWire.POWER);
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockRotation enumblockrotation) {
         switch (BlockRedstoneWire.SyntheticClass_1.a[enumblockrotation.ordinal()]) {
         case 1:
@@ -408,6 +419,7 @@ public class BlockRedstoneWire extends Block {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockMirror enumblockmirror) {
         switch (BlockRedstoneWire.SyntheticClass_1.b[enumblockmirror.ordinal()]) {
         case 1:

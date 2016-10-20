@@ -95,6 +95,7 @@ public class BlockPressurePlateBinary extends BlockPressurePlateAbstract {
         return 0;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockPressurePlateBinary.POWERED, i == 1);
     }

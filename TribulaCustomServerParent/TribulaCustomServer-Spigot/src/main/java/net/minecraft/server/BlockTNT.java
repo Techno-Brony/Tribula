@@ -21,6 +21,7 @@ public class BlockTNT extends Block {
 
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         if (world.isBlockIndirectlyPowered(blockposition)) {
             this.postBreak(world, blockposition, iblockdata.set(BlockTNT.EXPLODE, Boolean.TRUE));
@@ -91,6 +92,7 @@ public class BlockTNT extends Block {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockTNT.EXPLODE, (i & 1) > 0);
     }

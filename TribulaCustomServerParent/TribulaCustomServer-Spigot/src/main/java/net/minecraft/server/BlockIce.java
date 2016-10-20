@@ -1,7 +1,7 @@
 package net.minecraft.server;
 
-import java.util.Random;
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockIce extends BlockHalfTransparent {
 
@@ -65,6 +65,7 @@ public class BlockIce extends BlockHalfTransparent {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public EnumPistonReaction h(IBlockData iblockdata) {
         return EnumPistonReaction.NORMAL;
     }

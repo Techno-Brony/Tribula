@@ -26,15 +26,18 @@ public class BlockLever extends Block {
         return BlockButtonAbstract.a(world, blockposition, enumdirection);
     }
 
+    @SuppressWarnings("deprecation")
     @Nullable
     public AxisAlignedBB a(IBlockData iblockdata, World world, BlockPosition blockposition) {
         return BlockLever.k;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
@@ -82,6 +85,7 @@ public class BlockLever extends Block {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         if (this.e(world, blockposition, iblockdata) && !a(world, blockposition, iblockdata.get(BlockLever.FACING).c().opposite())) {
             this.b(world, blockposition, iblockdata, 0);
@@ -100,6 +104,7 @@ public class BlockLever extends Block {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         switch (BlockLever.SyntheticClass_1.b[iblockdata.get(BlockLever.FACING).ordinal()]) {
         case 1:
@@ -167,18 +172,22 @@ public class BlockLever extends Block {
         super.remove(world, blockposition, iblockdata);
     }
 
+    @SuppressWarnings("deprecation")
     public int b(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
         return iblockdata.get(BlockLever.POWERED) ? 15 : 0;
     }
 
+    @SuppressWarnings("deprecation")
     public int c(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
         return !iblockdata.get(BlockLever.POWERED) ? 0 : (iblockdata.get(BlockLever.FACING).c() == enumdirection ? 15 : 0);
     }
 
+    @SuppressWarnings("deprecation")
     public boolean isPowerSource(IBlockData iblockdata) {
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockLever.FACING, BlockLever.EnumLeverPosition.a(i & 7)).set(BlockLever.POWERED, (i & 8) > 0);
     }
@@ -194,6 +203,7 @@ public class BlockLever extends Block {
         return i;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockRotation enumblockrotation) {
         switch (BlockLever.SyntheticClass_1.c[enumblockrotation.ordinal()]) {
         case 1:
@@ -273,6 +283,7 @@ public class BlockLever extends Block {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockMirror enumblockmirror) {
         return iblockdata.a(enumblockmirror.a(iblockdata.get(BlockLever.FACING).c()));
     }

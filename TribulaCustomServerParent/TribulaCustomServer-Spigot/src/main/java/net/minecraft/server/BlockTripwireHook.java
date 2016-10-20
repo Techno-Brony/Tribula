@@ -24,6 +24,7 @@ public class BlockTripwireHook extends Block {
         this.a(true);
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         switch (BlockTripwireHook.SyntheticClass_1.a[iblockdata.get(BlockTripwireHook.FACING).ordinal()]) {
         case 1:
@@ -41,15 +42,18 @@ public class BlockTripwireHook extends Block {
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Nullable
     public AxisAlignedBB a(IBlockData iblockdata, World world, BlockPosition blockposition) {
         return BlockTripwireHook.k;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
@@ -88,6 +92,7 @@ public class BlockTripwireHook extends Block {
         this.a(world, blockposition, iblockdata, false, false, -1, null);
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         if (block != this) {
             if (this.e(world, blockposition, iblockdata)) {
@@ -239,18 +244,22 @@ public class BlockTripwireHook extends Block {
         super.remove(world, blockposition, iblockdata);
     }
 
+    @SuppressWarnings("deprecation")
     public int b(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
         return iblockdata.get(BlockTripwireHook.POWERED) ? 15 : 0;
     }
 
+    @SuppressWarnings("deprecation")
     public int c(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
         return !iblockdata.get(BlockTripwireHook.POWERED) ? 0 : (iblockdata.get(BlockTripwireHook.FACING) == enumdirection ? 15 : 0);
     }
 
+    @SuppressWarnings("deprecation")
     public boolean isPowerSource(IBlockData iblockdata) {
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockTripwireHook.FACING, EnumDirection.fromType2(i & 3)).set(BlockTripwireHook.POWERED, (i & 8) > 0).set(BlockTripwireHook.ATTACHED, (i & 4) > 0);
     }
@@ -270,10 +279,12 @@ public class BlockTripwireHook extends Block {
         return i;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockRotation enumblockrotation) {
         return iblockdata.set(BlockTripwireHook.FACING, enumblockrotation.a(iblockdata.get(BlockTripwireHook.FACING)));
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockMirror enumblockmirror) {
         return iblockdata.a(enumblockmirror.a(iblockdata.get(BlockTripwireHook.FACING)));
     }

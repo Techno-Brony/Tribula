@@ -16,6 +16,7 @@ import java.util.*;
 
 public class PlayerChunkMap {
 
+    @SuppressWarnings("unchecked")
     private static final Predicate<EntityPlayer> a = new Predicate() {
         public boolean a(@Nullable EntityPlayer entityplayer) {
             return entityplayer != null && !entityplayer.isSpectator();
@@ -25,6 +26,7 @@ public class PlayerChunkMap {
             return this.a((EntityPlayer) object);
         }
     };
+    @SuppressWarnings("unchecked")
     private static final Predicate<EntityPlayer> b = new Predicate() {
         public boolean a(@Nullable EntityPlayer entityplayer) {
             return entityplayer != null && (!entityplayer.isSpectator() || entityplayer.x().getGameRules().getBoolean("spectatorsGenerateChunks"));
@@ -36,6 +38,7 @@ public class PlayerChunkMap {
     };
     private final WorldServer world;
     private final List<EntityPlayer> managedPlayers = Lists.newArrayList();
+    @SuppressWarnings("unchecked")
     private final Long2ObjectMap<PlayerChunk> e = new Long2ObjectOpenHashMap(4096);
     private final Set<PlayerChunk> f = Sets.newHashSet();
     private final List<PlayerChunk> g = Lists.newLinkedList();

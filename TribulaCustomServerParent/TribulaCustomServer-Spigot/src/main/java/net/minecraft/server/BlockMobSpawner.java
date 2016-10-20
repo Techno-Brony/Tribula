@@ -38,6 +38,7 @@ public class BlockMobSpawner extends BlockTileEntity {
         // CraftBukkit end
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }

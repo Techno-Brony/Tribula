@@ -19,16 +19,20 @@ public class BlockEnderPortal extends BlockTileEntity {
         return new TileEntityEnderPortal();
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         return BlockEnderPortal.a;
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, AxisAlignedBB axisalignedbb, List<AxisAlignedBB> list, @Nullable Entity entity) {}
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
@@ -53,6 +57,7 @@ public class BlockEnderPortal extends BlockTileEntity {
         return null;
     }
 
+    @SuppressWarnings("deprecation")
     public MaterialMapColor r(IBlockData iblockdata) {
         return MaterialMapColor.E;
     }

@@ -69,6 +69,7 @@ public class BlockFire extends Block {
         Blocks.FIRE.a(Blocks.CARPET, 60, 20);
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData updateState(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         return !iblockaccess.getType(blockposition.down()).q() && !Blocks.FIRE.c(iblockaccess, blockposition.down()) ? iblockdata.set(BlockFire.NORTH, this.c(iblockaccess, blockposition.north())).set(BlockFire.EAST, this.c(iblockaccess, blockposition.east())).set(BlockFire.SOUTH, this.c(iblockaccess, blockposition.south())).set(BlockFire.WEST, this.c(iblockaccess, blockposition.west())).set(BlockFire.UPPER, this.c(iblockaccess, blockposition.up())) : this.getBlockData();
     }
@@ -78,15 +79,18 @@ public class BlockFire extends Block {
         this.B.put(block, j);
     }
 
+    @SuppressWarnings("deprecation")
     @Nullable
     public AxisAlignedBB a(IBlockData iblockdata, World world, BlockPosition blockposition) {
         return BlockFire.k;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
@@ -309,6 +313,7 @@ public class BlockFire extends Block {
         return world.getType(blockposition.down()).q() || this.c(world, blockposition);
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         if (!world.getType(blockposition.down()).q() && !this.c(world, blockposition)) {
             fireExtinguished(world, blockposition); // CraftBukkit - fuel block gone
@@ -326,10 +331,12 @@ public class BlockFire extends Block {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public MaterialMapColor r(IBlockData iblockdata) {
         return MaterialMapColor.f;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockFire.AGE, i);
     }

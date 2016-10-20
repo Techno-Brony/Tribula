@@ -179,6 +179,7 @@ public class BlockCrops extends BlockPlant implements IBlockFragilePlantElement 
         this.g(world, blockposition, iblockdata);
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.setAge(i);
     }

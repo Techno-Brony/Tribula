@@ -14,6 +14,7 @@ import java.util.List;
 
 public abstract class EntityArrow extends Entity implements IProjectile {
 
+    @SuppressWarnings("unchecked")
     private static final Predicate<Entity> f = Predicates.and(IEntitySelector.e, IEntitySelector.a, new Predicate() {
         public boolean a(@Nullable Entity entity) {
             return entity.isInteractable();

@@ -1,9 +1,9 @@
 package net.minecraft.server;
 
-import java.util.Random;
-import javax.annotation.Nullable;
+import org.bukkit.event.block.BlockFromToEvent;
 
-import org.bukkit.event.block.BlockFromToEvent; // CraftBukkit
+import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockDragonEgg extends Block {
 
@@ -13,6 +13,7 @@ public class BlockDragonEgg extends Block {
         super(Material.DRAGON_EGG, MaterialMapColor.E);
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         return BlockDragonEgg.a;
     }
@@ -21,6 +22,7 @@ public class BlockDragonEgg extends Block {
         world.a(blockposition, this, this.a(world));
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         world.a(blockposition, this, this.a(world));
     }
@@ -108,10 +110,12 @@ public class BlockDragonEgg extends Block {
         return 5;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }

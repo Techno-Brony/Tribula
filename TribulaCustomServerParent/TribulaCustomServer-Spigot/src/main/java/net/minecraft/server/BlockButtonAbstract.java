@@ -41,6 +41,7 @@ public abstract class BlockButtonAbstract extends BlockDirectional {
         return enumdirection == EnumDirection.DOWN ? world.getType(blockposition1).q() : world.getType(blockposition1).l();
     }
 
+    @SuppressWarnings("deprecation")
     @Nullable
     public AxisAlignedBB a(IBlockData iblockdata, World world, BlockPosition blockposition) {
         return BlockButtonAbstract.k;
@@ -50,10 +51,12 @@ public abstract class BlockButtonAbstract extends BlockDirectional {
         return this.I ? 30 : 20;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
@@ -79,6 +82,7 @@ public abstract class BlockButtonAbstract extends BlockDirectional {
         return a(world, blockposition, enumdirection.opposite()) ? this.getBlockData().set(BlockButtonAbstract.FACING, enumdirection).set(BlockButtonAbstract.POWERED, Boolean.FALSE) : this.getBlockData().set(BlockButtonAbstract.FACING, EnumDirection.DOWN).set(BlockButtonAbstract.POWERED, Boolean.FALSE);
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         if (this.e(world, blockposition, iblockdata) && !a(world, blockposition, iblockdata.get(BlockButtonAbstract.FACING).opposite())) {
             this.b(world, blockposition, iblockdata, 0);
@@ -97,6 +101,7 @@ public abstract class BlockButtonAbstract extends BlockDirectional {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         EnumDirection enumdirection = iblockdata.get(BlockButtonAbstract.FACING);
         boolean flag = iblockdata.get(BlockButtonAbstract.POWERED);
@@ -161,14 +166,17 @@ public abstract class BlockButtonAbstract extends BlockDirectional {
         super.remove(world, blockposition, iblockdata);
     }
 
+    @SuppressWarnings("deprecation")
     public int b(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
         return iblockdata.get(BlockButtonAbstract.POWERED) ? 15 : 0;
     }
 
+    @SuppressWarnings("deprecation")
     public int c(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
         return !iblockdata.get(BlockButtonAbstract.POWERED) ? 0 : (iblockdata.get(BlockButtonAbstract.FACING) == enumdirection ? 15 : 0);
     }
 
+    @SuppressWarnings("deprecation")
     public boolean isPowerSource(IBlockData iblockdata) {
         return true;
     }
@@ -285,6 +293,7 @@ public abstract class BlockButtonAbstract extends BlockDirectional {
         world.applyPhysics(blockposition.shift(enumdirection.opposite()), this);
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         EnumDirection enumdirection;
 
@@ -353,10 +362,12 @@ public abstract class BlockButtonAbstract extends BlockDirectional {
         return i;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockRotation enumblockrotation) {
         return iblockdata.set(BlockButtonAbstract.FACING, enumblockrotation.a(iblockdata.get(BlockButtonAbstract.FACING)));
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockMirror enumblockmirror) {
         return iblockdata.a(enumblockmirror.a(iblockdata.get(BlockButtonAbstract.FACING)));
     }

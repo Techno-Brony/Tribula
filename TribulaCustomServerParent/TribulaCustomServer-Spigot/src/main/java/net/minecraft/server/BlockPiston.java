@@ -91,6 +91,7 @@ public class BlockPiston extends BlockDirectional {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         if (iblockdata.get(BlockPiston.EXTENDED)) {
             switch (BlockPiston.SyntheticClass_1.a[iblockdata.get(BlockPiston.FACING).ordinal()]) {
@@ -118,14 +119,17 @@ public class BlockPiston extends BlockDirectional {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public boolean k(IBlockData iblockdata) {
         return !iblockdata.get(BlockPiston.EXTENDED) || iblockdata.get(BlockPiston.FACING) == EnumDirection.DOWN;
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, AxisAlignedBB axisalignedbb, List<AxisAlignedBB> list, @Nullable Entity entity) {
         a(blockposition, axisalignedbb, list, iblockdata.c(world, blockposition));
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
@@ -138,6 +142,7 @@ public class BlockPiston extends BlockDirectional {
 
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         if (!world.isClientSide) {
             this.e(world, blockposition, iblockdata);
@@ -216,6 +221,7 @@ public class BlockPiston extends BlockDirectional {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public boolean a(IBlockData iblockdata, World world, BlockPosition blockposition, int i, int j) {
         EnumDirection enumdirection = iblockdata.get(BlockPiston.FACING);
 
@@ -280,6 +286,7 @@ public class BlockPiston extends BlockDirectional {
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
@@ -406,6 +413,7 @@ public class BlockPiston extends BlockDirectional {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockPiston.FACING, e(i)).set(BlockPiston.EXTENDED, (i & 8) > 0);
     }
@@ -421,10 +429,12 @@ public class BlockPiston extends BlockDirectional {
         return i;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockRotation enumblockrotation) {
         return iblockdata.set(BlockPiston.FACING, enumblockrotation.a(iblockdata.get(BlockPiston.FACING)));
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockMirror enumblockmirror) {
         return iblockdata.a(enumblockmirror.a(iblockdata.get(BlockPiston.FACING)));
     }

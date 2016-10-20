@@ -217,6 +217,7 @@ public class BlockSapling extends BlockPlant implements IBlockFragilePlantElemen
         this.grow(world, blockposition, iblockdata, random);
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockSapling.TYPE, BlockWood.EnumLogVariant.a(i & 7)).set(BlockSapling.STAGE, (i & 8) >> 3);
     }

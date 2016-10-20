@@ -23,6 +23,7 @@ public class BlockGrass extends Block implements IBlockFragilePlantElement {
         this.a(CreativeModeTab.b);
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData updateState(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         Block block = iblockaccess.getType(blockposition.up()).getBlock();
 

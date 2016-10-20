@@ -30,6 +30,7 @@ public class EntityArmorStand extends EntityLiving {
     private static final Vector3f bu = new Vector3f(-15.0F, 0.0F, 10.0F);
     private static final Vector3f bv = new Vector3f(-1.0F, 0.0F, -1.0F);
     private static final Vector3f bw = new Vector3f(1.0F, 0.0F, 1.0F);
+    @SuppressWarnings("unchecked")
     private static final Predicate<Entity> bx = new Predicate() {
         public boolean a(@Nullable Entity entity) {
             return entity instanceof EntityMinecartAbstract && ((EntityMinecartAbstract) entity).v() == EntityMinecartAbstract.EnumMinecartType.RIDEABLE;

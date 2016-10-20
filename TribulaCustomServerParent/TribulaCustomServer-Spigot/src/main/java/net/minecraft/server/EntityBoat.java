@@ -21,6 +21,7 @@ public class EntityBoat extends Entity {
     private static final DataWatcherObject<Integer> b = DataWatcher.a(EntityBoat.class, DataWatcherRegistry.b);
     private static final DataWatcherObject<Float> c = DataWatcher.a(EntityBoat.class, DataWatcherRegistry.c);
     private static final DataWatcherObject<Integer> d = DataWatcher.a(EntityBoat.class, DataWatcherRegistry.b);
+    @SuppressWarnings("unchecked")
     private static final DataWatcherObject<Boolean>[] e = new DataWatcherObject[] { DataWatcher.a(EntityBoat.class, DataWatcherRegistry.h), DataWatcher.a(EntityBoat.class, DataWatcherRegistry.h)};
     private final float[] f;
     // CraftBukkit start

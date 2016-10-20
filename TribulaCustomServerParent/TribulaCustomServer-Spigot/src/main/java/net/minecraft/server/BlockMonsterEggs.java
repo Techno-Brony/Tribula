@@ -62,6 +62,7 @@ public class BlockMonsterEggs extends Block {
         return new ItemStack(this, 1, iblockdata.getBlock().toLegacyData(iblockdata));
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockMonsterEggs.VARIANT, BlockMonsterEggs.EnumMonsterEggVarient.a(i));
     }

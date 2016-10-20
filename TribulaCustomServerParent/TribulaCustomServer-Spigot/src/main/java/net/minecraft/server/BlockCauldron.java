@@ -20,6 +20,7 @@ public class BlockCauldron extends Block {
         this.w(this.blockStateList.getBlockData().set(BlockCauldron.LEVEL, 0));
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, AxisAlignedBB axisalignedbb, List<AxisAlignedBB> list, @Nullable Entity entity) {
         a(blockposition, axisalignedbb, list, BlockCauldron.b);
         a(blockposition, axisalignedbb, list, BlockCauldron.f);
@@ -28,14 +29,17 @@ public class BlockCauldron extends Block {
         a(blockposition, axisalignedbb, list, BlockCauldron.d);
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         return BlockCauldron.j;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
@@ -220,14 +224,17 @@ public class BlockCauldron extends Block {
         return new ItemStack(Items.CAULDRON);
     }
 
+    @SuppressWarnings("deprecation")
     public boolean isComplexRedstone(IBlockData iblockdata) {
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     public int d(IBlockData iblockdata, World world, BlockPosition blockposition) {
         return iblockdata.get(BlockCauldron.LEVEL);
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockCauldron.LEVEL, i);
     }

@@ -12,6 +12,7 @@ import java.util.Set;
 public class EntityTracker {
 
     private static final Logger a = LogManager.getLogger();
+    @SuppressWarnings("unchecked")
     public final IntHashMap<EntityTrackerEntry> trackedEntities = new IntHashMap();
     private final WorldServer world;
     private final Set<EntityTrackerEntry> c = Sets.newHashSet();

@@ -19,10 +19,12 @@ public class BlockDaylightDetector extends BlockTileEntity {
         this.c("daylightDetector");
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         return BlockDaylightDetector.b;
     }
 
+    @SuppressWarnings("deprecation")
     public int b(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
         return iblockdata.get(BlockDaylightDetector.POWER);
     }
@@ -82,10 +84,12 @@ public class BlockDaylightDetector extends BlockTileEntity {
         return new ItemStack(Blocks.DAYLIGHT_DETECTOR);
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
@@ -94,6 +98,7 @@ public class BlockDaylightDetector extends BlockTileEntity {
         return EnumRenderType.MODEL;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean isPowerSource(IBlockData iblockdata) {
         return true;
     }
@@ -102,6 +107,7 @@ public class BlockDaylightDetector extends BlockTileEntity {
         return new TileEntityLightDetector();
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockDaylightDetector.POWER, i);
     }

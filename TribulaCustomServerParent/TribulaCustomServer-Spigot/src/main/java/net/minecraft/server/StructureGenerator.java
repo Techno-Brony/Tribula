@@ -9,6 +9,7 @@ import java.util.Random;
 
 public abstract class StructureGenerator extends WorldGenBase {
 
+    @SuppressWarnings("unchecked")
     protected Long2ObjectMap<StructureStart> c = new Long2ObjectOpenHashMap(1024);
     private PersistentStructure a;
 

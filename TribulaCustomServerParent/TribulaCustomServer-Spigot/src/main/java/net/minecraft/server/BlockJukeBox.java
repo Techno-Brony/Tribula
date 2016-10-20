@@ -79,10 +79,12 @@ public class BlockJukeBox extends BlockTileEntity {
         return new BlockJukeBox.TileEntityRecordPlayer();
     }
 
+    @SuppressWarnings("deprecation")
     public boolean isComplexRedstone(IBlockData iblockdata) {
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     public int d(IBlockData iblockdata, World world, BlockPosition blockposition) {
         TileEntity tileentity = world.getTileEntity(blockposition);
 
@@ -101,6 +103,7 @@ public class BlockJukeBox extends BlockTileEntity {
         return EnumRenderType.MODEL;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockJukeBox.HAS_RECORD, i > 0);
     }

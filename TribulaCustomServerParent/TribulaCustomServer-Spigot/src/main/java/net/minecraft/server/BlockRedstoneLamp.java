@@ -1,9 +1,9 @@
 package net.minecraft.server;
 
-import java.util.Random;
-import javax.annotation.Nullable;
+import org.bukkit.craftbukkit.event.CraftEventFactory;
 
-import org.bukkit.craftbukkit.event.CraftEventFactory; // CraftBukkit
+import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockRedstoneLamp extends Block {
 
@@ -34,6 +34,7 @@ public class BlockRedstoneLamp extends Block {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         if (!world.isClientSide) {
             if (this.a && !world.isBlockIndirectlyPowered(blockposition)) {

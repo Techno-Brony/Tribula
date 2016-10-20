@@ -38,6 +38,7 @@ public abstract class World implements IBlockAccess {
     public final SpigotTimings.WorldTimingsHandler timings; // Spigot
     // Spigot end
     protected final List<Entity> f = Lists.newArrayList();
+    @SuppressWarnings("unchecked")
     protected final IntHashMap<Entity> entitiesById = new IntHashMap();
     protected final int m = 1013904223;
     protected final IDataManager dataManager;

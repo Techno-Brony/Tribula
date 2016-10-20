@@ -63,11 +63,13 @@ public class BlockVine extends Block {
         return i;
     }
 
+    @SuppressWarnings("deprecation")
     @Nullable
     public AxisAlignedBB a(IBlockData iblockdata, World world, BlockPosition blockposition) {
         return BlockVine.k;
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         iblockdata = iblockdata.b(iblockaccess, blockposition);
         int i = 0;
@@ -101,14 +103,17 @@ public class BlockVine extends Block {
         return i == 1 ? axisalignedbb : BlockVine.j;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData updateState(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         return iblockdata.set(BlockVine.UP, iblockaccess.getType(blockposition.up()).k());
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
@@ -166,6 +171,7 @@ public class BlockVine extends Block {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         if (!world.isClientSide && !this.e(world, blockposition, iblockdata)) {
             this.b(world, blockposition, iblockdata, 0);
@@ -347,6 +353,7 @@ public class BlockVine extends Block {
 
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockVine.SOUTH, (i & 1) > 0).set(BlockVine.WEST, (i & 2) > 0).set(BlockVine.NORTH, (i & 4) > 0).set(BlockVine.EAST, (i & 8) > 0);
     }
@@ -377,6 +384,7 @@ public class BlockVine extends Block {
         return new BlockStateList(this, BlockVine.UP, BlockVine.NORTH, BlockVine.EAST, BlockVine.SOUTH, BlockVine.WEST);
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockRotation enumblockrotation) {
         switch (BlockVine.SyntheticClass_1.b[enumblockrotation.ordinal()]) {
         case 1:
@@ -393,6 +401,7 @@ public class BlockVine extends Block {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockMirror enumblockmirror) {
         switch (BlockVine.SyntheticClass_1.c[enumblockmirror.ordinal()]) {
         case 1:

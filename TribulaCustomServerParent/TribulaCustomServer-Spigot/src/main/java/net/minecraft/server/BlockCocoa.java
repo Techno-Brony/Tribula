@@ -41,14 +41,17 @@ public class BlockCocoa extends BlockFacingHorizontal implements IBlockFragilePl
         return iblockdata1.getBlock() != Blocks.LOG || iblockdata1.get(BlockLog1.VARIANT) != BlockWood.EnumLogVariant.JUNGLE;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         int i = iblockdata.get(BlockCocoa.AGE);
 
@@ -68,10 +71,12 @@ public class BlockCocoa extends BlockFacingHorizontal implements IBlockFragilePl
         }
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockRotation enumblockrotation) {
         return iblockdata.set(BlockCocoa.FACING, enumblockrotation.a(iblockdata.get(BlockCocoa.FACING)));
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockMirror enumblockmirror) {
         return iblockdata.a(enumblockmirror.a(iblockdata.get(BlockCocoa.FACING)));
     }
@@ -90,6 +95,7 @@ public class BlockCocoa extends BlockFacingHorizontal implements IBlockFragilePl
         return this.getBlockData().set(BlockCocoa.FACING, enumdirection.opposite()).set(BlockCocoa.AGE, 0);
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         if (this.e(world, blockposition, iblockdata)) {
             this.f(world, blockposition, iblockdata);
@@ -135,6 +141,7 @@ public class BlockCocoa extends BlockFacingHorizontal implements IBlockFragilePl
         // CraftBukkit end
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockCocoa.FACING, EnumDirection.fromType2(i)).set(BlockCocoa.AGE, (i & 15) >> 2);
     }

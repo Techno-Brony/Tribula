@@ -18,8 +18,10 @@ public class EntityWither extends EntityMonster implements IRangedEntity {
     private static final DataWatcherObject<Integer> a = DataWatcher.a(EntityWither.class, DataWatcherRegistry.b);
     private static final DataWatcherObject<Integer> b = DataWatcher.a(EntityWither.class, DataWatcherRegistry.b);
     private static final DataWatcherObject<Integer> c = DataWatcher.a(EntityWither.class, DataWatcherRegistry.b);
+    @SuppressWarnings("unchecked")
     private static final DataWatcherObject<Integer>[] bx = new DataWatcherObject[] { EntityWither.a, EntityWither.b, EntityWither.c};
     private static final DataWatcherObject<Integer> by = DataWatcher.a(EntityWither.class, DataWatcherRegistry.b);
+    @SuppressWarnings("unchecked")
     private static final Predicate<Entity> bH = new Predicate() {
         public boolean a(@Nullable Entity entity) {
             return entity instanceof EntityLiving && ((EntityLiving) entity).getMonsterType() != EnumMonsterType.UNDEAD;

@@ -62,6 +62,7 @@ public class BlockDoor extends Block {
         return (i & 8) != 0;
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         iblockdata = iblockdata.b(iblockaccess, blockposition);
         EnumDirection enumdirection = iblockdata.get(BlockDoor.FACING);
@@ -89,6 +90,7 @@ public class BlockDoor extends Block {
         return LocaleI18n.get((this.a() + ".name").replaceAll("tile", "item"));
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
@@ -97,6 +99,7 @@ public class BlockDoor extends Block {
         return g(c(iblockaccess, blockposition));
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
@@ -109,6 +112,7 @@ public class BlockDoor extends Block {
         return this.material == Material.ORE ? 1005 : 1006;
     }
 
+    @SuppressWarnings("deprecation")
     public MaterialMapColor r(IBlockData iblockdata) {
         //noinspection deprecation
         return iblockdata.getBlock() == Blocks.IRON_DOOR ? MaterialMapColor.h : (iblockdata.getBlock() == Blocks.WOODEN_DOOR ? BlockWood.EnumLogVariant.OAK.c() : (iblockdata.getBlock() == Blocks.SPRUCE_DOOR ? BlockWood.EnumLogVariant.SPRUCE.c() : (iblockdata.getBlock() == Blocks.BIRCH_DOOR ? BlockWood.EnumLogVariant.BIRCH.c() : (iblockdata.getBlock() == Blocks.JUNGLE_DOOR ? BlockWood.EnumLogVariant.JUNGLE.c() : (iblockdata.getBlock() == Blocks.ACACIA_DOOR ? BlockWood.EnumLogVariant.ACACIA.c() : (iblockdata.getBlock() == Blocks.DARK_OAK_DOOR ? BlockWood.EnumLogVariant.DARK_OAK.c() : super.r(iblockdata)))))));
@@ -149,6 +153,7 @@ public class BlockDoor extends Block {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         if (iblockdata.get(BlockDoor.HALF) == BlockDoor.EnumDoorHalf.UPPER) {
             BlockPosition blockposition1 = blockposition.down();
@@ -220,6 +225,7 @@ public class BlockDoor extends Block {
         return blockposition.getY() < 255 && (world.getType(blockposition.down()).q() && super.canPlace(world, blockposition) && super.canPlace(world, blockposition.up()));
     }
 
+    @SuppressWarnings("deprecation")
     public EnumPistonReaction h(IBlockData iblockdata) {
         return EnumPistonReaction.DESTROY;
     }
@@ -250,6 +256,7 @@ public class BlockDoor extends Block {
 
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData updateState(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         IBlockData iblockdata1;
 
@@ -268,14 +275,17 @@ public class BlockDoor extends Block {
         return iblockdata;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockRotation enumblockrotation) {
         return iblockdata.get(BlockDoor.HALF) != BlockDoor.EnumDoorHalf.LOWER ? iblockdata : iblockdata.set(BlockDoor.FACING, enumblockrotation.a(iblockdata.get(BlockDoor.FACING)));
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockMirror enumblockmirror) {
         return enumblockmirror == EnumBlockMirror.NONE ? iblockdata : iblockdata.a(enumblockmirror.a(iblockdata.get(BlockDoor.FACING))).a((IBlockState) BlockDoor.HINGE);
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return (i & 8) > 0 ? this.getBlockData().set(BlockDoor.HALF, BlockDoor.EnumDoorHalf.UPPER).set(BlockDoor.HINGE, (i & 1) > 0 ? BlockDoor.EnumDoorHinge.RIGHT : BlockDoor.EnumDoorHinge.LEFT).set(BlockDoor.POWERED, (i & 2) > 0) : this.getBlockData().set(BlockDoor.HALF, BlockDoor.EnumDoorHalf.LOWER).set(BlockDoor.FACING, EnumDirection.fromType2(i & 3).f()).set(BlockDoor.OPEN, (i & 4) > 0);
     }

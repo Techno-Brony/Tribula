@@ -1,9 +1,9 @@
 package net.minecraft.server;
 
-import java.util.Random;
-import javax.annotation.Nullable;
+import org.bukkit.event.block.BlockRedstoneEvent;
 
-import org.bukkit.event.block.BlockRedstoneEvent; // CraftBukkit
+import javax.annotation.Nullable;
+import java.util.Random;
 
 public abstract class BlockPressurePlateAbstract extends Block {
 
@@ -21,6 +21,7 @@ public abstract class BlockPressurePlateAbstract extends Block {
         this.a(true);
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         boolean flag = this.getPower(iblockdata) > 0;
 
@@ -31,15 +32,18 @@ public abstract class BlockPressurePlateAbstract extends Block {
         return 20;
     }
 
+    @SuppressWarnings("deprecation")
     @Nullable
     public AxisAlignedBB a(IBlockData iblockdata, World world, BlockPosition blockposition) {
         return BlockPressurePlateAbstract.k;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
@@ -56,6 +60,7 @@ public abstract class BlockPressurePlateAbstract extends Block {
         return this.i(world, blockposition.down());
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         if (!this.i(world, blockposition.down())) {
             this.b(world, blockposition, iblockdata, 0);
@@ -146,18 +151,22 @@ public abstract class BlockPressurePlateAbstract extends Block {
         world.applyPhysics(blockposition.down(), this);
     }
 
+    @SuppressWarnings("deprecation")
     public int b(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
         return this.getPower(iblockdata);
     }
 
+    @SuppressWarnings("deprecation")
     public int c(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
         return enumdirection == EnumDirection.UP ? this.getPower(iblockdata) : 0;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean isPowerSource(IBlockData iblockdata) {
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     public EnumPistonReaction h(IBlockData iblockdata) {
         return EnumPistonReaction.DESTROY;
     }

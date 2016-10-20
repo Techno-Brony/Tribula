@@ -24,6 +24,7 @@ public class BlockStem extends BlockPlant implements IBlockFragilePlantElement {
         return BlockStem.d[iblockdata.get(BlockStem.AGE)];
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData updateState(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         int i = iblockdata.get(BlockStem.AGE);
 
@@ -138,6 +139,7 @@ public class BlockStem extends BlockPlant implements IBlockFragilePlantElement {
         this.g(world, blockposition, iblockdata);
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockStem.AGE, i);
     }

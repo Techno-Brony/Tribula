@@ -16,6 +16,7 @@ public class PortalTravelAgent {
 
     private final WorldServer world;
     private final Random b;
+    @SuppressWarnings("unchecked")
     private final Long2ObjectMap<PortalTravelAgent.ChunkCoordinatesPortal> c = new Long2ObjectOpenHashMap(4096);
 
     public PortalTravelAgent(WorldServer worldserver) {

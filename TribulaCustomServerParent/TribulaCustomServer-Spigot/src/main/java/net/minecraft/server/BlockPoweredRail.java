@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 
 public class BlockPoweredRail extends BlockMinecartTrackAbstract {
 
+    @SuppressWarnings("unchecked")
     public static final BlockStateEnum<BlockMinecartTrackAbstract.EnumTrackPosition> SHAPE = BlockStateEnum.a("shape", BlockMinecartTrackAbstract.EnumTrackPosition.class, new Predicate() {
         public boolean a(@Nullable BlockMinecartTrackAbstract.EnumTrackPosition blockminecarttrackabstract_enumtrackposition) {
             return blockminecarttrackabstract_enumtrackposition != BlockMinecartTrackAbstract.EnumTrackPosition.NORTH_EAST && blockminecarttrackabstract_enumtrackposition != BlockMinecartTrackAbstract.EnumTrackPosition.NORTH_WEST && blockminecarttrackabstract_enumtrackposition != BlockMinecartTrackAbstract.EnumTrackPosition.SOUTH_EAST && blockminecarttrackabstract_enumtrackposition != BlockMinecartTrackAbstract.EnumTrackPosition.SOUTH_WEST;
@@ -139,6 +140,7 @@ public class BlockPoweredRail extends BlockMinecartTrackAbstract {
         return BlockPoweredRail.SHAPE;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockPoweredRail.SHAPE, BlockMinecartTrackAbstract.EnumTrackPosition.a(i & 7)).set(BlockPoweredRail.POWERED, (i & 8) > 0);
     }
@@ -154,6 +156,7 @@ public class BlockPoweredRail extends BlockMinecartTrackAbstract {
         return i;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockRotation enumblockrotation) {
         switch (BlockPoweredRail.SyntheticClass_1.b[enumblockrotation.ordinal()]) {
         case 1:
@@ -254,6 +257,7 @@ public class BlockPoweredRail extends BlockMinecartTrackAbstract {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockMirror enumblockmirror) {
         BlockMinecartTrackAbstract.EnumTrackPosition blockminecarttrackabstract_enumtrackposition = iblockdata.get(BlockPoweredRail.SHAPE);
 

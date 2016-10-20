@@ -22,6 +22,7 @@ public class BlockCommand extends BlockTileEntity {
         return tileentitycommand;
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         if (!world.isClientSide) {
             TileEntity tileentity = world.getTileEntity(blockposition);
@@ -125,10 +126,12 @@ public class BlockCommand extends BlockTileEntity {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public boolean isComplexRedstone(IBlockData iblockdata) {
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     public int d(IBlockData iblockdata, World world, BlockPosition blockposition) {
         TileEntity tileentity = world.getTileEntity(blockposition);
 
@@ -172,6 +175,7 @@ public class BlockCommand extends BlockTileEntity {
         return EnumRenderType.MODEL;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockCommand.a, EnumDirection.fromType1(i & 7)).set(BlockCommand.b, (i & 8) != 0);
     }
@@ -180,10 +184,12 @@ public class BlockCommand extends BlockTileEntity {
         return iblockdata.get(BlockCommand.a).a() | (iblockdata.get(BlockCommand.b) ? 8 : 0);
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockRotation enumblockrotation) {
         return iblockdata.set(BlockCommand.a, enumblockrotation.a(iblockdata.get(BlockCommand.a)));
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockMirror enumblockmirror) {
         return iblockdata.a(enumblockmirror.a(iblockdata.get(BlockCommand.a)));
     }

@@ -70,6 +70,7 @@ public class BlockNetherWart extends BlockPlant {
         return new ItemStack(Items.NETHER_WART);
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockNetherWart.AGE, i);
     }

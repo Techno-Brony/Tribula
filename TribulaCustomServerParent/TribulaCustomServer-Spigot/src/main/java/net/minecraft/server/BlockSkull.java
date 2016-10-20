@@ -20,6 +20,7 @@ public class BlockSkull extends BlockTileEntity {
     protected static final AxisAlignedBB e = new AxisAlignedBB(0.25D, 0.25D, 0.0D, 0.75D, 0.75D, 0.5D);
     protected static final AxisAlignedBB f = new AxisAlignedBB(0.5D, 0.25D, 0.25D, 1.0D, 0.75D, 0.75D);
     protected static final AxisAlignedBB g = new AxisAlignedBB(0.0D, 0.25D, 0.25D, 0.5D, 0.75D, 0.75D);
+    @SuppressWarnings("unchecked")
     private static final Predicate<ShapeDetectorBlock> B = new Predicate() {
         public boolean a(@Nullable ShapeDetectorBlock shapedetectorblock) {
             return shapedetectorblock.a() != null && shapedetectorblock.a().getBlock() == Blocks.SKULL && shapedetectorblock.b() instanceof TileEntitySkull && ((TileEntitySkull) shapedetectorblock.b()).getSkullType() == 1;
@@ -42,14 +43,17 @@ public class BlockSkull extends BlockTileEntity {
         return LocaleI18n.get("tile.skull.skeleton.name");
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         switch (BlockSkull.SyntheticClass_1.a[iblockdata.get(BlockSkull.FACING).ordinal()]) {
         case 1:
@@ -208,6 +212,7 @@ public class BlockSkull extends BlockTileEntity {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockSkull.FACING, EnumDirection.fromType1(i & 7)).set(BlockSkull.NODROP, (i & 8) > 0);
     }
@@ -223,10 +228,12 @@ public class BlockSkull extends BlockTileEntity {
         return i;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockRotation enumblockrotation) {
         return iblockdata.set(BlockSkull.FACING, enumblockrotation.a(iblockdata.get(BlockSkull.FACING)));
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockMirror enumblockmirror) {
         return iblockdata.a(enumblockmirror.a(iblockdata.get(BlockSkull.FACING)));
     }

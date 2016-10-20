@@ -14,14 +14,17 @@ public class BlockCake extends Block {
         this.a(true);
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         return BlockCake.b[iblockdata.get(BlockCake.BITES)];
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
@@ -61,6 +64,7 @@ public class BlockCake extends Block {
         return super.canPlace(world, blockposition) && this.b(world, blockposition);
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         if (!this.b(world, blockposition)) {
             world.setAir(blockposition);
@@ -85,6 +89,7 @@ public class BlockCake extends Block {
         return new ItemStack(Items.CAKE);
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockCake.BITES, i);
     }
@@ -97,10 +102,12 @@ public class BlockCake extends Block {
         return new BlockStateList(this, BlockCake.BITES);
     }
 
+    @SuppressWarnings("deprecation")
     public int d(IBlockData iblockdata, World world, BlockPosition blockposition) {
         return (7 - iblockdata.get(BlockCake.BITES)) * 2;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean isComplexRedstone(IBlockData iblockdata) {
         return true;
     }

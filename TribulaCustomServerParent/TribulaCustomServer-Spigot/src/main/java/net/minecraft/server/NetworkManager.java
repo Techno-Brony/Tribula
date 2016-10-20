@@ -30,6 +30,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
     public static final Marker a = MarkerManager.getMarker("NETWORK");
     public static final Marker b = MarkerManager.getMarker("NETWORK_PACKETS", NetworkManager.a);
     public static final AttributeKey<EnumProtocol> c = AttributeKey.valueOf("protocol");
+    @SuppressWarnings("unchecked")
     public static final LazyInitVar<NioEventLoopGroup> d = new LazyInitVar() {
         protected NioEventLoopGroup a() {
             return new NioEventLoopGroup(0, (new ThreadFactoryBuilder()).setNameFormat("Netty Client IO #%d").setDaemon(true).build());
@@ -39,6 +40,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
             return this.a();
         }
     };
+    @SuppressWarnings("unchecked")
     public static final LazyInitVar<EpollEventLoopGroup> e = new LazyInitVar() {
         protected EpollEventLoopGroup a() {
             return new EpollEventLoopGroup(0, (new ThreadFactoryBuilder()).setNameFormat("Netty Epoll Client IO #%d").setDaemon(true).build());
@@ -48,6 +50,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
             return this.a();
         }
     };
+    @SuppressWarnings("unchecked")
     public static final LazyInitVar<LocalEventLoopGroup> f = new LazyInitVar() {
         protected LocalEventLoopGroup a() {
             return new LocalEventLoopGroup(0, (new ThreadFactoryBuilder()).setNameFormat("Netty Local Client IO #%d").setDaemon(true).build());

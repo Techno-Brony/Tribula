@@ -12,6 +12,7 @@ import javax.annotation.Nullable;
 
 public abstract class EntityHanging extends Entity {
 
+    @SuppressWarnings("unchecked")
     private static final Predicate<Entity> c = new Predicate() {
         public boolean a(@Nullable Entity entity) {
             return entity instanceof EntityHanging;

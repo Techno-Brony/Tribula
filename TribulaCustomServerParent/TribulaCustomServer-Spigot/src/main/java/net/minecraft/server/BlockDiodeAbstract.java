@@ -18,10 +18,12 @@ public abstract class BlockDiodeAbstract extends BlockFacingHorizontal {
         return Blocks.UNPOWERED_REPEATER.C(iblockdata) || Blocks.UNPOWERED_COMPARATOR.C(iblockdata);
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         return BlockDiodeAbstract.c;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
@@ -66,14 +68,17 @@ public abstract class BlockDiodeAbstract extends BlockFacingHorizontal {
         return this.d;
     }
 
+    @SuppressWarnings("deprecation")
     public int c(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
         return iblockdata.a(iblockaccess, blockposition, enumdirection);
     }
 
+    @SuppressWarnings("deprecation")
     public int b(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
         return !this.z(iblockdata) ? 0 : (iblockdata.get(BlockDiodeAbstract.FACING) == enumdirection ? this.a(iblockaccess, blockposition, iblockdata) : 0);
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         if (this.b(world, blockposition)) {
             this.g(world, blockposition, iblockdata);
@@ -146,6 +151,7 @@ public abstract class BlockDiodeAbstract extends BlockFacingHorizontal {
         return this.A(iblockdata) ? (block == Blocks.REDSTONE_BLOCK ? 15 : (block == Blocks.REDSTONE_WIRE ? iblockdata.get(BlockRedstoneWire.POWER) : iblockaccess.getBlockPower(blockposition, enumdirection))) : 0;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean isPowerSource(IBlockData iblockdata) {
         return true;
     }
@@ -186,6 +192,7 @@ public abstract class BlockDiodeAbstract extends BlockFacingHorizontal {
         super.postBreak(world, blockposition, iblockdata);
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }

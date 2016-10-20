@@ -9,7 +9,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nullable;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -70,7 +69,7 @@ public class DataWatcher {
         }
     }
 
-    public static void a(List<DataWatcher.Item<?>> list, PacketDataSerializer packetdataserializer) throws IOException {
+    public static void a(List<DataWatcher.Item<?>> list, PacketDataSerializer packetdataserializer) {
         if (list != null) {
             int i = 0;
 
@@ -225,7 +224,7 @@ public class DataWatcher {
         return arraylist;
     }
 
-    public void a(PacketDataSerializer packetdataserializer) throws IOException {
+    public void a(PacketDataSerializer packetdataserializer) {
         this.e.readLock().lock();
         Iterator iterator = this.d.values().iterator();
 

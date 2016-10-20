@@ -15,6 +15,7 @@ import java.util.UUID;
 
 public class MobEffectList {
 
+    @SuppressWarnings("unchecked")
     public static final RegistryMaterials<MinecraftKey, MobEffectList> REGISTRY = new RegistryMaterials();
     private final Map<IAttribute, AttributeModifier> a = Maps.newHashMap();
     private final boolean c;

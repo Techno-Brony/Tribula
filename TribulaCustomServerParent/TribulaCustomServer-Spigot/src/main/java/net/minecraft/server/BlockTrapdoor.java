@@ -56,6 +56,7 @@ public class BlockTrapdoor extends Block {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         AxisAlignedBB axisalignedbb;
 
@@ -86,10 +87,12 @@ public class BlockTrapdoor extends Block {
         return axisalignedbb;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
@@ -122,6 +125,7 @@ public class BlockTrapdoor extends Block {
 
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         if (!world.isClientSide) {
             boolean flag = world.isBlockIndirectlyPowered(blockposition);
@@ -169,6 +173,7 @@ public class BlockTrapdoor extends Block {
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockTrapdoor.FACING, e(i)).set(BlockTrapdoor.OPEN, (i & 4) != 0).set(BlockTrapdoor.HALF, (i & 8) == 0 ? BlockTrapdoor.EnumTrapdoorHalf.BOTTOM : BlockTrapdoor.EnumTrapdoorHalf.TOP);
     }
@@ -188,10 +193,12 @@ public class BlockTrapdoor extends Block {
         return i;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockRotation enumblockrotation) {
         return iblockdata.set(BlockTrapdoor.FACING, enumblockrotation.a(iblockdata.get(BlockTrapdoor.FACING)));
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockMirror enumblockmirror) {
         return iblockdata.a(enumblockmirror.a(iblockdata.get(BlockTrapdoor.FACING)));
     }

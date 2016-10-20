@@ -24,6 +24,7 @@ public class BlockPortal extends BlockHalfTransparent {
         return enumdirection_enumaxis == EnumDirection.EnumAxis.X ? 1 : (enumdirection_enumaxis == EnumDirection.EnumAxis.Z ? 2 : 0);
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         switch (BlockPortal.SyntheticClass_1.a[iblockdata.get(BlockPortal.AXIS).ordinal()]) {
         case 1:
@@ -60,11 +61,13 @@ public class BlockPortal extends BlockHalfTransparent {
 
     }
 
+    @SuppressWarnings("deprecation")
     @Nullable
     public AxisAlignedBB a(IBlockData iblockdata, World world, BlockPosition blockposition) {
         return BlockPortal.k;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
@@ -85,6 +88,7 @@ public class BlockPortal extends BlockHalfTransparent {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         EnumDirection.EnumAxis enumdirection_enumaxis = iblockdata.get(BlockPortal.AXIS);
         BlockPortal.Shape blockportal_shape;
@@ -123,6 +127,7 @@ public class BlockPortal extends BlockHalfTransparent {
         return null;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockPortal.AXIS, (i & 3) == 2 ? EnumDirection.EnumAxis.Z : EnumDirection.EnumAxis.X);
     }
@@ -131,6 +136,7 @@ public class BlockPortal extends BlockHalfTransparent {
         return a(iblockdata.get(BlockPortal.AXIS));
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData a(IBlockData iblockdata, EnumBlockRotation enumblockrotation) {
         switch (BlockPortal.SyntheticClass_1.b[enumblockrotation.ordinal()]) {
         case 1:

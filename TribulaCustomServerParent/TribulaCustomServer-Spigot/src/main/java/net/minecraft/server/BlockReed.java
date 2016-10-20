@@ -15,6 +15,7 @@ public class BlockReed extends Block {
         this.a(true);
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         return BlockReed.b;
     }
@@ -73,6 +74,7 @@ public class BlockReed extends Block {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         this.e(world, blockposition, iblockdata);
     }
@@ -91,6 +93,7 @@ public class BlockReed extends Block {
         return this.canPlace(world, blockposition);
     }
 
+    @SuppressWarnings("deprecation")
     @Nullable
     public AxisAlignedBB a(IBlockData iblockdata, World world, BlockPosition blockposition) {
         return BlockReed.k;
@@ -101,10 +104,12 @@ public class BlockReed extends Block {
         return Items.REEDS;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
@@ -113,6 +118,7 @@ public class BlockReed extends Block {
         return new ItemStack(Items.REEDS);
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockReed.AGE, i);
     }

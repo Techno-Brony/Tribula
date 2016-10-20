@@ -22,6 +22,7 @@ public class BlockMycel extends Block {
         this.a(CreativeModeTab.b);
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData updateState(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         Block block = iblockaccess.getType(blockposition.up()).getBlock();
 

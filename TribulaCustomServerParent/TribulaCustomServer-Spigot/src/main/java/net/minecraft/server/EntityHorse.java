@@ -14,6 +14,7 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener, IJu
     public static final IAttribute attributeJumpStrength = (new AttributeRanged(null, "horse.jumpStrength", 0.7D, 0.0D, 2.0D)).a("Jump Strength").a(true);
     private static final UUID bF = UUID.fromString("556E1665-8B10-40C8-8F9D-CF9B1667F295");
     private static final DataWatcherObject<Byte> bG = DataWatcher.a(EntityHorse.class, DataWatcherRegistry.a);
+    @SuppressWarnings("unchecked")
     private static final Predicate<Entity> bD = new Predicate() {
         public boolean a(@Nullable Entity entity) {
             return entity instanceof EntityHorse && ((EntityHorse) entity).dt();

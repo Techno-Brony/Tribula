@@ -22,14 +22,17 @@ public class BlockSoil extends Block {
         this.d(255);
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         return BlockSoil.b;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
@@ -105,6 +108,7 @@ public class BlockSoil extends Block {
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         //noinspection deprecation
         super.a(iblockdata, world, blockposition, block);
@@ -123,6 +127,7 @@ public class BlockSoil extends Block {
         return new ItemStack(Blocks.DIRT);
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockSoil.MOISTURE, i & 7);
     }

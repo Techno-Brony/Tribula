@@ -23,6 +23,7 @@ import java.util.List;
 
 public class ServerConnection {
 
+    @SuppressWarnings("unchecked")
     public static final LazyInitVar<NioEventLoopGroup> a = new LazyInitVar() {
         protected NioEventLoopGroup a() {
             return new NioEventLoopGroup(0, (new ThreadFactoryBuilder()).setNameFormat("Netty Server IO #%d").setDaemon(true).build());
@@ -32,6 +33,7 @@ public class ServerConnection {
             return this.a();
         }
     };
+    @SuppressWarnings("unchecked")
     public static final LazyInitVar<EpollEventLoopGroup> b = new LazyInitVar() {
         protected EpollEventLoopGroup a() {
             return new EpollEventLoopGroup(0, (new ThreadFactoryBuilder()).setNameFormat("Netty Epoll Server IO #%d").setDaemon(true).build());
@@ -41,6 +43,7 @@ public class ServerConnection {
             return this.a();
         }
     };
+    @SuppressWarnings("unchecked")
     public static final LazyInitVar<LocalEventLoopGroup> c = new LazyInitVar() {
         protected LocalEventLoopGroup a() {
             return new LocalEventLoopGroup(0, (new ThreadFactoryBuilder()).setNameFormat("Netty Local Server IO #%d").setDaemon(true).build());

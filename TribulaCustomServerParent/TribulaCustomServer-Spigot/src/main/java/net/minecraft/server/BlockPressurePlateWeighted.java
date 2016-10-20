@@ -74,6 +74,7 @@ public class BlockPressurePlateWeighted extends BlockPressurePlateAbstract {
         return 10;
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockPressurePlateWeighted.POWER, i);
     }

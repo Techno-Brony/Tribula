@@ -45,14 +45,17 @@ public class BlockCactus extends Block {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public AxisAlignedBB a(IBlockData iblockdata, World world, BlockPosition blockposition) {
         return BlockCactus.b;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean c(IBlockData iblockdata) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean b(IBlockData iblockdata) {
         return false;
     }
@@ -61,6 +64,7 @@ public class BlockCactus extends Block {
         return super.canPlace(world, blockposition) && this.b(world, blockposition);
     }
 
+    @SuppressWarnings("deprecation")
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block) {
         if (!this.b(world, blockposition)) {
             world.setAir(blockposition, true);
@@ -94,6 +98,7 @@ public class BlockCactus extends Block {
         CraftEventFactory.blockDamage = null; // CraftBukkit
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockData fromLegacyData(int i) {
         return this.getBlockData().set(BlockCactus.AGE, i);
     }
