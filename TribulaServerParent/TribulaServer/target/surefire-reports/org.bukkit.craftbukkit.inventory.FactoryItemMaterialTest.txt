@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: org.bukkit.craftbukkit.inventory.FactoryItemMaterialTest
--------------------------------------------------------------------------------
-Tests run: 1488, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.97 sec - in org.bukkit.craftbukkit.inventory.FactoryItemMaterialTest

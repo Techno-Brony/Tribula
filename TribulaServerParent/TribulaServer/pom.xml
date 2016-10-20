@@ -1,12 +1,10 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.spigotmc</groupId>
     <artifactId>spigot</artifactId>
     <packaging>jar</packaging>
     <version>1.10.2-R0.1-SNAPSHOT</version>
     <name>Spigot</name>
-    <url>http://www.spigotmc.org</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -14,7 +12,6 @@
         <minecraft.version>1.10.2</minecraft.version>
         <minecraft_version>1_10_R1</minecraft_version>
         <buildtag.prefix>git-Bukkit-</buildtag.prefix>
-        <buildtag.suffix></buildtag.suffix>
         <maven.compiler.source>1.6</maven.compiler.source>
         <maven.compiler.target>1.6</maven.compiler.target>
     </properties>
@@ -95,37 +92,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>net.md-5</groupId>
-                <artifactId>scriptus</artifactId>
-                <version>0.2</version>
-                <executions>
-                    <execution>
-                        <id>ex-spigot</id>
-                        <configuration>
-                            <format>git-Spigot-%s</format>
-                            <scmDirectory>../</scmDirectory>
-                            <descriptionProperty>spigot.desc</descriptionProperty>
-                        </configuration>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>describe</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>ex-craftbukkit</id>
-                        <configuration>
-                            <format>-%s</format>
-                            <scmDirectory>../../CraftBukkit</scmDirectory>
-                            <descriptionProperty>craftbukkit.desc</descriptionProperty>
-                        </configuration>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>describe</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>  
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.6</version>
@@ -160,26 +126,6 @@
                             </manifestSection>
                         </manifestSections>
                     </archive>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>animal-sniffer-maven-plugin</artifactId>
-                <version>1.14</version>
-                <executions>
-                    <execution>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <signature>
-                        <groupId>org.codehaus.mojo.signature</groupId>
-                        <artifactId>java16</artifactId>
-                        <version>1.1</version>
-                    </signature>
                 </configuration>
             </plugin>
             <plugin>
@@ -222,6 +168,35 @@
                                     <shadedPattern>net.minecraft.server.v${minecraft_version}</shadedPattern>
                                 </relocation>
                             </relocations>
+                            <finalName>tribula-latest</finalName>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.github.goldin</groupId>
+                <artifactId>copy-maven-plugin</artifactId>
+                <version>0.2.5</version>
+                <executions>
+                    <execution>
+                        <id>deploy-to-local-directory</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <skipIdentical>false</skipIdentical>
+                            <failIfNotFound>false</failIfNotFound>
+                            <resources>
+                                <resource>
+                                    <description>Copy artifact to another directory</description>
+                                    <targetPath>../../../Tribula Test Server/</targetPath>
+                                    <directory>${project.build.directory}</directory>
+                                    <includes>
+                                        <include>tribula-latest.jar</include>
+                                    </includes>
+                                </resource>
+                            </resources>
                         </configuration>
                     </execution>
                 </executions>
@@ -245,17 +220,6 @@
                         <version>2.5.0-spigotmc</version>
                     </dependency>
                 </dependencies>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19</version>
-                <configuration>
-                    <workingDirectory>${basedir}/target/test-server</workingDirectory>
-                    <excludes>
-                        <exclude>org/bukkit/craftbukkit/inventory/ItemStack*Test.java</exclude>
-                    </excludes>
-                </configuration>
             </plugin>
         </plugins>
     </build>
