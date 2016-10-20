@@ -46,6 +46,7 @@
       <list>
         <option value="$PROJECT_DIR$/TribulaCustomServer/Spigot-Server/pom.xml" />
         <option value="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/pom.xml" />
+        <option value="$PROJECT_DIR$/TribulaServerParent/TribulaServer/pom.xml" />
       </list>
     </option>
   </component>

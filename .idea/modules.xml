@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Tribula.iml" filepath="$PROJECT_DIR$/.idea/Tribula.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/spigot.iml" filepath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/spigot.iml" />
       <module fileurl="file://$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/spigot.iml" filepath="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/spigot.iml" />
     </modules>
   </component>

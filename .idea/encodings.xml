@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/TribulaCustomServerParent" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/TribulaCustomServerParent/Spigot-API" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer" charset="UTF-8" />
   </component>
 </project>
