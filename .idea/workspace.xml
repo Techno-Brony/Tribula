@@ -4,31 +4,9 @@
     <option name="SCOPE_TYPE" value="4" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91e547d1-3e04-4bea-8a71-a17795495724" name="Default" comment="Created first plugin taking advantage of custom player class ;D">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TribulaMobs/TribulaMobs.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TribulaMobs/pom.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TribulaMobs/src/main/resources/plugin.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/enums/TribulaMobTrigger.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/interfaces/ITribulaMob.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TribulaTemplate/src/main/java/io/github/techno_brony/tribula/template/EventListener.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TribulaTemplate/src/main/java/io/github/techno_brony/tribula/template/Main.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TribulaTemplate/src/main/java/io/github/techno_brony/tribula/template/commands/CommandHandler.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaUtilities/TribulaTemplate (1).iml" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/TribulaTemplate/src/main/java/io/github/techno_brony/tribula/utilities/EventListener.java" afterPath="$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_brony/tribula/mobs/EventListener.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/TribulaTemplate/src/main/java/io/github/techno_brony/tribula/utilities/Main.java" afterPath="$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_brony/tribula/mobs/Main.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/TribulaTemplate/src/main/java/io/github/techno_brony/tribula/utilities/commands/CommandHandler.java" afterPath="$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_brony/tribula/mobs/commands/CommandHandler.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/TribulaUtilities/src/main/resources/config.yml" afterPath="$PROJECT_DIR$/TribulaMobs/src/main/resources/config.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+    <list default="true" id="91e547d1-3e04-4bea-8a71-a17795495724" name="Default" comment="Added Mob Interface">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java" afterPath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/org/bukkit/craftbukkit/util/permissions/CraftDefaultPermissions.java" afterPath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/org/bukkit/craftbukkit/util/permissions/CraftDefaultPermissions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TribulaTemplate/TribulaTemplate.iml" afterPath="$PROJECT_DIR$/TribulaTemplate/TribulaTemplate.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TribulaTemplate/src/main/resources/plugin.yml" afterPath="$PROJECT_DIR$/TribulaTemplate/src/main/resources/plugin.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TribulaUtilities/src/main/java/io/github/techno_brony/tribula/utilities/EventListener.java" afterPath="$PROJECT_DIR$/TribulaUtilities/src/main/java/io/github/techno_brony/tribula/utilities/EventListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TribulaUtilities/src/main/java/io/github/techno_brony/tribula/utilities/Main.java" afterPath="$PROJECT_DIR$/TribulaUtilities/src/main/java/io/github/techno_brony/tribula/utilities/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TribulaUtilities/src/main/java/io/github/techno_brony/tribula/utilities/commands/CommandHandler.java" afterPath="$PROJECT_DIR$/TribulaUtilities/src/main/java/io/github/techno_brony/tribula/utilities/commands/CommandHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/interfaces/ITribulaMob.java" afterPath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/interfaces/ITribulaMob.java" />
     </list>
     <ignored path="Tribula.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -78,7 +56,7 @@
         <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="64">
-              <caret line="77" column="90" selection-start-line="77" selection-start-column="90" selection-end-line="77" selection-end-column="90" />
+              <caret line="30" column="90" selection-start-line="30" selection-start-column="90" selection-end-line="30" selection-end-column="90" />
               <folding>
                 <element signature="method#CraftLivingEntity#0;class#CraftLivingEntity#0" expanded="false" />
                 <element signature="method#setHealth#0;class#CraftLivingEntity#0" expanded="false" />
@@ -105,8 +83,8 @@
                 <element signature="method#hasLineOfSight#0;class#CraftLivingEntity#0" expanded="false" />
                 <element signature="method#getRemoveWhenFarAway#0;class#CraftLivingEntity#0" expanded="false" />
                 <element signature="method#setRemoveWhenFarAway#0;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#setCanPickupItems#0;class#CraftLivingEntity#0" expanded="false" />
                 <element signature="method#getCanPickupItems#0;class#CraftLivingEntity#0" expanded="false" />
+                <element signature="method#setCanPickupItems#0;class#CraftLivingEntity#0" expanded="false" />
                 <element signature="method#teleport#0;class#CraftLivingEntity#0" expanded="false" />
                 <element signature="method#isLeashed#0;class#CraftLivingEntity#0" expanded="false" />
                 <element signature="method#getLeashHolder#0;class#CraftLivingEntity#0" expanded="false" />
@@ -123,8 +101,8 @@
       <file leaf-file-name="ITribulaMob.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/interfaces/ITribulaMob.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
+            <state relative-caret-position="96">
+              <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -218,8 +196,8 @@
         <option value="$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_brony/tribula/mobs/enums/TribulaMobTrigger.java" />
         <option value="$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_brony/tribula/mobs/interfaces/ITribulaMob.java" />
         <option value="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/enums/TribulaMobTrigger.java" />
-        <option value="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/interfaces/ITribulaMob.java" />
         <option value="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java" />
+        <option value="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/interfaces/ITribulaMob.java" />
       </list>
     </option>
   </component>
@@ -946,7 +924,7 @@
       <workItem from="1477018208388" duration="2024000" />
       <workItem from="1477085033837" duration="16000" />
       <workItem from="1477085219023" duration="425000" />
-      <workItem from="1477270424247" duration="989000" />
+      <workItem from="1477270424247" duration="1070000" />
     </task>
     <task id="LOCAL-00001" summary="Added Base Plugin">
       <created>1475468678577</created>
@@ -1116,11 +1094,18 @@
       <option name="project" value="LOCAL" />
       <updated>1476948908446</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Added Mob Interface">
+      <created>1477271591346</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1477271591346</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="74651000" />
+    <option name="totallyTimeSpent" value="74732000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1220,7 +1205,8 @@
     <MESSAGE value="Removed unnecessary server startup logging" />
     <MESSAGE value="Removed unnecessary boxing in DedicatedServer.java" />
     <MESSAGE value="Created first plugin taking advantage of custom player class ;D" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created first plugin taking advantage of custom player class ;D" />
+    <MESSAGE value="Added Mob Interface" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Mob Interface" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -1571,7 +1557,7 @@
     <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="64">
-          <caret line="77" column="90" selection-start-line="77" selection-start-column="90" selection-end-line="77" selection-end-column="90" />
+          <caret line="30" column="90" selection-start-line="30" selection-start-column="90" selection-end-line="30" selection-end-column="90" />
           <folding>
             <element signature="method#CraftLivingEntity#0;class#CraftLivingEntity#0" expanded="false" />
             <element signature="method#setHealth#0;class#CraftLivingEntity#0" expanded="false" />
@@ -1598,8 +1584,8 @@
             <element signature="method#hasLineOfSight#0;class#CraftLivingEntity#0" expanded="false" />
             <element signature="method#getRemoveWhenFarAway#0;class#CraftLivingEntity#0" expanded="false" />
             <element signature="method#setRemoveWhenFarAway#0;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#setCanPickupItems#0;class#CraftLivingEntity#0" expanded="false" />
             <element signature="method#getCanPickupItems#0;class#CraftLivingEntity#0" expanded="false" />
+            <element signature="method#setCanPickupItems#0;class#CraftLivingEntity#0" expanded="false" />
             <element signature="method#teleport#0;class#CraftLivingEntity#0" expanded="false" />
             <element signature="method#isLeashed#0;class#CraftLivingEntity#0" expanded="false" />
             <element signature="method#getLeashHolder#0;class#CraftLivingEntity#0" expanded="false" />
@@ -1614,8 +1600,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/interfaces/ITribulaMob.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
+        <state relative-caret-position="96">
+          <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
