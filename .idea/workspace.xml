@@ -4,9 +4,24 @@
     <option name="SCOPE_TYPE" value="4" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91e547d1-3e04-4bea-8a71-a17795495724" name="Default" comment="Added Mob Interface">
+    <list default="true" id="91e547d1-3e04-4bea-8a71-a17795495724" name="Default" comment="Added basic boss class">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_brony/tribula/mobs/wrappers/TribulaBoss.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/target/classes/org/bukkit/craftbukkit/entity/CraftAmbient.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/target/classes/org/bukkit/craftbukkit/entity/CraftArmorStand.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/target/classes/org/bukkit/craftbukkit/entity/CraftCreature.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/target/classes/org/bukkit/craftbukkit/entity/CraftEnderDragon.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/target/classes/org/bukkit/craftbukkit/entity/CraftEntity$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/target/classes/org/bukkit/craftbukkit/entity/CraftEntity$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/target/classes/org/bukkit/craftbukkit/entity/CraftEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/target/classes/org/bukkit/craftbukkit/entity/CraftFlying.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/target/classes/org/bukkit/craftbukkit/entity/CraftHumanEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/target/classes/org/bukkit/craftbukkit/entity/CraftSlime.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/target/classes/org/bukkit/craftbukkit/entity/CraftWaterMob.class" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/target/classes/net/minecraft/server/PropertyManager.class" afterPath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/target/classes/net/minecraft/server/PropertyManager.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/target/classes/org/bukkit/craftbukkit/entity/CraftLivingEntity.class" afterPath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/target/classes/org/bukkit/craftbukkit/entity/CraftLivingEntity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/target/classes/org/bukkit/craftbukkit/util/permissions/CraftDefaultPermissions.class" afterPath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/target/classes/org/bukkit/craftbukkit/util/permissions/CraftDefaultPermissions.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/interfaces/ITribulaMob.java" afterPath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/interfaces/ITribulaMob.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
     </list>
     <ignored path="Tribula.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -98,13 +113,39 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ITribulaMob.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ITribulaMob.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/interfaces/ITribulaMob.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
+            <state relative-caret-position="128">
+              <caret line="8" column="33" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TribulaBoss.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_brony/tribula/mobs/wrappers/TribulaBoss.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="569">
+              <caret line="47" column="5" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#413#414#0" expanded="true" />
+                <element signature="e#444#445#0" expanded="true" />
+                <element signature="e#502#503#0" expanded="true" />
+                <element signature="e#533#534#0" expanded="true" />
+                <element signature="e#590#591#0" expanded="true" />
+                <element signature="e#623#624#0" expanded="true" />
+                <element signature="e#673#674#0" expanded="true" />
+                <element signature="e#704#705#0" expanded="true" />
+                <element signature="e#755#756#0" expanded="true" />
+                <element signature="e#786#787#0" expanded="true" />
+                <element signature="e#840#841#0" expanded="true" />
+                <element signature="e#871#872#0" expanded="true" />
+                <element signature="e#1062#1063#0" expanded="true" />
+                <element signature="e#1096#1097#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -147,7 +188,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/TribulaPluginKotlin/src/main/kotlin/io/github/techno_brony/tribula/plugin/items/itemtypes/attack/TribulaItemTypeAttack.kt" />
         <option value="$PROJECT_DIR$/TribulaPluginKotlin/pom.xml" />
         <option value="$PROJECT_DIR$/TribulaPluginKotlin/src/main/kotlin/io/github/techno_brony/tribula/plugin/items/ITribulaItem.kt" />
         <option value="$PROJECT_DIR$/TribulaPluginKotlin/src/main/resources/plugin.yml" />
@@ -198,6 +238,7 @@
         <option value="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/enums/TribulaMobTrigger.java" />
         <option value="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java" />
         <option value="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/interfaces/ITribulaMob.java" />
+        <option value="$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_brony/tribula/mobs/wrappers/TribulaBoss.java" />
       </list>
     </option>
   </component>
@@ -661,7 +702,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="commands" />
+              <option name="myItemId" value="wrappers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -924,7 +965,7 @@
       <workItem from="1477018208388" duration="2024000" />
       <workItem from="1477085033837" duration="16000" />
       <workItem from="1477085219023" duration="425000" />
-      <workItem from="1477270424247" duration="1070000" />
+      <workItem from="1477270424247" duration="1449000" />
     </task>
     <task id="LOCAL-00001" summary="Added Base Plugin">
       <created>1475468678577</created>
@@ -1101,13 +1142,20 @@
       <option name="project" value="LOCAL" />
       <updated>1477271591346</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Fixed Mob Ambiguous Functions&#10;">
+      <created>1477271652123</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1477271652123</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="74732000" />
+    <option name="totallyTimeSpent" value="75111000" />
   </component>
-  <component name="TodoView">
+  <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />
     </todo-panel>
@@ -1131,6 +1179,7 @@
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1143,7 +1192,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -1206,7 +1254,9 @@
     <MESSAGE value="Removed unnecessary boxing in DedicatedServer.java" />
     <MESSAGE value="Created first plugin taking advantage of custom player class ;D" />
     <MESSAGE value="Added Mob Interface" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Mob Interface" />
+    <MESSAGE value="Fixed Mob Ambiguous Functions&#10;" />
+    <MESSAGE value="Added basic boss class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added basic boss class" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -1221,13 +1271,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/org/bukkit/craftbukkit/CraftServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="846" column="0" selection-start-line="846" selection-start-column="0" selection-end-line="846" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/resources/configurations/bukkit.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
@@ -1600,10 +1643,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/interfaces/ITribulaMob.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
+        <state relative-caret-position="128">
+          <caret line="8" column="33" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_brony/tribula/mobs/wrappers/TribulaBoss.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="569">
+          <caret line="47" column="5" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#413#414#0" expanded="true" />
+            <element signature="e#444#445#0" expanded="true" />
+            <element signature="e#502#503#0" expanded="true" />
+            <element signature="e#533#534#0" expanded="true" />
+            <element signature="e#590#591#0" expanded="true" />
+            <element signature="e#623#624#0" expanded="true" />
+            <element signature="e#673#674#0" expanded="true" />
+            <element signature="e#704#705#0" expanded="true" />
+            <element signature="e#755#756#0" expanded="true" />
+            <element signature="e#786#787#0" expanded="true" />
+            <element signature="e#840#841#0" expanded="true" />
+            <element signature="e#871#872#0" expanded="true" />
+            <element signature="e#1062#1063#0" expanded="true" />
+            <element signature="e#1096#1097#0" expanded="true" />
           </folding>
         </state>
       </provider>
