@@ -1,4 +1,4 @@
-package io.github.techno_brony.tribula.utilities;
+package io.github.techno_brony.tribula.mobs;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

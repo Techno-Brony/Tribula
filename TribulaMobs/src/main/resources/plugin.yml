@@ -1,8 +1,8 @@
-main: io.github.techno_brony.tribula.template.Main
-name: TribulaTemplate #TODO
+main: io.github.techno_brony.tribula.mobs.Main
+name: TribulaMobs #TODO
 version: 1.0
 author: TechnoBrony
-description: Tribula Template #TODO
+description: Tribula Mobs #TODO
 commands:
    templatecmd: #TODO
       description: This is a demo command. #TODO

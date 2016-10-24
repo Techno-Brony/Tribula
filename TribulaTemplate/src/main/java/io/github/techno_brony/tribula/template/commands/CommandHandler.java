@@ -1,6 +1,6 @@
-package io.github.techno_brony.tribula.utilities.commands;
+package io.github.techno_brony.tribula.template.commands;
 
-import io.github.techno_brony.tribula.utilities.Main;
+import io.github.techno_brony.tribula.template.Main;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

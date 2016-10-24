@@ -1,38 +1,7 @@
 package org.bukkit.craftbukkit.entity;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
-import net.minecraft.server.DamageSource;
-import net.minecraft.server.EntityArmorStand;
-import net.minecraft.server.EntityArrow;
-import net.minecraft.server.EntityDragonFireball;
-import net.minecraft.server.EntityEgg;
-import net.minecraft.server.EntityEnderPearl;
-import net.minecraft.server.EntityFishingHook;
-import net.minecraft.server.EntityHuman;
-import net.minecraft.server.EntityFireball;
-import net.minecraft.server.EntityInsentient;
-import net.minecraft.server.EntityLargeFireball;
-import net.minecraft.server.EntityLiving;
-import net.minecraft.server.EntityPlayer;
-import net.minecraft.server.EntityPotion;
-import net.minecraft.server.EntityProjectile;
-import net.minecraft.server.EntitySmallFireball;
-import net.minecraft.server.EntitySnowball;
-import net.minecraft.server.EntityThrownExpBottle;
-import net.minecraft.server.EntityTippedArrow;
-import net.minecraft.server.EntitySpectralArrow;
-import net.minecraft.server.EntityWither;
-import net.minecraft.server.EntityWitherSkull;
-import net.minecraft.server.GenericAttributes;
-import net.minecraft.server.MobEffect;
-import net.minecraft.server.MobEffectList;
-
+import io.github.techno_brony.tribula.internals.interfaces.ITribulaMob;
+import net.minecraft.server.*;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -44,26 +13,8 @@ import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.craftbukkit.inventory.CraftEntityEquipment;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.potion.CraftPotionUtil;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.DragonFireball;
-import org.bukkit.entity.Egg;
-import org.bukkit.entity.EnderPearl;
+import org.bukkit.entity.*;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Fireball;
-import org.bukkit.entity.Fish;
-import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.LingeringPotion;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
-import org.bukkit.entity.SmallFireball;
-import org.bukkit.entity.Snowball;
-import org.bukkit.entity.SpectralArrow;
-import org.bukkit.entity.ThrownExpBottle;
-import org.bukkit.entity.ThrownPotion;
-import org.bukkit.entity.TippedArrow;
-import org.bukkit.entity.WitherSkull;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
@@ -75,7 +26,9 @@ import org.bukkit.util.BlockIterator;
 import org.bukkit.util.NumberConversions;
 import org.bukkit.util.Vector;
 
-public class CraftLivingEntity extends CraftEntity implements LivingEntity {
+import java.util.*;
+
+public abstract class CraftLivingEntity extends CraftEntity implements LivingEntity, ITribulaMob {
     private CraftEntityEquipment equipment;
 
     public CraftLivingEntity(final CraftServer server, final EntityLiving entity) {
@@ -392,7 +345,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
         Validate.notNull(launch, "Projectile not supported");
 
         if (velocity != null) {
-            ((T) launch.getBukkitEntity()).setVelocity(velocity);
+            launch.getBukkitEntity().setVelocity(velocity);
         }
 
         world.addEntity(launch);
@@ -421,14 +374,14 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
         return equipment;
     }
 
+    public boolean getCanPickupItems() {
+        return getHandle() instanceof EntityInsentient && ((EntityInsentient) getHandle()).canPickUpLoot;
+    }
+
     public void setCanPickupItems(boolean pickup) {
         if (getHandle() instanceof EntityInsentient) {
             ((EntityInsentient) getHandle()).canPickUpLoot = pickup;
         }
-    }
-
-    public boolean getCanPickupItems() {
-        return getHandle() instanceof EntityInsentient && ((EntityInsentient) getHandle()).canPickUpLoot;
     }
 
     @Override
@@ -544,16 +497,16 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
 
     @Override
     public boolean hasAI() {
-        return (this.getHandle() instanceof EntityInsentient) ? !((EntityInsentient) this.getHandle()).hasAI(): false;
-    }
-
-    @Override
-    public void setCollidable(boolean collidable) {
-        getHandle().collides = collidable;
+        return (this.getHandle() instanceof EntityInsentient) && !((EntityInsentient) this.getHandle()).hasAI();
     }
 
     @Override
     public boolean isCollidable() {
         return getHandle().collides;
+    }
+
+    @Override
+    public void setCollidable(boolean collidable) {
+        getHandle().collides = collidable;
     }
 }

@@ -1,6 +1,6 @@
-package io.github.techno_brony.tribula.utilities;
+package io.github.techno_brony.tribula.mobs;
 
-import io.github.techno_brony.tribula.utilities.commands.CommandHandler;
+import io.github.techno_brony.tribula.mobs.commands.CommandHandler;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
