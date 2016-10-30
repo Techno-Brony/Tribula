@@ -4,8 +4,55 @@
     <option name="SCOPE_TYPE" value="4" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91e547d1-3e04-4bea-8a71-a17795495724" name="Default" comment="Added basic boss class">
+    <list default="true" id="91e547d1-3e04-4bea-8a71-a17795495724" name="Default" comment="Stuff">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_xerial_sqlite_jdbc_3_8_11_2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TribulaDatabase/TribulaDatabase.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TribulaDatabase/pom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/database_types/TribulaDatabaseMySQL.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/database_types/TribulaDatabaseSQLite.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/enums/TribulaDatabaseType.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/interfaces/ITribulaDatabase.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/wrappers/TribulaDatabaseCredentials.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TribulaDatabase/src/main/resources/config.yml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TribulaDatabase/src/main/resources/plugin.yml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_coder/tribula/mobs/interfaces/ITribulaBoss.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_coder/tribula/mobs/interfaces/ITribulaLootTable.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TribulaTemplate/src/main/java/io/github/techno_coder/tribula/template/Main.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_brony/tribula/mobs/EventListener.java" afterPath="$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_coder/tribula/mobs/EventListener.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_brony/tribula/mobs/Main.java" afterPath="$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_coder/tribula/mobs/Main.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_brony/tribula/mobs/commands/CommandHandler.java" afterPath="$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_coder/tribula/mobs/commands/CommandHandler.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_brony/tribula/mobs/wrappers/TribulaBoss.java" afterPath="$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_coder/tribula/mobs/wrappers/TribulaBoss.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/TribulaPlayer.java" afterPath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_coder/tribula/internals/TribulaPlayer.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/enums/TribulaMobTrigger.java" afterPath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_coder/tribula/internals/enums/TribulaMobTrigger.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/enums/TribulaPlayerDifficulty.java" afterPath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_coder/tribula/internals/enums/TribulaPlayerDifficulty.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/interfaces/ITribulaMob.java" afterPath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_coder/tribula/internals/interfaces/ITribulaMob.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/interfaces/ITribulaPlayer.java" afterPath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_coder/tribula/internals/interfaces/ITribulaPlayer.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/TribulaTemplate/src/main/java/io/github/techno_brony/tribula/template/EventListener.java" afterPath="$PROJECT_DIR$/TribulaTemplate/src/main/java/io/github/techno_coder/tribula/template/EventListener.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/TribulaTemplate/src/main/java/io/github/techno_brony/tribula/template/Main.java" afterPath="$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/Main.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/TribulaTemplate/src/main/java/io/github/techno_brony/tribula/template/commands/CommandHandler.java" afterPath="$PROJECT_DIR$/TribulaTemplate/src/main/java/io/github/techno_coder/tribula/template/commands/CommandHandler.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/TribulaUtilities/src/main/java/io/github/techno_brony/tribula/utilities/EventListener.java" afterPath="$PROJECT_DIR$/TribulaUtilities/src/main/java/io/github/techno_coder/tribula/utilities/EventListener.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/TribulaUtilities/src/main/java/io/github/techno_brony/tribula/utilities/Main.java" afterPath="$PROJECT_DIR$/TribulaUtilities/src/main/java/io/github/techno_coder/tribula/utilities/Main.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/TribulaUtilities/src/main/java/io/github/techno_brony/tribula/utilities/commands/CommandHandler.java" afterPath="$PROJECT_DIR$/TribulaUtilities/src/main/java/io/github/techno_coder/tribula/utilities/commands/CommandHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_spigotmc_spigot_api_1_10_2_R0_1_SNAPSHOT.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_spigotmc_spigot_api_1_10_2_R0_1_SNAPSHOT.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TribulaMobs/TribulaMobs.iml" afterPath="$PROJECT_DIR$/TribulaMobs/TribulaMobs.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TribulaMobs/pom.xml" afterPath="$PROJECT_DIR$/TribulaMobs/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TribulaMobs/src/main/resources/plugin.yml" afterPath="$PROJECT_DIR$/TribulaMobs/src/main/resources/plugin.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/net/minecraft/server/DedicatedServer.java" afterPath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/net/minecraft/server/DedicatedServer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java" afterPath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java" afterPath="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TribulaTemplate/TribulaTemplate.iml" afterPath="$PROJECT_DIR$/TribulaTemplate/TribulaTemplate.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TribulaTemplate/pom.xml" afterPath="$PROJECT_DIR$/TribulaTemplate/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TribulaTemplate/src/main/resources/plugin.yml" afterPath="$PROJECT_DIR$/TribulaTemplate/src/main/resources/plugin.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TribulaUtilities/TribulaUtilities.iml" afterPath="$PROJECT_DIR$/TribulaUtilities/TribulaUtilities.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TribulaUtilities/pom.xml" afterPath="$PROJECT_DIR$/TribulaUtilities/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TribulaUtilities/src/main/resources/plugin.yml" afterPath="$PROJECT_DIR$/TribulaUtilities/src/main/resources/plugin.yml" />
     </list>
     <ignored path="Tribula.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -21,6 +68,7 @@
     <ignored path="$PROJECT_DIR$/TribulaTemplate/target/" />
     <ignored path="$PROJECT_DIR$/TribulaUtilities/target/" />
     <ignored path="$PROJECT_DIR$/TribulaMobs/target/" />
+    <ignored path="$PROJECT_DIR$/TribulaDatabase/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -51,72 +99,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CraftLivingEntity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="64">
-              <caret line="30" column="90" selection-start-line="30" selection-start-column="90" selection-end-line="30" selection-end-column="90" />
+            <state relative-caret-position="320">
+              <caret line="27" column="5" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
               <folding>
-                <element signature="method#CraftLivingEntity#0;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#setHealth#0;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#setMaxHealth#0;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#getLineOfSight#0;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#getLineOfSight#1;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#getLineOfSight#2;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#getLineOfSight#3;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#getTargetBlock#0;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#getTargetBlock#1;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#getLastTwoTargetBlocks#0;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#getLastTwoTargetBlocks#1;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#damage#1;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#getEyeLocation#0;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#getKiller#0;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#addPotionEffect#1;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#addPotionEffects#0;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#hasPotionEffect#0;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#getPotionEffect#0;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#removePotionEffect#0;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#getActivePotionEffects#0;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#launchProjectile#0;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#launchProjectile#1;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#hasLineOfSight#0;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#getRemoveWhenFarAway#0;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#setRemoveWhenFarAway#0;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#getCanPickupItems#0;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#setCanPickupItems#0;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#teleport#0;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#isLeashed#0;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#getLeashHolder#0;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#unleash#0;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#setLeashHolder#0;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#getAttribute#0;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#setAI#0;class#CraftLivingEntity#0" expanded="false" />
-                <element signature="method#hasAI#0;class#CraftLivingEntity#0" expanded="false" />
+                <element signature="imports" expanded="true" />
+                <element signature="method#createAndLoadConfig#0;class#Main#0" expanded="false" />
+                <element signature="method#parseConfig#0;class#Main#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ITribulaMob.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/interfaces/ITribulaMob.java">
+      <file leaf-file-name="config.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TribulaDatabase/src/main/resources/config.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="8" column="33" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="144">
+              <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TribulaBoss.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_brony/tribula/mobs/wrappers/TribulaBoss.java">
+      <file leaf-file-name="TribulaDatabaseSQLite.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/database_types/TribulaDatabaseSQLite.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="560">
-              <caret line="47" column="5" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="48">
+              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TribulaDatabaseMySQL.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/database_types/TribulaDatabaseMySQL.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="17" column="32" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -158,22 +180,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/TribulaPluginKotlin/pom.xml" />
-        <option value="$PROJECT_DIR$/TribulaPluginKotlin/src/main/kotlin/io/github/techno_brony/tribula/plugin/items/ITribulaItem.kt" />
-        <option value="$PROJECT_DIR$/TribulaPluginKotlin/src/main/resources/plugin.yml" />
-        <option value="$PROJECT_DIR$/TribulaCustomServer/pom.xml" />
-        <option value="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ItemBow.java" />
-        <option value="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/CraftingManager.java" />
-        <option value="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/test/java/org/bukkit/craftbukkit/inventory/CompositeSerialization.java" />
-        <option value="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/org/spigotmc/SpigotWorldConfig.java" />
-        <option value="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/org/bukkit/craftbukkit/CraftServer.java" />
-        <option value="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/ServerConnection.java" />
-        <option value="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/org/spigotmc/SpigotConfig.java" />
-        <option value="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/MinecraftServer.java" />
-        <option value="$PROJECT_DIR$/TribulaCustomServerParent/Spigot-API/src/main/java/org/bukkit/Bukkit.java" />
-        <option value="$PROJECT_DIR$/TribulaCustomServerParent/Bukkit/src/main/java/org/bukkit/Bukkit.java" />
-        <option value="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/org/bukkit/craftbukkit/Main.java" />
-        <option value="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/net/minecraft/server/DedicatedServer.java" />
         <option value="$PROJECT_DIR$/TribulaCustomServerParent/pom.xml" />
         <option value="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/org/bukkit/craftbukkit/CraftArt.java" />
         <option value="$PROJECT_DIR$/TribulaCustomServerParent/TribulaCustomServer-Spigot/pom.xml" />
@@ -185,7 +191,6 @@
         <option value="$PROJECT_DIR$/TribulaServerParent/CraftBukkit/src/main/java/org/bukkit/craftbukkit/CraftServer.java" />
         <option value="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/net/minecraft/server/MinecraftServer.java" />
         <option value="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/net/minecraft/server/PropertyManager.java" />
-        <option value="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/net/minecraft/server/DedicatedServer.java" />
         <option value="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/resources/configurations/bukkit.yml" />
         <option value="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/org/bukkit/craftbukkit/CraftServer.java" />
         <option value="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribulainternals/enums/TribulaPlayerDifficulty.java" />
@@ -195,20 +200,37 @@
         <option value="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/TribulaPlayer.java" />
         <option value="$PROJECT_DIR$/TribulaServerParent/TribulaServer/pom.xml" />
         <option value="$PROJECT_DIR$/TribulaUtilities/src/main/java/io/github/techno_brony/tribula/template/commands/CommandHandler.java" />
-        <option value="$PROJECT_DIR$/TribulaUtilities/pom.xml" />
-        <option value="$PROJECT_DIR$/TribulaTemplate/pom.xml" />
-        <option value="$PROJECT_DIR$/TribulaMobs/pom.xml" />
-        <option value="$PROJECT_DIR$/TribulaMobs/src/main/resources/plugin.yml" />
         <option value="$PROJECT_DIR$/TribulaTemplate/src/main/java/io/github/techno_brony/tribula/template/commands/CommandHandler.java" />
         <option value="$PROJECT_DIR$/TribulaUtilities/src/main/java/io/github/techno_brony/tribula/utilities/Main.java" />
-        <option value="$PROJECT_DIR$/TribulaUtilities/src/main/resources/plugin.yml" />
-        <option value="$PROJECT_DIR$/TribulaTemplate/src/main/resources/plugin.yml" />
         <option value="$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_brony/tribula/mobs/enums/TribulaMobTrigger.java" />
         <option value="$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_brony/tribula/mobs/interfaces/ITribulaMob.java" />
         <option value="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/enums/TribulaMobTrigger.java" />
         <option value="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java" />
-        <option value="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/interfaces/ITribulaMob.java" />
         <option value="$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_brony/tribula/mobs/wrappers/TribulaBoss.java" />
+        <option value="$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_brony/tribula/mobs/interfaces/ITribulaBoss.java" />
+        <option value="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/interfaces/ITribulaMob.java" />
+        <option value="$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_brony/tribula/mobs/interfaces/ITribulaLootTable.java" />
+        <option value="$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/net/minecraft/server/DedicatedServer.java" />
+        <option value="$PROJECT_DIR$/TribulaMobs/src/main/resources/plugin.yml" />
+        <option value="$PROJECT_DIR$/TribulaUtilities/src/main/resources/plugin.yml" />
+        <option value="$PROJECT_DIR$/TribulaTemplate/src/main/resources/plugin.yml" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/TribulaMobs/pom.xml" />
+        <option value="$PROJECT_DIR$/TribulaTemplate/pom.xml" />
+        <option value="$PROJECT_DIR$/TribulaUtilities/pom.xml" />
+        <option value="$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/commands/CommandHandler.java" />
+        <option value="$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/EventListener.java" />
+        <option value="$PROJECT_DIR$/TribulaDatabase/pom.xml" />
+        <option value="$PROJECT_DIR$/TribulaDatabase/src/main/resources/plugin.yml" />
+        <option value="$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/enums/TribulaDatabaseType.java" />
+        <option value="$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/interfaces/ITribulaDatabase.java" />
+        <option value="$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/database_types/TribulaDatabaseSqlite.java" />
+        <option value="$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/database_types/TribulaDatabaseSQlite.java" />
+        <option value="$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/database_types/TribulaDatabaseSQLite.java" />
+        <option value="$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/wrappers/TribulaDatabaseCredentials.java" />
+        <option value="$PROJECT_DIR$/TribulaDatabase/src/main/resources/config.yml" />
+        <option value="$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/database_types/TribulaDatabaseMySQL.java" />
+        <option value="$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/Main.java" />
       </list>
     </option>
   </component>
@@ -238,7 +260,7 @@
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
-          <option name="myItemId" value="TribulaSpigot" />
+          <option name="myItemId" value="TribulaDatabase" />
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
         </PATH_ELEMENT>
       </PATH>
@@ -248,7 +270,7 @@
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
-          <option name="myItemId" value="TribulaSpigot" />
+          <option name="myItemId" value="TribulaDatabase" />
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
@@ -261,6 +283,180 @@
   <component name="ProjectFrameBounds">
     <option name="width" value="1440" />
     <option name="height" value="900" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Global Default copy">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Ant inspections</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>Abstraction issuesJava</id>
+          </State>
+          <State>
+            <id>Assignment issuesJava</id>
+          </State>
+          <State>
+            <id>Bitwise operation issuesJava</id>
+          </State>
+          <State>
+            <id>Class metricsJava</id>
+          </State>
+          <State>
+            <id>Class structureJava</id>
+          </State>
+          <State>
+            <id>Cloning issuesJava</id>
+          </State>
+          <State>
+            <id>Code maturity issuesJava</id>
+          </State>
+          <State>
+            <id>Code style issuesJava</id>
+          </State>
+          <State>
+            <id>Compiler issuesJava</id>
+          </State>
+          <State>
+            <id>Concurrency annotation issuesJava</id>
+          </State>
+          <State>
+            <id>Control flow issuesJava</id>
+          </State>
+          <State>
+            <id>Data flow issuesJava</id>
+          </State>
+          <State>
+            <id>Declaration redundancyJava</id>
+          </State>
+          <State>
+            <id>Dependency issuesJava</id>
+          </State>
+          <State>
+            <id>Encapsulation issuesJava</id>
+          </State>
+          <State>
+            <id>Error handlingJava</id>
+          </State>
+          <State>
+            <id>Finalization issuesJava</id>
+          </State>
+          <State>
+            <id>GeneralJava</id>
+          </State>
+          <State>
+            <id>ImportsJava</id>
+          </State>
+          <State>
+            <id>Inheritance issuesJava</id>
+          </State>
+          <State>
+            <id>Initialization issuesJava</id>
+          </State>
+          <State>
+            <id>Internationalization issuesJava</id>
+          </State>
+          <State>
+            <id>J2ME SupportJava</id>
+          </State>
+          <State>
+            <id>J2ME issuesJava</id>
+          </State>
+          <State>
+            <id>JUnit issuesJava</id>
+          </State>
+          <State>
+            <id>Java</id>
+          </State>
+          <State>
+            <id>Java language level issuesJava</id>
+          </State>
+          <State>
+            <id>Java language level migration aidsJava</id>
+          </State>
+          <State>
+            <id>JavaBeans issuesJava</id>
+          </State>
+          <State>
+            <id>Javadoc issuesJava</id>
+          </State>
+          <State>
+            <id>Logging issuesJava</id>
+          </State>
+          <State>
+            <id>Memory issuesJava</id>
+          </State>
+          <State>
+            <id>Method metricsJava</id>
+          </State>
+          <State>
+            <id>Modularization issuesJava</id>
+          </State>
+          <State>
+            <id>Naming conventionsJava</id>
+          </State>
+          <State>
+            <id>Numeric issuesJava</id>
+          </State>
+          <State>
+            <id>Packaging issuesJava</id>
+          </State>
+          <State>
+            <id>Performance issuesJava</id>
+          </State>
+          <State>
+            <id>Portability issuesJava</id>
+          </State>
+          <State>
+            <id>Probable bugsJava</id>
+          </State>
+          <State>
+            <id>Properties FilesJava</id>
+          </State>
+          <State>
+            <id>Resource management issuesJava</id>
+          </State>
+          <State>
+            <id>Security issuesJava</id>
+          </State>
+          <State>
+            <id>Serialization issuesJava</id>
+          </State>
+          <State>
+            <id>Threading issuesJava</id>
+          </State>
+          <State>
+            <id>Verbose or redundant code constructsJava</id>
+          </State>
+          <State>
+            <id>Visibility issuesJava</id>
+          </State>
+          <State>
+            <id>toString() issuesJava</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Data flow issuesJava</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -287,6 +483,18 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -315,7 +523,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="TribulaTemplate" />
+              <option name="myItemId" value="TribulaDatabase" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -329,7 +537,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="TribulaServerParent" />
+              <option name="myItemId" value="TribulaDatabase" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -343,29 +555,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="TribulaServerParent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TribulaServer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Tribula" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Tribula" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TribulaServerParent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TribulaServer" />
+              <option name="myItemId" value="TribulaDatabase" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -376,6 +566,10 @@
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -387,11 +581,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="TribulaServerParent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TribulaServer" />
+              <option name="myItemId" value="TribulaDatabase" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -407,7 +597,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="org" />
+              <option name="myItemId" value="database" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -421,11 +611,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="TribulaServerParent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TribulaServer" />
+              <option name="myItemId" value="TribulaDatabase" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -441,231 +627,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Tribula" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Tribula" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TribulaServerParent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TribulaServer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="internals" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Tribula" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Tribula" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TribulaServerParent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TribulaServer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="internals" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="interfaces" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Tribula" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Tribula" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TribulaServerParent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TribulaServer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="internals" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="enums" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Tribula" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Tribula" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TribulaMobs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Tribula" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Tribula" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TribulaMobs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Tribula" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Tribula" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TribulaMobs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Tribula" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Tribula" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TribulaMobs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mobs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Tribula" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Tribula" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TribulaMobs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mobs" />
+              <option name="myItemId" value="database" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -675,18 +637,15 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/TribulaMobs/pom.xml" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/TribulaDatabase/pom.xml" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
     <property name="SearchEverywhereHistoryKey" value="CraftPlayer&#9;PSI&#9;JAVA://org.bukkit.craftbukkit.entity.CraftPlayer&#10;Bukki&#9;FILE&#9;file:///Users/zhiyuanqi/Documents/Github/Java/Minecraft/Tribula Everything/Tribula/TribulaServerParent/TribulaServer/src/main/resources/configurations/bukkit.yml&#10;Bukkit.yml&#9;FILE&#9;file:///Users/zhiyuanqi/Documents/Github/Java/Minecraft/Tribula Everything/Tribula/TribulaServerParent/TribulaServer/src/main/resources/configurations/bukkit.yml&#10;ChunkGenerator&#9;FILE&#9;jar:///Users/zhiyuanqi/.m2/repository/org/spigotmc/minecraft-server/1.10.2-SNAPSHOT/minecraft-server-1.10.2-SNAPSHOT.jar!/net/minecraft/server/ChunkGenerator.class&#10;MobSpawn&#9;PSI&#9;JAVA://net.minecraft.server.BlockMobSpawner&#10;WorldGene&#9;PSI&#9;JAVA://net.minecraft.server.WorldGenerator&#10;main&#9;FILE&#9;file:///Users/zhiyuanqi/Documents/Github/Java/Minecraft/Tribula Everything/Tribula/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/org/bukkit/craftbukkit/Main.java&#10;Main&#9;FILE&#9;file:///Users/zhiyuanqi/Documents/Github/Java/Minecraft/Tribula Everything/Tribula/TribulaCustomServerParent/TribulaCustomServer-Spigot/src/main/java/org/bukkit/craftbukkit/Main.java&#10;World Setti&#9;PSI&#9;JAVA://net.minecraft.server.WorldSettings&#10;Mob&#9;PSI&#9;JAVA://io.github.techno_brony.tribula.plugin.wrappers.enums.TribulaMobAttackTrigger" />
@@ -936,7 +895,12 @@
       <workItem from="1477085033837" duration="16000" />
       <workItem from="1477085219023" duration="425000" />
       <workItem from="1477270424247" duration="1641000" />
-      <workItem from="1477470098557" duration="6000" />
+      <workItem from="1477470098557" duration="47000" />
+      <workItem from="1477689903153" duration="1092000" />
+      <workItem from="1477691048017" duration="131000" />
+      <workItem from="1477691181575" duration="1837000" />
+      <workItem from="1477736198193" duration="702000" />
+      <workItem from="1477789195481" duration="28000" />
     </task>
     <task id="LOCAL-00001" summary="Added Base Plugin">
       <created>1475468678577</created>
@@ -1127,11 +1091,18 @@
       <option name="project" value="LOCAL" />
       <updated>1477272073449</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Stuff">
+      <created>1477470114697</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1477470114698</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75309000" />
+    <option name="totallyTimeSpent" value="79140000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -1220,7 +1191,6 @@
     <MESSAGE value="Created Basic Item API" />
     <MESSAGE value="Added basic stuff" />
     <MESSAGE value="Fixed Tribula Player Wrapper Class" />
-    <MESSAGE value="Stuff" />
     <MESSAGE value="Migrating java code to Kotlin" />
     <MESSAGE value="Resigned to modifying spigot server jar directly" />
     <MESSAGE value="Added base spigot source code" />
@@ -1234,13 +1204,14 @@
     <MESSAGE value="Added Mob Interface" />
     <MESSAGE value="Fixed Mob Ambiguous Functions&#10;" />
     <MESSAGE value="Added basic boss class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added basic boss class" />
+    <MESSAGE value="Stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="Stuff" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="11" />
+      <option name="time" value="12" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1249,133 +1220,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/resources/configurations/bukkit.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/net/minecraft/server/DedicatedServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="108" column="9" selection-start-line="108" selection-start-column="9" selection-end-line="108" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/org/bukkit/craftbukkit/inventory/CraftInventoryPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="10" column="40" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/net/minecraft/server/LoginListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="117" column="61" selection-start-line="117" selection-start-column="61" selection-end-line="117" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/net/minecraft/server/PlayerList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="447" column="51" selection-start-line="447" selection-start-column="51" selection-end-line="447" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/net/minecraft/server/EntityPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="617">
-          <caret line="1295" column="42" selection-start-line="1295" selection-start-column="42" selection-end-line="1295" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/net/minecraft/server/EntityHuman.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="74" column="48" selection-start-line="74" selection-start-column="48" selection-end-line="74" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/net/minecraft/server/Entity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="54" column="44" selection-start-line="54" selection-start-column="44" selection-end-line="54" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/interfaces/ITribulaPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/net/minecraft/server/PlayerConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="130" column="79" selection-start-line="130" selection-start-column="79" selection-end-line="130" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="68" column="21" selection-start-line="68" selection-start-column="21" selection-end-line="68" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/TribulaPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="16" column="47" selection-start-line="16" selection-start-column="47" selection-end-line="16" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/maven/lib/maven.jar!/schemas/maven-4.0.0.xsd">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="20" column="6" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.10.2-R0.1-SNAPSHOT/spigot-api-1.10.2-R0.1-20161019.094604-82.jar!/org/bukkit/plugin/java/JavaPlugin.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="45" column="22" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.10.2-R0.1-SNAPSHOT/spigot-api-1.10.2-R0.1-20161019.094604-82.jar!/org/bukkit/Server.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="43">
-          <caret line="103" column="33" selection-start-line="103" selection-start-column="33" selection-end-line="103" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaTemplate/src/main/java/io/github/techno_brony/tribula/template/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaUtilities/TribulaTemplate.iml" />
-    <entry file="file://$PROJECT_DIR$/TribulaTemplate/src/main/resources/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaUtilities/src/main/java/io/github/techno_brony/tribula/utilities/commands/CommandHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="18" column="52" selection-start-line="18" selection-start-column="52" selection-end-line="18" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TribulaUtilities/TribulaTemplate (1).iml" />
     <entry file="file://$PROJECT_DIR$/TribulaUtilities/TribulaUtilities.iml">
       <provider selected="true" editor-type-id="text-editor">
@@ -1391,67 +1235,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_brony/tribula/mobs/commands/CommandHandler.java">
+    <entry file="file://$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_coder/tribula/mobs/commands/CommandHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
           <caret line="16" column="36" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaTemplate/src/main/java/io/github/techno_brony/tribula/template/EventListener.java">
+    <entry file="file://$PROJECT_DIR$/TribulaTemplate/src/main/java/io/github/techno_coder/tribula/template/EventListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
           <caret line="14" column="42" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaTemplate/src/main/java/io/github/techno_brony/tribula/template/commands/CommandHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TribulaUtilities/src/main/resources/config.yml" />
-    <entry file="file://$PROJECT_DIR$/TribulaUtilities/src/main/java/io/github/techno_brony/tribula/utilities/Main.java">
+    <entry file="file://$PROJECT_DIR$/TribulaUtilities/src/main/java/io/github/techno_coder/tribula/utilities/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaUtilities/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaUtilities/src/main/resources/plugin.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="4" column="36" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaTemplate/src/main/resources/plugin.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="3" column="19" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_brony/tribula/mobs/Main.java">
+    <entry file="file://$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_coder/tribula/mobs/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="384">
           <caret line="27" column="17" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaMobs/src/main/resources/plugin.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="4" column="14" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -1525,35 +1334,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/interfaces/ITribulaMob.java">
+    <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_coder/tribula/internals/interfaces/ITribulaMob.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
           <caret line="12" column="29" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/enums/TribulaPlayerDifficulty.java">
+    <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_coder/tribula/internals/enums/TribulaPlayerDifficulty.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="16">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaMobs/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-983">
-          <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaTemplate/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="78" column="8" selection-start-line="78" selection-start-column="8" selection-end-line="82" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -1564,7 +1355,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/enums/TribulaMobTrigger.java">
+    <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_coder/tribula/internals/enums/TribulaMobTrigger.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="32">
           <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
@@ -1573,65 +1364,208 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
+        <state relative-caret-position="16">
           <caret line="30" column="90" selection-start-line="30" selection-start-column="90" selection-end-line="30" selection-end-column="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_coder/tribula/mobs/interfaces/ITribulaBoss.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_coder/tribula/mobs/wrappers/TribulaBoss.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_coder/tribula/mobs/interfaces/ITribulaLootTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="55" selection-start-line="0" selection-start-column="55" selection-end-line="0" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_coder/tribula/internals/interfaces/ITribulaMob.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="7" column="34" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/net/minecraft/server/DedicatedServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1376">
+          <caret line="108" column="5" selection-start-line="108" selection-start-column="5" selection-end-line="108" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TribulaTemplate/src/main/java/io/github/techno_coder/tribula/template/commands/CommandHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="18" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TribulaMobs/src/main/resources/plugin.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="3" column="19" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_coder/tribula/internals/TribulaPlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TribulaUtilities/src/main/resources/plugin.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="3" column="19" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TribulaMobs/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="4" column="35" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TribulaTemplate/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="4" column="35" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TribulaUtilities/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TribulaTemplate/src/main/resources/plugin.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="3" column="19" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="32">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TribulaTemplate/TribulaTemplate.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/EventListener.java" />
+    <entry file="file://$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/commands/CommandHandler.java" />
+    <entry file="file://$PROJECT_DIR$/TribulaDatabase/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="70" column="18" selection-start-line="70" selection-start-column="18" selection-end-line="70" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/enums/TribulaDatabaseType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="4" column="9" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TribulaDatabase/src/main/resources/plugin.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/database_types.java" />
+    <entry file="file://$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/interfaces/ITribulaDatabase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/wrappers.java" />
+    <entry file="file://$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/wrappers/TribulaDatabaseCredentials.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
           <folding>
-            <element signature="method#CraftLivingEntity#0;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#setHealth#0;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#setMaxHealth#0;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#getLineOfSight#0;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#getLineOfSight#1;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#getLineOfSight#2;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#getLineOfSight#3;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#getTargetBlock#0;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#getTargetBlock#1;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#getLastTwoTargetBlocks#0;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#getLastTwoTargetBlocks#1;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#damage#1;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#getEyeLocation#0;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#getKiller#0;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#addPotionEffect#1;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#addPotionEffects#0;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#hasPotionEffect#0;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#getPotionEffect#0;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#removePotionEffect#0;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#getActivePotionEffects#0;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#launchProjectile#0;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#launchProjectile#1;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#hasLineOfSight#0;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#getRemoveWhenFarAway#0;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#setRemoveWhenFarAway#0;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#getCanPickupItems#0;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#setCanPickupItems#0;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#teleport#0;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#isLeashed#0;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#getLeashHolder#0;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#unleash#0;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#setLeashHolder#0;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#getAttribute#0;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#setAI#0;class#CraftLivingEntity#0" expanded="false" />
-            <element signature="method#hasAI#0;class#CraftLivingEntity#0" expanded="false" />
+            <element signature="e#609#610#0" expanded="true" />
+            <element signature="e#640#641#0" expanded="true" />
+            <element signature="e#675#676#0" expanded="true" />
+            <element signature="e#706#707#0" expanded="true" />
+            <element signature="e#736#737#0" expanded="true" />
+            <element signature="e#763#764#0" expanded="true" />
+            <element signature="e#802#803#0" expanded="true" />
+            <element signature="e#837#838#0" expanded="true" />
+            <element signature="e#872#873#0" expanded="true" />
+            <element signature="e#903#904#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaServerParent/TribulaServer/src/main/java/io/github/techno_brony/tribula/internals/interfaces/ITribulaMob.java">
+    <entry file="file://$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="8" column="33" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
+        <state relative-caret-position="320">
+          <caret line="27" column="5" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#createAndLoadConfig#0;class#Main#0" expanded="false" />
+            <element signature="method#parseConfig#0;class#Main#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TribulaMobs/src/main/java/io/github/techno_brony/tribula/mobs/wrappers/TribulaBoss.java">
+    <entry file="file://$PROJECT_DIR$/TribulaDatabase/src/main/resources/config.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="47" column="5" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="144">
+          <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/database_types/TribulaDatabaseSQLite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TribulaDatabase/src/main/java/io/github/techno_coder/tribula/database/database_types/TribulaDatabaseMySQL.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="17" column="32" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1687,7 +1621,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>TribulaTemplate</last-edited>
+          <last-edited>TribulaDatabase</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

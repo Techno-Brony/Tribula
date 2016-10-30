@@ -1,0 +1,10 @@
+# SQLITE
+# MYSQL
+databaseType: SQLITE
+
+# Applicable only to types other than SQLITE
+username: Nothing
+password: Nothing
+port: 9001
+databaseName: AppleTree
+hostname: localhost

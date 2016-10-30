@@ -1,2 +1,2 @@
 # Tribula
-Tribula Server Project © TechnoBrony All Rights Reserved
+Tribula Server Project © Technocoder All Rights Reserved

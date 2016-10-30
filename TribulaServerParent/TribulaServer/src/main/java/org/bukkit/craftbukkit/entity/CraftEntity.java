@@ -1,7 +1,7 @@
 package org.bukkit.craftbukkit.entity;
 
 import com.google.common.base.Preconditions;
-import io.github.techno_brony.tribula.internals.TribulaPlayer;
+import io.github.techno_coder.tribula.internals.TribulaPlayer;
 import net.minecraft.server.*;
 import org.bukkit.EntityEffect;
 import org.bukkit.Location;

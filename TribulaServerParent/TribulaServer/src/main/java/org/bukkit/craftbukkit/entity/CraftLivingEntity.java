@@ -1,6 +1,6 @@
 package org.bukkit.craftbukkit.entity;
 
-import io.github.techno_brony.tribula.internals.interfaces.ITribulaMob;
+import io.github.techno_coder.tribula.internals.interfaces.ITribulaMob;
 import net.minecraft.server.*;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Location;

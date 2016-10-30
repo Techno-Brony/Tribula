@@ -1,7 +1,7 @@
-main: io.github.techno_brony.tribula.utilities.Main
+main: Main
 name: TribulaUtilities #TODO
 version: 1.0
-author: TechnoBrony
+author: Technocoder
 description: Tribula Utilities #TODO
 commands:
    templatecmd: #TODO

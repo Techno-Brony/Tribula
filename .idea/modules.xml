@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Tribula.iml" filepath="$PROJECT_DIR$/.idea/Tribula.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TribulaDatabase/TribulaDatabase.iml" filepath="$PROJECT_DIR$/TribulaDatabase/TribulaDatabase.iml" />
       <module fileurl="file://$PROJECT_DIR$/TribulaMobs/TribulaMobs.iml" filepath="$PROJECT_DIR$/TribulaMobs/TribulaMobs.iml" />
       <module fileurl="file://$PROJECT_DIR$/TribulaTemplate/TribulaTemplate.iml" filepath="$PROJECT_DIR$/TribulaTemplate/TribulaTemplate.iml" />
       <module fileurl="file://$PROJECT_DIR$/TribulaUtilities/TribulaUtilities.iml" filepath="$PROJECT_DIR$/TribulaUtilities/TribulaUtilities.iml" />

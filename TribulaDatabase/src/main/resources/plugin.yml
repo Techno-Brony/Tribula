@@ -1,0 +1,9 @@
+main: io.github.techno_coder.tribula.database
+name: TribulaDatabase #TODO
+version: 1.0
+author: Technocoder
+description: Tribula Database #TODO
+commands:
+   nothappening: #TODO
+      description: This is a demo command. #TODO
+      usage: /<command>

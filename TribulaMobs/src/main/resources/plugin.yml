@@ -1,7 +1,7 @@
-main: io.github.techno_brony.tribula.mobs.Main
+main: Main
 name: TribulaMobs #TODO
 version: 1.0
-author: TechnoBrony
+author: Technocoder
 description: Tribula Mobs #TODO
 commands:
    templatecmd: #TODO
