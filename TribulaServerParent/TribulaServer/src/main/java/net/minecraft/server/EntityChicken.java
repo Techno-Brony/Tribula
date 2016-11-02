@@ -1,12 +1,13 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Sets;
-import java.util.Set;
+
 import javax.annotation.Nullable;
+import java.util.Set;
 
 public class EntityChicken extends EntityAnimal {
 
-    private static final Set<Item> bF = Sets.newHashSet(new Item[] { Items.WHEAT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS, Items.BEETROOT_SEEDS});
+    private static final Set<Item> bF = Sets.newHashSet(Items.WHEAT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS, Items.BEETROOT_SEEDS);
     public float bx;
     public float by;
     public float bz;
@@ -22,15 +23,19 @@ public class EntityChicken extends EntityAnimal {
         this.a(PathType.WATER, 0.0F);
     }
 
+    public static void b(DataConverterManager dataconvertermanager) {
+        EntityInsentient.a(dataconvertermanager, "Chicken");
+    }
+
     protected void r() {
-        this.goalSelector.a(0, new PathfinderGoalFloat(this));
-        this.goalSelector.a(1, new PathfinderGoalPanic(this, 1.4D));
-        this.goalSelector.a(2, new PathfinderGoalBreed(this, 1.0D));
-        this.goalSelector.a(3, new PathfinderGoalTempt(this, 1.0D, false, EntityChicken.bF));
-        this.goalSelector.a(4, new PathfinderGoalFollowParent(this, 1.1D));
-        this.goalSelector.a(5, new PathfinderGoalRandomStroll(this, 1.0D));
-        this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F));
-        this.goalSelector.a(7, new PathfinderGoalRandomLookaround(this));
+//        this.goalSelector.a(0, new PathfinderGoalFloat(this));
+//        this.goalSelector.a(1, new PathfinderGoalPanic(this, 1.4D));
+//        this.goalSelector.a(2, new PathfinderGoalBreed(this, 1.0D));
+//        this.goalSelector.a(3, new PathfinderGoalTempt(this, 1.0D, false, EntityChicken.bF));
+//        this.goalSelector.a(4, new PathfinderGoalFollowParent(this, 1.1D));
+//        this.goalSelector.a(5, new PathfinderGoalRandomStroll(this, 1.0D));
+//        this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F));
+//        this.goalSelector.a(7, new PathfinderGoalRandomLookaround(this));
     }
 
     public float getHeadHeight() {
@@ -107,10 +112,6 @@ public class EntityChicken extends EntityAnimal {
 
     protected int getExpValue(EntityHuman entityhuman) {
         return this.isChickenJockey() ? 10 : super.getExpValue(entityhuman);
-    }
-
-    public static void b(DataConverterManager dataconvertermanager) {
-        EntityInsentient.a(dataconvertermanager, "Chicken");
     }
 
     public void a(NBTTagCompound nbttagcompound) {

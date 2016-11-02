@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
-import javax.annotation.Nullable;
-// CraftBukkit start
 import org.bukkit.craftbukkit.event.CraftEventFactory;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
+
+import javax.annotation.Nullable;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class EntityCreeper extends EntityMonster {
@@ -22,16 +24,20 @@ public class EntityCreeper extends EntityMonster {
         this.setSize(0.6F, 1.7F);
     }
 
+    public static void b(DataConverterManager dataconvertermanager) {
+        EntityInsentient.a(dataconvertermanager, "Creeper");
+    }
+
     protected void r() {
-        this.goalSelector.a(1, new PathfinderGoalFloat(this));
-        this.goalSelector.a(2, new PathfinderGoalSwell(this));
-        this.goalSelector.a(3, new PathfinderGoalAvoidTarget(this, EntityOcelot.class, 6.0F, 1.0D, 1.2D));
-        this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this, 1.0D, false));
-        this.goalSelector.a(5, new PathfinderGoalRandomStroll(this, 0.8D));
-        this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
-        this.goalSelector.a(6, new PathfinderGoalRandomLookaround(this));
-        this.targetSelector.a(1, new PathfinderGoalNearestAttackableTarget(this, EntityHuman.class, true));
-        this.targetSelector.a(2, new PathfinderGoalHurtByTarget(this, false, new Class[0]));
+//        this.goalSelector.a(1, new PathfinderGoalFloat(this));
+//        this.goalSelector.a(2, new PathfinderGoalSwell(this));
+//        this.goalSelector.a(3, new PathfinderGoalAvoidTarget(this, EntityOcelot.class, 6.0F, 1.0D, 1.2D));
+//        this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this, 1.0D, false));
+//        this.goalSelector.a(5, new PathfinderGoalRandomStroll(this, 0.8D));
+//        this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
+//        this.goalSelector.a(6, new PathfinderGoalRandomLookaround(this));
+//        this.targetSelector.a(1, new PathfinderGoalNearestAttackableTarget(this, EntityHuman.class, true));
+//        this.targetSelector.a(2, new PathfinderGoalHurtByTarget(this, false, new Class[0]));
     }
 
     protected void initAttributes() {
@@ -59,13 +65,9 @@ public class EntityCreeper extends EntityMonster {
         this.datawatcher.register(EntityCreeper.c, Boolean.valueOf(false));
     }
 
-    public static void b(DataConverterManager dataconvertermanager) {
-        EntityInsentient.a(dataconvertermanager, "Creeper");
-    }
-
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
-        if (((Boolean) this.datawatcher.get(EntityCreeper.b)).booleanValue()) {
+        if (this.datawatcher.get(EntityCreeper.b).booleanValue()) {
             nbttagcompound.setBoolean("powered", true);
         }
 
@@ -149,7 +151,11 @@ public class EntityCreeper extends EntityMonster {
     }
 
     public boolean isPowered() {
-        return ((Boolean) this.datawatcher.get(EntityCreeper.b)).booleanValue();
+        return this.datawatcher.get(EntityCreeper.b).booleanValue();
+    }
+
+    public void setPowered(boolean powered) {
+        this.datawatcher.set(EntityCreeper.b, powered);
     }
 
     @Nullable
@@ -158,7 +164,7 @@ public class EntityCreeper extends EntityMonster {
     }
 
     public int df() {
-        return ((Integer) this.datawatcher.get(EntityCreeper.a)).intValue();
+        return this.datawatcher.get(EntityCreeper.a).intValue();
     }
 
     public void a(int i) {
@@ -173,10 +179,6 @@ public class EntityCreeper extends EntityMonster {
         }
 
         this.setPowered(true);
-    }
-
-    public void setPowered(boolean powered) {
-        this.datawatcher.set(EntityCreeper.b, powered);
     }
     // CraftBukkit end
 
@@ -215,7 +217,7 @@ public class EntityCreeper extends EntityMonster {
     }
 
     public boolean isIgnited() {
-        return ((Boolean) this.datawatcher.get(EntityCreeper.c)).booleanValue();
+        return this.datawatcher.get(EntityCreeper.c).booleanValue();
     }
 
     public void dh() {

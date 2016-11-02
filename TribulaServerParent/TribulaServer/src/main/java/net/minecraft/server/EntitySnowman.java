@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
-import javax.annotation.Nullable;
-// CraftBukkit start
 import org.bukkit.craftbukkit.event.CraftEventFactory;
 import org.bukkit.craftbukkit.util.CraftMagicNumbers;
 import org.bukkit.event.block.EntityBlockFormEvent;
+
+import javax.annotation.Nullable;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class EntitySnowman extends EntityGolem implements IRangedEntity {
@@ -21,11 +23,11 @@ public class EntitySnowman extends EntityGolem implements IRangedEntity {
     }
 
     protected void r() {
-        this.goalSelector.a(1, new PathfinderGoalArrowAttack(this, 1.25D, 20, 10.0F));
-        this.goalSelector.a(2, new PathfinderGoalRandomStroll(this, 1.0D));
-        this.goalSelector.a(3, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F));
-        this.goalSelector.a(4, new PathfinderGoalRandomLookaround(this));
-        this.targetSelector.a(1, new PathfinderGoalNearestAttackableTarget(this, EntityInsentient.class, 10, true, false, IMonster.d));
+//        this.goalSelector.a(1, new PathfinderGoalArrowAttack(this, 1.25D, 20, 10.0F));
+//        this.goalSelector.a(2, new PathfinderGoalRandomStroll(this, 1.0D));
+//        this.goalSelector.a(3, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F));
+//        this.goalSelector.a(4, new PathfinderGoalRandomLookaround(this));
+//        this.targetSelector.a(1, new PathfinderGoalNearestAttackableTarget(this, EntityInsentient.class, 10, true, false, IMonster.d));
     }
 
     protected void initAttributes() {
@@ -114,11 +116,11 @@ public class EntitySnowman extends EntityGolem implements IRangedEntity {
     }
 
     public boolean isDerp() {
-        return (((Byte) this.datawatcher.get(EntitySnowman.a)).byteValue() & 16) != 0;
+        return (this.datawatcher.get(EntitySnowman.a).byteValue() & 16) != 0;
     }
 
     public void setDerp(boolean flag) {
-        byte b0 = ((Byte) this.datawatcher.get(EntitySnowman.a)).byteValue();
+        byte b0 = this.datawatcher.get(EntitySnowman.a).byteValue();
 
         if (flag) {
             this.datawatcher.set(EntitySnowman.a, Byte.valueOf((byte) (b0 | 16)));

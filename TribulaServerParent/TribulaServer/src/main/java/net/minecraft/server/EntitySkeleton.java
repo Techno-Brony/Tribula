@@ -1,8 +1,9 @@
 package net.minecraft.server;
 
-import java.util.Calendar;
+import org.bukkit.event.entity.EntityCombustEvent;
+
 import javax.annotation.Nullable;
-import org.bukkit.event.entity.EntityCombustEvent; // CraftBukkit
+import java.util.Calendar;
 
 public class EntitySkeleton extends EntityMonster implements IRangedEntity {
 
@@ -26,17 +27,21 @@ public class EntitySkeleton extends EntityMonster implements IRangedEntity {
         this.o();
     }
 
+    public static void b(DataConverterManager dataconvertermanager) {
+        EntityInsentient.a(dataconvertermanager, "Skeleton");
+    }
+
     protected void r() {
-        this.goalSelector.a(1, new PathfinderGoalFloat(this));
-        this.goalSelector.a(2, new PathfinderGoalRestrictSun(this));
-        this.goalSelector.a(3, new PathfinderGoalFleeSun(this, 1.0D));
-        this.goalSelector.a(3, new PathfinderGoalAvoidTarget(this, EntityWolf.class, 6.0F, 1.0D, 1.2D));
-        this.goalSelector.a(5, new PathfinderGoalRandomStroll(this, 1.0D));
-        this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
-        this.goalSelector.a(6, new PathfinderGoalRandomLookaround(this));
-        this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, false, new Class[0]));
-        this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this, EntityHuman.class, true));
-        this.targetSelector.a(3, new PathfinderGoalNearestAttackableTarget(this, EntityIronGolem.class, true));
+//        this.goalSelector.a(1, new PathfinderGoalFloat(this));
+//        this.goalSelector.a(2, new PathfinderGoalRestrictSun(this));
+//        this.goalSelector.a(3, new PathfinderGoalFleeSun(this, 1.0D));
+//        this.goalSelector.a(3, new PathfinderGoalAvoidTarget(this, EntityWolf.class, 6.0F, 1.0D, 1.2D));
+//        this.goalSelector.a(5, new PathfinderGoalRandomStroll(this, 1.0D));
+//        this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
+//        this.goalSelector.a(6, new PathfinderGoalRandomLookaround(this));
+//        this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, false, new Class[0]));
+//        this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this, EntityHuman.class, true));
+//        this.targetSelector.a(3, new PathfinderGoalNearestAttackableTarget(this, EntityIronGolem.class, true));
     }
 
     protected void initAttributes() {
@@ -98,7 +103,7 @@ public class EntitySkeleton extends EntityMonster implements IRangedEntity {
                         itemstack.setData(itemstack.h() + this.random.nextInt(2));
                         if (itemstack.h() >= itemstack.j()) {
                             this.b(itemstack);
-                            this.setSlot(EnumItemSlot.HEAD, (ItemStack) null);
+                            this.setSlot(EnumItemSlot.HEAD, null);
                         }
                     }
 
@@ -143,7 +148,7 @@ public class EntitySkeleton extends EntityMonster implements IRangedEntity {
             double d1 = entityhuman.locZ - this.locZ;
 
             if (d0 * d0 + d1 * d1 >= 2500.0D) {
-                entityhuman.b((Statistic) AchievementList.v);
+                entityhuman.b(AchievementList.v);
             }
         } else if (damagesource.getEntity() instanceof EntityCreeper && ((EntityCreeper) damagesource.getEntity()).isPowered() && ((EntityCreeper) damagesource.getEntity()).canCauseHeadDrop()) {
             ((EntityCreeper) damagesource.getEntity()).setCausedHeadDrop();
@@ -198,8 +203,8 @@ public class EntitySkeleton extends EntityMonster implements IRangedEntity {
 
     public void o() {
         if (this.world != null && !this.world.isClientSide) {
-            this.goalSelector.a((PathfinderGoal) this.bx);
-            this.goalSelector.a((PathfinderGoal) this.c);
+            this.goalSelector.a(this.bx);
+            this.goalSelector.a(this.c);
             ItemStack itemstack = this.getItemInMainHand();
 
             if (itemstack != null && itemstack.getItem() == Items.BOW) {
@@ -226,8 +231,8 @@ public class EntitySkeleton extends EntityMonster implements IRangedEntity {
         double d3 = (double) MathHelper.sqrt(d0 * d0 + d2 * d2);
 
         entitytippedarrow.shoot(d0, d1 + d3 * 0.20000000298023224D, d2, 1.6F, (float) (14 - this.world.getDifficulty().a() * 4));
-        int i = EnchantmentManager.a(Enchantments.ARROW_DAMAGE, (EntityLiving) this);
-        int j = EnchantmentManager.a(Enchantments.ARROW_KNOCKBACK, (EntityLiving) this);
+        int i = EnchantmentManager.a(Enchantments.ARROW_DAMAGE, this);
+        int j = EnchantmentManager.a(Enchantments.ARROW_KNOCKBACK, this);
         DifficultyDamageScaler difficultydamagescaler = this.world.D(new BlockPosition(this));
 
         entitytippedarrow.c((double) (f * 2.0F) + this.random.nextGaussian() * 0.25D + (double) ((float) this.world.getDifficulty().a() * 0.11F));
@@ -241,7 +246,7 @@ public class EntitySkeleton extends EntityMonster implements IRangedEntity {
 
         boolean flag = this.isBurning() && difficultydamagescaler.c() && this.random.nextBoolean() || this.getSkeletonType() == EnumSkeletonType.WITHER;
 
-        flag = flag || EnchantmentManager.a(Enchantments.ARROW_FIRE, (EntityLiving) this) > 0;
+        flag = flag || EnchantmentManager.a(Enchantments.ARROW_FIRE, this) > 0;
         if (flag) {
             // CraftBukkit start - call EntityCombustEvent
             EntityCombustEvent event = new EntityCombustEvent(entitytippedarrow.getBukkitEntity(), 100);
@@ -278,7 +283,7 @@ public class EntitySkeleton extends EntityMonster implements IRangedEntity {
     }
 
     public EnumSkeletonType getSkeletonType() {
-        return EnumSkeletonType.a(((Integer) this.datawatcher.get(EntitySkeleton.a)).intValue());
+        return EnumSkeletonType.a(this.datawatcher.get(EntitySkeleton.a).intValue());
     }
 
     public void setSkeletonType(EnumSkeletonType enumskeletontype) {
@@ -294,10 +299,6 @@ public class EntitySkeleton extends EntityMonster implements IRangedEntity {
             this.setSize(0.6F, 1.99F);
         }
 
-    }
-
-    public static void b(DataConverterManager dataconvertermanager) {
-        EntityInsentient.a(dataconvertermanager, "Skeleton");
     }
 
     public void a(NBTTagCompound nbttagcompound) {

@@ -1,7 +1,7 @@
 package net.minecraft.server;
 
-import java.util.Random;
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class EntitySpider extends EntityMonster {
 
@@ -17,15 +17,15 @@ public class EntitySpider extends EntityMonster {
     }
 
     protected void r() {
-        this.goalSelector.a(1, new PathfinderGoalFloat(this));
-        this.goalSelector.a(3, new PathfinderGoalLeapAtTarget(this, 0.4F));
-        this.goalSelector.a(4, new EntitySpider.PathfinderGoalSpiderMeleeAttack(this));
-        this.goalSelector.a(5, new PathfinderGoalRandomStroll(this, 0.8D));
-        this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
-        this.goalSelector.a(6, new PathfinderGoalRandomLookaround(this));
-        this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, false, new Class[0]));
-        this.targetSelector.a(2, new EntitySpider.PathfinderGoalSpiderNearestAttackableTarget(this, EntityHuman.class));
-        this.targetSelector.a(3, new EntitySpider.PathfinderGoalSpiderNearestAttackableTarget(this, EntityIronGolem.class));
+//        this.goalSelector.a(1, new PathfinderGoalFloat(this));
+//        this.goalSelector.a(3, new PathfinderGoalLeapAtTarget(this, 0.4F));
+//        this.goalSelector.a(4, new EntitySpider.PathfinderGoalSpiderMeleeAttack(this));
+//        this.goalSelector.a(5, new PathfinderGoalRandomStroll(this, 0.8D));
+//        this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
+//        this.goalSelector.a(6, new PathfinderGoalRandomLookaround(this));
+//        this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, false, new Class[0]));
+//        this.targetSelector.a(2, new EntitySpider.PathfinderGoalSpiderNearestAttackableTarget(this, EntityHuman.class));
+//        this.targetSelector.a(3, new EntitySpider.PathfinderGoalSpiderNearestAttackableTarget(this, EntityIronGolem.class));
     }
 
     public double ay() {
@@ -87,15 +87,15 @@ public class EntitySpider extends EntityMonster {
     }
 
     public boolean d(MobEffect mobeffect) {
-        return mobeffect.getMobEffect() == MobEffects.POISON ? false : super.d(mobeffect);
+        return mobeffect.getMobEffect() != MobEffects.POISON && super.d(mobeffect);
     }
 
     public boolean o() {
-        return (((Byte) this.datawatcher.get(EntitySpider.a)).byteValue() & 1) != 0;
+        return (this.datawatcher.get(EntitySpider.a).byteValue() & 1) != 0;
     }
 
     public void a(boolean flag) {
-        byte b0 = ((Byte) this.datawatcher.get(EntitySpider.a)).byteValue();
+        byte b0 = this.datawatcher.get(EntitySpider.a).byteValue();
 
         if (flag) {
             b0 = (byte) (b0 | 1);
@@ -114,7 +114,7 @@ public class EntitySpider extends EntityMonster {
             EntitySkeleton entityskeleton = new EntitySkeleton(this.world);
 
             entityskeleton.setPositionRotation(this.locX, this.locY, this.locZ, this.yaw, 0.0F);
-            entityskeleton.prepare(difficultydamagescaler, (GroupDataEntity) null);
+            entityskeleton.prepare(difficultydamagescaler, null);
             this.world.addEntity(entityskeleton, org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason.JOCKEY); // CraftBukkit - add SpawnReason
             entityskeleton.startRiding(this);
         }
@@ -150,7 +150,7 @@ public class EntitySpider extends EntityMonster {
         public boolean a() {
             float f = this.e.e(1.0F);
 
-            return f >= 0.5F ? false : super.a();
+            return f < 0.5F && super.a();
         }
     }
 
@@ -164,7 +164,7 @@ public class EntitySpider extends EntityMonster {
             float f = this.b.e(1.0F);
 
             if (f >= 0.5F && this.b.getRandom().nextInt(100) == 0) {
-                this.b.setGoalTarget((EntityLiving) null);
+                this.b.setGoalTarget(null);
                 return false;
             } else {
                 return super.b();

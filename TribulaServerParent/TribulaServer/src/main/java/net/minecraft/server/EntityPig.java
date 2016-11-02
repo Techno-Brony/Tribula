@@ -1,16 +1,16 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Sets;
+import org.bukkit.craftbukkit.event.CraftEventFactory;
+
+import javax.annotation.Nullable;
 import java.util.Iterator;
 import java.util.Set;
-import javax.annotation.Nullable;
-
-import org.bukkit.craftbukkit.event.CraftEventFactory; // CraftBukkit
 
 public class EntityPig extends EntityAnimal {
 
     private static final DataWatcherObject<Boolean> bx = DataWatcher.a(EntityPig.class, DataWatcherRegistry.h);
-    private static final Set<Item> by = Sets.newHashSet(new Item[] { Items.CARROT, Items.POTATO, Items.BEETROOT});
+    private static final Set<Item> by = Sets.newHashSet(Items.CARROT, Items.POTATO, Items.BEETROOT);
     private boolean bz;
     private int bB;
     private int bC;
@@ -20,16 +20,20 @@ public class EntityPig extends EntityAnimal {
         this.setSize(0.9F, 0.9F);
     }
 
+    public static void b(DataConverterManager dataconvertermanager) {
+        EntityInsentient.a(dataconvertermanager, "Pig");
+    }
+
     protected void r() {
-        this.goalSelector.a(0, new PathfinderGoalFloat(this));
-        this.goalSelector.a(1, new PathfinderGoalPanic(this, 1.25D));
-        this.goalSelector.a(3, new PathfinderGoalBreed(this, 1.0D));
-        this.goalSelector.a(4, new PathfinderGoalTempt(this, 1.2D, Items.CARROT_ON_A_STICK, false));
-        this.goalSelector.a(4, new PathfinderGoalTempt(this, 1.2D, false, EntityPig.by));
-        this.goalSelector.a(5, new PathfinderGoalFollowParent(this, 1.1D));
-        this.goalSelector.a(6, new PathfinderGoalRandomStroll(this, 1.0D));
-        this.goalSelector.a(7, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F));
-        this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
+//        this.goalSelector.a(0, new PathfinderGoalFloat(this));
+//        this.goalSelector.a(1, new PathfinderGoalPanic(this, 1.25D));
+//        this.goalSelector.a(3, new PathfinderGoalBreed(this, 1.0D));
+//        this.goalSelector.a(4, new PathfinderGoalTempt(this, 1.2D, Items.CARROT_ON_A_STICK, false));
+//        this.goalSelector.a(4, new PathfinderGoalTempt(this, 1.2D, false, EntityPig.by));
+//        this.goalSelector.a(5, new PathfinderGoalFollowParent(this, 1.1D));
+//        this.goalSelector.a(6, new PathfinderGoalRandomStroll(this, 1.0D));
+//        this.goalSelector.a(7, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F));
+//        this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
     }
 
     protected void initAttributes() {
@@ -40,7 +44,7 @@ public class EntityPig extends EntityAnimal {
 
     @Nullable
     public Entity bw() {
-        return this.bx().isEmpty() ? null : (Entity) this.bx().get(0);
+        return this.bx().isEmpty() ? null : this.bx().get(0);
     }
 
     public boolean cP() {
@@ -64,10 +68,6 @@ public class EntityPig extends EntityAnimal {
     protected void i() {
         super.i();
         this.datawatcher.register(EntityPig.bx, Boolean.valueOf(false));
-    }
-
-    public static void b(DataConverterManager dataconvertermanager) {
-        EntityInsentient.a(dataconvertermanager, "Pig");
     }
 
     public void b(NBTTagCompound nbttagcompound) {
@@ -123,7 +123,7 @@ public class EntityPig extends EntityAnimal {
     }
 
     public boolean hasSaddle() {
-        return ((Boolean) this.datawatcher.get(EntityPig.bx)).booleanValue();
+        return this.datawatcher.get(EntityPig.bx).booleanValue();
     }
 
     public void setSaddle(boolean flag) {
@@ -167,14 +167,14 @@ public class EntityPig extends EntityAnimal {
             while (iterator.hasNext()) {
                 EntityHuman entityhuman = (EntityHuman) iterator.next();
 
-                entityhuman.b((Statistic) AchievementList.u);
+                entityhuman.b(AchievementList.u);
             }
         }
 
     }
 
     public void g(float f, float f1) {
-        Entity entity = this.bx().isEmpty() ? null : (Entity) this.bx().get(0);
+        Entity entity = this.bx().isEmpty() ? null : this.bx().get(0);
 
         if (this.isVehicle() && this.cP()) {
             this.yaw = entity.yaw;

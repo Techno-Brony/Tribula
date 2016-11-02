@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
-import javax.annotation.Nullable;
-// CraftBukkit start
 import org.bukkit.craftbukkit.event.CraftEventFactory;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
+
+import javax.annotation.Nullable;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class EntityCow extends EntityAnimal {
@@ -18,14 +20,14 @@ public class EntityCow extends EntityAnimal {
     }
 
     protected void r() {
-        this.goalSelector.a(0, new PathfinderGoalFloat(this));
-        this.goalSelector.a(1, new PathfinderGoalPanic(this, 2.0D));
-        this.goalSelector.a(2, new PathfinderGoalBreed(this, 1.0D));
-        this.goalSelector.a(3, new PathfinderGoalTempt(this, 1.25D, Items.WHEAT, false));
-        this.goalSelector.a(4, new PathfinderGoalFollowParent(this, 1.25D));
-        this.goalSelector.a(5, new PathfinderGoalRandomStroll(this, 1.0D));
-        this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F));
-        this.goalSelector.a(7, new PathfinderGoalRandomLookaround(this));
+//        this.goalSelector.a(0, new PathfinderGoalFloat(this));
+//        this.goalSelector.a(1, new PathfinderGoalPanic(this, 2.0D));
+//        this.goalSelector.a(2, new PathfinderGoalBreed(this, 1.0D));
+//        this.goalSelector.a(3, new PathfinderGoalTempt(this, 1.25D, Items.WHEAT, false));
+//        this.goalSelector.a(4, new PathfinderGoalFollowParent(this, 1.25D));
+//        this.goalSelector.a(5, new PathfinderGoalRandomStroll(this, 1.0D));
+//        this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F));
+//        this.goalSelector.a(7, new PathfinderGoalRandomLookaround(this));
     }
 
     protected void initAttributes() {

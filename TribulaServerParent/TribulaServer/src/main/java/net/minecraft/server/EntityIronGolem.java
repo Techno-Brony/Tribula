@@ -1,13 +1,12 @@
 package net.minecraft.server;
 
-import com.google.common.base.Predicate;
 import javax.annotation.Nullable;
 
 public class EntityIronGolem extends EntityGolem {
 
     protected static final DataWatcherObject<Byte> a = DataWatcher.a(EntityIronGolem.class, DataWatcherRegistry.a);
-    private int c;
     Village b;
+    private int c;
     private int bx;
     private int by;
 
@@ -16,26 +15,30 @@ public class EntityIronGolem extends EntityGolem {
         this.setSize(1.4F, 2.7F);
     }
 
-    protected void r() {
-        this.goalSelector.a(1, new PathfinderGoalMeleeAttack(this, 1.0D, true));
-        this.goalSelector.a(2, new PathfinderGoalMoveTowardsTarget(this, 0.9D, 32.0F));
-        this.goalSelector.a(3, new PathfinderGoalMoveThroughVillage(this, 0.6D, true));
-        this.goalSelector.a(4, new PathfinderGoalMoveTowardsRestriction(this, 1.0D));
-        this.goalSelector.a(5, new PathfinderGoalOfferFlower(this));
-        this.goalSelector.a(6, new PathfinderGoalRandomStroll(this, 0.6D));
-        this.goalSelector.a(7, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F));
-        this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
-        this.targetSelector.a(1, new PathfinderGoalDefendVillage(this));
-        this.targetSelector.a(2, new PathfinderGoalHurtByTarget(this, false, new Class[0]));
-        this.targetSelector.a(3, new PathfinderGoalNearestAttackableTarget(this, EntityInsentient.class, 10, false, true, new Predicate() {
-            public boolean a(@Nullable EntityInsentient entityinsentient) {
-                return entityinsentient != null && IMonster.e.apply(entityinsentient) && !(entityinsentient instanceof EntityCreeper);
-            }
+    public static void b(DataConverterManager dataconvertermanager) {
+        EntityInsentient.a(dataconvertermanager, "VillagerGolem");
+    }
 
-            public boolean apply(Object object) {
-                return this.a((EntityInsentient) object);
-            }
-        }));
+    protected void r() {
+//        this.goalSelector.a(1, new PathfinderGoalMeleeAttack(this, 1.0D, true));
+//        this.goalSelector.a(2, new PathfinderGoalMoveTowardsTarget(this, 0.9D, 32.0F));
+//        this.goalSelector.a(3, new PathfinderGoalMoveThroughVillage(this, 0.6D, true));
+//        this.goalSelector.a(4, new PathfinderGoalMoveTowardsRestriction(this, 1.0D));
+//        this.goalSelector.a(5, new PathfinderGoalOfferFlower(this));
+//        this.goalSelector.a(6, new PathfinderGoalRandomStroll(this, 0.6D));
+//        this.goalSelector.a(7, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F));
+//        this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
+//        this.targetSelector.a(1, new PathfinderGoalDefendVillage(this));
+//        this.targetSelector.a(2, new PathfinderGoalHurtByTarget(this, false, new Class[0]));
+//        this.targetSelector.a(3, new PathfinderGoalNearestAttackableTarget(this, EntityInsentient.class, 10, false, true, new Predicate() {
+//            public boolean a(@Nullable EntityInsentient entityinsentient) {
+//                return entityinsentient != null && IMonster.e.apply(entityinsentient) && !(entityinsentient instanceof EntityCreeper);
+//            }
+//
+//            public boolean apply(Object object) {
+//                return this.a((EntityInsentient) object);
+//            }
+//        }));
     }
 
     protected void i() {
@@ -95,18 +98,14 @@ public class EntityIronGolem extends EntityGolem {
             IBlockData iblockdata = this.world.getType(new BlockPosition(i, j, k));
 
             if (iblockdata.getMaterial() != Material.AIR) {
-                this.world.addParticle(EnumParticle.BLOCK_CRACK, this.locX + ((double) this.random.nextFloat() - 0.5D) * (double) this.width, this.getBoundingBox().b + 0.1D, this.locZ + ((double) this.random.nextFloat() - 0.5D) * (double) this.width, 4.0D * ((double) this.random.nextFloat() - 0.5D), 0.5D, ((double) this.random.nextFloat() - 0.5D) * 4.0D, new int[] { Block.getCombinedId(iblockdata)});
+                this.world.addParticle(EnumParticle.BLOCK_CRACK, this.locX + ((double) this.random.nextFloat() - 0.5D) * (double) this.width, this.getBoundingBox().b + 0.1D, this.locZ + ((double) this.random.nextFloat() - 0.5D) * (double) this.width, 4.0D * ((double) this.random.nextFloat() - 0.5D), 0.5D, ((double) this.random.nextFloat() - 0.5D) * 4.0D, Block.getCombinedId(iblockdata));
             }
         }
 
     }
 
     public boolean d(Class<? extends EntityLiving> oclass) {
-        return this.isPlayerCreated() && EntityHuman.class.isAssignableFrom(oclass) ? false : (oclass == EntityCreeper.class ? false : super.d(oclass));
-    }
-
-    public static void b(DataConverterManager dataconvertermanager) {
-        EntityInsentient.a(dataconvertermanager, "VillagerGolem");
+        return !(this.isPlayerCreated() && EntityHuman.class.isAssignableFrom(oclass)) && (oclass != EntityCreeper.class && super.d(oclass));
     }
 
     public void b(NBTTagCompound nbttagcompound) {
@@ -126,7 +125,7 @@ public class EntityIronGolem extends EntityGolem {
 
         if (flag) {
             entity.motY += 0.4000000059604645D;
-            this.a((EntityLiving) this, entity);
+            this.a(this, entity);
         }
 
         this.a(SoundEffects.cM, 1.0F, 1.0F);
@@ -164,11 +163,11 @@ public class EntityIronGolem extends EntityGolem {
     }
 
     public boolean isPlayerCreated() {
-        return (((Byte) this.datawatcher.get(EntityIronGolem.a)).byteValue() & 1) != 0;
+        return (this.datawatcher.get(EntityIronGolem.a).byteValue() & 1) != 0;
     }
 
     public void setPlayerCreated(boolean flag) {
-        byte b0 = ((Byte) this.datawatcher.get(EntityIronGolem.a)).byteValue();
+        byte b0 = this.datawatcher.get(EntityIronGolem.a).byteValue();
 
         if (flag) {
             this.datawatcher.set(EntityIronGolem.a, Byte.valueOf((byte) (b0 | 1)));

@@ -19,25 +19,29 @@ public class EntityRabbit extends EntityAnimal {
         this.initializePathFinderGoals(); // CraftBukkit - moved code
     }
 
+    public static void b(DataConverterManager dataconvertermanager) {
+        EntityInsentient.a(dataconvertermanager, "Rabbit");
+    }
+    // CraftBukkit end
+
     // CraftBukkit start - code from constructor
     public void initializePathFinderGoals(){
         this.c(0.0D);
     }
-    // CraftBukkit end
 
     protected void r() {
-        this.goalSelector.a(1, new PathfinderGoalFloat(this));
-        this.goalSelector.a(1, new EntityRabbit.PathfinderGoalRabbitPanic(this, 2.2D));
-        this.goalSelector.a(2, new PathfinderGoalBreed(this, 0.8D));
-        this.goalSelector.a(3, new PathfinderGoalTempt(this, 1.0D, Items.CARROT, false));
-        this.goalSelector.a(3, new PathfinderGoalTempt(this, 1.0D, Items.GOLDEN_CARROT, false));
-        this.goalSelector.a(3, new PathfinderGoalTempt(this, 1.0D, Item.getItemOf(Blocks.YELLOW_FLOWER), false));
-        this.goalSelector.a(4, new EntityRabbit.PathfinderGoalRabbitAvoidTarget(this, EntityHuman.class, 8.0F, 2.2D, 2.2D));
-        this.goalSelector.a(4, new EntityRabbit.PathfinderGoalRabbitAvoidTarget(this, EntityWolf.class, 10.0F, 2.2D, 2.2D));
-        this.goalSelector.a(4, new EntityRabbit.PathfinderGoalRabbitAvoidTarget(this, EntityMonster.class, 4.0F, 2.2D, 2.2D));
-        this.goalSelector.a(5, new EntityRabbit.PathfinderGoalEatCarrots(this));
-        this.goalSelector.a(6, new PathfinderGoalRandomStroll(this, 0.6D));
-        this.goalSelector.a(11, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 10.0F));
+//        this.goalSelector.a(1, new PathfinderGoalFloat(this));
+//        this.goalSelector.a(1, new EntityRabbit.PathfinderGoalRabbitPanic(this, 2.2D));
+//        this.goalSelector.a(2, new PathfinderGoalBreed(this, 0.8D));
+//        this.goalSelector.a(3, new PathfinderGoalTempt(this, 1.0D, Items.CARROT, false));
+//        this.goalSelector.a(3, new PathfinderGoalTempt(this, 1.0D, Items.GOLDEN_CARROT, false));
+//        this.goalSelector.a(3, new PathfinderGoalTempt(this, 1.0D, Item.getItemOf(Blocks.YELLOW_FLOWER), false));
+//        this.goalSelector.a(4, new EntityRabbit.PathfinderGoalRabbitAvoidTarget(this, EntityHuman.class, 8.0F, 2.2D, 2.2D));
+//        this.goalSelector.a(4, new EntityRabbit.PathfinderGoalRabbitAvoidTarget(this, EntityWolf.class, 10.0F, 2.2D, 2.2D));
+//        this.goalSelector.a(4, new EntityRabbit.PathfinderGoalRabbitAvoidTarget(this, EntityMonster.class, 4.0F, 2.2D, 2.2D));
+//        this.goalSelector.a(5, new EntityRabbit.PathfinderGoalEatCarrots(this));
+//        this.goalSelector.a(6, new PathfinderGoalRandomStroll(this, 0.6D));
+//        this.goalSelector.a(11, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 10.0F));
     }
 
     protected float ck() {
@@ -45,7 +49,7 @@ public class EntityRabbit extends EntityAnimal {
             PathEntity pathentity = this.navigation.k();
 
             if (pathentity != null && pathentity.e() < pathentity.d()) {
-                Vec3D vec3d = pathentity.a((Entity) this);
+                Vec3D vec3d = pathentity.a(this);
 
                 if (vec3d.y > this.locY) {
                     return 0.5F;
@@ -137,7 +141,7 @@ public class EntityRabbit extends EntityAnimal {
                     Vec3D vec3d = new Vec3D(this.moveController.d(), this.moveController.e(), this.moveController.f());
 
                     if (pathentity != null && pathentity.e() < pathentity.d()) {
-                        vec3d = pathentity.a((Entity) this);
+                        vec3d = pathentity.a(this);
                     }
 
                     this.a(vec3d.x, vec3d.z);
@@ -197,10 +201,6 @@ public class EntityRabbit extends EntityAnimal {
         this.getAttributeInstance(GenericAttributes.MOVEMENT_SPEED).setValue(0.30000001192092896D);
     }
 
-    public static void b(DataConverterManager dataconvertermanager) {
-        EntityInsentient.a(dataconvertermanager, "Rabbit");
-    }
-
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
         nbttagcompound.setInt("RabbitType", this.getRabbitType());
@@ -243,7 +243,7 @@ public class EntityRabbit extends EntityAnimal {
     }
 
     public boolean damageEntity(DamageSource damagesource, float f) {
-        return this.isInvulnerable(damagesource) ? false : super.damageEntity(damagesource, f);
+        return !this.isInvulnerable(damagesource) && super.damageEntity(damagesource, f);
     }
 
     @Nullable
@@ -276,7 +276,7 @@ public class EntityRabbit extends EntityAnimal {
     }
 
     public int getRabbitType() {
-        return ((Integer) this.datawatcher.get(EntityRabbit.bx)).intValue();
+        return this.datawatcher.get(EntityRabbit.bx).intValue();
     }
 
     public void setRabbitType(int i) {
@@ -330,7 +330,7 @@ public class EntityRabbit extends EntityAnimal {
         BlockCarrots blockcarrots = (BlockCarrots) Blocks.CARROTS;
         IBlockData iblockdata = blockcarrots.setAge(blockcarrots.g());
 
-        this.world.addParticle(EnumParticle.BLOCK_DUST, this.locX + (double) (this.random.nextFloat() * this.width * 2.0F) - (double) this.width, this.locY + 0.5D + (double) (this.random.nextFloat() * this.length), this.locZ + (double) (this.random.nextFloat() * this.width * 2.0F) - (double) this.width, 0.0D, 0.0D, 0.0D, new int[] { Block.getCombinedId(iblockdata)});
+        this.world.addParticle(EnumParticle.BLOCK_DUST, this.locX + (double) (this.random.nextFloat() * this.width * 2.0F) - (double) this.width, this.locY + 0.5D + (double) (this.random.nextFloat() * this.length), this.locZ + (double) (this.random.nextFloat() * this.width * 2.0F) - (double) this.width, 0.0D, 0.0D, 0.0D, Block.getCombinedId(iblockdata));
         this.bD = 40;
     }
 
@@ -415,7 +415,7 @@ public class EntityRabbit extends EntityAnimal {
                 Block block = iblockdata.getBlock();
 
                 if (this.e && block instanceof BlockCarrots) {
-                    Integer integer = (Integer) iblockdata.get(BlockCarrots.AGE);
+                    Integer integer = iblockdata.get(BlockCarrots.AGE);
 
                     if (integer.intValue() == 0) {
                         // CraftBukkit start
@@ -513,6 +513,15 @@ public class EntityRabbit extends EntityAnimal {
         }
     }
 
+    public static class GroupDataRabbit implements GroupDataEntity {
+
+        public int a;
+
+        public GroupDataRabbit(int i) {
+            this.a = i;
+        }
+    }
+
     public class ControllerJumpRabbit extends ControllerJump {
 
         private final EntityRabbit c;
@@ -541,15 +550,6 @@ public class EntityRabbit extends EntityAnimal {
                 this.a = false;
             }
 
-        }
-    }
-
-    public static class GroupDataRabbit implements GroupDataEntity {
-
-        public int a;
-
-        public GroupDataRabbit(int i) {
-            this.a = i;
         }
     }
 }

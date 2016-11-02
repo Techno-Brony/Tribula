@@ -1,19 +1,41 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Maps;
-import java.util.Map;
-import java.util.Random;
-import javax.annotation.Nullable;
-
-// CraftBukkit start
 import org.bukkit.event.entity.SheepRegrowWoolEvent;
 import org.bukkit.event.player.PlayerShearEntityEvent;
 import org.bukkit.inventory.InventoryView;
+
+import javax.annotation.Nullable;
+import java.util.Map;
+import java.util.Random;
+
+// CraftBukkit start
 // CraftBukkit end
 
 public class EntitySheep extends EntityAnimal {
 
     private static final DataWatcherObject<Byte> bx = DataWatcher.a(EntitySheep.class, DataWatcherRegistry.a);
+    private static final Map<EnumColor, float[]> bz = Maps.newEnumMap(EnumColor.class);
+
+    static {
+        EntitySheep.bz.put(EnumColor.WHITE, new float[] { 1.0F, 1.0F, 1.0F});
+        EntitySheep.bz.put(EnumColor.ORANGE, new float[] { 0.85F, 0.5F, 0.2F});
+        EntitySheep.bz.put(EnumColor.MAGENTA, new float[] { 0.7F, 0.3F, 0.85F});
+        EntitySheep.bz.put(EnumColor.LIGHT_BLUE, new float[] { 0.4F, 0.6F, 0.85F});
+        EntitySheep.bz.put(EnumColor.YELLOW, new float[] { 0.9F, 0.9F, 0.2F});
+        EntitySheep.bz.put(EnumColor.LIME, new float[] { 0.5F, 0.8F, 0.1F});
+        EntitySheep.bz.put(EnumColor.PINK, new float[] { 0.95F, 0.5F, 0.65F});
+        EntitySheep.bz.put(EnumColor.GRAY, new float[] { 0.3F, 0.3F, 0.3F});
+        EntitySheep.bz.put(EnumColor.SILVER, new float[] { 0.6F, 0.6F, 0.6F});
+        EntitySheep.bz.put(EnumColor.CYAN, new float[] { 0.3F, 0.5F, 0.6F});
+        EntitySheep.bz.put(EnumColor.PURPLE, new float[] { 0.5F, 0.25F, 0.7F});
+        EntitySheep.bz.put(EnumColor.BLUE, new float[] { 0.2F, 0.3F, 0.7F});
+        EntitySheep.bz.put(EnumColor.BROWN, new float[] { 0.4F, 0.3F, 0.2F});
+        EntitySheep.bz.put(EnumColor.GREEN, new float[] { 0.4F, 0.5F, 0.2F});
+        EntitySheep.bz.put(EnumColor.RED, new float[] { 0.6F, 0.2F, 0.2F});
+        EntitySheep.bz.put(EnumColor.BLACK, new float[] { 0.1F, 0.1F, 0.1F});
+    }
+
     private final InventoryCrafting container = new InventoryCrafting(new Container() {
         public boolean a(EntityHuman entityhuman) {
             return false;
@@ -26,13 +48,8 @@ public class EntitySheep extends EntityAnimal {
         }
         // CraftBukkit end
     }, 2, 1);
-    private static final Map<EnumColor, float[]> bz = Maps.newEnumMap(EnumColor.class);
     private int bB;
     private PathfinderGoalEatTile bC;
-
-    public static float[] a(EnumColor enumcolor) {
-        return (float[]) EntitySheep.bz.get(enumcolor);
-    }
 
     public EntitySheep(World world) {
         super(world);
@@ -42,17 +59,31 @@ public class EntitySheep extends EntityAnimal {
         this.container.resultInventory = new InventoryCraftResult(); // CraftBukkit - add result slot for event
     }
 
+    public static float[] a(EnumColor enumcolor) {
+        return EntitySheep.bz.get(enumcolor);
+    }
+
+    public static void b(DataConverterManager dataconvertermanager) {
+        EntityInsentient.a(dataconvertermanager, "Sheep");
+    }
+
+    public static EnumColor a(Random random) {
+        int i = random.nextInt(100);
+
+        return i < 5 ? EnumColor.BLACK : (i < 10 ? EnumColor.GRAY : (i < 15 ? EnumColor.SILVER : (i < 18 ? EnumColor.BROWN : (random.nextInt(500) == 0 ? EnumColor.PINK : EnumColor.WHITE))));
+    }
+
     protected void r() {
-        this.bC = new PathfinderGoalEatTile(this);
-        this.goalSelector.a(0, new PathfinderGoalFloat(this));
-        this.goalSelector.a(1, new PathfinderGoalPanic(this, 1.25D));
-        this.goalSelector.a(2, new PathfinderGoalBreed(this, 1.0D));
-        this.goalSelector.a(3, new PathfinderGoalTempt(this, 1.1D, Items.WHEAT, false));
-        this.goalSelector.a(4, new PathfinderGoalFollowParent(this, 1.1D));
-        this.goalSelector.a(5, this.bC);
-        this.goalSelector.a(6, new PathfinderGoalRandomStroll(this, 1.0D));
-        this.goalSelector.a(7, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F));
-        this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
+//        this.bC = new PathfinderGoalEatTile(this);
+//        this.goalSelector.a(0, new PathfinderGoalFloat(this));
+//        this.goalSelector.a(1, new PathfinderGoalPanic(this, 1.25D));
+//        this.goalSelector.a(2, new PathfinderGoalBreed(this, 1.0D));
+//        this.goalSelector.a(3, new PathfinderGoalTempt(this, 1.1D, Items.WHEAT, false));
+//        this.goalSelector.a(4, new PathfinderGoalFollowParent(this, 1.1D));
+//        this.goalSelector.a(5, this.bC);
+//        this.goalSelector.a(6, new PathfinderGoalRandomStroll(this, 1.0D));
+//        this.goalSelector.a(7, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F));
+//        this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
     }
 
     protected void M() {
@@ -170,10 +201,6 @@ public class EntitySheep extends EntityAnimal {
         return super.a(entityhuman, enumhand, itemstack);
     }
 
-    public static void b(DataConverterManager dataconvertermanager) {
-        EntityInsentient.a(dataconvertermanager, "Sheep");
-    }
-
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
         nbttagcompound.setBoolean("Sheared", this.isSheared());
@@ -203,21 +230,21 @@ public class EntitySheep extends EntityAnimal {
     }
 
     public EnumColor getColor() {
-        return EnumColor.fromColorIndex(((Byte) this.datawatcher.get(EntitySheep.bx)).byteValue() & 15);
+        return EnumColor.fromColorIndex(this.datawatcher.get(EntitySheep.bx).byteValue() & 15);
     }
 
     public void setColor(EnumColor enumcolor) {
-        byte b0 = ((Byte) this.datawatcher.get(EntitySheep.bx)).byteValue();
+        byte b0 = this.datawatcher.get(EntitySheep.bx).byteValue();
 
         this.datawatcher.set(EntitySheep.bx, Byte.valueOf((byte) (b0 & 240 | enumcolor.getColorIndex() & 15)));
     }
 
     public boolean isSheared() {
-        return (((Byte) this.datawatcher.get(EntitySheep.bx)).byteValue() & 16) != 0;
+        return (this.datawatcher.get(EntitySheep.bx).byteValue() & 16) != 0;
     }
 
     public void setSheared(boolean flag) {
-        byte b0 = ((Byte) this.datawatcher.get(EntitySheep.bx)).byteValue();
+        byte b0 = this.datawatcher.get(EntitySheep.bx).byteValue();
 
         if (flag) {
             this.datawatcher.set(EntitySheep.bx, Byte.valueOf((byte) (b0 | 16)));
@@ -227,17 +254,11 @@ public class EntitySheep extends EntityAnimal {
 
     }
 
-    public static EnumColor a(Random random) {
-        int i = random.nextInt(100);
-
-        return i < 5 ? EnumColor.BLACK : (i < 10 ? EnumColor.GRAY : (i < 15 ? EnumColor.SILVER : (i < 18 ? EnumColor.BROWN : (random.nextInt(500) == 0 ? EnumColor.PINK : EnumColor.WHITE))));
-    }
-
     public EntitySheep b(EntityAgeable entityageable) {
         EntitySheep entitysheep = (EntitySheep) entityageable;
         EntitySheep entitysheep1 = new EntitySheep(this.world);
 
-        entitysheep1.setColor(this.a((EntityAnimal) this, (EntityAnimal) entitysheep));
+        entitysheep1.setColor(this.a(this, entitysheep));
         return entitysheep1;
     }
 
@@ -288,25 +309,6 @@ public class EntitySheep extends EntityAnimal {
         return this.b(entityageable);
     }
 
-    static {
-        EntitySheep.bz.put(EnumColor.WHITE, new float[] { 1.0F, 1.0F, 1.0F});
-        EntitySheep.bz.put(EnumColor.ORANGE, new float[] { 0.85F, 0.5F, 0.2F});
-        EntitySheep.bz.put(EnumColor.MAGENTA, new float[] { 0.7F, 0.3F, 0.85F});
-        EntitySheep.bz.put(EnumColor.LIGHT_BLUE, new float[] { 0.4F, 0.6F, 0.85F});
-        EntitySheep.bz.put(EnumColor.YELLOW, new float[] { 0.9F, 0.9F, 0.2F});
-        EntitySheep.bz.put(EnumColor.LIME, new float[] { 0.5F, 0.8F, 0.1F});
-        EntitySheep.bz.put(EnumColor.PINK, new float[] { 0.95F, 0.5F, 0.65F});
-        EntitySheep.bz.put(EnumColor.GRAY, new float[] { 0.3F, 0.3F, 0.3F});
-        EntitySheep.bz.put(EnumColor.SILVER, new float[] { 0.6F, 0.6F, 0.6F});
-        EntitySheep.bz.put(EnumColor.CYAN, new float[] { 0.3F, 0.5F, 0.6F});
-        EntitySheep.bz.put(EnumColor.PURPLE, new float[] { 0.5F, 0.25F, 0.7F});
-        EntitySheep.bz.put(EnumColor.BLUE, new float[] { 0.2F, 0.3F, 0.7F});
-        EntitySheep.bz.put(EnumColor.BROWN, new float[] { 0.4F, 0.3F, 0.2F});
-        EntitySheep.bz.put(EnumColor.GREEN, new float[] { 0.4F, 0.5F, 0.2F});
-        EntitySheep.bz.put(EnumColor.RED, new float[] { 0.6F, 0.2F, 0.2F});
-        EntitySheep.bz.put(EnumColor.BLACK, new float[] { 0.1F, 0.1F, 0.1F});
-    }
-
     static class SyntheticClass_1 {
 
         static final int[] a = new int[EnumColor.values().length];
@@ -315,97 +317,81 @@ public class EntitySheep extends EntityAnimal {
             try {
                 EntitySheep.SyntheticClass_1.a[EnumColor.WHITE.ordinal()] = 1;
             } catch (NoSuchFieldError nosuchfielderror) {
-                ;
             }
 
             try {
                 EntitySheep.SyntheticClass_1.a[EnumColor.ORANGE.ordinal()] = 2;
             } catch (NoSuchFieldError nosuchfielderror1) {
-                ;
             }
 
             try {
                 EntitySheep.SyntheticClass_1.a[EnumColor.MAGENTA.ordinal()] = 3;
             } catch (NoSuchFieldError nosuchfielderror2) {
-                ;
             }
 
             try {
                 EntitySheep.SyntheticClass_1.a[EnumColor.LIGHT_BLUE.ordinal()] = 4;
             } catch (NoSuchFieldError nosuchfielderror3) {
-                ;
             }
 
             try {
                 EntitySheep.SyntheticClass_1.a[EnumColor.YELLOW.ordinal()] = 5;
             } catch (NoSuchFieldError nosuchfielderror4) {
-                ;
             }
 
             try {
                 EntitySheep.SyntheticClass_1.a[EnumColor.LIME.ordinal()] = 6;
             } catch (NoSuchFieldError nosuchfielderror5) {
-                ;
             }
 
             try {
                 EntitySheep.SyntheticClass_1.a[EnumColor.PINK.ordinal()] = 7;
             } catch (NoSuchFieldError nosuchfielderror6) {
-                ;
             }
 
             try {
                 EntitySheep.SyntheticClass_1.a[EnumColor.GRAY.ordinal()] = 8;
             } catch (NoSuchFieldError nosuchfielderror7) {
-                ;
             }
 
             try {
                 EntitySheep.SyntheticClass_1.a[EnumColor.SILVER.ordinal()] = 9;
             } catch (NoSuchFieldError nosuchfielderror8) {
-                ;
             }
 
             try {
                 EntitySheep.SyntheticClass_1.a[EnumColor.CYAN.ordinal()] = 10;
             } catch (NoSuchFieldError nosuchfielderror9) {
-                ;
             }
 
             try {
                 EntitySheep.SyntheticClass_1.a[EnumColor.PURPLE.ordinal()] = 11;
             } catch (NoSuchFieldError nosuchfielderror10) {
-                ;
             }
 
             try {
                 EntitySheep.SyntheticClass_1.a[EnumColor.BLUE.ordinal()] = 12;
             } catch (NoSuchFieldError nosuchfielderror11) {
-                ;
             }
 
             try {
                 EntitySheep.SyntheticClass_1.a[EnumColor.BROWN.ordinal()] = 13;
             } catch (NoSuchFieldError nosuchfielderror12) {
-                ;
             }
 
             try {
                 EntitySheep.SyntheticClass_1.a[EnumColor.GREEN.ordinal()] = 14;
             } catch (NoSuchFieldError nosuchfielderror13) {
-                ;
             }
 
             try {
                 EntitySheep.SyntheticClass_1.a[EnumColor.RED.ordinal()] = 15;
             } catch (NoSuchFieldError nosuchfielderror14) {
-                ;
             }
 
             try {
                 EntitySheep.SyntheticClass_1.a[EnumColor.BLACK.ordinal()] = 16;
             } catch (NoSuchFieldError nosuchfielderror15) {
-                ;
             }
 
         }

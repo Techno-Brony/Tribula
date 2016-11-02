@@ -1,7 +1,7 @@
 package net.minecraft.server;
 
-import java.util.Random;
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class EntityGhast extends EntityFlying implements IMonster {
 
@@ -16,11 +16,15 @@ public class EntityGhast extends EntityFlying implements IMonster {
         this.moveController = new EntityGhast.ControllerGhast(this);
     }
 
+    public static void b(DataConverterManager dataconvertermanager) {
+        EntityInsentient.a(dataconvertermanager, "Ghast");
+    }
+
     protected void r() {
-        this.goalSelector.a(5, new EntityGhast.PathfinderGoalGhastIdleMove(this));
-        this.goalSelector.a(7, new EntityGhast.PathfinderGoalGhastMoveTowardsTarget(this));
-        this.goalSelector.a(7, new EntityGhast.PathfinderGoalGhastAttackTarget(this));
-        this.targetSelector.a(1, new PathfinderGoalTargetNearestPlayer(this));
+//        this.goalSelector.a(5, new EntityGhast.PathfinderGoalGhastIdleMove(this));
+//        this.goalSelector.a(7, new EntityGhast.PathfinderGoalGhastMoveTowardsTarget(this));
+//        this.goalSelector.a(7, new EntityGhast.PathfinderGoalGhastAttackTarget(this));
+//        this.targetSelector.a(1, new PathfinderGoalTargetNearestPlayer(this));
     }
 
     public void a(boolean flag) {
@@ -44,7 +48,7 @@ public class EntityGhast extends EntityFlying implements IMonster {
             return false;
         } else if ("fireball".equals(damagesource.p()) && damagesource.getEntity() instanceof EntityHuman) {
             super.damageEntity(damagesource, 1000.0F);
-            ((EntityHuman) damagesource.getEntity()).b((Statistic) AchievementList.z);
+            ((EntityHuman) damagesource.getEntity()).b(AchievementList.z);
             return true;
         } else {
             return super.damageEntity(damagesource, f);
@@ -95,10 +99,6 @@ public class EntityGhast extends EntityFlying implements IMonster {
         return 1;
     }
 
-    public static void b(DataConverterManager dataconvertermanager) {
-        EntityInsentient.a(dataconvertermanager, "Ghast");
-    }
-
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
         nbttagcompound.setInt("ExplosionPower", this.b);
@@ -146,7 +146,7 @@ public class EntityGhast extends EntityFlying implements IMonster {
 
                 ++this.a;
                 if (this.a == 10) {
-                    world.a((EntityHuman) null, 1015, new BlockPosition(this.ghast), 0);
+                    world.a(null, 1015, new BlockPosition(this.ghast), 0);
                 }
 
                 if (this.a == 20) {
@@ -156,7 +156,7 @@ public class EntityGhast extends EntityFlying implements IMonster {
                     double d3 = entityliving.getBoundingBox().b + (double) (entityliving.length / 2.0F) - (0.5D + this.ghast.locY + (double) (this.ghast.length / 2.0F));
                     double d4 = entityliving.locZ - (this.ghast.locZ + vec3d.z * 4.0D);
 
-                    world.a((EntityHuman) null, 1016, new BlockPosition(this.ghast), 0);
+                    world.a(null, 1016, new BlockPosition(this.ghast), 0);
                     EntityLargeFireball entitylargefireball = new EntityLargeFireball(world, this.ghast, d2, d3, d4);
 
                     // CraftBukkit - set bukkitYield when setting explosionpower
