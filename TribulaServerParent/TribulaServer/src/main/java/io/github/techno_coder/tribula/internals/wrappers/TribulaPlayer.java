@@ -1,4 +1,4 @@
-package io.github.techno_coder.tribula.internals;
+package io.github.techno_coder.tribula.internals.wrappers;
 
 import io.github.techno_coder.tribula.internals.enums.TribulaPlayerDifficulty;
 import io.github.techno_coder.tribula.internals.interfaces.ITribulaPlayer;

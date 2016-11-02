@@ -1,6 +1,9 @@
 package org.bukkit.craftbukkit.entity;
 
+import io.github.techno_coder.tribula.internals.enums.TribulaMobTrigger;
 import io.github.techno_coder.tribula.internals.interfaces.ITribulaMob;
+import io.github.techno_coder.tribula.internals.interfaces.ITribulaMobAPI;
+import io.github.techno_coder.tribula.internals.wrappers.TribulaSpecial;
 import net.minecraft.server.*;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
@@ -28,8 +31,13 @@ import org.bukkit.util.Vector;
 
 import java.util.*;
 
-public abstract class CraftLivingEntity extends CraftEntity implements LivingEntity, ITribulaMob {
+public class CraftLivingEntity extends CraftEntity implements LivingEntity, ITribulaMob, ITribulaMobAPI {
+    private final String customName = "Undefined"; //TODO Set custom name somehow
+    private final int level = -1; //TODO Set level somehow
+    private final double maxHealth = 0.0; //TODO Set max health somehow
     private CraftEntityEquipment equipment;
+    private int currentGoalAmount = 0;
+    private double health = maxHealth; //TODO Change health somehow
 
     public CraftLivingEntity(final CraftServer server, final EntityLiving entity) {
         super(server, entity);
@@ -483,6 +491,8 @@ public abstract class CraftLivingEntity extends CraftEntity implements LivingEnt
         setMaxHealth(health);
     }
 
+    //********* New Tribula Functionality Begins Here *********//
+
     @Override
     public AttributeInstance getAttribute(Attribute attribute) {
         return getHandle().craftAttributes.getAttribute(attribute);
@@ -508,5 +518,65 @@ public abstract class CraftLivingEntity extends CraftEntity implements LivingEnt
     @Override
     public void setCollidable(boolean collidable) {
         getHandle().collides = collidable;
+    }
+
+    @Override
+    public boolean addSpecial(TribulaSpecial special) {
+        return addAI(special);
+    }
+
+    @Override
+    public boolean addAI(PathfinderGoal goal) {
+        if (entity instanceof EntityInsentient) {
+            ((EntityInsentient) entity).goalSelector.a(currentGoalAmount, goal);
+            currentGoalAmount++;
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String getTribulaName() {
+        return customName;
+    }
+
+    @Override
+    public double getTribulaNextDamage() { //TODO To be formulate
+        return 0;
+    }
+
+    @Override
+    public int getTribulaLevel() {
+        return level;
+    }
+
+    @Override
+    public double getTribulaHealth() {
+        return health;
+    }
+
+    @Override
+    public double getTribulaMaxHealth() {
+        return maxHealth;
+    }
+
+    @Override
+    public TribulaMobTrigger getAttackTrigger() {
+        return TribulaMobTrigger.AGGRESSIVE; //TODO To be added correctly
+    }
+
+    @Override
+    public EntityLiving getDisplayMob() {
+        return this.getHandle();
+    }
+
+    @Override
+    public List<TribulaSpecial> getSpecials() {
+        return null; //TODO to be distinguished from regular pathfinder goals somehow
+    }
+
+    @Override
+    public int getSpecialCooldownTicks() {
+        return 0; //TODO
     }
 }
