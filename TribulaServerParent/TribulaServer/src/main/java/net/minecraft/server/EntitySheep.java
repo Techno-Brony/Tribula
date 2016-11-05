@@ -87,7 +87,7 @@ public class EntitySheep extends EntityAnimal {
     }
 
     protected void M() {
-        this.bB = this.bC.f();
+//        this.bB = this.bC.f();
         super.M();
     }
 

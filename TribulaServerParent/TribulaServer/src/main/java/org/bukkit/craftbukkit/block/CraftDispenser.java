@@ -4,7 +4,6 @@ import net.minecraft.server.BlockDispenser;
 import net.minecraft.server.BlockPosition;
 import net.minecraft.server.Blocks;
 import net.minecraft.server.TileEntityDispenser;
-
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Dispenser;
@@ -72,5 +71,20 @@ public class CraftDispenser extends CraftBlockState implements Dispenser {
     @Override
     public TileEntityDispenser getTileEntity() {
         return dispenser;
+    }
+
+    @Override
+    public boolean isLocked() {
+        return false;
+    }
+
+    @Override
+    public String getLock() {
+        return null;
+    }
+
+    @Override
+    public void setLock(String s) {
+
     }
 }

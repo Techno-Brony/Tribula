@@ -1,4 +1,4 @@
-main: io.github.techno_coder.tribula.database
+main: io.github.techno_coder.tribula.database.Main
 name: TribulaDatabase #TODO
 version: 1.0
 author: Technocoder

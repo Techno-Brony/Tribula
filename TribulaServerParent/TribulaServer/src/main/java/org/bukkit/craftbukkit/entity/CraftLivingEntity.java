@@ -29,6 +29,7 @@ import org.bukkit.util.BlockIterator;
 import org.bukkit.util.NumberConversions;
 import org.bukkit.util.Vector;
 
+import java.lang.reflect.Field;
 import java.util.*;
 
 public class CraftLivingEntity extends CraftEntity implements LivingEntity, ITribulaMob, ITribulaMobAPI {
@@ -491,8 +492,6 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity, ITri
         setMaxHealth(health);
     }
 
-    //********* New Tribula Functionality Begins Here *********//
-
     @Override
     public AttributeInstance getAttribute(Attribute attribute) {
         return getHandle().craftAttributes.getAttribute(attribute);
@@ -572,7 +571,18 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity, ITri
 
     @Override
     public List<TribulaSpecial> getSpecials() {
-        return null; //TODO to be distinguished from regular pathfinder goals somehow
+        if (entity instanceof EntityInsentient) {
+            try {
+                Field field = ((EntityInsentient) entity).goalSelector.getClass().getDeclaredField("b");
+                field.setAccessible(true);
+//                for (Object goal : field.get())) { // TODO da fuck is wrong with reflection ERROROOROROREOOREOREOO
+//
+//                }
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
     @Override

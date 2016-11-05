@@ -1,6 +1,6 @@
 package io.github.techno_coder.tribula.utilities.commands;
 
-import io.github.techno_coder.tribula.internals.TribulaPlayer;
+import io.github.techno_coder.tribula.internals.wrappers.TribulaPlayer;
 import io.github.techno_coder.tribula.utilities.Main;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

@@ -2,7 +2,6 @@ package org.bukkit.craftbukkit.block;
 
 import net.minecraft.server.BlockPosition;
 import net.minecraft.server.TileEntityChest;
-
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
@@ -83,5 +82,20 @@ public class CraftChest extends CraftBlockState implements Chest {
     @Override
     public TileEntityChest getTileEntity() {
         return chest;
+    }
+
+    @Override
+    public boolean isLocked() {
+        return false;
+    }
+
+    @Override
+    public String getLock() {
+        return null;
+    }
+
+    @Override
+    public void setLock(String s) {
+
     }
 }

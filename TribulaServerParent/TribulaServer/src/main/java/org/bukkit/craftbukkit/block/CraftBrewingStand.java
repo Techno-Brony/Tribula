@@ -59,4 +59,19 @@ public class CraftBrewingStand extends CraftBlockState implements BrewingStand {
     public void setFuelLevel(int level) {
         brewingStand.setProperty(1, level);
     }
+
+    @Override
+    public boolean isLocked() {
+        return false;
+    }
+
+    @Override
+    public String getLock() {
+        return null;
+    }
+
+    @Override
+    public void setLock(String s) {
+
+    }
 }

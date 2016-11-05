@@ -110,16 +110,17 @@ public class EntitySkeleton extends EntityMonster implements IRangedEntity {
                     flag = false;
                 }
 
-                if (flag) {
-                    // CraftBukkit start
-                    EntityCombustEvent event = new EntityCombustEvent(this.getBukkitEntity(), 8);
-                    this.world.getServer().getPluginManager().callEvent(event);
-
-                    if (!event.isCancelled()) {
-                        this.setOnFire(event.getDuration());
-                    }
-                    // CraftBukkit end
-                }
+                //Custom Skeletons dont get set on fire spontaneously
+//                if (flag) {
+//                    // CraftBukkit start
+//                    EntityCombustEvent event = new EntityCombustEvent(this.getBukkitEntity(), 8);
+//                    this.world.getServer().getPluginManager().callEvent(event);
+//
+//                    if (!event.isCancelled()) {
+//                        this.setOnFire(event.getDuration());
+//                    }
+//                    // CraftBukkit end
+//                }
             }
         }
 

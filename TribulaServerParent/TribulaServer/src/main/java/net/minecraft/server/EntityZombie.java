@@ -2,7 +2,6 @@ package net.minecraft.server;
 
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityCombustByEntityEvent;
-import org.bukkit.event.entity.EntityCombustEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
 
 import javax.annotation.Nullable;
@@ -165,16 +164,17 @@ public class EntityZombie extends EntityMonster {
                     flag = false;
                 }
 
-                if (flag) {
-                    // CraftBukkit start
-                    EntityCombustEvent event = new EntityCombustEvent(this.getBukkitEntity(), 8);
-                    this.world.getServer().getPluginManager().callEvent(event);
-
-                    if (!event.isCancelled()) {
-                        this.setOnFire(event.getDuration());
-                    }
-                    // CraftBukkit end
-                }
+                //Custom zombies dont get set on fire spontaneously
+//                if (flag) {
+//                    // CraftBukkit start
+//                    EntityCombustEvent event = new EntityCombustEvent(this.getBukkitEntity(), 8);
+//                    this.world.getServer().getPluginManager().callEvent(event);
+//
+//                    if (!event.isCancelled()) {
+//                        this.setOnFire(event.getDuration());
+//                    }
+//                    // CraftBukkit end
+//                }
             }
         }
 

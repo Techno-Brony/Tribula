@@ -42,4 +42,19 @@ public class CraftHopper extends CraftBlockState implements Hopper {
     public TileEntityHopper getTileEntity() {
         return hopper;
     }
+
+    @Override
+    public boolean isLocked() {
+        return false;
+    }
+
+    @Override
+    public String getLock() {
+        return null;
+    }
+
+    @Override
+    public void setLock(String s) {
+
+    }
 }

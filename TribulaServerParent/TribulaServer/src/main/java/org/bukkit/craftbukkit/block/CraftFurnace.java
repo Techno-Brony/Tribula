@@ -57,4 +57,19 @@ public class CraftFurnace extends CraftBlockState implements Furnace {
     public TileEntityFurnace getTileEntity() {
         return furnace;
     }
+
+    @Override
+    public boolean isLocked() {
+        return false;
+    }
+
+    @Override
+    public String getLock() {
+        return null;
+    }
+
+    @Override
+    public void setLock(String s) {
+
+    }
 }

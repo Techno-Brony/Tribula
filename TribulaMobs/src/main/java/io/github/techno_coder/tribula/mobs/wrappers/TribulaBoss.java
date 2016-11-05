@@ -1,11 +1,14 @@
 package io.github.techno_coder.tribula.mobs.wrappers;
 
 import io.github.techno_coder.tribula.internals.enums.TribulaMobTrigger;
+import io.github.techno_coder.tribula.internals.wrappers.TribulaSpecial;
 import io.github.techno_coder.tribula.mobs.interfaces.ITribulaBoss;
-import org.bukkit.entity.LivingEntity;
+import net.minecraft.server.EntityLiving;
+
+import java.util.List;
 
 public class TribulaBoss implements ITribulaBoss { //TODO
-    private LivingEntity displayMob;
+    private EntityLiving displayMob;
     private String bossName;
 
     @Override
@@ -19,7 +22,7 @@ public class TribulaBoss implements ITribulaBoss { //TODO
     }
 
     @Override
-    public LivingEntity getDisplayMob() {
+    public EntityLiving getDisplayMob() {
         return displayMob;
     }
 
@@ -29,18 +32,23 @@ public class TribulaBoss implements ITribulaBoss { //TODO
     }
 
     @Override
-    public int getTribulaHealth() {
+    public double getTribulaHealth() {
         return 0; //TODO
     }
 
     @Override
-    public int getTribulaMaxHealth() {
+    public double getTribulaMaxHealth() {
         return 0; //TODO
     }
 
     @Override
-    public void getSpecials() {
-        //TODO
+    public List<TribulaSpecial> getSpecials() {
+        return null; //TODO
+    }
+
+    @Override
+    public int getSpecialCooldownTicks() {
+        return 0; //TODO
     }
 
     @Override

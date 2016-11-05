@@ -22,6 +22,7 @@ net/minecraft/server/EntityEnderman$PathfinderGoalPlayerWhoLookedAtTarget.class
 net/minecraft/server/PathfinderGoalMakeLove.class
 net/minecraft/server/IInventory.class
 net/minecraft/server/DispenseBehaviorProjectile.class
+org/bukkit/craftbukkit/entity/CraftEnderDragon.class
 net/minecraft/server/BlockMinecartDetector.class
 net/minecraft/server/ChatModifier$ChatModifierSerializer.class
 org/bukkit/craftbukkit/inventory/CraftMetaItem$ItemMetaKey$Specific.class
@@ -31,8 +32,10 @@ org/bukkit/craftbukkit/entity/CraftCow.class
 org/bukkit/craftbukkit/entity/CraftHanging.class
 net/minecraft/server/EntityLiving$SyntheticClass_1.class
 net/minecraft/server/PlayerChunk$1.class
+io/github/techno_coder/tribula/internals/enums/TribulaPlayerDifficulty.class
 net/minecraft/server/DispenserRegistry$17.class
 net/minecraft/server/WorldManager.class
+org/bukkit/craftbukkit/entity/CraftFlying.class
 net/minecraft/server/Entity.class
 net/minecraft/server/ItemBucket.class
 net/minecraft/server/DedicatedServer$4.class
@@ -46,7 +49,6 @@ net/minecraft/server/EntityDamageSourceIndirect.class
 net/minecraft/server/CommandBlockListenerAbstract$2.class
 org/bukkit/craftbukkit/entity/CraftArrow.class
 net/minecraft/server/TileEntitySkull$3$1.class
-net/minecraft/server/EntityEnderman$1.class
 net/minecraft/server/BlockEnderPortal.class
 net/minecraft/server/WorldData$3.class
 net/minecraft/server/CrashReport$2.class
@@ -55,6 +57,7 @@ net/minecraft/server/ChatBaseComponent.class
 net/minecraft/server/StructureGenerator$3.class
 net/minecraft/server/TileEntity.class
 net/minecraft/server/BlockPoweredRail$1.class
+org/bukkit/craftbukkit/entity/CraftAmbient.class
 org/bukkit/craftbukkit/scoreboard/CraftScoreboard.class
 org/bukkit/craftbukkit/block/CraftBlockState.class
 org/bukkit/craftbukkit/entity/CraftPigZombie.class
@@ -75,6 +78,7 @@ net/minecraft/server/PacketPlayInChat$1.class
 net/minecraft/server/ChunkProviderGenerate.class
 org/bukkit/craftbukkit/entity/CraftWitch.class
 net/minecraft/server/ContainerWorkbench.class
+io/github/techno_coder/tribula/internals/enums/TribulaMobTrigger.class
 net/minecraft/server/WorldData.class
 net/minecraft/server/CommandSpreadPlayers.class
 net/minecraft/server/ContainerBrewingStand$SlotPotionBottle.class
@@ -125,7 +129,6 @@ net/minecraft/server/EntityRabbit$PathfinderGoalRabbitPanic.class
 net/minecraft/server/TileEntityBeacon$BeaconColorTracker.class
 org/bukkit/craftbukkit/scheduler/CraftAsyncDebugger.class
 net/minecraft/server/TileEntityDispenser.class
-net/minecraft/server/EntityIronGolem$1.class
 org/bukkit/craftbukkit/CraftParticle.class
 org/bukkit/craftbukkit/inventory/CraftInventoryEnchanting.class
 net/minecraft/server/EntityLiving$6.class
@@ -215,6 +218,7 @@ net/minecraft/server/SpawnerCreature.class
 org/bukkit/craftbukkit/block/CraftDropper.class
 org/bukkit/craftbukkit/event/CraftEventFactory.class
 org/bukkit/craftbukkit/scheduler/CraftTask.class
+io/github/techno_coder/tribula/internals/wrappers/TribulaSpecial.class
 org/bukkit/craftbukkit/util/CraftDamageSource.class
 org/bukkit/craftbukkit/util/ForwardLogHandler.class
 org/spigotmc/RestartCommand$2.class
@@ -303,6 +307,7 @@ net/minecraft/server/EntityArrow.class
 net/minecraft/server/EntityMinecartCommandBlock.class
 net/minecraft/server/BlockButtonAbstract.class
 net/minecraft/server/CrashReport$1.class
+org/bukkit/craftbukkit/entity/CraftWaterMob.class
 org/bukkit/craftbukkit/entity/CraftFish.class
 net/minecraft/server/BlockDoor$EnumDoorHinge.class
 net/minecraft/server/PlayerConnection$SyntheticClass_1.class
@@ -310,6 +315,7 @@ org/spigotmc/SpigotWorldConfig.class
 net/minecraft/server/EntityAreaEffectCloud.class
 net/minecraft/server/CrashReport.class
 net/minecraft/server/BlockSapling$SyntheticClass_1.class
+org/bukkit/craftbukkit/entity/CraftEntity$1.class
 net/minecraft/server/ContainerAnvil.class
 org/bukkit/craftbukkit/util/LongObjectHashMap.class
 net/minecraft/server/EntityPlayer.class
@@ -328,6 +334,7 @@ org/bukkit/craftbukkit/entity/CraftSpider.class
 net/minecraft/server/ItemMinecart.class
 net/minecraft/server/CommandGamemode.class
 org/bukkit/craftbukkit/entity/CraftProjectile.class
+org/bukkit/craftbukkit/entity/CraftEntity$2.class
 org/bukkit/craftbukkit/inventory/CraftMetaItem$ItemMetaKey.class
 org/bukkit/craftbukkit/entity/CraftMinecart.class
 org/bukkit/craftbukkit/inventory/CraftInventoryFurnace.class
@@ -383,6 +390,7 @@ net/minecraft/server/BlockPumpkin$1.class
 net/minecraft/server/WorldData$2.class
 net/minecraft/server/WorldGenVillagePieces$WorldGenVillageRoad.class
 net/minecraft/server/ContainerMerchant.class
+io/github/techno_coder/tribula/internals/wrappers/TribulaPlayer.class
 net/minecraft/server/PathfinderGoalNearestAttackableTargetInsentient$1.class
 net/minecraft/server/EntityCreature.class
 net/minecraft/server/MethodProfiler$ProfilerInfo.class
@@ -444,7 +452,6 @@ net/minecraft/server/ContainerBeacon$SlotBeacon.class
 net/minecraft/server/RecipeMapClone.class
 net/minecraft/server/ServerConnection$6.class
 org/bukkit/craftbukkit/block/CraftSign.class
-net/minecraft/server/EntityWolf$1.class
 org/bukkit/craftbukkit/block/CraftJukebox.class
 net/minecraft/server/EntityRabbit$PathfinderGoalRabbitAvoidTarget.class
 net/minecraft/server/WorldGenLargeFeature$WorldGenLargeFeatureStart.class
@@ -461,6 +468,7 @@ org/bukkit/craftbukkit/potion/CraftPotionEffectType.class
 org/bukkit/craftbukkit/entity/CraftSplashPotion.class
 net/minecraft/server/EntityWitherSkull.class
 net/minecraft/server/TileEntityContainer.class
+org/bukkit/craftbukkit/entity/CraftSlime.class
 org/bukkit/craftbukkit/util/LazyHashSet.class
 net/minecraft/server/WorldServer$BlockActionDataList.class
 net/minecraft/server/EntityGhast$PathfinderGoalGhastAttackTarget.class
@@ -481,6 +489,7 @@ net/minecraft/server/WorldData$6.class
 net/minecraft/server/PersistentCollection.class
 org/bukkit/craftbukkit/entity/CraftShulker.class
 org/apache/logging/log4j/core/appender/ConsoleAppender$ConsoleManagerFactory.class
+org/bukkit/craftbukkit/entity/CraftCreature.class
 org/bukkit/craftbukkit/util/HashTreeSet.class
 org/bukkit/craftbukkit/entity/CraftHorse.class
 net/minecraft/server/TileEntityChest$SyntheticClass_1.class
@@ -525,7 +534,6 @@ net/minecraft/server/WorldGenVillagePieces$WorldGenVillageButcher.class
 net/minecraft/server/BlockIce.class
 org/bukkit/craftbukkit/enchantments/CraftEnchantment.class
 net/minecraft/server/EntityGhast$PathfinderGoalGhastIdleMove.class
-io/github/techno_brony/tribula/internals/interfaces/ITribulaPlayer.class
 net/minecraft/server/EntityGhast$ControllerGhast.class
 org/apache/logging/log4j/core/appender/ConsoleAppender$FactoryData.class
 net/minecraft/server/NBTTagIntArray.class
@@ -535,7 +543,6 @@ net/minecraft/server/BlockMonsterEggs$EnumMonsterEggVarient.class
 net/minecraft/server/ContainerAnvil$SyntheticClass_1.class
 org/bukkit/craftbukkit/help/CustomIndexHelpTopic.class
 net/minecraft/server/DispenserRegistry$9.class
-io/github/techno_brony/tribula/internals/interfaces/ITribulaMob.class
 net/minecraft/server/BlockMonsterEggs$SyntheticClass_1.class
 org/bukkit/craftbukkit/CraftOfflinePlayer.class
 org/bukkit/craftbukkit/entity/CraftChicken.class
@@ -614,7 +621,6 @@ net/minecraft/server/BlockMagma.class
 org/bukkit/craftbukkit/inventory/CraftMetaMap.class
 net/minecraft/server/BlockPortal$Shape.class
 net/minecraft/server/PacketStatusListener$1ServerListPingEvent.class
-io/github/techno_brony/tribula/internals/enums/TribulaPlayerDifficulty.class
 net/minecraft/server/WorldGenVillagePieces$WorldGenVillageStartPiece.class
 org/bukkit/craftbukkit/inventory/CraftShapedRecipe.class
 org/spigotmc/TrackingRange.class
@@ -655,6 +661,7 @@ net/minecraft/server/ItemMinecart$1.class
 org/bukkit/craftbukkit/block/CraftCommandBlock.class
 net/minecraft/server/BlockTrapdoor.class
 net/minecraft/server/ItemArmor.class
+io/github/techno_coder/tribula/internals/interfaces/ITribulaPlayer.class
 net/minecraft/server/PathfinderGoalHorseTrap.class
 org/bukkit/craftbukkit/entity/CraftLivingEntity.class
 net/minecraft/server/BlockPressurePlateBinary$SyntheticClass_1.class
@@ -664,6 +671,7 @@ net/minecraft/server/EntityHuman$EnumBedResult.class
 net/minecraft/server/WorldGenVillagePieces$WorldGenVillagePieceWeight.class
 org/bukkit/craftbukkit/generator/SkyLandsChunkGenerator.class
 net/minecraft/server/ContainerPlayer$1.class
+org/bukkit/craftbukkit/entity/CraftArmorStand.class
 org/bukkit/craftbukkit/entity/CraftRabbit.class
 net/minecraft/server/EntityLiving$4.class
 net/minecraft/server/DispenserRegistry$8$1.class
@@ -673,6 +681,7 @@ net/minecraft/server/CrashReport$4.class
 net/minecraft/server/EntityHanging.class
 org/bukkit/craftbukkit/CraftServer$2.class
 org/bukkit/craftbukkit/entity/CraftTippedArrow.class
+io/github/techno_coder/tribula/internals/interfaces/ITribulaMob.class
 net/minecraft/server/ChatBaseComponent$2.class
 net/minecraft/server/ItemWaterLily.class
 net/minecraft/server/WorldGenGroundBush.class
@@ -741,6 +750,7 @@ net/minecraft/server/BlockMonsterEggs$EnumMonsterEggVarient$1.class
 net/minecraft/server/BlockTripwire$SyntheticClass_1.class
 net/minecraft/server/TileEntityCommand.class
 org/bukkit/craftbukkit/scoreboard/CraftObjective.class
+io/github/techno_coder/tribula/internals/interfaces/ITribulaMobAPI.class
 org/bukkit/craftbukkit/CraftArt.class
 net/minecraft/server/WorldMap.class
 net/minecraft/server/ItemDoor.class
@@ -814,6 +824,7 @@ org/bukkit/craftbukkit/inventory/CraftInventoryHorse.class
 net/minecraft/server/Entity$3.class
 net/minecraft/server/EntityTippedArrow.class
 net/minecraft/server/DispenserRegistry$8.class
+org/bukkit/craftbukkit/entity/CraftEntity.class
 net/minecraft/server/TileEntitySkull$3.class
 net/minecraft/server/BlockMonsterEggs$EnumMonsterEggVarient$4.class
 net/minecraft/server/EntityFallingBlock.class
@@ -905,7 +916,6 @@ org/spigotmc/TickLimiter.class
 net/minecraft/server/Enchantment.class
 net/minecraft/server/IRecipe.class
 org/bukkit/craftbukkit/entity/CraftBat.class
-io/github/techno_brony/tribula/internals/enums/TribulaMobTrigger.class
 org/bukkit/craftbukkit/Main$1.class
 net/minecraft/server/RegionFile$ChunkBuffer.class
 net/minecraft/server/RecipesBanner$AddRecipe.class
@@ -913,7 +923,6 @@ org/bukkit/craftbukkit/help/SimpleHelpMap.class
 net/minecraft/server/EntitySpider$GroupDataSpider.class
 net/minecraft/server/TileEntityNote.class
 net/minecraft/server/EntityEnderman$PathfinderGoalPlayerWhoLookedAtTarget$1.class
-io/github/techno_brony/tribula/internals/TribulaPlayer.class
 org/bukkit/craftbukkit/scheduler/CraftScheduler.class
 org/bukkit/craftbukkit/chunkio/QueuedChunk.class
 org/bukkit/craftbukkit/inventory/CraftInventoryBeacon.class
@@ -936,6 +945,7 @@ org/bukkit/craftbukkit/help/MultipleCommandAliasHelpTopicFactory.class
 net/minecraft/server/WorldGenRegistration.class
 org/bukkit/craftbukkit/util/ShortConsoleLogFormatter.class
 net/minecraft/server/TileEntityBanner.class
+org/bukkit/craftbukkit/entity/CraftHumanEntity.class
 org/bukkit/craftbukkit/util/LongObjectHashMap$Entry.class
 org/bukkit/craftbukkit/scoreboard/CraftTeam.class
 net/minecraft/server/DispenserRegistry$1.class
